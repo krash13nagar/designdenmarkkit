@@ -48,3 +48,8 @@ Thumbs.db
 *.mov
 *.wmv
 
+
+# Below code need to ignore for this project
+dist
+node_modules
+package-lock.json
