@@ -38,7 +38,7 @@ const TestCommon = () => {
             User:
             <User />
 
-            <Input label="test" name="Title" 
+            <Input label="Test" name="Title" 
                 onBlur={handleChange}
                 onKeyUp={handleChange}
                 onChange={handleChange}

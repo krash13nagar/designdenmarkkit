@@ -15,6 +15,7 @@ export default {
 const Template = (args) => <User {...args} />;
 
 export const SampleUser = Template.bind({});
+
 SampleUser.args = {
   name: 'Mohan Kumar',
   age: 21,

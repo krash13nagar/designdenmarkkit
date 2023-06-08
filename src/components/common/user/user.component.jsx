@@ -6,6 +6,7 @@
 
 import React from "react";
 import PropTypes from 'prop-types';
+import styles from './user.module.scss'; 
 
 
 /**
@@ -23,7 +24,7 @@ const User = props => {
 
     const {name, age} = props;
     return (
-        <p>
+        <p className={styles["user-wrapper"]}>
             {name} is {age} years old.
         </p>
     );
