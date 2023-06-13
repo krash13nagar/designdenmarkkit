@@ -1,18 +1,21 @@
-
 /**
  * @author: sandeep.gupta1@timesinternet.in
  * @desc: Storybook display for Input component
  */
 
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import Input from './input.component';
+import { InputProps } from './types';
+
+type Story = ComponentStory<typeof Input>;
 
 export default {
   title: 'Denmark/Common/Input',
   component: Input,
-};
+} as ComponentMeta<typeof Input>;
 
-const Template = (args) => <Input {...args} />;
+const Template: Story = (args: InputProps) => <Input {...args} />;
 
 export const SampleInput = Template.bind({});
 SampleInput.args = {

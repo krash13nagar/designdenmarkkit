@@ -7,14 +7,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production';
+console.log('mode', devMode)
 module.exports = {
-  entry: [paths.src + '/index.js'],
+  entry: [paths.src + '/index.tsx'],
     resolve: {
         alias: {
           Env_Path: paths.src + "/environments/environment.dev"
         },
         modules: ['node_modules'],
-        extensions: ['*', '.js', '*.jsx', '*.css', '*.scss'],
+        // extensions: ['.js', '*.jsx', '*.css', '*.scss'],
         symlinks: false,
         cacheWithContext: false
         

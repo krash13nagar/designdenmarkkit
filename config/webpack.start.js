@@ -93,6 +93,6 @@ module.exports = merge(common, {
       Env_Path: APP_DIR + "/environments/environment.dev"
     },
     modules: [APP_DIR, 'node_modules'],
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ['.*',".ts", ".tsx", '.js', '.jsx', '.css', '.scss'],
   }
 });

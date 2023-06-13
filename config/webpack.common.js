@@ -1,19 +1,15 @@
 const paths = require('./paths');
-const path = require('path');
-
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 //const HtmlWebpackPlugin = require('html-webpack-plugin')
 //const MiniCssExtractPlugin = require('mini-css-extract-plugin') // extract css to files
-
-const webpack = require('webpack');
-
 const devMode = process.env.NODE_ENV !== 'production';
-//console.log("Build Mode : --", devMode ? 'development' : 'production')
+console.log("Build Mode : --", devMode ? 'development' : 'production')
 module.exports = {
-    entry: [paths.src + '/index.js'],
+    entry: [paths.src + '/index.tsx'],
+    devtool: 'inline-source-map',
     resolve: {
         modules: ['node_modules'],
-        extensions: ['*', '.js', '*.jsx', '*.css', '*.scss'],
+        extensions: ['.*',".ts", ".tsx", '.js', '.jsx', '.css', '.scss'],
         symlinks: false,
         cacheWithContext: false,
         alias: {
@@ -44,6 +40,11 @@ module.exports = {
     module: {
         rules: [
             // JavaScript: Use Babel to transpile JavaScript files
+            {
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: "ts-loader"
+              },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

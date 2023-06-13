@@ -51,7 +51,7 @@ module.exports = merge(common, {
       Env_Path: APP_DIR + "/environments/environment.prod"
     },
     modules: [APP_DIR, 'node_modules'],
-    extensions: ["*", ".js", ".jsx"],
+    // extensions: [ ".js", ".jsx"],
   },
   optimization: {
     minimize: true,
