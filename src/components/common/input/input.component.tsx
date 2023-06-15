@@ -4,9 +4,8 @@
  */
 
 import React from 'react';
-import TextField from '@mui/material/TextField';
+import { TextField, TextFieldProps } from '@mui/material';
 import styles from './input.module.scss';
-import { InputProps } from './types';
 
 /**
  * Component for showing input box
@@ -27,7 +26,7 @@ import { InputProps } from './types';
             helperText="Test"  />
  * )
  */
-const Input = (props: InputProps) => (
+export const Input = (props: TextFieldProps) => (
   <div className={styles['input-wrapper']}>
     <TextField
       InputLabelProps={{ shrink: true }}

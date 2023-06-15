@@ -6,7 +6,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import Input from './input.component';
-import { InputProps } from './types';
+import { TextFieldProps } from '@mui/material';
 
 type Story = ComponentStory<typeof Input>;
 
@@ -15,7 +15,7 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: Story = (args: InputProps) => <Input {...args} />;
+const Template: Story = (args: TextFieldProps) => <Input {...args} />;
 
 export const SampleInput = Template.bind({});
 SampleInput.args = {

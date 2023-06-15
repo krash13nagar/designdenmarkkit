@@ -5,6 +5,7 @@
 
 import React from 'react';
 import TestCommon from './testcommon';
+import BasicMenu from './testmenu';
 
 declare const module: {
   hot: {
@@ -21,6 +22,7 @@ const App = (props: AppProps) => (
   <>
     Test App
     <TestCommon />
+    <BasicMenu />
   </>
 );
 if (module?.hot) {

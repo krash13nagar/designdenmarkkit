@@ -19,7 +19,7 @@ import styles from './user.module.scss';
  * )
  */
 
-const User = (props: UserProps) => {
+export const User = (props: UserProps) => {
   const { name, age } = props;
   return (
     <p className={styles['user-wrapper']}>

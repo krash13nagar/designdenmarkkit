@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { Input, User } from './components/common';
+import DenButton from './components/common/button/button.component';
 
 const TestCommon = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +31,9 @@ const TestCommon = () => {
         onChange={handleChange}
         helperText="Enter the Title"
       />
+      <DenButton variant="contained" color="primary">
+        Test
+      </DenButton>
       {/* <SelectComponent
               label="Status"
               value={status}
