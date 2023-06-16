@@ -1,19 +1,19 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
-import DenButton from './button.component';
+// Button.stories.ts|tsx
 
-type Story = ComponentStory<typeof DenButton>;
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
-  title: 'Denmark/Common/Button',
+import { DenButton } from './button.component';
+
+const meta: Meta<typeof DenButton> = {
   component: DenButton,
-} as ComponentMeta<typeof DenButton>;
+};
 
-const Template: Story = (args) => <DenButton {...args} />;
+export default meta;
+type Story = StoryObj<typeof DenButton>;
 
-export const SampleInput = Template.bind({});
-SampleInput.args = {
-  label: 'Full Name',
-  name: 'name',
-  //   helperText: 'Enter the full name',
+export const Primary: Story = {
+  args: {
+    // primary: true,
+    children: 'DenButton',
+  },
 };
