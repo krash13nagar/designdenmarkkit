@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TypographyProps, Typography } from '@mui/material';
 
-const DenTypography: React.FC<TypographyProps> = (props) => (
+export const DenTypography: React.FC<TypographyProps> = (props) => (
   <Typography {...props} />
 );
 
