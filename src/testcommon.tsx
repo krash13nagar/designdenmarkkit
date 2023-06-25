@@ -8,6 +8,7 @@
 import React from 'react';
 import { Input, User } from './components/common';
 import DenButton from './components/common/button/button.component';
+import DenChip from './components/common/chip/chip.component';
 
 const TestCommon = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +35,7 @@ const TestCommon = () => {
       <DenButton variant="contained" color="primary">
         Test
       </DenButton>
+      <DenChip label="chip" color="primary" />
       {/* <SelectComponent
               label="Status"
               value={status}

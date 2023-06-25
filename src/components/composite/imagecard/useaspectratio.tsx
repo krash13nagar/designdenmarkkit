@@ -7,6 +7,9 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
   useEffect(() => {
     const image = new Image();
 
+    setImageStyle({ display: 'none' });
+    setIsLoading(true);
+
     image.onload = () => {
       setIsLoading(false);
       const { width, height } = parentNode?.getBoundingClientRect() ?? {
@@ -21,7 +24,7 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
             height: 'auto',
             aspectRatio: aspectRatio,
             margin: 'auto',
-            // objectFit: 'cover',
+            objectFit: 'cover',
             maxHeight: height,
           };
         } else {
@@ -30,7 +33,7 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
             height: height,
             aspectRatio: aspectRatio,
             margin: 'auto',
-            // objectFit: 'cover',
+            objectFit: 'cover',
             maxHeight: height,
           };
         }
@@ -38,11 +41,16 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
         setImageStyle({ ...updatedStyle, display: 'block' });
       }
     };
+    image.onerror = () => {
+      setIsLoading(false);
+      setImageStyle({ display: 'block' });
+    };
 
     image.src = src;
 
     return () => {
       image.onload = null; // Cleanup the event handler on unmount
+      image.onerror = null; // Cleanup the event handler on unmount
     };
   }, [src, aspectRatio]);
 
