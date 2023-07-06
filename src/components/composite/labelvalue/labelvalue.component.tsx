@@ -30,19 +30,23 @@ export const LabelValue = (props: LabelValueProps) => {
       className: style['valueClass'],
     },
     seperator,
+    renderValue,
   } = props;
+  const rendervalue = (renderValue && renderValue(value)) || (
+    <span {...valueProps}>{value as string}</span>
+  );
   return (
-    <div
+    <DenFormLabel
       className={`${className} ${style['labelvalueWrapper']} ${style[align]}`}
     >
-      <DenFormLabel {...labelProps} aria-label={label}>
+      <span {...labelProps} aria-label={label}>
         {label}
-      </DenFormLabel>
+      </span>
       {seperator && align === 'row' && (
         <span className={seperatorClassName}>{seperator}</span>
       )}
-      <DenFormLabel {...valueProps}>{value}</DenFormLabel>
-    </div>
+      {rendervalue}
+    </DenFormLabel>
   );
 };
 export default LabelValue;

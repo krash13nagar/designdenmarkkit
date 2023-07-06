@@ -15,7 +15,7 @@ import { DenCircularProgress } from '../../common/circularprogress/circularprogr
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const ImageCard = (props: ImageCardProps) => {
+export const DenImageCard = (props: ImageCardProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const {
     src = '',
@@ -41,4 +41,4 @@ export const ImageCard = (props: ImageCardProps) => {
     </div>
   );
 };
-export default ImageCard;
+export default DenImageCard;

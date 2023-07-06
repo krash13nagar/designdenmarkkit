@@ -1,0 +1,63 @@
+.viewportWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .block-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #e8e9ec;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 5px;
+
+    &.small {
+      width: 75px;
+      height: 75px;
+    }
+
+    &.medium {
+      width: 150px;
+      height: 150px;
+      padding: 7px;
+    }
+
+    &.large {
+      width: 220px;
+      height: 220px;
+      padding: 10px;
+    }
+    &.selected {
+      border: 1px solid #4d9aca;
+      .viewportBlock {
+        color: #4d9aca;
+      }
+    }
+  }
+
+  .viewportBlock {
+    background: #e8e9ec 0% 0% no-repeat padding-box;
+    border: 1px solid #e8e9ec;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: normal normal bold 10px/12px Lato;
+    letter-spacing: 0px;
+    color: #43425d;
+    opacity: 0.5;
+  }
+}
+.viewportLabel {
+  text-align: center;
+  font: normal normal normal 8px/20px Lato;
+  letter-spacing: 0px;
+  color: #2b2b2b;
+  &.selected {
+    color: #4d9aca;
+  }
+}

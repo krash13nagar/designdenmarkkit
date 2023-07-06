@@ -37,9 +37,8 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
             maxHeight: height,
           };
         }
-
-        setImageStyle({ ...updatedStyle, display: 'block' });
       }
+      setImageStyle({ ...updatedStyle, display: 'block' });
     };
     image.onerror = () => {
       setIsLoading(false);

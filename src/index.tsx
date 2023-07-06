@@ -45,5 +45,4 @@ var g = window || global;
 };
 
 export default g;
-export { default as Input } from './components/common/input/input.component';
-export { default as User } from './components/common/user/user.component';
+export * from './components';
