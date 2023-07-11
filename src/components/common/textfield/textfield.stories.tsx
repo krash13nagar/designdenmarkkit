@@ -10,8 +10,10 @@ const meta: Meta<typeof DenTextField> = {
 export default meta;
 type Story = StoryObj<typeof DenTextField>;
 
-export const Primary: Story = {
+export const DnmarkDefault: Story = {
   args: {
-    label: 'primary',
+    label: 'Basic',
+    value: 'Basic',
+    fullWidth: true,
   },
 };

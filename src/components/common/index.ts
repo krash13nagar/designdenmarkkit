@@ -30,3 +30,8 @@ export * from './menu/menu.component';
 export * from './slide/slide.component';
 export * from './tooltip/tooltip.component';
 export * from './formlabel/formlabel.component';
+export * from './inputlabel/inputlabel.component';
+export * from './formhelpertext/formhelpertext.component';
+export * from './formcontrol/formcontrol.component';
+export * from './filledinput/filledinput.component';
+export * from './inputbase/inputbase.component';
