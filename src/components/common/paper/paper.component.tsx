@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ChipProps, Chip } from '@mui/material';
+import { PaperProps, Paper } from '@mui/material';
 
 /**
- * DenChip Component.
+ * DenPaper Component.
  * @constructor
  * @param {element} props.avatar -The Avatar element to display.
- * @param {boolean} props.clickable - If true, the chip will appear clickable, and will raise when pressed, even if the onClick prop is not defined. If false, the chip will not appear clickable, even if onClick prop is defined. This can be used, for example, along with the component prop to indicate an anchor Chip is clickable. Note: this controls the UI and does not affect the onClick event.
+ * @param {boolean} props.clickable - If true, thePaper will appear clickable, and will raise when pressed, even if the onClick prop is not defined. If false, thePaper will not appear clickable, even if onClick prop is defined. This can be used, for example, along with the component prop to indicate an anchorPaper is clickable. Note: this controls the UI and does not affect the onClick event.
  * @param {object} props.classes - Override or extend the styles applied to the component. See CSS API below for more details.
  * @param {	'default'| 'primary'| 'secondary'| 'error'| 'info'| 'success'| 'warning'| string} props.color - If true, the dialog is full-screen.
  * @param {Element} props.component - The component used for the root node. Either a string to use a HTML element or a component.
@@ -14,6 +14,6 @@ import { ChipProps, Chip } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenChip: React.FC<ChipProps> = (props) => <Chip {...props} />;
+export const DenPaper: React.FC<PaperProps> = (props) => <Paper {...props} />;
 
-export default DenChip;
+export default DenPaper;

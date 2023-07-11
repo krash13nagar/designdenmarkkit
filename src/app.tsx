@@ -6,7 +6,6 @@
 import React from 'react';
 import TestCommon from './testcommon';
 import BasicMenu from './testmenu';
-import ImagePreview from './imagepreview';
 
 declare const module: {
   hot: {
@@ -20,12 +19,11 @@ interface AppProps {
 }
 const App = (props: AppProps) => (
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
-  // <>
-  //   Test App
-  //   <TestCommon />
-  //   <BasicMenu />
-  // </>
-  <ImagePreview />
+  <>
+    Test App
+    <TestCommon />
+    <BasicMenu />
+  </>
 );
 if (module?.hot) {
   module.hot.accept(App);
