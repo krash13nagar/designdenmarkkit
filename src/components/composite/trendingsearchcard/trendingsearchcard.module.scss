@@ -1,0 +1,27 @@
+.rootWrapper {
+    display: flex;
+    border: 2px solid #d3d3d3;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    .right {
+        display: flex;
+        align-items: center;
+
+        .statistics {
+            margin-left: 3px;
+        }
+
+        .static-text {
+            color: #ababab;
+            font-size: 13px;
+            margin-left: 3px;
+        }
+
+        .icon {
+            padding-right: 2px;
+        }
+    }
+
+}
