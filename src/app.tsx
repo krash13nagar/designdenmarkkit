@@ -9,7 +9,9 @@ import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { DenTypography } from './components';
+import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 
 declare const module: {
   hot: {
@@ -37,6 +39,7 @@ const App = (props: AppProps) => (
     <BasicMenu />
     <DenLink underline='none'>MUI</DenLink>
     <DenBreadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>{breadcrumbs}</DenBreadcrumbs>
+    <TrendingSearchCard label='World Cup Schedule' count={'100k+'} icon={<TwitterIcon style={{ color: '#5da8dc' }} />} />
   </>
 );
 if (module?.hot) {
