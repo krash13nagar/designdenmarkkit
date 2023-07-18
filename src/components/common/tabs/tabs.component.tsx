@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TabsProps, Tabs } from '@mui/material';
 
 /**
- * FormControl Component.
+ * Tabs Component.
  * @constructor
  * @param {node} props.children - Child on which FormControl is wrapped
  * @param {Function} props.onChange - Callback fires up when the value changes.

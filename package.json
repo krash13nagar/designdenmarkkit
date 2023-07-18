@@ -71,6 +71,7 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.136",
     "@mui/material": "^5.11.16",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/material-ui": "^0.21.12",
