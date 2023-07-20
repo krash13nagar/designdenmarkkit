@@ -18,6 +18,7 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
         label,
         icon = null,
         wrapperClassName = style['rootWrapper'],
+        count
     } = props;
     return (
         <div className={`${wrapperClassName}`}>
@@ -26,10 +27,12 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
             </div>
             <div className={style['right']}>
                 {icon}
+                {count &&
                 <div className={style['statistics']}>
                     <span>{formatCount(props)}</span>
                     <span className={style['static-text']}>searches</span>
                 </div>
+                }
             </div>
         </div>
     );
