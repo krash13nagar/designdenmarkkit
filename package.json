@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "",
   "main": "index.tsx",
@@ -17,7 +17,7 @@
     "prebuildpackage": "npm run clean && npm run build && node SetupPackage.js",
     "localunpublish": "npm unpublish  --registry http://localhost:4873/ @denui/denmark-ui-components --force",
     "localpublish": "npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873",
-    "prodpublish": "npm run prebuildpackage && cd dist && npm publish"
+    "prodpublish": "npm run prebuildpackage && cp .npmrc dist/ && cd dist && npm publish"
   },
   "keywords": [],
   "author": "sandeep.guddu@gmail.com",
