@@ -11,7 +11,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "lib": ["es6", "dom", "dom.iterable", "esnext"],
-    "types": ["node", "@types/babel__core"]
+    "types": ["node", "@types/babel__core"],
+    "declaration": true
   },
   "include": ["src", ".storybook", "declaration.d.ts"],
   "exclude": ["node_modules"]

@@ -9,8 +9,9 @@ import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { DenImageCard, DenTypography, ImagePreview } from './components';
-import { sample } from './components/complex/imagepreview/sample';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { DenTypography } from './components';
+import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 
 declare const module: {
   hot: {
@@ -39,8 +40,8 @@ const App = (props: AppProps) => (
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
   <>
     Test App
-    {/* <TestCommon /> */}
-    {/* <BasicMenu /> */}
+    <TestCommon />
+    <BasicMenu />
     <DenLink underline="none">MUI</DenLink>
     <DenBreadcrumbs
       aria-label="breadcrumb"
@@ -48,12 +49,11 @@ const App = (props: AppProps) => (
     >
       {breadcrumbs}
     </DenBreadcrumbs>
-    <DenImageCard
-      src="https://picsum.photos/200/300"
-      alt="sample image"
-      aspectRatio={1.1}
+    <TrendingSearchCard
+      label="World Cup Schedule"
+      count={'100k+'}
+      icon={<TwitterIcon style={{ color: '#5da8dc' }} />}
     />
-    <ImagePreview {...sample} />
   </>
 );
 if (module?.hot) {

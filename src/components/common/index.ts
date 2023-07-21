@@ -35,3 +35,7 @@ export * from './formhelpertext/formhelpertext.component';
 export * from './formcontrol/formcontrol.component';
 export * from './filledinput/filledinput.component';
 export * from './inputbase/inputbase.component';
+export * from './badge/badge.component'
+export * from './switch/switch.component'
+export * from './outlinedinput/outlinedinput.component'
+export * from './grid/grid.component'
