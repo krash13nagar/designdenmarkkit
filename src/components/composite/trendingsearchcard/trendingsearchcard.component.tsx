@@ -17,11 +17,15 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
     const {
         label,
         icon = null,
-        wrapperClassName = style['rootWrapper'],
-        count
+        wrapperClassName,
+        count,
+        active,
+        handleClick
     } = props;
     return (
-        <div className={`${wrapperClassName}`}>
+        <div className={`${wrapperClassName} ${style['rootWrapper']} ${active?style.active:''}`}
+        onClick={handleClick}
+        >
             <div className={style['left']}>
                 <span>{label}</span>
             </div>
@@ -29,8 +33,8 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
                 {icon}
                 {count &&
                 <div className={style['statistics']}>
-                    <span>{formatCount(props)}</span>
-                    <span className={style['static-text']}>searches</span>
+                    <div className={style['count']}>{formatCount(props)}</div>
+                    <div className={style['static-text']}>searches</div>
                 </div>
                 }
             </div>

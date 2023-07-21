@@ -5,4 +5,6 @@ export interface TrendingSearchCardProps {
     label: string;
     icon?: ReactNode;
     wrapperClassName?: string;
+    active?: boolean,
+    handleClick?: React.MouseEventHandler<HTMLDivElement>
 }

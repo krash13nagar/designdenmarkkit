@@ -16,6 +16,7 @@ export const Basic: Story = {
     args: {
         count: '100K+',
         label: 'World Cup Schedule',
-        icon: <TwitterIcon style={{ color: '#5da8dc' }} />
+        icon: <TwitterIcon style={{ color: '#5da8dc' }} />,
+        handleClick : ()=>console.log("clicked!")
     },
 };
