@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ForwardedRef, Ref, forwardRef } from 'react';
 import DenFormLabel from '../../common/formlabel/formlabel.component';
 import { LabelValueProps } from './labelvalue.types';
 import style from './labelvalue.module.scss';
@@ -18,35 +18,38 @@ import style from './labelvalue.module.scss';
  * for more details see http:localhost:6006
  */
 
-export const LabelValue = (props: LabelValueProps) => {
-  const {
-    label,
-    value,
-    align = 'row',
-    className = '',
-    seperatorClassName = style['seperatorClassName'],
-    labelProps = {},
-    valueProps = {
-      className: style['valueClass'],
-    },
-    seperator,
-    renderValue,
-  } = props;
-  const rendervalue = (renderValue && renderValue(value)) || (
-    <span {...valueProps}>{value as string}</span>
-  );
-  return (
-    <DenFormLabel
-      className={`${className} ${style['labelvalueWrapper']} ${style[align]}`}
-    >
-      <span {...labelProps} aria-label={label}>
-        {label}
-      </span>
-      {seperator && align === 'row' && (
-        <span className={seperatorClassName}>{seperator}</span>
-      )}
-      {rendervalue}
-    </DenFormLabel>
-  );
-};
+export const LabelValue = forwardRef(
+  (props: LabelValueProps, ref: Ref<HTMLLabelElement>) => {
+    const {
+      label,
+      value,
+      align = 'row',
+      className = '',
+      seperatorClassName = style['seperatorClassName'],
+      labelProps = {},
+      valueProps = {
+        className: style['valueClass'],
+      },
+      seperator,
+      renderValue,
+    } = props;
+    const rendervalue: any = (renderValue && renderValue(value)) || (
+      <span {...valueProps}>{value as string}</span>
+    );
+    return (
+      <DenFormLabel
+        className={`${className} ${style['labelvalueWrapper']} ${style[align]}`}
+        ref={ref}
+      >
+        <span {...labelProps} aria-label={label}>
+          {label}
+        </span>
+        {seperator && align === 'row' && (
+          <span className={seperatorClassName}>{seperator}</span>
+        )}
+        {rendervalue}
+      </DenFormLabel>
+    );
+  }
+);
 export default LabelValue;
