@@ -229,6 +229,11 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                             onClick={(e) =>
                               handleClose(e, index, action.onClick)
                             }
+                            {...(option?.optionProps ?? {
+                              classes: {
+                                root: style['menuOptions'],
+                              },
+                            })}
                           >
                             {option?.startIcon && (
                               <DenListItemIcon>

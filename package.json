@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": false,
   "description": "",
   "main": "index.tsx",
@@ -17,7 +17,8 @@
     "clean": "rm -rf dist",
     "prebuildpackage": "npm run clean && npm run build && node SetupPackage.js",
     "localunpublish": "npm unpublish  --registry http://localhost:4873/ @denui/denmark-ui-components --force",
-    "localpublish": "npm version patch --no-git-tag-version && npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873"
+    "localpublish": "npm version patch --no-git-tag-version && npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873",
+    "prodpublish": "npm run prebuildpackage && cd dist && npm publish --registry https://npmdenmark.timesinternet.in"
   },
   "keywords": [],
   "author": "sandeep.guddu@gmail.com",
