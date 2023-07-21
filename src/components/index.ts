@@ -5,3 +5,4 @@
 import './global.scss';
 export * from './common';
 export * from './composite';
+export * from './complex';

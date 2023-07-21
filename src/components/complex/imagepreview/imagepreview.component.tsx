@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, SyntheticEvent } from 'react';
 import style from './imagepreview.module.scss';
 import {
   AlingType,
@@ -31,7 +31,9 @@ import {
   MenuEnum,
 } from './imagepreview.types';
 
-export const ImagePreview = (props: ImagePreviewProps = sample) => {
+export const ImagePreview: FC<ImagePreviewProps> = (
+  props: ImagePreviewProps = sample
+) => {
   const {
     msid,
     title,
@@ -49,11 +51,14 @@ export const ImagePreview = (props: ImagePreviewProps = sample) => {
   const [viewPort, setViewport] = React.useState<string | null>(
     selectedAspectRatio
   );
-  const handleClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+  const handleClick = (
+    event: React.SyntheticEvent<HTMLElement>,
+    index: number
+  ) => {
     setAnchorEl((prev) => ({ ...prev, [index]: event.currentTarget }));
   };
   const handleClose = (
-    event: React.MouseEvent<HTMLElement> | undefined,
+    event: React.SyntheticEvent<HTMLElement> | undefined,
     index: number,
     cb?: Function | undefined
   ) => {
@@ -83,7 +88,7 @@ export const ImagePreview = (props: ImagePreviewProps = sample) => {
           <div className={style['rightPanel']}>
             <div className={style['rightPanel-content']}>
               <LabelValue
-                label={'MSID'}
+                label="MSID"
                 value={msid}
                 seperator=":"
                 className={style['msid']}
@@ -132,7 +137,7 @@ export const ImagePreview = (props: ImagePreviewProps = sample) => {
                         renderValue={
                           info?.value instanceof Array &&
                           info?.value.length &&
-                          ((value) => {
+                          ((value: any) => {
                             if (value instanceof Array && value.length) {
                               return (
                                 <div className={style['column-6']}>
