@@ -1,9 +1,24 @@
 .rootWrapper {
     display: flex;
-    border: 2px solid #d3d3d3;
-    padding: 10px;
+    border: 1px solid #E8ECEF;
+    padding: 16px;
     align-items: center;
     justify-content: space-between;
+    background: #fff;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    max-height: 52px;
+    cursor: pointer;
+
+    &.active {
+        background-color: #D3E4FD;
+    }
+
+    .left {
+        color: #4D4D4D;
+        font-size: 16px;
+        line-height: 22px;
+    }
 
     .right {
         display: flex;
@@ -13,10 +28,18 @@
             margin-left: 3px;
         }
 
+        .count {
+            color: #4D4D4D;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+        }
+
         .static-text {
-            color: #ababab;
-            font-size: 13px;
-            margin-left: 3px;
+            color: #818181;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
         }
 
         .icon {
