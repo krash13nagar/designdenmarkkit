@@ -5,9 +5,8 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './app';
-
 import { Input, User } from './components/common';
-
+import './muiclasssetup';
 interface AppComponentProps {
   element: HTMLElement;
   callbackNgFn?: () => void | null;
@@ -44,7 +43,5 @@ var g = window || global;
   commonComponents: { Input, User },
 };
 
-// export default g;
-export * from './components/common';
-// export { default as Input } from './components/common/input/input.component';
-// export { default as User } from './components/common/user/user.component';
+export default g;
+export * from './components';

@@ -2,14 +2,14 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ImageCard } from './imagecard.component';
+import { DenImageCard } from './imagecard.component';
 
-const meta: Meta<typeof ImageCard> = {
-  component: ImageCard,
+const meta: Meta<typeof DenImageCard> = {
+  component: DenImageCard,
 };
 
 export default meta;
-type Story = StoryObj<typeof ImageCard>;
+type Story = StoryObj<typeof DenImageCard>;
 
 export const Basic: Story = {
   args: {
