@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "private": false,
   "description": "",
   "main": "index.tsx",
@@ -10,15 +10,14 @@
     "start": "webpack serve --config config/webpack.start.js --port 3100",
     "format": "prettier --write \"src/**/*.tsx\"",
     "babelbuild": "babel src -d build",
-    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "publish:npm": "rm -rf dist && mkdir dist &&  babel src/components -d dist --copy-files",
     "clean": "rm -rf dist",
     "prebuildpackage": "npm run clean && npm run build && node SetupPackage.js",
     "localunpublish": "npm unpublish  --registry http://localhost:4873/ @denui/denmark-ui-components --force",
-    "localpublish": "npm version patch --no-git-tag-version && npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873",
-    "prodpublish": "npm run prebuildpackage && cd dist && npm publish --registry https://npmdenmark.timesinternet.in"
+    "localpublish": "npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873",
+    "prodpublish": "npm run prebuildpackage && cd dist && npm publish"
   },
   "keywords": [],
   "author": "sandeep.guddu@gmail.com",
