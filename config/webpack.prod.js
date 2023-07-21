@@ -47,10 +47,27 @@ module.exports = merge(common, {
   // pass all js files through Babel
   resolve: {
     alias: {
-      Env_Path: APP_DIR + '/environments/environment.prod',
+      Env_Path: APP_DIR + "/environments/environment.prod",
+      'react': path.resolve(__dirname, '../node_modules/react'),
+      'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
     },
     modules: [APP_DIR, 'node_modules'],
     // extensions: [ ".js", ".jsx"],
+  },
+  externals: {
+    // Don't bundle react or react-dom      
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "React",
+      root: "React"
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "ReactDOM",
+      root: "ReactDOM"
+    }
   },
   optimization: {
     minimize: true,
