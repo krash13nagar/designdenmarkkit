@@ -9,7 +9,7 @@ module.exports = {
     devtool: 'inline-source-map',
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.*',".ts", ".tsx", '.js', '.jsx', '.css', '.scss'],
+        extensions: ['.*', ".ts", ".tsx", '.js', '.jsx', '.css', '.scss'],
         symlinks: false,
         cacheWithContext: false,
         alias: {
@@ -44,11 +44,24 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: "ts-loader"
-              },
+            },
             {
                 test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
+                //exclude: /node_modules/,
+                exclude: {
+                    and: [/node_modules/], // Exclude libraries in node_modules ...
+                    not: [
+                        // Except for a few of them that needs to be transpiled because they use modern syntax
+                        /@mui/
+                    ]
+                },
+                //use: ['babel-loader'],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: ["@babel/plugin-transform-exponentiation-operator"]
+                    }
+                }
             },
             {
                 test: /\.css$/,
@@ -60,7 +73,7 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                  'style-loader',
+                    'style-loader',
                     "css-loader",
                     'sass-loader',
                 ],
@@ -73,9 +86,9 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loader: 'file-loader',
-                options:{
-                    name:'[name].[ext]',
-                    outputPath:'pictures/webstory'
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'pictures/webstory'
                 }
             },
             {
