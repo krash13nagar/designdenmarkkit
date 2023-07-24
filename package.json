@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "private": false,
   "description": "",
   "main": "index.tsx",
@@ -10,14 +10,14 @@
     "start": "webpack serve --config config/webpack.start.js --port 3100",
     "format": "prettier --write \"src/**/*.tsx\"",
     "babelbuild": "babel src -d build",
-    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "publish:npm": "rm -rf dist && mkdir dist &&  babel src/components -d dist --copy-files",
     "clean": "rm -rf dist",
     "prebuildpackage": "npm run clean && npm run build && node SetupPackage.js",
     "localunpublish": "npm unpublish  --registry http://localhost:4873/ @denui/denmark-ui-components --force",
-    "localpublish": "npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873"
+    "localpublish": "npm run prebuildpackage && cd dist && npm publish --registry http://localhost:4873",
+    "prodpublish": "npm run prebuildpackage && cp .npmrc dist/ && cd dist && npm publish"
   },
   "keywords": [],
   "author": "sandeep.guddu@gmail.com",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
+    "@babel/plugin-transform-exponentiation-operator": "^7.22.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.22.5",

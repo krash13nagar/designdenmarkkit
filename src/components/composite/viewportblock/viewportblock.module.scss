@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font: normal normal bold 10px/12px Lato;
+    font: normal normal bold 10px/12px 'source sans 3', sans-serif;
     letter-spacing: 0px;
     color: #43425d;
     opacity: 0.5;
@@ -54,7 +54,7 @@
 }
 .viewportLabel {
   text-align: center;
-  font: normal normal normal 8px/20px Lato;
+  font: normal normal normal 8px/20px 'source sans 3', sans-serif;
   letter-spacing: 0px;
   color: #2b2b2b;
   &.selected {

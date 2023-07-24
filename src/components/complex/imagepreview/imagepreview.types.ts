@@ -1,3 +1,4 @@
+import { MenuItemProps } from '@mui/base';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
@@ -15,6 +16,7 @@ export interface ActionOptions {
   endIcon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
     muiName: string;
   };
+  optionProps?: MenuItemProps;
 }
 export interface Action extends Partial<Omit<LabelValue, 'value'>> {
   type: MenuEnum;
