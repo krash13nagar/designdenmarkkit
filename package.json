@@ -1,10 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-<<<<<<< HEAD
   "version": "1.0.4",
-=======
-  "version": "1.0.3",
->>>>>>> fccedce0d65dbdd510c903b864f6ac6c4b7c2850
   "private": false,
   "description": "",
   "main": "index.tsx",
