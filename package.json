@@ -1,6 +1,10 @@
 {
   "name": "@denui/denmark-ui-components",
+<<<<<<< HEAD
   "version": "1.0.4",
+=======
+  "version": "1.0.3",
+>>>>>>> fccedce0d65dbdd510c903b864f6ac6c4b7c2850
   "private": false,
   "description": "",
   "main": "index.tsx",
@@ -28,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
+    "@babel/plugin-transform-exponentiation-operator": "^7.22.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.22.5",

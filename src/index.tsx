@@ -2,11 +2,12 @@
  * @author:  sandeep.gupta1@timesinternet.in
  * @desc: entry  point  to  render Denmark UI components  based on environment
  */
+import './muiclasssetup';
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './app';
 import { Input, User } from './components/common';
-import './muiclasssetup';
+
 interface AppComponentProps {
   element: HTMLElement;
   callbackNgFn?: () => void | null;
