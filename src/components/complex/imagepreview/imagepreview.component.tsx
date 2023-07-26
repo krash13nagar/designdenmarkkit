@@ -80,7 +80,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
           </div>
         </div>
       </DenDialogTitle>
-      <DenDialogContent>
+      <DenDialogContent classes={{root:style['dialogContentWrapper']}}>
         <div className={style['imagePreviewWrapper']}>
           <div className={style['leftPanel']}>
             <DenImageCard src={imageSource} aspectRatio={width / height} />
