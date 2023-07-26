@@ -21,7 +21,6 @@ let renderApplication = null;
  */
 console.log('=============>>>> React MODE:   ', process.env.REACT_APP_MODE);
 if (
-  true || 
   process.env.REACT_APP_MODE !== 'production' &&
   window.location.host !== 'denmark.local' &&
   window.location.host.match(/localhost/)
