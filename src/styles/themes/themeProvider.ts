@@ -1,0 +1,1 @@
+export { ThemeProvider as DenThemeProvider } from '@mui/material/styles';
