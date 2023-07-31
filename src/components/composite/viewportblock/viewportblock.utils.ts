@@ -5,12 +5,12 @@ export const viewPortDimenssions = (aspectRatio: string = '') => {
   try {
     if (typeof aspectRatio === 'string') {
       if (aspectRatio.includes('/')) {
-        const [width, height] = aspectRatio.split('/');
+        const [width, height] = aspectRatio.trim().split('/');
         dimensions.width = Number(width);
         dimensions.height = Number(height);
       }
       if (aspectRatio.includes(':')) {
-        const [width, height] = aspectRatio.split(':');
+        const [width, height] = aspectRatio.trim().split(':');
         dimensions.width = Number(width);
         dimensions.height = Number(height);
       }

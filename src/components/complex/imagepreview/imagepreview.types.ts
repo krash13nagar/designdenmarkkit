@@ -44,6 +44,8 @@ export interface ImagePreviewProps {
   additionalInfo: AdditionalInfo;
   viewPorts: ViewPorts;
   actions: Action[];
+  creationDateTime?: number;
+  artDate?: number;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export enum MenuEnum {
