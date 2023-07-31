@@ -30,6 +30,7 @@ import {
   ImagePreviewProps,
   MenuEnum,
 } from './imagepreview.types';
+import { DisplayCardDate } from '../../composite/datetime/datetime';
 
 export const ImagePreview: FC<ImagePreviewProps> = (
   props: ImagePreviewProps = sample
@@ -45,6 +46,8 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     additionalInfo,
     viewPorts,
     actions,
+    creationDateTime,
+    artDate,
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -80,7 +83,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
           </div>
         </div>
       </DenDialogTitle>
-      <DenDialogContent classes={{root:style['dialogContentWrapper']}}>
+      <DenDialogContent classes={{ root: style['dialogContentWrapper'] }}>
         <div className={style['imagePreviewWrapper']}>
           <div className={style['leftPanel']}>
             <DenImageCard src={imageSource} aspectRatio={width / height} />
@@ -99,12 +102,22 @@ export const ImagePreview: FC<ImagePreviewProps> = (
               <DenTypography variant="body1" className={style['image-caption']}>
                 {caption}
               </DenTypography>
+              <DisplayCardDate
+                creationDateTime={creationDateTime}
+                artDate={artDate}
+              />
               <div className={style['row']}>
                 {imageInfo?.map((info) => (
                   <LabelValue
                     className={style[`column-${info.col ?? 6}`]}
                     label={info.label}
                     value={info.value}
+                    labelProps={{
+                      className: style['info-label'],
+                    }}
+                    valueProps={{
+                      className: style['info-value'],
+                    }}
                     align={
                       AlingType[info.align as AlingType] ?? AlingType.column
                     }
@@ -129,10 +142,10 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                         value={info?.value}
                         seperator=" "
                         labelProps={{
-                          className: style['column-6'],
+                          className: `${style['column-6']} ${style['additonal-info-label']}`,
                         }}
                         valueProps={{
-                          className: style['column-6'],
+                          className: `${style['column-6']} ${style['additonal-info-value']}`,
                         }}
                         renderValue={
                           info?.value instanceof Array &&

@@ -20,7 +20,7 @@
   //   padding-top: 7px !important;
   padding: 0px !important;
 }
-.dialogContentWrapper{
+.dialogContentWrapper {
   padding: 17px 12px !important;
   padding-left: 25px !important;
 }
@@ -41,9 +41,9 @@
       overflow: auto;
       .msid {
         margin: 0px 5px 10px 5px;
-        letter-spacing: 0.12px;
-        color: #2b2b2b;
-        font: normal normal bold 11px/20px 'source sans 3', sans-serif;
+        letter-spacing: 0;
+        color: #4d4d4d;
+        font: normal normal 600 14px/20px 'source sans 3', sans-serif;
       }
       .image-title,
       .image-caption {
@@ -54,9 +54,10 @@
         text-overflow: ellipsis;
       }
       .image-caption {
-        font: normal normal normal 11px/20px 'source sans 3', sans-serif;
-        letter-spacing: 0.12px;
+        font: normal normal normal 12px/20px 'source sans 3', sans-serif;
+        letter-spacing: 0.13px;
         margin: 10px 5px;
+        color: #4d4d4d;
       }
       .image-title {
         font: normal normal bold 14px/20px 'source sans 3', sans-serif;
@@ -70,6 +71,16 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         margin: 10px 5px;
+        .info-value {
+          font: normal normal bold 14px/20px 'source sans 3', sans-serif;
+          color: #4d4d4d;
+          letter-spacing: 0px;
+        }
+        .info-label {
+          font: normal normal 600 12px/20px 'source sans 3', sans-serif;
+          color: #818181;
+          letter-spacing: 0px;
+        }
       }
 
       .block-wrapper {
@@ -89,7 +100,7 @@
         opacity: 0.8;
       }
       .panel-header {
-        font: normal normal bold 11px/13px 'source sans 3', sans-serif;
+        font: normal normal bold 14px/20px 'source sans 3', sans-serif;
         letter-spacing: 0px;
         color: #262626;
         opacity: 1;
@@ -98,11 +109,22 @@
         background-color: #ffc700;
         padding: 0px 5px;
       }
+      .additonal-info-value {
+        font: normal normal 600 12px/17px 'Source Sans 3', sans-serif;
+        letter-spacing: 0px;
+        color: #4d4d4d;
+      }
+      .additonal-info-label {
+        font: normal normal normal 12px/17px 'Source Sans 3', sans-serif;
+        letter-spacing: 0px;
+        color: #818181;
+      }
     }
     .column-6 {
       flex-basis: 50%;
       font: normal normal normal 10px/18px 'source sans 3', sans-serif;
       letter-spacing: 0px;
+      margin: 10px 0px;
     }
     .footerWrapper {
       display: flex;
