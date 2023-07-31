@@ -1,0 +1,48 @@
+.previewWrapper {
+    padding: 16px 40px;
+    background-color: white;
+    overflow: auto;
+
+    .popoutIcon {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .clockIcon {
+        svg {
+            vertical-align: middle;
+        }
+
+        margin-right: 5px;
+    }
+
+    .topInfo {
+        font: normal normal normal 12px/17px "Source Sans 3";
+        color: #4D4D4D;
+        margin-bottom: 8px;
+    }
+
+    .title {
+        font: normal normal 600 20px/28px "Source Sans 3";
+        color: #2B2B2B;
+        margin-bottom: 8px;
+    }
+
+    .synopsis {
+        font: italic normal normal 14px/20px "Source Sans 3";
+        color: #4D4D4D;
+        margin-bottom: 16px;
+        padding: 0px 20px;
+    }
+
+    .content {
+        font: normal normal normal 16px/26px "Source Sans 3";
+        color: #4D4D4D;
+
+        img {
+            display: block;
+            margin: 10px auto;
+        }
+    }
+
+}
