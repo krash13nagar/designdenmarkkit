@@ -1,0 +1,25 @@
+.image-with-fallback-wrapper {
+    display: inline-block;
+    position: relative;
+    .fallback-image-wrapper {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        &.show {
+            display:flex;
+        }
+        &.hide {
+            display: none;
+        }
+
+        &.border {
+            border:1px solid #D2D8DF;
+            border-radius: 4px;
+        }
+    }
+}
