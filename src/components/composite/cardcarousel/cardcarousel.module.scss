@@ -1,0 +1,43 @@
+.carouselWrapper {
+    margin-bottom: 16px;
+
+    .tabsRoot {
+        position: relative;
+        border: 1px solid #E8ECEF;
+        padding: 16px;
+        background-color: white;
+
+        .indicator {
+            display: none;
+        }
+
+        .scrollButtonDisabled {
+            opacity: 0;
+        }
+
+        .scrollButtons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            z-index: 1;
+
+            svg {
+                border-radius: 50%;
+                background-color: #F7F7F7;
+                box-shadow: 0px 3px 6px #00000029;
+                width: 32px;
+                height: 32px;
+            }
+
+            &:first-child {
+                left: 0;
+            }
+        }
+
+        .ctaIcon {
+            color: #0E88FF;
+        }
+    }
+
+}

@@ -4,3 +4,5 @@ export * from './viewportblock';
 export * from './trendingsearchcard'
 export * from './articlepreviewcard'
 export * from './customtabs'
+export * from './articlepreview'
+export * from './cardcarousel'
