@@ -12,5 +12,9 @@ export interface ArticlePreviewProps {
     handlePopOutClick?: React.MouseEventHandler<HTMLSpanElement>,
     popOutTooltip?: string,
     clockIcon?: ReactNode,
-    popOutIcon?: ReactNode
+    popOutIcon?: ReactNode,
+    titleClass?: string,
+    contentClass?: string,
+    synopsisClass?: string,
+    topInfoClass?: string
 }

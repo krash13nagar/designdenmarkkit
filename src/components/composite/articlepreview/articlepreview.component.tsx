@@ -19,6 +19,10 @@ import DenBox from '../../common/box/box.component';
  * @param {React.ReactNode} props.clockIcon -  (optional) icon for clock
  * @param {React.ReactNode} props.popOutIcon -  (optional) pop out Iion
  * @param {string} props.popOutTooltip -  (optional) pop out icon tooltip
+ * @param {string} props.titleClass - (optional) titleClass
+ * @param {string} props.contentClass -  (optional) contentClass
+ * @param {string} props.synopsisClass - (optional) synopsisClass
+ *
  * ref is forwarded to parent element
  */
 
@@ -40,6 +44,10 @@ export const ArticlePreview = React.forwardRef<
       popOutTooltip,
       clockIcon,
       popOutIcon,
+      titleClass,
+      contentClass,
+      synopsisClass,
+      topInfoClass,
     },
     ref
   ) => {
@@ -48,7 +56,9 @@ export const ArticlePreview = React.forwardRef<
         ref={ref}
         className={`${className ? className : ''} ${styles.previewWrapper}`}
       >
-        <div className={styles.topInfo}>
+        <div
+          className={`${styles.topInfo} ${topInfoClass ? topInfoClass : ''}`}
+        >
           {clockIcon && (date || time) && (
             <span className={styles.clockIcon}>{clockIcon}</span>
           )}
@@ -58,7 +68,10 @@ export const ArticlePreview = React.forwardRef<
           {date && wordCount && <span className={styles.pipe}> | </span>}
           {wordCount && <span>Word Count : {wordCount}</span>}
         </div>
-        <DenTypography className={styles.title} variant="h2">
+        <DenTypography
+          className={`${styles.title} ${titleClass ? titleClass : ''}`}
+          variant="h2"
+        >
           {title}
           {showPopOutIcon && popOutIcon && (
             <span
@@ -71,10 +84,16 @@ export const ArticlePreview = React.forwardRef<
           )}
         </DenTypography>
         {synopsis && (
-          <DenTypography className={styles.synopsis}>{synopsis}</DenTypography>
+          <DenTypography
+            className={`${styles.synopsis} ${
+              synopsisClass ? synopsisClass : ''
+            }`}
+          >
+            {synopsis}
+          </DenTypography>
         )}
         <div
-          className={styles.content}
+          className={`${styles.content} ${contentClass ? contentClass : ''}`}
           dangerouslySetInnerHTML={{ __html: richContent }}
         ></div>
       </DenBox>
