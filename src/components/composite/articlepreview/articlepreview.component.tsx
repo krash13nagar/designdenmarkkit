@@ -4,6 +4,24 @@ import styles from './articlepreview.module.scss';
 import { DenTypography } from '../../common';
 import DenBox from '../../common/box/box.component';
 
+/**
+ * ArticlePreview Component.
+ * @constructor
+ * @param {string} props.title -  title
+ * @param {string} props.synopsis - (optional) synopsis
+ * @param {string} props.date -  (optional) date
+ * @param {string} props.time -  (optional) time
+ * @param {string} props.wordCount - (optional) wordcount
+ * @param {string} props.className -  (optional) className
+ * @param {string} props.richContent - (optional) richContent to render
+ * @param {boolean} props.showPopOutIcon -  (optional) whether to show popout icon,default is false
+ * @param {React.MouseEventHandler<HTMLSpanElement>} props.handlePopOutClick - (optional) handler for pop out click
+ * @param {React.ReactNode} props.clockIcon -  (optional) icon for clock
+ * @param {React.ReactNode} props.popOutIcon -  (optional) pop out Iion
+ * @param {string} props.popOutTooltip -  (optional) pop out icon tooltip
+ * ref is forwarded to parent element
+ */
+
 export const ArticlePreview = React.forwardRef<
   HTMLDivElement,
   ArticlePreviewProps
