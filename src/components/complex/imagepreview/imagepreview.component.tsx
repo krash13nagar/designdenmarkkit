@@ -211,6 +211,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                     <DenButton
                       variant="contained"
                       className={style['edit-image']}
+                      disabled={action?.disabled}
                       onClick={action?.onClick}
                     >
                       {action.label}
@@ -227,6 +228,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                         onClick={(e) => handleClick(e, index)}
                         className={style['more-icon-base']}
                         disableRipple
+                        disabled={action?.disabled}
                       >
                         {action?.icon ? <action.icon /> : action?.label}
                       </DenIconButton>
@@ -247,6 +249,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                                 root: style['menuOptions'],
                               },
                             })}
+                            disabled={option?.disabled}
                           >
                             {option?.startIcon && (
                               <DenListItemIcon>

@@ -17,6 +17,7 @@ export interface ActionOptions {
     muiName: string;
   };
   optionProps?: MenuItemProps;
+  disabled?: boolean;
 }
 export interface Action extends Partial<Omit<LabelValue, 'value'>> {
   type: MenuEnum;
@@ -24,6 +25,7 @@ export interface Action extends Partial<Omit<LabelValue, 'value'>> {
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & { muiName: string };
   options?: ActionOptions[];
   onClick?: React.MouseEventHandler<HTMLElement>;
+  disabled?: boolean;
 }
 export interface AdditionalInfo {
   header?: string;
