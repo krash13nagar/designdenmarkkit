@@ -4,6 +4,22 @@ import styles from './articlepreviewcard.module.scss';
 import { DenTypography } from '../../common';
 import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback';
 
+/**
+ * ArticlePreviewCard Component.
+ * @constructor
+ * @param {string} props.title -  title
+ * @param {string} props.imgUrl - (optional) url for image
+ * @param {string} props.date -  (optional) date
+ * @param {string} props.wordCount - (optional) wordcount
+ * @param {string} props.agency -  (optional) agency
+ * @param {string} props.source - (optional) source
+ * @param {React.ReactNode} props.ctaIcon -  (optional) icon for CTA
+ * @param {React.MouseEventHandler<HTMLDivElement>} props.handleCTAClick - (optional) handler for CTA click
+ * @param {React.ReactNode} props.imagePlaceholderIcon -  (optional) icon for image placeholder
+ * @param {string} props.ctaTooltipText -  (optional) cta tooltip
+ * ref is forwarded to parent element
+ */
+
 export const ArticlePreviewCard = React.forwardRef<
   HTMLDivElement,
   ArticlePreviewCardProps
@@ -65,13 +81,15 @@ export const ArticlePreviewCard = React.forwardRef<
             </div>
           </div>
         </div>
-        <div
-          title={ctaTooltipText}
-          onClick={handleCTA}
-          className={styles.ctaIcon}
-        >
-          {ctaIcon}
-        </div>
+        {ctaIcon && (
+          <div
+            title={ctaTooltipText}
+            onClick={handleCTA}
+            className={styles.ctaIcon}
+          >
+            {ctaIcon}
+          </div>
+        )}
       </div>
     );
   }

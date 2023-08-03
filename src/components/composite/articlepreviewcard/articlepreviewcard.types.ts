@@ -7,8 +7,7 @@ export interface ArticlePreviewCardProps {
     date?: string
     agency?: string,
     source?: string,
-    label: string,
-    ctaIcon: ReactNode,
+    ctaIcon?: ReactNode,
     handleCTAClick?: React.MouseEventHandler<HTMLDivElement>,
     imagePlaceholderIcon?: ReactNode,
     handleCardClick?: React.MouseEventHandler<HTMLDivElement>,

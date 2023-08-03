@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import React from 'react';
-import PersonIcon from '@mui/icons-material/Person2Rounded';
 import ArticlePreviewCard from './articlepreviewcard.component';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
