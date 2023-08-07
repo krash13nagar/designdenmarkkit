@@ -2,7 +2,7 @@ import React from 'react';
 import { DenFab, DenTooltip, DenTypography } from '../../common';
 import { DateTimeDisplay } from './datetimedisplay.types';
 import moment from 'moment';
-import { Calender } from '../../../asset/calender';
+import { CalenderIcon } from '../../common/Icons/cdsIcon'
 import style from './datetime.module.scss';
 
 export const DisplayCardDate: React.FC<DateTimeDisplay> = (
@@ -34,7 +34,7 @@ export const DisplayCardDate: React.FC<DateTimeDisplay> = (
           aria-label="art creation date"
           classes={{ root: style['fab-button-wrapper'] }}
         >
-          <Calender />
+          <CalenderIcon />
           {moment(creationDateTime).format('DD MMM YYYY  h:mm a')}
         </DenFab>
         {/* <DenButton startIcon={} variant="outlined">
