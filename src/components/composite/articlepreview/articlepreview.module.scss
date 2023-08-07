@@ -1,10 +1,13 @@
+@use '../../../styles/' as css;
+
 .previewWrapper {
-    padding: 16px 40px;
+    padding: css.pxToRem(16px) css.pxToRem(40px);
+    //padding: 16px 40px;
     background-color: white;
     overflow: auto;
 
     .popoutIcon {
-        margin-left: 5px;
+        margin-left: css.pxToRem(5px);
         cursor: pointer;
     }
 
@@ -17,31 +20,31 @@
     }
 
     .topInfo {
-        font: normal normal normal 12px/17px "Source Sans 3", "Open Sans", sans-serif;
+        font: normal normal normal css.pxToRem(12px)/css.pxToRem(17px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
         margin-bottom: 8px;
     }
 
     .title {
-        font: normal normal 600 20px/28px "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+        font: normal normal 600 css.pxToRem(20px)/css.pxToRem(28px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
         color: #2B2B2B;
-        margin-bottom: 8px;
+        margin-bottom: css.pxToRem(8px);
     }
 
     .synopsis {
-        font: italic normal normal 14px/18px "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+        font: italic normal normal css.pxToRem(14px)/css.pxToRem(18px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
-        margin-bottom: 16px;
-        padding: 0px 20px;
+        margin-bottom: css.pxToRem(16px);
+        padding: 0px css.pxToRem(20px);
     }
 
     .content {
-        font: normal normal normal 16px/26px "Source Sans 3", "Open Sans", sans-serif;
+        font: normal normal normal css.pxToRem(16px)/css.pxToRem(26px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
 
         img {
             display: block;
-            margin: 10px auto;
+            margin: css.pxToRem(10px) auto;
         }
     }
 
