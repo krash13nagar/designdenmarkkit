@@ -1,5 +1,8 @@
+@use '../../../styles/' as css;
+
 .previewWrapper {
-    padding: 16px 40px;
+    padding: css.pxToRem(16px) css.pxToRem(40px);
+    //padding: 16px 40px;
     background-color: white;
     overflow: auto;
 
