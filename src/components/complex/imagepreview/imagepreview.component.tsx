@@ -130,6 +130,11 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    className={style['panel-summary']}
+                    classes={{
+                      content: style['panel-content'],
+                      expanded: style['panel-content'],
+                    }}
                   >
                     <DenTypography className={style['panel-header']}>
                       {additionalInfo?.header}
@@ -142,10 +147,14 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                         value={info?.value}
                         seperator=" "
                         labelProps={{
-                          className: `${style['column-6']} ${style['additonal-info-label']}`,
+                          className: `${style['column-6']} ${
+                            style['additonal-info-label']
+                          } ${style[info?.label]}`,
                         }}
                         valueProps={{
-                          className: `${style['column-6']} ${style['additonal-info-value']}`,
+                          className: `${style['column-6']} ${
+                            style['additonal-info-value']
+                          } ${style[info?.label]}`,
                         }}
                         renderValue={
                           info?.value instanceof Array &&
@@ -180,6 +189,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    className={style['panel-summary']}
                   >
                     <DenTypography className={style['panel-header']}>
                       {viewPorts?.header}

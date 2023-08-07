@@ -17,14 +17,18 @@ export const DisplayCardDate: React.FC<DateTimeDisplay> = (
         }}
         title={
           <div className={style['tooltip-content']}>
-            <DenTypography color="inherit">
-              <span className={style['addedAt']}>Added at : </span>
-              {moment(creationDateTime).format('DD MMM YYYY  h:mm a')}
-            </DenTypography>
-            <DenTypography color="inherit">
-              <span className={style['addedAt']}>Published at :</span>
-              {moment(artDate).format('DD MMM YYYY  h:mm a')}
-            </DenTypography>
+            {creationDateTime ? (
+              <DenTypography color="inherit">
+                <span className={style['addedAt']}>Added at : </span>
+                {moment(creationDateTime).format('DD MMM YYYY  h:mm a')}
+              </DenTypography>
+            ) : null}
+            {artDate ? (
+              <DenTypography color="inherit">
+                <span className={style['addedAt']}>Published at :</span>
+                {moment(artDate).format('DD MMM YYYY  h:mm a')}
+              </DenTypography>
+            ) : null}
           </div>
         }
       >
@@ -37,9 +41,6 @@ export const DisplayCardDate: React.FC<DateTimeDisplay> = (
           <Calender />
           {moment(creationDateTime).format('DD MMM YYYY  h:mm a')}
         </DenFab>
-        {/* <DenButton startIcon={} variant="outlined">
-          
-        </DenButton> */}
       </DenTooltip>
     </div>
   ) : null;

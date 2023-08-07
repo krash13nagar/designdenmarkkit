@@ -5,7 +5,7 @@ import { MenuEnum } from './imagepreview.types';
 export const sample = {
   containerHeader: 'View Image',
   msid: 1234567,
-  imageSource: 'https://picsum.photos/1200/1200',
+  imageSource: 'https://picsum.photos/1920/1280',
   selectedAspectRatio: '16:9',
   title: 'Modi’s inauguration ceremony at the New Parliament',
   caption:
