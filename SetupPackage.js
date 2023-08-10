@@ -11,12 +11,20 @@ function main() {
   sourceObj.name = source.name;
   sourceObj.version = source.version;
   sourceObj.description = source.description;
+  sourceObj.keywords = source.keywords;
+  sourceObj.author = source.author;
+  sourceObj.license = source.license;
   sourceObj.main = 'main.js';
 
   fs.writeFileSync(
     __dirname + '/dist/package.json',
     Buffer.from(JSON.stringify(sourceObj, null, 2), 'utf-8')
   );
+  fs.cp(__dirname + '/README.md', __dirname + '/dist/README.md', (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 main();
