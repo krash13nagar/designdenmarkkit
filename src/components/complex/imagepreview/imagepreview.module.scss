@@ -99,6 +99,14 @@
         color: #2b2b2b;
         opacity: 0.8;
       }
+      .panel-summary {
+        padding: 0px 5px;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        .panel-content {
+          margin: 0px;
+        }
+      }
       .panel-header {
         font: normal normal bold 14px/20px 'source sans 3', sans-serif;
         letter-spacing: 0px;
@@ -113,11 +121,17 @@
         font: normal normal 600 12px/17px 'Source Sans 3', sans-serif;
         letter-spacing: 0px;
         color: #4d4d4d;
+        &.Photographer {
+          margin-top: 0px;
+        }
       }
       .additonal-info-label {
         font: normal normal normal 12px/17px 'Source Sans 3', sans-serif;
         letter-spacing: 0px;
         color: #818181;
+        &.Photographer {
+          margin-top: 0px;
+        }
       }
     }
     .column-6 {

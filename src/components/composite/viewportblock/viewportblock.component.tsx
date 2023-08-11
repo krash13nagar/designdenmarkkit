@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import style from './viewportblock.module.scss';
 import { ViewPortBlockProps } from './viewportblock.types';
-import { blockStyle, viewPortDimenssions } from './viewportblock.utils';
+import { viewPortDimenssions } from './viewportblock.utils';
+import { useAspectRatioBlock } from './useaspectratioblock';
 
 /**
  * LabelValue Component.
@@ -14,6 +15,8 @@ import { blockStyle, viewPortDimenssions } from './viewportblock.utils';
  */
 
 export const ViewPortBlock = (props: ViewPortBlockProps) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+
   const {
     aspectRatio,
     label,
@@ -24,13 +27,20 @@ export const ViewPortBlock = (props: ViewPortBlockProps) => {
     selected = false,
     onClick = () => {},
   } = props;
-  const blockStyles = blockStyle(viewPortDimenssions(aspectRatio));
+  // const blockStyles = blockStyle(viewPortDimenssions(aspectRatio));
+  const { width, height } = viewPortDimenssions(aspectRatio);
+  const blockStyles = useAspectRatioBlock({
+    aspectRatio: width / height,
+    parentNode: parentRef?.current,
+  });
+
   return (
     <div className={`${wrapperClassName}`} onClick={onClick}>
       <div
         className={`${style['block-wrapper']}  ${style[size]} ${
           selected ? style['selected'] : ''
         }`}
+        ref={parentRef}
       >
         <div className={blockClassName} style={blockStyles}>
           {aspectRatio}
