@@ -2,7 +2,6 @@
 
 .previewWrapper {
     padding: css.pxToRem(16px) css.pxToRem(40px);
-    //padding: 16px 40px;
     background-color: white;
     overflow: auto;
 
@@ -23,28 +22,44 @@
         font: normal normal normal css.pxToRem(12px)/css.pxToRem(17px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
         margin-bottom: 8px;
+
+        .agencySource {
+            border-radius: css.pxToRem(2px);
+            background: #0E88FF14;
+            padding: css.pxToRem(2px) css.pxToRem(6px);
+            margin-right: css.pxToRem(8px);
+        }
+
+        .wordCount {
+            color: #2B2B2B;
+        }
     }
 
     .title {
-        font: normal normal 600 css.pxToRem(20px)/css.pxToRem(28px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+        font: normal normal 700 css.pxToRem(20px)/css.pxToRem(28px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
         color: #2B2B2B;
-        margin-bottom: css.pxToRem(8px);
+        margin-bottom: css.pxToRem(16px);
     }
 
     .synopsis {
-        font: italic normal normal css.pxToRem(14px)/css.pxToRem(18px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+        font: italic normal normal css.pxToRem(14px)/css.pxToRem(24px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
-        margin-bottom: css.pxToRem(16px);
-        padding: 0px css.pxToRem(20px);
+        margin-bottom: css.pxToRem(24px);
     }
 
     .content {
         font: normal normal normal css.pxToRem(16px)/css.pxToRem(26px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
 
+        p {
+            margin-bottom: css.pxToRem(10px);
+        }
+
         img {
             display: block;
             margin: css.pxToRem(10px) auto;
+            max-width: 50%;
+            height: auto;
         }
     }
 

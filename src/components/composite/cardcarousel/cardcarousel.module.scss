@@ -4,7 +4,7 @@
     .tabsRoot {
         position: relative;
         border: 1px solid #E8ECEF;
-        padding: 16px;
+        padding-right: 16px;
         background-color: white;
 
         .indicator {
@@ -33,6 +33,10 @@
             &:first-child {
                 left: 0;
             }
+        }
+
+        .flexContainer {
+            padding: 16px;
         }
 
         .ctaIcon {
