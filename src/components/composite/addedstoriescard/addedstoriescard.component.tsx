@@ -57,6 +57,7 @@ export const AddedStoriesCard = React.forwardRef<
             disableRipple
             checked={checked}
             onChange={handleCheckboxChange}
+            classes={{ root: styles.checkboxRoot }}
           />
         </div>
         <span title={text} className={styles.textWrapper}>

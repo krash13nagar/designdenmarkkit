@@ -185,6 +185,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
               storiesIndicesToRemove.length > 0 &&
               storiesIndicesToRemove.length < stories?.length
             }
+            classes={{ root: styles.checkboxRoot }}
           />
           <DenTypography variant="h4" className={styles.selectAllLabel}>
             {multiSelectLabel}
@@ -203,9 +204,8 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
       }
       return stories?.map((story, index) => {
         return (
-          <>
+          <React.Fragment key={story.id}>
             <AddedStoriesCard
-              key={story.id}
               text={story.title}
               sourceUrl={story.sourceUrl}
               handlePopOut={handlePopOut}
@@ -219,7 +219,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
             {index < stories.length - 1 && (
               <div className={styles.separator}></div>
             )}
-          </>
+          </React.Fragment>
         );
       });
     };
