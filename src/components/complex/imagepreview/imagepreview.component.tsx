@@ -96,12 +96,20 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 seperator=":"
                 className={style['msid']}
               />
-              <DenTypography variant="h6" className={style['image-title']}>
-                {title}
-              </DenTypography>
-              <DenTypography variant="body1" className={style['image-caption']}>
-                {caption}
-              </DenTypography>
+              <DenTypography
+                variant="h6"
+                className={style['image-title']}
+                dangerouslySetInnerHTML={{ __html: title }}
+              />
+              {/* {title}
+              </DenTypography> */}
+              <DenTypography
+                variant="body1"
+                className={style['image-caption']}
+                dangerouslySetInnerHTML={{ __html: caption }}
+              />
+              {/* {caption}
+              </DenTypography> */}
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}
@@ -166,7 +174,10 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                                   {value?.map((elm) => (
                                     <DenChip
                                       label={
-                                        <span className={style['chip-label']}>
+                                        <span
+                                          title={elm}
+                                          className={style['chip-label']}
+                                        >
                                           {elm as string}
                                         </span>
                                       }
