@@ -14,7 +14,6 @@ import DenBox from '../../common/box/box.component';
  * @param {string} props.wordCount - (optional) wordcount
  * @param {string} props.className -  (optional) className
  * @param {string} props.richContent - (optional) richContent to render
- * @param {boolean} props.showPopOutIcon -  (optional) whether to show popout icon,default is false
  * @param {React.MouseEventHandler<HTMLSpanElement>} props.handlePopOutClick - (optional) handler for pop out click
  * @param {React.ReactNode} props.clockIcon -  (optional) icon for clock
  * @param {React.ReactNode} props.popOutIcon -  (optional) pop out Iion
@@ -38,8 +37,6 @@ export const ArticlePreview = React.forwardRef<
       title,
       synopsis,
       richContent,
-      className,
-      showPopOutIcon = false,
       handlePopOutClick,
       popOutTooltip,
       clockIcon,
@@ -48,17 +45,25 @@ export const ArticlePreview = React.forwardRef<
       contentClass,
       synopsisClass,
       topInfoClass,
+      agency,
+      source,
+      classes = {},
     },
     ref
   ) => {
     return (
       <DenBox
         ref={ref}
-        className={`${className ? className : ''} ${styles.previewWrapper}`}
+        className={`${classes.root || ''} ${styles.previewWrapper}`}
       >
         <div
           className={`${styles.topInfo} ${topInfoClass ? topInfoClass : ''}`}
         >
+          <span className={agency || source ? styles.agencySource : ''}>
+            {agency && <span>Agency : {agency}</span>}
+            {agency && source && ' | '}
+            {source && <span>Source : {source}</span>}
+          </span>
           {clockIcon && (date || time) && (
             <span className={styles.clockIcon}>{clockIcon}</span>
           )}
@@ -66,14 +71,16 @@ export const ArticlePreview = React.forwardRef<
           {time && date && <span className={styles.pipe}> | </span>}
           {date && <span>{date}</span>}
           {date && wordCount && <span className={styles.pipe}> | </span>}
-          {wordCount && <span>Word Count : {wordCount}</span>}
+          {wordCount && (
+            <span className={styles.wordCount}>Word Count : {wordCount}</span>
+          )}
         </div>
         <DenTypography
           className={`${styles.title} ${titleClass ? titleClass : ''}`}
           variant="h2"
         >
           {title}
-          {showPopOutIcon && popOutIcon && (
+          {popOutIcon && (
             <span
               title={popOutTooltip}
               className={styles.popoutIcon}

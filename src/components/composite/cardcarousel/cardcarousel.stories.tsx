@@ -31,6 +31,7 @@ export const Basic: Story = {
         handleCardClick: () => console.log('card clicked!'),
         handleCTAClick: () => console.log('cta clicked'),
         ctaTooltipText: 'Open in new tab',
+        rightMargin: '16px',
       },
       {
         title:
@@ -46,6 +47,7 @@ export const Basic: Story = {
         handleCardClick: () => console.log('card clicked!'),
         handleCTAClick: () => console.log('cta clicked'),
         ctaTooltipText: 'Open in new tab',
+        rightMargin: '16px',
       },
       {
         title:
@@ -61,6 +63,7 @@ export const Basic: Story = {
         handleCardClick: () => console.log('card clicked!'),
         handleCTAClick: () => console.log('cta clicked'),
         ctaTooltipText: 'Open in new tab',
+        rightMargin: '16px',
       },
       {
         title:
@@ -76,6 +79,7 @@ export const Basic: Story = {
         handleCardClick: () => console.log('card clicked!'),
         handleCTAClick: () => console.log('cta clicked'),
         ctaTooltipText: 'Open in new tab',
+        rightMargin: '16px',
       },
     ],
   },
