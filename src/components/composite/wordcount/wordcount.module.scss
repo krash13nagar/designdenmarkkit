@@ -1,6 +1,6 @@
 @import url('../../global.scss');
 .wrapper {
-  font-family: 'source sans 3', sans-serif;
+  font-family: 'source sans 3', sans-serif !important;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
