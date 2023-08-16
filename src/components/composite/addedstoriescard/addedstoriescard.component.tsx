@@ -76,6 +76,7 @@ export const AddedStoriesCard = React.forwardRef<
           {popOutIcon && (
             <span
               title={popOutTooltip}
+              key="popouticon"
               className={`${styles.popOutIcon} ${
                 removeIcon ? styles.margin : ''
               }`}
@@ -86,6 +87,7 @@ export const AddedStoriesCard = React.forwardRef<
           )}
           {removeIcon && (
             <span
+              key="removeicon"
               title={removeTooltip}
               className={styles.removeIcon}
               onClick={(e) => handleRemove?.(e)}
