@@ -7,7 +7,8 @@ export const sample = {
   msid: 1234567,
   imageSource: 'https://picsum.photos/1920/1280',
   selectedAspectRatio: '16:9',
-  title: 'Modi’s inauguration ceremony at the New Parliament',
+  title:
+    '<p><strong>Modi’s inauguration ceremony at the New Parliament</strong></p>',
   caption:
     '<p><strong>New Delhi, Aug 11 (IANS) Isolate</strong>d heavy<sub> to very hea</sub>vy rainfall is <sup>likely to continue</sup> over Uttarakhand, Bihar, Sikkim, Arunachal Pradesh, Assam, <u>and Meghalaya during </u>next five days while rainfall activity over rest of the country is likely to be subdued during next one week before a revival of active monsoon conditions thereafter, the IMD said on Friday.</p>',
   imageInfo: [
