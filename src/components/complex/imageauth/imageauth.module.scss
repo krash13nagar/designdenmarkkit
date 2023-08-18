@@ -1,0 +1,10 @@
+.image-auth-wrapper {
+  display: flex;
+  flex-direction: row;
+  .image-auth-left-panel {
+    flex-basis: 30%;
+  }
+  .image-auth-right-panel {
+    flex-basis: 70%;
+  }
+}
