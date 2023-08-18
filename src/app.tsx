@@ -10,7 +10,7 @@ import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { DenTypography, ImagePreview } from './components';
+import { DenTypography, ImagePreview, KeywordsWrapper} from './components';
 import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
 
@@ -55,7 +55,8 @@ const App = (props: AppProps) => (
       count={'100k+'}
       icon={<TwitterIcon style={{ color: '#5da8dc' }} />}
     />
-    <ImagePreview {...sample} />
+    {/* <ImagePreview {...sample} /> */}
+    <KeywordsWrapper/>
   </>
 );
 if (module?.hot) {
