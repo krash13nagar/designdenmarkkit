@@ -10,7 +10,13 @@ import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { DenTypography, ImagePreview, Title, TitleForUrl } from './components';
+import {
+  DenTypography,
+  ImagePreview,
+  Title,
+  TitleForUrl,
+  ImageAuthoring,
+} from './components';
 import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
 
@@ -56,7 +62,7 @@ const App = (props: AppProps) => (
       icon={<TwitterIcon style={{ color: '#5da8dc' }} />}
     /> */}
     {/* <ImagePreview {...sample} /> */}
-    <Title
+    {/* <Title
       label="Image Title"
       fullWidth
       value="jdkash akjdh kajshd kjahs dkjahs dkjha dskj"
@@ -75,7 +81,8 @@ const App = (props: AppProps) => (
         onChange: () => console.log(''),
         fullWidth: true,
       }}
-    />
+    /> */}
+    <ImageAuthoring />
   </>
 );
 if (module?.hot) {
