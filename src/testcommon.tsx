@@ -5,7 +5,7 @@
  * @desc: Display of Denmark UI components based on material UI
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, User } from './components/common';
 import DenButton from './components/common/button/button.component';
 import DenChip from './components/common/chip/chip.component';
@@ -13,8 +13,10 @@ import './styles/storybookBasesStyles.scss';
 import MetadataList from './components/complex/imageauthoring/metadata/metadataList.config';
 import MetadataGroupList from './components/complex/imageauthoring/metadata/metadataGroupList.config';
 import Metadata from './components/complex/imageauthoring/metadata/metadata';
+import MetadataUtils from './components/complex/imageauthoring/metadata/metadata.utils';
 
 const TestCommon = () => {
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event);
   };
@@ -25,7 +27,7 @@ const TestCommon = () => {
     console.log(event);
   };
 
-const summary = {
+const summary1 = {
   "groupedList": {
       "3": {
           "id": 3,
@@ -102,6 +104,50 @@ const summary = {
   "expand": false
 };
 
+
+
+const model1: any = {
+  "73": {
+      "metatype": 73,
+      "value": "1",
+      "olderValue": "",
+      "dataType": "NUMBER",
+      "dbname": "latestnewsflag"
+  },
+  "436": {
+      "metatype": 436,
+      "value": "0",
+      "olderValue": "",
+      "dataType": "CHARACTER",
+      "dbname": "GadgetsMarkedReviewed"
+  },
+  "592": {
+      "metatype": 592,
+      "value": "0",
+      "olderValue": "",
+      "dataType": "CHARACTER",
+      "dbname": "AMPStory"
+  }
+};
+
+const [model, setModel] = useState(model1);
+const [summary, setSummary] = useState(summary1);
+
+useEffect(() => {
+  if (model) {
+      // update summary with change in model
+      // const _summary = MetadataUtils.makeSummary(model, summary);
+      // setSummary(_summary);
+  }
+}, [model])
+
+const handleWidgetChange = (type: any, value: any, olderValue: any, msid: any) => {
+  const obj = MetadataUtils.makeMetaObjectForModel(type, value, olderValue, msid);
+      model[type] = obj;
+      const newObj = Object.assign({},model);
+      setModel(newObj);
+  };
+
   return (
     <div>
       User:
@@ -119,7 +165,7 @@ const summary = {
       </DenButton>
       <DenChip label="chip" color="primary" />
       <div className='metadataWrapper'>
-      <Metadata title="Selected Group" visibleSummary={true} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} />
+      <Metadata title="Selected Group" value={model} visibleSummary={true} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} onChangeWidget={handleWidgetChange}/>
       </div>
       {/* <DenButton variant="outlined" color="primary">
         Metadata

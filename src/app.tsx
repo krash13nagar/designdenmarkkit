@@ -55,7 +55,7 @@ const App = (props: AppProps) => (
       count={'100k+'}
       icon={<TwitterIcon style={{ color: '#5da8dc' }} />}
     />
-    <ImagePreview {...sample} />
+    {/* <ImagePreview {...sample} /> */}
   </>
 );
 if (module?.hot) {

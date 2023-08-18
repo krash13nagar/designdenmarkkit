@@ -9,10 +9,12 @@ export interface MetadataSummaryProps {
 }
 export interface MetadataProps {
     title?:string;
-    visibleSummary: boolean;
+    visibleSummary?: boolean;
     summary:any;
     metaGroup:object;
     metaDefinationList:object;
+    value?: any;
+    onChangeWidget?: any;
 }
 export interface MetadataSelectorProps {
     onChange: any;

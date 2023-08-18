@@ -27,11 +27,8 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
         return (
             arr.map((element:any, index) => (
                     <DenGrid item container xs={12} key={index + '_' + i} className={style['metadata-summary-item-details']}>
-                        <DenGrid item container xs={6} key={index + '_' + i + 1} justifyContent="flex-start" alignItems="left">
-                            <DenTypography variant="body2" noWrap> {(element.metaGroup.name)+` : `}</DenTypography>
-                        </DenGrid>
-                        <DenGrid item container xs={6} key={index + '_' + i + 2} justifyContent="flex-start" alignItems="left">
-                            <DenTypography variant="body2" noWrap> {element.metaGroup.value}</DenTypography>
+                        <DenGrid item container xs={12} key={index + '_' + i + 1} justifyContent="flex-start" alignItems="left">
+                            <DenTypography variant="body2" noWrap> {(element.metaGroup.name)+` : `+(element.metaGroup.value)}</DenTypography>
                         </DenGrid>
                     </DenGrid>
                 ))
