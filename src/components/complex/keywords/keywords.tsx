@@ -54,7 +54,7 @@ export const Keywords = () => {
         <Grid container spacing={1}>
           {keywordsArray.map((item, index) => {
             return (
-              <Grid item xs={6}>
+              <Grid item xs={6} className={(index % 2 == 0) ? "keywordTypeEven": ""}>
                 <div className="keywordflexContainer">
                   <div className="removeIcondiv">
                     <DenIconButton
@@ -71,6 +71,7 @@ export const Keywords = () => {
                     <TextField
                       value={56}
                       type="number"
+                      size="small"
                       inputProps={{
                         max: 100,
                         min: 10,
@@ -78,7 +79,7 @@ export const Keywords = () => {
                       }}
                       className="marks-input"
                     />
-                    {true && <div className="seprator">|</div>}
+                    {/* true && <div className="seprator">|</div> */}
                   </div>
                 </div>
               </Grid>
