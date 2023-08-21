@@ -46,7 +46,7 @@
     // .parent {
     padding: css.pxToRem(24px) 0px 0px css.pxToRem(24px);
     .primary-data-wrapper {
-      overflow: auto;
+      overflow-y: auto;
       max-height: inherit;
       height: calc(100vh - 174px);
     }

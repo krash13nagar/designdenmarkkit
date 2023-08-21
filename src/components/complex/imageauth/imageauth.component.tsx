@@ -7,11 +7,13 @@ import {
   LabelValue,
   Title,
   TitleForUrl,
+  ImageCaption,
+  Footer,
 } from '../../composite';
-import { DenGrid } from '../../common';
-import { Footer } from '../../composite/footer/footer.component';
 
 /**
+ * Error should be field name plus Error if field is caption then error field would be captionError
+ * Warning should be field name plus Warning if field is caption then Warning field would be captionWarning
  * LabelValue Component.
  * @constructor
  * @param {string} props.label* -.label of the element to display
@@ -75,7 +77,11 @@ export const ImageAuthoring = () => {
                   fullWidth: true,
                 }}
               />
-              <Title label="Title" value="Title for the image" fullWidth />
+              <ImageCaption
+                caption="test"
+                captionTitle="Caption"
+                onChange={(str) => {}}
+              />
               <Title label="Title" value="Title for the image" fullWidth />
               <Title label="Title" value="Title for the image" fullWidth />
               <Title label="Title" value="Title for the image" fullWidth />

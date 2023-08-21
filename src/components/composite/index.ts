@@ -11,3 +11,5 @@ export * from './addedstories';
 export * from './addedstoriescard';
 export * from './title';
 export * from './titleforurl';
+export * from './imagecaption';
+export * from './footer';

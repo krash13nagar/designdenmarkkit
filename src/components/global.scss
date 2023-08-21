@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/**
+Will comment this out brfore publishing
+*/
+* {
+  margin: 0px;
+  padding: 0px;
+}
 [class*='cds-'] {
   font-family: 'source sans 3', sans-serif !important;
   box-sizing: border-box;
@@ -25,6 +32,28 @@
     }
     &-3 {
       flex-basis: 25%;
+    }
+  }
+}
+.sun-editor {
+  border: 1px solid #d2d8df;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  .se-toolbar.sun-editor-common {
+    border-bottom: 1px solid #d2d8df;
+    outline: none !important;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  .se-wrapper-inner.se-wrapper-wysiwyg.sun-editor-editable {
+    border-radius: 4px;
+  }
+  &:focus-within {
+    border-color: #4b9cceef;
+
+    .se-toolbar.sun-editor-common {
+      border-bottom: 1px solid #4b9cceef;
     }
   }
 }
