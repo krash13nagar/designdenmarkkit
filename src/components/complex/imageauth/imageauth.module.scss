@@ -1,10 +1,55 @@
+@use '../../../styles/' as css;
 .image-auth-wrapper {
   display: flex;
   flex-direction: row;
+  padding: css.pxToRem(16px);
+  height: calc(100vh - css.pxToRem(102px));
   .image-auth-left-panel {
     flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    .image-container {
+      flex-basis: 50%;
+      height: 50%;
+      width: 100%;
+      background: #e8e9ec 0% 0% no-repeat padding-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #e8e9ec;
+      .image {
+        width: 100%;
+        height: auto;
+        max-width: inherit;
+        max-height: inherit;
+        transition: aspect-ratio 2s ease-out;
+      }
+    }
+    .meta-info-wrapper {
+      padding: css.pxToRem(10px);
+      label {
+        font: normal normal 600 12px/20px 'Source Sans 3';
+        color: #818181;
+        margin-bottom: css.pxToRem(10px);
+        span:last-child {
+          font-size: css.pxToRem(14px);
+          letter-spacing: 0px;
+          color: #4d4d4d;
+        }
+      }
+    }
   }
   .image-auth-right-panel {
     flex-basis: 70%;
+    // .parent {
+    padding: css.pxToRem(24px) 0px 0px css.pxToRem(24px);
+    .primary-data-wrapper {
+      overflow: auto;
+      max-height: inherit;
+      height: calc(100vh - 174px);
+    }
+    // }
   }
 }

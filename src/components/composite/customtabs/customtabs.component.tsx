@@ -60,7 +60,11 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
     (child: any, index: number) => {
       let tabPanelId = 'tab' + Number(index + 1);
       return (
-        <DenTabPanel value={tabPanelId} id={`tab-panel-${index}`}>
+        <DenTabPanel
+          className={'parent'}
+          value={tabPanelId}
+          id={`tab-panel-${index}`}
+        >
           {child}
         </DenTabPanel>
       );
@@ -68,26 +72,24 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
   );
 
   return (
-    <div>
-      <DenTabContext value={val}>
-        <DenTabs
-          indicatorColor={indicatorColor}
-          aria-label="tabs custom component"
-          centered={centered}
-          visibleScrollbar={visibleScrollbar}
-          orientation={orientation}
-          textColor={textColor}
-          variant={variant}
-          scrollButtons={scrollButtons}
-          selectionFollowsFocus={selectionFollowsFocus}
-          value={val}
-          onChange={handleChange}
-        >
-          {tabList}
-        </DenTabs>
-        {tabPanel}
-      </DenTabContext>
-    </div>
+    <DenTabContext value={val}>
+      <DenTabs
+        indicatorColor={indicatorColor}
+        aria-label="tabs custom component"
+        centered={centered}
+        visibleScrollbar={visibleScrollbar}
+        orientation={orientation}
+        textColor={textColor}
+        variant={variant}
+        scrollButtons={scrollButtons}
+        selectionFollowsFocus={selectionFollowsFocus}
+        value={val}
+        onChange={handleChange}
+      >
+        {tabList}
+      </DenTabs>
+      {tabPanel}
+    </DenTabContext>
   );
 };
 

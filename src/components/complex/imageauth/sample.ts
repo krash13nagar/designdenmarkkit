@@ -6,8 +6,8 @@ export const sample = {
   msId: 6942292,
   activationStatus: 'ACTIVE',
   liveBlogEntity: false,
-  cmsKeywords: [],
-  taxonomyTags: [],
+  cmsKeywords: [] as any[],
+  taxonomyTags: [] as any[],
   originalContentInfo: {
     damType: {
       damid: '64d64c5c6aea3f22f8e45af5',
@@ -30,15 +30,15 @@ export const sample = {
   additionalInfo: {
     agencyJustification: '',
   },
-  authorsForCMSLiteList: [],
-  secondaryAuthorsList: [],
+  authorsForCMSLiteList: [] as any[],
+  secondaryAuthorsList: [] as any[],
   agencyDetails: {},
   secondaryAgencyDetails: {},
   publishDate: '08/11/2023 08:25:50 PM',
   artExpDate: 1707317750000,
-  socialData: [],
-  commentDetails: [],
-  pageViewsData: [],
+  socialData: [] as any[],
+  commentDetails: [] as any[],
+  pageViewsData: [] as any[],
   caption:
     '<p>New Delhi, Aug 11 (IANS) Isolated heavy to very heavy rainfall is likely to continue over Uttarakhand, Bihar, Sikkim, Arunachal Pradesh, Assam, and Meghalaya during next five days while rainfall activity over rest of the country is likely to be subdued during next one week before a revival of active monsoon conditions thereafter, the IMD said on Friday.</p>',
   imgCapType: 0,
@@ -112,7 +112,7 @@ export const sample = {
   },
   delete: false,
   entityType: 'IMAGES',
-  secondaryAgencyName: [],
-  templatedata: null,
-  additionalKeywords: [],
+  secondaryAgencyName: [] as any[],
+  templatedata: null as any,
+  additionalKeywords: [] as any[],
 };

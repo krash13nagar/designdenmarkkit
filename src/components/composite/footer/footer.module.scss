@@ -1,0 +1,11 @@
+@use '../../../styles/' as css;
+.footer {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #d2d8df;
+  height: css.pxToRem(70px);
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  top: auto;
+}
