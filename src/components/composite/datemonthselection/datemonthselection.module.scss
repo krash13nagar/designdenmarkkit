@@ -1,0 +1,100 @@
+@use '../../../styles/' as css;
+
+.dateMonthselectionWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    .dateCirclesWrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: css.pxToRem(2px);
+
+        .dateCircle {
+            margin-right: css.pxToRem(20px);
+            border-radius: 50%;
+            color: #2B2B2B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #E8ECEF;
+            cursor: pointer;
+            user-select: none;
+
+            &:active {
+                opacity: 0.8;
+            }
+
+            &.noMargin {
+                margin: 0;
+            }
+
+            &.medium {
+                width: css.pxToRem(28px);
+                height: css.pxToRem(28px);
+                padding: css.pxToRem(6px);
+                font-size: css.pxToRem(12px);
+                line-height: css.pxToRem(16px);
+            }
+
+            &.small {
+                width: css.pxToRem(24px);
+                height: css.pxToRem(24px);
+                padding: css.pxToRem(6px);
+                font-size: css.pxToRem(10px);
+                line-height: css.pxToRem(12px);
+            }
+
+            &.main {
+                width: css.pxToRem(32px);
+                height: css.pxToRem(32px);
+                padding: css.pxToRem(6px);
+                color: #FFFFFF;
+                background-color: #1D82F5;
+                font-size: css.pxToRem(24px);
+                font-weight: 600;
+                cursor: default;
+
+                &:active {
+                    opacity: 1;
+                }
+            }
+
+            &.calendarCircle {
+                position: relative;
+                color: #4D4D4D;
+                padding: css.pxToRem(5px);
+
+                &:active {
+                    opacity: 1;
+                }
+
+                .dayMonthPickerRoot {
+                    position: absolute;
+                    left: 0px;
+                    border-radius: css.pxToRem(8px);
+                    top: css.pxToRem(32px);
+                    box-shadow: 0 css.pxToRem(3px) css.pxToRem(6px) #00000029;
+                    background-color: #FFFFFF;
+                }
+            }
+
+        }
+    }
+
+    .monthWrapper {
+        text-align: center;
+
+        .monthText {
+            text-transform: uppercase;
+            font-size: css.pxToRem(16px);
+            line-height: css.pxToRem(25px);
+            color: #4D4D4D;
+        }
+
+    }
+
+
+
+}

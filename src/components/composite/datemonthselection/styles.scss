@@ -1,0 +1,27 @@
+.customcalendar {
+
+    .MuiDayCalendar-header,
+    .cds-MuiDayCalendar-header {
+        display: none;
+    }
+
+    .MuiPickersDay-hiddenDaySpacingFiller,
+    .cds-MuiPickersDay-hiddenDaySpacingFiller {
+        display: none;
+    }
+
+    .MuiDayCalendar-weekContainer,
+    .cds-MuiDayCalendar-weekContainer {
+        display: inline;
+    }
+
+    .MuiDayCalendar-monthContainer,
+    .cds-MuiDayCalendar-monthContainer {
+        margin: 0 css.pxToRem(20px);
+    }
+
+    .MuiDayCalendar-slideTransition,
+    .cds-MuiDayCalendar-slideTransition {
+        min-height: css.pxToRem(200px);
+    }
+}
