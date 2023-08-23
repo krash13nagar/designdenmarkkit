@@ -4,6 +4,7 @@ import DenTabContext from '../../common/tabcontext/tabcontext.component';
 import DenTabPanel from '../../common/tabpanel/tabpanel.component';
 import DenTabs from '../../common/tabs/tabs.component';
 import { CustomTabsProps } from './customtabs.types';
+import style from './customtabs.module.scss';
 
 export const DenCustomTabs = (props: CustomTabsProps) => {
   const {
@@ -61,9 +62,10 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
       let tabPanelId = 'tab' + Number(index + 1);
       return (
         <DenTabPanel
-          className={'parent'}
+          className={style['tabPanel-root']}
           value={tabPanelId}
           id={`tab-panel-${index}`}
+          sx={{ padding: '16px 0px 16px 20px' }}
         >
           {child}
         </DenTabPanel>

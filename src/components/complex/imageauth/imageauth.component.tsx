@@ -1,4 +1,4 @@
-import React, { ForwardedRef, Ref, forwardRef } from 'react';
+import React, { useRef } from 'react';
 import style from './imageauth.module.scss';
 import {
   AlingType,
@@ -10,6 +10,11 @@ import {
   ImageCaption,
   Footer,
 } from '../../composite';
+import { DenTypography } from '../../common';
+import { DenTextField } from '../../common/textfield/textfield.component';
+import DenCheckbox from '../../common/checkbox/checkbox.component';
+import DenFormControlLabel from '../../common/formcontrollabel/formcontrolllabel.component';
+import useCustomScrollbar from '../../../customhooks/usecustomscrollbar';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -29,12 +34,14 @@ import {
  */
 
 export const ImageAuthoring = () => {
+  const tabComponentRef = useRef(null);
+  useCustomScrollbar(tabComponentRef);
   return (
     <>
       <div className={style['image-auth-wrapper']}>
         <div className={style['image-auth-left-panel']}>
           <DenImageCard
-            src="https://picsum.photos/1920/1280"
+            src="https://picsum.photos/900/1600"
             wrapperClassName={style['image-container']}
             imageClassName={style['image']}
           />
@@ -58,8 +65,12 @@ export const ImageAuthoring = () => {
           <DenCustomTabs
             tabTitleList={['Primary Data', 'Keywords', 'Meta Data']}
             centered={true}
+            variant="standard"
           >
-            <div className={style['primary-data-wrapper']}>
+            <div
+              ref={tabComponentRef}
+              className={style['primary-data-wrapper']}
+            >
               <LabelValue label="MSID" value="8763426" seperator=":" />
               <Title label="Title" value="Title for the image" fullWidth />
               <TitleForUrl
@@ -82,16 +93,44 @@ export const ImageAuthoring = () => {
                 captionTitle="Caption"
                 onChange={(str) => {}}
               />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
-              <Title label="Title" value="Title for the image" fullWidth />
+              <DenTypography variant="h6">Credits</DenTypography>
+              <div className="row">
+                <DenFormControlLabel
+                  control={<DenCheckbox defaultChecked />}
+                  label="Not related to any agency"
+                  className="column-12"
+                />
+                <DenTextField
+                  label="Justification"
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mr: '25px', mb: '25px' } }}
+                />
+                <DenTextField
+                  label="Add Image Agency"
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mb: '25px' } }}
+                />
+                <DenTextField
+                  label="Add Caption Agency"
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mr: '25px', mb: '25px' } }}
+                />
+                <DenTextField
+                  label="Add Photographer Byline"
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mb: '25px' } }}
+                />
+                {/* <DenTextField
+                  label=""
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mr: '25px', mb: '25px' } }}
+                />
+                <DenTextField
+                  label="Add Photographer Byline"
+                  wrapperClass="column-6"
+                  valueProps={{ sx: { mb: '25px' } }}
+                /> */}
+              </div>
             </div>
             <div className={style['keywords-wrapper']}>tab 2</div>
             <div className={style['meta-data-wrapper']}>tab 3</div>

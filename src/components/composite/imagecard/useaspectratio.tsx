@@ -1,9 +1,32 @@
 import { useEffect, useState } from 'react';
-import { AspectRatioProps } from './imagecard.types';
+import { AspectRatioProps, ImageStyleObject } from './imagecard.types';
 export const useAspectRatioImage = (props: AspectRatioProps) => {
   const { aspectRatio, src, parentNode } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [imageStyle, setImageStyle] = useState({ display: 'none' });
+  const getStyle = (
+    aspectRatio: number,
+    width: string | number,
+    height: string | number
+  ) => {
+    if (aspectRatio > 1) {
+      return {
+        width: width,
+        height: `${Math.floor(parseInt(width as string) / aspectRatio)}px`,
+        margin: 'auto',
+        objectFit: 'cover',
+        maxHeight: height,
+      };
+    } else {
+      return {
+        width: `${Math.floor(aspectRatio * parseInt(height as string))}px`,
+        height: height,
+        margin: 'auto',
+        objectFit: 'cover',
+        maxHeight: height,
+      };
+    }
+  };
   useEffect(() => {
     const image = new Image();
 
@@ -16,25 +39,13 @@ export const useAspectRatioImage = (props: AspectRatioProps) => {
         width: '100%',
         height: '100%',
       };
-      let updatedStyle = {};
+      let updatedStyle: ImageStyleObject = {};
       if (aspectRatio) {
-        if (aspectRatio > 1) {
-          updatedStyle = {
-            width: width,
-            height: `${Math.floor(parseInt(width as string) / aspectRatio)}px`,
-            margin: 'auto',
-            objectFit: 'cover',
-            maxHeight: height,
-          };
-        } else {
-          updatedStyle = {
-            width: `${Math.floor(aspectRatio * parseInt(height as string))}px`,
-            height: height,
-            margin: 'auto',
-            objectFit: 'cover',
-            maxHeight: height,
-          };
-        }
+        updatedStyle = getStyle(aspectRatio, width, height);
+      } else {
+        const { naturalWidth, naturalHeight } = image;
+        const aspectRatio = naturalWidth / naturalHeight;
+        updatedStyle = getStyle(aspectRatio, width, height);
       }
       setImageStyle({ ...updatedStyle, display: 'block' });
     };
