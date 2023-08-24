@@ -9,6 +9,8 @@ import React from 'react';
 import { Input, User } from './components/common';
 import DenButton from './components/common/button/button.component';
 import DenChip from './components/common/chip/chip.component';
+import { KeywordsWrapper } from './components';
+import { config } from './components/complex/keywords/keywords.sample';
 
 const TestCommon = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +49,8 @@ const TestCommon = () => {
                 handleChange({ target: { name: 'status', value } }, false);
               }}
             /> */}
+        <KeywordsWrapper searchKeywordConfig={config.searchKeywordConfig} addBtnConfig={config.addBtnConfig} addKeywordsConfig={config.addKeywordsConfig} recommendConfig={config.recommendConfig}></KeywordsWrapper>
+      
     </div>
   );
 };

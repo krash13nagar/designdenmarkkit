@@ -3,7 +3,7 @@
 // import { updateCommonModel } from '../../../actions/common.action';
 // import Utils from '../../../utils/utils';
 // import {
-//   Grid,
+//   DenGrid,
 //   Button,
 //   TextField,
 //   List,
@@ -231,24 +231,36 @@
 // export default Keywords;
 import React, { useEffect, useState } from "react";
 import RecommendKeywords from "./recommend.keywords";
-import { keywordsMappingObj } from "./keywords.types";
+import { addKeywordsConfig, keywordsMappingObj, keywordsWrapperConfig } from "./keywords.types";
 import { Grid } from "@mui/material";
 import Keywords from "./keywords";
+import { DenButton, DenGrid } from "../../common";
+import SearchKeyword from "./search.keyword";
+import SearchKeywordWrapper from "./keywords.searchwrapper";
 
 
-export const KeywordsWrapper = () =>{
+export const KeywordsWrapper = (props : keywordsWrapperConfig) => {
+    const {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig} = props;
+    const [addKeywordsConfigState, setAddKeywordsConfigState] = useState(addKeywordsConfig);
+
+    const changeAddkeywordsConfig = (val:addKeywordsConfig)=>{
+        setAddKeywordsConfigState(val);
+    }
 
     return (
         <div>
-            <Grid container spacing={3}>
-                <Grid item xs={4}>
+            <DenGrid container spacing={3}>
+                <DenGrid item xs={4}>
                     <h1>Hello world</h1>
-                </Grid>
-                <Grid item xs={8}>
-                    <Keywords/>
-                    {/* <RecommendKeywords recommendedConfig={recommendedSchema.recommendedConfig} recommendedKeywords={recommendedSchema.recommendedKeywords}  /> */}
-                </Grid>
-            </Grid>
+                </DenGrid>
+                <DenGrid item xs={8}>
+                    <SearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
+                    <Keywords addedKeywordsConfig={addKeywordsConfig.addedKeywordsConfig} 
+                    addedKeywords={addKeywordsConfig.addedKeywords} />
+                    <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig} 
+                    recommendedKeywords={recommendConfig.recommendedKeywords}  />
+                </DenGrid>
+            </DenGrid>
         </div>
     )
 }

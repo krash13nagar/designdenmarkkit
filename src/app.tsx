@@ -56,7 +56,6 @@ const App = (props: AppProps) => (
       icon={<TwitterIcon style={{ color: '#5da8dc' }} />}
     />
     {/* <ImagePreview {...sample} /> */}
-    <KeywordsWrapper/>
   </>
 );
 if (module?.hot) {

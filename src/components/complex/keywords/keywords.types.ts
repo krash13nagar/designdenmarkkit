@@ -6,8 +6,8 @@ export interface recommendedConfig {
 	errorMsg: string;
 	refreshIcon : ReactNode;
     addKeywordIcon: ReactNode;
-	refreshCallbackFn: undefined | React.MouseEventHandler<HTMLButtonElement>;
-	addCallbackFn: undefined | React.MouseEventHandler<HTMLDivElement>;
+	refreshCallbackFn: React.MouseEventHandler<HTMLButtonElement>;
+	addCallbackFn: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export interface recommendedKeywords {
@@ -44,4 +44,49 @@ export interface metaInfo {
 
 export interface recommendWidget {
     recommendWidgetObj : keywordsMappingObj;
+}
+
+export interface addedKeywordsConfig {
+    removeCallbackFn: React.MouseEventHandler<HTMLButtonElement>;
+    title: string;
+    removeKeywordIcon: ReactNode;
+}
+
+export interface searchKeywordConfig {
+    autocomplete: boolean;
+    label: string;
+    placeholder: string;
+    searchCallbckfnc: ()=>void; 
+}
+
+export interface addBtnConfig {
+    btnConfig : any;
+    addBtnCallbckfnc: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface searchKeywordWrapper {
+    searchKeywordConfig: searchKeywordConfig;
+    addBtnConfig: addBtnConfig;
+}
+
+export interface addKeywordsConfig {
+    addedKeywordsConfig: addedKeywordsConfig;
+    addedKeywords: recommendedKeywords[];
+}
+
+export interface recommendConfig {
+    recommendedConfig: recommendedConfig;
+    recommendedKeywords: recommendedKeywords[];
+}
+
+export interface keywordsWrapperConfig {
+    searchKeywordConfig: searchKeywordConfig;
+    addBtnConfig: addBtnConfig;
+    addKeywordsConfig: addKeywordsConfig;
+    recommendConfig: recommendConfig;
+}
+
+export interface keywordsConfig {
+    addedKeywordsConfig: addedKeywordsConfig;
+    addedKeywords: recommendedKeywords[];
 }
