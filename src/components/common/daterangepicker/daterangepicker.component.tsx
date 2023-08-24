@@ -16,18 +16,12 @@ import { react } from '@babel/types';
  * for more details see http:localhost:6006
  */
 export const DenDateRangePicker: React.FC<DateRangePickerProps> = (props) =>{
-    // React.useEffect(()=>{
-    //     if(parent.current.classList){
-    //         parent.current.classList.add('vs-daterange');
-    //     }
-        
-    // },[])
     const parent = React.useRef(null);
     const {children:Children,...rest} = props;
- return <div><DateRangePicker {...rest} ref={parent}  >
-    {Children}
-  </DateRangePicker>
-  </div>
+    return <div><DateRangePicker {...rest}  >
+      {Children}
+    </DateRangePicker>
+    </div>
 };
 
 export default DenDateRangePicker;

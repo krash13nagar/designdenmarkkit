@@ -105,6 +105,13 @@ const summary1 = {
 };
 
 
+/**
+ * 
+ * {
+ *    
+ * }
+ */
+
 
 const model1: any = {
   "73": {
@@ -132,6 +139,11 @@ const model1: any = {
 
 const [model, setModel] = useState(model1);
 const [summary, setSummary] = useState(summary1);
+const [group, selectedGroup] = useState('Select');
+
+    const handleGroupChange = (group: string) => {
+        selectedGroup(group)
+    };
 
 useEffect(() => {
   if (model) {
@@ -146,6 +158,7 @@ const handleWidgetChange = (type: any, value: any, olderValue: any, msid: any) =
       model[type] = obj;
       const newObj = Object.assign({},model);
       setModel(newObj);
+      console.log(group);
   };
 
   return (
@@ -165,7 +178,7 @@ const handleWidgetChange = (type: any, value: any, olderValue: any, msid: any) =
       </DenButton>
       <DenChip label="chip" color="primary" />
       <div className='metadataWrapper'>
-      <Metadata title="Selected Group" value={model} visibleSummary={true} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} onChangeWidget={handleWidgetChange}/>
+      <Metadata title="Selected Group" value={model} visibleSummary={true} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} onChangeWidget={handleWidgetChange} onChangeGroup={handleGroupChange} selectedGroup={group}/>
       </div>
       {/* <DenButton variant="outlined" color="primary">
         Metadata

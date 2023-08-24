@@ -1,3 +1,5 @@
+import { SelectProps } from "../../../common/select/select.types";
+
 export interface MetadataSummaryProps {
     existingSummary?: any;
     value: any;
@@ -15,6 +17,8 @@ export interface MetadataProps {
     metaDefinationList:object;
     value?: any;
     onChangeWidget?: any;
+    onChangeGroup?: any;
+    selectedGroup?: any;
 }
 export interface MetadataSelectorProps {
     onChange: any;

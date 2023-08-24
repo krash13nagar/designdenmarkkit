@@ -9,16 +9,13 @@ import MetadataWidgets from './metadata.widget';
 export const Metadata = (props: MetadataProps) => {
 
     const metaGroup = props.metaGroup;
-    const [model, setModel] = useState({...props.value})
-    const [group, selectedGroup] = useState('Select');
+    const model = {...props.value};
+    // const [group, selectedGroup] = useState('Select');
 
-    const handleChange = (group: string) => {
-        selectedGroup(group)
-    }
+    // const handleChange = (group: string) => {
+    //     selectedGroup(group)
+    // }
 
-    useEffect(() => {
-        setModel({...props.value})
-    }, [props.value])
 
     const getMetaCount = (groupId: string) => {
         if(groupId) {
@@ -50,15 +47,15 @@ export const Metadata = (props: MetadataProps) => {
                     <DenInputLabel shrink> {props.title}</DenInputLabel>
                     </DenGrid>
                     <DenGrid  container item xs={3} alignContent="flex-end" justifyContent="center">
-                    <DenInputLabel> Count : {getMetaCount(group)}</DenInputLabel>
+                    <DenInputLabel> Count : {getMetaCount(props.selectedGroup)}</DenInputLabel>
                     </DenGrid>                    
                     <DenGrid item xs={12}>
-                    <MetadataSelector onChange={handleChange} selectedGroup={group} items={metaGroup} /> 
+                    <MetadataSelector onChange={props.onChangeGroup} selectedGroup={props.selectedGroup} items={metaGroup} /> 
                     </DenGrid>
 
                  </DenGrid>
                 <DenGrid item xs={12}>
-                    <MetadataWidgets model={model} selectedGroup={group} items={props.metaDefinationList} onChange={handleWidgetChanges} />
+                    <MetadataWidgets model={model} selectedGroup={props.selectedGroup} items={props.metaDefinationList} onChange={handleWidgetChanges} className={style['widgets-wrapper']} />
                 </DenGrid>
             </DenGrid>
         </DenGrid>

@@ -19,6 +19,7 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
                 metaGroup: metaGroup
             })
         }
+        console.log(arr);
         return arr;
     }
    
@@ -56,6 +57,7 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
             ))
         )
     }
+    //style.metadataAddedWrapper
     return (
         <DenGrid container>
             <DenGrid item container xs={12} direction="row">
@@ -65,7 +67,7 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
                 {
                     props.isButtonVisible && 
                     <DenGrid item container xs={6} justifyContent="flex-end" alignItems="center">
-                        <DenButton variant="contained" size="small" color="primary">Add Metadata</DenButton>
+                        <DenButton variant="outlined" size="small" color="primary">Add Metadata</DenButton>
                     </DenGrid>
                 }
             </DenGrid>

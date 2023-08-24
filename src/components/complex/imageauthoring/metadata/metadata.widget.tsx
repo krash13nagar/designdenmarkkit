@@ -11,6 +11,10 @@ import DenDateRangePicker from "../../../common/daterangepicker/daterangepicker.
 import moment from "moment";
 import MetadataDuration from "./metawidgetcomponents/metadata.duration";
 import MetadataTextBox from "./metawidgetcomponents/metadata.textbox";
+import MetadataDatePicker from "./metawidgetcomponents/metadata.datepicker";
+import MetadataSingleSelect from "./metawidgetcomponents/metadata.singleselect";
+import MetadataMultiSelect from "./metawidgetcomponents/metadata.multiselect";
+import style from './metadata.module.scss';
 
 export const MetadataWidgets = (props: any) => {
     const [model, setModel] = useState(props.model)
@@ -71,6 +75,54 @@ export const MetadataWidgets = (props: any) => {
         }
     }
 
+    const onCloseAutoComplete = () => {
+        setOptions([])  
+    }
+
+    const handleAutocompleteTextChange = (type: any, query: any) => {
+        if(query) {
+            let data = [
+                {
+                    "id": "TRAVEL GUIDE",
+                    "value": "TRAVEL GUIDE",
+                    "title": "TRAVEL GUIDE",
+                    "display": {
+                        "title": "TRAVEL GUIDE"
+                    }
+                },
+                {
+                    "id": "Travel News",
+                    "value": "Travel News",
+                    "title": "Travel News",
+                    "display": {
+                        "title": "Travel News"
+                    }
+                },
+                {
+                    "id": "TRAVEL TIPS",
+                    "value": "TRAVEL TIPS",
+                    "title": "TRAVEL TIPS",
+                    "display": {
+                        "title": "TRAVEL TIPS"
+                    }
+                },
+                {
+                    "id": "TRAVEL TRENDS",
+                    "value": "TRAVEL TRENDS",
+                    "title": "TRAVEL TRENDS",
+                    "display": {
+                        "title": "TRAVEL TRENDS"
+                    }
+                }
+            ] ;
+            //let data = ['a1','a2','a3'];
+            setOptions(data);
+        } else {
+            setOptions([])
+        }
+        
+    }
+
     const parseDefaultValue = (widgetType: any) => {
         switch (widgetType) {
             case 'LABEL':
@@ -106,7 +158,7 @@ export const MetadataWidgets = (props: any) => {
                             const isDisabled = (isPublished && metaType == 592) ? true : false;
                             switch (metaWidget) {
                                 case 'LABEL':
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}>
                                             <DenTextField label={item.metadataDefinition.name} fullWidth value={metaValue} valueProps={{
                                             readOnly: true,
                                             disabled: true
@@ -114,54 +166,28 @@ export const MetadataWidgets = (props: any) => {
                                     </DenGrid>
                                 case 'TEXTBOX':
                                     //143-144 k liye flot
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataTextBox title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataTextBox title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
                                 case "TEXTAREA":
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}>
                                     <DenTextField label={item.metadataDefinition.name} value={metaValue} fullWidth={true} valueProps={{multiline: true,
                                          onChange:(event) => handleChange(item.metadataDefinition.metatype, event.target.value, olderValue)}}/>
                                      </DenGrid>
                                 case "DROPDOWN":
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDropdown title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} isDisabled={isDisabled} /> </DenGrid>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDropdown title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} isDisabled={isDisabled} /> </DenGrid>
                                 case "CHECKBOX":
                                     // need to handle for multiple tags
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataCheckbox title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataCheckbox title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
                                 case "DURATION":
-                                    return <DenGrid key={index} item xs={gridSize} className="mt10" data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDuration title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange}  /> 
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDuration title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange}  /> 
                                     </DenGrid>
                                 case "DATEPICKER":
-                                    const initialSettings = {
-                                        format: 'DD/MM/YYYY h:mm A',
-                                        timePicker: true,
-                                        timePickerIncrement: 1,
-                                        singleDatePicker: true,
-                                        showDropdowns: true,
-                                        autoApply: true,
-                                        autoUpdateInput: false,
-                                        startDate: moment().startOf('day'),
-                                        endDate: moment().endOf('day'),
-                                        drops: 'down',
-                                        opens: 'right',
-                                        minDate: '01/01/1971',
-                                        maxDate: '12/31/2037',
-                                        parentEl: 'body',
-                                        locale: {}
-                                    }
-                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}>
-                                    <DenInputLabel shrink>{props.title}</DenInputLabel>
-                                    <DateRangeIcon />
-                                    <DenDateRangePicker initialSettings={initialSettings}
-                                     onApply={(event: React.MouseEventHandler<HTMLButtonElement>, picker:any)=>{
-                                        if(picker.startDate)
-                                        picker.startDate = new Date(picker.startDate).getTime()
-                                        if (handleChange) {
-                                            handleChange(item.metadataDefinition.metatype, picker.startDate, olderValue)
-                                        }
-                                    }}>
-                                    <input onChange={(event)=>{
-                                        metaValue = event.target.value ;
-                                        }} value={moment.unix(Math.floor(metaValue/1000)).format("DD/MM/YYYY HH:mm")} type="text" />
-                                    </DenDateRangePicker>
-                                     </DenGrid>
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDatePicker title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
+                                case "SINGLESELECTSUGGESTIONTEXTBOX":
+                                case "DROPDOWNSUGGESTIONTEXTBOX":
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataSingleSelect title={item.metadataDefinition.name} widget={item} options={options} value={metaValue} msid={msid} olderValue={olderValue} onChange={handleChange} onTextChange={handleAutocompleteTextChange} onClose={onCloseAutoComplete} /> </DenGrid>
+                                case "MULTISELECTSUGGESTIONTEXTBOX":
+                                    // need to handle for multiple metadata
+                                    return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}><MetadataMultiSelect title={item.metadataDefinition.name} widget={item} options={options} value={metaValue} msid={msid} olderValue={olderValue} onChange={handleChange} onTextChange={handleAutocompleteTextChange} onClose={onCloseAutoComplete}/> </DenGrid>
                             }
                         })
                         }

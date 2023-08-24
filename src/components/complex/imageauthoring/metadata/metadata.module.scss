@@ -39,3 +39,7 @@
     min-width: 200px;
     padding-right: 20px;
 }
+.widgets-wrapper {
+    overflow-y: scroll;
+    max-height: 400px;
+}
