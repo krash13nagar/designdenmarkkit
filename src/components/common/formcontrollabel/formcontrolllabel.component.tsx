@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { FormControlLabelProps, FormControlLabel } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
+import { FormControlLabelTypes } from './formcontrollabel.types';
 
 /**
  * DenformcontrFormControlLabel Component.
@@ -13,7 +14,7 @@ import { FormControlLabelProps, FormControlLabel } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormControlLabel: React.FC<FormControlLabelProps> = (props) => (
+export const DenFormControlLabel: React.FC<FormControlLabelTypes> = (props) => (
   <FormControlLabel {...props} />
 );
 

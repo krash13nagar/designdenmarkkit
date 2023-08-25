@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ListItemIconProps, ListItemIcon } from '@mui/material';
+import { ListItemIcon } from '@mui/material';
+import { ListItemIconTypes } from './listitemicon.types';
 
 /**
  * DenListItemIcon Component.
@@ -10,7 +11,7 @@ import { ListItemIconProps, ListItemIcon } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenListItemIcon: React.FC<ListItemIconProps> = (props) => (
+export const DenListItemIcon: React.FC<ListItemIconTypes> = (props) => (
   <ListItemIcon {...props} />
 );
 

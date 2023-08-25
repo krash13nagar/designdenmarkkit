@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Switch,{SwitchProps} from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
+import { SwitchTypes } from './switch.types';
 
 /**
  * Switches toggle the state of a single setting on or off.
@@ -10,7 +11,7 @@ import Switch,{SwitchProps} from '@mui/material/Switch';
  * @param {string} props.color - The color of the component.
  * @param {string} props.variant - The variant to use.
  */
-export const DenSwitch:React.FC<SwitchProps> = React.forwardRef((props,ref) => (
+export const DenSwitch:React.FC<SwitchTypes> = React.forwardRef((props,ref) => (
   <Switch {...props} ref={ref} />
 ));
 

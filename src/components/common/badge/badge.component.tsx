@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Badge,{BadgeProps} from '@mui/material/Badge';
+import Badge from '@mui/material/Badge';
+import { BadgeTypes } from './badge.types';
 
 /**
  * Badge generates a small badge to the top-right of its child(ren).
@@ -10,7 +11,7 @@ import Badge,{BadgeProps} from '@mui/material/Badge';
  * @param {string} props.color - The color of the component.
  * @param {string} props.variant - The variant to use.
  */
-export const DenBadge:React.FC<BadgeProps> = React.forwardRef((props,ref) => (
+export const DenBadge:React.FC<BadgeTypes> = React.forwardRef((props,ref) => (
   <Badge {...props} ref={ref} />
 ));
 

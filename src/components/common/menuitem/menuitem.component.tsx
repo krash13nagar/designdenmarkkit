@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { MenuItem, MenuItemProps } from '@mui/material';
+import { MenuItem } from '@mui/material';
+import { MenuItemTypes } from './menuitem.types';
 
 /**
  * Menu Item Component.
@@ -12,7 +13,7 @@ import { MenuItem, MenuItemProps } from '@mui/material';
  * for more details see http:localhost:6006
  */
 
-export const DenMenuItem: React.FC<MenuItemProps> = (props) => (
+export const DenMenuItem: React.FC<MenuItemTypes> = (props) => (
   <MenuItem {...props} />
 );
 

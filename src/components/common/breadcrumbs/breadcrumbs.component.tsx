@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { BreadcrumbsProps, Breadcrumbs } from '@mui/material';
+import { Breadcrumbs } from '@mui/material';
+import { BreadcrumbsTypes } from './breadcrumbs.types';
 
 /**
  * DenBreadcrumbs Component.
@@ -18,7 +19,7 @@ import { BreadcrumbsProps, Breadcrumbs } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenBreadcrumbs: React.FC<BreadcrumbsProps> = (props) => (
+export const DenBreadcrumbs: React.FC<BreadcrumbsTypes> = (props) => (
     <Breadcrumbs  {...props} />
 );
 

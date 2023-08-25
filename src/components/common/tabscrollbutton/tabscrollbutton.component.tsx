@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TabScrollButton, TabScrollButtonProps } from '@mui/material';
+import { TabScrollButton } from '@mui/material';
+import { TabScrollButtonTypes } from './tabscrollbutton.types';
 
 /**
  * Tab Scroll Button Component.
@@ -12,7 +13,7 @@ import { TabScrollButton, TabScrollButtonProps } from '@mui/material';
  * for more details see http:localhost:6006
  */
 
-export const DenTabScrollButton: React.FC<TabScrollButtonProps> = (props) => (
+export const DenTabScrollButton: React.FC<TabScrollButtonTypes> = (props) => (
   <TabScrollButton {...props} />
 );
 

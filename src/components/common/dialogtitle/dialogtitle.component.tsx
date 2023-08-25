@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DialogTitleProps, DialogTitle } from '@mui/material';
+import { DialogTitle } from '@mui/material';
+import { DialogTitleTypes } from './dialogtitle.types';
 
 /**
  * DenDialogTitle Component.
@@ -9,7 +10,7 @@ import { DialogTitleProps, DialogTitle } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialogTitle: React.FC<DialogTitleProps> = (props) => (
+export const DenDialogTitle: React.FC<DialogTitleTypes> = (props) => (
   <DialogTitle {...props} />
 );
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { FormLabelProps, FormLabel } from '@mui/material';
+import { FormLabel } from '@mui/material';
+import { FormLabelTypes } from './formlabel.types';
 
 /**
  * DenFormLabel Component.
@@ -13,7 +14,7 @@ import { FormLabelProps, FormLabel } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormLabel: React.FC<FormLabelProps> = React.forwardRef(
+export const DenFormLabel: React.FC<FormLabelTypes> = React.forwardRef(
   (props, ref) => <FormLabel {...props} ref={ref} />
 );
 

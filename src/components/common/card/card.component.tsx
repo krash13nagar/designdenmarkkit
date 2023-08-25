@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CardProps, Card } from '@mui/material';
+import { Card } from '@mui/material';
+import { CardTypes } from './card.types';
 
 /**
  * DenCard Component.
@@ -11,6 +12,6 @@ import { CardProps, Card } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCard: React.FC<CardProps> = (props) => <Card {...props} />;
+export const DenCard: React.FC<CardTypes> = (props) => <Card {...props} />;
 
 export default DenCard;

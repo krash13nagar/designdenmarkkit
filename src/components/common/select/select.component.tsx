@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { SelectProps, Select } from '@mui/material';
+import { Select } from '@mui/material';
+import { SelectTypes } from './select.types';
 
 /**
  * DenSelect Component.
@@ -12,7 +13,7 @@ import { SelectProps, Select } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenSelect: React.FC<SelectProps> = (props) => (
+export const DenSelect: React.FC<SelectTypes> = (props) => (
   <Select {...props} />
 );
 

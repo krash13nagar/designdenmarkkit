@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DialogActionsProps, DialogActions } from '@mui/material';
+import { DialogActions } from '@mui/material';
+import { DialogActionsTypes } from './dialogactions.types';
 
 /**
  * DenDialogContent Component.
@@ -10,7 +11,7 @@ import { DialogActionsProps, DialogActions } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialogActions: React.FC<DialogActionsProps> = (props) => (
+export const DenDialogActions: React.FC<DialogActionsTypes> = (props) => (
   <DialogActions {...props} />
 );
 

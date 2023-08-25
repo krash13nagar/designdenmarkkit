@@ -1,12 +1,12 @@
-import { FormLabelProps } from '@mui/material';
 import { ReactElement, ReactHTMLElement, ReactNode } from 'react';
+import { FormLabelTypes } from '../../common/formlabel/formlabel.types';
 
 export interface LabelValueProps {
   label: string;
   value: string | number | ArrayOfType<string | number | object>;
   align?: AlingType;
-  labelProps?: FormLabelProps;
-  valueProps?: FormLabelProps;
+  labelProps?: FormLabelTypes;
+  valueProps?: FormLabelTypes;
   className?: string;
   seperator?: string | ReactNode;
   seperatorClassName?: string;
