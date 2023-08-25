@@ -14,8 +14,8 @@ import { CircularProgressProps, CircularProgress } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCircularProgress: React.FC<CircularProgressProps> = React.forwardRef((props, ref) => (
-  <CircularProgress ref={ref} {...props} />
-));
+export const DenCircularProgress: React.FC<CircularProgressProps> = (props) => (
+  <CircularProgress {...props} />
+);
 
 export default DenCircularProgress;

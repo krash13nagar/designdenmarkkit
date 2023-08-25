@@ -9,8 +9,8 @@ import { DialogTitleProps, DialogTitle } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialogTitle: React.FC<DialogTitleProps> = React.forwardRef((props, ref) => (
-  <DialogTitle ref={ref} {...props} />
-));
+export const DenDialogTitle: React.FC<DialogTitleProps> = (props) => (
+  <DialogTitle {...props} />
+);
 
 export default DenDialogTitle;

@@ -2,7 +2,7 @@ import React from 'react';
 import { getWordCharCount } from './wordcount.utils';
 import style from './wordcount.module.scss';
 import { WordCountProps } from './wordcount.types';
-export const Count = React.forwardRef<HTMLDivElement, WordCountProps>((props: WordCountProps, ref) => {
+export const Count = (props: WordCountProps) => {
   const { words, characters, spaces } = getWordCharCount(
     props?.wordString ?? ''
   );
@@ -12,9 +12,9 @@ export const Count = React.forwardRef<HTMLDivElement, WordCountProps>((props: Wo
     wrapperClassName = style['wrapper'],
   } = props;
   return (
-    <div ref={ref} className={wrapperClassName}>
+    <div className={wrapperClassName}>
       {`${charLabelText} ${characters} / ${wordLabelText} ${words}`}
     </div>
   );
-});
+};
 export default Count;

@@ -1,4 +1,4 @@
-import React, { Ref, useRef } from 'react';
+import React, { useRef } from 'react';
 import style from './imagecard.module.scss';
 import { ImageCardProps } from './imagecard.types';
 import { useAspectRatioImage } from './useaspectratio';
@@ -15,7 +15,7 @@ import { DenCircularProgress } from '../../common/circularprogress/circularprogr
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>((props: ImageCardProps, ref:Ref<HTMLDivElement>) => {
+export const DenImageCard = (props: ImageCardProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const {
     src = '',
@@ -40,5 +40,5 @@ export const DenImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>((pr
       />
     </div>
   );
-});
+};
 export default DenImageCard;

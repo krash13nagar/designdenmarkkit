@@ -7,5 +7,4 @@ export interface TextFieldProps {
   fullWidth?: boolean;
   labelProps?: InputLabelProps;
   valueProps?: InputBaseProps;
-  forwardedRef?: React.FC<InputBaseProps>;
 }

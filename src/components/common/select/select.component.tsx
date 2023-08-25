@@ -12,8 +12,8 @@ import { SelectProps, Select } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenSelect: React.FC<SelectProps> = React.forwardRef((props, ref) => (
-  <Select ref={ref} {...props} />
-));
+export const DenSelect: React.FC<SelectProps> = (props) => (
+  <Select {...props} />
+);
 
 export default DenSelect;

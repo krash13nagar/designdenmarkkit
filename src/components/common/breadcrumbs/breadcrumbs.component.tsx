@@ -18,8 +18,8 @@ import { BreadcrumbsProps, Breadcrumbs } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenBreadcrumbs: React.FC<BreadcrumbsProps> = React.forwardRef((props, ref) => (
-    <Breadcrumbs ref={ref} {...props} />
-));
+export const DenBreadcrumbs: React.FC<BreadcrumbsProps> = (props) => (
+    <Breadcrumbs  {...props} />
+);
 
 export default DenBreadcrumbs;

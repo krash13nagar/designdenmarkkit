@@ -5,8 +5,9 @@ import moment from 'moment';
 import { CalenderIcon } from '../../common/Icons/cdsIcon';
 import style from './datetime.module.scss';
 
-export const DisplayCardDate: React.FC<DateTimeDisplay> = React.forwardRef<HTMLDivElement, DateTimeDisplay>((
-  props: DateTimeDisplay, ref ) => {
+export const DisplayCardDate: React.FC<DateTimeDisplay> = (
+  props: DateTimeDisplay
+) => {
   const { creationDateTime, artDate } = props;
   return creationDateTime ? (
     <div>
@@ -15,7 +16,7 @@ export const DisplayCardDate: React.FC<DateTimeDisplay> = React.forwardRef<HTMLD
           tooltip: style['tooltip-wrapper'],
         }}
         title={
-          <div ref={ref} className={style['tooltip-content']}>
+          <div className={style['tooltip-content']}>
             {creationDateTime ? (
               <DenTypography color="inherit">
                 <span className={style['addedAt']}>Added at : </span>
@@ -43,4 +44,4 @@ export const DisplayCardDate: React.FC<DateTimeDisplay> = React.forwardRef<HTMLD
       </DenTooltip>
     </div>
   ) : null;
-});
+};

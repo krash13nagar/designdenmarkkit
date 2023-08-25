@@ -10,8 +10,8 @@ import { FormGroupProps, FormGroup } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormGroup: React.FC<FormGroupProps> = React.forwardRef((props, ref) => (
-  <FormGroup ref={ref} {...props} />
-));
+export const DenFormGroup: React.FC<FormGroupProps> = (props) => (
+  <FormGroup {...props} />
+);
 
 export default DenFormGroup;

@@ -17,8 +17,8 @@ import { ButtonProps, Button } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenButton: React.FC<ButtonProps> = React.forwardRef((props, ref) => (
-  <Button {...props} ref={ref} />
-));
+export const DenButton: React.FC<ButtonProps> = (props) => (
+  <Button {...props} />
+);
 
 export default DenButton;

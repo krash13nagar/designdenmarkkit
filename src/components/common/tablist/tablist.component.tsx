@@ -9,8 +9,8 @@ import { TabList, TabListProps } from '@mui/lab';
  * for more details see http:localhost:6006
  */
 
-export const DenTabList: React.FC<TabListProps> = React.forwardRef((props, ref) => (
-  <TabList ref={ref} {...props} />
-));
+export const DenTabList: React.FC<TabListProps> = (props) => (
+  <TabList {...props} />
+);
 
 export default DenTabList;

@@ -12,8 +12,8 @@ import { MenuItem, MenuItemProps } from '@mui/material';
  * for more details see http:localhost:6006
  */
 
-export const DenMenuItem: React.FC<MenuItemProps> = React.forwardRef((props, ref) => (
-  <MenuItem ref={ref} {...props} />
-));
+export const DenMenuItem: React.FC<MenuItemProps> = (props) => (
+  <MenuItem {...props} />
+);
 
 export default DenMenuItem;

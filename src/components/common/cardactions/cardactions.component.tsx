@@ -11,8 +11,8 @@ import { CardActionsProps, CardActions } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardActions: React.FC<CardActionsProps> = React.forwardRef((props, ref) => (
-  <CardActions ref={ref} {...props} />
-));
+export const DenCardActions: React.FC<CardActionsProps> = (props) => (
+  <CardActions {...props} />
+);
 
 export default DenCardActions;
