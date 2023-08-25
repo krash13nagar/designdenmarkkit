@@ -15,8 +15,8 @@ import { LinkProps, Link } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenLink: React.FC<LinkProps> = (props) => (
-    <Link  {...props} />
-);
+export const DenLink: React.FC<LinkProps> = React.forwardRef((props, ref) => (
+    <Link ref={ref} {...props} />
+));
 
 export default DenLink;

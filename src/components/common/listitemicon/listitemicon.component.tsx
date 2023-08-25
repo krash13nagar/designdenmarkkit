@@ -10,8 +10,8 @@ import { ListItemIconProps, ListItemIcon } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenListItemIcon: React.FC<ListItemIconProps> = (props) => (
-  <ListItemIcon {...props} />
-);
+export const DenListItemIcon: React.FC<ListItemIconProps> = React.forwardRef((props, ref) => (
+  <ListItemIcon ref={ref} {...props} />
+));
 
 export default DenListItemIcon;

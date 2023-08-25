@@ -13,8 +13,8 @@ import { FormControlLabelProps, FormControlLabel } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormControlLabel: React.FC<FormControlLabelProps> = (props) => (
-  <FormControlLabel {...props} />
-);
+export const DenFormControlLabel: React.FC<FormControlLabelProps> = React.forwardRef((props, ref) => (
+  <FormControlLabel ref={ref} {...props} />
+));
 
 export default DenFormControlLabel;

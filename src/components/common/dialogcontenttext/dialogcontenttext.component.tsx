@@ -9,8 +9,6 @@ import { DialogContentTextProps, DialogContentText } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialogContentText: React.FC<DialogContentTextProps> = (
-  props
-) => <DialogContentText {...props} />;
+export const DenDialogContentText: React.FC<DialogContentTextProps> = React.forwardRef((props, ref) => <DialogContentText ref={ref} {...props} />);
 
 export default DenDialogContentText;

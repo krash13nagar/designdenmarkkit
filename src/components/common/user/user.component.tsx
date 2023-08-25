@@ -19,13 +19,13 @@ import styles from './user.module.scss';
  * )
  */
 
-export const User = (props: UserProps) => {
+export const User = React.forwardRef<HTMLParagraphElement, UserProps>((props: UserProps, ref) => {
   const { name, age } = props;
   return (
-    <p className={styles['user-wrapper']}>
+    <p ref={ref} className={styles['user-wrapper']}>
       {name} is {age} years old.
     </p>
   );
-};
+});
 
 export default User;

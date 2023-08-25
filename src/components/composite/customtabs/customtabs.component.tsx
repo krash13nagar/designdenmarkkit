@@ -5,8 +5,8 @@ import DenTabPanel from "../../common/tabpanel/tabpanel.component";
 import DenTabs from "../../common/tabs/tabs.component";
 import { CustomTabsProps } from "./customtabs.types";
 
-export const DenCustomTabs = (props: CustomTabsProps) => {
-    const parentRef = useRef<HTMLDivElement>(null);
+export const DenCustomTabs = React.forwardRef<HTMLDivElement, CustomTabsProps>((props: CustomTabsProps, ref) => {
+    //const parentRef = useRef<HTMLDivElement>(null);
     const {
         defaultTab = "tab1",
         indicatorColor = "primary",
@@ -45,7 +45,7 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
     });
 
     return (
-        <div ref={parentRef}>
+        <div ref={ref}>
             <DenTabContext value={val}>
                 <DenTabs indicatorColor={indicatorColor}
                 aria-label="tabs custom component"
@@ -68,6 +68,6 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
             </DenTabContext>
         </div>
     )
-}
+})
 
 export default DenCustomTabs ;

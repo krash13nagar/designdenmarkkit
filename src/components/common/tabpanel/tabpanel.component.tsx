@@ -10,8 +10,8 @@ import { TabPanel, TabPanelProps } from '@mui/lab';
  * for more details see http:localhost:6006
  */
 
-export const DenTabPanel: React.FC<TabPanelProps> = (props) => (
-  <TabPanel {...props} />
-);
+export const DenTabPanel: React.FC<TabPanelProps> = React.forwardRef((props, ref) => (
+  <TabPanel ref={ref} {...props} />
+));
 
 export default DenTabPanel;

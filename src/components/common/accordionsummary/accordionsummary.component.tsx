@@ -11,8 +11,8 @@ import { AccordionSummaryProps, AccordionSummary } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenAccordionSummary: React.FC<AccordionSummaryProps> = (props) => (
-  <AccordionSummary {...props} />
-);
+export const DenAccordionSummary: React.FC<AccordionSummaryProps> = React.forwardRef((props, ref) => (
+  <AccordionSummary {...props} ref={ref} />
+));
 
 export default DenAccordionSummary;

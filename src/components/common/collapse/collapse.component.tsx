@@ -14,8 +14,8 @@ import { CollapseProps, Collapse } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCollapse: React.FC<CollapseProps> = (props) => (
-  <Collapse {...props} />
-);
+export const DenCollapse: React.FC<CollapseProps> = React.forwardRef((props, ref) => (
+  <Collapse ref={ref} {...props} />
+));
 
 export default DenCollapse;

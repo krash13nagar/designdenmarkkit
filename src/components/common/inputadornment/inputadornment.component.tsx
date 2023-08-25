@@ -9,8 +9,8 @@ import { InputAdornmentProps, InputAdornment } from '@mui/material';
  * @param {boolean} props.appear - Perform the enter transition when it first mounts if in is also true. Set this to false to disable this behavior.
  * @param {	HTMLElement|Function} props.container -An HTML element, or a function that returns one. It's used to set the container the InputAdornment is transitioning from.
  */
-export const DenInputAdornment: React.FC<InputAdornmentProps> = (props) => (
-  <InputAdornment {...props} />
-);
+export const DenInputAdornment: React.FC<InputAdornmentProps> = React.forwardRef((props, ref) => (
+  <InputAdornment ref={ref} {...props} />
+));
 
 export default DenInputAdornment;

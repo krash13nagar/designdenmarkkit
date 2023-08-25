@@ -10,8 +10,8 @@ import { IconButtonProps, IconButton } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenIconButton: React.FC<IconButtonProps> = (props) => (
-  <IconButton {...props} />
-);
+export const DenIconButton: React.FC<IconButtonProps> = React.forwardRef((props, ref) => (
+  <IconButton ref={ref} {...props} />
+));
 
 export default DenIconButton;

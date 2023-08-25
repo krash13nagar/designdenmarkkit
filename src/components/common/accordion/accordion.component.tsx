@@ -15,8 +15,8 @@ import { AccordionProps, Accordion } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenAccordion: React.FC<AccordionProps> = (props) => (
-  <Accordion {...props} />
-);
+export const DenAccordion: React.FC<AccordionProps> = React.forwardRef((props, ref) => (
+  <Accordion {...props} ref={ref} />
+));
 
 export default DenAccordion;

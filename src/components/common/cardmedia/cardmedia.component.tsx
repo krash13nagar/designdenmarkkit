@@ -14,8 +14,8 @@ import { CardMediaProps, CardMedia } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardMedia: React.FC<CardMediaProps> = (props) => (
-  <CardMedia {...props} />
-);
+export const DenCardMedia: React.FC<CardMediaProps> = React.forwardRef((props, ref) => (
+  <CardMedia ref={ref} {...props} />
+));
 
 export default DenCardMedia;

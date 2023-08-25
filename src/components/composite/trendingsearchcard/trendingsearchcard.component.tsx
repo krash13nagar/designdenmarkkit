@@ -13,7 +13,7 @@ import { formatCount } from './trendingsearchcard.utils';
  * for more details see http:localhost:6006
  */
 
-export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
+export const TrendingSearchCard = React.forwardRef<HTMLDivElement, TrendingSearchCardProps>((props: TrendingSearchCardProps, ref) => {
     const {
         label,
         icon = null,
@@ -23,7 +23,7 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
         handleClick
     } = props;
     return (
-        <div className={`${wrapperClassName} ${style['rootWrapper']} ${active?style.active:''}`}
+        <div ref={ref} className={`${wrapperClassName} ${style['rootWrapper']} ${active?style.active:''}`}
         onClick={handleClick}
         >
             <div className={style['left']}>
@@ -40,5 +40,5 @@ export const TrendingSearchCard = (props: TrendingSearchCardProps) => {
             </div>
         </div>
     );
-};
+});
 export default TrendingSearchCard;

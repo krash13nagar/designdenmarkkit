@@ -11,8 +11,8 @@ import { NativeSelectProps, NativeSelect } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenNativeSelect: React.FC<NativeSelectProps> = (props) => (
-  <NativeSelect {...props} />
-);
+export const DenNativeSelect: React.FC<NativeSelectProps> = React.forwardRef((props, ref) => (
+  <NativeSelect ref={ref} {...props} />
+));
 
 export default DenNativeSelect;

@@ -14,6 +14,6 @@ import { PaperProps, Paper } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenPaper: React.FC<PaperProps> = (props) => <Paper {...props} />;
+export const DenPaper: React.FC<PaperProps> = React.forwardRef((props, ref) => <Paper ref={ref} {...props} />);
 
 export default DenPaper;

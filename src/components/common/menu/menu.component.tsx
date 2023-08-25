@@ -11,6 +11,6 @@ import { MenuProps, Menu } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenMenu: React.FC<MenuProps> = (props) => <Menu {...props} />;
+export const DenMenu: React.FC<MenuProps> = React.forwardRef((props, ref) => <Menu ref={ref} {...props} />);
 
 export default DenMenu;

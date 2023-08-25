@@ -3,7 +3,7 @@ import Skeleton from '@mui/material/Skeleton';
 import './imagewithfallback.style.scss';
 import { ImageWithFallbackProps } from './imagewithfallback.types';
 
-export const ImageWithFallback: React.FC<ImageWithFallbackProps> = (props) => {
+export const ImageWithFallback = React.forwardRef<HTMLImageElement, ImageWithFallbackProps>((props, ref) => {
   const {
     placeholderIcon = null,
     showLoaderWhenLoading = true,
@@ -41,6 +41,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = (props) => {
             src={src}
             width={width}
             height={height}
+            ref={ref}
             {...otherProps}
           ></img>
         )}
@@ -66,6 +67,6 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = (props) => {
       </div>
     </>
   );
-};
+});
 
 export default ImageWithFallback;

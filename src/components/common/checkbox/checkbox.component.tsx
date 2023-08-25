@@ -13,8 +13,8 @@ import { CheckboxProps, Checkbox } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCheckbox: React.FC<CheckboxProps> = (props) => (
-  <Checkbox {...props} />
-);
+export const DenCheckbox: React.FC<CheckboxProps> = React.forwardRef((props, ref) => (
+  <Checkbox ref={ref} {...props} />
+));
 
 export default DenCheckbox;
