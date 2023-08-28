@@ -25,5 +25,9 @@ export interface ArticleSelectionCardProps {
     synopsisClass?: string,
     wordCountLabel?: string,
     publishedByLabel?: string,
-    popOutIconClass?: string
+    popOutIconClass?: string,
+    msid?: string,
+    showReadMoreInSynopsis?: boolean,
+    parentWidth?: string,
+    tooltipDelay?: number
 }

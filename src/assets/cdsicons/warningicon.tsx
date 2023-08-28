@@ -1,14 +1,16 @@
 import React from 'react';
 import { DenSvgIcon } from './svg';
-export const Warning = () => {
+import { SVGTypes } from './svg.types';
+
+export const Warning = (props: Partial<SVGTypes>) => {
   return (
     <DenSvgIcon
       name="warning icon"
       htmlColor="#ffa700"
       hoverHtmlColor="#ffa700cc"
+      {...props}
     >
       <svg
-        key={81}
         xmlns="http://www.w3.org/2000/svg"
         id="icon-warning"
         width="12.766"
@@ -26,3 +28,5 @@ export const Warning = () => {
     </DenSvgIcon>
   );
 };
+
+export default Warning;

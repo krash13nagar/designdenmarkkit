@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import ArticleSelectionCard from './articleselectioncard.component';
-import '../../../styles/storybookBasesStyles.scss';
 import ControlPointRoundedIcon from '@mui/icons-material/ControlPointRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -13,7 +12,7 @@ const meta: Meta<typeof ArticleSelectionCard> = {
 export default meta;
 type Story = StoryObj<typeof ArticleSelectionCard>;
 
-export const Basic: Story = {
+export const ArticleSelection: Story = {
   args: {
     title:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industryLorem Ipsum is simply dummy text of the printing and typesetting industry ',
@@ -35,6 +34,7 @@ export const Basic: Story = {
         hostName: 'Absolute Radio',
       },
     ],
+    msid: '123456',
     addIcon: <ControlPointRoundedIcon />,
     addedIcon: <CheckCircleRoundedIcon />,
     popOutIcon: <OpenInNewIcon sx={{ fontSize: '16px' }} />,
@@ -44,5 +44,16 @@ export const Basic: Story = {
     handlePopOut: () => {
       console.log('Pop Out button clicked');
     },
+  },
+};
+
+export const EventSelectionCard: Story = {
+  args: {
+    title:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industryLorem Ipsum is simply dummy text of the printing and typesetting industry ',
+    synopsis:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    handleCardClick: () => console.log('card clicked!'),
+    showReadMoreInSynopsis: true,
   },
 };

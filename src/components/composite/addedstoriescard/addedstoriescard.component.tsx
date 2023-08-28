@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import React from 'react';
 import { AddedStoriesCardProps } from './addedstoriescard.types';
 import styles from './addedstoriescard.module.scss';
 import DenCheckbox from '../../common/checkbox/checkbox.component';
@@ -50,7 +50,7 @@ export const AddedStoriesCard = React.forwardRef<
           <DenCheckbox
             sx={{
               padding: 0,
-              visibility: showCheckbox ? 'visible' : 'hidden',
+              display: showCheckbox ? 'block' : 'none',
               color: '#D3E4FD',
             }}
             disableFocusRipple

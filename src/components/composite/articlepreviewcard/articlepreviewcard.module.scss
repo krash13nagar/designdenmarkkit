@@ -1,7 +1,6 @@
 @use '../../../styles/' as css;
 
 .referenceCardWrapper {
-    width: css.pxToRem(320px);
     border: css.pxToRem(1px) solid #70707033;
     border-radius: css.pxToRem(4px);
     padding: css.pxToRem(8px);
@@ -27,8 +26,10 @@
 
     .rightWrapper {
         display: flex;
+        flex: 1;
         flex-direction: column;
         justify-content: space-between;
+        font-family: "Source Sans 3", "Open Sans", sans-serif;
 
         .rightBottomWrapper {
             display: flex;
@@ -37,8 +38,17 @@
             .redirectWrapper {
                 margin-top: css.pxToRem(4px);
                 display: flex;
+                width: 100%;
                 justify-content: space-between;
-                margin-right: css.pxToRem(30px);
+
+                .agencySourceWrapper {
+                    flex-wrap: wrap;
+                    display: flex;
+
+                    span {
+                        margin: 0;
+                    }
+                }
             }
         }
 
@@ -66,10 +76,9 @@
     }
 
     .ctaIcon {
+        align-self: flex-end;
+
         svg {
-            position: absolute;
-            bottom: css.pxToRem(8px);
-            right: css.pxToRem(8px);
             cursor: pointer;
         }
 

@@ -39,8 +39,10 @@ export const ArticlePreviewCard = React.forwardRef<
       handleCardClick = () => {},
       ctaTooltipText = '',
       classes = {},
+      msid = '',
       rightMargin,
       leftMargin,
+      wrapperClass = '',
     },
     ref
   ) => {
@@ -53,7 +55,9 @@ export const ArticlePreviewCard = React.forwardRef<
       <DenBox
         onClick={handleCardClick}
         ref={ref}
-        className={`${styles.referenceCardWrapper} ${classes.root || ''}`}
+        className={`${styles.referenceCardWrapper} ${wrapperClass || ''} ${
+          classes.root || ''
+        }`}
         sx={{ mr: rightMargin || 0, ml: leftMargin || 0 }}
       >
         {imgUrl && (
@@ -74,27 +78,31 @@ export const ArticlePreviewCard = React.forwardRef<
           <div className={styles.rightBottomWrapper}>
             <div className={styles.secondaryText}>
               {date && <span>{date}</span>}
-              {date && wordCount && ' | '}
+              {date && wordCount && <>&thinsp;|&thinsp;</>}
               {wordCount && <span>WC {wordCount}</span>}
             </div>
             <div className={styles.redirectWrapper}>
-              <div className={styles.secondaryText}>
+              <div
+                className={`${styles.agencySourceWrapper} ${styles.secondaryText}`}
+              >
                 {agency && <span>Agency : {agency}</span>}
-                {agency && source && ' | '}
+                {agency && source && <>&thinsp;|&thinsp;</>}
                 {source && <span>Source : {source}</span>}
+                {msid && (agency || source) && <>&thinsp;|&thinsp;</>}
+                {msid && <span>MSID : {msid}</span>}
               </div>
+              {ctaIcon && (
+                <div
+                  title={ctaTooltipText}
+                  onClick={handleCTA}
+                  className={styles.ctaIcon}
+                >
+                  {ctaIcon}
+                </div>
+              )}
             </div>
           </div>
         </div>
-        {ctaIcon && (
-          <div
-            title={ctaTooltipText}
-            onClick={handleCTA}
-            className={styles.ctaIcon}
-          >
-            {ctaIcon}
-          </div>
-        )}
       </DenBox>
     );
   }

@@ -2,12 +2,13 @@ import React from 'react';
 import { DenSvgIcon } from './svg';
 import { SVGTypes } from './svg.types';
 
-export const Calender = (props: Partial<SVGTypes>) => (
+export const Calendar = (props: Partial<SVGTypes>) => (
   <DenSvgIcon
     name={props?.name ?? 'calender icon'}
     htmlColor={props?.htmlColor ?? '#2b2b2b'}
-    width={props?.width ?? 21}
-    height={props?.height ?? 21}
+    width={props?.width}
+    height={props?.height}
+    {...props}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -120,3 +121,5 @@ export const Calender = (props: Partial<SVGTypes>) => (
     </svg>
   </DenSvgIcon>
 );
+
+export default Calendar;

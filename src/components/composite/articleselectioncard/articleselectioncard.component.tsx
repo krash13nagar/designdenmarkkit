@@ -55,30 +55,48 @@ export const ArticleSelectionCard = React.forwardRef<
       isAdded,
       wordCountLabel = 'WC',
       publishedByLabel = 'Published by',
+      msid = '',
+      showReadMoreInSynopsis = false,
+      parentWidth = '',
+      tooltipDelay = 400,
     },
     ref
   ) => {
     const titleRef = useRef(null);
+    const synopsisRef = useRef(null);
 
     const [titleOverflow, setTitleOverflow] = useState(false);
+    const [sysnopsisOverflow, setSynopsisOverflow] = useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
       if (!popOutIcon) return;
       if (titleRef?.current) {
         if (
-          titleRef.current.scrollHeight - titleRef.current.offsetHeight >=
-          19
+          titleRef.current.scrollHeight - titleRef.current.offsetHeight >= 19 &&
+          !titleOverflow
         ) {
           setTitleOverflow(true);
-        } else {
-          setTitleOverflow(false);
+        } else if (sysnopsisOverflow) {
+          setSynopsisOverflow(false);
         }
       }
-    }, [
-      title,
-      titleRef?.current?.scrollHeight,
-      titleRef?.current?.offsetHeight,
-    ]);
+    }, [title, parentWidth]);
+
+    useEffect(() => {
+      if (!showReadMoreInSynopsis) return;
+      if (synopsisRef?.current) {
+        if (
+          synopsisRef.current.scrollHeight - synopsisRef.current.offsetHeight >=
+            19 &&
+          !sysnopsisOverflow
+        ) {
+          setSynopsisOverflow(true);
+        } else if (sysnopsisOverflow) {
+          setSynopsisOverflow(false);
+        }
+      }
+    }, [synopsis, parentWidth]);
 
     const handlePopOutClick = (e: React.MouseEvent<HTMLSpanElement>) => {
       if (handlePopOut) {
@@ -97,84 +115,109 @@ export const ArticleSelectionCard = React.forwardRef<
       }
     };
 
+    const handleReadMore = (e: React.MouseEvent<HTMLSpanElement>) => {
+      e.stopPropagation();
+      setExpanded((expanded) => !expanded);
+    };
+
     return (
       <div
         onClick={handleCardClick}
         ref={ref}
         className={`${wrapperClass ? wrapperClass : ''} ${styles.cardWrapper}`}
       >
-        <div
-          className={`${leftSectionClass ? leftSectionClass : ''} ${
-            styles.leftSection
-          }`}
-        >
-          <div className={styles.addBtn} onClick={handleAddClick}>
-            {isAdded ? addedIcon : addIcon}
+        {addedIcon && addIcon && (
+          <div
+            className={`${leftSectionClass ? leftSectionClass : ''} ${
+              styles.leftSection
+            } ${styles.alignCenter}`}
+          >
+            <div className={styles.addBtn} onClick={handleAddClick}>
+              {isAdded ? addedIcon : addIcon}
+            </div>
           </div>
-        </div>
+        )}
         <div
           className={`${rightSectionClass ? rightSectionClass : ''} ${
             styles.rightSection
           }`}
         >
-          <div className={styles.topRightSection}>
-            <div className={styles.agencyDetails}>
-              <div className={agency || source ? styles.agencySource : ''}>
-                {agency && <span>Agency : {agency}</span>}
-                {agency && source && ' | '}
-                {source && <span>Source : {source}</span>}
-              </div>
-              {publishedBy?.length && (
-                <div className={styles.publishedBy}>
-                  <span>{publishedByLabel}</span>
-                  <div className={styles.publishedByList}>
-                    {publishedBy.map((pub) => {
-                      return (
-                        <DenTooltip key={pub.hostName} title={pub.hostName}>
-                          <div className={styles.host}>{pub.hostLabel}</div>
-                        </DenTooltip>
-                      );
-                    })}
-                  </div>
+          {(agency ||
+            source ||
+            publishedBy?.length > 0 ||
+            date ||
+            time ||
+            msid ||
+            wordCount) && (
+            <div className={styles.topRightSection}>
+              <div className={styles.agencyDetails}>
+                <div className={agency || source ? styles.agencySource : ''}>
+                  {agency && <span>Agency : {agency}</span>}
+                  {agency && source && ' | '}
+                  {source && <span>Source : {source}</span>}
                 </div>
-              )}
+                {msid && <span className={styles.msid}>MSID : {msid}</span>}
+                {publishedBy?.length && (
+                  <div className={styles.publishedBy}>
+                    <span>{publishedByLabel}</span>
+                    <div className={styles.publishedByList}>
+                      {publishedBy.map((pub) => {
+                        return (
+                          <DenTooltip key={pub.hostName} title={pub.hostName}>
+                            <div className={styles.host}>{pub.hostLabel}</div>
+                          </DenTooltip>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className={styles.timing}>
+                {clockIcon && (date || time) && (
+                  <span className={styles.clockIcon}>{clockIcon}</span>
+                )}
+                {time && <span>{time}</span>}
+                {time && date && <span className={styles.pipe}> | </span>}
+                {date && <span>{date}</span>}
+                {date && wordCount && <span className={styles.pipe}> | </span>}
+                {wordCount && (
+                  <span>
+                    {wordCountLabel} {wordCount}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className={styles.timing}>
-              {clockIcon && (date || time) && (
-                <span className={styles.clockIcon}>{clockIcon}</span>
-              )}
-              {time && <span>{time}</span>}
-              {time && date && <span className={styles.pipe}> | </span>}
-              {date && <span>{date}</span>}
-              {date && wordCount && <span className={styles.pipe}> | </span>}
-              {wordCount && (
-                <span>
-                  {wordCountLabel} {wordCount}
-                </span>
-              )}
-            </div>
-          </div>
-          <span title={title} className={styles.titleWrapper}>
-            <DenTypography
-              className={`${styles.title} ${styles.ellipsis} ${
-                titleClass ? titleClass : ''
-              }`}
-              variant="h4"
-              ref={titleRef}
+          )}
+
+          <span className={styles.titleWrapper}>
+            <DenTooltip
+              title={title}
+              arrow
+              classes={{ tooltip: styles.tooltip }}
+              enterDelay={tooltipDelay}
+              enterNextDelay={tooltipDelay}
             >
-              {title}
-              {!titleOverflow && popOutIcon && (
-                <span
-                  title={popOutTooltip}
-                  className={`${styles.popoutIcon} ${
-                    titleOverflow ? styles.block : ''
-                  } ${popOutIconClass ? popOutIconClass : ''}`}
-                  onClick={(e) => handlePopOutClick?.(e)}
-                >
-                  {popOutIcon}
-                </span>
-              )}
-            </DenTypography>
+              <DenTypography
+                className={`${styles.title} ${styles.ellipsis} ${
+                  titleClass ? titleClass : ''
+                }`}
+                variant="h4"
+                ref={titleRef}
+              >
+                {title}
+                {!titleOverflow && popOutIcon && (
+                  <span
+                    title={popOutTooltip}
+                    className={`${styles.popoutIcon} ${
+                      titleOverflow ? styles.block : ''
+                    } ${popOutIconClass ? popOutIconClass : ''}`}
+                    onClick={(e) => handlePopOutClick?.(e)}
+                  >
+                    {popOutIcon}
+                  </span>
+                )}
+              </DenTypography>
+            </DenTooltip>
             {titleOverflow && popOutIcon && (
               <span
                 title={popOutTooltip}
@@ -187,15 +230,43 @@ export const ArticleSelectionCard = React.forwardRef<
               </span>
             )}
           </span>
+
           {synopsis && (
-            <span title={synopsis} className={styles.synopsisWrapper}>
-              <DenTypography
-                className={`${styles.synopsis} ${styles.ellipsis} ${
-                  synopsisClass ? synopsisClass : ''
-                }`}
+            <span className={styles.synopsisWrapper}>
+              <DenTooltip
+                title={showReadMoreInSynopsis ? '' : synopsis}
+                arrow
+                classes={{ tooltip: styles.tooltip }}
+                enterDelay={tooltipDelay}
+                enterNextDelay={tooltipDelay}
               >
-                {synopsis}
-              </DenTypography>
+                <DenTypography
+                  ref={synopsisRef}
+                  className={`${styles.synopsis} ${
+                    !showReadMoreInSynopsis ? styles.ellipsis : ''
+                  } ${synopsisClass ? synopsisClass : ''}
+                ${expanded ? styles.expanded : styles.ellipsis}
+                `}
+                >
+                  {synopsis}
+                  {showReadMoreInSynopsis && expanded && (
+                    <span
+                      className={styles.readMoreBtn}
+                      onClick={handleReadMore}
+                    >
+                      Read Less
+                    </span>
+                  )}
+                </DenTypography>
+              </DenTooltip>
+              {sysnopsisOverflow && showReadMoreInSynopsis && !expanded && (
+                <span
+                  className={`${styles.readMoreBtn} ${styles.absoultePos}`}
+                  onClick={handleReadMore}
+                >
+                  Read More
+                </span>
+              )}
             </span>
           )}
         </div>

@@ -8,14 +8,16 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-styling'
   ],
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
   },
+
   webpackFinal: async (config: Configuration) => {
     if (config.module?.rules)
       config?.module?.rules.push({

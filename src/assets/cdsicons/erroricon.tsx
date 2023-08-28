@@ -1,14 +1,18 @@
 import React from 'react';
 import { DenSvgIcon } from './svg';
-export const ErrorIcon = () => {
+import { SVGTypes } from './svg.types';
+
+export const ErrorIcon = (props: Partial<SVGTypes>) => {
   return (
-    <DenSvgIcon name="error icon" htmlColor="#d00" hoverHtmlColor="#dd0000cc">
+    <DenSvgIcon
+      name="error icon"
+      htmlColor="#d00"
+      hoverHtmlColor="#dd0000cc"
+      {...props}
+    >
       <svg
-        key={80}
         xmlns="http://www.w3.org/2000/svg"
         id="icon-error"
-        width="13.396"
-        height="13.396"
         viewBox="0 0 13.396 13.396"
       >
         <path
@@ -22,3 +26,5 @@ export const ErrorIcon = () => {
     </DenSvgIcon>
   );
 };
+
+export default ErrorIcon;

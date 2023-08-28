@@ -17,4 +17,6 @@ export interface ArticlePreviewCardProps {
     },
     leftMargin?: string,
     rightMargin?: string
+    msid?: string,
+    wrapperClass?: string
 }
