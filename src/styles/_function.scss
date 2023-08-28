@@ -1,6 +1,10 @@
 @use "sass:math";
 
-$baseFontSize: 16px;
+/*temporarily changing base font size to 13px as in Denmark 13px is set as base font
+ and calculations get mismatched if we keep base size as 16px here,this needs to be fixed by removing
+ base font size from html from denmark(in _customVariables.scss file) and fixing font size in all the places
+ it the change impacts*/
+$baseFontSize: 13px;
 
 @function stripUnit($value) {
     @return math.div($value, $value * 0 + 1);

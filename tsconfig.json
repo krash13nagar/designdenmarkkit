@@ -20,7 +20,7 @@
       "node",
       "@types/babel__core"
     ],
-    "declaration": true
+    "declaration": true,
   },
   "include": [
     "src",
@@ -29,5 +29,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

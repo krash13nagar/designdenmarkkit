@@ -37,7 +37,7 @@ export const ArticlePreview = React.forwardRef<
       title,
       synopsis,
       richContent,
-      handlePopOutClick,
+      handlePopOutClick = () => {},
       popOutTooltip,
       clockIcon,
       popOutIcon,
@@ -84,7 +84,7 @@ export const ArticlePreview = React.forwardRef<
             <span
               title={popOutTooltip}
               className={styles.popoutIcon}
-              onClick={(e) => handlePopOutClick?.(e)}
+              onClick={handlePopOutClick}
             >
               {popOutIcon}
             </span>

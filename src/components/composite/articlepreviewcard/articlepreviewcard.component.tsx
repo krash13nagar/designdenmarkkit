@@ -68,7 +68,7 @@ export const ArticlePreviewCard = React.forwardRef<
         )}
 
         <div className={styles.rightWrapper}>
-          <span title={title}>
+          <span className={styles.noMargin} title={title}>
             <DenTypography className={styles.title}>{title}</DenTypography>
           </span>
           <div className={styles.rightBottomWrapper}>
