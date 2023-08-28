@@ -8,6 +8,9 @@ export interface MetadataSummaryProps {
     updateExitingSummary?: any;
     isButtonVisible?: any;
     iconButtons?: any;
+    onClickEdit?: any;
+    onClickDelete?: any;
+    onClickDeleteItem?: any;
 }
 export interface MetadataProps {
     title?:string;
@@ -19,6 +22,9 @@ export interface MetadataProps {
     onChangeWidget?: any;
     onChangeGroup?: any;
     selectedGroup?: any;
+    onClickEdit?: any;
+    onClickDelete?: any;
+    onClickDeleteItem?: any;
 }
 export interface MetadataSelectorProps {
     onChange: any;

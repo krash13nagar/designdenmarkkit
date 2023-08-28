@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { DenGrid, DenTypography, DenButton, DenTooltip } from '../../../common';
+import { DenGrid, DenTypography, DenButton, DenTooltip, DenIconButton } from '../../../common';
 import { MetadataSummaryProps } from './metadata.types';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CreateIcon from '@mui/icons-material/Create';
+import ReplayIcon from '@mui/icons-material/Create';
 import style from './metadata.module.scss';
 
 export const MetadataSummary = (props: MetadataSummaryProps) => {
@@ -22,19 +25,44 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
         console.log(arr);
         return arr;
     }
+    const handleEdit = () => {
+        props.onClickEdit();
+    }
+    const handleDeleteGroup = () => {
+        props.onClickDelete();
+    }
+    const handleDeleteItem = () => {
+        props.onClickDeleteItem();
+    }
+
+    const renderDeleteIcon=(element: any)=>{
+        if(!element?.metaGroup?.isDeleted){
+            return <DeleteIcon />
+        }else{
+            return  <ReplayIcon />
+        }
+    }
    
     const renderSubItems = (list:any, i:any) => {
         const arr = makeArray(list)
         return (
             arr.map((element:any, index) => (
                     <DenGrid item container xs={12} key={index + '_' + i} className={style['metadata-summary-item-details']}>
-                        <DenGrid item container xs={12} key={index + '_' + i + 1} justifyContent="flex-start" alignItems="left">
+                        <DenGrid item container xs={11} key={index + '_' + i + 1} justifyContent="flex-start" alignItems="left">
+                        <DenTooltip title={element.metaGroup.value} aria-label={element.metaGroup.value}>
                             <DenTypography variant="body2" noWrap> {(element.metaGroup.name)+` : `+(element.metaGroup.value)}</DenTypography>
+                        </DenTooltip>
+                        </DenGrid>
+                        <DenGrid container item xs={1} key={index + '_' + i + 2}>
+                            { summary.iconButtons && !element.metaGroup.isReadOnly && <DenIconButton size={'small'} onClick={() => handleDeleteItem()}>
+                               {renderDeleteIcon(element)}
+                            </DenIconButton>}
                         </DenGrid>
                     </DenGrid>
                 ))
         )
     }
+    
     const renderItems = (list:any) => {
         const arr = makeArray(list);
         return (
@@ -42,9 +70,28 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
                 element.metaGroup.name != "Miscellaneous" &&
                 <DenGrid item container xs={12} key={index}>
                     <DenGrid item container xs={12}>
-                    <DenGrid item xs={12}>
+                    {/* <DenGrid item xs={12}>
                         <DenTypography variant="subtitle2" className={style['metagroupHead']}> {element.metaGroup.name}</DenTypography>  
+                    </DenGrid> */}
+                    <DenGrid item xs={summary.iconButtons ? 10 : 12}>
+                        {summary.iconButtons ? <DenTypography variant="subtitle2" className={style['metagroupHead']} onClick={() => handleEdit()} > {element.metaGroup.name} </DenTypography> : <DenTypography variant="subtitle2" className={style['metagroupHead']}> {element.metaGroup.name}</DenTypography> } 
                     </DenGrid>
+                    { summary.iconButtons && !element.metaGroup.isReadOnly && <>
+                    <DenGrid item xs={2}>
+                    <DenGrid container item className="group-head-action">
+                    <DenGrid container item xs={6} justifyContent="center" alignItems="center">
+                        <DenIconButton size={'small'} onClick={() => handleEdit()}>
+                            <CreateIcon />
+                        </DenIconButton>
+                    </DenGrid>
+                     <DenGrid container item xs={6} justifyContent="center" alignItems="center">
+                        <DenIconButton size={'small'} onClick={()=> handleDeleteGroup()}>
+                            <DeleteIcon />
+                        </DenIconButton>
+                    </DenGrid>
+                    </DenGrid>
+                    </DenGrid>
+                    </>}
                     </DenGrid>
                     <DenGrid item container xs={12}>{
                         renderSubItems(element.metaGroup.metatype, index)
@@ -65,7 +112,7 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
                     <DenTypography className={style['metadataAddedWrapper']}>{'Added('+(summary!=null ? summary?.metaCount : 0)+')'}</DenTypography>
                 </DenGrid>
                 {
-                    props.isButtonVisible && 
+                    summary && summary.isButtonVisible && 
                     <DenGrid item container xs={6} justifyContent="flex-end" alignItems="center">
                         <DenButton variant="outlined" size="small" color="primary">Add Metadata</DenButton>
                     </DenGrid>

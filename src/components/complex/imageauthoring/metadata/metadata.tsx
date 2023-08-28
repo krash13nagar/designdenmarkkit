@@ -5,21 +5,21 @@ import style from './metadata.module.scss';
 import MetadataSummary from './metadata.summary';
 import MetadataSelector from './metadata.selector';
 import MetadataWidgets from './metadata.widget';
+import { META_CONST } from './metadata.constants';
 
 export const Metadata = (props: MetadataProps) => {
 
-    const metaGroup = props.metaGroup;
+    const {
+        title = META_CONST.metaSelectorTitle,
+        metaGroup,
+        summary
+    } = props;
+
     const model = {...props.value};
-    // const [group, selectedGroup] = useState('Select');
-
-    // const handleChange = (group: string) => {
-    //     selectedGroup(group)
-    // }
-
 
     const getMetaCount = (groupId: string) => {
         if(groupId) {
-            const summary = props.summary;
+            //const summary = props.summary;
             if(summary && summary.groupedList){
                 if(summary.groupedList[groupId]) {
                     return summary.groupedList[groupId].count ? summary.groupedList[groupId].count : 0
@@ -34,17 +34,17 @@ export const Metadata = (props: MetadataProps) => {
         props.onChangeWidget(type, value, olderValue, msid);
     }
     
-    return (
+    return ( 
         <DenGrid container item xs={12}>
-            {props.visibleSummary &&
+            {summary && summary.visibleSummary &&
                 <DenGrid item xs={5} className={style['metadataLeftPanel']}>
-                    <MetadataSummary title="Summary" value={props.summary} />
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={props.onClickEdit} onClickDelete={props.onClickDelete} onClickDeleteItem={props.onClickDeleteItem} />
                 </DenGrid>
             }
-            <DenGrid item sm={props.visibleSummary ? 7 : 12} className={style['metadataRightPanel']}>
+            <DenGrid item sm={(summary && summary.visibleSummary) ? 7 : 12} className={style['metadataRightPanel']}>
                 <DenGrid container item xs={12}>
                     <DenGrid  container item xs={9} alignContent="flex-start" justifyContent="left">
-                    <DenInputLabel shrink> {props.title}</DenInputLabel>
+                    <DenInputLabel shrink>{title}</DenInputLabel>
                     </DenGrid>
                     <DenGrid  container item xs={3} alignContent="flex-end" justifyContent="center">
                     <DenInputLabel> Count : {getMetaCount(props.selectedGroup)}</DenInputLabel>
