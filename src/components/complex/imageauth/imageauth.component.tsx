@@ -10,11 +10,19 @@ import {
   ImageCaption,
   Footer,
 } from '../../composite';
-import { DenTypography } from '../../common';
+import {
+  DenFormControl,
+  DenInputLabel,
+  DenMenuItem,
+  DenSelect,
+  DenTypography,
+} from '../../common';
 import { DenTextField } from '../../common/textfield/textfield.component';
 import DenCheckbox from '../../common/checkbox/checkbox.component';
 import DenFormControlLabel from '../../common/formcontrollabel/formcontrolllabel.component';
 import useCustomScrollbar from '../../../customhooks/usecustomscrollbar';
+import { DenThemeDefault, DenThemeProvider } from '../../../styles';
+import DenmarkDefault from '../../../styles/themes/denmarktheme';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -37,7 +45,7 @@ export const ImageAuthoring = () => {
   const tabComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
   return (
-    <>
+    <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
         <div className={style['image-auth-left-panel']}>
           <DenImageCard
@@ -72,12 +80,16 @@ export const ImageAuthoring = () => {
               className={style['primary-data-wrapper']}
             >
               <LabelValue label="MSID" value="8763426" seperator=":" />
-              <Title label="Title" value="Title for the image" fullWidth />
+              <Title
+                label="Image Title"
+                value="Title for the image"
+                fullWidth
+                wrapperClass={style['title-wrapper']}
+              />
               <TitleForUrl
                 seoTitleProps={{
-                  label: 'Seo Title',
-                  value:
-                    'test seo title dsajh dsakjhd kjsah dkjsah dkjsah dkjhsadkjh sakjdh kjsahd kjsahdkjsah kdjh askjdh kasjdh kjsah dkjsahdkjjksah dkjh sakjdh kjsah dk dkasjh dasjhdkjash dkjash dkjash djkashjkdh askjhd kjasd hkjash dkjash kjadsh kjdash kjdsah kjdsah kjasdh kjsadh kjdh skjh dsakj',
+                  label: 'Title for URL',
+                  value: 'seo title',
                   onChange: () => console.log(''),
                   fullWidth: true,
                 }}
@@ -120,16 +132,6 @@ export const ImageAuthoring = () => {
                   wrapperClass="column-6"
                   valueProps={{ sx: { mb: '25px' } }}
                 />
-                {/* <DenTextField
-                  label=""
-                  wrapperClass="column-6"
-                  valueProps={{ sx: { mr: '25px', mb: '25px' } }}
-                />
-                <DenTextField
-                  label="Add Photographer Byline"
-                  wrapperClass="column-6"
-                  valueProps={{ sx: { mb: '25px' } }}
-                /> */}
               </div>
             </div>
             <div className={style['keywords-wrapper']}>tab 2</div>
@@ -137,8 +139,27 @@ export const ImageAuthoring = () => {
           </DenCustomTabs>
         </div>
       </div>
-      <Footer />
-    </>
+      <Footer>
+        <DenFormControl>
+          <DenInputLabel id="demo-simple-select-label">Age</DenInputLabel>
+          <DenSelect
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={10}
+            label="Age"
+            onChange={() => {}}
+            variant="standard"
+            classes={{
+              standard: style['custom-select-root'],
+            }}
+          >
+            <DenMenuItem value={10}>Ten</DenMenuItem>
+            <DenMenuItem value={20}>Twenty</DenMenuItem>
+            <DenMenuItem value={30}>Thirty</DenMenuItem>
+          </DenSelect>
+        </DenFormControl>
+      </Footer>
+    </DenThemeProvider>
   );
 };
 export default ImageAuthoring;

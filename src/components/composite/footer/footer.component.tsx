@@ -1,5 +1,6 @@
 import * as React from 'react';
 import style from './footer.module.scss';
+import { FooterProps, PropsWithChildren } from './footer.types';
 /**
  * Footer Component.
  * @constructor
@@ -11,6 +12,6 @@ import style from './footer.module.scss';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const Footer: React.FC<any> = (props) => {
-  return <div className={style['footer']}></div>;
+export const Footer: React.FC<PropsWithChildren<FooterProps>> = (props) => {
+  return <div className={style['footer']}>{props.children}</div>;
 };

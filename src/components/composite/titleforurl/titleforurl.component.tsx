@@ -3,8 +3,8 @@ import { DenTextField } from '../../common/textfield/textfield.component';
 import Count from '../wordcount/wordcount.component';
 import style from './titleforurl.module.scss';
 import { DenIconButton } from '../../common';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+import { AddCircle } from '../../../assets/cdsicons/addcircleicon';
+import { Cancel } from '../../../assets/cdsicons/cancelicon';
 import { TitleForUrlProps } from './titleforurl.types';
 
 /**
@@ -30,7 +30,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = (props) => {
           }}
         />
         <DenIconButton onClick={() => setIsOvverideVisible(true)}>
-          <AddCircleIcon />
+          <AddCircle />
         </DenIconButton>
       </div>
       <Count wordString={props.seoTitleProps.value ?? ''} />
@@ -47,7 +47,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = (props) => {
               }}
             />
             <DenIconButton onClick={() => setIsOvverideVisible(false)}>
-              <CancelIcon />
+              <Cancel />
             </DenIconButton>
           </div>
           <Count wordString={props.overrideLinkProps.value ?? ''} />

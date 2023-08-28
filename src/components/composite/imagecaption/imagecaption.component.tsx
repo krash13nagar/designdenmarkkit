@@ -4,7 +4,7 @@ import SunEditorCore from 'suneditor/src/lib/core';
 import { SUNEDITOR_DESCRIPTION_OPTIONS } from './imagecaption.constant';
 import Count from '../wordcount/wordcount.component';
 import { DenInputLabel } from '../../common';
-import { Error, Warning } from '../../../asset';
+import { ErrorIcon, Warning } from '../../../assets';
 import style from './imagecaption.module.scss';
 import { ImageCaptionProps } from './imagecaption.types';
 
@@ -65,7 +65,7 @@ export const ImageCaption: React.FC<ImageCaptionProps> = (props) => {
       {captionError && <div className="has-error"> {captionError} </div>}
       {captionChildError && (
         <div className="ws-error desc-ws-error">
-          <Error />
+          <ErrorIcon />
           <span className={`errormessage`}>{captionChildError}</span>
         </div>
       )}

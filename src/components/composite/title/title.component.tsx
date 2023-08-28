@@ -19,7 +19,7 @@ import Count from '../wordcount/wordcount.component';
 export const Title: React.FC<TextFieldProps> = (props) => {
   return (
     <>
-      <DenTextField {...props} />
+      <DenTextField {...props} sx={{ mt: '16px' }} />
       <Count wordString={props.value ?? ''} />
     </>
   );
