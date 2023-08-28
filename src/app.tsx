@@ -10,13 +10,7 @@ import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import {
-  DenTypography,
-  ImagePreview,
-  Title,
-  TitleForUrl,
-  ImageAuthoring,
-} from './components';
+import { DenTypography, ImagePreview } from './components';
 import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
 
@@ -82,7 +76,6 @@ const App = (props: AppProps) => (
         fullWidth: true,
       }}
     /> */}
-    <ImageAuthoring />
   </>
 );
 if (module?.hot) {
