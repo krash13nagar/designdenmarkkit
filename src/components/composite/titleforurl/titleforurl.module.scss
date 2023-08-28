@@ -1,0 +1,45 @@
+.title-for-url-wrapper {
+  display: flex;
+  width: auto;
+  transition: width 0.3s ease-in-out;
+  flex-direction: column;
+  .title-for-url,
+  .override-link {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    button {
+      border: 1px solid;
+      border-radius: 3px;
+      padding: 4px 5px 5px 5px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border: 1px solid #d2d8df;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+    .denLabel {
+      margin-top: 1.4rem;
+
+      .denInput {
+        border-radius: 4px;
+        position: relative;
+        border: 1px solid #d2d8df;
+        font-size: 1rem;
+        padding: 5px 12px !important;
+        transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        &:focus {
+          box-shadow: rgba(0, 0, 0, 0.57) 0 0 0 1px;
+          border-color: #4b9cceef;
+        }
+      }
+    }
+    &:focus-within {
+      button {
+        box-shadow: rgba(0, 0, 0, 0.57) 0 0 0 1px;
+        border-color: #4b9cceef;
+      }
+    }
+  }
+}

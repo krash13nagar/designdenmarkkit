@@ -2,11 +2,13 @@
   background-color: #ffffff !important;
   box-shadow: 0px 3px 6px #00000029;
   border: 0.5px solid #cccccc;
-  font: normal normal normal 12px/17px 'Source Sans 3' !important;
+  font-size: 12px;
+  line-height: 17px;
   color: #2b2b2b !important;
   .tooltip-content {
     p {
-      font: normal normal normal 12px/17px 'Source Sans 3' !important;
+      font-size: 12px;
+      line-height: 17px;
       margin-bottom: 5px;
       color: #2b2b2b;
     }
@@ -14,23 +16,25 @@
       margin-bottom: 0px !important;
     }
     .addedAt {
-      font: normal normal normal 12px/15px 'Source Sans 3' !important;
+      font-size: 12px;
+      line-height: 15px;
       letter-spacing: 0px;
       color: #323332;
     }
   }
 }
 .fab-button-wrapper {
-  font: normal normal normal 12px/17px 'Source Sans 3' !important;
+  font-size: 12px;
+  line-height: 17px;
   height: 26px !important;
   letter-spacing: 0.24px;
   color: #4d4d4d;
   background-color: #ffffff !important;
   border: 1px solid #e8e9ec !important;
   box-shadow: none !important;
-  svg {
-    padding: 5px;
-    height: 22px !important;
-    width: 22px !important;
-  }
+  // svg {
+  //   padding: 5px;
+  //   height: 22px !important;
+  //   width: 22px !important;
+  // }
 }

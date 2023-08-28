@@ -20,23 +20,33 @@ export const DenTextField: React.FC<TextFieldProps> = (props) => {
     fullWidth = false,
     labelProps = {},
     valueProps = {},
+    wrapperClass = '',
+    labelClass = style['label-wrapper'],
+    valueClass = '',
+    onChange = () => {},
   } = props;
   return (
-    <DenFormControl variant="standard" fullWidth={fullWidth}>
+    <DenFormControl
+      className={wrapperClass}
+      variant="standard"
+      fullWidth={fullWidth}
+    >
       <DenInputLabel
         shrink
         htmlFor={id ?? 'bootstrap-input'}
-        className={style['label-wrapper']}
+        className={labelClass}
         {...labelProps}
       >
         {label}
       </DenInputLabel>
       <DenInputBase
+        className={valueClass}
         classes={{ root: style['denLabel'], input: style['denInput'] }}
         value={value ?? ''}
         defaultValue="react-bootstrap"
         id={id ?? 'bootstrap-input'}
         {...valueProps}
+        onChange={onChange}
       />
     </DenFormControl>
   );

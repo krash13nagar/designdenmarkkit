@@ -13,3 +13,10 @@ export interface AspectRatioProps {
   aspectRatio: number;
   parentNode: HTMLDivElement | undefined;
 }
+export interface ImageStyleObject {
+  width?: string | number;
+  height?: string | number;
+  margin?: string;
+  objectFit?: string;
+  maxHeight?: string | number;
+}
