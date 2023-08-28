@@ -23,6 +23,7 @@ export const CardCarousel = React.forwardRef<HTMLDivElement, CardCarouselProps>(
             root: styles.tabsRoot,
             scrollButtons: styles.scrollButtons,
             indicator: styles.indicator,
+            flexContainer: styles.flexContainer,
           }}
           value={0}
           scrollButtons={'auto'}

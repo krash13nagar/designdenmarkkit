@@ -31,6 +31,7 @@ import {
   MenuEnum,
 } from './imagepreview.types';
 import { DisplayCardDate } from '../../composite/datetime/datetime';
+import { cleanHTML } from '../../../utility/utils';
 
 export const ImagePreview: FC<ImagePreviewProps> = (
   props: ImagePreviewProps = sample
@@ -96,12 +97,17 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 seperator=":"
                 className={style['msid']}
               />
-              <DenTypography variant="h6" className={style['image-title']}>
-                {title}
-              </DenTypography>
-              <DenTypography variant="body1" className={style['image-caption']}>
-                {caption}
-              </DenTypography>
+              <DenTypography
+                variant="h6"
+                className={style['image-title']}
+                title={cleanHTML(title)}
+                dangerouslySetInnerHTML={{ __html: title }}
+              />
+              <DenTypography
+                variant="body1"
+                className={style['image-caption']}
+                dangerouslySetInnerHTML={{ __html: caption }}
+              />
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}
@@ -166,10 +172,16 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                                   {value?.map((elm) => (
                                     <DenChip
                                       label={
-                                        <span className={style['chip-label']}>
+                                        <span
+                                          title={elm}
+                                          className={style['chip-label']}
+                                        >
                                           {elm as string}
                                         </span>
                                       }
+                                      classes={{
+                                        root: style['chip-root'],
+                                      }}
                                     />
                                   ))}
                                 </div>

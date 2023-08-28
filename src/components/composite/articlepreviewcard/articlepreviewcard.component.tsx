@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArticlePreviewCardProps } from './articlepreviewcard.types';
 import styles from './articlepreviewcard.module.scss';
-import { DenTypography } from '../../common';
+import { DenBox, DenTypography } from '../../common';
 import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback';
 
 /**
@@ -15,6 +15,7 @@ import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback'
  * @param {string} props.source - (optional) source
  * @param {React.ReactNode} props.ctaIcon -  (optional) icon for CTA
  * @param {React.MouseEventHandler<HTMLDivElement>} props.handleCTAClick - (optional) handler for CTA click
+ * @param {React.MouseEventHandler<HTMLDivElement>} props.handleCardClick - (optional) handler for card click
  * @param {React.ReactNode} props.imagePlaceholderIcon -  (optional) icon for image placeholder
  * @param {string} props.ctaTooltipText -  (optional) cta tooltip
  * ref is forwarded to parent element
@@ -37,6 +38,9 @@ export const ArticlePreviewCard = React.forwardRef<
       source,
       handleCardClick = () => {},
       ctaTooltipText = '',
+      classes = {},
+      rightMargin,
+      leftMargin,
     },
     ref
   ) => {
@@ -46,10 +50,11 @@ export const ArticlePreviewCard = React.forwardRef<
     };
 
     return (
-      <div
+      <DenBox
         onClick={handleCardClick}
         ref={ref}
-        className={styles.referenceCardWrapper}
+        className={`${styles.referenceCardWrapper} ${classes.root || ''}`}
+        sx={{ mr: rightMargin || 0, ml: leftMargin || 0 }}
       >
         {imgUrl && (
           <div className={styles.leftWrapper}>
@@ -90,7 +95,7 @@ export const ArticlePreviewCard = React.forwardRef<
             {ctaIcon}
           </div>
         )}
-      </div>
+      </DenBox>
     );
   }
 );

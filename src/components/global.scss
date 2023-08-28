@@ -1,6 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-[class*='cds-'] {
-  font-family: 'source sans 3', sans-serif !important;
+/**
+Will comment this out brfore publishing
+*/
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 10px 5px;
+  .column {
+    font: normal normal normal 10px/18px 'source sans 3', sans-serif !important;
+    letter-spacing: 0px;
+    margin: 10px 0px;
+    &-12 {
+      flex-basis: 100%;
+    }
+    &-6 {
+      flex-basis: 50%;
+    }
+    &-4 {
+      flex-basis: 33.33%;
+    }
+    &-3 {
+      flex-basis: 25%;
+    }
+  }
+}
+.sun-editor {
+  border: 1px solid #d2d8df !important;
+  border-radius: 4px;
   box-sizing: border-box;
+  transition: all 0.3s;
+  .se-toolbar.sun-editor-common {
+    border-bottom: 1px solid #d2d8df !important;
+    outline: none !important;
+    border-radius: 4px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    transition: all 0.3s;
+  }
+  .se-wrapper-inner.se-wrapper-wysiwyg.sun-editor-editable {
+    border-radius: 4px !important;
+  }
+  &:focus-within {
+    border-color: #4b9cceef !important;
+
+    .se-toolbar.sun-editor-common {
+      border-bottom: 1px solid #4b9cceef !important;
+    }
+  }
+
+  .se-container {
+    .se-toolbar.sun-editor-common {
+      .se-btn-tray {
+        .se-btn-module {
+          ul.se-menu-list {
+            li {
+              button {
+                color: #4d4d4d !important;
+                width: 20px !important;
+                height: 20px !important;
+                margin: 0 8px 0 0 !important;
+                .fa-keyboard-o {
+                  position: absolute !important;
+                  height: 14px !important;
+                  margin: 0 0 10px -10px !important;
+                  bottom: 1px !important;
+                }
+                svg {
+                  width: 10px !important;
+                  height: 10px !important;
+                }
+                &:hover {
+                  color: #333 !important;
+                }
+                &.active {
+                  color: #333 !important;
+                  background-color: #e1e1e1 !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

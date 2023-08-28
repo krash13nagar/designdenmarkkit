@@ -1,0 +1,81 @@
+@use '../../../styles/' as css;
+
+.addedStoriesCardWrapper {
+    padding: css.pxToRem(6px) css.pxToRem(4px);
+    background-color: #FFFFFF;
+    border-radius: css.pxToRem(2px);
+    display: flex;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0 css.pxToRem(3px) css.pxToRem(6px) #00000029;
+        z-index: 1;
+
+        .iconsWrapper {
+            visibility: visible;
+        }
+
+        .iconsWrapper.hide {
+            visibility: hidden;
+        }
+    }
+
+    &.noShadow:hover {
+        box-shadow: none;
+    }
+
+    .checkBoxWrapper {
+        margin-right: css.pxToRem(8px);
+    }
+
+    .ellipsis {
+        display: -webkit-box;
+        white-space: normal;
+        overflow: hidden;
+        max-width: 100%;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .textWrapper {
+        flex: 1;
+
+        .text {
+            font-size: css.pxToRem(14px);
+            line-height: css.pxToRem(23px);
+            color: #2B2B2B;
+            max-height: css.pxToRem(69px);
+        }
+    }
+
+
+
+    .iconsWrapper {
+        display: flex;
+        visibility: hidden;
+        margin-left: css.pxToRem(10px);
+
+        .popOutIcon {
+            cursor: pointer;
+
+            &.margin {
+                margin-right: css.pxToRem(6px);
+            }
+        }
+
+        .removeIcon {
+            cursor: pointer;
+        }
+    }
+
+    .checkboxRoot {
+        &>input {
+            width: 100%;
+            height: 100%;
+            cursor: inherit;
+            border: none;
+            border-radius: unset;
+        }
+    }
+
+}

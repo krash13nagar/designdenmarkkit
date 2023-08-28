@@ -1,0 +1,129 @@
+@use '../../../styles/' as css;
+
+.cardWrapper {
+    display: flex;
+    cursor: pointer;
+    padding: css.pxToRem(8px) css.pxToRem(4px);
+    background-color: #FFFFFF;
+
+    &:hover {
+        box-shadow: 0 css.pxToRem(3px) css.pxToRem(6px) #00000029;
+    }
+
+    .leftSection {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: css.pxToRem(16px)
+    }
+
+    .rightSection {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .topRightSection {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: css.pxToRem(10px);
+
+            .agencyDetails {
+                font-size: css.pxToRem(12px);
+                line-height: css.pxToRem(17px);
+                color: #4D4D4D;
+                display: flex;
+                flex-wrap: wrap;
+
+                .agencySource {
+                    border-radius: css.pxToRem(2px);
+                    background: #0E88FF14;
+                    padding: css.pxToRem(2px) css.pxToRem(6px);
+                }
+
+                .publishedBy {
+                    margin-left: css.pxToRem(8px);
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+
+                    .publishedByList {
+                        display: flex;
+                        flex-wrap: wrap;
+
+                        .host {
+                            margin-left: css.pxToRem(6px);
+                            font-size: css.pxToRem(9px);
+                            line-height: css.pxToRem(10px);
+                            font-weight: bold;
+                            border-radius: 50%;
+                            padding: css.pxToRem(5px);
+                            color: #2B2B2B;
+                            background-color: #E8ECEF;
+                            font-family: 'Times New Roman', Times, serif;
+
+                        }
+                    }
+                }
+            }
+
+            .timing {
+                font-size: css.pxToRem(12px);
+                line-height: css.pxToRem(17px);
+                color: #818181CC;
+            }
+        }
+
+        .ellipsis {
+            display: -webkit-box;
+            white-space: normal;
+            overflow: hidden;
+            max-width: 100%;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .titleWrapper {
+            margin: 0;
+            margin-bottom: css.pxToRem(16px);
+
+            .title {
+                font-size: css.pxToRem(15px);
+                line-height: css.pxToRem(19px);
+                font-weight: bold;
+                max-height: css.pxToRem(38px);
+                color: #2B2B2B;
+            }
+        }
+
+        .synopsisWrapper {
+            margin: 0;
+
+            .synopsis {
+                font-size: css.pxToRem(12px);
+                line-height: css.pxToRem(17px);
+                max-height: css.pxToRem(34px);
+                color: #818181;
+            }
+        }
+
+
+
+        .popoutIcon {
+            visibility: hidden;
+
+            &.block {
+                display: block;
+            }
+
+            svg {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &:hover {
+        .popoutIcon {
+            visibility: visible;
+        }
+    }
+}
