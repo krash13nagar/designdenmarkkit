@@ -222,7 +222,7 @@ export class AdapterDateFns implements MuiPickersAdapter<Date, DateFnsLocale> {
         return new Date(value);
     };
 
-    public dateWithTimezone = (value: string | null | undefined): Date | null => {
+    public dateWithTimezone = (value: string | null | undefined): any => {
         return this.date(value);
     };
 
