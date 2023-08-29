@@ -12,6 +12,7 @@ import {
 } from '../../composite';
 import {
   DenFormControl,
+  DenGrid,
   DenInputLabel,
   DenMenuItem,
   DenSelect,
@@ -23,6 +24,10 @@ import DenFormControlLabel from '../../common/formcontrollabel/formcontrolllabel
 import useCustomScrollbar from '../../../customhooks/usecustomscrollbar';
 import { DenThemeDefault, DenThemeProvider } from '../../../styles';
 import DenmarkDefault from '../../../styles/themes/denmarktheme';
+import MetadataSummary from '../imageauthoring/metadata/metadata.summary';
+import { META_CONST } from '../imageauthoring/metadata/metadata.constants';
+import Summary from '../imageauthoring/metadata/metadata.sample.summary';
+import metaStyle from '../imageauthoring/metadata/metadata.module.scss';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -44,6 +49,10 @@ import DenmarkDefault from '../../../styles/themes/denmarktheme';
 export const ImageAuthoring = () => {
   const tabComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
+  const onClickEdit = () => {
+  }
+  const onClickDelete = () => {
+  }
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
@@ -135,7 +144,11 @@ export const ImageAuthoring = () => {
               </div>
             </div>
             <div className={style['keywords-wrapper']}>tab 2</div>
-            <div className={style['meta-data-wrapper']}>tab 3</div>
+            <div className={style['meta-data-wrapper']}>
+            <DenGrid item xs={5} className={metaStyle['metadataLeftPanel']}>
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={Summary} onClickEdit={onClickEdit} onClickDelete={onClickDelete} />
+                </DenGrid>
+            </div>
           </DenCustomTabs>
         </div>
       </div>

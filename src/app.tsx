@@ -83,6 +83,7 @@ const App = (props: AppProps) => (
       }}
     /> */}
     <ImageAuthoring />
+    {/* <TestCommon /> */}
   </>
 );
 if (module?.hot) {

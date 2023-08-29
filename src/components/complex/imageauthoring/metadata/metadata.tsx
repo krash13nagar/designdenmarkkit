@@ -38,7 +38,7 @@ export const Metadata = (props: MetadataProps) => {
         <DenGrid container item xs={12}>
             {summary && summary.visibleSummary &&
                 <DenGrid item xs={5} className={style['metadataLeftPanel']}>
-                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={props.onClickEdit} onClickDelete={props.onClickDelete} onClickDeleteItem={props.onClickDeleteItem} />
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={props.onClickEdit} onClickDelete={props.onClickDelete} />
                 </DenGrid>
             }
             <DenGrid item sm={(summary && summary.visibleSummary) ? 7 : 12} className={style['metadataRightPanel']}>
@@ -55,7 +55,7 @@ export const Metadata = (props: MetadataProps) => {
 
                  </DenGrid>
                 <DenGrid item xs={12}>
-                    <MetadataWidgets model={model} selectedGroup={props.selectedGroup} items={props.metaDefinationList} onChange={handleWidgetChanges} className={style['widgets-wrapper']} />
+                    <MetadataWidgets className={style['widgets-wrapper']} model={model} selectedGroup={props.selectedGroup} items={props.metaDefinationList} onChange={handleWidgetChanges}  />
                 </DenGrid>
             </DenGrid>
         </DenGrid>
