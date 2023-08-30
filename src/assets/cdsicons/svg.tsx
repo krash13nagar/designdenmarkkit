@@ -1,92 +1,56 @@
-// import { SvgIcon } from '@mui/material';
-// import React from 'react';
-// import { PropsWithChildren, SVGTypes } from './svg.types';
-// export const DenSvgIcon = (props: PropsWithChildren<SVGTypes>) => {
-//   const {
-//     htmlColor,
-//     hoverHtmlColor,
-//     width,
-//     height,
-//     name,
-//     handleClick = () => {},
-//     sx,
-//     ...otherProps
-//   } = props;
-//   const getDimension = (num: string | number) => {
-//     if (Number(num)) {
-//       return num + 'px';
-//     }
-//     return num;
-//   };
-//   return (
-//     <SvgIcon
-//       sx={[
-//         {
-//           ...(htmlColor && { color: htmlColor }),
-//           ...(hoverHtmlColor && { '&:hover': { color: hoverHtmlColor } }),
-//           width: width ? getDimension(width) : '24px',
-//           height: height ? getDimension(height) : '24px',
-//         },
-//         ...(Array.isArray(sx) ? sx : [sx]),
-//       ]}
-//       onClick={handleClick}
-//       {...otherProps}
-//     >
-//       {props.children}{' '}
-//     </SvgIcon>
-//   );
-// };
+import { PropsWithChildren, SVGTypes } from './svg.types';
+import clsx from 'clsx';
+
 /* eslint-disable react/prop-types */
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon } from '@mui/material';
 import React from 'react';
 
-export type DenSvgIconProps = SvgIconProps & {
-  hoverHtmlColor?: string;
-  handleClick?: React.MouseEventHandler<HTMLOrSVGElement>;
-};
+export const DenSvgIcon = React.forwardRef<
+  SVGSVGElement,
+  PropsWithChildren<SVGTypes>
+>((props, ref) => {
+  const {
+    htmlColor,
+    hoverHtmlColor,
+    width,
+    name,
+    height,
+    handleClick = () => {},
+    sx,
+    className = '',
+    ...otherProps
+  } = props;
 
-export const DenSvgIcon = React.forwardRef<SVGSVGElement, DenSvgIconProps>(
-  (props, ref) => {
-    const {
-      htmlColor,
-      hoverHtmlColor,
-      width,
-      height,
-      handleClick = () => {},
-      sx,
-      ...otherProps
-    } = props;
+  const getDimension = (num: string | number) => {
+    if (Number(num)) {
+      return num + 'px';
+    }
+    return num;
+  };
 
-    const getDimension = (num: string | number) => {
-      if (Number(num)) {
-        return num + 'px';
-      }
-      return num;
-    };
-
-    return (
-      <SvgIcon
-        sx={[
-          {
-            ...(htmlColor && { color: htmlColor }),
-            ...(hoverHtmlColor && {
-              '&:hover': {
-                color: hoverHtmlColor,
-              },
-            }),
-            ...(width && { width: getDimension(width) }),
-            ...(height && { height: getDimension(height) }),
-          },
-          ...(Array.isArray(sx) ? sx : [sx]),
-        ]}
-        onClick={handleClick}
-        {...otherProps}
-        ref={ref}
-      >
-        {props.children}
-      </SvgIcon>
-    );
-  }
-);
+  return (
+    <SvgIcon
+      className={clsx('cds-icon', className)}
+      sx={[
+        {
+          ...(htmlColor && { color: htmlColor }),
+          ...(hoverHtmlColor && {
+            '&:hover': {
+              color: hoverHtmlColor,
+            },
+          }),
+          ...(width && { width: getDimension(width) }),
+          ...(height && { height: getDimension(height) }),
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
+      onClick={handleClick}
+      {...otherProps}
+      ref={ref}
+    >
+      {props.children}
+    </SvgIcon>
+  );
+});
 
 export default DenSvgIcon;

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import SearchIcons from './cdsicons.component';
-import { DenSvgIconProps } from '../../asset/DenSvgIcon';
+import { SVGTypes } from '../../assets/cdsicons/svg.types';
 
-const meta: Meta<DenSvgIconProps> = {
+const meta: Meta<SVGTypes> = {
   component: SearchIcons,
   argTypes: {
     htmlColor: {
