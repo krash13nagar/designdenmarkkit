@@ -6,17 +6,18 @@ import RecommendWidget from "./recommend.widget";
 
 
 export const SearchKeyword = (props:searchKeywordConfig) => {
-    const {autocomplete, label, placeholder, searchCallbckfnc} = props;
-    const [val, setval] = useState<string>("");
+    const {autocomplete, label, placeholder, searchCallbckfnc, searchKeywordVal, handleSearchKeywordVal} = props;
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
-      setval(e.target.value);
+      const val = e.target.value;
+      handleSearchKeywordVal(val);
+      searchCallbckfnc(val)
     }
 
   return (
     <div className="search-keyword">
         <DenTextField fullWidth={true} label={label}
-        value={val}
+        value={searchKeywordVal}
         labelProps={{
           classes:{root:"search-keyword-label"}
         }}

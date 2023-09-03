@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
-import { DenGrid, DenIconButton } from '../../common';
+import { DenGrid, DenIconButton, DenTypography } from '../../common';
 import {
   RemoveCircleOutline,
   RemoveCircleOutlineOutlined,
@@ -24,7 +24,7 @@ export const Keywords = (props : keywordsConfig) => {
                   <div className="removeIcondiv">
                     <DenIconButton
                       size="small"
-                      onClick={addedKeywordsConfig.removeCallbackFn}
+                      onClick={()=>{addedKeywordsConfig.removeCallbackFn(index)}}
                     >
                       {addedKeywordsConfig.removeKeywordIcon}
                     </DenIconButton>
@@ -44,6 +44,9 @@ export const Keywords = (props : keywordsConfig) => {
                     />
                     {/* true && <div className="seprator">|</div> */}
                   </div>
+                </div>
+                <div className='keywordSourceName'>
+                  <div className="keywordDetails">{item.source}</div>
                 </div>
               </DenGrid>
             );

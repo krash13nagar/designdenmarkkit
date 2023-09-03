@@ -47,7 +47,7 @@ export interface recommendWidget {
 }
 
 export interface addedKeywordsConfig {
-    removeCallbackFn: React.MouseEventHandler<HTMLButtonElement>;
+    removeCallbackFn: (index:number)=>void;
     title: string;
     removeKeywordIcon: ReactNode;
 }
@@ -56,7 +56,9 @@ export interface searchKeywordConfig {
     autocomplete: boolean;
     label: string;
     placeholder: string;
-    searchCallbckfnc: ()=>void; 
+    searchCallbckfnc: (val:string)=>void;
+    searchKeywordVal?: string;
+    handleSearchKeywordVal?:React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface addBtnConfig {
@@ -71,7 +73,7 @@ export interface searchKeywordWrapper {
 
 export interface addKeywordsConfig {
     addedKeywordsConfig: addedKeywordsConfig;
-    addedKeywords: recommendedKeywords[];
+    addedKeywords: addedKeywords[];
 }
 
 export interface recommendConfig {
@@ -88,5 +90,5 @@ export interface keywordsWrapperConfig {
 
 export interface keywordsConfig {
     addedKeywordsConfig: addedKeywordsConfig;
-    addedKeywords: recommendedKeywords[];
+    addedKeywords: addedKeywords[];
 }
