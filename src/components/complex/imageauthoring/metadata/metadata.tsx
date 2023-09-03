@@ -6,16 +6,18 @@ import MetadataSummary from './metadata.summary';
 import MetadataSelector from './metadata.selector';
 import MetadataWidgets from './metadata.widget';
 import { META_CONST } from './metadata.constants';
+import MetadataUtils from './metadata.utils';
 
-export const Metadata = (props: MetadataProps) => {
+export const Metadata = (props: any) => {
 
     const {
         title = META_CONST.metaSelectorTitle,
         metaGroup,
-        summary
     } = props;
 
-    const model = props.value;
+    const [group, selectedGroup] = useState(props.selectedGroup);
+    const [model, setModel] = useState<any>({...props.value});
+    const [summary, setSummary] = useState<any>(props.summary);
 
     const getMetaCount = (groupId: string) => {
         if(groupId) {
@@ -30,14 +32,51 @@ export const Metadata = (props: MetadataProps) => {
         return 0;
     }
     const handleWidgetChanges = (type: any, value: any, olderValue: any, msid: any) => {
-        props.onChangeWidget(type, value, olderValue, msid);
+        const obj = props.onChangeWidget(type, value, olderValue, msid);
+        model[type] = obj;
+        const newObj = Object.assign({},model);
+        setModel(newObj);
     }
+
+    useEffect(() => {
+        if (model) {
+            //update summary with change in model
+            //const _summary = MetadataUtils.makeSummary(model, summary);
+            setSummary(props.makeSummary(model, summary));
+        }
+      }, [model])
     
+    const handleGroupChange = (group: string) => {
+        selectedGroup(group)
+    }
+
+    const updateModel = (model: any) => {
+        setSummary(props.makeSummary(model, summary));
+        setModel(model);
+    }
+
+    useEffect(() => {
+        if(props.triggerMBReset) {
+            setModel({...props.value})
+        }
+    },[props.triggerMBReset])
+
+    useEffect(() => {
+        if(props.triggerMBDone) {
+            // dispatch(updateCommonModel({
+            //     val:model,
+            //     model:props.model,
+            //     store:props.storeKey
+            // }));
+            props.updateModel(model);
+        }
+    },[props.triggerMBDone])
+
     return ( 
         <DenGrid container item xs={12}>
             {summary && summary.visibleSummary &&
                 <DenGrid item xs={5} className={style['metadataLeftPanel']}>
-                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={props.onClickEdit} onClickDelete={props.onClickDelete} />
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} model={model} value={summary} onClickEdit={handleGroupChange} onClickDelete={props.onClickDelete} updateModel={updateModel} />
                 </DenGrid>
             }
             <DenGrid item sm={(summary && summary.visibleSummary) ? 7 : 12} className={style['metadataRightPanel']}>
@@ -46,15 +85,15 @@ export const Metadata = (props: MetadataProps) => {
                     <DenInputLabel shrink>{title}</DenInputLabel>
                     </DenGrid>
                     <DenGrid  container item xs={3} alignContent="flex-end" justifyContent="center">
-                    <DenInputLabel> Count : {getMetaCount(props.selectedGroup)}</DenInputLabel>
+                    <DenInputLabel> Count : {getMetaCount(group)}</DenInputLabel>
                     </DenGrid>                    
                     <DenGrid item xs={12}>
-                    <MetadataSelector onChange={props.onChangeGroup} selectedGroup={props.selectedGroup} items={metaGroup} /> 
+                    <MetadataSelector onChange={handleGroupChange} selectedGroup={group} items={metaGroup} /> 
                     </DenGrid>
 
                  </DenGrid>
                 <DenGrid item xs={12}>
-                    <MetadataWidgets className={style['widgets-wrapper']} model={model} selectedGroup={props.selectedGroup} items={props.metaDefinationList} onChange={handleWidgetChanges}  />
+                    <MetadataWidgets className={style['widgets-wrapper']} model={model} selectedGroup={group} items={props.metaDefinationList} onChange={handleWidgetChanges}  />
                 </DenGrid>
             </DenGrid>
         </DenGrid>

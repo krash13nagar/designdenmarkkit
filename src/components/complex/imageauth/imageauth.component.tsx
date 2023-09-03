@@ -57,44 +57,65 @@ export const ImageAuthoring = () => {
   const originalModel = JSON.parse(JSON.stringify(config.metadataConfig.value)) ;
   const originalSummary = JSON.parse(JSON.stringify(config.metadataConfig.summary)) ;
   const [open, setOpen] = useState(false);
-  const [group, selectedGroup] = useState(config.metadataConfig.selectedGroup);
-  const [model, setModel] = useState<any>(config.metadataConfig.value);
-  const [summary, setSummary] = useState<any>();
+  const [triggerMBDone, setTriggerMBDone] = useState(false)
+  const [triggerMBReset, setTriggerMBReset] = useState(false)
+  // const [group, selectedGroup] = useState(config.metadataConfig.selectedGroup);
+   const [model, setModel] = useState<any>(config.metadataConfig.value);
+   const [summary, setSummary] = useState<any>(Summary);
 
-  useEffect(() => {
-    if (model) {
-        //update summary with change in model
-        const _summary = MetadataUtils.makeSummary(model, summary);
-        setSummary(_summary);
-    }
-  }, [model])
+  // useEffect(() => {
+  //   if (model) {
+  //       //update summary with change in model
+  //       const _summary = MetadataUtils.makeSummary(model, summary);
+  //       setSummary(_summary);
+  //   }
+  // }, [model])
   const onClickEdit = () => {
   }
-  const onClickDelete = () => {
+  const onClickDelete = (item: any, value: any) => {
+    const model = MetadataUtils.deleteMetadataGroup(item.metaGroup.metatype, value);
+    return model;
   }
-  const onEditMetaClick = () => {
+  const openMetaModel = () => {
     setOpen(true);    
   }
   const onCancelClick = () => {
     // const _summary = MetadataUtils.makeSummary(originalModel);
     // setSummary(_summary);
+    setTriggerMBReset(true)
+        setTimeout(()=> {
+            setTriggerMBReset(false)
+        },1000)
     setOpen(false);
   }
   const onSaveClick = () => {
-    // const _summary = MetadataUtils.makeSummary(model, summary);
-    // setExistingSummary(_summary);
+    const _summary = MetadataUtils.makeSummary(model, summary);
+    setSummary(_summary);
+    setTriggerMBDone(true)
+        setTimeout(()=> {
+            setTriggerMBDone(false)
+        },1000)
     setOpen(false);
   }
-  const handleGroupChange = (group: string) => {
-    selectedGroup(group)
-  };
+  // const handleGroupChange = (group: string) => {
+  //   selectedGroup(group)
+  // };
   const handleWidgetChange = (type: string | number, value: any, olderValue: any, msid: any) => {
     const obj = MetadataUtils.makeMetaObjectForModel(type, value, olderValue, msid);
-        model[type] = obj;
-        const newObj = Object.assign({},model);
-        setModel(newObj);
-        console.log(group);
+    return obj;
+        // model[type] = obj;
+        // const newObj = Object.assign({},model);
+        // setModel(newObj);
+        //console.log(group);
     };
+  const makeSummary = (model: any, summary: any) => {
+    const _summary = MetadataUtils.makeSummary(model, summary);
+    return _summary ;
+  }
+
+  const updateModel = (model: any) => {
+    setModel(model);
+  }
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
@@ -188,7 +209,7 @@ export const ImageAuthoring = () => {
             <div className={style['keywords-wrapper']}>tab 2</div>
             <div className={style['meta-data-wrapper']}>
             <DenGrid item xs={5} className={metaStyle['metadataLeftPanel']}>
-                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={onEditMetaClick} onClickDelete={onClickDelete} />
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} openMetaModel={openMetaModel} />
                 </DenGrid>
             </div>
           </DenCustomTabs>
@@ -227,8 +248,12 @@ export const ImageAuthoring = () => {
         variant: 'contained',
         color: 'primary',
       },
-    ]} handleClose={()=>{setOpen(false)}} 
-    content={<Metadata title="Selected Group" value={model} summary={summary} metaGroup={config.metadataConfig.metagroup} metaDefinationList={config.metadataConfig.metadefinitionList} onChangeWidget={handleWidgetChange} onChangeGroup={handleGroupChange} selectedGroup={group} onClickDelete={config.metadataConfig.onClickDelete} onClickEdit={onEditMetaClick} />} />
+    ]} handleClose={(event: any, reason: any)=>{
+      if (reason && reason == "backdropClick") 
+        return;
+      setOpen(false)
+    }} 
+    content={<Metadata title="Selected Group" value={model} summary={config.metadataConfig.summary} metaGroup={config.metadataConfig.metagroup} metaDefinationList={config.metadataConfig.metadefinitionList} onChangeWidget={handleWidgetChange} selectedGroup={config.metadataConfig.selectedGroup} onClickDelete={onClickDelete} makeSummary={makeSummary} updateModel={updateModel} triggerMBDone={triggerMBDone} triggerMBReset={triggerMBReset} />} />
     </DenThemeProvider>
   );
 };

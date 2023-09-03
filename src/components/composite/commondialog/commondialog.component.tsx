@@ -43,7 +43,7 @@ export const CommonDialog = React.forwardRef<HTMLDivElement, CommonDialogProps>(
     return (
       <DenDialog
         open={open}
-        onClose={handleClose}
+        onClose={(event, reason) => handleClose(event, reason)}
         className={`${classes?.root ? classes.root : ''} ${
           styles.commonDialogRoot
         } ${container ? styles.absolutePos : ''}`}

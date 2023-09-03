@@ -21,6 +21,14 @@ const MetadataUtils = {
             expand: false
         }
     },
+    deleteMetadataGroup: function (group: any, model: any) {
+        for (var key in group) {
+            if (model[key]) {
+                delete model[key];
+            }
+        }
+        return model;
+    },
     getCheckboxDisplayStr: function (value: any, metadata: any) {
         const dataType = metadata.metadataDataType;
         if(dataType && dataType=='CHARACTER') {
