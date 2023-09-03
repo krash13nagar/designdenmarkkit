@@ -1,0 +1,49 @@
+@use '../../../styles/' as css;
+
+.commonDialogRoot {
+
+    &.absolutePos,
+    .absolutePos {
+        position: absolute;
+    }
+
+    .alignTop {
+        top: 0;
+        margin: 0;
+        position: absolute;
+    }
+
+    .titleRootPlain {
+        padding: 0;
+        font-size: css.pxToRem(14px);
+        line-height: css.pxToRem(16px);
+        font-weight: 600;
+        color: #262626;
+        margin: css.pxToRem(6px) css.pxToRem(12px);
+        padding-bottom: css.pxToRem(2px);
+        border-bottom: css.pxToRem(1px) solid #D2D8DF;
+    }
+
+    .titleRootContained {
+        padding: 5px 0px 0px 15px;
+        //font-size: 0.875rem;
+        font: normal normal 600 16px/22px 'source sans 3' !important;;
+        line-height: 0.5rem;
+        //font-weight: 600;
+        background-color: #102563;
+        color: #fff;
+    }
+
+    .contentRoot {
+        min-width: css.pxToRem(300px);
+        padding-right: css.pxToRem(12px);
+        padding-left: css.pxToRem(12px);
+        color: #4D4D4D;
+        line-height: css.pxToRem(18px);
+    }
+
+    .footerRoot {
+        border-top: 1px solid #F1F1F3;
+    }
+
+}

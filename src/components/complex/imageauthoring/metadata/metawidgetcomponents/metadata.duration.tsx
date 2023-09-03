@@ -61,12 +61,12 @@ const MetadataDuration = (props: any) => {
     return (
         <>
             {props.inputLabel && <DenInputLabel> {props.title} </DenInputLabel>}
-            <DenTextField label={props.title} value={value} fullWidth valueProps={{
+            <DenTextField label={props.title} value={value} onChange = {(event: any) => handleClick(event) } fullWidth valueProps={{
                 startAdornment: (
                     <DenInputAdornment position="start">
                         <ScheduleSharpIcon />
                     </DenInputAdornment> 
-                ), onChange: (event: any) => { handleClick(event) } }} />
+                )}} />
             <DenMenu anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}

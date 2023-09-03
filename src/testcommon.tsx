@@ -190,7 +190,7 @@ const handleWidgetChange = (type: any, value: any, olderValue: any, msid: any) =
       </DenButton>
       <DenChip label="chip" color="primary" />
       <div className='metadataWrapper'>
-      <Metadata title="Selected Group" value={model} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} onChangeWidget={handleWidgetChange} onChangeGroup={handleGroupChange} selectedGroup={group} onClickDelete={onClickDelete} onClickEdit={onClickEdit} />
+      {/* <Metadata title="Selected Group" value={model} summary={summary} metaGroup={MetadataGroupList} metaDefinationList={MetadataList} onChangeWidget={handleWidgetChange} onChangeGroup={handleGroupChange} selectedGroup={group} onClickDelete={onClickDelete} onClickEdit={onClickEdit} /> */}
       </div>
       {/* <DenButton variant="outlined" color="primary">
         Metadata

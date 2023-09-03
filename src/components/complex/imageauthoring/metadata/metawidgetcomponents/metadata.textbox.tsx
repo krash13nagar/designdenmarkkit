@@ -26,9 +26,8 @@ const MetadataTextBox = (props: any) => {
 
     return (
         <>
-            <DenTextField fullWidth={true} label={props.title} value={props.value} 
+            <DenTextField fullWidth={true} label={props.title} value={props.value} onChange = {handleChange}
             valueProps={{
-                onChange: (event)=>{handleChange(event)},
                 readOnly: Boolean(handleTitle()),
                 title: handleTitle() ? "Author can not be added or removed":''
                 }} />

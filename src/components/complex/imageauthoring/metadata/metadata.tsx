@@ -15,11 +15,10 @@ export const Metadata = (props: MetadataProps) => {
         summary
     } = props;
 
-    const model = {...props.value};
+    const model = props.value;
 
     const getMetaCount = (groupId: string) => {
         if(groupId) {
-            //const summary = props.summary;
             if(summary && summary.groupedList){
                 if(summary.groupedList[groupId]) {
                     return summary.groupedList[groupId].count ? summary.groupedList[groupId].count : 0

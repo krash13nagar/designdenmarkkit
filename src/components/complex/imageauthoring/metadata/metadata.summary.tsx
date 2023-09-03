@@ -109,7 +109,7 @@ export const MetadataSummary = (props: MetadataSummaryProps) => {
                 {
                     summary && summary.isButtonVisible && 
                     <DenGrid item container xs={6} justifyContent="flex-end" alignItems="center">
-                        <DenButton variant="outlined" size="small" color="primary">Add/Edit Metadata</DenButton>
+                        <DenButton onClick={() => handleEdit()} variant="outlined" size="small" color="primary">Add/Edit Metadata</DenButton>
                     </DenGrid>
                 }
             </DenGrid>

@@ -1,6 +1,7 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent, ReactNode } from "react";
 import { MetadataSelectorProps } from "./metadata.types";
 import { DenFormControl, DenInputLabel, DenMenuItem, DenSelect } from "../../../common";
+import { SelectChangeEvent } from "@mui/material";
 
 
 export const MetadataSelector = (props: MetadataSelectorProps) => {
@@ -10,7 +11,7 @@ export const MetadataSelector = (props: MetadataSelectorProps) => {
         setDropdown(props.selectedGroup ? props.selectedGroup : 'Select') 
     },[props.selectedGroup])
 
-    const handleChange = (event:any) => {
+    const handleChange = (event: SelectChangeEvent<string>, child?: ReactNode) => {
         const val = event.target.value;
         setDropdown(val);
         if(props.onChange && typeof props.onChange === "function") {

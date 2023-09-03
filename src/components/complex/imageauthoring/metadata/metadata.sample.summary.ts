@@ -1,6 +1,6 @@
 const Summary = {
     "visibleSummary": true,
-    "iconButtons": true,
+    "iconButtons": false,
     "isButtonVisible": true, 
     "groupedList": {
         "3": {

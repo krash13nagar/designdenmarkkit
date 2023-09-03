@@ -25,6 +25,7 @@ export interface MetadataProps {
     onClickEdit?: any;
     onClickDelete?: any;
     onClickDeleteItem?: any;
+    metadataConfig?: any;
 }
 export interface MetadataSelectorProps {
     onChange: any;

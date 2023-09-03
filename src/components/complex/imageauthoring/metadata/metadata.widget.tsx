@@ -169,8 +169,8 @@ export const MetadataWidgets = (props: any) => {
                                     return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataTextBox title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} /> </DenGrid>
                                 case "TEXTAREA":
                                     return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}>
-                                    <DenTextField label={item.metadataDefinition.name} value={metaValue} fullWidth={true} valueProps={{multiline: true,
-                                         onChange:(event) => handleChange(item.metadataDefinition.metatype, event.target.value, olderValue)}}/>
+                                    <DenTextField label={item.metadataDefinition.name} value={metaValue}
+                                    onChange = {(event) => handleChange(item.metadataDefinition.metatype, event.target.value, olderValue)} fullWidth={true} valueProps={{multiline: true}}/>
                                      </DenGrid>
                                 case "DROPDOWN":
                                     return <DenGrid key={index} item xs={gridSize} data-meta-type={metaType} data-widget-type={metaWidget}> <MetadataDropdown title={item.metadataDefinition.name} widget={item} value={metaValue} olderValue={olderValue} msid={msid} onChange={handleChange} isDisabled={isDisabled} /> </DenGrid>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from './imageauth.module.scss';
 import {
   AlingType,
@@ -28,6 +28,11 @@ import MetadataSummary from '../imageauthoring/metadata/metadata.summary';
 import { META_CONST } from '../imageauthoring/metadata/metadata.constants';
 import Summary from '../imageauthoring/metadata/metadata.sample.summary';
 import metaStyle from '../imageauthoring/metadata/metadata.module.scss';
+import CommonDialog from '../../composite/commondialog/commondialog.component';
+import Metadata from '../imageauthoring/metadata/metadata';
+import { config } from '../imageauthoring/metadata/metadata.config';
+import MetadataUtils from '../imageauthoring/metadata/metadata.utils';
+import { any } from 'prop-types';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -49,10 +54,47 @@ import metaStyle from '../imageauthoring/metadata/metadata.module.scss';
 export const ImageAuthoring = () => {
   const tabComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
+  const originalModel = JSON.parse(JSON.stringify(config.metadataConfig.value)) ;
+  const originalSummary = JSON.parse(JSON.stringify(config.metadataConfig.summary)) ;
+  const [open, setOpen] = useState(false);
+  const [group, selectedGroup] = useState(config.metadataConfig.selectedGroup);
+  const [model, setModel] = useState<any>(config.metadataConfig.value);
+  const [summary, setSummary] = useState<any>();
+
+  useEffect(() => {
+    if (model) {
+        //update summary with change in model
+        const _summary = MetadataUtils.makeSummary(model, summary);
+        setSummary(_summary);
+    }
+  }, [model])
   const onClickEdit = () => {
   }
   const onClickDelete = () => {
   }
+  const onEditMetaClick = () => {
+    setOpen(true);    
+  }
+  const onCancelClick = () => {
+    // const _summary = MetadataUtils.makeSummary(originalModel);
+    // setSummary(_summary);
+    setOpen(false);
+  }
+  const onSaveClick = () => {
+    // const _summary = MetadataUtils.makeSummary(model, summary);
+    // setExistingSummary(_summary);
+    setOpen(false);
+  }
+  const handleGroupChange = (group: string) => {
+    selectedGroup(group)
+  };
+  const handleWidgetChange = (type: string | number, value: any, olderValue: any, msid: any) => {
+    const obj = MetadataUtils.makeMetaObjectForModel(type, value, olderValue, msid);
+        model[type] = obj;
+        const newObj = Object.assign({},model);
+        setModel(newObj);
+        console.log(group);
+    };
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
@@ -146,7 +188,7 @@ export const ImageAuthoring = () => {
             <div className={style['keywords-wrapper']}>tab 2</div>
             <div className={style['meta-data-wrapper']}>
             <DenGrid item xs={5} className={metaStyle['metadataLeftPanel']}>
-                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={Summary} onClickEdit={onClickEdit} onClickDelete={onClickDelete} />
+                    <MetadataSummary title={META_CONST.metaSummaryTitle} value={summary} onClickEdit={onEditMetaClick} onClickDelete={onClickDelete} />
                 </DenGrid>
             </div>
           </DenCustomTabs>
@@ -172,6 +214,21 @@ export const ImageAuthoring = () => {
           </DenSelect>
         </DenFormControl>
       </Footer>
+    <CommonDialog open={open} titleVariant="contained" dialogProps={{maxWidth: 'md'}} title="Add/Edit Metadata" actionOptionsList= { [
+      {
+        onClick: () => onCancelClick(),
+        label: 'Cancel',
+        variant: 'outlined',
+        color: 'primary',
+      },
+      {
+        onClick: () => onSaveClick(),
+        label: 'Save & Add',
+        variant: 'contained',
+        color: 'primary',
+      },
+    ]} handleClose={()=>{setOpen(false)}} 
+    content={<Metadata title="Selected Group" value={model} summary={summary} metaGroup={config.metadataConfig.metagroup} metaDefinationList={config.metadataConfig.metadefinitionList} onChangeWidget={handleWidgetChange} onChangeGroup={handleGroupChange} selectedGroup={group} onClickDelete={config.metadataConfig.onClickDelete} onClickEdit={onEditMetaClick} />} />
     </DenThemeProvider>
   );
 };

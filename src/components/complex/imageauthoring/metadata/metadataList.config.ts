@@ -1,4 +1,4 @@
-const MetadataList = {
+const MetadataList: any = {
     "0": {
         "metadataDefinition": {
             "id": 1,
