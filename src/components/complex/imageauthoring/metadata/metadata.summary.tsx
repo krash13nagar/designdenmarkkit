@@ -41,8 +41,21 @@ export const MetadataSummary = (props: any) => {
         // }));
     }
 
+    const handleDeleteItem = (metaType: any, item: any) => {
+        let model = props.model;
+        item.isDeleted =  !item.isDeleted
+        model[metaType] = item;
+        props.updateModel(model);
+        // dispatch(updateInMetadata({
+        //         val: item,
+        //         model: item.metatype,
+        //         store: props.storeKey,
+        //         store_action_key: props.storeActionKey
+        //     }));
+        }
+
     const renderDeleteIcon=(element: any)=>{
-        if(!element?.metaGroup?.isDeleted){
+        if(!props.model?.[element.metaGroup['metatype']]?.['isDeleted']){
             return <Delete />
         }else{
             return  <Replay />
@@ -59,11 +72,11 @@ export const MetadataSummary = (props: any) => {
                             <DenTypography variant="body2" noWrap> {(element.metaGroup.name)+` : `+(element.metaGroup.value)}</DenTypography>
                         </DenTooltip>
                         </DenGrid>
-                        {/* <DenGrid container item xs={1} key={index + '_' + i + 2}>
-                            { summary.iconButtons && !element.metaGroup.isReadOnly && <DenIconButton size={'small'} onClick={() => handleDelete()}>
+                        <DenGrid container item xs={1} key={index + '_' + i + 2}>
+                            { summary.iconButtons && !element.metaGroup.isReadOnly && <DenIconButton size={'small'} onClick={() => handleDeleteItem(element.metaGroup['metatype'], props.model[element.metaGroup['metatype']])}>
                                {renderDeleteIcon(element)}
                             </DenIconButton>}
-                        </DenGrid> */}
+                        </DenGrid>
                     </DenGrid>
                 ))
         )

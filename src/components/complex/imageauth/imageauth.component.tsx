@@ -116,6 +116,13 @@ export const ImageAuthoring = () => {
   const updateModel = (model: any) => {
     setModel(model);
   }
+
+  // const metadataProps = {
+  //   'title': "Selected Group",
+  //   'summary': {config.metadataConfig.summary}
+
+
+  // }
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>

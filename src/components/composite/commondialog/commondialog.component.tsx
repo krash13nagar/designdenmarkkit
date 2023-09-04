@@ -72,7 +72,7 @@ export const CommonDialog = React.forwardRef<HTMLDivElement, CommonDialogProps>(
               <DenTypography variant="h6">{props.title}</DenTypography>
             </DenGrid>
             <DenGrid container item xs={1} alignContent={"flex-end"}>
-              <DenIconButton style={{color: '#fff'}} aria-label="close">
+              <DenIconButton style={{color: '#fff'}} aria-label="close" onClick={handleClose}>
                 <Close />
               </DenIconButton>
             </DenGrid>
