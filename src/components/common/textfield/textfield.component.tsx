@@ -47,6 +47,7 @@ export const DenTextField: React.FC<TextFieldProps> = (props) => {
         id={id ?? 'bootstrap-input'}
         {...valueProps}
         onChange={onChange}
+        color="primary"
       />
     </DenFormControl>
   );

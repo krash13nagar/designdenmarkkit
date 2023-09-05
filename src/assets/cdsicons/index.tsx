@@ -6,3 +6,6 @@ export * from './warningicon';
 export * from './deleteicon';
 export * from './createicon';
 export * from './replayicon';
+export * from './todayicon';
+export * from './daterangeicon';
+export * from './helpoutlinesharpicon';

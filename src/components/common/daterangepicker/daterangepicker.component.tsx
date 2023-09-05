@@ -1,7 +1,6 @@
 import * as React from 'react';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import { DateRangePickerProps } from './daterangepicker.types';
-import { react } from '@babel/types';
 
 /**
  * DenDateRangePicker Component.
@@ -15,13 +14,13 @@ import { react } from '@babel/types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDateRangePicker: React.FC<DateRangePickerProps> = (props) =>{
-    const parent = React.useRef(null);
-    const {children:Children,...rest} = props;
-    return <div><DateRangePicker {...rest}  >
-      {Children}
-    </DateRangePicker>
+export const DenDateRangePicker: React.FC<DateRangePickerProps> = (props) => {
+  const { children: Children, ...rest } = props;
+  return (
+    <div>
+      <DateRangePicker {...rest}>{Children}</DateRangePicker>
     </div>
+  );
 };
 
 export default DenDateRangePicker;
