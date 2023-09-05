@@ -6,7 +6,7 @@ import { AddedStoriesCard } from '../addedstoriescard';
 import DenCheckbox from '../../common/checkbox/checkbox.component';
 
 /**
- * ArticleSelectionCard Component.
+ * Addedstories Component.
  * @constructor
  * @param  props.stories - stories added to generate
  * @param {React.ReactNode} props.removeIcon -  (optional) delete icon
@@ -32,7 +32,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
       handlePopOut = () => {},
       classes = {},
       headerLabel = 'Added Stories',
-      footerNote,
+      footerNote = 'You can add a minimum of 2 and a maximum of 5 stories',
       footerNoteLabel = 'Note',
       generateButtonLabel = 'Generate Story',
       cancelButtonLabel = 'Cancel',
@@ -41,7 +41,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
       multiSelectLabel = 'Select all',
       maxStoryCount = 5,
       minStoryCount = 2,
-      noStoriesMessage = '',
+      noStoriesMessage = 'No Stories Added',
     },
     ref
   ) => {

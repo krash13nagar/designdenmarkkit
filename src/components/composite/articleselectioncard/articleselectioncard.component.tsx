@@ -68,6 +68,7 @@ export const ArticleSelectionCard = React.forwardRef<
     const [titleOverflow, setTitleOverflow] = useState(false);
     const [sysnopsisOverflow, setSynopsisOverflow] = useState(false);
     const [expanded, setExpanded] = useState(false);
+    const [titleTooltipOpen, setTitleTooltipOpen] = useState(false);
 
     useEffect(() => {
       if (!popOutIcon) return;
@@ -196,6 +197,19 @@ export const ArticleSelectionCard = React.forwardRef<
               classes={{ tooltip: styles.tooltip }}
               enterDelay={tooltipDelay}
               enterNextDelay={tooltipDelay}
+              open={titleTooltipOpen}
+              onClose={() => setTitleTooltipOpen(false)}
+              onOpen={(
+                e: React.SyntheticEvent<HTMLSpanElement, MouseEvent>
+              ) => {
+                if (
+                  (e.target as Element)?.className?.includes?.(styles.title)
+                ) {
+                  setTitleTooltipOpen(true);
+                  return;
+                }
+                setTitleTooltipOpen(false);
+              }}
             >
               <DenTypography
                 className={`${styles.title} ${styles.ellipsis} ${
@@ -251,7 +265,7 @@ export const ArticleSelectionCard = React.forwardRef<
                   {synopsis}
                   {showReadMoreInSynopsis && expanded && (
                     <span
-                      className={styles.readMoreBtn}
+                      className={styles.readMoreLessBtn}
                       onClick={handleReadMore}
                     >
                       Read Less
@@ -261,7 +275,7 @@ export const ArticleSelectionCard = React.forwardRef<
               </DenTooltip>
               {sysnopsisOverflow && showReadMoreInSynopsis && !expanded && (
                 <span
-                  className={`${styles.readMoreBtn} ${styles.absoultePos}`}
+                  className={`${styles.readMoreLessBtn} ${styles.absoultePos}`}
                   onClick={handleReadMore}
                 >
                   Read More

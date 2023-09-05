@@ -1,11 +1,17 @@
 import { ReactNode } from "react";
 
 export interface AddedStoriesProps {
+    /**
+     * stories added to generate
+     */
     stories: {
         title: string,
         id: string,
         sourceUrl?: string
     }[],
+    /**
+     *  (optional) delete icon
+     */
     removeIcon?: ReactNode,
     popOutIcon?: ReactNode,
     handleCancel?: React.MouseEventHandler<HTMLButtonElement>,

@@ -139,13 +139,17 @@
                 max-height: unset;
             }
 
-            .readMoreBtn {
-                text-decoration: underline;
+            .readMoreLessBtn {
+
                 color: #1D82F5;
                 font-size: css.pxToRem(14px);
                 line-height: css.pxToRem(19px);
                 background-color: #FFFFFF;
                 padding-left: 4px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
 
             .absoultePos {
