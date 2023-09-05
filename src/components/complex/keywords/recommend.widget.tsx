@@ -7,7 +7,7 @@ import DenCardHeader from '../../common/cardheader/cardheader.component';
 import DenCardContent from '../../common/cardcontent/cardcontent.component';
 
 export const RecommendWidget = (props: recommendWidget) => {
-  const { recommendWidgetObj } = props;
+  const { recommendWidgetObj, addCallbckFnc } = props;
 
   return (
     <>
@@ -38,7 +38,7 @@ export const RecommendWidget = (props: recommendWidget) => {
                       <DenGrid
                         item
                         xs={1}
-                        onClick={elm.addCallbackFn}
+                        onClick={()=>{addCallbckFnc(elm)}}
                         className="pointerCursor"
                       >
                         {elm.addKeywordIcon}

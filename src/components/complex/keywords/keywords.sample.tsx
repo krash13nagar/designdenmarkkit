@@ -2,7 +2,7 @@ import React from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {RemoveCircleOutlineOutlined} from '@mui/icons-material';
 import { CachedOutlined } from '@mui/icons-material';
-import { metaInfo } from './keywords.types';
+import { metaInfo, recommendedKeywords } from './keywords.types';
 
 export const config = {
   searchKeywordConfig:{
@@ -85,30 +85,28 @@ export const config = {
       refreshCallbackFn: function () {
         console.log('clicked refresh btn');
       },
-      addCallbackFn: function () {
-        console.log('clicked refresh btn');
-      },
+      addCallbackFn: function(elm: recommendedKeywords){
+        console.log("clicked refresh btn")
+      }
     },
     "recommendedKeywords": [
       {
         keywordName: 'Aisha Verma',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '100',
-        metaInfo: undefined,
+        relevance: 100,
       },
       {
         keywordName: 'Guru Divekar',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '100',
-        metaInfo: undefined,
+        relevance: 100,
       },
       {
         keywordName: 'young woman',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '80',
+        relevance: 80,
         metaInfo: {
           hostId: 83,
           aliasName:
@@ -124,142 +122,129 @@ export const config = {
         keywordName: 'defenestration',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '80',
-        metaInfo: undefined,
+        relevance: 80,
       },
       {
         keywordName: 'masked man',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '80',
-        metaInfo: undefined,
+        relevance: 80,
       },
       {
         keywordName: 'CBI',
         keyEnum: 'Denny',
         source: 'Denny',
-        relevance: '20',
-        metaInfo: undefined,
+        relevance: 20,
       },
       {
         keywordName: 'Mumbai',
         keyEnum: 'TOPIC',
         keywordType: 'place',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined as metaInfo,
+        relevance: 60,
       },
       {
         keywordName: 'Aditya',
         keyEnum: 'TOPIC',
         keywordType: 'cinema-entertainment',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'Aisha',
         keyEnum: 'TOPIC',
         keywordType: 'cinema-entertainment',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'Guru',
         keyEnum: 'TOPIC',
         keywordType: 'cinema-entertainment',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'Uttar Pradesh',
         keyEnum: 'TOPIC',
         keywordType: 'place',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'murder case',
         keyEnum: 'TOPIC',
         keywordType: 'miscellaneous',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'World Health Organisation',
         keyEnum: 'TOPIC',
         keywordType: 'organisation-company',
         source: 'TOPIC',
-        relevance: '60',
-        metaInfo: undefined,
+        relevance: 60,
       },
       {
         keywordName: 'aisha verma',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '100',
-        metaInfo: undefined,
+        relevance: 100,
       },
       {
         keywordName: 'guru',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '80',
-        metaInfo: undefined,
+        relevance: 80,
       },
       {
         keywordName: 'guru divekar',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
       },
       {
         keywordName: 'debu',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
       },
       {
         keywordName: 'aditya rathore',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
       },
       {
         keywordName: 'cbi',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
+      },
+      {
+        keywordName: 'cbi',
+        keyEnum: 'General',
+        source: 'Orion',
+        relevance: 50,
       },
       {
         keywordName: 'caesar',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
       },
       {
         keywordName: 'aisha',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '50',
-        metaInfo: undefined,
+        relevance: 50,
       },
       {
         keywordName: 'mumbai',
         keyEnum: 'General',
         source: 'Orion',
-        relevance: '20',
-        metaInfo: undefined,
+        relevance: 20,
       },
-    ],
+    ] as recommendedKeywords[],
   },
 };

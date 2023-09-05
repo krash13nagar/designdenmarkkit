@@ -12,6 +12,7 @@ import DenChip from './components/common/chip/chip.component';
 import { KeywordsWrapper } from './components';
 import { config } from './components/complex/keywords/keywords.sample';
 import _ from 'lodash';
+import { recommendedKeywords } from './components/complex/keywords/keywords.types';
 
 const TestCommon = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,34 +26,22 @@ const TestCommon = () => {
   };
 
   const [addKeywordState, setAddKeywords] = useState(config.addKeywordsConfig.addedKeywords);
+  const [recommndKeywordsState, setRecommndKeywordsState] = useState<recommendedKeywords[]>(config.recommendConfig.recommendedKeywords)
   const [searchKeywordVal, setSearchKeywordVal] = useState("");
 
-//   const manageRemove=(keydata=[],original={})=>{
-//     const copyAvaialble=_.cloneDeep(original);
-//     console.log(keydata,original,"checking remove")
-//     keydata.forEach(item=>{
-//            if(copyAvaialble[item.source]){
-//                const i = _.findIndex(copyAvaialble[item.source], { "keywordName":item["keywordName"] })
-//                if(i===-1){
-//                  copyAvaialble[item.source].push(item);
-
-//                }
-//            }else{
-//             copyAvaialble[item.source]=[item];
-//             }
-//     })
-//     console.log(copyAvaialble)
-//     return copyAvaialble;
-// }
-
 const removeCallbackFn = (index:number) => {
-  //const _arr = addKeywordsConfigState.addedKeywords.slice();
   const tmplist = addKeywordState.slice();
   let toberemoved=tmplist[index];
+  let tobeadded:recommendedKeywords = {
+    keywordName: toberemoved.keywordName,
+    keyEnum:toberemoved.keyEnum,
+    source:toberemoved.source,
+    relevance:toberemoved.relevance,
+  }
   // setLasRemoved(toberemoved)
-  console.log(toberemoved)
   tmplist.splice(index, 1);
   setAddKeywords(tmplist);
+  setRecommndKeywordsState([...recommndKeywordsState, tobeadded])
 }
 
 const handleAddbtn = () => {
@@ -86,9 +75,28 @@ const handleAddbtn = () => {
     setSearchKeywordVal(text);
   }
 
+  const addCallbackFn = (elm: recommendedKeywords) => {
+    const tmplist = addKeywordState.slice();
+    const recommndList = recommndKeywordsState.slice();
+    const index = _.findIndex(recommndList, { keywordName: elm.keywordName });
+    const i = _.findIndex(tmplist, { keywordName: elm.keywordName });
+    if (i == -1) {
+      tmplist.push({
+        keyEnum: elm.keyEnum,
+        keywordName: elm.keywordName,
+        relevance: elm.relevance,
+        source: elm.source,
+      });
+    }
+    recommndList.splice(index, 1);
+    setAddKeywords(tmplist);
+    setRecommndKeywordsState(recommndList);
+  }
+
   const searchKeywordConfig = {...config.searchKeywordConfig, searchCallbckfnc:handleSearchCallbckfnc}
   const addBtnConfig = {...config.addBtnConfig, addBtnCallbckfnc:handleAddbtn}
   const addKeywordsConfig = {...config.addKeywordsConfig, addedKeywordsConfig:{...config.addKeywordsConfig.addedKeywordsConfig, removeCallbackFn:removeCallbackFn}, addedKeywords:addKeywordState}
+  const recommendConfig = {...config.recommendConfig, recommendedConfig:{...config.recommendConfig.recommendedConfig, addCallbackFn:addCallbackFn}, recommendedKeywords:recommndKeywordsState}
 
 
   return (
@@ -118,7 +126,7 @@ const handleAddbtn = () => {
                 handleChange({ target: { name: 'status', value } }, false);
               }}
             /> */}
-        <KeywordsWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} addKeywordsConfig={addKeywordsConfig} recommendConfig={config.recommendConfig}></KeywordsWrapper>
+        <KeywordsWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} addKeywordsConfig={addKeywordsConfig} recommendConfig={recommendConfig}></KeywordsWrapper>
       
     </div>
   );

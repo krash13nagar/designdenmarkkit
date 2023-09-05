@@ -7,7 +7,7 @@ export interface recommendedConfig {
 	refreshIcon : ReactNode;
     addKeywordIcon: ReactNode;
 	refreshCallbackFn: React.MouseEventHandler<HTMLButtonElement>;
-	addCallbackFn: React.MouseEventHandler<HTMLDivElement>;
+	addCallbackFn: (elm:recommendedKeywords)=>void;
 }
 
 export interface recommendedKeywords {
@@ -15,11 +15,10 @@ export interface recommendedKeywords {
     keyEnum: string;
     keywordType?: string;
     source: string;
-    relevance: string;
+    relevance: number;
     seoScore?: number;
-    metaInfo?: undefined | metaInfo;
+    metaInfo?: metaInfo;
     addKeywordIcon?: ReactNode;
-    addCallbackFn?: undefined | React.MouseEventHandler<HTMLDivElement>;
 }
 
 export interface RecommendedKeywordsConfig {
@@ -44,6 +43,7 @@ export interface metaInfo {
 
 export interface recommendWidget {
     recommendWidgetObj : keywordsMappingObj;
+    addCallbckFnc: (elm:recommendedKeywords)=>void;
 }
 
 export interface addedKeywordsConfig {

@@ -3,6 +3,7 @@ import "./recommended.keywords.style.scss";
 import { RecommendedKeywordsConfig, keywordsMappingObj } from "./keywords.types";
 import { DenIconButton } from "../../common";
 import RecommendWidget from "./recommend.widget";
+import _ from "lodash";
 
 
 export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
@@ -13,7 +14,7 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
   useEffect(()=>{
     console.log(keywordsMapping());
     setKeywordsObj(keywordsMapping());    
-  },[])
+  },[recommendedKeywords])
 
   const keywordsMapping = () => {
     let obj: keywordsMappingObj = {};
@@ -23,12 +24,13 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
       //Utils.cleanRelevance(item,"relevance")
       //if(item.metaInfo) item.metaInfo=JSON.stringify(item.metaInfo);
       if(recommendedConfig.addCallbackFn && recommendedConfig.addKeywordIcon){
-        item["addCallbackFn"] = recommendedConfig.addCallbackFn;
         item["addKeywordIcon"] = recommendedConfig.addKeywordIcon;
       }
 
       if (item.source) {
+        const index = _.findIndex(obj[item.source], { "keywordName":item["keywordName"] })
         if (obj[item.source]) {
+          if(index===-1)
           obj[item.source].push(item);
         } else {
           obj[item.source] = [item];
@@ -61,7 +63,7 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
           {recommendedConfig.refreshIcon}
         </DenIconButton>
       </div>
-      <RecommendWidget recommendWidgetObj={keywordsObj} />
+      <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
       { false &&
           <div className="no-recommendation">No Recommendations available.</div>
       }

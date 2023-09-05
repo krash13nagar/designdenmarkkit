@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { DenGrid, DenIconButton, DenTypography } from '../../common';
-import {
-  RemoveCircleOutline,
-  RemoveCircleOutlineOutlined,
-} from '@mui/icons-material';
 import './recommended.keywords.style.scss';
 import { keywordsConfig } from './keywords.types';
 
