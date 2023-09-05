@@ -206,6 +206,8 @@ const handleWidgetChange = (type: any, value: any, olderValue: any, msid: any) =
                 handleChange({ target: { name: 'status', value } }, false);
               }}
             /> */}
+        {/* <KeywordsWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} addKeywordsConfig={addKeywordsConfig} recommendConfig={recommendConfig}></KeywordsWrapper> */}
+      
     </div>
   );
 };
