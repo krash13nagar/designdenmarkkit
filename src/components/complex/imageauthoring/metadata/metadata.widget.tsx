@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { DenGrid, DenInputLabel } from "../../../common";
 import MetadataDropdown from "./metawidgetcomponents/metadata.dropdown";
-import Metadatalabel from "./metawidgetcomponents/metadata.label";
-import MetadataTextarea from "./metawidgetcomponents/metadata.textarea";
+// import Metadatalabel from "./metawidgetcomponents/metadata.label";
+// import MetadataTextarea from "./metawidgetcomponents/metadata.textarea";
 import MetadataCheckbox from "./metadata.checkbox";
 import { DenTextField } from "../../../common/textfield/textfield.component";
 //import { DateRange } from "@mui/icons-material";
-import DateRangeIcon from '@mui/icons-material/DateRange';
-import DenDateRangePicker from "../../../common/daterangepicker/daterangepicker.component";
-import moment from "moment";
+// import DateRangeIcon from '@mui/icons-material/DateRange';
+// import DenDateRangePicker from "../../../common/daterangepicker/daterangepicker.component";
+// import moment from "moment";
 import MetadataDuration from "./metawidgetcomponents/metadata.duration";
 import MetadataTextBox from "./metawidgetcomponents/metadata.textbox";
 import MetadataDatePicker from "./metawidgetcomponents/metadata.datepicker";
 import MetadataSingleSelect from "./metawidgetcomponents/metadata.singleselect";
 import MetadataMultiSelect from "./metawidgetcomponents/metadata.multiselect";
-import style from './metadata.module.scss';
+//import style from './metadata.module.scss';
 
 export const MetadataWidgets = (props: any) => {
     const [model, setModel] = useState(props.model)
@@ -81,40 +81,41 @@ export const MetadataWidgets = (props: any) => {
 
     const handleAutocompleteTextChange = (type: any, query: any) => {
         if(query) {
-            let data = [
-                {
-                    "id": "TRAVEL GUIDE",
-                    "value": "TRAVEL GUIDE",
-                    "title": "TRAVEL GUIDE",
-                    "display": {
-                        "title": "TRAVEL GUIDE"
-                    }
-                },
-                {
-                    "id": "Travel News",
-                    "value": "Travel News",
-                    "title": "Travel News",
-                    "display": {
-                        "title": "Travel News"
-                    }
-                },
-                {
-                    "id": "TRAVEL TIPS",
-                    "value": "TRAVEL TIPS",
-                    "title": "TRAVEL TIPS",
-                    "display": {
-                        "title": "TRAVEL TIPS"
-                    }
-                },
-                {
-                    "id": "TRAVEL TRENDS",
-                    "value": "TRAVEL TRENDS",
-                    "title": "TRAVEL TRENDS",
-                    "display": {
-                        "title": "TRAVEL TRENDS"
-                    }
-                }
-            ] ;
+            const data = props.handleAutocomplete();
+            // let data = [
+            //     {
+            //         "id": "TRAVEL GUIDE",
+            //         "value": "TRAVEL GUIDE",
+            //         "title": "TRAVEL GUIDE",
+            //         "display": {
+            //             "title": "TRAVEL GUIDE"
+            //         }
+            //     },
+            //     {
+            //         "id": "Travel News",
+            //         "value": "Travel News",
+            //         "title": "Travel News",
+            //         "display": {
+            //             "title": "Travel News"
+            //         }
+            //     },
+            //     {
+            //         "id": "TRAVEL TIPS",
+            //         "value": "TRAVEL TIPS",
+            //         "title": "TRAVEL TIPS",
+            //         "display": {
+            //             "title": "TRAVEL TIPS"
+            //         }
+            //     },
+            //     {
+            //         "id": "TRAVEL TRENDS",
+            //         "value": "TRAVEL TRENDS",
+            //         "title": "TRAVEL TRENDS",
+            //         "display": {
+            //             "title": "TRAVEL TRENDS"
+            //         }
+            //     }
+            // ] ;
             //let data = ['a1','a2','a3'];
             setOptions(data);
         } else {

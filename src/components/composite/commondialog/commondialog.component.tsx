@@ -68,15 +68,19 @@ export const CommonDialog = React.forwardRef<HTMLDivElement, CommonDialogProps>(
             {...dialogTitleProps}
           >
             <DenGrid container>
-            <DenGrid item xs={11}>
-              <DenTypography variant="h6">{props.title}</DenTypography>
+              <DenGrid item xs={11}>
+                <DenTypography variant="h6">{props.title}</DenTypography>
+              </DenGrid>
+              <DenGrid container item xs={1} alignContent={'flex-end'}>
+                <DenIconButton
+                  style={{ color: '#fff' }}
+                  aria-label="close"
+                  onClick={handleClose}
+                >
+                  <Close />
+                </DenIconButton>
+              </DenGrid>
             </DenGrid>
-            <DenGrid container item xs={1} alignContent={"flex-end"}>
-              <DenIconButton style={{color: '#fff'}} aria-label="close" onClick={handleClose}>
-                <Close />
-              </DenIconButton>
-            </DenGrid>
-          </DenGrid>
           </DenDialogTitle>
         )}
         <DenDialogContent
@@ -86,7 +90,10 @@ export const CommonDialog = React.forwardRef<HTMLDivElement, CommonDialogProps>(
           {content}
         </DenDialogContent>
         {actionOptionsList?.length > 0 && (
-          <DenDialogActions classes={{ root: styles.footerRoot }} {...dialogActionProps}>
+          <DenDialogActions
+            classes={{ root: styles.footerRoot }}
+            {...dialogActionProps}
+          >
             {actionOptionsList.map((action) => (
               <DenButton
                 key={action.label}
