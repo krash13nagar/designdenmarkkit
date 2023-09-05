@@ -13,18 +13,11 @@ export const KeywordsWrapper = (props : keywordsWrapperConfig) => {
 
     return (
         <div>
-            <DenGrid container spacing={3}>
-                <DenGrid item xs={4}>
-                    <h1>Hello world</h1>
-                </DenGrid>
-                <DenGrid item xs={8}>
-                    <SearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
-                    <Keywords addedKeywordsConfig={addKeywordsConfig.addedKeywordsConfig} 
-                    addedKeywords={addKeywordsConfig.addedKeywords} />
-                    <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig} 
-                    recommendedKeywords={recommendConfig.recommendedKeywords}  />
-                </DenGrid>
-            </DenGrid>
+            <SearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
+            <Keywords addedKeywordsConfig={addKeywordsConfig.addedKeywordsConfig}
+                addedKeywords={addKeywordsConfig.addedKeywords} />
+            <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig}
+                recommendedKeywords={recommendConfig.recommendedKeywords} />
         </div>
     )
 }

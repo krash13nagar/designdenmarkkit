@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./recommended.keywords.style.scss";
+import styles from "./recommended.keywords.module.scss";
 import { RecommendedKeywordsConfig, keywordsMappingObj, searchKeywordConfig } from "./keywords.types";
 import { DenIconButton, DenTextField } from "../../common";
-import RecommendWidget from "./recommend.widget";
 
 
 export const SearchKeyword = (props:searchKeywordConfig) => {
@@ -15,11 +14,11 @@ export const SearchKeyword = (props:searchKeywordConfig) => {
     }
 
   return (
-    <div className="search-keyword">
+    <div className={styles["search-keyword"]}>
         <DenTextField fullWidth={true} label={label}
         value={searchKeywordVal}
         labelProps={{
-          classes:{root:"search-keyword-label"}
+          classes:{root:styles.searchkeywordlabel}
         }}
         valueProps={{
           onChange: (event)=>{handleChange(event)},

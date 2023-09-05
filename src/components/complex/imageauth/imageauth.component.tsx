@@ -33,6 +33,8 @@ import PublishDate from '../../composite/publishdate/publishdate.component';
 import ActivationStatus from '../../composite/activationstatus/activationstatus.component';
 import { SelectChangeEvent } from '@mui/material';
 import { Cancel } from '../../../assets';
+import KeywordsWrapper from '../keywords/keywords.wrapper';
+import { config } from '../keywords/keywords.sample';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -147,7 +149,13 @@ export const ImageAuthoring = () => {
                 />
               </div>
             </div>
-            <div className={style['keywords-wrapper']}>tab 2</div>
+            <div className={style['keywords-wrapper']}>
+              <KeywordsWrapper searchKeywordConfig={config.searchKeywordConfig}
+              addBtnConfig = {config.addBtnConfig}
+              addKeywordsConfig={config.addKeywordsConfig}
+              recommendConfig={config.recommendConfig}
+              />
+            </div>
             <div className={style['meta-data-wrapper']}>
               <DenGrid item xs={5} className={metaStyle['metadataLeftPanel']}>
                 <MetadataSummary

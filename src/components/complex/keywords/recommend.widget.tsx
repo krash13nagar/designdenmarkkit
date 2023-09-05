@@ -1,5 +1,5 @@
 import React from 'react';
-import './recommended.keywords.style.scss';
+import styles from './recommended.keywords.module.scss';
 import { recommendWidget } from './keywords.types';
 import { DenGrid } from '../../common';
 import DenCard from '../../common/card/card.component';
@@ -13,11 +13,11 @@ export const RecommendWidget = (props: recommendWidget) => {
     <>
       {Object.entries(recommendWidgetObj).map((item, i) => {
         return (
-          <DenCard className="Recommended-card" key={i}>
+          <DenCard className={styles["Recommended-card"]} key={i}>
             {item[1].length > 0 && (
               <>
                 <DenCardHeader
-                  className="Recommended-group"
+                  className={styles["Recommended-group"]}
                   title={`${item[0]}(${item[1].length})`}
                 />
                 <DenCardContent>
@@ -26,7 +26,7 @@ export const RecommendWidget = (props: recommendWidget) => {
                       <DenGrid item xs={1}>
                         {index + 1}
                       </DenGrid>
-                      <DenGrid item xs={5} className="textEllipis">
+                      <DenGrid item xs={5} className={styles.textEllipis}>
                         {elm.keywordName}{' '}
                       </DenGrid>
                       <DenGrid item xs={3}>
@@ -39,7 +39,7 @@ export const RecommendWidget = (props: recommendWidget) => {
                         item
                         xs={1}
                         onClick={()=>{addCallbckFnc(elm)}}
-                        className="pointerCursor"
+                        className={styles.pointerCursor}
                       >
                         {elm.addKeywordIcon}
                       </DenGrid>

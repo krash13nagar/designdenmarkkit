@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import "./recommended.keywords.style.scss";
+import styles from "./recommended.keywords.module.scss";
 import { searchKeywordWrapper } from "./keywords.types";
 import SearchKeyword from "./search.keyword";
 import { DenButton } from "../../common";
@@ -17,7 +17,7 @@ export const SearchKeywordWrapper = (props: searchKeywordWrapper) => {
   }
 
   return (
-    <div className="searchKeywordWrapper">
+    <div className={styles.searchKeywordWrapper}>
         <SearchKeyword autocomplete={searchKeywordConfig.autocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval}/>
         <DenButton onClick={handleClick} variant="outlined">Add</DenButton>
     </div>

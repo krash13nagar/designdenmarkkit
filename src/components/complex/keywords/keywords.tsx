@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { DenGrid, DenIconButton, DenTypography } from '../../common';
-import './recommended.keywords.style.scss';
+import styles from './recommended.keywords.module.scss';
 import { keywordsConfig } from './keywords.types';
 
 export const Keywords = (props : keywordsConfig) => {
   const {addedKeywordsConfig, addedKeywords} = props;
   return (
     <>
-      <div className="addKeywordsTitle">
+      <div className={styles.addKeywordsTitle}>
         {addedKeywordsConfig.title}{` (${addedKeywords.length}):`}
       </div>
-      <div className="addKeywordsWrapperClass">
+      <div className={styles.addKeywordsWrapperClass}>
         <DenGrid container spacing={1}>
           {addedKeywords.map((item, index) => {
             return (
-              <DenGrid item xs={6} className={(index % 2 == 0) ? "keywordTypeEven": ""}>
-                <div className="keywordflexContainer">
-                  <div className="removeIcondiv">
+              <DenGrid item xs={6} className={(index % 2 == 0) ? styles.keywordTypeEven: ""}>
+                <div className={styles.keywordflexContainer}>
+                  <div className={styles.removeIcondiv}>
                     <DenIconButton
                       size="small"
                       onClick={()=>{addedKeywordsConfig.removeCallbackFn(index)}}
@@ -36,13 +36,13 @@ export const Keywords = (props : keywordsConfig) => {
                         min: 10,
                         step: 10,
                       }}
-                      className="marks-input"
+                      className={styles["marks-input"]}
                     />
                     {/* true && <div className="seprator">|</div> */}
                   </div>
                 </div>
-                <div className='keywordSourceName'>
-                  <div className="keywordDetails">{item.source}</div>
+                <div className={styles.keywordSourceName}>
+                  <div className={styles.keywordDetails}>{item.source}</div>
                 </div>
               </DenGrid>
             );

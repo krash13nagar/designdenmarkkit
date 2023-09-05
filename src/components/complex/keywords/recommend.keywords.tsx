@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./recommended.keywords.style.scss";
+import styles from "./recommended.keywords.module.scss";
 import { RecommendedKeywordsConfig, keywordsMappingObj } from "./keywords.types";
 import { DenIconButton } from "../../common";
 import RecommendWidget from "./recommend.widget";
 import _ from "lodash";
+import { AddCircle } from "../../../assets";
 
 
 export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
@@ -51,21 +52,21 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
 
 
   return (
-    <div className="recommended-wrapper">
-      <div className="recommend">
+    <div className={styles["recommended-wrapper"]}>
+      <div className={styles.recommend}>
         {recommendedConfig.title}
         <DenIconButton
           onClick={recommendedConfig.refreshCallbackFn}
           aria-label="refresh"
-          className="recommended-refresh"
+          className={styles["recommended-refresh"]}
           size="small"
         >
-          {recommendedConfig.refreshIcon}
+          {recommendedConfig.refreshIcon} <AddCircle/>
         </DenIconButton>
       </div>
       <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
       { false &&
-          <div className="no-recommendation">No Recommendations available.</div>
+          <div className={styles["no-recommendation"]}>No Recommendations available.</div>
       }
     </div>
   );
