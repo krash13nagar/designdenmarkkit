@@ -4,7 +4,6 @@ import { RecommendedKeywordsConfig, keywordsMappingObj } from "./keywords.types"
 import { DenIconButton } from "../../common";
 import RecommendWidget from "./recommend.widget";
 import _ from "lodash";
-import { AddCircle } from "../../../assets";
 
 
 export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
@@ -61,7 +60,7 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
           className={styles["recommended-refresh"]}
           size="small"
         >
-          {recommendedConfig.refreshIcon} <AddCircle/>
+          {recommendedConfig.refreshIcon}
         </DenIconButton>
       </div>
       <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
