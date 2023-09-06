@@ -1,7 +1,6 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { DenSvgIcon } from './svg';
 import React from 'react';
-import { SVGTypes } from './svg.types';
+import { DenSvgIcon, SVGTypes } from '../../components';
 
 export const AddCircle = (props: Partial<SVGTypes>) => {
   return (

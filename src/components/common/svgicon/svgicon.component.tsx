@@ -1,4 +1,4 @@
-import { PropsWithChildren, SVGTypes } from './svg.types';
+import { PropsWithChildren, SVGTypes } from './svgicon.types';
 import clsx from 'clsx';
 
 /* eslint-disable react/prop-types */

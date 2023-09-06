@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import SearchIcons from './cdsicons.component';
-import { SVGTypes } from '../../assets/cdsicons/svg.types';
+import { SVGTypes } from '../common';
 
 const meta: Meta<SVGTypes> = {
   component: SearchIcons,

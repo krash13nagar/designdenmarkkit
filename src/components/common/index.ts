@@ -51,3 +51,4 @@ export * from './fab/fab.component';
 export * from './box/box.component'
 export * from "./dotloader"
 export * from "./datecalendar/datecalendar.component"
+export * from "./svgicon"

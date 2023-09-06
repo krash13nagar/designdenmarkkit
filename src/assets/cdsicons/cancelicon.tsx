@@ -1,7 +1,6 @@
 import CancelIcon from '@mui/icons-material/Cancel';
-import { DenSvgIcon } from './svg';
 import React from 'react';
-import { SVGTypes } from './svg.types';
+import { DenSvgIcon, SVGTypes } from '../../components';
 
 export const Cancel = (props: Partial<SVGTypes>) => {
   return (
