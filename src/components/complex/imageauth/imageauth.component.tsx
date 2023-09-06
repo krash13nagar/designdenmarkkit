@@ -65,6 +65,12 @@ export const ImageAuthoring = (props: any) => {
 
   const { summary, openMetaModel } = props.summaryProps;
   const { open, onCancelClick, onSaveClick, dialogClose } = props.dialogProps;
+  const {
+    metadataProps,
+    metadataSelectorProps,
+    metadataSummaryProps,
+    metadataWidgetProps,
+  } = props.metaProps;
 
   // useEffect(() => {
   //   if (model) {
@@ -321,26 +327,13 @@ export const ImageAuthoring = (props: any) => {
         ]}
         handleClose={(event: any, reason: any) => {
           dialogClose(event, reason);
-          // if (reason && reason == 'backdropClick') return;
-          // setOpen(false);
         }}
-        // content={<Metadata title="Selected Group" value={model} summary={config.metadataConfig.summary} metaGroup={config.metadataConfig.metagroup} metaDefinationList={config.metadataConfig.metadefinitionList} onChangeWidget={handleWidgetChange} selectedGroup={config.metadataConfig.selectedGroup} onClickDelete={onClickDelete} makeSummary={makeSummary} updateModel={updateModel} triggerMBDone={triggerMBDone} triggerMBReset={triggerMBReset} />} />
         content={
           <Metadata
-            metadataConfig={props.metadataProps}
-            //value={props.model}
-            metadataSelectorConfig={props.metadataSelectorProps}
-            //metaGroup={config.metadataConfig.metagroup}
-            metadataWidgetConfig={props.metadataWidgetProps}
-            //metaDefinationList={config.metadataConfig.metadefinitionList}
-            //onChangeWidget={props.handleWidgetChange}
-            metadataSummaryConfig={props.metadataSummaryProps}
-            //onClickDelete={props.onClickDelete}
-            //makeSummary={props.makeSummary}
-            //updateModel={props.updateModel}
-            //triggerMBDone={props.triggerMBDone}
-            //triggerMBReset={props.triggerMBReset}
-            //handleAutocomplete={props.handleAutocomplete}
+            metadataConfig={metadataProps}
+            metadataSelectorConfig={metadataSelectorProps}
+            metadataWidgetConfig={metadataWidgetProps}
+            metadataSummaryConfig={metadataSummaryProps}
           />
         }
       />

@@ -65,8 +65,6 @@ const App = (props: AppProps) => {
     setOpen(true);
   };
   const onCancelClick = () => {
-    // const _summary = MetadataUtils.makeSummary(originalModel);
-    // setSummary(_summary);
     setTriggerMBReset(true);
     setTimeout(() => {
       setTriggerMBReset(false);
@@ -95,10 +93,6 @@ const App = (props: AppProps) => {
       msid
     );
     return obj;
-    // model[type] = obj;
-    // const newObj = Object.assign({},model);
-    // setModel(newObj);
-    //console.log(group);
   };
   const makeSummary = (model: any, summary: any) => {
     const _summary = MetadataUtils.makeSummary(model, summary);
@@ -179,6 +173,12 @@ const App = (props: AppProps) => {
     onSaveClick: onSaveClick,
     dialogClose: dialogClose,
   };
+  const metaProps = {
+    metadataProps: metadataProps,
+    metadataSelectorProps: metadataSelectorProps,
+    metadataSummaryProps: metadataSummaryProps,
+    metadataWidgetProps: metadataWidgetProps,
+  };
 
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
   return (
@@ -220,26 +220,9 @@ const App = (props: AppProps) => {
       }}
     /> */}
       <ImageAuthoring
-        // onClickDelete={onClickDelete}
-        // openMetaModel={openMetaModel}
-        // onCancelClick={onCancelClick}
-        // onSaveClick={onSaveClick}
-        // handleWidgetChange={handleWidgetChange}
-        // makeSummary={makeSummary}
-        // updateModel={updateModel}
-        metadataProps={metadataProps}
-        metadataSelectorProps={metadataSelectorProps}
-        metadataWidgetProps={metadataWidgetProps}
-        metadataSummaryProps={metadataSummaryProps}
+        metaProps={metaProps}
         summaryProps={summaryProps}
         dialogProps={dialogProps}
-        // handleAutocomplete={handleAutocomplete}
-        // summary={summary}
-        // open={open}
-        // //model={model}
-        // triggerMBDone={triggerMBDone}
-        // triggerMBReset={triggerMBReset}
-        // dialogClose={dialogClose}
       />
       {/* <TestCommon /> */}
     </>
