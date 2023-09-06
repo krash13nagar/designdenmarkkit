@@ -1,7 +1,8 @@
+import { SvgIconProps } from '@mui/material';
 import { ReactNode } from 'react';
 
 export type PropsWithChildren<P> = P & { children?: ReactNode };
-export interface SVGTypes {
+export interface SVGTypes extends SvgIconProps {
   htmlColor?: string;
   hoverHtmlColor?: string;
   width?: number;

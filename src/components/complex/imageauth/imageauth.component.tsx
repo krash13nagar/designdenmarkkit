@@ -26,13 +26,12 @@ import { DenThemeDefault, DenThemeProvider } from '../../../styles';
 import DenmarkDefault from '../../../styles/themes/denmarktheme';
 import MetadataSummary from '../imageauthoring/metadata/metadata.summary';
 import { META_CONST } from '../imageauthoring/metadata/metadata.constants';
-import Summary from '../imageauthoring/metadata/metadata.sample.summary';
 import metaStyle from '../imageauthoring/metadata/metadata.module.scss';
-import CommonDialog from '../../composite/commondialog/commondialog.component';
-import Metadata from '../imageauthoring/metadata/metadata';
-import { config } from '../imageauthoring/metadata/metadata.config';
-import MetadataUtils from '../imageauthoring/metadata/metadata.utils';
-import { any } from 'prop-types';
+import PrimeCategory from '../../composite/primecategory/primecategory.component';
+import PublishDate from '../../composite/publishdate/publishdate.component';
+import ActivationStatus from '../../composite/activationstatus/activationstatus.component';
+import { SelectChangeEvent } from '@mui/material';
+import { Cancel } from '../../../assets';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -56,6 +55,8 @@ export const ImageAuthoring = (props: any) => {
   useCustomScrollbar(tabComponentRef);
   const { summary, openMetaModel } = props.summaryProps;
 
+  const onClickEdit = () => {};
+  const onClickDelete = () => {};
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
@@ -123,6 +124,7 @@ export const ImageAuthoring = (props: any) => {
                   control={<DenCheckbox defaultChecked />}
                   label="Not related to any agency"
                   className="column-12"
+                  color="primary"
                 />
                 <DenTextField
                   label="Justification"
@@ -147,41 +149,90 @@ export const ImageAuthoring = (props: any) => {
               </div>
             </div>
             <div className={style['keywords-wrapper']}>tab 2</div>
-            <div className={style['meta-data-wrapper']}>
-              <div className={metaStyle['metadataLeftPanel']}>
-                <MetadataSummary
-                  title={META_CONST.metaSummaryTitle}
-                  isButtonVisible={true}
-                  isIconButtons={false}
-                  value={summary}
-                  openMetaModel={openMetaModel}
-                  dialogProps={props.dialogProps}
-                  metaProps={props.metaProps}
-                />
-              </div>
+            <div className={metaStyle['metadataLeftPanel']}>
+              <MetadataSummary
+                title={META_CONST.metaSummaryTitle}
+                isButtonVisible={true}
+                isIconButtons={false}
+                value={summary}
+                openMetaModel={openMetaModel}
+                dialogProps={props.dialogProps}
+                metaProps={props.metaProps}
+              />
             </div>
           </DenCustomTabs>
         </div>
       </div>
       <Footer>
-        <DenFormControl>
-          <DenInputLabel id="demo-simple-select-label">Age</DenInputLabel>
-          <DenSelect
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={10}
-            label="Age"
-            onChange={() => {}}
-            variant="standard"
-            classes={{
-              standard: style['custom-select-root'],
-            }}
-          >
-            <DenMenuItem value={10}>Ten</DenMenuItem>
-            <DenMenuItem value={20}>Twenty</DenMenuItem>
-            <DenMenuItem value={30}>Thirty</DenMenuItem>
-          </DenSelect>
-        </DenFormControl>
+        <PrimeCategory
+          primeCategoryLabel="Prime Category"
+          category={[
+            {
+              categoryId: 100,
+              category: 'Prime Category 1',
+            },
+            {
+              categoryId: 200,
+              category: 'Prime Category 2',
+            },
+            {
+              categoryId: 300,
+              category: 'Prime Category 3',
+            },
+            {
+              categoryId: 400,
+              category: 'Prime Category 4',
+            },
+            {
+              categoryId: 500,
+              category: 'Prime Category 5',
+            },
+          ]}
+          isPrimeEnable={true}
+          primeType={500}
+          isPublished={true}
+          handlePrimeChange={() => {}}
+        />
+        <PublishDate
+          PublishModalTitle={'Publish and Expiry Date'}
+          onAutoCorrect={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+          onReset={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+          onClose={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+          onDone={function (preventCloseOnDone: boolean): void {
+            throw new Error('Function not implemented.');
+          }}
+          preventCloseOnDone={false}
+          overrideClose={''}
+          callback={function (
+            arr: { [key: string]: string; value: any }[]
+          ): void {
+            throw new Error('Function not implemented.');
+          }}
+          publishDateLabel="Publish Date"
+          publishDate={1693819795753}
+          expiresIn={1693824566621}
+        />
+        <ActivationStatus
+          activationStatusOptions={[
+            { title: 'Active', value: '0', icon: <Cancel /> },
+            { title: 'InActive', value: '1', icon: <Cancel /> },
+            { title: 'Unavaialble', value: '2', icon: <Cancel /> },
+            { title: 'block', value: '3', icon: <Cancel /> },
+          ]}
+          activationChangeHandle={function (
+            event: SelectChangeEvent<unknown>,
+            child: React.ReactNode
+          ): void {
+            throw new Error('Function not implemented.');
+          }}
+          activationStatus={'0'}
+        />
       </Footer>
     </DenThemeProvider>
   );
