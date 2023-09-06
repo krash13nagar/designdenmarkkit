@@ -107,11 +107,6 @@ const App = (props: AppProps) => {
   const updateModel = (model: any) => {
     setModel(model);
   };
-  const metadataProps = {
-    title: 'Selected Group',
-    summary: config.metadataConfig.summary,
-    selectedGroup: config.metadataConfig.selectedGroup,
-  };
   const handleAutocomplete = () => {
     let data = [
       {
@@ -149,10 +144,40 @@ const App = (props: AppProps) => {
     ];
     return data;
   };
-
   const dialogClose = (event: any, reason: any) => {
     if (reason && reason == 'backdropClick') return;
     setOpen(false);
+  };
+  const metadataProps = {
+    title: 'Selected Group',
+    summary: config.metadataConfig.summary,
+    selectedGroup: config.metadataConfig.selectedGroup,
+    value: model,
+    makeSummary: makeSummary,
+    modelUpdate: updateModel,
+    triggerMBDone: triggerMBDone,
+    triggerMBReset: triggerMBReset,
+  };
+  const metadataSelectorProps = {
+    metaGroup: config.metadataConfig.metagroup,
+  };
+  const metadataWidgetProps = {
+    metaDefinationList: config.metadataConfig.metadefinitionList,
+    onChangeWidget: handleWidgetChange,
+    handleAutocomplete: handleAutocomplete,
+  };
+  const metadataSummaryProps = {
+    onClickDelete: onClickDelete,
+  };
+  const summaryProps = {
+    summary: summary,
+    openMetaModel: openMetaModel,
+  };
+  const dialogProps = {
+    open: open,
+    onCancelClick: onCancelClick,
+    onSaveClick: onSaveClick,
+    dialogClose: dialogClose,
   };
 
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
@@ -195,21 +220,26 @@ const App = (props: AppProps) => {
       }}
     /> */}
       <ImageAuthoring
-        onClickDelete={onClickDelete}
-        openMetaModel={openMetaModel}
-        onCancelClick={onCancelClick}
-        onSaveClick={onSaveClick}
-        handleWidgetChange={handleWidgetChange}
-        makeSummary={makeSummary}
-        updateModel={updateModel}
+        // onClickDelete={onClickDelete}
+        // openMetaModel={openMetaModel}
+        // onCancelClick={onCancelClick}
+        // onSaveClick={onSaveClick}
+        // handleWidgetChange={handleWidgetChange}
+        // makeSummary={makeSummary}
+        // updateModel={updateModel}
         metadataProps={metadataProps}
-        handleAutocomplete={handleAutocomplete}
-        summary={summary}
-        open={open}
-        model={model}
-        triggerMBDone={triggerMBDone}
-        triggerMBReset={triggerMBReset}
-        dialogClose={dialogClose}
+        metadataSelectorProps={metadataSelectorProps}
+        metadataWidgetProps={metadataWidgetProps}
+        metadataSummaryProps={metadataSummaryProps}
+        summaryProps={summaryProps}
+        dialogProps={dialogProps}
+        // handleAutocomplete={handleAutocomplete}
+        // summary={summary}
+        // open={open}
+        // //model={model}
+        // triggerMBDone={triggerMBDone}
+        // triggerMBReset={triggerMBReset}
+        // dialogClose={dialogClose}
       />
       {/* <TestCommon /> */}
     </>

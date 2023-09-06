@@ -63,6 +63,9 @@ export const ImageAuthoring = (props: any) => {
   // const [model, setModel] = useState<any>(config.metadataConfig.value);
   // const [summary, setSummary] = useState<any>(Summary);
 
+  const { summary, openMetaModel } = props.summaryProps;
+  const { open, onCancelClick, onSaveClick, dialogClose } = props.dialogProps;
+
   // useEffect(() => {
   //   if (model) {
   //       //update summary with change in model
@@ -269,8 +272,8 @@ export const ImageAuthoring = (props: any) => {
                   title={META_CONST.metaSummaryTitle}
                   isButtonVisible={true}
                   isIconButtons={false}
-                  value={props.summary}
-                  openMetaModel={props.openMetaModel}
+                  value={summary}
+                  openMetaModel={openMetaModel}
                 />
               </div>
             </div>
@@ -298,26 +301,26 @@ export const ImageAuthoring = (props: any) => {
         </DenFormControl>
       </Footer>
       <CommonDialog
-        open={props.open}
+        open={open}
         titleVariant="contained"
         dialogProps={{ maxWidth: 'md' }}
         title="Add/Edit Metadata"
         actionOptionsList={[
           {
-            onClick: props.onCancelClick,
+            onClick: onCancelClick,
             label: 'Cancel',
             variant: 'outlined',
             color: 'primary',
           },
           {
-            onClick: props.onSaveClick,
+            onClick: onSaveClick,
             label: 'Save & Add',
             variant: 'contained',
             color: 'primary',
           },
         ]}
         handleClose={(event: any, reason: any) => {
-          props.dialogClose(event, reason);
+          dialogClose(event, reason);
           // if (reason && reason == 'backdropClick') return;
           // setOpen(false);
         }}
@@ -325,16 +328,19 @@ export const ImageAuthoring = (props: any) => {
         content={
           <Metadata
             metadataConfig={props.metadataProps}
-            value={props.model}
-            metaGroup={config.metadataConfig.metagroup}
-            metaDefinationList={config.metadataConfig.metadefinitionList}
-            onChangeWidget={props.handleWidgetChange}
-            onClickDelete={props.onClickDelete}
-            makeSummary={props.makeSummary}
-            updateModel={props.updateModel}
-            triggerMBDone={props.triggerMBDone}
-            triggerMBReset={props.triggerMBReset}
-            handleAutocomplete={props.handleAutocomplete}
+            //value={props.model}
+            metadataSelectorConfig={props.metadataSelectorProps}
+            //metaGroup={config.metadataConfig.metagroup}
+            metadataWidgetConfig={props.metadataWidgetProps}
+            //metaDefinationList={config.metadataConfig.metadefinitionList}
+            //onChangeWidget={props.handleWidgetChange}
+            metadataSummaryConfig={props.metadataSummaryProps}
+            //onClickDelete={props.onClickDelete}
+            //makeSummary={props.makeSummary}
+            //updateModel={props.updateModel}
+            //triggerMBDone={props.triggerMBDone}
+            //triggerMBReset={props.triggerMBReset}
+            //handleAutocomplete={props.handleAutocomplete}
           />
         }
       />

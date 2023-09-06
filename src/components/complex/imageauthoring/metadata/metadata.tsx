@@ -13,10 +13,20 @@ export const Metadata = (props: any) => {
     title = META_CONST.metaSelectorTitle,
     existingSummary,
     selectedGroup,
+    value,
+    makeSummary,
+    modelUpdate,
+    triggerMBDone,
+    triggerMBReset,
   } = props.metadataConfig;
 
+  const { metaGroup } = props.metadataSelectorConfig;
+  const { metaDefinationList, onChangeWidget, handleAutocomplete } =
+    props.metadataWidgetConfig;
+  const { onClickDelete } = props.metadataSummaryConfig;
+
   const [group, setGroup] = useState(selectedGroup);
-  const [model, setModel] = useState<any>({ ...props.value });
+  const [model, setModel] = useState<any>({ ...value });
   const [summary, setSummary] = useState<any>(existingSummary);
 
   const getMetaCount = (groupId: string) => {
@@ -38,7 +48,7 @@ export const Metadata = (props: any) => {
     olderValue: any,
     msid: any
   ) => {
-    const obj = props.onChangeWidget(type, value, olderValue, msid);
+    const obj = onChangeWidget(type, value, olderValue, msid);
     model[type] = obj;
     const newObj = Object.assign({}, model);
     setModel(newObj);
@@ -48,7 +58,7 @@ export const Metadata = (props: any) => {
     if (model) {
       //update summary with change in model
       //const _summary = MetadataUtils.makeSummary(model, summary);
-      setSummary(props.makeSummary(model, summary));
+      setSummary(makeSummary(model, summary));
     }
   }, [model]);
 
@@ -57,26 +67,26 @@ export const Metadata = (props: any) => {
   };
 
   const updateModel = (model: any) => {
-    setSummary(props.makeSummary(model, summary));
+    setSummary(makeSummary(model, summary));
     setModel(model);
   };
 
   useEffect(() => {
-    if (props.triggerMBReset) {
-      setModel({ ...props.value });
+    if (triggerMBReset) {
+      setModel({ ...value });
     }
-  }, [props.triggerMBReset]);
+  }, [triggerMBReset]);
 
   useEffect(() => {
-    if (props.triggerMBDone) {
+    if (triggerMBDone) {
       // dispatch(updateCommonModel({
       //     val:model,
       //     model:props.model,
       //     store:props.storeKey
       // }));
-      props.updateModel(model);
+      modelUpdate(model);
     }
-  }, [props.triggerMBDone]);
+  }, [triggerMBDone]);
 
   return (
     <DenGrid container item xs={12}>
@@ -89,7 +99,7 @@ export const Metadata = (props: any) => {
             model={model}
             value={summary}
             onClickEdit={handleGroupChange}
-            onClickDelete={props.onClickDelete}
+            onClickDelete={onClickDelete}
             updateModel={updateModel}
           />
         </DenGrid>
@@ -122,7 +132,7 @@ export const Metadata = (props: any) => {
             <MetadataSelector
               onChange={handleGroupChange}
               selectedGroup={group}
-              items={props.metaGroup}
+              items={metaGroup}
             />
           </DenGrid>
         </DenGrid>
@@ -131,9 +141,9 @@ export const Metadata = (props: any) => {
             className={style['widgets-wrapper']}
             model={model}
             selectedGroup={group}
-            items={props.metaDefinationList}
+            items={metaDefinationList}
             onChange={handleWidgetChanges}
-            handleAutocomplete={props.handleAutocomplete}
+            handleAutocomplete={handleAutocomplete}
           />
         </DenGrid>
       </DenGrid>
