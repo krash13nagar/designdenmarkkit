@@ -56,8 +56,6 @@ export const Metadata = (props: any) => {
 
   useEffect(() => {
     if (model) {
-      //update summary with change in model
-      //const _summary = MetadataUtils.makeSummary(model, summary);
       setSummary(makeSummary(model, summary));
     }
   }, [model]);
@@ -79,11 +77,6 @@ export const Metadata = (props: any) => {
 
   useEffect(() => {
     if (triggerMBDone) {
-      // dispatch(updateCommonModel({
-      //     val:model,
-      //     model:props.model,
-      //     store:props.storeKey
-      // }));
       modelUpdate(model);
     }
   }, [triggerMBDone]);
@@ -101,6 +94,8 @@ export const Metadata = (props: any) => {
             onClickEdit={handleGroupChange}
             onClickDelete={onClickDelete}
             updateModel={updateModel}
+            dialogProps=""
+            metaProps=""
           />
         </DenGrid>
       )}

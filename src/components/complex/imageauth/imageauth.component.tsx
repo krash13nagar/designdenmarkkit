@@ -54,133 +54,8 @@ import { any } from 'prop-types';
 export const ImageAuthoring = (props: any) => {
   const tabComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
-  //const originalModel = JSON.parse(JSON.stringify(config.metadataConfig.value)) ;
-  //const originalSummary = JSON.parse(JSON.stringify(config.metadataConfig.summary)) ;
-  // const [group, selectedGroup] = useState(config.metadataConfig.selectedGroup);
-  // const [open, setOpen] = useState(false);
-  // const [triggerMBDone, setTriggerMBDone] = useState(false);
-  // const [triggerMBReset, setTriggerMBReset] = useState(false);
-  // const [model, setModel] = useState<any>(config.metadataConfig.value);
-  // const [summary, setSummary] = useState<any>(Summary);
-
   const { summary, openMetaModel } = props.summaryProps;
-  const { open, onCancelClick, onSaveClick, dialogClose } = props.dialogProps;
-  const {
-    metadataProps,
-    metadataSelectorProps,
-    metadataSummaryProps,
-    metadataWidgetProps,
-  } = props.metaProps;
 
-  // useEffect(() => {
-  //   if (model) {
-  //       //update summary with change in model
-  //       const _summary = MetadataUtils.makeSummary(model, summary);
-  //       setSummary(_summary);
-  //   }
-  // }, [model])
-  //const onClickEdit = () => {};
-  // const onClickDelete = (item: any, value: any) => {
-  //   const model = MetadataUtils.deleteMetadataGroup(
-  //     item.metaGroup.metatype,
-  //     value
-  //   );
-  //   return model;
-  // };
-  // const openMetaModel = () => {
-  //   setOpen(true);
-  // };
-  // const onCancelClick = () => {
-  //   // const _summary = MetadataUtils.makeSummary(originalModel);
-  //   // setSummary(_summary);
-  //   setTriggerMBReset(true);
-  //   setTimeout(() => {
-  //     setTriggerMBReset(false);
-  //   }, 1000);
-  //   setOpen(false);
-  // };
-  // const onSaveClick = () => {
-  //   const _summary = MetadataUtils.makeSummary(model, summary);
-  //   setSummary(_summary);
-  //   setTriggerMBDone(true);
-  //   setTimeout(() => {
-  //     setTriggerMBDone(false);
-  //   }, 1000);
-  //   setOpen(false);
-  // };
-  // // const handleGroupChange = (group: string) => {
-  // //   selectedGroup(group)
-  // // };
-  // const handleWidgetChange = (
-  //   type: string | number,
-  //   value: any,
-  //   olderValue: any,
-  //   msid: any
-  // ) => {
-  //   const obj = MetadataUtils.makeMetaObjectForModel(
-  //     type,
-  //     value,
-  //     olderValue,
-  //     msid
-  //   );
-  //   return obj;
-  //   // model[type] = obj;
-  //   // const newObj = Object.assign({},model);
-  //   // setModel(newObj);
-  //   //console.log(group);
-  // };
-  // const makeSummary = (model: any, summary: any) => {
-  //   const _summary = MetadataUtils.makeSummary(model, summary);
-  //   return _summary;
-  // };
-
-  // const updateModel = (model: any) => {
-  //   setModel(model);
-  // };
-
-  // const metadataProps = {
-  //   title: 'Selected Group',
-  //   summary: config.metadataConfig.summary,
-  //   selectedGroup: config.metadataConfig.selectedGroup,
-  // };
-
-  // const handleAutocomplete = () => {
-  //   let data = [
-  //     {
-  //       id: 'TRAVEL GUIDE',
-  //       value: 'TRAVEL GUIDE',
-  //       title: 'TRAVEL GUIDE',
-  //       display: {
-  //         title: 'TRAVEL GUIDE',
-  //       },
-  //     },
-  //     {
-  //       id: 'Travel News',
-  //       value: 'Travel News',
-  //       title: 'Travel News',
-  //       display: {
-  //         title: 'Travel News',
-  //       },
-  //     },
-  //     {
-  //       id: 'TRAVEL TIPS',
-  //       value: 'TRAVEL TIPS',
-  //       title: 'TRAVEL TIPS',
-  //       display: {
-  //         title: 'TRAVEL TIPS',
-  //       },
-  //     },
-  //     {
-  //       id: 'TRAVEL TRENDS',
-  //       value: 'TRAVEL TRENDS',
-  //       title: 'TRAVEL TRENDS',
-  //       display: {
-  //         title: 'TRAVEL TRENDS',
-  //       },
-  //     },
-  //   ];
-  //   return data;
-  // };
   return (
     <DenThemeProvider theme={DenmarkDefault}>
       <div className={style['image-auth-wrapper']}>
@@ -280,6 +155,8 @@ export const ImageAuthoring = (props: any) => {
                   isIconButtons={false}
                   value={summary}
                   openMetaModel={openMetaModel}
+                  dialogProps={props.dialogProps}
+                  metaProps={props.metaProps}
                 />
               </div>
             </div>
@@ -306,37 +183,6 @@ export const ImageAuthoring = (props: any) => {
           </DenSelect>
         </DenFormControl>
       </Footer>
-      <CommonDialog
-        open={open}
-        titleVariant="contained"
-        dialogProps={{ maxWidth: 'md' }}
-        title="Add/Edit Metadata"
-        actionOptionsList={[
-          {
-            onClick: onCancelClick,
-            label: 'Cancel',
-            variant: 'outlined',
-            color: 'primary',
-          },
-          {
-            onClick: onSaveClick,
-            label: 'Save & Add',
-            variant: 'contained',
-            color: 'primary',
-          },
-        ]}
-        handleClose={(event: any, reason: any) => {
-          dialogClose(event, reason);
-        }}
-        content={
-          <Metadata
-            metadataConfig={metadataProps}
-            metadataSelectorConfig={metadataSelectorProps}
-            metadataWidgetConfig={metadataWidgetProps}
-            metadataSummaryConfig={metadataSummaryProps}
-          />
-        }
-      />
     </DenThemeProvider>
   );
 };

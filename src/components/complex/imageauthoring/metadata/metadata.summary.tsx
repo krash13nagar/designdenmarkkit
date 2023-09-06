@@ -9,8 +9,17 @@ import {
 import { MetadataSummaryProps } from './metadata.types';
 import { Delete, Create, Replay } from '../../../../assets';
 import style from './metadata.module.scss';
+import CommonDialog from '../../../composite/commondialog/commondialog.component';
+import Metadata from './metadata';
 
 export const MetadataSummary = (props: any) => {
+  const { open, onCancelClick, onSaveClick, dialogClose } = props.dialogProps;
+  const {
+    metadataProps,
+    metadataSelectorProps,
+    metadataSummaryProps,
+    metadataWidgetProps,
+  } = props.metaProps;
   const [summary, setSummary] = useState(null);
   useEffect(() => {
     if (props.value) {
@@ -19,21 +28,12 @@ export const MetadataSummary = (props: any) => {
     }
   }, [props.value]);
   const makeArray = (list: any) => {
-    //const arr = []
-    // for (const [groupId, metaGroup] of Object.entries(list)) {
-    //     arr.push({
-    //         groupId: groupId,
-    //         metaGroup: metaGroup
-    //     })
-    // }
     return Object.entries(list).map(([groupId, metaGroup]) => {
       return {
         groupId,
         metaGroup,
       };
     });
-    // console.log(arr);
-    // return arr;
   };
   const handleEdit = (group: any) => {
     props.onClickEdit(group);
@@ -42,15 +42,8 @@ export const MetadataSummary = (props: any) => {
     props.onClickDelete();
   };
   const handleDeleteGroup = (item: any) => {
-    //const model = MetadataUtils.deleteMetadataGroup(item.metaGroup.metatype, props.value)
     const model = props.onClickDelete(item, props.model);
     props.updateModel(model);
-    //setSummary(MetadataUtils.makeSummary(model))
-    // dispatch(updateCommonModel({
-    //     val:model,
-    //     model:props.model,
-    //     store:props.storeKey
-    // }));
   };
 
   const handleDeleteItem = (metaType: any, item: any) => {
@@ -58,12 +51,6 @@ export const MetadataSummary = (props: any) => {
     item.isDeleted = !item.isDeleted;
     model[metaType] = item;
     props.updateModel(model);
-    // dispatch(updateInMetadata({
-    //         val: item,
-    //         model: item.metatype,
-    //         store: props.storeKey,
-    //         store_action_key: props.storeActionKey
-    //     }));
   };
 
   const renderDeleteIcon = (element: any) => {
@@ -128,9 +115,6 @@ export const MetadataSummary = (props: any) => {
         element.metaGroup.name != 'Miscellaneous' && (
           <DenGrid item container xs={12} key={index}>
             <DenGrid item container xs={12}>
-              {/* <DenGrid item xs={12}>
-                        <DenTypography variant="subtitle2" className={style['metagroupHead']}> {element.metaGroup.name}</DenTypography>  
-                    </DenGrid> */}
               <DenGrid item xs={props.iconButtons ? 10 : 12}>
                 {props.iconButtons ? (
                   <DenTypography
@@ -203,38 +187,75 @@ export const MetadataSummary = (props: any) => {
         )
     );
   };
-  //style.metadataAddedWrapper
+
   return (
-    <DenGrid container>
-      <DenGrid item container xs={12} direction="row">
-        <DenGrid item container xs={6} alignItems="center">
-          <DenTypography className={style['metadataAddedWrapper']}>
-            {'Added(' + (summary != null ? summary?.metaCount : 0) + ')'}
-          </DenTypography>
-        </DenGrid>
-        {summary && props.isButtonVisible && (
-          <DenGrid
-            item
-            container
-            xs={6}
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <DenButton
-              onClick={() => props.openMetaModel()}
-              variant="outlined"
-              size="small"
-              color="primary"
-            >
-              Add/Edit Metadata
-            </DenButton>
+    <div>
+      <DenGrid container>
+        <DenGrid item container xs={12} direction="row">
+          <DenGrid item container xs={6} alignItems="center">
+            <DenTypography className={style['metadataAddedWrapper']}>
+              {'Added(' + (summary != null ? summary?.metaCount : 0) + ')'}
+            </DenTypography>
           </DenGrid>
-        )}
+          {summary && props.isButtonVisible && (
+            <DenGrid
+              item
+              container
+              xs={6}
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <DenButton
+                onClick={() => props.openMetaModel()}
+                variant="outlined"
+                size="small"
+                color="primary"
+              >
+                Add/Edit Metadata
+              </DenButton>
+            </DenGrid>
+          )}
+        </DenGrid>
+        <DenGrid item container xs={12}>
+          {summary && renderItems(summary.groupedList)}
+        </DenGrid>
       </DenGrid>
-      <DenGrid item container xs={12}>
-        {summary && renderItems(summary.groupedList)}
-      </DenGrid>
-    </DenGrid>
+      <CommonDialog
+        open={open}
+        titleVariant="contained"
+        dialogProps={{ maxWidth: 'md' }}
+        title="Add/Edit Metadata"
+        actionOptionsList={[
+          {
+            onClick: onCancelClick,
+            label: 'Cancel',
+            variant: 'outlined',
+            color: 'primary',
+          },
+          {
+            onClick: onSaveClick ? onSaveClick : () => {},
+            label: 'Save & Add',
+            variant: 'contained',
+            color: 'primary',
+          },
+        ]}
+        handleClose={(event: any, reason: any) => {
+          if (dialogClose) {
+            dialogClose(event, reason);
+          } else {
+            console.log('HnadleClose');
+          }
+        }}
+        content={
+          <Metadata
+            metadataConfig={metadataProps}
+            metadataSelectorConfig={metadataSelectorProps}
+            metadataWidgetConfig={metadataWidgetProps}
+            metadataSummaryConfig={metadataSummaryProps}
+          />
+        }
+      />
+    </div>
   );
 };
 export default MetadataSummary;
