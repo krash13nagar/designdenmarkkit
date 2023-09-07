@@ -3,7 +3,7 @@
  * @desc: Denmark UI components: app
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import TestCommon from './testcommon';
 import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
@@ -19,6 +19,9 @@ import {
 } from './components';
 import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
+import { config } from './components/complex/keywords/keywords.sample';
+import { keywordsWrapperConfig, recommendedKeywords } from './components/complex/keywords/keywords.types';
+import _ from 'lodash';
 
 declare const module: {
   hot: {
@@ -43,8 +46,84 @@ const breadcrumbs = [
   </DenTypography>,
 ];
 
-const App = (props: AppProps) => (
+const App = (props: AppProps) => {
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
+  const [addKeywordState, setAddKeywords] = useState(config.addKeywordsConfig.addedKeywords);
+  const [recommndKeywordsState, setRecommndKeywordsState] = useState<recommendedKeywords[]>(config.recommendConfig.recommendedKeywords)
+  const [searchKeywordVal, setSearchKeywordVal] = useState("");
+
+  const removeCallbackFn = (index: number) => {
+    const tmplist = addKeywordState.slice();
+    let toberemoved = tmplist[index];
+    let tobeadded: recommendedKeywords = {
+      keywordName: toberemoved.keywordName,
+      keyEnum: toberemoved.keyEnum,
+      source: toberemoved.source,
+      relevance: toberemoved.relevance,
+    }
+    // setLasRemoved(toberemoved)
+    tmplist.splice(index, 1);
+    setAddKeywords(tmplist);
+    setRecommndKeywordsState([...recommndKeywordsState, tobeadded])
+  }
+
+  const handleAddbtn = () => {
+    const list = searchKeywordVal.split(',');
+    const tmplist = addKeywordState.slice();
+    list.forEach((element) => {
+      if (element.trim() != '') {
+        const i = _.findIndex(tmplist, { keywordName: element.trim() });
+        if (i == -1) {
+          tmplist.push({
+            keyEnum: 'General',
+            keywordName: element.trim(),
+            relevance: 20,
+            source: 'Orion',
+          });
+        }
+        // else if(tmplist[i] && tmplist[i].botKeyword) {
+        //     tmplist.push({
+        //         "keyEnum": "General",
+        //         "keywordName": element.trim(),
+        //         "relevance": 20,
+        //         "source": "Orion"
+        //     })
+        // }
+      }
+    });
+    setAddKeywords(tmplist);
+  };
+
+  const handleSearchCallbckfnc = (text: string) => {
+    setSearchKeywordVal(text);
+  }
+
+  const addCallbackFn = (elm: recommendedKeywords) => {
+    const tmplist = addKeywordState.slice();
+    const recommndList = recommndKeywordsState.slice();
+    const index = _.findIndex(recommndList, { keywordName: elm.keywordName });
+    const i = _.findIndex(tmplist, { keywordName: elm.keywordName });
+    if (i == -1) {
+      tmplist.push({
+        keyEnum: elm.keyEnum,
+        keywordName: elm.keywordName,
+        relevance: elm.relevance,
+        source: elm.source,
+      });
+    }
+    recommndList.splice(index, 1);
+    setAddKeywords(tmplist);
+    setRecommndKeywordsState(recommndList);
+  }
+
+  const searchKeywordConfig = { ...config.searchKeywordConfig, searchCallbckfnc: handleSearchCallbckfnc }
+  const addBtnConfig = { ...config.addBtnConfig, addBtnCallbckfnc: handleAddbtn }
+  const addKeywordsConfig = { ...config.addKeywordsConfig, addedKeywordsConfig: { ...config.addKeywordsConfig.addedKeywordsConfig, removeCallbackFn: removeCallbackFn }, addedKeywords: addKeywordState }
+  const recommendConfig = { ...config.recommendConfig, recommendedConfig: { ...config.recommendConfig.recommendedConfig, addCallbackFn: addCallbackFn }, recommendedKeywords: recommndKeywordsState }
+
+  const kewordConfig:keywordsWrapperConfig = {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig}
+
+  return (
   <>
     {/* Test App */}
     {/* <TestCommon />
@@ -82,10 +161,11 @@ const App = (props: AppProps) => (
         fullWidth: true,
       }}
     /> */}
-    <ImageAuthoring />
+    <ImageAuthoring keywordconfig={kewordConfig}/>
     {/* <TestCommon /> */}
   </>
-);
+  )
+};
 if (module?.hot) {
   module.hot.accept(App);
 }

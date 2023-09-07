@@ -35,6 +35,7 @@ import { SelectChangeEvent } from '@mui/material';
 import { Cancel } from '../../../assets';
 import KeywordsWrapper from '../keywords/keywords.wrapper';
 import { config } from '../keywords/keywords.sample';
+import { KeywordCompConfig, keywordsWrapperConfig } from '../keywords/keywords.types';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -53,9 +54,12 @@ import { config } from '../keywords/keywords.sample';
  * for more details see http:localhost:6006
  */
 
-export const ImageAuthoring = () => {
+export const ImageAuthoring = (props:KeywordCompConfig) => {
+  const {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig } = props.keywordconfig;
   const tabComponentRef = useRef(null);
+  const keywordComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
+  //useCustomScrollbar(keywordComponentRef, "5px", "5px");
   const onClickEdit = () => {};
   const onClickDelete = () => {};
   return (
@@ -149,11 +153,11 @@ export const ImageAuthoring = () => {
                 />
               </div>
             </div>
-            <div className={style['keywords-wrapper']}>
-              <KeywordsWrapper searchKeywordConfig={config.searchKeywordConfig}
-              addBtnConfig = {config.addBtnConfig}
-              addKeywordsConfig={config.addKeywordsConfig}
-              recommendConfig={config.recommendConfig}
+            <div ref={keywordComponentRef} className={style['keywords-wrapper']}>
+              <KeywordsWrapper searchKeywordConfig={searchKeywordConfig}
+              addBtnConfig = {addBtnConfig}
+              addKeywordsConfig={addKeywordsConfig}
+              recommendConfig={recommendConfig}
               />
             </div>
             <div className={style['meta-data-wrapper']}>

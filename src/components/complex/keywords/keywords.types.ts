@@ -92,3 +92,7 @@ export interface keywordsConfig {
     addedKeywordsConfig: addedKeywordsConfig;
     addedKeywords: addedKeywords[];
 }
+
+export interface KeywordCompConfig {
+    keywordconfig:keywordsWrapperConfig
+}

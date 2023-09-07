@@ -17,11 +17,11 @@ export const SearchKeyword = (props:searchKeywordConfig) => {
     <div className={styles["search-keyword"]}>
         <DenTextField fullWidth={true} label={label}
         value={searchKeywordVal}
+        onChange = {(event)=>handleChange(event)}
         labelProps={{
           classes:{root:styles.searchkeywordlabel}
         }}
         valueProps={{
-          onChange: (event)=>{handleChange(event)},
           placeholder: placeholder
         }}/>
     </div>
