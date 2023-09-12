@@ -10,7 +10,7 @@ export interface Categories {
 
 export interface PrimeCategoryProps {
   primeCategoryLabel: string;
-  category: PrimeCategory[];
+  primeCategoris: PrimeCategory[];
   isPrimeEnable: boolean;
   primeType: number;
   isPublished: boolean;

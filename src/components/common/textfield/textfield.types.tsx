@@ -14,4 +14,5 @@ export interface TextFieldProps extends StandardTextFieldProps {
   wrapperClass?: string;
   labelClass?: string;
   valueClass?: string;
+  disabled?: boolean;
 }

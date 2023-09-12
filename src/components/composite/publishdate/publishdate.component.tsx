@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Today } from '../../../assets/cdsicons/todayicon';
 import { PublishDateProps } from './publishdate.types';
 import PublishDateModalComponent from './publish.modal';
+import style from './publishdate.module.scss';
 import moment from 'moment';
 
 const PublishDate = (props: PublishDateProps) => {
@@ -12,6 +13,9 @@ const PublishDate = (props: PublishDateProps) => {
     expiresInDaysLabel = 'Expire In',
     artUpdDate,
     publishDateFormat = 'LLL',
+    publishDateWrapper = style['publishDateWrapper'],
+    publishDateClass = style['publishDate'],
+    publishDateLabelClass = style['publishDateLabel'],
   } = props;
   let days: number = 0;
   if (expiresIn && publishDate) {
@@ -19,7 +23,7 @@ const PublishDate = (props: PublishDateProps) => {
   }
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className={publishDateWrapper}>
       <Today
         name="Today Icon"
         className="vs-calendar-icon"
@@ -28,13 +32,13 @@ const PublishDate = (props: PublishDateProps) => {
         }}
       />
 
-      <div>
-        <span className="publishDateLink" onClick={() => setOpen(true)}>
+      <div className={publishDateLabelClass}>
+        <span className={'publishDateLink'} onClick={() => setOpen(true)}>
           {publishDateLabel}
         </span>
 
         {publishDate && (
-          <div className="foramtted-date">
+          <div className={'foramtted-date' + publishDateClass}>
             {moment(publishDate)?.format(publishDateFormat)}
           </div>
         )}

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Autocomplete, { AutocompleteProps, AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
+import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
+import { ChipTypeMap } from '@mui/material';
 /**
  * DenAutocomplete Component.
  * @constructor
@@ -13,6 +14,20 @@ import Autocomplete, { AutocompleteProps, AutocompleteRenderInputParams } from '
 
 // export const DenAutocomplete = React.forwardRef((props: any, ref) => ( <Autocomplete {...props} ref={ref} /> ));
 
-export const DenAutocomplete = React.forwardRef< HTMLDivElement, AutocompleteProps< any, boolean | undefined, boolean | undefined, boolean | undefined > >((props, ref) => <Autocomplete ref={ref} {...props} />)
-
-export default DenAutocomplete;
+export default function DenAutocomplete<
+  T,
+  Multiple extends boolean | undefined = false,
+  DisableClearable extends boolean | undefined = false,
+  FreeSolo extends boolean | undefined = false,
+  ChipComponent extends React.ElementType = ChipTypeMap['defaultComponent']
+>(
+  props: AutocompleteProps<
+    T,
+    Multiple,
+    DisableClearable,
+    FreeSolo,
+    ChipComponent
+  >
+) {
+  return <Autocomplete {...props} />;
+}

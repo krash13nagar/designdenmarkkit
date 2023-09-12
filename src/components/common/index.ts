@@ -48,5 +48,7 @@ export * from './tabpanel/tabpanel.component';
 export * from './tabs/tabs.component';
 export * from './tabscrollbutton/tabscrollbutton.component';
 export * from './fab/fab.component';
-export * from './box/box.component'
-export * from "./dotloader"
+export * from './box/box.component';
+export * from './dotloader';
+export * from './textfield';
+export * from './defaulttextfield';

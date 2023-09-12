@@ -13,3 +13,7 @@ export * from './title';
 export * from './titleforurl';
 export * from './imagecaption';
 export * from './footer';
+export * from './imagecaption';
+export * from './primecategory';
+export * from './publishdate';
+export * from './activationstatus';

@@ -13,7 +13,7 @@
     justify-content: start;
     .image-container {
       flex-basis: 70%;
-      height: 70%;
+      height: 55%;
       width: 100%;
       background: #e8e9ec 0% 0% no-repeat padding-box;
       display: flex;
@@ -30,7 +30,7 @@
       padding: css.pxToRem(24px) css.pxToRem(22px);
       width: 100%;
       box-sizing: border-box;
-      flex-basis: 30%;
+      flex-basis: 45%;
       label {
         font-size: 12px;
         font-weight: 600;
@@ -68,5 +68,58 @@
   ::after {
     content: none !important;
     border-bottom: 0px !important;
+  }
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .titleText {
+    flex: 1;
+    padding-left: 2rem;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  .titleIcon {
+    button {
+      color: #ffffff;
+    }
+  }
+  background: #4d9aca 0% 0% no-repeat padding-box;
+  color: #ffffff;
+}
+.titleRootWrapper {
+  padding: 0px !important;
+}
+.dialogContentWrapper {
+  padding: 0px !important;
+  .image-auth-wrapper {
+    height: calc(100vh - css.pxToRem(150px));
+  }
+  .primary-data-wrapper {
+    height: calc(100vh - 220px) !important;
+  }
+}
+.imagePreviewWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.dialogRoot {
+  max-width: 1250px !important;
+}
+@media screen and (min-width: 1350px) {
+  .dialogRoot {
+    max-width: 1302px !important;
+    width: 1302px !important;
+  }
+}
+@media screen and (min-width: 750px) {
+  .dialogRoot {
+    min-height: 590px !important;
+    margin: 10px !important;
   }
 }

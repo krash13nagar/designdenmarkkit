@@ -1,5 +1,6 @@
 @use '../../../styles/' as css;
 .footer {
+  z-index: 2;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #d2d8df;
   height: css.pxToRem(70px);
