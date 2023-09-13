@@ -21,6 +21,9 @@ import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
 import { Cancel } from './assets';
 import ImageAuthModel from './components/complex/imageauth/imageauthmodel';
+import _ from 'lodash';
+import { config } from './components/complex/keywords/keywords.sample';
+import { keywordsWrapperConfig, recommendedKeywords } from './components/complex/keywords/keywords.types';
 
 declare const module: {
   hot: {
@@ -121,6 +124,7 @@ const test = {
     { label: 'Original Resolutions', value: '120x120 px' },
   ],
   msid: '123456',
+  keywordConfig:config
 };
 
 const App = (props: AppProps) => {
@@ -199,10 +203,11 @@ const App = (props: AppProps) => {
   const recommendConfig = { ...config.recommendConfig, recommendedConfig: { ...config.recommendConfig.recommendedConfig, addCallbackFn: addCallbackFn }, recommendedKeywords: recommndKeywordsState }
 
   const kewordConfig:keywordsWrapperConfig = {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig}
+  const testConfig = {...test, keywordConfig:kewordConfig}
 
   return (
   <>
-    <ImageAuthModel {...test} />
+    <ImageAuthModel {...testConfig} />
     {/* <TestCommon /> */}
   </>
   )

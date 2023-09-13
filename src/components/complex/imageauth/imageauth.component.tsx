@@ -36,6 +36,7 @@ import { Cancel } from '../../../assets';
 import { ImageAuthoringProps } from './imageauth.types';
 import AsyncAutoComplete from '../../common/asynchronousautocomplete/asyncautocomplete.component';
 import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete/Autocomplete';
+import KeywordsWrapper from '../keywords/keywords.wrapper';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -74,6 +75,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatus,
     activationStatusOptions,
     activationStatusLabel,
+    keywordConfig
   } = props;
   const tabComponentRef = useRef(null);
   const keywordComponentRef = useRef(null);
@@ -160,10 +162,10 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
               </div>
             </div>
             <div ref={keywordComponentRef} className={style['keywords-wrapper']}>
-              <KeywordsWrapper searchKeywordConfig={searchKeywordConfig}
-              addBtnConfig = {addBtnConfig}
-              addKeywordsConfig={addKeywordsConfig}
-              recommendConfig={recommendConfig}
+              <KeywordsWrapper searchKeywordConfig={keywordConfig.searchKeywordConfig}
+              addBtnConfig = {keywordConfig.addBtnConfig}
+              addKeywordsConfig={keywordConfig.addKeywordsConfig}
+              recommendConfig={keywordConfig.recommendConfig}
               />
             </div>
             <div className={style['meta-data-wrapper']}>

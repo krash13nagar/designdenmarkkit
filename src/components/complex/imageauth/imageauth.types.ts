@@ -8,6 +8,7 @@ import {
   ImageCaptionProps,
   LabelValueProps,
 } from '../../composite';
+import { keywordsWrapperConfig } from '../keywords/keywords.types';
 
 export interface ImageAuthoringProps
   extends ImageCardProps,
@@ -20,6 +21,7 @@ export interface ImageAuthoringProps
   publishDate: PublishDateProps;
   tabTitleList: string[];
   msid?: string;
+  keywordConfig:keywordsWrapperConfig
 }
 
 export interface AnchorGeneric {
