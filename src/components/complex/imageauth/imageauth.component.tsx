@@ -33,9 +33,9 @@ import PublishDate from '../../composite/publishdate/publishdate.component';
 import ActivationStatus from '../../composite/activationstatus/activationstatus.component';
 import { SelectChangeEvent } from '@mui/material';
 import { Cancel } from '../../../assets';
-import KeywordsWrapper from '../keywords/keywords.wrapper';
-import { config } from '../keywords/keywords.sample';
-import { KeywordCompConfig, keywordsWrapperConfig } from '../keywords/keywords.types';
+import { ImageAuthoringProps } from './imageauth.types';
+import AsyncAutoComplete from '../../common/asynchronousautocomplete/asyncautocomplete.component';
+import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete/Autocomplete';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -54,8 +54,27 @@ import { KeywordCompConfig, keywordsWrapperConfig } from '../keywords/keywords.t
  * for more details see http:localhost:6006
  */
 
-export const ImageAuthoring = (props:KeywordCompConfig) => {
-  const {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig } = props.keywordconfig;
+export const ImageAuthoring = (props: ImageAuthoringProps) => {
+  const {
+    metaInformation,
+    src,
+    tabTitleList,
+    msid,
+    title,
+    titleForUrl,
+    imageCaption,
+    primeCategoris,
+    primeCategoryLabel,
+    primeType,
+    publishDate,
+    isPrimeEnable,
+    isPublished,
+    handlePrimeChange,
+    activationChangeHandle,
+    activationStatus,
+    activationStatusOptions,
+    activationStatusLabel,
+  } = props;
   const tabComponentRef = useRef(null);
   const keywordComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
@@ -67,18 +86,12 @@ export const ImageAuthoring = (props:KeywordCompConfig) => {
       <div className={style['image-auth-wrapper']}>
         <div className={style['image-auth-left-panel']}>
           <DenImageCard
-            src="https://picsum.photos/900/1600"
+            src={src}
             wrapperClassName={style['image-container']}
             imageClassName={style['image']}
           />
           <div className={style['meta-info-wrapper'] + ' row'}>
-            {[
-              { label: 'Original Resolutions', value: '120x120 px' },
-              { label: 'Original File Size', value: '31KB' },
-              { label: 'Type', value: 'jpeg' },
-              { label: 'Original Resolutions', value: '120x120 px' },
-              { label: 'Original Resolutions', value: '120x120 px' },
-            ].map((elm) => (
+            {metaInformation.map((elm) => (
               <LabelValue
                 {...elm}
                 align={AlingType.column}
@@ -89,7 +102,7 @@ export const ImageAuthoring = (props:KeywordCompConfig) => {
         </div>
         <div className={style['image-auth-right-panel']}>
           <DenCustomTabs
-            tabTitleList={['Primary Data', 'Keywords', 'Meta Data']}
+            tabTitleList={tabTitleList}
             centered={true}
             variant="standard"
           >
@@ -97,32 +110,10 @@ export const ImageAuthoring = (props:KeywordCompConfig) => {
               ref={tabComponentRef}
               className={style['primary-data-wrapper']}
             >
-              <LabelValue label="MSID" value="8763426" seperator=":" />
-              <Title
-                label="Image Title"
-                value="Title for the image"
-                fullWidth
-                wrapperClass={style['title-wrapper']}
-              />
-              <TitleForUrl
-                seoTitleProps={{
-                  label: 'Title for URL',
-                  value: 'seo title',
-                  onChange: () => console.log(''),
-                  fullWidth: true,
-                }}
-                overrideLinkProps={{
-                  label: 'Ovveride Link',
-                  value: 'test Ovveride link',
-                  onChange: () => console.log(''),
-                  fullWidth: true,
-                }}
-              />
-              <ImageCaption
-                caption="test"
-                captionTitle="Caption"
-                onChange={(str) => {}}
-              />
+              <LabelValue label="MSID" value={msid ?? 'New'} seperator=":" />
+              <Title {...title} wrapperClass={style['title-wrapper']} />
+              <TitleForUrl {...titleForUrl} />
+              <ImageCaption {...imageCaption} />
               <DenTypography variant="h6">Credits</DenTypography>
               <div className="row">
                 <DenFormControlLabel
@@ -135,21 +126,36 @@ export const ImageAuthoring = (props:KeywordCompConfig) => {
                   label="Justification"
                   wrapperClass="column-6"
                   valueProps={{ sx: { mr: '25px', mb: '25px' } }}
+                  disabled={true}
                 />
-                <DenTextField
-                  label="Add Image Agency"
-                  wrapperClass="column-6"
-                  valueProps={{ sx: { mb: '25px' } }}
+                <AsyncAutoComplete
+                  renderInput={function (
+                    params: AutocompleteRenderInputParams
+                  ): React.ReactNode {
+                    throw new Error('Function not implemented.');
+                  }}
+                  options={[]}
+                  label="Image Agency"
                 />
-                <DenTextField
+                <AsyncAutoComplete
                   label="Add Caption Agency"
                   wrapperClass="column-6"
-                  valueProps={{ sx: { mr: '25px', mb: '25px' } }}
+                  renderInput={function (
+                    params: AutocompleteRenderInputParams
+                  ): React.ReactNode {
+                    throw new Error('Function not implemented.');
+                  }}
+                  options={[]}
                 />
-                <DenTextField
+                <AsyncAutoComplete
                   label="Add Photographer Byline"
                   wrapperClass="column-6"
-                  valueProps={{ sx: { mb: '25px' } }}
+                  renderInput={function (
+                    params: AutocompleteRenderInputParams
+                  ): React.ReactNode {
+                    throw new Error('Function not implemented.');
+                  }}
+                  options={[]}
                 />
               </div>
             </div>
@@ -175,73 +181,19 @@ export const ImageAuthoring = (props:KeywordCompConfig) => {
       </div>
       <Footer>
         <PrimeCategory
-          primeCategoryLabel="Prime Category"
-          category={[
-            {
-              categoryId: 100,
-              category: 'Prime Category 1',
-            },
-            {
-              categoryId: 200,
-              category: 'Prime Category 2',
-            },
-            {
-              categoryId: 300,
-              category: 'Prime Category 3',
-            },
-            {
-              categoryId: 400,
-              category: 'Prime Category 4',
-            },
-            {
-              categoryId: 500,
-              category: 'Prime Category 5',
-            },
-          ]}
-          isPrimeEnable={true}
-          primeType={500}
-          isPublished={true}
-          handlePrimeChange={() => {}}
+          primeCategoris={primeCategoris}
+          primeCategoryLabel={primeCategoryLabel}
+          primeType={primeType}
+          isPrimeEnable={isPrimeEnable}
+          isPublished={isPublished}
+          handlePrimeChange={handlePrimeChange}
         />
-        <PublishDate
-          PublishModalTitle={'Publish and Expiry Date'}
-          onAutoCorrect={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-          onReset={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-          onClose={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-          onDone={function (preventCloseOnDone: boolean): void {
-            throw new Error('Function not implemented.');
-          }}
-          preventCloseOnDone={false}
-          overrideClose={''}
-          callback={function (
-            arr: { [key: string]: string; value: any }[]
-          ): void {
-            throw new Error('Function not implemented.');
-          }}
-          publishDateLabel="Publish Date"
-          publishDate={1693819795753}
-          expiresIn={1693824566621}
-        />
+        <PublishDate {...publishDate} />
         <ActivationStatus
-          activationStatusOptions={[
-            { title: 'Active', value: '0', icon: <Cancel /> },
-            { title: 'InActive', value: '1', icon: <Cancel /> },
-            { title: 'Unavaialble', value: '2', icon: <Cancel /> },
-            { title: 'block', value: '3', icon: <Cancel /> },
-          ]}
-          activationChangeHandle={function (
-            event: SelectChangeEvent<unknown>,
-            child: React.ReactNode
-          ): void {
-            throw new Error('Function not implemented.');
-          }}
-          activationStatus={'0'}
+          activationStatusOptions={activationStatusOptions}
+          activationChangeHandle={activationChangeHandle}
+          activationStatus={activationStatus}
+          activationStatusLabel={activationStatusLabel}
         />
       </Footer>
     </DenThemeProvider>

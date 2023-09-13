@@ -3,6 +3,9 @@ export interface PublishDateProps
   publishDateLabel?: string;
   expiresInDaysLabel?: number;
   publishDatehandle?: React.MouseEventHandler<SVGSVGElement | HTMLSpanElement>;
+  publishDateWrapper?: string;
+  publishDateClass?: string;
+  publishDateLabelClass?: string;
 }
 export interface PublishModalProps {
   PublishModalTitle: string;

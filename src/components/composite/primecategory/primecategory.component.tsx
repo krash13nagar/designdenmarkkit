@@ -10,7 +10,7 @@ const PrimeCategory = (props: PrimeCategoryProps) => {
   const {
     primeCategoryLabel = 'Prime Category',
     primeType = 0,
-    category = [],
+    primeCategoris = [],
     isPrimeEnable = false,
     isPublished = false,
     handlePrimeChange,
@@ -30,7 +30,7 @@ const PrimeCategory = (props: PrimeCategoryProps) => {
             Select
           </DenMenuItem>
         )}
-        {category?.map((item, index) => (
+        {primeCategoris?.map((item, index) => (
           <DenMenuItem key={index + 1} value={item.categoryId}>
             {item.category}
           </DenMenuItem>

@@ -6,7 +6,7 @@ import {
   DenSelect,
 } from '../../common';
 import { ActivattionStatusProps } from './activationstatus.types';
-
+import style from './activationstatus.module.scss';
 const ActivationStatus = (props: ActivattionStatusProps) => {
   const {
     disableActivationStatus,
@@ -37,11 +37,11 @@ const ActivationStatus = (props: ActivattionStatusProps) => {
             value={item.value}
             className={'status-' + item.title.toLowerCase()}
           >
-            <div
+            {/* <div
               className={'statusIcon   ' + 'status-' + item.title.toLowerCase()}
             >
               <span>{item.icon}</span>
-            </div>
+            </div> */}
             <div
               className={
                 'publish_select_menu_text  ' +

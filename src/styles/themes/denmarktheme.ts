@@ -52,6 +52,16 @@ export const DenmarkDefaultTheme = {
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          padding: '6px 12px',
+          padddingRight: '32px',
+          minWidth: '85px',
+          display: 'inline-flex',
+        },
+      },
+    },
   },
 };
 export const DenmarkDefault = createTheme(DenmarkDefaultTheme);
