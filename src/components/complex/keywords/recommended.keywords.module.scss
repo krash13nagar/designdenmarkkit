@@ -25,18 +25,6 @@
         }
         
     }
-    .no-recommendation{
-    min-height: 150px;
-    margin: auto;
-    border: 1px dashed #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: normal normal normal 0.75rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
-    background: #fcfcfc;
-    text-align: center;
-    }
-    
 }
 
 .add_keyword_Wrapper {
@@ -115,11 +103,11 @@
 }
 
 .marks-input{
-    margin: 0px;
-    flex-basis: 20%;
-    input{
-        padding: 0.72rem;
-    }
+    // margin: 0px;
+    // flex-basis: 20%;
+    // input{
+    //     padding: 0.72rem;
+    // }
 }
 
 .removeIcondiv {
@@ -173,4 +161,23 @@
     color: #818181;
     opacity: 1
   }
+}
+
+.no-keywords {
+  min-height: 32px;
+  margin: auto;
+  border: 1px dashed #D2D8DF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: normal normal normal 0.75rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
+  text-align: center;
+  letter-spacing: 0px;
+  color: #818181;
+  opacity: 0.6;
+}
+
+.addkeywordtextfield{
+  max-width: 40px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
 }

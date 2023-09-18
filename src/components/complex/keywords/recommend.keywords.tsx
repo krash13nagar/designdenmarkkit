@@ -59,13 +59,16 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
           aria-label="refresh"
           className={styles["recommended-refresh"]}
           size="small"
+          color="primary"
         >
           {recommendedConfig.refreshIcon}
         </DenIconButton>
       </div>
-      <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
-      { false &&
-          <div className={styles["no-recommendation"]}>No Recommendations available.</div>
+      {recommendedKeywords.length > 0 &&
+        <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
+      }
+      {recommendedKeywords.length < 1 &&
+          <div className={styles["no-keywords"]}>Less content available to recommend keywords.</div>
       }
     </div>
   );

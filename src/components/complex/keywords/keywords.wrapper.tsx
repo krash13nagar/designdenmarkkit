@@ -15,7 +15,7 @@ export const KeywordsWrapper = (props : keywordsWrapperConfig) => {
         <div>
             <SearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
             <Keywords addedKeywordsConfig={addKeywordsConfig.addedKeywordsConfig}
-                addedKeywords={addKeywordsConfig.addedKeywords} />
+                addedKeywordslist={addKeywordsConfig.addedKeywords} />
             <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig}
                 recommendedKeywords={recommendConfig.recommendedKeywords} />
         </div>

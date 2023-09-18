@@ -47,7 +47,7 @@ export interface recommendWidget {
 }
 
 export interface addedKeywordsConfig {
-    removeCallbackFn: (index:number)=>void;
+    removeCallbackFn: (index:number, val:number)=>void;
     title: string;
     removeKeywordIcon: ReactNode;
 }
@@ -90,7 +90,7 @@ export interface keywordsWrapperConfig {
 
 export interface keywordsConfig {
     addedKeywordsConfig: addedKeywordsConfig;
-    addedKeywords: addedKeywords[];
+    addedKeywordslist: addedKeywords[];
 }
 
 export interface KeywordCompConfig {

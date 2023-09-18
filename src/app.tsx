@@ -133,14 +133,14 @@ const App = (props: AppProps) => {
   const [recommndKeywordsState, setRecommndKeywordsState] = useState<recommendedKeywords[]>(config.recommendConfig.recommendedKeywords)
   const [searchKeywordVal, setSearchKeywordVal] = useState("");
 
-  const removeCallbackFn = (index: number) => {
+  const removeCallbackFn = (index: number, val:number) => {
     const tmplist = addKeywordState.slice();
     let toberemoved = tmplist[index];
     let tobeadded: recommendedKeywords = {
       keywordName: toberemoved.keywordName,
       keyEnum: toberemoved.keyEnum,
       source: toberemoved.source,
-      relevance: toberemoved.relevance,
+      relevance: val,
     }
     // setLasRemoved(toberemoved)
     tmplist.splice(index, 1);
