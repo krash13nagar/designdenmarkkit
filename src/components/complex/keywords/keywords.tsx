@@ -7,8 +7,7 @@ import _ from 'lodash';
 export const Keywords = (props : keywordsConfig) => {
   const {addedKeywordsConfig, addedKeywordslist} = props;
   const [addedKeywords, setKeywords] = useState(addedKeywordslist);
-  var timer:any;
-
+  const timer = React.useRef(null);
   useEffect(()=>{
     setKeywords(addedKeywordslist)
   },[addedKeywordslist])
@@ -28,9 +27,9 @@ export const Keywords = (props : keywordsConfig) => {
     let value = Number(event.target.value);
     _arr[index]['relevance'] = value;
     setKeywords(_arr);
-    clearTimeout(timer);
-    if (value) {
-      timer = setTimeout(() => {
+    clearTimeout(timer.current);
+    if (value ) {
+      timer.current = setTimeout(() => {
         let val = nearestRound(value);
         if (val) {
           _arr[index]['relevance'] = val;
@@ -39,7 +38,7 @@ export const Keywords = (props : keywordsConfig) => {
         }
       }, 1000);
     }
-  }
+}
 
   return (
     <>
