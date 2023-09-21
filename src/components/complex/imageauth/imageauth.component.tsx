@@ -80,7 +80,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
   const keywordComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
   //useCustomScrollbar(keywordComponentRef, "5px", "5px");
-  const { summary, openMetaModel } = props.summaryProps;
+  const { summary, openMetaModel } = props.summaryProps || {};
 
   const onClickEdit = () => {};
   const onClickDelete = () => {};

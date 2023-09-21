@@ -1,10 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { DenSvgIcon } from './svg';
+import { DenSvgIcon, SVGTypes } from '../../components';
 import React from 'react';
 
-export const Close = () => {
+export const Close = (props: Partial<SVGTypes>) => {
   return (
-    <DenSvgIcon name="Close icon">
+    <DenSvgIcon name="Close icon" {...props}>
       <CloseIcon />
     </DenSvgIcon>
   );

@@ -13,13 +13,15 @@ import CommonDialog from '../../../composite/commondialog/commondialog.component
 import Metadata from './metadata';
 
 export const MetadataSummary = (props: any) => {
-  const { open, onCancelClick, onSaveClick, dialogClose } = props.dialogProps;
+  const { open, onCancelClick, onSaveClick, dialogClose } =
+    props.dialogProps || {};
   const {
     metadataProps,
     metadataSelectorProps,
     metadataSummaryProps,
     metadataWidgetProps,
-  } = props.metaProps;
+  } = props.metaProps || {};
+
   const [summary, setSummary] = useState(null);
   useEffect(() => {
     if (props.value) {
@@ -188,6 +190,14 @@ export const MetadataSummary = (props: any) => {
     );
   };
 
+  const handleClose = (event: object, reason: string) => {
+    if (dialogClose) {
+      dialogClose(event, reason);
+    } else {
+      console.log('HandleClose');
+    }
+  };
+
   return (
     <div>
       <DenGrid container>
@@ -239,13 +249,7 @@ export const MetadataSummary = (props: any) => {
             color: 'primary',
           },
         ]}
-        handleClose={(event: any, reason: any) => {
-          if (dialogClose) {
-            dialogClose(event, reason);
-          } else {
-            console.log('HnadleClose');
-          }
-        }}
+        handleClose={handleClose}
         content={
           <Metadata
             metadataConfig={metadataProps}

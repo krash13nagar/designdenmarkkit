@@ -14,7 +14,7 @@ export interface CommonDialogProps {
         root?: string,
     },
     open: boolean,
-    handleClose: React.MouseEventHandler<HTMLDivElement | HTMLButtonElement>,
+    handleClose?: (event?: object, reason?: string) => void,
     title?: string,
     titleVariant?: 'contained' | 'plain',
     content?: string | ReactNode,

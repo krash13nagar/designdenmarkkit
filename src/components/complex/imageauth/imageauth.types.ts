@@ -22,9 +22,9 @@ export interface ImageAuthoringProps
   tabTitleList: string[];
   msid?: string;
   keywordConfig: keywordsWrapperConfig;
-  dialogProps: any,
-  metaProps: any,
-  summaryProps: any
+  dialogProps?: any,
+  metaProps?: any,
+  summaryProps?: any
 }
 
 export interface AnchorGeneric {
