@@ -1,4 +1,4 @@
-import ReplayIcon from '@mui/icons-material/Create';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { DenSvgIcon, SVGTypes } from '../../components';
 import React from 'react';
 

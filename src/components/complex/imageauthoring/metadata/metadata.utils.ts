@@ -1,8 +1,10 @@
 import moment from "moment";
 import MetadataGroupList from "./metadataGroupList.config";
+import MetadataList from "./metadataList.config";
 
 const MetadataUtils = {
-    metadataDefination: MetadataGroupList,
+    //metadataDefination: MetadataGroupList,
+    metadataDefination: MetadataList,
     makeSummary: function (model: any, existingSummary?: any) {
         if (!model) {
             return null
@@ -11,9 +13,43 @@ const MetadataUtils = {
         const groupedList = MetadataUtils.makeMetaDataGroupList(metadataDefination, model, existingSummary);
         const count = MetadataUtils.returnMetaCount(metadataDefination, model);
         return {
+            visibleSummary: true,
+            iconButtons: true,
+            isButtonVisible: true,
             groupedList: groupedList,
             metaCount: count,
             expand: false
+        }
+    },
+    deleteMetadataGroup: function (group: any, model: any) {
+        for (var key in group) {
+            if (model[key]) {
+                delete model[key];
+            }
+        }
+        return model;
+    },
+    getCheckboxDisplayStr: function (value: any, metadata: any) {
+        const dataType = metadata.metadataDataType;
+        if(dataType && dataType=='CHARACTER') {
+           if(typeof value === "boolean") {
+                return value ? 'Yes' : 'No'
+            } 
+           return value=="true" || value=="1" ? 'Yes' : 'No'
+        }
+        return value && value!="0" ? 'Yes' : 'No'
+
+    },
+    setDisplayValue: function (model: any, metadata: any) {
+        switch (metadata.editorWidget) {
+            case 'CHECKBOX':
+                return MetadataUtils.getCheckboxDisplayStr(model[metadata['metatype']].value, metadata) //props.value[metadata['metatype']].value ? 'Yes' : 'No'
+            case 'DATEPICKER':
+                return MetadataUtils.formatDate(model[metadata['metatype']].value, 'LLL')
+            case 'DROPDOWN':
+                return MetadataUtils.getSummaryDropdownValue(metadata, model[metadata['metatype']].value)
+            default:
+                return model[metadata['metatype']].value
         }
     },
     makeMetaDataGroupList: function (list: any, model: any, existingSummary: any) {
@@ -31,6 +67,7 @@ const MetadataUtils = {
                                     out[list[key].parentGroups[i].id].metatype = {};
                                 }
                                 out[list[key].parentGroups[i].id].metatype[list[key].metadataDefinition.metatype] = list[key].metadataDefinition;
+                                out[list[key].parentGroups[i].id].metatype[list[key].metadataDefinition.metatype].value = MetadataUtils.setDisplayValue(model, list[key].metadataDefinition);
                                 out[list[key].parentGroups[i].id].count = MetadataUtils.returnGroupMetaCount(out[list[key].parentGroups[i].id].metatype, model, out[list[key].parentGroups[i].id].name);
                                 
                                 out[list[key].parentGroups[i].id].expand = MetadataUtils.isExpanded(existingSummary, list[key].parentGroups[i].id) ? true : false;

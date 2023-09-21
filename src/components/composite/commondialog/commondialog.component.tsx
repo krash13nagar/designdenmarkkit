@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { CommonDialogProps } from './commondialog.types';
 import styles from './commondialog.module.scss';
+import { Close } from '../../../assets/cdsicons/closeicon';
 import {
   DenButton,
   DenDialog,
   DenDialogActions,
   DenDialogContent,
   DenDialogTitle,
+  DenGrid,
+  DenIconButton,
+  DenTypography,
 } from '../../common';
 
 /**
@@ -19,68 +23,95 @@ import {
  * ref is forwarded to parent element
  */
 
-export const CommonDialog = React.forwardRef<HTMLDivElement, CommonDialogProps>(
-  (props) => {
-    const {
-      classes = {},
-      open,
-      handleClose = () => {},
-      title = '',
-      content = '',
-      dialogProps = { open },
-      renderAtTop = false,
-      dialogContentProps = {},
-      dialogActionProps = {},
-      dialogTitleProps = {},
-      actionOptionsList = [],
-      container = null,
-    } = props;
-    return (
-      <DenDialog
-        open={open}
-        onClose={handleClose}
-        className={`${classes?.root ? classes.root : ''} ${
-          styles.commonDialogRoot
-        } ${container ? styles.absolutePos : ''}`}
-        slotProps={{
-          backdrop: { classes: { root: styles.absolutePos || '' } },
-        }}
-        PaperProps={{ classes: { root: renderAtTop ? styles.alignTop : '' } }}
-        container={container}
-        {...dialogProps}
-      >
-        {title && (
-          <DenDialogTitle
-            classes={{ root: styles.titleRoot }}
-            {...dialogTitleProps}
-          >
-            {title}
-          </DenDialogTitle>
-        )}
-        <DenDialogContent
-          classes={{ root: styles.contentRoot }}
-          {...dialogContentProps}
+export const CommonDialog = React.forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<CommonDialogProps>
+>((props) => {
+  const {
+    classes = {},
+    open,
+    handleClose = () => {},
+    title = '',
+    content = '',
+    titleVariant = '',
+    dialogProps = {},
+    renderAtTop = false,
+    dialogContentProps = {},
+    dialogActionProps = {},
+    dialogTitleProps = {},
+    actionOptionsList = [],
+    container = null,
+    children,
+  } = props;
+  return (
+    <DenDialog
+      open={open}
+      onClose={handleClose}
+      className={`${classes?.root ? classes.root : ''} ${
+        styles.commonDialogRoot
+      } ${container ? styles.absolutePos : ''}`}
+      slotProps={{
+        backdrop: { classes: { root: styles.absolutePos || '' } },
+      }}
+      PaperProps={{ classes: { root: renderAtTop ? styles.alignTop : '' } }}
+      container={container}
+      {...dialogProps}
+    >
+      {title && titleVariant == 'plain' && (
+        <DenDialogTitle
+          classes={{ root: styles.titleRootPlain }}
+          {...dialogTitleProps}
         >
-          {content}
-        </DenDialogContent>
-        {actionOptionsList?.length > 0 && (
-          <DenDialogActions {...dialogActionProps}>
-            {actionOptionsList.map((action) => (
-              <DenButton
-                key={action.label}
-                onClick={action.onClick}
-                variant={action.variant}
-                color={action.color}
-                {...(action.props || {})}
+          {title}
+        </DenDialogTitle>
+      )}
+      {title && titleVariant == 'contained' && (
+        <DenDialogTitle
+          classes={{ root: styles.titleRootContained }}
+          {...dialogTitleProps}
+        >
+          <DenGrid container>
+            <DenGrid item xs={11}>
+              <DenTypography variant="h6">{props.title}</DenTypography>
+            </DenGrid>
+            <DenGrid container item xs={1} alignContent={'flex-end'}>
+              <DenIconButton
+                style={{ color: '#fff' }}
+                aria-label="close"
+                onClick={handleClose}
               >
-                {action.label}
-              </DenButton>
-            ))}
-          </DenDialogActions>
-        )}
-      </DenDialog>
-    );
-  }
-);
+                <Close />
+              </DenIconButton>
+            </DenGrid>
+          </DenGrid>
+        </DenDialogTitle>
+      )}
+      <DenDialogContent
+        classes={{ root: styles.contentRoot }}
+        {...dialogContentProps}
+      >
+        {content || children}
+      </DenDialogContent>
+      {actionOptionsList?.length > 0 && (
+        <DenDialogActions
+          classes={{ root: styles.footerRoot }}
+          {...dialogActionProps}
+        >
+          {actionOptionsList.map((action) => (
+            <DenButton
+              key={action.label}
+              onClick={action.onClick}
+              variant={action.variant}
+              color={action.color}
+              {...(action.props || {})}
+            >
+              {action.label}
+            </DenButton>
+          ))}
+        </DenDialogActions>
+      )}
+    </DenDialog>
+  );
+});
 CommonDialog.displayName = 'CommonDialog';
 export default CommonDialog;

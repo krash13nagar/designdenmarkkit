@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from './imageauth.module.scss';
 import {
   AlingType,
@@ -26,7 +26,6 @@ import { DenThemeDefault, DenThemeProvider } from '../../../styles';
 import DenmarkDefault from '../../../styles/themes/denmarktheme';
 import MetadataSummary from '../imageauthoring/metadata/metadata.summary';
 import { META_CONST } from '../imageauthoring/metadata/metadata.constants';
-import Summary from '../imageauthoring/metadata/metadata.sample.summary';
 import metaStyle from '../imageauthoring/metadata/metadata.module.scss';
 import PrimeCategory from '../../composite/primecategory/primecategory.component';
 import PublishDate from '../../composite/publishdate/publishdate.component';
@@ -75,12 +74,14 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatus,
     activationStatusOptions,
     activationStatusLabel,
-    keywordConfig
+    keywordConfig,
   } = props;
   const tabComponentRef = useRef(null);
   const keywordComponentRef = useRef(null);
   useCustomScrollbar(tabComponentRef);
   //useCustomScrollbar(keywordComponentRef, "5px", "5px");
+  const { summary, openMetaModel } = props.summaryProps;
+
   const onClickEdit = () => {};
   const onClickDelete = () => {};
   return (
@@ -161,22 +162,29 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
                 />
               </div>
             </div>
-            <div ref={keywordComponentRef} className={style['keywords-wrapper']}>
-              <KeywordsWrapper searchKeywordConfig={keywordConfig.searchKeywordConfig}
-              addBtnConfig = {keywordConfig.addBtnConfig}
-              addKeywordsConfig={keywordConfig.addKeywordsConfig}
-              recommendConfig={keywordConfig.recommendConfig}
+            <div
+              ref={keywordComponentRef}
+              className={style['keywords-wrapper']}
+            >
+              <KeywordsWrapper
+                searchKeywordConfig={keywordConfig.searchKeywordConfig}
+                addBtnConfig={keywordConfig.addBtnConfig}
+                addKeywordsConfig={keywordConfig.addKeywordsConfig}
+                recommendConfig={keywordConfig.recommendConfig}
               />
             </div>
             <div className={style['meta-data-wrapper']}>
-              <DenGrid item xs={5} className={metaStyle['metadataLeftPanel']}>
+              <div className={metaStyle['metadataLeftPanel']}>
                 <MetadataSummary
                   title={META_CONST.metaSummaryTitle}
-                  value={Summary}
-                  onClickEdit={onClickEdit}
-                  onClickDelete={onClickDelete}
+                  isButtonVisible={true}
+                  isIconButtons={false}
+                  value={summary}
+                  openMetaModel={openMetaModel}
+                  dialogProps={props.dialogProps}
+                  metaProps={props.metaProps}
                 />
-              </DenGrid>
+              </div>
             </div>
           </DenCustomTabs>
         </div>

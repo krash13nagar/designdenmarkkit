@@ -1,8 +1,9 @@
 import React, { useEffect, useState,useRef } from 'react';
-import IconButton from '@mui/material/IconButton';
+//import IconButton from '@mui/material/IconButton';
 import TodayIcon from '@mui/icons-material/Today';
 import moment from 'moment';
 import DenDateRangePicker from '../../../../common/daterangepicker/daterangepicker.component';
+import { DenIconButton } from '../../../../common';
 
 /* 
 for calender documentations
@@ -25,7 +26,7 @@ const DenCalender = (props: any) => {
     // },[])
     const template = () => {
         return (
-            <IconButton> <TodayIcon /> </IconButton>
+            <DenIconButton> <TodayIcon /> </DenIconButton>
         )
     }
 

@@ -9,6 +9,7 @@ import { SelectProps, Select } from '@mui/material';
  * @param {boolean} props.defaultOpen - If true, the component is initially open. Use when the component open state is not controlled.
  * @param {string} props.id - The id of the wrapper element or the select element when native.
  * @param {string} props.labelId - The ID of an element that acts as an additional label.
+ * @param {func} props.onChange - The ID of an element that acts as an additional label.
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
