@@ -4,7 +4,7 @@ import { DenSvgIcon, SVGTypes } from '../../components';
 
 export const Cancel = (props: Partial<SVGTypes>) => {
   return (
-    <DenSvgIcon name="Add circle" {...props}>
+    <DenSvgIcon name="Cancel" {...props}>
       <CancelIcon />
     </DenSvgIcon>
   );

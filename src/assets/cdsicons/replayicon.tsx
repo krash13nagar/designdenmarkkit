@@ -1,10 +1,10 @@
 import ReplayIcon from '@mui/icons-material/Create';
-import { DenSvgIcon } from './svg';
+import { DenSvgIcon, SVGTypes } from '../../components';
 import React from 'react';
 
-export const Replay = () => {
+export const Replay = (props: SVGTypes) => {
   return (
-    <DenSvgIcon name="Replay icon">
+    <DenSvgIcon name="Replay icon" {...props}>
       <ReplayIcon />
     </DenSvgIcon>
   );
