@@ -16,7 +16,7 @@ type Story = StoryObj<typeof ArticlePreviewCard>;
 export const Basic: Story = {
   args: {
     title:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry…',
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
     date: 'July 7, 2023',
     wordCount: '234',
     agency: 'ANI',
@@ -28,5 +28,6 @@ export const Basic: Story = {
     handleCardClick: () => console.log('card clicked!'),
     handleCTAClick: () => console.log('cta clicked'),
     ctaTooltipText: 'Open in new tab',
+    msid: '123456',
   },
 };

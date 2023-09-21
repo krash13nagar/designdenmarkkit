@@ -13,8 +13,9 @@ import { DialogProps, Dialog } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialog: React.FC<DialogProps> = (props) => (
-  <Dialog {...props} />
+
+export const DenDialog: React.FC<DialogProps> = React.forwardRef(
+  (props, ref) => <Dialog ref={ref} {...props} />
 );
 
 export default DenDialog;

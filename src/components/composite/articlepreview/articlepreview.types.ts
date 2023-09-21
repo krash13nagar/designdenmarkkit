@@ -21,5 +21,6 @@ export interface ArticlePreviewProps {
         "root": string
     },
     agency?: string,
-    source?: string
+    source?: string,
+    msid?: string
 }

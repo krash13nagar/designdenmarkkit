@@ -3,18 +3,37 @@
 .cardWrapper {
     display: flex;
     cursor: pointer;
-    padding: css.pxToRem(8px) css.pxToRem(4px);
+    padding: css.pxToRem(8px);
     background-color: #FFFFFF;
 
     &:hover {
         box-shadow: 0 css.pxToRem(3px) css.pxToRem(6px) #00000029;
+        z-index: 1;
     }
 
     .leftSection {
         display: flex;
+
+
+        margin-right: css.pxToRem(16px);
+
+        .leftLabelWrapper {
+            background-color: #E8ECEF;
+            padding: css.pxToRem(4px) css.pxToRem(8px);
+            font-size: css.pxToRem(14px);
+            line-height: css.pxToRem(18px);
+            font-weight: bold;
+            font-family: "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+            color: #2B2B2B;
+            border-radius: css.pxToRem(4px);
+            margin-right: css.pxToRem(32px);
+            height: fit-content;
+        }
+    }
+
+    .alignCenter {
         align-items: center;
         justify-content: center;
-        margin-right: css.pxToRem(16px)
     }
 
     .rightSection {
@@ -26,10 +45,12 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: css.pxToRem(10px);
+            font-family: "Source Sans 3", "Open Sans", sans-serif;
 
             .agencyDetails {
                 font-size: css.pxToRem(12px);
                 line-height: css.pxToRem(17px);
+                font-weight: 500;
                 color: #4D4D4D;
                 display: flex;
                 flex-wrap: wrap;
@@ -38,6 +59,12 @@
                     border-radius: css.pxToRem(2px);
                     background: #0E88FF14;
                     padding: css.pxToRem(2px) css.pxToRem(6px);
+                    margin-right: css.pxToRem(8px);
+                }
+
+                .msid {
+                    margin: auto;
+                    margin-left: 0;
                 }
 
                 .publishedBy {
@@ -70,6 +97,7 @@
                 font-size: css.pxToRem(12px);
                 line-height: css.pxToRem(17px);
                 color: #818181CC;
+                font-weight: 500;
             }
         }
 
@@ -84,10 +112,11 @@
 
         .titleWrapper {
             margin: 0;
-            margin-bottom: css.pxToRem(16px);
+            margin-bottom: css.pxToRem(8px);
 
             .title {
-                font-size: css.pxToRem(15px);
+                font-size: css.pxToRem(14px);
+                font-family: "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
                 line-height: css.pxToRem(19px);
                 font-weight: bold;
                 max-height: css.pxToRem(38px);
@@ -97,12 +126,37 @@
 
         .synopsisWrapper {
             margin: 0;
+            position: relative;
 
             .synopsis {
-                font-size: css.pxToRem(12px);
-                line-height: css.pxToRem(17px);
-                max-height: css.pxToRem(34px);
+                font-size: css.pxToRem(14px);
+                line-height: css.pxToRem(19px);
+                max-height: css.pxToRem(38px);
                 color: #818181;
+            }
+
+            .expanded {
+                max-height: unset;
+            }
+
+            .readMoreLessBtn {
+
+                color: #1D82F5;
+                font-size: css.pxToRem(14px);
+                line-height: css.pxToRem(19px);
+                background-color: #FFFFFF;
+                padding-left: 4px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .absoultePos {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
             }
         }
 
@@ -126,4 +180,12 @@
             visibility: visible;
         }
     }
+
+
+}
+
+.tooltip {
+    background-color: #6C6C6C !important;
+    color: #FFFFFF !important;
+    max-width: 500px !important;
 }

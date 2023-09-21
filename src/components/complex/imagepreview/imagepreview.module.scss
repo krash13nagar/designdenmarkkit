@@ -2,6 +2,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
   .titleText {
     flex: 1;
     padding-left: 2rem;
@@ -9,36 +10,45 @@
     font-weight: 600;
     line-height: 20px;
   }
+
   .titleIcon {
     button {
       color: #ffffff;
     }
   }
+
   background: #4d9aca 0% 0% no-repeat padding-box;
   color: #ffffff;
 }
+
 .titleRootWrapper {
   padding: 0px !important;
 }
+
 .dialogContentWrapper {
   padding: 17px 12px !important;
   padding-left: 25px !important;
 }
+
 .imagePreviewWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
+
   .leftPanel {
     flex-basis: 70%;
     padding: 5px;
   }
+
   .rightPanel {
     flex-basis: 30%;
     position: relative;
     padding-left: 10px;
+
     .rightPanel-content {
       overflow: auto;
+
       .msid {
         margin: 0px 5px 10px 5px;
         letter-spacing: 0;
@@ -47,6 +57,7 @@
         font-weight: 600;
         line-height: 20px;
       }
+
       .image-title,
       .image-caption {
         display: -webkit-box;
@@ -54,15 +65,18 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+
         p {
           margin: 0px;
           padding: 0px;
         }
+
         div {
           margin: 0px;
           padding: 0px;
         }
       }
+
       .image-caption {
         font-size: 12px;
         line-height: 20px;
@@ -70,6 +84,7 @@
         margin: 10px 5px;
         color: #4d4d4d;
       }
+
       .image-title {
         font-size: 14px;
         font-weight: bold;
@@ -78,12 +93,14 @@
         color: #2b2b2b;
         margin: 10px 5px;
       }
+
       .row {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-wrap: wrap;
         margin: 10px 5px;
+
         .info-value {
           font-size: 14px;
           font-weight: bold;
@@ -91,6 +108,7 @@
           color: #4d4d4d;
           letter-spacing: 0px;
         }
+
         .info-label {
           font-size: 14px;
           font-weight: 600;
@@ -105,6 +123,7 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
+
         .block {
           margin: 5px;
         }
@@ -123,20 +142,24 @@
         white-space: nowrap;
         overflow: hidden;
       }
+
       .chip-root {
         margin: 3px;
         height: 18px;
         align-items: center;
         line-height: 8px;
       }
+
       .panel-summary {
         padding: 0px 5px;
         min-height: 44px !important;
         max-height: 44px !important;
+
         .panel-content {
           margin: 0px;
         }
       }
+
       .panel-header {
         font-size: 14px;
         font-weight: bold;
@@ -145,30 +168,36 @@
         color: #262626;
         opacity: 1;
       }
+
       .agency-usage-quota {
         background-color: #ffc700;
         padding: 0px 5px;
       }
+
       .additonal-info-value {
         font-size: 12px;
         font-weight: 600;
         line-height: 17px;
         letter-spacing: 0px;
         color: #4d4d4d;
+
         &.Photographer {
           margin-top: 0px;
         }
       }
+
       .additonal-info-label {
         font-size: 12px;
         line-height: 20px;
         letter-spacing: 0px;
         color: #818181;
+
         &.Photographer {
           margin-top: 0px;
         }
       }
     }
+
     .column-6 {
       flex-basis: 50%;
       font-size: 10px;
@@ -176,10 +205,12 @@
       letter-spacing: 0px;
       margin: 10px 0px;
     }
+
     .footerWrapper {
       display: flex;
       justify-content: flex-end;
       align-items: center;
+
       .more-icon-base {
         border-radius: 5px !important;
         background-color: #0000000a;
@@ -198,6 +229,7 @@
     }
   }
 }
+
 .menuOptions {
   div:first-child {
     min-width: 25px !important;
@@ -209,42 +241,52 @@
     max-height: 470px;
     overflow: hidden;
   }
+
   .rightPanel {
     .rightPanel-content {
       height: 438px;
+
       .image-caption {
         -webkit-line-clamp: 3 !important;
       }
     }
   }
 }
+
 @media screen and (min-height: 650px) {
   .imagePreviewWrapper {
     max-height: 85%;
     overflow: hidden;
   }
 }
+
 @media screen and (min-width: 1300px) {
   .imagePreviewWrapper {
-    min-width: 1020px;
-    max-width: 1190px;
+    min-width: 1150px;
+    max-width: 1150px;
     overflow: hidden;
   }
 }
+
 /* For webkit-based browsers */
 ::-webkit-scrollbar {
-  width: 5px; /* Width of the scrollbar */
+  width: 5px;
+  /* Width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Background color of the track */
+  background-color: #f1f1f1;
+  /* Background color of the track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar thumb */
-  border-radius: 5px; /* Border radius of the thumb */
+  background-color: #888;
+  /* Color of the scrollbar thumb */
+  border-radius: 5px;
+  /* Border radius of the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
+  background-color: #555;
+  /* Color of the scrollbar thumb on hover */
 }

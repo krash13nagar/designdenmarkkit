@@ -1,11 +1,13 @@
 import CancelIcon from '@mui/icons-material/Cancel';
-import { DenSvgIcon } from './svg';
 import React from 'react';
+import { DenSvgIcon, SVGTypes } from '../../components';
 
-export const Cancel = () => {
+export const Cancel = (props: Partial<SVGTypes>) => {
   return (
-    <DenSvgIcon name="Add circle">
+    <DenSvgIcon name="Add circle" {...props}>
       <CancelIcon />
     </DenSvgIcon>
   );
 };
+
+export default Cancel;

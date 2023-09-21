@@ -37,7 +37,7 @@ export const ArticlePreview = React.forwardRef<
       title,
       synopsis,
       richContent,
-      handlePopOutClick,
+      handlePopOutClick = () => {},
       popOutTooltip,
       clockIcon,
       popOutIcon,
@@ -48,6 +48,7 @@ export const ArticlePreview = React.forwardRef<
       agency,
       source,
       classes = {},
+      msid = '',
     },
     ref
   ) => {
@@ -56,25 +57,35 @@ export const ArticlePreview = React.forwardRef<
         ref={ref}
         className={`${classes.root || ''} ${styles.previewWrapper}`}
       >
-        <div
+        <DenBox
+          sx={{
+            justifyContent:
+              agency || source || msid ? 'space-between' : 'unset',
+          }}
           className={`${styles.topInfo} ${topInfoClass ? topInfoClass : ''}`}
         >
-          <span className={agency || source ? styles.agencySource : ''}>
-            {agency && <span>Agency : {agency}</span>}
-            {agency && source && ' | '}
-            {source && <span>Source : {source}</span>}
-          </span>
-          {clockIcon && (date || time) && (
-            <span className={styles.clockIcon}>{clockIcon}</span>
-          )}
-          {time && <span>{time}</span>}
-          {time && date && <span className={styles.pipe}> | </span>}
-          {date && <span>{date}</span>}
-          {date && wordCount && <span className={styles.pipe}> | </span>}
-          {wordCount && (
-            <span className={styles.wordCount}>Word Count : {wordCount}</span>
-          )}
-        </div>
+          <div>
+            <span className={agency || source ? styles.agencySource : ''}>
+              {agency && <span>Agency : {agency}</span>}
+              {agency && source && ' | '}
+              {source && <span>Source : {source}</span>}
+            </span>
+
+            {msid && <span className={styles.msid}>MSID : {msid}</span>}
+          </div>
+          <div>
+            {clockIcon && (date || time) && (
+              <span className={styles.clockIcon}>{clockIcon}</span>
+            )}
+            {time && <span>{time}</span>}
+            {time && date && <span className={styles.pipe}> | </span>}
+            {date && <span>{date}</span>}
+            {date && wordCount && <span className={styles.pipe}> | </span>}
+            {wordCount && (
+              <span className={styles.wordCount}>Word Count : {wordCount}</span>
+            )}
+          </div>
+        </DenBox>
         <DenTypography
           className={`${styles.title} ${titleClass ? titleClass : ''}`}
           variant="h2"
@@ -84,7 +95,7 @@ export const ArticlePreview = React.forwardRef<
             <span
               title={popOutTooltip}
               className={styles.popoutIcon}
-              onClick={(e) => handlePopOutClick?.(e)}
+              onClick={handlePopOutClick}
             >
               {popOutIcon}
             </span>

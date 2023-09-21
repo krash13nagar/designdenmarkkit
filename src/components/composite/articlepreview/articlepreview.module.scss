@@ -15,13 +15,15 @@
             vertical-align: middle;
         }
 
-        margin-right: 5px;
+        margin-right: css.pxToRem(5px);
     }
 
     .topInfo {
         font: normal normal normal css.pxToRem(12px)/css.pxToRem(17px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
-        margin-bottom: 8px;
+        margin-bottom: css.pxToRem(8px);
+        display: flex;
+        flex-wrap: wrap;
 
         .agencySource {
             border-radius: css.pxToRem(2px);
@@ -36,20 +38,28 @@
     }
 
     .title {
-        font: normal normal 700 css.pxToRem(20px)/css.pxToRem(28px) "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
         color: #2B2B2B;
         margin-bottom: css.pxToRem(16px);
+        font-family: "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
+        font-size: css.pxToRem(20px);
+        line-height: css.pxToRem(28px);
+        font-weight: 700;
     }
 
     .synopsis {
-        font: italic normal normal css.pxToRem(14px)/css.pxToRem(24px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
         margin-bottom: css.pxToRem(24px);
+        font-family: "Source Sans 3", "Open Sans", sans-serif;
+        font-size: css.pxToRem(14px);
+        line-height: css.pxToRem(24px);
+        font-style: italic;
     }
 
     .content {
-        font: normal normal normal css.pxToRem(16px)/css.pxToRem(26px) "Source Sans 3", "Open Sans", sans-serif;
         color: #4D4D4D;
+        font-family: "Source Sans 3", "Open Sans", sans-serif;
+        font-size: css.pxToRem(16px);
+        line-height: css.pxToRem(26px);
 
         p {
             margin-bottom: css.pxToRem(10px);
@@ -60,6 +70,10 @@
             margin: css.pxToRem(10px) auto;
             max-width: 50%;
             height: auto;
+
+            @media (max-width:899px) {
+                max-width: 70%;
+            }
         }
     }
 

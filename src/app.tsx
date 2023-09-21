@@ -10,20 +10,17 @@ import DenLink from './components/common/link/link.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import {
-  DenTypography,
-  ImagePreview,
-  Title,
-  TitleForUrl,
-  ImageAuthoring,
-} from './components';
+import { DenTypography, ImagePreview } from './components';
 import { TrendingSearchCard } from './components/composite/trendingsearchcard';
 import { sample } from './components/complex/imagepreview/sample';
 import { Cancel } from './assets';
 import ImageAuthModel from './components/complex/imageauth/imageauthmodel';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
-import { keywordsWrapperConfig, recommendedKeywords } from './components/complex/keywords/keywords.types';
+import {
+  keywordsWrapperConfig,
+  recommendedKeywords,
+} from './components/complex/keywords/keywords.types';
 
 declare const module: {
   hot: {
@@ -124,16 +121,20 @@ const test = {
     { label: 'Original Resolutions', value: '120x120 px' },
   ],
   msid: '123456',
-  keywordConfig:config
+  keywordConfig: config,
 };
 
 const App = (props: AppProps) => {
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
-  const [addKeywordState, setAddKeywords] = useState(config.addKeywordsConfig.addedKeywords);
-  const [recommndKeywordsState, setRecommndKeywordsState] = useState<recommendedKeywords[]>(config.recommendConfig.recommendedKeywords)
-  const [searchKeywordVal, setSearchKeywordVal] = useState("");
+  const [addKeywordState, setAddKeywords] = useState(
+    config.addKeywordsConfig.addedKeywords
+  );
+  const [recommndKeywordsState, setRecommndKeywordsState] = useState<
+    recommendedKeywords[]
+  >(config.recommendConfig.recommendedKeywords);
+  const [searchKeywordVal, setSearchKeywordVal] = useState('');
 
-  const removeCallbackFn = (index: number, val:number) => {
+  const removeCallbackFn = (index: number, val: number) => {
     const tmplist = addKeywordState.slice();
     let toberemoved = tmplist[index];
     let tobeadded: recommendedKeywords = {
@@ -141,12 +142,12 @@ const App = (props: AppProps) => {
       keyEnum: toberemoved.keyEnum,
       source: toberemoved.source,
       relevance: val,
-    }
+    };
     // setLasRemoved(toberemoved)
     tmplist.splice(index, 1);
     setAddKeywords(tmplist);
-    setRecommndKeywordsState([...recommndKeywordsState, tobeadded])
-  }
+    setRecommndKeywordsState([...recommndKeywordsState, tobeadded]);
+  };
 
   const handleAddbtn = () => {
     const list = searchKeywordVal.split(',');
@@ -177,7 +178,7 @@ const App = (props: AppProps) => {
 
   const handleSearchCallbckfnc = (text: string) => {
     setSearchKeywordVal(text);
-  }
+  };
 
   const addCallbackFn = (elm: recommendedKeywords) => {
     const tmplist = addKeywordState.slice();
@@ -195,22 +196,47 @@ const App = (props: AppProps) => {
     recommndList.splice(index, 1);
     setAddKeywords(tmplist);
     setRecommndKeywordsState(recommndList);
-  }
+  };
 
-  const searchKeywordConfig = { ...config.searchKeywordConfig, searchCallbckfnc: handleSearchCallbckfnc }
-  const addBtnConfig = { ...config.addBtnConfig, addBtnCallbckfnc: handleAddbtn }
-  const addKeywordsConfig = { ...config.addKeywordsConfig, addedKeywordsConfig: { ...config.addKeywordsConfig.addedKeywordsConfig, removeCallbackFn: removeCallbackFn }, addedKeywords: addKeywordState }
-  const recommendConfig = { ...config.recommendConfig, recommendedConfig: { ...config.recommendConfig.recommendedConfig, addCallbackFn: addCallbackFn }, recommendedKeywords: recommndKeywordsState }
+  const searchKeywordConfig = {
+    ...config.searchKeywordConfig,
+    searchCallbckfnc: handleSearchCallbckfnc,
+  };
+  const addBtnConfig = {
+    ...config.addBtnConfig,
+    addBtnCallbckfnc: handleAddbtn,
+  };
+  const addKeywordsConfig = {
+    ...config.addKeywordsConfig,
+    addedKeywordsConfig: {
+      ...config.addKeywordsConfig.addedKeywordsConfig,
+      removeCallbackFn: removeCallbackFn,
+    },
+    addedKeywords: addKeywordState,
+  };
+  const recommendConfig = {
+    ...config.recommendConfig,
+    recommendedConfig: {
+      ...config.recommendConfig.recommendedConfig,
+      addCallbackFn: addCallbackFn,
+    },
+    recommendedKeywords: recommndKeywordsState,
+  };
 
-  const kewordConfig:keywordsWrapperConfig = {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig}
-  const testConfig = {...test, keywordConfig:kewordConfig}
+  const kewordConfig: keywordsWrapperConfig = {
+    searchKeywordConfig,
+    addBtnConfig,
+    addKeywordsConfig,
+    recommendConfig,
+  };
+  const testConfig = { ...test, keywordConfig: kewordConfig };
 
   return (
-  <>
-    <ImageAuthModel {...testConfig} />
-    {/* <TestCommon /> */}
-  </>
-  )
+    <>
+      <ImageAuthModel {...testConfig} />
+      {/* <TestCommon /> */}
+    </>
+  );
 };
 if (module?.hot) {
   module.hot.accept(App);
