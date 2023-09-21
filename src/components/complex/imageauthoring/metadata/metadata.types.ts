@@ -1,5 +1,3 @@
-import { SelectProps } from "../../../common/select/select.types";
-
 export interface MetadataSummaryProps {
     existingSummary?: any;
     value: any;
@@ -13,11 +11,11 @@ export interface MetadataSummaryProps {
     onClickDeleteItem?: any;
 }
 export interface MetadataProps {
-    title?:string;
+    title?: string;
     visibleSummary?: boolean;
-    summary:any;
-    metaGroup:object;
-    metaDefinationList:object;
+    summary: any;
+    metaGroup: object;
+    metaDefinationList: object;
     value?: any;
     onChangeWidget?: any;
     onChangeGroup?: any;
