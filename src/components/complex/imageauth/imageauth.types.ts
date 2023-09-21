@@ -12,8 +12,8 @@ import { keywordsWrapperConfig } from '../keywords/keywords.types';
 
 export interface ImageAuthoringProps
   extends ImageCardProps,
-    PrimeCategoryProps,
-    ActivattionStatusProps {
+  PrimeCategoryProps,
+  ActivattionStatusProps {
   metaInformation: LabelValueProps[];
   title: TextFieldProps;
   titleForUrl: TitleForUrlProps;
@@ -21,7 +21,10 @@ export interface ImageAuthoringProps
   publishDate: PublishDateProps;
   tabTitleList: string[];
   msid?: string;
-  keywordConfig:keywordsWrapperConfig
+  keywordConfig: keywordsWrapperConfig;
+  dialogProps: any,
+  metaProps: any,
+  summaryProps: any
 }
 
 export interface AnchorGeneric {
