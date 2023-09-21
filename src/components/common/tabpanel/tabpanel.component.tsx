@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TabPanel, TabPanelProps } from '@mui/lab';
+import { TabPanel } from '@mui/lab';
+import { TabPanelTypes } from './tabpanel.types';
 
 /**
  * Tab Panel Component.
@@ -10,7 +11,7 @@ import { TabPanel, TabPanelProps } from '@mui/lab';
  * for more details see http:localhost:6006
  */
 
-export const DenTabPanel: React.FC<TabPanelProps> = (props) => (
+export const DenTabPanel: React.FC<TabPanelTypes> = (props) => (
   <TabPanel {...props} />
 );
 

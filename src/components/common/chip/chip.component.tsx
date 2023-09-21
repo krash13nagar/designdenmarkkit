@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ChipProps, Chip } from '@mui/material';
+import { Chip } from '@mui/material';
+import { ChipTypes } from './chip.types';
 
 /**
  * DenChip Component.
@@ -14,6 +15,6 @@ import { ChipProps, Chip } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenChip: React.FC<ChipProps> = (props) => <Chip {...props} />;
+export const DenChip: React.FC<ChipTypes> = (props) => <Chip {...props} />;
 
 export default DenChip;

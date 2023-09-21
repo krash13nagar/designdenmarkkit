@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CardMediaProps, CardMedia } from '@mui/material';
+import { CardMedia } from '@mui/material';
+import { CardMediaTypes } from './cardmedia.types';
 
 /**
  * DenCardMedia Component.
@@ -14,7 +15,7 @@ import { CardMediaProps, CardMedia } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardMedia: React.FC<CardMediaProps> = (props) => (
+export const DenCardMedia: React.FC<CardMediaTypes> = (props) => (
   <CardMedia {...props} />
 );
 

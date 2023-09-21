@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CardHeaderProps, CardHeader } from '@mui/material';
+import { CardHeader } from '@mui/material';
+import { CardHeaderTypes } from './cardheader.types';
 
 /**
  * DenCardHeader Component.
@@ -14,7 +15,7 @@ import { CardHeaderProps, CardHeader } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardHeader: React.FC<CardHeaderProps> = (props) => (
+export const DenCardHeader: React.FC<CardHeaderTypes> = (props) => (
   <CardHeader {...props} />
 );
 

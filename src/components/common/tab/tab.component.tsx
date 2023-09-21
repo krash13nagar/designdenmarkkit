@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TabProps, Tab } from '@mui/material';
+import { Tab } from '@mui/material';
+import { TabTypes } from './tab.types';
 
 /**
  * Tab Component.
@@ -9,7 +10,7 @@ import { TabProps, Tab } from '@mui/material';
  * @param {boolean} props.wrapped - Tab labels appear in a single row. They can use a second line if needed.
  * @param {any} props.value - We can provide our own value. Otherwise, we fallback to the child position index.
  */
-export const DenTab: React.FC<TabProps> = React.forwardRef((props, ref) => (
+export const DenTab: React.FC<TabTypes> = React.forwardRef((props, ref) => (
   <Tab ref={ref} {...props} />
 ));
 

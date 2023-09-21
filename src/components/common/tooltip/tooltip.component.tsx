@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TooltipProps, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
+import { TooltipTypes } from './tooltip.types';
 
 /**
  * Tooltip Component.
@@ -7,7 +8,7 @@ import { TooltipProps, Tooltip } from '@mui/material';
  * @param {string} props.title - The text content for tooltip.
  * @param {boolean} props.arrow - display arrow in the tooltip
  */
-export const DenTooltip: React.FC<TooltipProps> = (props) => (
+export const DenTooltip: React.FC<TooltipTypes> = (props) => (
   <Tooltip {...props} />
 );
 

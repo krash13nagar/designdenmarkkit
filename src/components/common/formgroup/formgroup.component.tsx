@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { FormGroupProps, FormGroup } from '@mui/material';
+import { FormGroup } from '@mui/material';
+import { FormGroupTypes } from './formgroup.types';
 
 /**
  * DenformgrFormGroup Component.
@@ -10,7 +11,7 @@ import { FormGroupProps, FormGroup } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormGroup: React.FC<FormGroupProps> = (props) => (
+export const DenFormGroup: React.FC<FormGroupTypes> = (props) => (
   <FormGroup {...props} />
 );
 

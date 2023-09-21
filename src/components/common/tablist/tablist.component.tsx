@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TabList, TabListProps } from '@mui/lab';
+import { TabList } from '@mui/lab';
+import { TabListTypes } from './tablist.types';
 
 /**
  * Tab List Component.
@@ -9,7 +10,7 @@ import { TabList, TabListProps } from '@mui/lab';
  * for more details see http:localhost:6006
  */
 
-export const DenTabList: React.FC<TabListProps> = (props) => (
+export const DenTabList: React.FC<TabListTypes> = (props) => (
   <TabList {...props} />
 );
 

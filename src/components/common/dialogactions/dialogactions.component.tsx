@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DialogActionsProps, DialogActions } from '@mui/material';
+import { DialogActions } from '@mui/material';
+import { DialogActionsTypes } from './dialogactions.types';
 
 /**
  * DenDialogContent Component.
@@ -11,7 +12,7 @@ import { DialogActionsProps, DialogActions } from '@mui/material';
  * for more details see http:localhost:6006
  */
 
-export const DenDialogActions: React.FC<DialogActionsProps> = React.forwardRef(
+export const DenDialogActions: React.FC<DialogActionsTypes> = React.forwardRef(
   (props, ref) => <DialogActions ref={ref} {...props} />
 );
 

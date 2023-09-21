@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { MenuProps, Menu } from '@mui/material';
+import { Menu } from '@mui/material';
+import { MenuTypes } from './menu.types';
 
 /**
  * Menu Item Component.
@@ -11,6 +12,6 @@ import { MenuProps, Menu } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenMenu: React.FC<MenuProps> = (props) => <Menu {...props} />;
+export const DenMenu: React.FC<MenuTypes> = (props) => <Menu {...props} />;
 
 export default DenMenu;

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TabContext, TabContextProps } from '@mui/lab';
+import { TabContext } from '@mui/lab';
+import { TabContextTypes } from './tabcontext.types';
 
 /**
  * Tab Context Component.
@@ -13,7 +14,7 @@ import { TabContext, TabContextProps } from '@mui/lab';
 //     props?: React.ReactNode
 //   };
 
-export const DenTabContext: React.FC<TabContextProps> = (props) => (
+export const DenTabContext: React.FC<TabContextTypes> = (props) => (
   <TabContext {...props} />
 );
 

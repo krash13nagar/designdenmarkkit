@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CardContentProps, CardContent } from '@mui/material';
+import { CardContent } from '@mui/material';
+import { CardContentTypes } from './cardcontent.types';
 
 /**
  * DenCardContent Component.
@@ -11,7 +12,7 @@ import { CardContentProps, CardContent } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardContent: React.FC<CardContentProps> = (props) => (
+export const DenCardContent: React.FC<CardContentTypes> = (props) => (
   <CardContent {...props} />
 );
 

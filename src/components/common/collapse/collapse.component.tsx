@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CollapseProps, Collapse } from '@mui/material';
+import { Collapse } from '@mui/material';
+import { CollapseTypes } from './collapse.types';
 
 /**
  * DenCollapse Component.
@@ -14,7 +15,7 @@ import { CollapseProps, Collapse } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCollapse: React.FC<CollapseProps> = (props) => (
+export const DenCollapse: React.FC<CollapseTypes> = (props) => (
   <Collapse {...props} />
 );
 

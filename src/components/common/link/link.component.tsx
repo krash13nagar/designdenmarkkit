@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { LinkProps, Link } from '@mui/material';
+import { Link } from '@mui/material';
+import { LinkTypes } from './link.types';
 
 /**
  * DenLink Component.
@@ -15,7 +16,7 @@ import { LinkProps, Link } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenLink: React.FC<LinkProps> = (props) => (
+export const DenLink: React.FC<LinkTypes> = (props) => (
     <Link  {...props} />
 );
 

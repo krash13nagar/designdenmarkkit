@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CardActionAreaProps, CardActionArea } from '@mui/material';
+import { CardActionArea } from '@mui/material';
+import { CardActionAreaTypes } from './cardactionarea.types';
 
 /**
  * DenCardActionArea Component.
@@ -10,7 +11,7 @@ import { CardActionAreaProps, CardActionArea } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCardActionArea: React.FC<CardActionAreaProps> = (props) => (
+export const DenCardActionArea: React.FC<CardActionAreaTypes> = (props) => (
   <CardActionArea {...props} />
 );
 

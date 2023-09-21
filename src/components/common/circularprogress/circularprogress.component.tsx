@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CircularProgressProps, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { CircularProgressTypes } from './circularprogress.types';
 
 /**
  * DenCircularProgress Component.
@@ -14,7 +15,7 @@ import { CircularProgressProps, CircularProgress } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCircularProgress: React.FC<CircularProgressProps> = (props) => (
+export const DenCircularProgress: React.FC<CircularProgressTypes> = (props) => (
   <CircularProgress {...props} />
 );
 

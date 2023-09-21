@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Box, BoxProps } from '@mui/material';
+import { Box } from '@mui/material';
+import { BoxTypes } from './box.types';
 
 /**
  * Box Component.
@@ -7,7 +8,7 @@ import { Box, BoxProps } from '@mui/material';
  * for more details see http:localhost:6006
  */
 
-export const DenBox: React.FC<BoxProps> = React.forwardRef((props, ref) => (
+export const DenBox: React.FC<BoxTypes> = React.forwardRef((props, ref) => (
   <Box ref={ref} {...props} />
 ));
 
