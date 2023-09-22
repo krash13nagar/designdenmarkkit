@@ -26,7 +26,7 @@ import {
 export const CommonDialog = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<CommonDialogProps>
->((props) => {
+>((props, ref) => {
   const {
     classes = {},
     open,
@@ -45,6 +45,7 @@ export const CommonDialog = React.forwardRef<
   } = props;
   return (
     <DenDialog
+      ref={ref}
       open={open}
       onClose={handleClose}
       className={`${classes?.root ? classes.root : ''} ${
@@ -89,7 +90,7 @@ export const CommonDialog = React.forwardRef<
         </DenDialogTitle>
       )}
       <DenDialogContent
-        classes={{ root: styles.contentRoot }}
+        classes={{ root: classes?.contentRoot || '' }}
         {...dialogContentProps}
       >
         {content || children}
