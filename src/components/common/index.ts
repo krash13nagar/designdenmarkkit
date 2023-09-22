@@ -4,6 +4,9 @@
  */
 // export { default as Input } from './input/input.component';
 // export { default as Select } from './select/select.component';
+
+import DenFormControlLabel from './formcontrollabel/formcontrolllabel.component';
+
 // export { default as User } from './user/user.component';
 export * from './user/user.component';
 export * from './button/button.component';
@@ -50,7 +53,10 @@ export * from './tabscrollbutton/tabscrollbutton.component';
 export * from './fab/fab.component';
 export * from './textfield';
 export * from './defaulttextfield';
-export * from './box/box.component'
-export * from "./dotloader"
-export * from "./datecalendar/datecalendar.component"
-export * from "./svgicon"
+export * from './box/box.component';
+export * from './dotloader';
+export * from './datecalendar/datecalendar.component';
+export * from './svgicon';
+export * from './formcontrollabel/formcontrolllabel.component';
+export * from './radio/radio.component';
+export * from './radiogroup/radiogroup.component';

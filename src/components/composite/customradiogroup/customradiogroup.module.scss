@@ -1,0 +1,29 @@
+@use '../../../styles/' as css;
+.radiogroupWrapper {
+  height: 50px;
+  .radioGroupLabel {
+    height: 17px;
+    text-align: left;
+    font: normal normal medium 13px/17px 'Source Sans 3';
+    letter-spacing: 0.13px;
+    color: #818181;
+    opacity: 1;
+  }
+  .radioGroup {
+    height: 20px;
+    .radioGroupValue {
+      text-align: left;
+      font: normal normal medium 14px/13px 'Source Sans 3';
+      letter-spacing: 0px;
+      color: #5f5f5f;
+      opacity: 1;
+      .radio {
+        > svg {
+          background: #ffffff 0% 0% no-repeat padding-box;
+          border: 2px solid #c3daff;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
