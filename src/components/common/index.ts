@@ -60,3 +60,4 @@ export * from './svgicon';
 export * from './formcontrollabel/formcontrolllabel.component';
 export * from './radio/radio.component';
 export * from './radiogroup/radiogroup.component';
+export * from './datetimepicker/datetimepicker.component';
