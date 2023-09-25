@@ -9,3 +9,4 @@ export * from './replayicon';
 export * from './todayicon';
 export * from './daterangeicon';
 export * from './helpoutlinesharpicon';
+export * from './infoicon';
