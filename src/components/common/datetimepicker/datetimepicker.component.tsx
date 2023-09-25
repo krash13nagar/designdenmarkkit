@@ -3,6 +3,7 @@ import {
   DateTimePicker,
   DateTimePickerProps,
 } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 /**
  * DateCalendar Component.
@@ -16,3 +17,4 @@ export const DenDateTimePicker = React.forwardRef<
 >((props, ref) => <DateTimePicker ref={ref} {...props} />);
 
 export default DenDateTimePicker;
+export const DenAdapterDateFns = AdapterDateFns;
