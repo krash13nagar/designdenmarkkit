@@ -1,0 +1,13 @@
+.cds-status-dot {
+    border-radius: 50%;
+    display: inline-block;
+
+    &.active-status-dot {
+        background-color: #37BE8A;
+    }
+
+    &.inactive-status-dot {
+        background-color: #DD4545;
+    }
+
+}

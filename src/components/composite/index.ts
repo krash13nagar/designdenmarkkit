@@ -25,3 +25,4 @@ export * from './publishdate';
 export * from './activationstatus';
 export * from './commondialog';
 export * from './customradiogroup';
+export * from './basictable'

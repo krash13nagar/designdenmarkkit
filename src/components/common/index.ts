@@ -5,7 +5,6 @@
 // export { default as Input } from './input/input.component';
 // export { default as Select } from './select/select.component';
 
-import DenFormControlLabel from './formcontrollabel/formcontrolllabel.component';
 
 // export { default as User } from './user/user.component';
 export * from './user/user.component';
@@ -60,3 +59,13 @@ export * from './svgicon';
 export * from './formcontrollabel/formcontrolllabel.component';
 export * from './radio/radio.component';
 export * from './radiogroup/radiogroup.component';
+export * from './table/table.component'
+export * from './tablebody/tablebody.component'
+export * from './tablecell/tablecell.component'
+export * from './tablehead/tablehead.component'
+export * from './tablecontainer/tablecontainer.component'
+export * from './tablerow/tablerow.component'
+export * from './paper/paper.component'
+export * from './statusdot/statusdot.component'
+export * from './cardskeleton/cardskeleton.component'
+
