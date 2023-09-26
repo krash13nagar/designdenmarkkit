@@ -22,7 +22,10 @@ const ActivationStatus = (props: ActivattionStatusProps) => {
 
   return (
     <DenFormControl className="publish_status_dropdown">
-      <DenInputLabel id="demo-simple-select-label">
+      <DenInputLabel
+        id="demo-simple-select-label"
+        className="activation-status-label"
+      >
         {activationStatusLabel}
       </DenInputLabel>
       <DenSelect
@@ -30,12 +33,15 @@ const ActivationStatus = (props: ActivattionStatusProps) => {
         onChange={activationChangeHandle}
         disabled={disableActivationStatus}
         className="publish_select_menu"
+        plain
       >
         {activationStatusOptions.map((item, index) => (
           <DenMenuItem
             key={index}
             value={item.value}
-            className={'status-' + item.title.toLowerCase()}
+            className={
+              'activation-status-menu-item status-' + item.title.toLowerCase()
+            }
           >
             {/* <div
               className={'statusIcon   ' + 'status-' + item.title.toLowerCase()}
