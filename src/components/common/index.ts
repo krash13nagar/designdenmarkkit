@@ -68,4 +68,5 @@ export * from './tablerow/tablerow.component'
 export * from './paper/paper.component'
 export * from './statusdot/statusdot.component'
 export * from './cardskeleton/cardskeleton.component'
-
+export * from './datetimepicker/datetimepicker.component';
+export * from './localizationprovider/localizationprovider.component';

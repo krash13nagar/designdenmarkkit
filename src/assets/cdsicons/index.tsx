@@ -10,3 +10,4 @@ export * from './todayicon';
 export * from './daterangeicon';
 export * from './helpoutlinesharpicon';
 export * from './refreshicon';
+export * from './infoicon';

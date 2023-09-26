@@ -1,5 +1,6 @@
 @use '../../../styles/' as css;
 .radiogroupWrapper {
+  display: inline-block;
   height: 50px;
   .radioGroupLabel {
     height: 17px;
