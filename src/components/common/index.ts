@@ -62,3 +62,4 @@ export * from './radio/radio.component';
 export * from './radiogroup/radiogroup.component';
 export * from './datetimepicker/datetimepicker.component';
 export * from './localizationprovider/localizationprovider.component';
+export * from './link/link.component';
