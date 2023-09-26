@@ -11,3 +11,4 @@ export * from './daterangeicon';
 export * from './helpoutlinesharpicon';
 export * from './refreshicon';
 export * from './infoicon';
+export * from './expandmoreicon';
