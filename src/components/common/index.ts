@@ -70,3 +70,4 @@ export * from './statusdot/statusdot.component'
 export * from './cardskeleton/cardskeleton.component'
 export * from './datetimepicker/datetimepicker.component';
 export * from './localizationprovider/localizationprovider.component';
+export * from './link/link.component';
