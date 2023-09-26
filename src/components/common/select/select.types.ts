@@ -1,6 +1,8 @@
-import { SelectProps as Props } from "@mui/material"
+import { SelectProps } from "@mui/material"
 // export interface SelectProps extends Props {
 
 // }
 
-export interface SelectTypes extends Props { }
+export type SelectTypes = SelectProps & {
+    plain?: boolean
+}
