@@ -23,56 +23,66 @@ export const Basic: Story = {
   args: {
     headings: ['Status', 'Message', 'Expires at', 'Name'],
     rows: [
-      [
-        <StatusDot />,
-        <Text
-          text="Markets are all time High as Sensex jumps over 3000 points to hit the
-    50,000 mark for all time. Nifty above 14,700 market at all time high as
-    Sensex."
-        />,
-        '14:27',
-        'MB',
-      ],
-      [
-        <StatusDot active />,
-        <Text
-          text="Markets are all time High as Sensex jumps over 3000 points to hit the
-    50,000 mark for all time. Nifty above 14,700 market at all time high as
-    Sensex."
-        />,
-        '14:27',
-        'MB',
-      ],
-      [
-        <StatusDot />,
-        <Text
-          text="Markets are all time High as Sensex jumps over 3000 points to hit the
-    50,000 mark for all time. Nifty above 14,700 market at all time high as
-    Sensex."
-        />,
-        '14:27',
-        'MB',
-      ],
-      [
-        <StatusDot />,
-        <Text
-          text="Markets are all time High as Sensex jumps over 3000 points to hit the
-    50,000 mark for all time. Nifty above 14,700 market at all time high as
-    Sensex."
-        />,
-        '14:27',
-        'MB',
-      ],
-      [
-        <StatusDot active />,
-        <Text
-          text="Markets are all time High as Sensex jumps over 3000 points to hit the
-    50,000 mark for all time. Nifty above 14,700 market at all time high as
-    Sensex."
-        />,
-        '14:27',
-        'MB',
-      ],
+      {
+        rowData: [
+          <StatusDot />,
+          <Text
+            text="Markets are all time High as Sensex jumps over 3000 points to hit the
+  50,000 mark for all time. Nifty above 14,700 market at all time high as
+  Sensex."
+          />,
+          '14:27',
+          'MB',
+        ],
+      },
+      {
+        rowData: [
+          <StatusDot />,
+          <Text
+            text="Markets are all time High as Sensex jumps over 3000 points to hit the
+  50,000 mark for all time. Nifty above 14,700 market at all time high as
+  Sensex."
+          />,
+          '14:27',
+          'MB',
+        ],
+      },
+      {
+        rowData: [
+          <StatusDot />,
+          <Text
+            text="Markets are all time High as Sensex jumps over 3000 points to hit the
+  50,000 mark for all time. Nifty above 14,700 market at all time high as
+  Sensex."
+          />,
+          '14:27',
+          'MB',
+        ],
+      },
+      {
+        rowData: [
+          <StatusDot />,
+          <Text
+            text="Markets are all time High as Sensex jumps over 3000 points to hit the
+  50,000 mark for all time. Nifty above 14,700 market at all time high as
+  Sensex."
+          />,
+          '14:27',
+          'MB',
+        ],
+      },
+      {
+        rowData: [
+          <StatusDot />,
+          <Text
+            text="Markets are all time High as Sensex jumps over 3000 points to hit the
+  50,000 mark for all time. Nifty above 14,700 market at all time high as
+  Sensex."
+          />,
+          '14:27',
+          'MB',
+        ],
+      },
     ],
     showEditColumn: true,
   },

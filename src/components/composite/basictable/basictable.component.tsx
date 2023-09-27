@@ -94,13 +94,17 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
       showEditColumn = false,
       classes = {},
       stickyHeader = false,
+      handleEditClick = () => {},
     },
     ref
   ) => {
     const [activeIndex, setActiveIndex] = useState(-1);
 
-    const handleClick = (ind: number) => {
-      setActiveIndex(ind);
+    const handleClick = (index: number) => {
+      setActiveIndex(index);
+      if (handleEditClick) {
+        handleEditClick(index);
+      }
     };
     return (
       <DenTableContainer
@@ -131,13 +135,13 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
           )}
 
           <DenTableBody classes={{ root: clsx(classes.tableBodyRoot) }}>
-            {rows.map((row, i) => (
+            {rows.map(({ rowData, id }, i) => (
               <StyledTableRow
                 classes={{ root: clsx(classes.rowRoot) }}
-                key={i}
+                key={id || i}
                 className={i == activeIndex ? 'active' : ''}
               >
-                {row.map((cell) => (
+                {rowData.map((cell) => (
                   <StyledTableCell>{cell}</StyledTableCell>
                 ))}
                 {showEditColumn && (
