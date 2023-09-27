@@ -13,4 +13,5 @@ export interface ActivattionStatusProps {
   ) => void;
   activationStatus: string;
   activationStatusLabel?: string;
+  menuItemClass?: string
 }

@@ -7,13 +7,15 @@ import {
 } from '../../common';
 import { ActivattionStatusProps } from './activationstatus.types';
 import style from './activationstatus.module.scss';
-const ActivationStatus = (props: ActivattionStatusProps) => {
+
+export const ActivationStatus = (props: ActivattionStatusProps) => {
   const {
     disableActivationStatus,
     activationStatusOptions,
     activationChangeHandle,
     activationStatus,
     activationStatusLabel = 'Status',
+    menuItemClass = '',
   } = props;
   /**
    *
@@ -52,7 +54,8 @@ const ActivationStatus = (props: ActivattionStatusProps) => {
               className={
                 'publish_select_menu_text  ' +
                 'status-' +
-                item.title.toLowerCase()
+                item.title.toLowerCase() +
+                `${menuItemClass ? ' ' + menuItemClass : ''}`
               }
             >
               {item.title}
