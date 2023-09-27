@@ -71,3 +71,4 @@ export * from './cardskeleton/cardskeleton.component'
 export * from './datetimepicker/datetimepicker.component';
 export * from './localizationprovider/localizationprovider.component';
 export * from './link/link.component';
+export * from './loadingbutton/loadingbutton.component'
