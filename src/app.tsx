@@ -233,8 +233,8 @@ const App = (props: AppProps) => {
 
   return (
     <>
-      <ImageAuthModel {...testConfig} />
-      {/* <TestCommon /> */}
+      {/* <ImageAuthModel {...testConfig} /> */}
+      <TestCommon />
     </>
   );
 };
