@@ -34,6 +34,7 @@ export const Basic: Story = {
           '14:27',
           'MB',
         ],
+        id: 0,
       },
       {
         rowData: [
@@ -46,6 +47,7 @@ export const Basic: Story = {
           '14:27',
           'MB',
         ],
+        id: 1,
       },
       {
         rowData: [
@@ -58,6 +60,7 @@ export const Basic: Story = {
           '14:27',
           'MB',
         ],
+        id: 2,
       },
       {
         rowData: [
@@ -70,6 +73,7 @@ export const Basic: Story = {
           '14:27',
           'MB',
         ],
+        id: 3,
       },
       {
         rowData: [
@@ -82,6 +86,7 @@ export const Basic: Story = {
           '14:27',
           'MB',
         ],
+        id: 4,
       },
     ],
     showEditColumn: true,

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export interface BasicTableProps {
     headings?: ReactNode[],
-    rows?: { rowData: ReactNode[], id?: string | number }[],
+    rows?: { rowData: ReactNode[], id: string | number }[],
     showEditColumn?: boolean,
     classes?: {
         containerRoot?: string,
@@ -15,5 +15,6 @@ export interface BasicTableProps {
         bodyCellRoot?: string,
     },
     stickyHeader?: boolean,
-    handleEditClick?: Function
+    handleEditClick?: Function,
+    activeRowId?: string | number
 }

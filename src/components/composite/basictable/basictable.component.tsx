@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BasicTableProps } from './basictable.types';
 import styles from './basictable.module.scss';
 import {
@@ -95,15 +95,13 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
       classes = {},
       stickyHeader = false,
       handleEditClick = () => {},
+      activeRowId = '',
     },
     ref
   ) => {
-    const [activeIndex, setActiveIndex] = useState(-1);
-
-    const handleClick = (index: number) => {
-      setActiveIndex(index);
+    const handleClick = (index: number, id: string | number) => {
       if (handleEditClick) {
-        handleEditClick(index);
+        handleEditClick(index, id);
       }
     };
     return (
@@ -139,7 +137,7 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
               <StyledTableRow
                 classes={{ root: clsx(classes.rowRoot) }}
                 key={id || i}
-                className={i == activeIndex ? 'active' : ''}
+                className={id == activeRowId ? 'active' : ''}
               >
                 {rowData.map((cell) => (
                   <StyledTableCell>{cell}</StyledTableCell>
@@ -150,7 +148,7 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
                   >
                     <EditBtn
                       onClick={() => {
-                        handleClick(i);
+                        handleClick(i, id);
                       }}
                     />
                   </StyledTableCell>
