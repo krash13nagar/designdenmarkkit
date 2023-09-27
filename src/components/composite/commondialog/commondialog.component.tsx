@@ -75,9 +75,15 @@ export const CommonDialog = React.forwardRef<
             <DenGrid item xs={11}>
               <DenTypography variant="h6">{props.title}</DenTypography>
             </DenGrid>
-            <DenGrid container item xs={1} alignContent={'flex-end'}>
+            <DenGrid
+              container
+              item
+              xs={1}
+              justifyContent="flex-end"
+              alignItems="center"
+            >
               <DenIconButton
-                style={{ color: '#fff' }}
+                style={{ color: '#fff', marginRight: '10px' }}
                 aria-label="close"
                 onClick={(e: React.MouseEvent) => {
                   handleClose(e);
