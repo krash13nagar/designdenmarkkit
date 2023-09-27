@@ -83,7 +83,7 @@ export const CommonDialog = React.forwardRef<
               alignItems="center"
             >
               <DenIconButton
-                style={{ color: '#fff', marginRight: '10px' }}
+                classes={{ root: styles.closeIcon }}
                 aria-label="close"
                 onClick={(e: React.MouseEvent) => {
                   handleClose(e);
