@@ -71,22 +71,19 @@ export const CommonDialog = React.forwardRef<
           classes={{ root: styles.titleRootContained }}
           {...dialogTitleProps}
         >
-          <DenGrid container>
-            <DenGrid item xs={11}>
-              <DenTypography variant="h6">{props.title}</DenTypography>
-            </DenGrid>
-            <DenGrid container item xs={1} alignContent={'flex-end'}>
-              <DenIconButton
-                style={{ color: '#fff' }}
-                aria-label="close"
-                onClick={(e: React.MouseEvent) => {
-                  handleClose(e);
-                }}
-              >
-                <Close />
-              </DenIconButton>
-            </DenGrid>
-          </DenGrid>
+          <DenTypography className={styles.titletext} variant="h6">
+            {props.title}
+          </DenTypography>
+          <DenIconButton
+            className={styles.titleicon}
+            style={{ color: '#fff' }}
+            aria-label="close"
+            onClick={(e: React.MouseEvent) => {
+              handleClose(e);
+            }}
+          >
+            <Close />
+          </DenIconButton>
         </DenDialogTitle>
       )}
       <DenDialogContent

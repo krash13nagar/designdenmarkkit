@@ -25,14 +25,14 @@
     }
 
     .titleRootContained {
-        padding: 5px 0px 0px 15px;
-        //font-size: 0.875rem;
+        padding: 0px 8px 0px 15px;
         font: normal normal 600 16px/22px 'source sans 3' !important;
-        ;
-        line-height: 0.5rem;
-        //font-weight: 600;
         background-color: #102563;
         color: #fff;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
     }
 
     // .contentRoot {
