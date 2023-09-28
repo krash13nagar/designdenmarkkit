@@ -1,8 +1,8 @@
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 import React from 'react';
 import { DenSvgIcon, SVGTypes } from '../../components';
 
-export const Info = (props: Partial<SVGTypes>) => {
+export const InfoIconOutlined = (props: Partial<SVGTypes>) => {
   return (
     <DenSvgIcon name="Info icon" {...props}>
       <InfoIcon />
@@ -10,4 +10,4 @@ export const Info = (props: Partial<SVGTypes>) => {
   );
 };
 
-export default Info;
+export default InfoIconOutlined;
