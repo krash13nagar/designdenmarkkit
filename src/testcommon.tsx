@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import { Input, User } from './components/common';
 import DenButton from './components/common/button/button.component';
 import DenChip from './components/common/chip/chip.component';
-import './styles/storybookBasesStyles.scss';
 import MetadataList from './components/complex/imageauthoring/metadata/metadataList.config';
 import MetadataGroupList from './components/complex/imageauthoring/metadata/metadataGroupList.config';
 import Metadata from './components/complex/imageauthoring/metadata/metadata';
