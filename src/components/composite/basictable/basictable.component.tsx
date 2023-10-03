@@ -94,7 +94,7 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
       showEditColumn = false,
       classes = {},
       stickyHeader = false,
-      handleEditClick = () => {},
+      handleEditClick,
       activeRowId = '',
     },
     ref
@@ -138,6 +138,10 @@ export const BasicTable = React.forwardRef<HTMLDivElement, BasicTableProps>(
                 classes={{ root: clsx(classes.rowRoot) }}
                 key={id || i}
                 className={id == activeRowId ? 'active' : ''}
+                onClick={() => {
+                  handleClick(i, id);
+                }}
+                sx={{ cursor: handleEditClick ? 'pointer' : 'default' }}
               >
                 {rowData.map((cell) => (
                   <StyledTableCell>{cell}</StyledTableCell>

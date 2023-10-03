@@ -21,6 +21,9 @@ type Story = StoryObj<typeof BasicTable>;
 
 export const Basic: Story = {
   args: {
+    handleEditClick: (ind: number, id: string | number) => {
+      console.log(ind, id);
+    },
     headings: ['Status', 'Message', 'Expires at', 'Name'],
     rows: [
       {

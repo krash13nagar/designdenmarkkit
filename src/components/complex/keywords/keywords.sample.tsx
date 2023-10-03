@@ -1,35 +1,35 @@
 import React from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import {RemoveCircleOutlineOutlined} from '@mui/icons-material';
-import { CachedOutlined } from '@mui/icons-material';
+import RemoveCircleOutlineOutlined from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import CachedOutlined from '@mui/icons-material/CachedOutlined';
 import { metaInfo, recommendedKeywords } from './keywords.types';
 
 export const config = {
-  searchKeywordConfig:{
+  searchKeywordConfig: {
     autocomplete: false,
-    label:"Type Keyword",
-    placeholder:"Add multiple Keywords separated by comma(,)",
-    searchCallbckfnc: function(){
-        console.log("search keyword call back fnc");
-    }
+    label: 'Type Keyword',
+    placeholder: 'Add multiple Keywords separated by comma(,)',
+    searchCallbckfnc: function () {
+      console.log('search keyword call back fnc');
+    },
   },
   addBtnConfig: {
     btnConfig: {
-        color: "red"
+      color: 'red',
     },
-    addBtnCallbckfnc: function(){
-        console.log("clicked add btn config function");
-    } 
+    addBtnCallbckfnc: function () {
+      console.log('clicked add btn config function');
+    },
   },
   addKeywordsConfig: {
-    "addedKeywordsConfig": {
+    addedKeywordsConfig: {
       removeCallbackFn: function () {
         console.log('click remove btn');
       },
       title: 'Added Keywords',
-      removeKeywordIcon: <RemoveCircleOutlineOutlined/>
+      removeKeywordIcon: <RemoveCircleOutlineOutlined />,
     },
-    "addedKeywords": [
+    addedKeywords: [
       {
         keywordName: 'Aisha Verma',
         keyEnum: 'Denny',
@@ -76,7 +76,7 @@ export const config = {
     ],
   },
   recommendConfig: {
-    "recommendedConfig": {
+    recommendedConfig: {
       title: 'Recommended Keywords',
       nodatafound: 'No recommendation found',
       errorMsg: 'API Error',
@@ -85,11 +85,11 @@ export const config = {
       refreshCallbackFn: function () {
         console.log('clicked refresh btn');
       },
-      addCallbackFn: function(elm: recommendedKeywords){
-        console.log("clicked refresh btn")
-      }
+      addCallbackFn: function (elm: recommendedKeywords) {
+        console.log('clicked refresh btn');
+      },
     },
-    "recommendedKeywords": [
+    recommendedKeywords: [
       {
         keywordName: 'Aisha Verma',
         keyEnum: 'Denny',
