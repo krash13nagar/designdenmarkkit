@@ -4,9 +4,12 @@
  */
 
 import React, { useState } from 'react';
-import TestCommon from './testcommon';
+// import TestCommon from './testcommon';
+import ReusableViewTable from './testTable';
+import DataGridTable from './components/composite/datagridtable/datagridtable.component';
 import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
+import DenDataGrid from './components/common/datagrid/datagrid.component';
 import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -17,6 +20,7 @@ import { Cancel } from './assets';
 import ImageAuthModel from './components/complex/imageauth/imageauthmodel';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
+import './components/global.scss'
 import {
   keywordsWrapperConfig,
   recommendedKeywords,
@@ -46,7 +50,7 @@ const breadcrumbs = [
 ];
 const test = {
   primeCategoryLabel: '',
-  handlePrimeChange: () => {},
+  handlePrimeChange: () => { },
   isPublished: false,
   primeType: 0,
   isPrimeEnable: true,
@@ -61,13 +65,13 @@ const test = {
    */
   publishDate: {
     PublishModalTitle: 'Publish and expiry Date',
-    onAutoCorrect: () => {},
-    onReset: () => {},
-    onClose: () => {},
-    onDone: () => {},
+    onAutoCorrect: () => { },
+    onReset: () => { },
+    onClose: () => { },
+    onDone: () => { },
     preventCloseOnDone: false,
     overrideClose: '',
-    callback: () => {},
+    callback: () => { },
     publishDateLabel: 'Publish Date',
     publishDate: 1693819795753,
     expiresIn: 1693824566621,
@@ -79,17 +83,17 @@ const test = {
     { title: 'Unavaialble', value: '2', icon: <Cancel /> },
     { title: 'block', value: '3', icon: <Cancel /> },
   ],
-  activationChangeHandle: () => {},
+  activationChangeHandle: () => { },
   activationStatus: '0',
   imageCaption: {
     caption: 'caption of image',
     captionError: '',
     captionChildError: '',
     captionChildWarning: '',
-    onChange: (str: string) => {},
+    onChange: (str: string) => { },
     captionTitle: 'Title of caption',
     captionRequired: false,
-    onClick: (event: any) => {},
+    onClick: (event: any) => { },
     countRequired: false,
   },
   titleForUrl: {
@@ -230,11 +234,28 @@ const App = (props: AppProps) => {
     recommendConfig,
   };
   const testConfig = { ...test, keywordConfig: kewordConfig };
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'Name', width: 150 },
+    { field: 'age', headerName: 'Age', width: 90 },
+    { field: 'city', headerName: 'City', width: 150 },
+  ];
+
+  const rows = [
+    { id: 1, name: 'Alice', age: 25, city: 'New York' },
+    { id: 2, name: 'Bob', age: 30, city: 'Los Angeles' },
+    // Add more rows here
+  ];
+
 
   return (
     <>
       {/* <ImageAuthModel {...testConfig} /> */}
-      <TestCommon />
+      {/* <TestCommon /> */}
+      {/* <ReusableViewTable columns={columns} rows={rows} sortingOrder={['asc', 'desc']} /> */}
+      {/* <DataGridTable /> */}
+      <DenDataGrid columns={columns} rows={rows}
+        classes={{ row: "gridRow" }} />
     </>
   );
 };
@@ -244,7 +265,7 @@ if (module?.hot) {
 
 App.defaultProps = {
   reqObj: {},
-  callbackNgFn: () => {},
+  callbackNgFn: () => { },
 };
 
 export default App;
