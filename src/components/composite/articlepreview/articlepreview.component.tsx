@@ -48,7 +48,9 @@ export const ArticlePreview = React.forwardRef<
       agency,
       source,
       classes = {},
-      msid = '',
+      id = '',
+      idLabel = 'MSID',
+      showPopOutIcon = true,
     },
     ref
   ) => {
@@ -59,8 +61,7 @@ export const ArticlePreview = React.forwardRef<
       >
         <DenBox
           sx={{
-            justifyContent:
-              agency || source || msid ? 'space-between' : 'unset',
+            justifyContent: agency || source || id ? 'space-between' : 'unset',
           }}
           className={`${styles.topInfo} ${topInfoClass ? topInfoClass : ''}`}
         >
@@ -71,7 +72,11 @@ export const ArticlePreview = React.forwardRef<
               {source && <span>Source : {source}</span>}
             </span>
 
-            {msid && <span className={styles.msid}>MSID : {msid}</span>}
+            {id && (
+              <span className={styles.msid}>
+                {idLabel} : {id}
+              </span>
+            )}
           </div>
           <div>
             {clockIcon && (date || time) && (
@@ -80,8 +85,10 @@ export const ArticlePreview = React.forwardRef<
             {time && <span>{time}</span>}
             {time && date && <span className={styles.pipe}> | </span>}
             {date && <span>{date}</span>}
-            {date && wordCount && <span className={styles.pipe}> | </span>}
-            {wordCount && (
+            {date && +wordCount >= 0 && (
+              <span className={styles.pipe}> | </span>
+            )}
+            {+wordCount >= 0 && (
               <span className={styles.wordCount}>Word Count : {wordCount}</span>
             )}
           </div>
@@ -91,7 +98,7 @@ export const ArticlePreview = React.forwardRef<
           variant="h2"
         >
           {title}
-          {popOutIcon && (
+          {showPopOutIcon && popOutIcon && (
             <span
               title={popOutTooltip}
               className={styles.popoutIcon}

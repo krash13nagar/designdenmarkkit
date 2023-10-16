@@ -55,10 +55,12 @@ export const ArticleSelectionCard = React.forwardRef<
       isAdded,
       wordCountLabel = 'WC',
       publishedByLabel = 'Published by',
-      msid = '',
+      id = '',
+      idLabel = 'MSID',
       showReadMoreInSynopsis = false,
       parentWidth = '',
       tooltipDelay = 400,
+      showPopOutIcon = true,
     },
     ref
   ) => {
@@ -148,7 +150,7 @@ export const ArticleSelectionCard = React.forwardRef<
             publishedBy?.length > 0 ||
             date ||
             time ||
-            msid ||
+            id ||
             wordCount) && (
             <div className={styles.topRightSection}>
               <div className={styles.agencyDetails}>
@@ -157,7 +159,11 @@ export const ArticleSelectionCard = React.forwardRef<
                   {agency && source && ' | '}
                   {source && <span>Source : {source}</span>}
                 </div>
-                {msid && <span className={styles.msid}>MSID : {msid}</span>}
+                {id && (
+                  <span className={styles.msid}>
+                    {idLabel} : {id}
+                  </span>
+                )}
                 {publishedBy?.length && (
                   <div className={styles.publishedBy}>
                     <span>{publishedByLabel}</span>
@@ -180,8 +186,10 @@ export const ArticleSelectionCard = React.forwardRef<
                 {time && <span>{time}</span>}
                 {time && date && <span className={styles.pipe}> | </span>}
                 {date && <span>{date}</span>}
-                {date && wordCount && <span className={styles.pipe}> | </span>}
-                {wordCount && (
+                {date && +wordCount >= 0 && (
+                  <span className={styles.pipe}> | </span>
+                )}
+                {+wordCount >= 0 && (
                   <span>
                     {wordCountLabel} {wordCount}
                   </span>
@@ -219,7 +227,7 @@ export const ArticleSelectionCard = React.forwardRef<
                 ref={titleRef}
               >
                 {title}
-                {!titleOverflow && popOutIcon && (
+                {showPopOutIcon && !titleOverflow && popOutIcon && (
                   <span
                     title={popOutTooltip}
                     className={`${styles.popoutIcon} ${
@@ -232,7 +240,7 @@ export const ArticleSelectionCard = React.forwardRef<
                 )}
               </DenTypography>
             </DenTooltip>
-            {titleOverflow && popOutIcon && (
+            {showPopOutIcon && titleOverflow && popOutIcon && (
               <span
                 title={popOutTooltip}
                 className={`${styles.popoutIcon} ${

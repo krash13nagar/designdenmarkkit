@@ -36,6 +36,7 @@ export const AddedStoriesCard = React.forwardRef<
       popOutTooltip,
       removeTooltip,
       sourceUrl = '',
+      showPopOutIcon = true,
     },
     ref
   ) => {
@@ -73,7 +74,7 @@ export const AddedStoriesCard = React.forwardRef<
             showCheckbox ? styles.hide : ''
           }`}
         >
-          {popOutIcon && (
+          {showPopOutIcon && popOutIcon && (
             <span
               title={popOutTooltip}
               key="popouticon"

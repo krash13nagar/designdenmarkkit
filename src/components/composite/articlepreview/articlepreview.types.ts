@@ -22,5 +22,6 @@ export interface ArticlePreviewProps {
     },
     agency?: string,
     source?: string,
-    msid?: string
+    id?: string,
+    idLabel?: string,
 }

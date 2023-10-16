@@ -18,7 +18,6 @@ export const Basic: Story = {
     title:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
     date: 'July 7, 2023',
-    wordCount: '234',
     agency: 'ANI',
     source: 'PTI',
     ctaIcon: <OpenInNewIcon />,
@@ -28,6 +27,6 @@ export const Basic: Story = {
     handleCardClick: () => console.log('card clicked!'),
     handleCTAClick: () => console.log('cta clicked'),
     ctaTooltipText: 'Open in new tab',
-    msid: '123456',
+    id: '123456',
   },
 };

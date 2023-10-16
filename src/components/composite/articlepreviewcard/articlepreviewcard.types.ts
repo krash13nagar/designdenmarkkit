@@ -17,6 +17,8 @@ export interface ArticlePreviewCardProps {
     },
     leftMargin?: string,
     rightMargin?: string
-    msid?: string,
-    wrapperClass?: string
+    id?: string,
+    idLabel?: string,
+    wrapperClass?: string,
+    showCta?: boolean
 }

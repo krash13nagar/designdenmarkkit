@@ -208,6 +208,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
             <AddedStoriesCard
               text={story.title}
               sourceUrl={story.sourceUrl}
+              showPopOutIcon={!!story.sourceUrl}
               handlePopOut={handlePopOut}
               handleRemove={(e) => handleRemoveSingle?.(e, index)}
               popOutIcon={popOutIcon}

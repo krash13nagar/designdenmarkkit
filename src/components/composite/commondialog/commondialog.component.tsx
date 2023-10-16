@@ -12,6 +12,7 @@ import {
   DenIconButton,
   DenTypography,
 } from '../../common';
+import clsx from 'clsx';
 
 /**
  * CommonDialog Component.
@@ -33,7 +34,7 @@ export const CommonDialog = React.forwardRef<
     handleClose = () => {},
     title = '',
     content = '',
-    titleVariant = '',
+    titleVariant = 'plain',
     dialogProps = {},
     renderAtTop = false,
     dialogContentProps = {},
@@ -94,7 +95,7 @@ export const CommonDialog = React.forwardRef<
       </DenDialogContent>
       {actionOptionsList?.length > 0 && (
         <DenDialogActions
-          classes={{ root: styles.footerRoot }}
+          classes={{ root: clsx(styles.footerRoot, classes.footerRoot) }}
           {...dialogActionProps}
         >
           {actionOptionsList.map((action) => (

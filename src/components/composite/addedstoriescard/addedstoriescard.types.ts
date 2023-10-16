@@ -12,5 +12,6 @@ export interface AddedStoriesCardProps {
     handleCheckboxChange?: React.ChangeEventHandler<HTMLInputElement>,
     popOutTooltip?: string,
     removeTooltip?: string,
-    sourceUrl?: string
+    sourceUrl?: string,
+    showPopOutIcon?: boolean
 }

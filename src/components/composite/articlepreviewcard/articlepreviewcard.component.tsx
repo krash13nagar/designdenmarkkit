@@ -39,10 +39,12 @@ export const ArticlePreviewCard = React.forwardRef<
       handleCardClick = () => {},
       ctaTooltipText = '',
       classes = {},
-      msid = '',
+      id = '',
+      idLabel = 'MSID',
       rightMargin,
       leftMargin,
       wrapperClass = '',
+      showCta = true,
     },
     ref
   ) => {
@@ -78,8 +80,8 @@ export const ArticlePreviewCard = React.forwardRef<
           <div className={styles.rightBottomWrapper}>
             <div className={styles.secondaryText}>
               {date && <span>{date}</span>}
-              {date && wordCount && <>&thinsp;|&thinsp;</>}
-              {wordCount && <span>WC {wordCount}</span>}
+              {date && +wordCount >= 0 && <>&thinsp;|&thinsp;</>}
+              {+wordCount >= 0 && <span>WC {wordCount}</span>}
             </div>
             <div className={styles.redirectWrapper}>
               <div
@@ -88,10 +90,14 @@ export const ArticlePreviewCard = React.forwardRef<
                 {agency && <span>Agency : {agency}</span>}
                 {agency && source && <>&thinsp;|&thinsp;</>}
                 {source && <span>Source : {source}</span>}
-                {msid && (agency || source) && <>&thinsp;|&thinsp;</>}
-                {msid && <span>MSID : {msid}</span>}
+                {id && (agency || source) && <>&thinsp;|&thinsp;</>}
+                {id && (
+                  <span>
+                    {idLabel} : {id}
+                  </span>
+                )}
               </div>
-              {ctaIcon && (
+              {showCta && ctaIcon && (
                 <div
                   title={ctaTooltipText}
                   onClick={handleCTA}

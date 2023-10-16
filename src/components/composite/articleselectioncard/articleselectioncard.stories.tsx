@@ -34,7 +34,7 @@ export const ArticleSelection: Story = {
         hostName: 'Absolute Radio',
       },
     ],
-    msid: '123456',
+    id: '123456',
     addIcon: <ControlPointRoundedIcon />,
     addedIcon: <CheckCircleRoundedIcon />,
     popOutIcon: <OpenInNewIcon sx={{ fontSize: '16px' }} />,

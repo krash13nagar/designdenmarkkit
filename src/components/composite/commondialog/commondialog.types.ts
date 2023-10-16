@@ -12,7 +12,8 @@ export interface CommonDialogProps {
 
     classes?: {
         root?: string,
-        contentRoot?: string
+        contentRoot?: string,
+        footerRoot?: string,
     },
     open: boolean,
     handleClose?: (event?: object, reason?: string) => void,
