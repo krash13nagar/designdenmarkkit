@@ -1,9 +1,0 @@
-@use '../../../styles/' as css;
-
-//writing double class to increase specifity
-.tableContainerRoot.tableContainerRoot {
-    box-shadow: none;
-    overflow: visible;
-    border-radius: css.pxToRem(2px);
-    border: 1px solid #D2D8DF;
-}

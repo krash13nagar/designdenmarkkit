@@ -6,7 +6,6 @@
 import React, { useState } from 'react';
 // import TestCommon from './testcommon';
 import ReusableViewTable from './testTable';
-import DataGridTable from './components/composite/datagridtable/datagridtable.component';
 import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
 import DenDataGrid from './components/common/datagrid/datagrid.component';
