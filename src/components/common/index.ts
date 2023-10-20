@@ -81,6 +81,8 @@ export * from './cardcontent/cardcontent.component';
 export * from './cardheader/cardheader.component';
 export * from './checkbox/checkbox.component';
 export * from './clickawaylistener/clickawaylistener.component';
+export * from './modal/modal.component';
+
 
 
 
