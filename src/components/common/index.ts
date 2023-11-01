@@ -83,6 +83,7 @@ export * from './checkbox/checkbox.component';
 export * from './clickawaylistener/clickawaylistener.component';
 export * from './modal/modal.component';
 export * from './stack/stack.component';
+export * from './listitemtext/listitemtext.component'
 
 
 
