@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { AccordionSummaryProps, AccordionSummary } from '@mui/material';
+import { AccordionSummary } from '@mui/material';
+import { AccordionSummaryTypes } from './accordionsummary.types';
 
 /**
  * DenAccordionSummary Component.
@@ -11,7 +12,7 @@ import { AccordionSummaryProps, AccordionSummary } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenAccordionSummary: React.FC<AccordionSummaryProps> = (props) => (
+export const DenAccordionSummary: React.FC<AccordionSummaryTypes> = (props) => (
   <AccordionSummary {...props} />
 );
 

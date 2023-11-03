@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArticlePreviewCardProps } from './articlepreviewcard.types';
 import styles from './articlepreviewcard.module.scss';
-import { DenTypography } from '../../common';
+import { DenBox, DenTypography } from '../../common';
 import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback';
 
 /**
@@ -15,6 +15,7 @@ import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback'
  * @param {string} props.source - (optional) source
  * @param {React.ReactNode} props.ctaIcon -  (optional) icon for CTA
  * @param {React.MouseEventHandler<HTMLDivElement>} props.handleCTAClick - (optional) handler for CTA click
+ * @param {React.MouseEventHandler<HTMLDivElement>} props.handleCardClick - (optional) handler for card click
  * @param {React.ReactNode} props.imagePlaceholderIcon -  (optional) icon for image placeholder
  * @param {string} props.ctaTooltipText -  (optional) cta tooltip
  * ref is forwarded to parent element
@@ -37,6 +38,13 @@ export const ArticlePreviewCard = React.forwardRef<
       source,
       handleCardClick = () => {},
       ctaTooltipText = '',
+      classes = {},
+      id = '',
+      idLabel = 'MSID',
+      rightMargin,
+      leftMargin,
+      wrapperClass = '',
+      showCta = true,
     },
     ref
   ) => {
@@ -46,10 +54,13 @@ export const ArticlePreviewCard = React.forwardRef<
     };
 
     return (
-      <div
+      <DenBox
         onClick={handleCardClick}
         ref={ref}
-        className={styles.referenceCardWrapper}
+        className={`${styles.referenceCardWrapper} ${wrapperClass || ''} ${
+          classes.root || ''
+        }`}
+        sx={{ mr: rightMargin || 0, ml: leftMargin || 0 }}
       >
         {imgUrl && (
           <div className={styles.leftWrapper}>
@@ -63,34 +74,42 @@ export const ArticlePreviewCard = React.forwardRef<
         )}
 
         <div className={styles.rightWrapper}>
-          <span title={title}>
+          <span className={styles.noMargin} title={title}>
             <DenTypography className={styles.title}>{title}</DenTypography>
           </span>
           <div className={styles.rightBottomWrapper}>
             <div className={styles.secondaryText}>
               {date && <span>{date}</span>}
-              {date && wordCount && ' | '}
-              {wordCount && <span>WC {wordCount}</span>}
+              {date && +wordCount >= 0 && <>&thinsp;|&thinsp;</>}
+              {+wordCount >= 0 && <span>WC {wordCount}</span>}
             </div>
             <div className={styles.redirectWrapper}>
-              <div className={styles.secondaryText}>
+              <div
+                className={`${styles.agencySourceWrapper} ${styles.secondaryText}`}
+              >
                 {agency && <span>Agency : {agency}</span>}
-                {agency && source && ' | '}
+                {agency && source && <>&thinsp;|&thinsp;</>}
                 {source && <span>Source : {source}</span>}
+                {id && (agency || source) && <>&thinsp;|&thinsp;</>}
+                {id && (
+                  <span>
+                    {idLabel} : {id}
+                  </span>
+                )}
               </div>
+              {showCta && ctaIcon && (
+                <div
+                  title={ctaTooltipText}
+                  onClick={handleCTA}
+                  className={styles.ctaIcon}
+                >
+                  {ctaIcon}
+                </div>
+              )}
             </div>
           </div>
         </div>
-        {ctaIcon && (
-          <div
-            title={ctaTooltipText}
-            onClick={handleCTA}
-            className={styles.ctaIcon}
-          >
-            {ctaIcon}
-          </div>
-        )}
-      </div>
+      </DenBox>
     );
   }
 );

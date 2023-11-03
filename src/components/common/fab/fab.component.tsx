@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { FabProps, Fab } from '@mui/material';
+import { Fab } from '@mui/material';
+import { FabTypes } from './fab.types';
 
 /**
  *Fab Component.
@@ -9,7 +10,7 @@ import { FabProps, Fab } from '@mui/material';
  * @param {boolean} props.appear - Perform the enter transition when it first mounts if in is also true. Set this to false to disable this behavior.
  * @param {	HTMLElement|Function} props.container -An HTML element, or a function that returns one. It's used to set the container theFab is transitioning from.
  */
-export const DenFab: React.FC<FabProps> = React.forwardRef((props, ref) => (
+export const DenFab: React.FC<FabTypes> = React.forwardRef((props, ref) => (
   <Fab {...props} ref={ref} />
 ));
 

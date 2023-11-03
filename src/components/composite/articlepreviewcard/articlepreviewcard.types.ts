@@ -11,5 +11,14 @@ export interface ArticlePreviewCardProps {
     handleCTAClick?: React.MouseEventHandler<HTMLDivElement>,
     imagePlaceholderIcon?: ReactNode,
     handleCardClick?: React.MouseEventHandler<HTMLDivElement>,
-    ctaTooltipText?: string
+    ctaTooltipText?: string,
+    classes?: {
+        "root": string
+    },
+    leftMargin?: string,
+    rightMargin?: string
+    id?: string,
+    idLabel?: string,
+    wrapperClass?: string,
+    showCta?: boolean
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { AccordionActionsProps, AccordionActions } from '@mui/material';
+import { AccordionActions } from '@mui/material';
+import { AccordionActionsTypes } from './accordionaction.types';
 
 /**
  * DenAccordionActions Component.
@@ -10,7 +11,7 @@ import { AccordionActionsProps, AccordionActions } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenAccordionActions: React.FC<AccordionActionsProps> = (props) => (
+export const DenAccordionActions: React.FC<AccordionActionsTypes> = (props) => (
   <AccordionActions {...props} />
 );
 

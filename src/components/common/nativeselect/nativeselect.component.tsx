@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { NativeSelectProps, NativeSelect } from '@mui/material';
+import { NativeSelect } from '@mui/material';
+import { NativeSelectTypes } from './nativeselect.types';
 
 /**
  * DenNativeSelect Component.
@@ -11,7 +12,7 @@ import { NativeSelectProps, NativeSelect } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenNativeSelect: React.FC<NativeSelectProps> = (props) => (
+export const DenNativeSelect: React.FC<NativeSelectTypes> = (props) => (
   <NativeSelect {...props} />
 );
 

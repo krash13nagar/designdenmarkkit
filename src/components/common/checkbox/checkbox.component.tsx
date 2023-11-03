@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CheckboxProps, Checkbox } from '@mui/material';
+import { Checkbox } from '@mui/material';
+import { CheckboxTypes } from './checkbox.types';
 
 /**
  * DenCheckbox Component.
@@ -13,7 +14,7 @@ import { CheckboxProps, Checkbox } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCheckbox: React.FC<CheckboxProps> = (props) => (
+export const DenCheckbox: React.FC<CheckboxTypes> = (props) => (
   <Checkbox {...props} />
 );
 

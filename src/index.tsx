@@ -46,4 +46,5 @@ var g = window || global;
 
 export default g;
 export * from './components';
+export * from './assets';
 export * from './styles';

@@ -1,6 +1,6 @@
-import { MenuItemProps } from '@mui/base';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { MenuItemTypes } from '../../common/menuitem/menuitem.types';
 
 export interface LabelValue {
   label: string;
@@ -16,7 +16,7 @@ export interface ActionOptions {
   endIcon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
     muiName: string;
   };
-  optionProps?: MenuItemProps;
+  optionProps?: MenuItemTypes;
   disabled?: boolean;
 }
 export interface Action extends Partial<Omit<LabelValue, 'value'>> {

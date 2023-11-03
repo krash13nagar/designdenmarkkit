@@ -1,0 +1,120 @@
+@use '../../../styles/' as css;
+
+.addedStoriesWrapper {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+
+    .separator {
+        width: 100%;
+        height: 1px;
+        background-color: #E8ECEF;
+        margin: 8px 0;
+    }
+
+    .header {
+        padding: css.pxToRem(8px) css.pxToRem(16px);
+        width: 100%;
+        display: flex;
+        background-color: #102563;
+        align-items: center;
+
+        .headerLabel {
+            font-weight: 500;
+            font-size: css.pxToRem(16px);
+            line-height: css.pxToRem(21px);
+            color: #FFFFFF;
+            margin-right: css.pxToRem(8px);
+        }
+
+        .count {
+            border-radius: 50%;
+            padding: 0 css.pxToRem(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: css.pxToRem(14px);
+            line-height: css.pxToRem(19px);
+            color: #2B2B2B;
+            background-color: #FFFFFF;
+        }
+    }
+
+    .storiesWrapper {
+        flex: 1;
+        padding: css.pxToRem(10px) css.pxToRem(6px);
+        overflow: auto;
+
+        &.alignCenter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .noStoriesMessage {
+            margin: auto;
+            color: #4D4D4D;
+            font-size: css.pxToRem(18px);
+            line-height: css.pxToRem(18px);
+        }
+    }
+
+    .multiSelect {
+        padding-left: css.pxToRem(10px);
+        margin-top: css.pxToRem(8px);
+
+        .selectAll {
+            display: flex;
+
+            .selectAllLabel {
+                color: #4D4D4D;
+                font-size: css.pxToRem(14px);
+                line-height: css.pxToRem(20px);
+                font-weight: 700;
+            }
+        }
+    }
+
+    .footer {
+        padding: css.pxToRem(6px) css.pxToRem(10px);
+        box-shadow: 0 css.pxToRem(-3px) css.pxToRem(6px) #00000029;
+        background-color: #FFFFFF;
+        display: flex;
+        width: 100%;
+
+        justify-content: space-between;
+        align-items: center;
+
+        .footerNote {
+            color: #4D4D4D;
+            font-size: css.pxToRem(14px);
+            line-height: css.pxToRem(18px);
+
+            .footerNoteLabel {
+                font-weight: 700;
+
+                .danger {
+                    color: #D92D2C;
+                }
+            }
+        }
+
+
+        .multiSelectModeButtons {
+            margin-left: auto;
+        }
+
+    }
+
+    .checkboxRoot {
+        &>input {
+            width: 100%;
+            height: 100%;
+            cursor: inherit;
+            border: none;
+            border-radius: unset;
+        }
+    }
+}

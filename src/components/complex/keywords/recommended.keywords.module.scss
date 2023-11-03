@@ -1,0 +1,183 @@
+.recommended-wrapper{
+    padding: 5px 0px;
+    .recommend{
+        font: normal normal 600 12px/17px Source Sans 3;
+        letter-spacing: 0px;
+        color: #818181;
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        .recommended-refresh{
+           vertical-align: middle;
+        }
+    }
+    
+    .Recommended-card{
+
+        .Recommended-group{
+            background-color: #f0f2f8;
+            padding:0.55rem;
+            [class*="MuiCardHeader-content"]{
+                [class*="MuiTypography-h5"] {
+                    font-size:0.893rem;
+                }
+            }
+        }
+        
+    }
+}
+
+.add_keyword_Wrapper {
+    max-width: 100%;
+    border: 0 none;
+    position: relative;
+    background: #fffdf4;
+    padding: 10px 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 225px;
+    .repeat-col {
+      margin-bottom: 5px;
+      &:nth-of-type(even) {}
+      &:nth-of-type(odd) {
+        max-width: calc(50% - 10px);
+        margin-right: 10px;
+        border-right: 1px solid #ECEBEC;
+        margin-bottom: 0px;
+        padding-bottom: 5px;
+      }
+      .addedKeywordtype {
+        text-transform: capitalize;
+      }
+      .remove-keyword {
+        cursor: pointer;
+        svg{fill: #d8d8d8;}
+        &:hover {
+          svg{fill:#a00101;}
+        }
+      }
+
+      .keywordTitle {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 14px;
+      }
+      .otherDetails {
+        font-size: 11px;
+        font-weight: 400;
+        &.showKeyEnum {
+          .seprator { display: inherit; padding: 0 4px;}
+          .keyEnumName { display: inherit;}
+        }
+        &.hideKeyEnum {
+          .seprator { display: none;}
+          .keyEnumName { display: none;}
+        }
+      }
+      &.repeat-row-taxonomy {
+        max-width: 100%;
+        border: none;
+      }
+
+    }
+}
+
+.layoutRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.seprator { display: inherit; padding: 0 4px;}
+
+.keywordflexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-right: 13px;
+}
+
+.keywordTypeEven{
+    border-right: 1px solid #ECEBEC;
+}
+
+.marks-input{
+    // margin: 0px;
+    // flex-basis: 20%;
+    // input{
+    //     padding: 0.72rem;
+    // }
+}
+
+.removeIcondiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.addKeywordsWrapperClass {
+    width: 712px;
+    height: 210px;
+    background: #FFFDF4 0% 0% no-repeat padding-box;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .keywordSourceName {
+      position: relative;
+      .keywordDetails {
+        letter-spacing: 0px;
+        color: #4D4D4D;
+        opacity: 0.8;
+        line-height: 15px;
+        font-size: 12px;
+        left: 30px;
+        position: absolute;
+      }
+    }
+}
+
+.addKeywordsTitle {
+  font: normal normal 600 12px/17px Source Sans 3;
+  letter-spacing: 0px;
+  color: #818181;
+  opacity: 1;
+  margin-bottom: 8px;
+}
+
+.searchKeywordWrapper{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  .search-keyword{
+    flex: 1;
+    margin-right: 10px;
+  }
+  .searchkeywordlabel{
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: #818181;
+    opacity: 1
+  }
+}
+
+.no-keywords {
+  min-height: 32px;
+  margin: auto;
+  border: 1px dashed #D2D8DF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: normal normal normal 0.75rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
+  text-align: center;
+  letter-spacing: 0px;
+  color: #818181;
+  opacity: 0.6;
+}
+
+.addkeywordtextfield{
+  max-width: 40px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+}

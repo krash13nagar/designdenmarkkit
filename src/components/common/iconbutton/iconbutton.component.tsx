@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { IconButtonProps, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { IconButtonTypes } from './iconbutton.types';
 
 /**
  * DenIconButton Component.
@@ -10,7 +11,7 @@ import { IconButtonProps, IconButton } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenIconButton: React.FC<IconButtonProps> = (props) => (
+export const DenIconButton: React.FC<IconButtonTypes> = (props) => (
   <IconButton {...props} />
 );
 

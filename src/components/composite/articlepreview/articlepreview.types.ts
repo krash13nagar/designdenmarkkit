@@ -16,5 +16,12 @@ export interface ArticlePreviewProps {
     titleClass?: string,
     contentClass?: string,
     synopsisClass?: string,
-    topInfoClass?: string
+    topInfoClass?: string,
+    classes?: {
+        "root": string
+    },
+    agency?: string,
+    source?: string,
+    id?: string,
+    idLabel?: string,
 }

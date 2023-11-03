@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DialogContentTextProps, DialogContentText } from '@mui/material';
+import { DialogContentText } from '@mui/material';
+import { DialogContentTextTypes } from './dialogcontenttext.types';
 
 /**
  * DenDialogContentText Component.
@@ -9,7 +10,7 @@ import { DialogContentTextProps, DialogContentText } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenDialogContentText: React.FC<DialogContentTextProps> = (
+export const DenDialogContentText: React.FC<DialogContentTextTypes> = (
   props
 ) => <DialogContentText {...props} />;
 

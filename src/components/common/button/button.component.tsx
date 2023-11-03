@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ButtonProps, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import { ButtonTypes } from './types';
 
 /**
  * DenButton Component.
@@ -17,7 +18,7 @@ import { ButtonProps, Button } from '@mui/material';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenButton: React.FC<ButtonProps> = (props) => (
+export const DenButton: React.FC<ButtonTypes> = (props) => (
   <Button {...props} />
 );
 
