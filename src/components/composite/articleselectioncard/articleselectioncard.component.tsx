@@ -35,8 +35,8 @@ export const ArticleSelectionCard = React.forwardRef<
       addIcon,
       addedIcon,
       popOutIcon,
-      handleAdd = () => {},
-      handleCardClick = () => {},
+      handleAdd = () => { },
+      handleCardClick = () => { },
       handlePopOut,
       wordCount,
       date,
@@ -91,7 +91,7 @@ export const ArticleSelectionCard = React.forwardRef<
       if (synopsisRef?.current) {
         if (
           synopsisRef.current.scrollHeight - synopsisRef.current.offsetHeight >=
-            19 &&
+          19 &&
           !sysnopsisOverflow
         ) {
           setSynopsisOverflow(true);
@@ -110,9 +110,6 @@ export const ArticleSelectionCard = React.forwardRef<
 
     const handleAddClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
-      if (isAdded) {
-        return;
-      }
       if (handleAdd) {
         handleAdd(e);
       }
@@ -131,9 +128,8 @@ export const ArticleSelectionCard = React.forwardRef<
       >
         {addedIcon && addIcon && (
           <div
-            className={`${leftSectionClass ? leftSectionClass : ''} ${
-              styles.leftSection
-            } ${styles.alignCenter}`}
+            className={`${leftSectionClass ? leftSectionClass : ''} ${styles.leftSection
+              } ${styles.alignCenter}`}
           >
             <div className={styles.addBtn} onClick={handleAddClick}>
               {isAdded ? addedIcon : addIcon}
@@ -141,9 +137,8 @@ export const ArticleSelectionCard = React.forwardRef<
           </div>
         )}
         <div
-          className={`${rightSectionClass ? rightSectionClass : ''} ${
-            styles.rightSection
-          }`}
+          className={`${rightSectionClass ? rightSectionClass : ''} ${styles.rightSection
+            }`}
         >
           {(agency ||
             source ||
@@ -152,51 +147,51 @@ export const ArticleSelectionCard = React.forwardRef<
             time ||
             id ||
             wordCount) && (
-            <div className={styles.topRightSection}>
-              <div className={styles.agencyDetails}>
-                <div className={agency || source ? styles.agencySource : ''}>
-                  {agency && <span>Agency : {agency}</span>}
-                  {agency && source && ' | '}
-                  {source && <span>Source : {source}</span>}
-                </div>
-                {id && (
-                  <span className={styles.msid}>
-                    {idLabel} : {id}
-                  </span>
-                )}
-                {publishedBy?.length && (
-                  <div className={styles.publishedBy}>
-                    <span>{publishedByLabel}</span>
-                    <div className={styles.publishedByList}>
-                      {publishedBy.map((pub) => {
-                        return (
-                          <DenTooltip key={pub.hostName} title={pub.hostName}>
-                            <div className={styles.host}>{pub.hostLabel}</div>
-                          </DenTooltip>
-                        );
-                      })}
-                    </div>
+              <div className={styles.topRightSection}>
+                <div className={styles.agencyDetails}>
+                  <div className={agency || source ? styles.agencySource : ''}>
+                    {agency && <span>Agency : {agency}</span>}
+                    {agency && source && ' | '}
+                    {source && <span>Source : {source}</span>}
                   </div>
-                )}
+                  {id && (
+                    <span className={styles.msid}>
+                      {idLabel} : {id}
+                    </span>
+                  )}
+                  {publishedBy?.length && (
+                    <div className={styles.publishedBy}>
+                      <span>{publishedByLabel}</span>
+                      <div className={styles.publishedByList}>
+                        {publishedBy.map((pub) => {
+                          return (
+                            <DenTooltip key={pub.hostName} title={pub.hostName}>
+                              <div className={styles.host}>{pub.hostLabel}</div>
+                            </DenTooltip>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className={styles.timing}>
+                  {clockIcon && (date || time) && (
+                    <span className={styles.clockIcon}>{clockIcon}</span>
+                  )}
+                  {time && <span>{time}</span>}
+                  {time && date && <span className={styles.pipe}> | </span>}
+                  {date && <span>{date}</span>}
+                  {date && +wordCount >= 0 && (
+                    <span className={styles.pipe}> | </span>
+                  )}
+                  {+wordCount >= 0 && (
+                    <span>
+                      {wordCountLabel} {wordCount}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className={styles.timing}>
-                {clockIcon && (date || time) && (
-                  <span className={styles.clockIcon}>{clockIcon}</span>
-                )}
-                {time && <span>{time}</span>}
-                {time && date && <span className={styles.pipe}> | </span>}
-                {date && <span>{date}</span>}
-                {date && +wordCount >= 0 && (
-                  <span className={styles.pipe}> | </span>
-                )}
-                {+wordCount >= 0 && (
-                  <span>
-                    {wordCountLabel} {wordCount}
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
+            )}
 
           <span className={styles.titleWrapper}>
             <DenTooltip
@@ -220,9 +215,8 @@ export const ArticleSelectionCard = React.forwardRef<
               }}
             >
               <DenTypography
-                className={`${styles.title} ${styles.ellipsis} ${
-                  titleClass ? titleClass : ''
-                }`}
+                className={`${styles.title} ${styles.ellipsis} ${titleClass ? titleClass : ''
+                  }`}
                 variant="h4"
                 ref={titleRef}
               >
@@ -230,9 +224,8 @@ export const ArticleSelectionCard = React.forwardRef<
                 {showPopOutIcon && !titleOverflow && popOutIcon && (
                   <span
                     title={popOutTooltip}
-                    className={`${styles.popoutIcon} ${
-                      titleOverflow ? styles.block : ''
-                    } ${popOutIconClass ? popOutIconClass : ''}`}
+                    className={`${styles.popoutIcon} ${titleOverflow ? styles.block : ''
+                      } ${popOutIconClass ? popOutIconClass : ''}`}
                     onClick={(e) => handlePopOutClick?.(e)}
                   >
                     {popOutIcon}
@@ -243,9 +236,8 @@ export const ArticleSelectionCard = React.forwardRef<
             {showPopOutIcon && titleOverflow && popOutIcon && (
               <span
                 title={popOutTooltip}
-                className={`${styles.popoutIcon} ${
-                  titleOverflow ? styles.block : ''
-                } ${popOutIconClass ? popOutIconClass : ''}`}
+                className={`${styles.popoutIcon} ${titleOverflow ? styles.block : ''
+                  } ${popOutIconClass ? popOutIconClass : ''}`}
                 onClick={(e) => handlePopOutClick?.(e)}
               >
                 {popOutIcon}
@@ -264,9 +256,8 @@ export const ArticleSelectionCard = React.forwardRef<
               >
                 <DenTypography
                   ref={synopsisRef}
-                  className={`${styles.synopsis} ${
-                    !showReadMoreInSynopsis ? styles.ellipsis : ''
-                  } ${synopsisClass ? synopsisClass : ''}
+                  className={`${styles.synopsis} ${!showReadMoreInSynopsis ? styles.ellipsis : ''
+                    } ${synopsisClass ? synopsisClass : ''}
                 ${expanded ? styles.expanded : styles.ellipsis}
                 `}
                 >
