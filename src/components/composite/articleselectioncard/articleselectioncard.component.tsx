@@ -110,9 +110,6 @@ export const ArticleSelectionCard = React.forwardRef<
 
     const handleAddClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
-      if (isAdded) {
-        return;
-      }
       if (handleAdd) {
         handleAdd(e);
       }
