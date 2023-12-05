@@ -181,8 +181,8 @@ const TestCommon = () => {
     setModel(newObj);
     console.log(group);
   };
-  const onClickEdit = () => {};
-  const onClickDelete = () => {};
+  const onClickEdit = () => { };
+  const onClickDelete = () => { };
   const list = [
     {
       value: 'Breaking News',
