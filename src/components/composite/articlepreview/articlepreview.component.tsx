@@ -85,10 +85,8 @@ export const ArticlePreview = React.forwardRef<
             {time && <span>{time}</span>}
             {time && date && <span className={styles.pipe}> | </span>}
             {date && <span>{date}</span>}
-            {date && +wordCount >= 0 && (
-              <span className={styles.pipe}> | </span>
-            )}
-            {+wordCount >= 0 && (
+            {date && +wordCount > 0 && <span className={styles.pipe}> | </span>}
+            {+wordCount > 0 && (
               <span className={styles.wordCount}>Word Count : {wordCount}</span>
             )}
           </div>
