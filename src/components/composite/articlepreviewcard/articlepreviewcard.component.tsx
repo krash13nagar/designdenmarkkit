@@ -80,8 +80,8 @@ export const ArticlePreviewCard = React.forwardRef<
           <div className={styles.rightBottomWrapper}>
             <div className={styles.secondaryText}>
               {date && <span>{date}</span>}
-              {date && +wordCount >= 0 && <>&thinsp;|&thinsp;</>}
-              {+wordCount >= 0 && <span>WC {wordCount}</span>}
+              {date && +wordCount > 0 && <>&thinsp;|&thinsp;</>}
+              {+wordCount > 0 && <span>WC {wordCount}</span>}
             </div>
             <div className={styles.redirectWrapper}>
               <div
