@@ -37,5 +37,6 @@ export const Basic: Story = {
     handlePopOut: () => {
       console.log('Pop Out button clicked');
     },
+    countLabel: 'This is count label',
   },
 };
