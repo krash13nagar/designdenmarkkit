@@ -42,6 +42,7 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
       maxStoryCount = 5,
       minStoryCount = 2,
       noStoriesMessage = 'No Stories Added',
+      countLabel = '',
     },
     ref
   ) => {
@@ -242,7 +243,9 @@ export const AddedStories = React.forwardRef<HTMLDivElement, AddedStoriesProps>(
             {headerLabel}
           </DenTypography>
           {stories?.length >= 0 && (
-            <div className={styles.count}>{stories?.length}</div>
+            <div className={styles.count} title={countLabel}>
+              {stories?.length}
+            </div>
           )}
         </div>
         <div

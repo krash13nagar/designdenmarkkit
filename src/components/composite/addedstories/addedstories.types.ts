@@ -35,6 +35,7 @@ export interface AddedStoriesProps {
     removeButtonLabel?: string,
     multiSelectToggleLabel?: string,
     multiSelectLabel?: string,
-    noStoriesMessage?: string
+    noStoriesMessage?: string,
+    countLabel?: string
 
 }
