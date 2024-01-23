@@ -52,6 +52,8 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
+  const [showFullTitle, setShowFullTitle] = React.useState(false);
+  const [showFullCaption, setShowFullCaption] = React.useState(false);
   const [viewPort, setViewport] = React.useState<string | null>(
     selectedAspectRatio
   );
@@ -70,6 +72,15 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     if (cb) cb(event);
   };
   const { width, height } = viewPortDimenssions(viewPort);
+
+  const toggleShowFullTitle =()=>{
+    setShowFullTitle(!showFullTitle);
+  }
+
+  const toggleShowFullCaption =()=>{
+    setShowFullCaption(!showFullCaption);
+  }
+
   return (
     <DenDialog open={true} maxWidth="lg">
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
@@ -99,15 +110,19 @@ export const ImagePreview: FC<ImagePreviewProps> = (
               />
               <DenTypography
                 variant="h6"
-                className={style['image-title']}
+                className={`${style['image-title']} ${showFullTitle ? style['expanded'] : ''}`}
                 title={cleanHTML(title)}
-                dangerouslySetInnerHTML={{ __html: title }}
-              />
+              >
+               {title}
+               <span onClick={toggleShowFullTitle}>{showFullTitle ? 'Read Less' : 'Read More'}</span>
+              </DenTypography>
               <DenTypography
                 variant="body1"
-                className={style['image-caption']}
-                dangerouslySetInnerHTML={{ __html: caption }}
-              />
+                className={`${style['image-caption']} ${showFullCaption ? style['expanded'] : ''}`}
+              >
+               {caption}
+               <span onClick={toggleShowFullCaption}>{showFullCaption ? 'Read Less' : 'Read More'}</span>
+              </DenTypography>
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}

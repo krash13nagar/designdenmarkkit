@@ -76,6 +76,10 @@
           padding: 0px;
         }
       }
+      .expanded {
+        -webkit-line-clamp: unset;
+        overflow: visible;
+      }
 
       .image-caption {
         font-size: 12px;
