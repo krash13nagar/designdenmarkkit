@@ -50,6 +50,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     creationDateTime,
     artDate,
     maxWidth,
+    showMoreShowLess,
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -115,7 +116,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 title={cleanHTML(title)}
               >
                 {
-                  title.length <= 75 ? (
+                  title.length <= 75 || !showMoreShowLess ? (
                     title
                   ) : (
                     <>
@@ -139,7 +140,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 title={cleanHTML(caption)}
               >
                 {
-                  caption.length <= 125 ? (
+                  caption.length <= 125 || !showMoreShowLess ? (
                     caption
                   ) : (
                     <>
