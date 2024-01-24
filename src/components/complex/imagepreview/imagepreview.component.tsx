@@ -153,7 +153,6 @@ export const ImagePreview: FC<ImagePreviewProps> = (
               <DenTypography
                 variant="body1"
                 className={`${style['image-caption']} ${showFullCaption ? style['expanded'] : ''}`}
-                title={cleanHTML(caption)}
                 dangerouslySetInnerHTML={{ __html: captionContent }}
               />
               <DisplayCardDate
