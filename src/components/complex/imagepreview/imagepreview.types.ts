@@ -49,7 +49,7 @@ export interface ImagePreviewProps {
   creationDateTime?: number;
   artDate?: number;
   maxWidth?: false | 'sm' | 'md' | 'lg';
-  showMoreShowLess?: true;
+  showHideReadMore?: true;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export enum MenuEnum {

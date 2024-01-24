@@ -50,12 +50,12 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     creationDateTime,
     artDate,
     maxWidth,
-    showMoreShowLess,
+    showHideReadMore,
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
-  const [showFullTitle, setShowFullTitle] = React.useState(false);
-  const [showFullCaption, setShowFullCaption] = React.useState(false);
+  const [showTitle, setShowTitle] = React.useState(false);
+  const [showCaption, setShowCaption] = React.useState(false);
   const [viewPort, setViewport] = React.useState<string | null>(
     selectedAspectRatio
   );
@@ -75,44 +75,44 @@ export const ImagePreview: FC<ImagePreviewProps> = (
   };
   const { width, height } = viewPortDimenssions(viewPort);
 
-  const toggleShowFullTitle =()=>{
-    setShowFullTitle(!showFullTitle);
+  const toggleshowTitle =()=>{
+    setShowTitle(!showTitle);
   }
 
-  const toggleShowFullCaption =()=>{
-    setShowFullCaption(!showFullCaption);
+  const toggleshowCaption =()=>{
+    setShowCaption(!showCaption);
   }
 
-  let titleContent = title.length <= 75 || !showMoreShowLess ? (
+  let titleContent = title.length <= 75 || !showHideReadMore ? (
       title
     ) : (
       <>
-        {showFullTitle ? (
+        {showTitle ? (
           title
         ) : (
           <>
             {`${title.slice(0, 75)}...`}
           </>
         )}
-        <span className={style['showFullContentSpan']} onClick={toggleShowFullTitle}>
-          {showFullTitle ? ' Read Less' : 'Read More'}
+        <span className={style['showFullContentSpan']} onClick={toggleshowTitle}>
+          {showTitle ? ' Read Less' : 'Read More'}
         </span>
       </>
     );
 
-  let captionContent = caption.length <= 125 || !showMoreShowLess ? (
+  let captionContent = caption.length <= 125 || !showHideReadMore ? (
       caption
     ) : (
       <>
-        {showFullCaption ? (
+        {showCaption ? (
           caption
         ) : (
           <>
             {`${caption.slice(0, 125)}...`}
           </>
         )}
-        <span className={style['showFullContentSpan']} onClick={toggleShowFullCaption}>
-          {showFullCaption ? ' Read Less' : 'Read More'}
+        <span className={style['showFullContentSpan']} onClick={toggleshowCaption}>
+          {showCaption ? ' Read Less' : 'Read More'}
         </span>
       </>
     );
@@ -146,13 +146,13 @@ export const ImagePreview: FC<ImagePreviewProps> = (
               />
               <DenTypography
                 variant="h6"
-                className={`${style['image-title']} ${showFullTitle ? style['expanded'] : ''}`}
+                className={`${style['image-title']} ${showTitle ? style['expanded'] : ''}`}
                 title={cleanHTML(title)}
                 dangerouslySetInnerHTML={{ __html: titleContent }}
               />
               <DenTypography
                 variant="body1"
-                className={`${style['image-caption']} ${showFullCaption ? style['expanded'] : ''}`}
+                className={`${style['image-caption']} ${showCaption ? style['expanded'] : ''}`}
                 dangerouslySetInnerHTML={{ __html: captionContent }}
               />
               <DisplayCardDate
