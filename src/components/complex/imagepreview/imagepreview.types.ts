@@ -48,6 +48,7 @@ export interface ImagePreviewProps {
   actions: Action[];
   creationDateTime?: number;
   artDate?: number;
+  maxWidth?: false | 'sm' | 'md' | 'lg';
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export enum MenuEnum {

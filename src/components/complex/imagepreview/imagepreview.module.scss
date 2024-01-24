@@ -81,7 +81,7 @@
         }
       }
       .image-caption{
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 3 !important;
       }
       .expanded {
         -webkit-line-clamp: unset !important;
