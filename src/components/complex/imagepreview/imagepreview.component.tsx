@@ -113,20 +113,48 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 className={`${style['image-title']} ${showFullTitle ? style['expanded'] : ''}`}
                 title={cleanHTML(title)}
               >
-                {showFullTitle ? title : `${title.slice(0, 70)}...`}
-                <span className='showFullContentSpan' onClick={toggleShowFullTitle}>
-                  {showFullTitle && title.length>70 ? ' Read Less' : 'Read More'}
-                </span>
+                {
+                  title.length <= 75 ? (
+                    title
+                  ) : (
+                    <>
+                      {showFullTitle ? (
+                        title
+                      ) : (
+                        <>
+                          {`${title.slice(0, 75)}...`}
+                        </>
+                      )}
+                      <span className={style['showFullContentSpan']} onClick={toggleShowFullTitle}>
+                        {showFullTitle ? ' Read Less' : 'Read More'}
+                      </span>
+                    </>
+                  )
+                }
               </DenTypography>
               <DenTypography
                 variant="body1"
                 className={`${style['image-caption']} ${showFullCaption ? style['expanded'] : ''}`}
                 title={cleanHTML(caption)}
               >
-               {showFullCaption ? caption : `${caption.slice(0, 80)}...`}
-               <span className='showFullContentSpan' onClick={toggleShowFullCaption}>
-                  {showFullCaption && caption.length>80 ? ' Read Less' : 'Read More'}
-                </span>
+                {
+                  caption.length <= 125 ? (
+                    caption
+                  ) : (
+                    <>
+                      {showFullCaption ? (
+                        caption
+                      ) : (
+                        <>
+                          {`${caption.slice(0, 125)}...`}
+                        </>
+                      )}
+                      <span className={style['showFullContentSpan']} onClick={toggleShowFullCaption}>
+                        {showFullCaption ? ' Read Less' : 'Read More'}
+                      </span>
+                    </>
+                  )
+                }
               </DenTypography>
               <DisplayCardDate
                 creationDateTime={creationDateTime}
