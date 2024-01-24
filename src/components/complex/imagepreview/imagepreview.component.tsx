@@ -83,6 +83,40 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     setShowFullCaption(!showFullCaption);
   }
 
+  let titleContent = title.length <= 75 || !showMoreShowLess ? (
+      title
+    ) : (
+      <>
+        {showFullTitle ? (
+          title
+        ) : (
+          <>
+            {`${title.slice(0, 75)}...`}
+          </>
+        )}
+        <span className={style['showFullContentSpan']} onClick={toggleShowFullTitle}>
+          {showFullTitle ? ' Read Less' : 'Read More'}
+        </span>
+      </>
+    );
+
+  let captionContent = caption.length <= 125 || !showMoreShowLess ? (
+      caption
+    ) : (
+      <>
+        {showFullCaption ? (
+          caption
+        ) : (
+          <>
+            {`${caption.slice(0, 125)}...`}
+          </>
+        )}
+        <span className={style['showFullContentSpan']} onClick={toggleShowFullCaption}>
+          {showFullCaption ? ' Read Less' : 'Read More'}
+        </span>
+      </>
+    );
+
   return (
     <DenDialog open={true} maxWidth={maxWidth ?? "lg"}>
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
@@ -114,50 +148,14 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 variant="h6"
                 className={`${style['image-title']} ${showFullTitle ? style['expanded'] : ''}`}
                 title={cleanHTML(title)}
-              >
-                {
-                  title.length <= 75 || !showMoreShowLess ? (
-                    title
-                  ) : (
-                    <>
-                      {showFullTitle ? (
-                        title
-                      ) : (
-                        <>
-                          {`${title.slice(0, 75)}...`}
-                        </>
-                      )}
-                      <span className={style['showFullContentSpan']} onClick={toggleShowFullTitle}>
-                        {showFullTitle ? ' Read Less' : 'Read More'}
-                      </span>
-                    </>
-                  )
-                }
-              </DenTypography>
+                dangerouslySetInnerHTML={{ __html: titleContent }}
+              />
               <DenTypography
                 variant="body1"
                 className={`${style['image-caption']} ${showFullCaption ? style['expanded'] : ''}`}
                 title={cleanHTML(caption)}
-              >
-                {
-                  caption.length <= 125 || !showMoreShowLess ? (
-                    caption
-                  ) : (
-                    <>
-                      {showFullCaption ? (
-                        caption
-                      ) : (
-                        <>
-                          {`${caption.slice(0, 125)}...`}
-                        </>
-                      )}
-                      <span className={style['showFullContentSpan']} onClick={toggleShowFullCaption}>
-                        {showFullCaption ? ' Read Less' : 'Read More'}
-                      </span>
-                    </>
-                  )
-                }
-              </DenTypography>
+                dangerouslySetInnerHTML={{ __html: captionContent }}
+              />
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}
