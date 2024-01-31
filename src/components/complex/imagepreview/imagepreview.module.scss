@@ -75,17 +75,6 @@
           margin: 0px;
           padding: 0px;
         }
-
-        .showFullContentSpan{
-          color: #4D9ACA;
-        }
-      }
-      .image-caption{
-        -webkit-line-clamp: 3 !important;
-      }
-      .expanded {
-        -webkit-line-clamp: unset !important;
-        overflow: visible;
       }
 
       .image-caption {
@@ -256,6 +245,10 @@
   .rightPanel {
     .rightPanel-content {
       height: 438px;
+
+      .image-caption {
+        -webkit-line-clamp: 3 !important;
+      }
     }
   }
 }

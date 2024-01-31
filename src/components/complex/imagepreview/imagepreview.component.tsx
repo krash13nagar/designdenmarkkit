@@ -50,8 +50,6 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     actions,
     creationDateTime,
     artDate,
-    maxWidth,
-    showHideReadMore,
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -73,9 +71,8 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     if (cb) cb(event);
   };
   const { width, height } = viewPortDimenssions(viewPort);
-
   return (
-    <DenDialog open={true} maxWidth={maxWidth ?? "lg"}>
+    <DenDialog open={true} maxWidth={"lg"}>
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
         <div className={style['titleWrapper']}>
           <div className={style['titleText']}>
