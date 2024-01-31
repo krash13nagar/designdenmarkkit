@@ -12,27 +12,28 @@ import { cleanHTML } from '../../../utility/utils';
  * @param {number} props.lineLimit - Line count for the collapsed state of Typography.
  * @param {number} props.charLimit - Character count for the collapsed state of Typography.
  * @param {string} props.variant - Variant of typography.
- * @param {string} props.className - Classes for Typography.
+ * @param {string} props.classes - Classes for Typography.
  * @param {React.CSSProperties} props.cssConfig - CSS Configurations.
  * @param {string} props.displayText - Display Text.
  * ref is forwarded to the parent element.
  */
 
 export const ReadMoreLess = React.forwardRef<HTMLDivElement, { config: ReadMoreLessProps }>(
-  ({ config: { content, lineLimit, charLimit, variant, className, cssConfig, displayText } }, ref) => {
+  ({ config: { content, lineLimit, charLimit, variant, classes, cssConfig, displayText } }, ref) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const [updatedContent, setUpdatedContent]=useState(content);
+    const [updatedContent, setUpdatedContent]=useState(`${charLimit ? content.slice(0, charLimit) : content}`);
     const [dynamicCss, setDynamicCss]=useState({WebkitLineClamp: isExpanded ? 'unset' : lineLimit || 2});
 
+
     const toggleReadMore =()=>{
+      setIsExpanded(!isExpanded);
       if(lineLimit || !charLimit){
         setDynamicCss({
-          WebkitLineClamp: isExpanded ? 'unset' : lineLimit || 2,
+          WebkitLineClamp: !isExpanded ? 'unset' : lineLimit || 2,
         });
       }else if(charLimit){
-        setUpdatedContent(isExpanded ? content : content.slice(0, charLimit));
+        setUpdatedContent(!isExpanded ? content : content.slice(0, charLimit));
       }
-      setIsExpanded(!isExpanded);
     }
 
 
@@ -40,15 +41,17 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, { config: ReadMoreL
       <>
       <span className={style.contentWrapper}>
         <DenTypography
-          className={`${style['ellipsis']}`}
-          variant="caption"
+          variant={variant ? variant : 'caption'}
+          className={`${charLimit || isExpanded ? style['inlinePos'] : style['ellipsis']}`}
           title={cleanHTML(updatedContent)}
-          dangerouslySetInnerHTML={{ __html: updatedContent }}
+          classes={classes}
+          dangerouslySetInnerHTML={{ __html: updatedContent}}
           style={lineLimit || !charLimit ? dynamicCss : {}}
         />
         {<DenTypography
-          variant="caption"
-          style={cssConfig}
+          variant={variant ? variant : 'caption'}
+          className={`${!isExpanded && (lineLimit || !charLimit) ? style['absoultePos'] : ''}`}
+          style={{...cssConfig, color: cssConfig?.color? cssConfig.color : "#4D9ACA"}}
           onClick={toggleReadMore}
           >
           {isExpanded ? `${displayText?.less ? displayText.less : "Read Less"}` :

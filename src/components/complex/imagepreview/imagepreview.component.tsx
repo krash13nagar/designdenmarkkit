@@ -107,7 +107,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 title={cleanHTML(title)}
                 dangerouslySetInnerHTML={{ __html: title }}
               />
-              <ReadMoreLess config={{content: caption, cssConfig:{color:'red'}, lineLimit: 3}}  />
+              <ReadMoreLess config={{content: caption, variant: "caption", classes:`${style['image-title']}` }}  />
               {/* <DenTypography
                 variant="body1"
                 className={`${style['image-caption']}`}
