@@ -1,0 +1,23 @@
+@use '../../../styles/' as css;
+
+.ellipsis {
+    display: -webkit-box;
+    white-space: normal;
+    overflow: hidden;
+    max-width: 100%;
+    -webkit-box-orient: vertical;
+}
+
+.contentWrapper{
+    display: inherit;
+    margin: 0;
+    position: relative;
+    .absoultePos {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        background: white;
+    }
+}
+

@@ -32,6 +32,7 @@ import {
 } from './imagepreview.types';
 import { DisplayCardDate } from '../../composite/datetime/datetime';
 import { cleanHTML } from '../../../utility/utils';
+import {ReadMoreLess} from '../../common';
 
 export const ImagePreview: FC<ImagePreviewProps> = (
   props: ImagePreviewProps = sample
@@ -54,8 +55,6 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     onClose = (_event: any) => {},
   } = props;
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
-  const [showTitle, setShowTitle] = React.useState(false);
-  const [showCaption, setShowCaption] = React.useState(false);
   const [viewPort, setViewport] = React.useState<string | null>(
     selectedAspectRatio
   );
@@ -74,48 +73,6 @@ export const ImagePreview: FC<ImagePreviewProps> = (
     if (cb) cb(event);
   };
   const { width, height } = viewPortDimenssions(viewPort);
-
-  const toggleshowTitle =()=>{
-    setShowTitle(!showTitle);
-  }
-
-  const toggleshowCaption =()=>{
-    setShowCaption(!showCaption);
-  }
-
-  let titleContent = title.length <= 75 || !showHideReadMore ? (
-      title
-    ) : (
-      <>
-        {showTitle ? (
-          title
-        ) : (
-          <>
-            {`${title.slice(0, 75)}...`}
-          </>
-        )}
-        <span className={style['showFullContentSpan']} onClick={toggleshowTitle}>
-          {showTitle ? ' Read Less' : 'Read More'}
-        </span>
-      </>
-    );
-
-  let captionContent = caption.length <= 125 || !showHideReadMore ? (
-      caption
-    ) : (
-      <>
-        {showCaption ? (
-          caption
-        ) : (
-          <>
-            {`${caption.slice(0, 125)}...`}
-          </>
-        )}
-        <span className={style['showFullContentSpan']} onClick={toggleshowCaption}>
-          {showCaption ? ' Read Less' : 'Read More'}
-        </span>
-      </>
-    );
 
   return (
     <DenDialog open={true} maxWidth={maxWidth ?? "lg"}>
@@ -146,15 +103,17 @@ export const ImagePreview: FC<ImagePreviewProps> = (
               />
               <DenTypography
                 variant="h6"
-                className={`${style['image-title']} ${showTitle ? style['expanded'] : ''}`}
+                className={`${style['image-title']}`}
                 title={cleanHTML(title)}
-                dangerouslySetInnerHTML={{ __html: titleContent }}
+                dangerouslySetInnerHTML={{ __html: title }}
               />
-              <DenTypography
+              <ReadMoreLess config={{content: caption, cssConfig:{color:'red'}, lineLimit: 3}}  />
+              {/* <DenTypography
                 variant="body1"
-                className={`${style['image-caption']} ${showCaption ? style['expanded'] : ''}`}
-                dangerouslySetInnerHTML={{ __html: captionContent }}
-              />
+                className={`${style['image-caption']}`}
+                dangerouslySetInnerHTML={{ __html: caption }}
+              /> */}
+              {/* <ReadMoreLess config={{content: caption}}/> */}
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}
