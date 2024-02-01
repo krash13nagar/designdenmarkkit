@@ -12,10 +12,9 @@ type Story = StoryObj<typeof ReadMoreLess>;
 
 export const Default: Story = {
     args: {
-        config: {
-            content: "<strong>New Delhi, Aug 11 (IANS) Isolate</strong>d heavy<sub> to very hea</sub>vy rainfall is <sup>likely to continue</sup> over Uttarakhand, Bihar, Sikkim, Arunachal Pradesh, Assam, <u>and Meghalaya during </u>next five days while rainfall activity over rest of the country is likely to be subdued during next one week before a revival of active monsoon conditions thereafter, the IMD said on Friday. <strong>New Delhi, Aug 11 (IANS) Isolate</strong>d heavy<sub> to very hea</sub>vy rainfall is <sup>likely to continue</sup> over Uttarakhand, Bihar, Sikkim, Arunachal Pradesh, Assam, <u>and Meghalaya during </u>next five days while rainfall activity over rest of the country is likely to be subdued during next one week before a revival of active monsoon conditions thereafter, the IMD said on Friday.",
-            charLimit: 300
-        }
+        content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+        lineLimit: 2,
+        config:{variant: "h6"}
     },
   };
   
