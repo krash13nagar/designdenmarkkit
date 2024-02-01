@@ -8,12 +8,8 @@
     -webkit-box-orient: vertical;
 }
 
-.inlinePos{
-    display: inline;
-}
-
 .contentWrapper{
-    display: inline;
+    display: block;
     margin: 0;
     position: relative;
     .absoultePos {
@@ -22,6 +18,9 @@
         bottom: 0;
         z-index: 1;
         background: white;
+    }
+    .inlinePos{
+        display: inline;
     }
 }
 

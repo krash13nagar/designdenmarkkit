@@ -98,19 +98,19 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 seperator=":"
                 className={style['msid']}
               />
-              <DenTypography
+              {/* <DenTypography
                 variant="h6"
                 className={`${style['image-title']}`}
                 title={cleanHTML(title)}
                 dangerouslySetInnerHTML={{ __html: title }}
-              />
-              <ReadMoreLess config={{content: caption, variant: "caption", classes:`${style['image-title']}` }}  />
+              /> */}
+              <ReadMoreLess config={{content: title, charLimit:80 ,variant: "body1", classes:`${style['image-title']}` }}  />
+              <ReadMoreLess config={{content: caption, lineLimit:3, variant: "caption", classes:`${style['image-caption']}` }}  />
               {/* <DenTypography
                 variant="body1"
                 className={`${style['image-caption']}`}
                 dangerouslySetInnerHTML={{ __html: caption }}
               /> */}
-              {/* <ReadMoreLess config={{content: caption}}/> */}
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}
