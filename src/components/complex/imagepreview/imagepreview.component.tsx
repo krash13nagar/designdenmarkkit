@@ -72,7 +72,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (
   };
   const { width, height } = viewPortDimenssions(viewPort);
   return (
-    <DenDialog open={true} maxWidth={"lg"}>
+    <DenDialog open={true} maxWidth="lg">
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
         <div className={style['titleWrapper']}>
           <div className={style['titleText']}>
@@ -98,19 +98,8 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 seperator=":"
                 className={style['msid']}
               />
-              {/* <DenTypography
-                variant="h6"
-                className={`${style['image-title']}`}
-                title={cleanHTML(title)}
-                dangerouslySetInnerHTML={{ __html: title }}
-              /> */}
-              <ReadMoreLess config={{content: title, charLimit:80 ,variant: "body1", classes:`${style['image-title']}` }}  />
+              <ReadMoreLess config={{content: title, lineLimit: 2 ,variant: "body1", classes:`${style['image-title']}` }}  />
               <ReadMoreLess config={{content: caption, lineLimit:3, variant: "caption", classes:`${style['image-caption']}` }}  />
-              {/* <DenTypography
-                variant="body1"
-                className={`${style['image-caption']}`}
-                dangerouslySetInnerHTML={{ __html: caption }}
-              /> */}
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}

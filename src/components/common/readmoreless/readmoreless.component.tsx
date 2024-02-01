@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { ReadMoreLessProps } from './readmoreless.types';
 import style from './readmoreless.module.scss'
-import DenAccordion from '../accordion/accordion.component';
 import DenTypography from '../typography/typography.component';
 import { cleanHTML } from '../../../utility/utils';
 
@@ -11,10 +10,10 @@ import { cleanHTML } from '../../../utility/utils';
  * @param {string} props.content - Content of the typography component.
  * @param {number} props.lineLimit - Line count for the collapsed state of Typography.
  * @param {number} props.charLimit - Character count for the collapsed state of Typography.
- * @param {string} props.variant - Variant of typography.
+ * @param {string} props.variant - Variant of Typography.
  * @param {string} props.classes - Classes for Typography.
  * @param {React.CSSProperties} props.cssConfig - CSS Configurations.
- * @param {string} props.displayText - Display Text.
+ * @param {object} props.displayText - Display Text.
  * ref is forwarded to the parent element.
  */
 
@@ -24,22 +23,25 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, { config: ReadMoreL
     const [updatedContent, setUpdatedContent]=useState(`${charLimit ? content.slice(0, charLimit) : content}`);
     const [dynamicCss, setDynamicCss]=useState({WebkitLineClamp: isExpanded ? 'unset' : lineLimit || 2});
 
-
     const toggleReadMore =()=>{
       setIsExpanded(!isExpanded);
-      if(lineLimit || !charLimit){
+      if(lineLimit){
         setDynamicCss({
           WebkitLineClamp: !isExpanded ? 'unset' : lineLimit || 2,
         });
       }else if(charLimit){
         setUpdatedContent(!isExpanded ? content : content.slice(0, charLimit));
+      }else{
+        setDynamicCss({
+          WebkitLineClamp: !isExpanded ? 'unset' : lineLimit || 2,
+        });
       }
     }
 
 
     return (
       <>
-      <span className={style.contentWrapper}>
+      <span className={style['contentWrapper']}>
         <DenTypography
           variant={variant ? variant : 'caption'}
           className={`${charLimit || isExpanded ? style['inlinePos'] : style['ellipsis']}`}
@@ -50,11 +52,11 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, { config: ReadMoreL
         />
         {<DenTypography
           variant={variant ? variant : 'caption'}
-          className={`${!isExpanded && (lineLimit || !charLimit) ? style['absoultePos'] : ''}`}
+          className={`${!isExpanded && (lineLimit || !charLimit) ? style['absoultePos'] : style['inlinePos']}`}
           style={{...cssConfig, color: cssConfig?.color? cssConfig.color : "#4D9ACA"}}
           onClick={toggleReadMore}
           >
-          {isExpanded ? `${displayText?.less ? displayText.less : "Read Less"}` :
+          {isExpanded ? `${displayText?.less ? displayText.less : " Read Less"}` :
           `${displayText?.more ? displayText.more : "...Read More"}`}
           </DenTypography>}
         </span>
