@@ -8,18 +8,18 @@
     -webkit-box-orient: vertical;
 }
 
-.contentWrapper{
+.readmorewrapper{
     display: block;
     margin: 0;
     position: relative;
-    .absolutePos {
+    .posabsolute {
         position: absolute;
         right: 0;
         bottom: 0;
         z-index: 1;
         background: white;
     }
-    .inlinePos{
+    .posinline{
         display: inline;
     }
 }

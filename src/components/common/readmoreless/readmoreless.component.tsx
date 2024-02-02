@@ -17,44 +17,59 @@ import { cleanHTML } from '../../../utility/utils';
 export const ReadMoreLess = React.forwardRef<HTMLDivElement, ReadMoreLessProps >(
   ({content, lineLimit, charLimit, config}, ref) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const [updatedContent, setUpdatedContent]=useState(`${charLimit ? content.slice(0, charLimit) : content}`);
+    const [updatedContent, setUpdatedContent]=useState(`${!lineLimit && charLimit ? content.slice(0, charLimit) : content}`);
     const [dynamicCss, setDynamicCss]=useState({WebkitLineClamp: isExpanded ? 'unset' : lineLimit || 2});
 
     const toggleReadMore =()=>{
       setIsExpanded(!isExpanded);
-      if(lineLimit){
+      if(lineLimit || !charLimit){
         setDynamicCss({
           WebkitLineClamp: !isExpanded ? 'unset' : lineLimit || 2,
         });
-      }else if(charLimit){
-        setUpdatedContent(!isExpanded ? content : content.slice(0, charLimit));
       }else{
-        setDynamicCss({
-          WebkitLineClamp: !isExpanded ? 'unset' : lineLimit || 2,
-        });
+        setUpdatedContent(!isExpanded ? content : content.slice(0, charLimit));
       }
     }
 
+    const variant=config?.variant ? config?.variant : 'caption';
+    const readMoreText=config?.displayText?.more ? config?.displayText.more : "...Read More";
+    const readLessText=config?.displayText?.less ? config?.displayText.less : " Read Less";
+    const btnColor=config?.cssConfig?.color? config?.cssConfig?.color : "#4D9ACA";
+    const btnCss={...config?.cssConfig, color: btnColor};
+    const titleText=cleanHTML(updatedContent);
+
+    const btnClass=()=>{
+      if(!isExpanded && (lineLimit || !charLimit)){
+        return 'posabsolute';
+      }
+      return 'posinline';
+    }
+
+    const txtClass=()=>{
+      if(charLimit || isExpanded){
+        return 'posinline';
+      }
+      return 'ellipsis';
+    }
 
     return (
       <>
-      <span className={style['contentWrapper']}>
+      <span className={style['readmorewrapper']}>
         <DenTypography
-          variant={config?.variant ? config?.variant : 'caption'}
-          className={`${charLimit || isExpanded ? style['inlinePos'] : style['ellipsis']}`}
-          title={cleanHTML(updatedContent)}
+          variant={variant}
+          className={style[txtClass()]}
+          title={titleText}
           classes={config?.classes}
           dangerouslySetInnerHTML={{ __html: updatedContent}}
           style={lineLimit || !charLimit ? dynamicCss : {}}
         />
         {<DenTypography
-          variant={config?.variant ? config?.variant : 'caption'}
-          className={`${!isExpanded && (lineLimit || !charLimit) ? style['absolutePos'] : style['inlinePos']}`}
-          style={{...config?.cssConfig, color: config?.cssConfig?.color? config?.cssConfig?.color : "#4D9ACA"}}
+          variant={variant}
+          className={style[btnClass()]}
+          style={btnCss}
           onClick={toggleReadMore}
           >
-          {isExpanded ? `${config?.displayText?.less ? config?.displayText.less : " Read Less"}` :
-          `${config?.displayText?.more ? config?.displayText.more : "...Read More"}`}
+          {isExpanded ? readLessText : readMoreText}
           </DenTypography>}
         </span>
       </>
