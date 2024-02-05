@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ArticlePreviewProps {
-    title: string,
+    title?: string,
     wordCount?: string | number,
     time?: string,
     date?: string,

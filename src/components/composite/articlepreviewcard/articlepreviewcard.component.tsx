@@ -1,8 +1,13 @@
 import React from 'react';
 import { ArticlePreviewCardProps } from './articlepreviewcard.types';
 import styles from './articlepreviewcard.module.scss';
-import { DenBox, DenTypography } from '../../common';
+import { DenBox, DenIconButton, DenRadio, DenTypography } from '../../common';
 import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback';
+import { Collapse, IconButtonProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import ArticlePreview from '../articlepreview/articlepreview.component';
+import clsx from 'clsx';
+import { ExpandMoreIcon, OpenInNewIcon } from '../../../assets';
 
 /**
  * ArticlePreviewCard Component.
@@ -45,21 +50,55 @@ export const ArticlePreviewCard = React.forwardRef<
       leftMargin,
       wrapperClass = '',
       showCta = true,
+      radioValue,
+      selectedRadioValue,
+      handleRadioChange,
+      showRadio = false,
+      synopsis = '',
+      richContent = '',
+      showExpandMore = false,
     },
     ref
   ) => {
-    const handleCTA = (e: React.MouseEvent<HTMLDivElement>) => {
+    const [expanded, setExpanded] = React.useState(false);
+    const handleCTA = (e: React.MouseEvent<HTMLButtonElement>) => {
       handleCTAClick(e);
       e.stopPropagation();
     };
+
+    const handleExpandClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setExpanded((exp) => !exp);
+      e.stopPropagation();
+    };
+
+    interface ExpandMoreProps extends IconButtonProps {
+      expand: boolean;
+    }
+
+    const ExpandMore = styled((props: ExpandMoreProps) => {
+      const { expand, ...other } = props;
+      return <DenIconButton {...other} />;
+    })(({ theme, expand }) => ({
+      transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('all', {
+        duration: theme.transitions.duration.short,
+      }),
+    }));
+
+    const isSelected =
+      selectedRadioValue !== undefined && selectedRadioValue === radioValue;
 
     return (
       <DenBox
         onClick={handleCardClick}
         ref={ref}
-        className={`${styles.referenceCardWrapper} ${wrapperClass || ''} ${
-          classes.root || ''
-        }`}
+        className={clsx(
+          styles.referenceCardWrapper,
+          wrapperClass,
+          classes.root,
+          { [styles.selected]: isSelected }
+        )}
         sx={{ mr: rightMargin || 0, ml: leftMargin || 0 }}
       >
         {imgUrl && (
@@ -74,15 +113,41 @@ export const ArticlePreviewCard = React.forwardRef<
         )}
 
         <div className={styles.rightWrapper}>
-          <span className={styles.noMargin} title={title}>
+          <DenBox
+            className={clsx(styles.noMargin, styles.radioTitleWrapper)}
+            title={title}
+            sx={{
+              mb: showRadio ? '4px' : '8px',
+            }}
+          >
+            {showRadio && (
+              <DenRadio
+                classes={{ root: styles.radio }}
+                checked={isSelected}
+                onChange={handleRadioChange}
+                value={radioValue}
+                name="article-preview-radio-buttons"
+              />
+            )}
             <DenTypography className={styles.title}>{title}</DenTypography>
-          </span>
+          </DenBox>
           <div className={styles.rightBottomWrapper}>
             <div className={styles.secondaryText}>
               {date && <span>{date}</span>}
               {date && +wordCount > 0 && <>&thinsp;|&thinsp;</>}
               {+wordCount > 0 && <span>WC {wordCount}</span>}
             </div>
+            {(synopsis || richContent) && (
+              <Collapse in={expanded} timeout="auto">
+                <ArticlePreview
+                  synopsis={synopsis}
+                  richContent={richContent}
+                  contentClass={styles.richContent}
+                  synopsisClass={styles.synopsis}
+                  classes={{ root: styles.articlePreviewRoot }}
+                />
+              </Collapse>
+            )}
             <div className={styles.redirectWrapper}>
               <div
                 className={`${styles.agencySourceWrapper} ${styles.secondaryText}`}
@@ -97,15 +162,40 @@ export const ArticlePreviewCard = React.forwardRef<
                   </span>
                 )}
               </div>
-              {showCta && ctaIcon && (
-                <div
-                  title={ctaTooltipText}
-                  onClick={handleCTA}
-                  className={styles.ctaIcon}
-                >
-                  {ctaIcon}
-                </div>
-              )}
+              <div className={styles.actionButtons}>
+                {showCta && (
+                  <DenIconButton
+                    title={ctaTooltipText}
+                    onClick={handleCTA}
+                    className={styles.ctaIcon}
+                    size={'small'}
+                    disableRipple
+                    sx={{ p: 0 }}
+                  >
+                    {ctaIcon || (
+                      <OpenInNewIcon
+                        hoverHtmlColor="#0E88FF"
+                        htmlColor="#D2D8DF"
+                      />
+                    )}
+                  </DenIconButton>
+                )}
+                {showExpandMore && (
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                    size={'small'}
+                    sx={{ p: 0 }}
+                  >
+                    <ExpandMoreIcon
+                      hoverHtmlColor="#4D4D4D"
+                      htmlColor="#D2D8DF"
+                    />
+                  </ExpandMore>
+                )}
+              </div>
             </div>
           </div>
         </div>
