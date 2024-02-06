@@ -45,7 +45,7 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, ReadMoreLessProps >
     const readMoreText=config?.displayText?.more ? config?.displayText.more : "...Read More";
     const readLessText=config?.displayText?.less ? config?.displayText.less : " Read Less";
     const btnColor=config?.cssConfig?.color? config?.cssConfig?.color : "#4D9ACA";
-    const btnCss={...config?.cssConfig, color: btnColor};
+    const btnCss={...config?.cssConfig, ...config?.textConfig, color: btnColor};
     const titleText=cleanHTML(updatedContent);
 
     const btnClass=()=>{
@@ -72,7 +72,8 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, ReadMoreLessProps >
           classes={config?.classes}
           ref={contentRef}
           dangerouslySetInnerHTML={{ __html: updatedContent}}
-          style={lineLimit || !charLimit ? dynamicCss : {}}
+          style={(lineLimit || !charLimit) ? { ...dynamicCss, ...config?.textConfig } : {...config?.textConfig}}
+
         />
         {contentOverflow && <DenTypography
           variant={variant}

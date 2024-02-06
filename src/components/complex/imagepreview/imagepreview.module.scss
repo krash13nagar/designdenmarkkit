@@ -61,35 +61,6 @@
       .contentDiv{
         margin: 10px 5px;
       }
-      .image-title,
-      .image-caption {
-        p {
-          margin: 0px;
-          padding: 0px;
-        }
-
-        div {
-          margin: 0px;
-          padding: 0px;
-        }
-      }
-
-      .image-caption {
-        font-size: 12px;
-        line-height: 20px;
-        letter-spacing: 0.13px;
-        margin: 10px 5px;
-        color: #4d4d4d;
-      }
-
-      .image-title {
-        font-size: 14px;
-        font-weight: bold;
-        line-height: 20px;
-        letter-spacing: 0.15px;
-        color: #2b2b2b;
-        margin: 10px 5px;
-      }
 
       .row {
         display: flex;
@@ -242,10 +213,6 @@
   .rightPanel {
     .rightPanel-content {
       height: 438px;
-
-      .image-caption {
-        -webkit-line-clamp: 3 !important;
-      }
     }
   }
 }
