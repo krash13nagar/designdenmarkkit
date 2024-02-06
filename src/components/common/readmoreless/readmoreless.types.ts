@@ -1,0 +1,17 @@
+import {ReactNode} from 'react';
+
+export interface ReadMoreLessProps{
+    content: string,
+    lineLimit?: number,
+    charLimit?: number,    
+    config?:{
+        classes?: string,
+        variant?: "button" | "caption" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body1" | "body2" | "overline" | "inherit",
+        cssConfig?: React.CSSProperties;
+        textConfig?: React.CSSProperties;
+        displayText?: {
+            more?: string,
+            less?:string
+        },
+    }
+} 
