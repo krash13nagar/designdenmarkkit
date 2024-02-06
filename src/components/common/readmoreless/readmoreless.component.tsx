@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { ReadMoreLessProps } from './readmoreless.types';
 import style from './readmoreless.module.scss'
 import DenTypography from '../typography/typography.component';
@@ -19,6 +19,16 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, ReadMoreLessProps >
     const [isExpanded, setIsExpanded] = useState(false);
     const [updatedContent, setUpdatedContent]=useState(`${!lineLimit && charLimit ? content.slice(0, charLimit) : content}`);
     const [dynamicCss, setDynamicCss]=useState({WebkitLineClamp: isExpanded ? 'unset' : lineLimit || 2});
+    const [contentOverflow, setContentOverflow] = useState(false);
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+      if (contentRef?.current) {
+        if(contentRef.current.scrollHeight - contentRef.current.offsetHeight >= 19){
+          setContentOverflow(true);
+        }
+      }
+    }, [content]);
 
     const toggleReadMore =()=>{
       setIsExpanded(!isExpanded);
@@ -60,10 +70,11 @@ export const ReadMoreLess = React.forwardRef<HTMLDivElement, ReadMoreLessProps >
           className={style[txtClass()]}
           title={titleText}
           classes={config?.classes}
+          ref={contentRef}
           dangerouslySetInnerHTML={{ __html: updatedContent}}
           style={lineLimit || !charLimit ? dynamicCss : {}}
         />
-        {<DenTypography
+        {contentOverflow && <DenTypography
           variant={variant}
           className={style[btnClass()]}
           style={btnCss}
