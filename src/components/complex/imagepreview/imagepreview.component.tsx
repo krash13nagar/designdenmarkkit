@@ -99,8 +99,8 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 className={style['msid']}
               />
               <div className={style['contentDiv']}>
-                <ReadMoreLess content={title} lineLimit={2} config={{variant:"h6", textConfig:{color:"#2b2b2b", fontSize:"14px", fontWeight:"bold", lineHeight:"20px", letterSpacing:"0.15px"}}} />
-                <ReadMoreLess content={caption} lineLimit={3} config={{variant:"body1", textConfig:{color:"#4d4d4d", fontSize:"12px", fontWeight:"bold", lineHeight:"20px", letterSpacing:"0.13px"}}} />
+                <ReadMoreLess content={title} lineLimit={2} config={{variant:"h6", textConfig:{color:"#2b2b2b", fontSize:"14px", fontWeight:"bold !important", lineHeight:"20px", letterSpacing:"0.15px"}}} />
+                <ReadMoreLess content={caption} lineLimit={3} config={{variant:"body1", textConfig:{color:"#4d4d4d", fontSize:"12px", lineHeight:"20px", letterSpacing:"0.13px"}}} />
               </div>
               <DisplayCardDate
                 creationDateTime={creationDateTime}
