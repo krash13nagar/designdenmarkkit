@@ -1,3 +1,37 @@
-// {item.name}, item.agencyName, item.imageInput.dataSource, ingestionDate, item.resolution, agencyUsageData(obj), onCallbackMenufnc
-// onCallbackSelectImagefnc
+import { ReactNode } from "react";
 
+export interface imageSearchCardConfig {
+    msid?:string,
+    type: string,
+    name: string,
+    fromNow: string,
+    agencyName: string,
+    entityType: string,
+    imageUrl: string,
+    dataSource: string,
+    imageSource: string,
+    resolution: string,
+    ingestionDate: string,
+    imageCardMenuOptions:imageCardMenuOptionsConfig[],
+    onCallbackSelectImagefnc: (e: React.SyntheticEvent<HTMLElement>)=>void;
+}
+
+export interface imageCardMenuOptionsConfig {
+    label: string;
+    icon: ReactNode;
+}
+
+export interface imageSearchCardHoverConfig {
+    name: string;
+	agencyName: string;
+	dataSource: string;
+	ingestionDate : string;
+    resolution: string;
+    agencyUsageData: any;
+    onCallbackMenufnc: (e: React.SyntheticEvent<HTMLElement>) => void;
+    onCallbackSelectImagefnc: (e: React.SyntheticEvent<HTMLElement>)=>void;
+}
+
+export interface imageSearchCardWrapperConfig {
+    imagesearchcardwrapper: imageSearchCardConfig[]
+}

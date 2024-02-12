@@ -1,7 +1,7 @@
 export const IMAGE_CARD_MENU_OPTIONS = [
-    {name:"Preview", icon:""},
-    {name:"Download", icon:""},
-    {name:"Set as Thumbnail",icon:""}
+    {label:"Preview", icon:""},
+    {label:"Download", icon:""},
+    {label:"Set as Thumbnail",icon:""}
 ]
 
 export const AGENCY_USAGE_QUOTA = {
@@ -15,4 +15,92 @@ export const AGENCY_USAGE_QUOTA = {
     agencyAlertClass:"agency-alert-class",
     agencyWarningClass:"agency-warning-class",
     agencyInfoClass:"agency-info-class"
-  }
+}
+
+export const imageSearchCardSample = {
+    type: "3-0",
+    name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+    agencyName: "Getty Images",
+    entityType: "IMAGES",
+    imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+    dataSource: "GETTYFEED",
+    fromNow: "10min ago",
+    imageSource: "DAM",
+    resolution: "5369 x 3580",
+    ingestionDate: "6th Feb 2024 03:53 PM",
+    imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+    onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+}
+
+export const imageSearchCardWrapperSample = [
+    {
+        type: "3-0",
+        name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+        agencyName: "Getty Images",
+        entityType: "IMAGES",
+        imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+        dataSource: "GETTYFEED",
+        fromNow: "10min ago",
+        imageSource: "DAM",
+        resolution: "5369 x 3580",
+        ingestionDate: "6th Feb 2024 03:53 PM",
+        imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+        onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+    },
+    {
+        type: "3-0",
+        name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+        agencyName: "Getty Images",
+        entityType: "IMAGES",
+        imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+        dataSource: "GETTYFEED",
+        fromNow: "10min ago",
+        imageSource: "DAM",
+        resolution: "5369 x 3580",
+        ingestionDate: "6th Feb 2024 03:53 PM",
+        imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+        onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+    },
+    {
+        type: "3-0",
+        name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+        agencyName: "Getty Images",
+        entityType: "IMAGES",
+        imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+        dataSource: "GETTYFEED",
+        fromNow: "10min ago",
+        imageSource: "DAM",
+        resolution: "5369 x 3580",
+        ingestionDate: "6th Feb 2024 03:53 PM",
+        imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+        onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+    },
+    {
+        type: "3-0",
+        name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+        agencyName: "Getty Images",
+        entityType: "IMAGES",
+        imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+        dataSource: "GETTYFEED",
+        fromNow: "10min ago",
+        imageSource: "DAM",
+        resolution: "5369 x 3580",
+        ingestionDate: "6th Feb 2024 03:53 PM",
+        imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+        onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+    },
+    {
+        type: "3-0",
+        name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+        agencyName: "Getty Images",
+        entityType: "IMAGES",
+        imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+        dataSource: "GETTYFEED",
+        fromNow: "10min ago",
+        imageSource: "DAM",
+        resolution: "5369 x 3580",
+        ingestionDate: "6th Feb 2024 03:53 PM",
+        imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,
+        onCallbackSelectImagefnc: function(e:React.SyntheticEvent<HTMLElement>){{console.log("select image")}}
+    }
+]

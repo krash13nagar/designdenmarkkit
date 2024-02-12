@@ -22,6 +22,8 @@ import {
   recommendedKeywords,
 } from './components/complex/keywords/keywords.types';
 import ImageSearchCard from './components/composite/imagesearchcard/imagesearchcard.component';
+import { imageSearchCardSample, imageSearchCardWrapperSample } from './components/composite/imagesearchcard/sample';
+import ImageSearchCardWrapper from './components/composite/imagesearchcard/imagesearchcardwrapper.component';
 
 declare const module: {
   hot: {
@@ -236,7 +238,7 @@ const App = (props: AppProps) => {
     <>
       {/* <ImageAuthModel {...testConfig} /> */}
       <TestCommon />
-      <ImageSearchCard/>
+      <ImageSearchCardWrapper imagesearchcardwrapper={imageSearchCardWrapperSample} />
     </>
   );
 };
