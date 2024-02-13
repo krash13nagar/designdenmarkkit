@@ -8,7 +8,6 @@ import style from './customtabs.module.scss';
 
 export const DenCustomTabs = (props: CustomTabsProps) => {
   const {
-    defaultTab = 'tab1',
     indicatorColor = 'primary',
     centered = false,
     visibleScrollbar = false,
@@ -19,10 +18,14 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
     selectionFollowsFocus = false,
     disableTab = '',
     tabTitleList = [],
+    selectedTab = '',
+    handleTabChange = () => {},
+    tabsProps = {},
+    tabProps = {},
+    tabPanelProps = {},
   } = props;
-  const [val, setVal] = React.useState(defaultTab);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setVal(newValue);
+    handleTabChange(newValue);
   };
 
   let tabList = React.Children.map(
@@ -44,13 +47,14 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
         <DenTab
           label={tabName}
           id={`tab-${index}`}
-          value={tabValue}
+          value={tabName}
           disabled={isTabDisabled}
           disableFocusRipple={disableFocusRipple}
           disableRipple={disableRipple}
           icon={icon}
           iconPosition={iconPosition}
           wrapped={wrapped}
+          {...tabProps}
         ></DenTab>
       );
     }
@@ -59,13 +63,13 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
   let tabPanel = React.Children.map(
     props.children,
     (child: any, index: number) => {
-      let tabPanelId = 'tab' + Number(index + 1);
+      let tabPanelId = tabTitleList[index] || 'tab' + Number(index + 1);
       return (
         <DenTabPanel
-          className={style['tabPanel-root']}
           value={tabPanelId}
           id={`tab-panel-${index}`}
           sx={{ padding: '16px 0px 16px 20px' }}
+          {...tabPanelProps}
         >
           {child}
         </DenTabPanel>
@@ -74,7 +78,7 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
   );
 
   return (
-    <DenTabContext value={val}>
+    <DenTabContext value={selectedTab}>
       <DenTabs
         indicatorColor={indicatorColor}
         aria-label="tabs custom component"
@@ -85,8 +89,9 @@ export const DenCustomTabs = (props: CustomTabsProps) => {
         variant={variant}
         scrollButtons={scrollButtons}
         selectionFollowsFocus={selectionFollowsFocus}
-        value={val}
+        value={selectedTab}
         onChange={handleChange}
+        {...tabsProps}
       >
         {tabList}
       </DenTabs>
