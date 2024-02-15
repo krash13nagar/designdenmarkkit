@@ -22,17 +22,26 @@ export const DenCustomRadioGroup = (props: CustomRadioGroupProps) => {
     onHandleChange(event.target.value);
   };
   const renderRadioButtons = () => {
-    return radioButtonList.map((obj: { value: string; label: string }) => (
-      <DenFormControlLabel
-        className={styles.radioGroupValue}
-        key={obj.value}
-        value={obj.value}
-        control={<DenRadio className={styles.radio} />}
-        label={obj.label}
-        checked={selectedValue === obj.value}
-        onChange={handleChange}
-      />
-    ));
+    return radioButtonList.map(
+      (obj: {
+        value: string;
+        label: string;
+        disabled?: boolean;
+        title?: string;
+      }) => (
+        <DenFormControlLabel
+          className={styles.radioGroupValue}
+          key={obj.value}
+          value={obj.value}
+          disabled={obj.disabled}
+          control={<DenRadio className={styles.radio} />}
+          label={obj.label}
+          checked={selectedValue === obj.value}
+          onChange={handleChange}
+          title={obj.title || ''}
+        />
+      )
+    );
   };
 
   return (
