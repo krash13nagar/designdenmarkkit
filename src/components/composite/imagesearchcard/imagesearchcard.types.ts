@@ -19,6 +19,7 @@ export interface imageSearchCardConfig {
 export interface imageCardMenuOptionsConfig {
     label: string;
     icon: ReactNode;
+    onClickFnc: (e: React.SyntheticEvent<HTMLElement>) => void;
 }
 
 export interface imageSearchCardHoverConfig {
@@ -30,8 +31,4 @@ export interface imageSearchCardHoverConfig {
     agencyUsageData: any;
     onCallbackMenufnc: (e: React.SyntheticEvent<HTMLElement>) => void;
     onCallbackSelectImagefnc: (e: React.SyntheticEvent<HTMLElement>)=>void;
-}
-
-export interface imageSearchCardWrapperConfig {
-    imagesearchcardwrapper: imageSearchCardConfig[]
 }

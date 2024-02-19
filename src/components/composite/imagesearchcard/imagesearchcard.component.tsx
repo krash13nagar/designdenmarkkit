@@ -4,7 +4,7 @@ import { DenCard, DenCardActions, DenCardMedia } from '../../common';
 import { cleanHTML } from '../../../utility/utils';
 import ImageSearchCardHoverDetails from './imagesearchcardhover.component';
 import { ClickAwayListener } from '@mui/material';
-import { imageSearchCardConfig } from './imagesearchcard.types';
+import { imageCardMenuOptionsConfig, imageSearchCardConfig } from './imagesearchcard.types';
 
 
 export const ImageSearchCard = (props: imageSearchCardConfig) => {
@@ -31,7 +31,7 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
     const handleShowCardMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setShowCardMenu(!showCardMenu);
         if (e.currentTarget) {
-            var list = e.currentTarget.closest('.search-outcome');
+            var list = e.currentTarget.closest('.cds-imagesearchCardWrapper');
             if (list) {
                 var menuBtnRect = e.currentTarget.getBoundingClientRect()
                 var listRect = list.getBoundingClientRect()
@@ -52,6 +52,15 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
                 }
             }
         }
+    }
+
+    const handleOnCardMenuClick = (e: React.SyntheticEvent<HTMLElement>, item: imageCardMenuOptionsConfig) => {
+        if (item.onClickFnc) {
+            item.onClickFnc(e);
+            setShowCardMenu(false);
+
+        }
+
     }
 
     const getClassNames = (item: any) => {
@@ -137,9 +146,10 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
                                     <>
                                         <div
                                             className={cssClassName["card-menu-item"]}
-                                        //   onClick={() => {
-                                        //     handleOnCardMenuClick(cardMenuItem);
-                                        //   }}
+                                            key={index}
+                                            onClick={(e) => {
+                                                handleOnCardMenuClick(e, cardMenuItem);
+                                            }}
                                         >
                                             <span className={`${cssClassName["menu-icon"]} ${cssClassName["mr6"]}`}>
                                                 {cardMenuItem.icon}
