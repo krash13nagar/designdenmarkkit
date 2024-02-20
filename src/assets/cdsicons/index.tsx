@@ -14,3 +14,4 @@ export * from './infoicon';
 export * from './expandmoreicon';
 export * from './morevertIcon';
 export * from './closeicon';
+export * from './openinnewicon';

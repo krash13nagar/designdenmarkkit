@@ -11,4 +11,9 @@ export interface CustomTabsProps {
   selectionFollowsFocus?: boolean;
   disableTab?: string;
   tabTitleList?: string[];
+  selectedTab?: string,
+  handleTabChange?: (tabValue: string) => void,
+  tabsProps?: any,
+  tabProps?: any,
+  tabPanelProps?: any
 }

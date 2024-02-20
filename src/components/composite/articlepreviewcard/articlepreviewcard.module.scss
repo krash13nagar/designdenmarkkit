@@ -15,6 +15,11 @@
         box-shadow: 0px css.pxToRem(3px) css.pxToRem(6px) #00000029;
     }
 
+    &.selected {
+        border: css.pxToRem(1px) solid #3D88C6;
+        box-shadow: 0px css.pxToRem(3px) css.pxToRem(6px) #00000029;
+    }
+
     .leftWrapper {
         width: css.pxToRem(64px);
         height: css.pxToRem(64px);
@@ -30,6 +35,11 @@
         flex-direction: column;
         justify-content: space-between;
         font-family: "Source Sans 3", "Open Sans", sans-serif;
+
+        .radioTitleWrapper {
+            display: flex;
+            flex-wrap: nowrap;
+        }
 
         .rightBottomWrapper {
             display: flex;
@@ -51,6 +61,22 @@
                     }
                 }
             }
+
+            .richContent {
+                color: "#2b2b2b";
+                font-size: css.pxToRem(13px);
+                line-height: css.pxToRem(19px);
+            }
+
+            .synopsis {
+                font-size: css.pxToRem(12px);
+                line-height: css.pxToRem(19px);
+                margin-bottom: css.pxToRem(8px);
+            }
+
+            .articlePreviewRoot {
+                padding: 0;
+            }
         }
 
         .title {
@@ -66,7 +92,9 @@
             -webkit-box-orient: vertical;
             font-family: "Merriweather", "Source Sans 3", "Open Sans", sans-serif;
             color: #4D4D4D;
-            margin-bottom: css.pxToRem(8px);
+            // margin-bottom: css.pxToRem(8px);
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         .secondaryText {
@@ -74,15 +102,26 @@
             line-height: css.pxToRem(16px);
             color: #818181;
         }
+
+        .radio {
+            padding: 4px;
+        }
     }
 
-    .ctaIcon {
+    .actionButtons {
         align-self: flex-end;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        svg {
-            cursor: pointer;
+        .ctaIcon {
+            margin-right: css.pxToRem(14px);
+
+            svg {
+                cursor: pointer;
+            }
+
         }
-
     }
 
     .noMargin {
