@@ -13,13 +13,13 @@ export interface imageSearchCardConfig {
     resolution: string,
     ingestionDate: string,
     imageCardMenuOptions:imageCardMenuOptionsConfig[],
-    onCallbackSelectImagefnc: (e: React.SyntheticEvent<HTMLElement>)=>void;
+    onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>;
 }
 
 export interface imageCardMenuOptionsConfig {
     label: string;
     icon: ReactNode;
-    onClickFnc: (e: React.SyntheticEvent<HTMLElement>) => void;
+    onClickFnc: React.MouseEventHandler<HTMLElement>;
 }
 
 export interface imageSearchCardHoverConfig {
@@ -29,6 +29,6 @@ export interface imageSearchCardHoverConfig {
 	ingestionDate : string;
     resolution: string;
     agencyUsageData: any;
-    onCallbackMenufnc: (e: React.SyntheticEvent<HTMLElement>) => void;
-    onCallbackSelectImagefnc: (e: React.SyntheticEvent<HTMLElement>)=>void;
+    onCallbackMenufnc: React.MouseEventHandler<HTMLElement>;
+    onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>;
 }

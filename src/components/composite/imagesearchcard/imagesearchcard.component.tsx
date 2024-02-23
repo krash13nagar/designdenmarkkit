@@ -54,11 +54,10 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
         }
     }
 
-    const handleOnCardMenuClick = (e: React.SyntheticEvent<HTMLElement>, item: imageCardMenuOptionsConfig) => {
+    const handleOnCardMenuClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: imageCardMenuOptionsConfig) => {
         if (item.onClickFnc) {
             item.onClickFnc(e);
             setShowCardMenu(false);
-
         }
 
     }

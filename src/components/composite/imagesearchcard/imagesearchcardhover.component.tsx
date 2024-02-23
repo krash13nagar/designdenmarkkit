@@ -40,13 +40,13 @@ export const ImageSearchCardHoverDetails = (props: imageSearchCardHoverConfig) =
     }
   }, [])
 
-  const handleSelectImage = (e: React.SyntheticEvent<HTMLElement>) => {
+  const handleSelectImage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (props.onCallbackSelectImagefnc) {
       props.onCallbackSelectImagefnc(e);
     }
   }
 
-  const handleCardMenu = (e: React.SyntheticEvent<HTMLElement>) => {
+  const handleCardMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (props.onCallbackMenufnc) {
       props.onCallbackMenufnc(e);
     }
