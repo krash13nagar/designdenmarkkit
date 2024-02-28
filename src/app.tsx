@@ -5,23 +5,15 @@
 
 import React, { useState } from 'react';
 import TestCommon from './testcommon';
-import BasicMenu from './testmenu';
 import DenLink from './components/common/link/link.component';
-import DenBreadcrumbs from './components/common/breadcrumbs/breadcrumbs.component';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import { DenTypography, ImagePreview } from './components';
-import { TrendingSearchCard } from './components/composite/trendingsearchcard';
-import { sample } from './components/complex/imagepreview/sample';
 import { Cancel } from './assets';
-import ImageAuthModel from './components/complex/imageauth/imageauthmodel';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
 import {
   keywordsWrapperConfig,
   recommendedKeywords,
 } from './components/complex/keywords/keywords.types';
-
 
 declare const module: {
   hot: {
@@ -47,7 +39,7 @@ const breadcrumbs = [
 ];
 const test = {
   primeCategoryLabel: '',
-  handlePrimeChange: () => { },
+  handlePrimeChange: () => {},
   isPublished: false,
   primeType: 0,
   isPrimeEnable: true,
@@ -62,13 +54,13 @@ const test = {
    */
   publishDate: {
     PublishModalTitle: 'Publish and expiry Date',
-    onAutoCorrect: () => { },
-    onReset: () => { },
-    onClose: () => { },
-    onDone: () => { },
+    onAutoCorrect: () => {},
+    onReset: () => {},
+    onClose: () => {},
+    onDone: () => {},
     preventCloseOnDone: false,
     overrideClose: '',
-    callback: () => { },
+    callback: () => {},
     publishDateLabel: 'Publish Date',
     publishDate: 1693819795753,
     expiresIn: 1693824566621,
@@ -80,17 +72,17 @@ const test = {
     { title: 'Unavaialble', value: '2', icon: <Cancel /> },
     { title: 'block', value: '3', icon: <Cancel /> },
   ],
-  activationChangeHandle: () => { },
+  activationChangeHandle: () => {},
   activationStatus: '0',
   imageCaption: {
     caption: 'caption of image',
     captionError: '',
     captionChildError: '',
     captionChildWarning: '',
-    onChange: (str: string) => { },
+    onChange: (str: string) => {},
     captionTitle: 'Title of caption',
     captionRequired: false,
-    onClick: (event: any) => { },
+    onClick: (event: any) => {},
     countRequired: false,
   },
   titleForUrl: {
@@ -246,7 +238,7 @@ if (module?.hot) {
 
 App.defaultProps = {
   reqObj: {},
-  callbackNgFn: () => { },
+  callbackNgFn: () => {},
 };
 
 export default App;
