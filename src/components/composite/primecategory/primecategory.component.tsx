@@ -21,6 +21,7 @@ const PrimeCategory = (props: PrimeCategoryProps) => {
         {primeCategoryLabel}
       </DenInputLabel>
       <DenSelect
+        variant='outlined'
         value={primeType}
         onChange={handlePrimeChange}
         className="primeSelector"
