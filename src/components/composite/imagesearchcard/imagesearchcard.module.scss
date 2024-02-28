@@ -20,7 +20,7 @@
 
 .default-card-wrapper{
   padding: 0px;
-  width: 190px;
+  width: inherit;
   position: relative;
   height: 160px;
   cursor: pointer;
@@ -277,4 +277,14 @@
 
 .mr6 {
   margin-right: 6px;
+}
+
+.icon {
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.mr4 {
+  margin-right: 4px;
 }

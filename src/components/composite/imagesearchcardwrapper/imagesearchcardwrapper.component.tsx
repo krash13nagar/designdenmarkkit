@@ -9,7 +9,8 @@ import { imageSearchCardConfig } from '../imagesearchcard/imagesearchcard.types'
 export const ImageSearchCardWrapper = (props: imageSearchCardWrapperConfig) => {
 
     const {
-        imagesearchcardList
+        imagesearchcardList,
+        classes
     } = props;
 
     const renderChildern = (item: imageSearchCardConfig, index: number) => {
@@ -24,7 +25,7 @@ export const ImageSearchCardWrapper = (props: imageSearchCardWrapperConfig) => {
     }
 
     return (
-        <div className={clsx('cds-imagesearchCardWrapper', style['imagesearchcard-wrapper'])}>
+        <div className={clsx('cds-imagesearchCardWrapper', style['imagesearchcard-wrapper'], classes?.root)}>
             {imagesearchcardList.map((item, index) => renderChildern(item, index))}
         </div>
     )

@@ -15,5 +15,6 @@ type Story = StoryObj<typeof ImageSearchCardWrapper>;
 export const Primary: Story = {
   args: {
     imagesearchcardList: imageSearchCardWrapperSample,
+    classes:{"root":"imgCardWrapperClass"}
   },
 };

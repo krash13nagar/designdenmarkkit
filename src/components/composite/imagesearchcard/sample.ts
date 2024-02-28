@@ -26,6 +26,7 @@ export const imageSearchCardSample = {
     dataSource: "GETTYFEED",
     fromNow: "10min ago",
     imageSource: "DAM",
+    classes:{"root":"cardWrapperClass"},
     resolution: "5369 x 3580",
     ingestionDate: "6th Feb 2024 03:53 PM",
     imageCardMenuOptions:IMAGE_CARD_MENU_OPTIONS,

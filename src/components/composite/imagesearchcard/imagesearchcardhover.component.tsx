@@ -3,6 +3,7 @@ import style from './imagesearchcard.module.scss';
 import moment from 'moment';
 import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
+import { ICONS } from './imagesearchcard.constant';
 
 
 export const ImageSearchCardHoverDetails = (props: imageSearchCardHoverConfig) => {
@@ -85,7 +86,7 @@ export const ImageSearchCardHoverDetails = (props: imageSearchCardHoverConfig) =
 
       </div>
       <div className={`${style['mb7']} ${style['vc-ellipsis']}`} title={ingestionDate}>
-        {/* <span className="mr4 icon">{ICONS.pubDate}</span> */}
+        <span className={`${style['mr4']} ${style['icon']}`}>{ICONS.pubDate}</span>
         <span className={style["secondaryText"]}>{ingestionDate}</span>
       </div>
       <div className={`${style['mb7']} ${style["secondaryText"]} ${style['vc-ellipsis']}`}>
