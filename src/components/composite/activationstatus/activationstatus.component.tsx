@@ -31,6 +31,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
         {activationStatusLabel}
       </DenInputLabel>
       <DenSelect
+        variant='standard'
         value={activationStatus}
         onChange={activationChangeHandle}
         disabled={disableActivationStatus}

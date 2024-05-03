@@ -32,6 +32,7 @@ import {
 } from './imagepreview.types';
 import { DisplayCardDate } from '../../composite/datetime/datetime';
 import { cleanHTML } from '../../../utility/utils';
+import {ReadMoreLess} from '../../common';
 
 export const ImagePreview: FC<ImagePreviewProps> = (
   props: ImagePreviewProps = sample
@@ -97,17 +98,10 @@ export const ImagePreview: FC<ImagePreviewProps> = (
                 seperator=":"
                 className={style['msid']}
               />
-              <DenTypography
-                variant="h6"
-                className={style['image-title']}
-                title={cleanHTML(title)}
-                dangerouslySetInnerHTML={{ __html: title }}
-              />
-              <DenTypography
-                variant="body1"
-                className={style['image-caption']}
-                dangerouslySetInnerHTML={{ __html: caption }}
-              />
+              <div className={style['contentDiv']}>
+                <ReadMoreLess content={title} lineLimit={2} config={{variant:"h6", textConfig:{color:"#2b2b2b", fontSize:"14px", fontWeight:"bold !important", lineHeight:"20px", letterSpacing:"0.15px"}}} />
+                <ReadMoreLess content={caption} lineLimit={3} config={{variant:"body1", textConfig:{color:"#4d4d4d", fontSize:"12px", lineHeight:"20px", letterSpacing:"0.13px"}}} />
+              </div>
               <DisplayCardDate
                 creationDateTime={creationDateTime}
                 artDate={artDate}

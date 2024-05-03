@@ -8,7 +8,7 @@ export interface ArticlePreviewCardProps {
     agency?: string,
     source?: string,
     ctaIcon?: ReactNode,
-    handleCTAClick?: React.MouseEventHandler<HTMLDivElement>,
+    handleCTAClick?: React.MouseEventHandler<any>,
     imagePlaceholderIcon?: ReactNode,
     handleCardClick?: React.MouseEventHandler<HTMLDivElement>,
     ctaTooltipText?: string,
@@ -20,5 +20,12 @@ export interface ArticlePreviewCardProps {
     id?: string,
     idLabel?: string,
     wrapperClass?: string,
-    showCta?: boolean
+    showCta?: boolean,
+    showRadio?: boolean,
+    selectedRadioValue?: string | number,
+    radioValue?: string | number,
+    handleRadioChange?: React.ChangeEventHandler<HTMLInputElement>,
+    synopsis?: string,
+    richContent?: string,
+    showExpandMore?: boolean
 }

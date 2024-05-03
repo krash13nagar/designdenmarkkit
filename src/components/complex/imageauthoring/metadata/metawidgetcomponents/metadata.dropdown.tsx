@@ -47,6 +47,7 @@ const MetadataDropdown = (props: any) => {
       <DenInputLabel shrink>{props.title}</DenInputLabel>
       <DenFormControl fullWidth>
         <DenSelect
+          variant='outlined'
           value={dropdown}
           onChange={handleChange}
           SelectDisplayProps={{
