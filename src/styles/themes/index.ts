@@ -1,2 +1,3 @@
 export * from "./defaultTheme"
-// export { styled as DenStyled } from '@mui/material/styles';
+
+export { createTheme as DenCreateTheme } from '@mui/material/styles';
