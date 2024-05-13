@@ -20,4 +20,5 @@ export interface richStoryCardConfig {
     classes?: {
         "root"?: string
     }
+    active?: boolean
 }

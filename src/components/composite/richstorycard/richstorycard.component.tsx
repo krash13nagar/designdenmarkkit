@@ -31,7 +31,8 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     cardMenuOptions,
     handleClick,
     handleCTA,
-    classes
+    classes,
+    active
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -67,7 +68,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
 
   return (
     <div>
-      <DenCard classes={{ root: cssClassName['card-root'] }} className={cssClassName['richStorycard-wrapper']} onClick={handleClick}>
+      <DenCard classes={{ root: cssClassName['card-root'] }} className={`${cssClassName['richStorycard-wrapper']} ${active?cssClassName.active:''}`} onClick={handleClick}>
         <div className={cssClassName["image-with-resolution-wrapper"]}>
           <DenCardMedia
             sx={{ height: 143 }}

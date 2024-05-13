@@ -18,5 +18,6 @@ export const richStoryCardSample = {
     id: "789866578",
     handleCTA: function(e:React.SyntheticEvent<HTMLElement>){{console.log("clicked preview icon")}},
     cardMenuOptions: CARD_MENU_OPTIONS,
-    handleClick : ()=>console.log("clicked!")
+    handleClick : ()=>console.log("clicked!"),
+    active: true
 }
