@@ -202,11 +202,9 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
             {imgTitle}
           </div>
           <div className={cssClassName['richStorycard-footer']}>
-            <div className={cssClassName['richStorycard-footer-id']}>
-              <div className={cssClassName['idWrapper']}>
-                <span className={cssClassName['richStoryCardId']}>ID</span>
-                <span className={cssClassName['richStoryCardIdNo']}>{id}</span>
-              </div>
+            <div className={cssClassName['idWrapper']}>
+              <span className={cssClassName['richStoryCardId']}>ID</span>
+              <span className={cssClassName['richStoryCardIdNo']}>{id}</span>
             </div>
             <div>
               <DenIconButton
