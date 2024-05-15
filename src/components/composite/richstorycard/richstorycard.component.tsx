@@ -148,6 +148,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 placement="top-start"
                 classes={{
                   tooltip: style['tooltip-wrapper'],
+                  arrow: style['tooltip-arrow'],
                 }}
                 title={
                   <div className={style['tooltip-content']}>
