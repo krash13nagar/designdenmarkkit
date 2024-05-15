@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import cssClassName from './richstorycard.module.scss';
+import './richstorycard.styles.scss';
 import {
   DenButton,
   DenCard,
@@ -148,7 +149,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 placement="top-start"
                 classes={{
                   tooltip: style['tooltip-wrapper'],
-                  arrow: style['tooltip-arrow'],
+                  arrow: 'richstorycard-tooltip-arrow',
                 }}
                 title={
                   <div className={style['tooltip-content']}>
