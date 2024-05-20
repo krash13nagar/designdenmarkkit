@@ -92,6 +92,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
             src={imageUrl}
             component="img"
             title=""
+            className={cssClassName['richstoryThumb']}
           />
           <div className={cssClassName['new-resolution']}>
             <div className={cssClassName['slidesCnt']}>
@@ -118,25 +119,35 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
               >{`Slides : ${slidesCount}`}</div>
             </div>
             <div className={cssClassName['cardAssestWrapper']}>
-              <div className={cssClassName['imgCount']}>
-                <ImageIcon
-                  width={12}
-                  height={11}
-                  htmlColor="#2b2b2b"
-                  name="Image Icon"
-                  className={cssClassName['imgCount']}
-                />
-                {imagesCount}
-              </div>
-              <div className={cssClassName['videoCount']}>
-                <VideoIcon
-                  width={13}
-                  height={9.72}
-                  htmlColor="#2b2b2b"
-                  name="Video Icon"
-                />
-                {videosCount}
-              </div>
+
+              {
+                imagesCount &&
+                <div className={cssClassName['imgCount']}>
+                  <ImageIcon
+                    width={12}
+                    height={11}
+                    htmlColor="#2b2b2b"
+                    name="Image Icon"
+                    className={cssClassName['imgCount']}
+                  />
+                  {imagesCount}
+                </div>
+              }
+
+
+              {
+                videosCount &&
+                <div className={cssClassName['videoCount']}>
+                  <VideoIcon
+                    width={13}
+                    height={9.72}
+                    htmlColor="#2b2b2b"
+                    name="Video Icon"
+                  />
+                  {videosCount}
+                </div>
+              }
+
             </div>
           </div>
         </div>
