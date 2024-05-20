@@ -34,48 +34,46 @@
         align-items: center;
         font: normal normal normal 12px/16px "Source Sans 3";
 
-        span {
-            margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 95.99%;
-            white-space: nowrap;
-        }
-
         .slidesCnt {
             display: flex;
             align-items: center;
             flex-wrap: nowrap;
-            flex-direction: row;
 
             .slideImg {
                 margin-right: 5px;
+                display: flex;
             }
         }
 
-        .primaryText {
-            font: normal normal normal 12px/16px "Source Sans 3";
-            letter-spacing: 0px;
-            color: #FFFFFF;
-            opacity: 1;
-        }
+        .cardAssestWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        .secondaryText {
-            //font: normal normal normal 10px/10px "Source Sans 3";
-        }
+            .imgCount {
+                font: normal normal normal 12px/16px "Source Sans 3";
+                color: #FFF;
+                margin-right: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        .thirdText {
-            font: normal normal normal 12px/16px "Source Sans 3";
-            letter-spacing: 0px;
-            color: #FFFFFF;
-            opacity: 1;
-            margin-right: 8px;
+            .videoCount {
+                font: normal normal normal 12px/16px "Source Sans 3";
+                color: #FFF;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 8px;
+
+                svg {
+                    margin-right: 4px;
+                }
+            }
+
         }
     }
-}
-
-.imgIconCls {
-    //margin-top: 4px;
 }
 
 .richStorycard-footer {
@@ -166,7 +164,6 @@
     height: 20px;
     width: max-content;
     border: 1px solid #D2D8DF;
-    //opacity: 0.3;
     align-content: center;
 }
 

@@ -82,9 +82,8 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     <div>
       <DenCard
         classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
-        className={`${cssClassName['richStorycard-wrapper']} ${
-          active ? cssClassName.active : ''
-        }`}
+        className={`${cssClassName['richStorycard-wrapper']} ${active ? cssClassName.active : ''
+          }`}
         onClick={handleClick}
       >
         <div className={cssClassName['image-with-resolution-wrapper']}>
@@ -114,22 +113,22 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                   />
                 )}
               </div>
-              <span
+              <div
                 className={cssClassName['primaryText']}
-              >{`Slides : ${slidesCount}`}</span>
+              >{`Slides : ${slidesCount}`}</div>
             </div>
-            <div>
-              <span className={cssClassName['thirdText']}>
+            <div className={cssClassName['cardAssestWrapper']}>
+              <div className={cssClassName['imgCount']}>
                 <ImageIcon
                   width={12}
                   height={11}
                   htmlColor="#2b2b2b"
                   name="Image Icon"
-                  className={cssClassName['imgIconCls']}
+                  className={cssClassName['imgCount']}
                 />
                 {imagesCount}
-              </span>
-              <span className={cssClassName['primaryText']}>
+              </div>
+              <div className={cssClassName['videoCount']}>
                 <VideoIcon
                   width={13}
                   height={9.72}
@@ -137,47 +136,54 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                   name="Video Icon"
                 />
                 {videosCount}
-              </span>
+              </div>
             </div>
           </div>
         </div>
         <div className={cssClassName['card-action-wrapper']}>
           <div className={cssClassName['richStoryCard-channel']}>
+
             <div className={''}>
-              <DenTooltip
-                arrow
-                placement="top-start"
-                classes={{
-                  tooltip: style['tooltip-wrapper'],
-                  arrow: 'richstorycard-tooltip-arrow',
-                }}
-                title={
-                  <div className={style['tooltip-content']}>
-                    {publishDateTimeEpoch ? (
-                      <DenTypography color="inherit">
-                        <span className={style['addedAt']}>
-                          Published at :{' '}
-                        </span>
-                        {moment(publishDateTimeEpoch).format(
-                          'h:mm,  DD MMM YYYY'
-                        )}
-                      </DenTypography>
-                    ) : null}
-                    {updatedDateTimeEpoch ? (
-                      <DenTypography color="inherit">
-                        <span className={style['addedAt']}>Updated at : </span>
-                        {moment(updatedDateTimeEpoch).format(
-                          'h:mm,  DD MMM YYYY'
-                        )}
-                      </DenTypography>
-                    ) : null}
-                  </div>
-                }
-              >
-                <span>{ingestionDate}</span>
-              </DenTooltip>
-              <span> | {hostName}</span>
+              {
+                ingestionDate &&
+                <DenTooltip
+                  arrow
+                  placement="top-start"
+                  classes={{
+                    tooltip: style['tooltip-wrapper'],
+                    arrow: 'richstorycard-tooltip-arrow',
+                  }}
+                  title={
+                    <div className={style['tooltip-content']}>
+                      {publishDateTimeEpoch ? (
+                        <DenTypography color="inherit">
+                          <span className={style['addedAt']}>
+                            Published at :{' '}
+                          </span>
+                          {moment(publishDateTimeEpoch).format(
+                            'h:mm,  DD MMM YYYY'
+                          )}
+                        </DenTypography>
+                      ) : null}
+                      {updatedDateTimeEpoch ? (
+                        <DenTypography color="inherit">
+                          <span className={style['addedAt']}>Updated at : </span>
+                          {moment(updatedDateTimeEpoch).format(
+                            'h:mm,  DD MMM YYYY'
+                          )}
+                        </DenTypography>
+                      ) : null}
+                    </div>
+                  }
+                >
+                  <span>{ingestionDate}</span>
+                </DenTooltip>
+              }
+              {hostName &&
+                <span> | {hostName}</span>
+              }
             </div>
+
             <div>
               {
                 <DenIconButton
@@ -216,7 +222,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 onClick={(e) => handleContextClick(e, 1)}
                 className={cssClassName['more-icon-base']}
                 disableRipple
-                //disabled={action?.disabled}
+              //disabled={action?.disabled}
               >
                 <MoreVertIcon sx={{ width: '16px', height: '16px' }} />
               </DenIconButton>
