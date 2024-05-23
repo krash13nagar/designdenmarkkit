@@ -4,6 +4,7 @@ import { DenCard, DenCardActions, DenCardMedia } from '../../common';
 import { cleanHTML } from '../../../utility/utils';
 import ImageSearchCardHoverDetails from './imagesearchcardhover.component';
 import { ClickAwayListener } from '@mui/material';
+import clsx from 'clsx';
 import { imageCardMenuOptionsConfig, imageSearchCardConfig } from './imagesearchcard.types';
 
 
@@ -21,12 +22,21 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
         imageSource,
         resolution,
         ingestionDate,
+        classes={},
+        variant="",
         imageCardMenuOptions,
         onCallbackSelectImagefnc
     } = props;
 
     const [showCardMenu, setShowCardMenu] = useState(false);
     const [cardMenuBtnClass, setCardMenuBtnClass] = useState("");
+
+    let variantClassName = ""
+    const changeVariantClassName = (variantType:string)=>{
+        if(variantType == "small")
+            variantClassName = "smallVariant"
+    }
+    changeVariantClassName(variant);
 
     const handleShowCardMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setShowCardMenu(!showCardMenu);
@@ -71,8 +81,8 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
     }
 
     return (
-        <div>
-            <DenCard classes={{ root: 'card-root' }} id={`vs-item-${msid}`} key={msid} className={cssClassName['default-card-wrapper']} onMouseLeave={() => { setShowCardMenu(false) }}>
+        <div className={cssClassName[variantClassName]}>
+            <DenCard classes={{ root: 'card-root' }} id={`vs-item-${msid}`} key={msid} className={clsx(cssClassName['default-card-wrapper'], classes?.root)} onMouseLeave={() => { setShowCardMenu(false) }}>
                 <div aria-describedby="order of section children" className="heading-wrapper">
                     {/* <input disabled={!disableEvents} value={props?.index} onBlur={(e) => InputBlurHandler(msid, e, props?.index)} onChange={(e) => InputHandler(msid, e)} className={clsx("card-serial", { "card-error": props.error })} type="number" min={1} />
                     {!props.error && IsCheckVisisble && <span onClick={handleCheckIcon} className="check-icon-green"><CheckGreenIcon /></span>}
@@ -105,7 +115,7 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
                         component="img"
                         title={name}
                         classes={{
-                            img: `${isShowResolution ? cssClassName["newCardMedia-image"] : cssClassName["cardMedia-image"]}`
+                            img: `${isShowResolution ? clsx(cssClassName["newCardMedia-image"], classes?.root) : cssClassName["cardMedia-image"]}`
                         }}
                         onError={e => {
                             // ImageUtils.imageFallback(src, type).then(function (url) {
