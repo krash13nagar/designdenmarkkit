@@ -22,7 +22,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       labelProps = {},
       valueProps = {},
       wrapperClass = '',
-      labelClass = style['label-wrapper'],
+      labelClass = '',
       valueClass = '',
       onChange = () => {},
       disabled = false,
