@@ -85,6 +85,7 @@ export * from './modal/modal.component';
 export * from './stack/stack.component';
 export * from './listitemtext/listitemtext.component';
 export * from './readmoreless/readmoreless.component';
+export * from './drawer/drawer.component'
 
 
 
