@@ -14,8 +14,11 @@ import { FormLabelTypes } from './formlabel.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenFormLabel: React.FC<FormLabelTypes> = React.forwardRef(
-  (props, ref) => <FormLabel {...props} ref={ref} />
-);
+export const DenFormLabelBase = (
+  props: FormLabelTypes,
+  ref: React.ForwardedRef<HTMLLabelElement>
+) => <FormLabel {...props} ref={ref} />;
+
+export const DenFormLabel = React.forwardRef(DenFormLabelBase);
 
 export default DenFormLabel;

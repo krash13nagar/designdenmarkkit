@@ -10,8 +10,11 @@ import { TabTypes } from './tab.types';
  * @param {boolean} props.wrapped - Tab labels appear in a single row. They can use a second line if needed.
  * @param {any} props.value - We can provide our own value. Otherwise, we fallback to the child position index.
  */
-export const DenTab: React.FC<TabTypes> = React.forwardRef((props, ref) => (
-  <Tab ref={ref} {...props} />
-));
+const DenTabBase = (
+  props: TabTypes,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => <Tab {...props} ref={ref} />;
+
+export const DenTab = React.forwardRef(DenTabBase);
 
 export default DenTab;

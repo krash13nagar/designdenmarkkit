@@ -8,8 +8,11 @@ import { SkeletonTypes } from './skeleton.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenSkeleton: React.FC<SkeletonTypes> = React.forwardRef(
-  (props, ref) => <Skeleton ref={ref} {...props} />
-);
+const DenSkeletonBase = (
+  props: SkeletonTypes,
+  ref: React.ForwardedRef<HTMLSpanElement>
+) => <Skeleton ref={ref} {...props} />;
+
+export const DenSkeleton = React.forwardRef(DenSkeletonBase);
 
 export default DenSkeleton;

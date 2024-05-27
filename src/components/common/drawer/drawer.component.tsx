@@ -12,8 +12,11 @@ import { DrawerTypes } from './drawer.types';
  * for more details see http:localhost:6006
  */
 
-export const DenDrawer: React.FC<DrawerTypes> = React.forwardRef(
-  (props, ref) => <Drawer ref={ref} {...props} />
-);
+export const DenDrawerBase = (
+  props: DrawerTypes,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => <Drawer ref={ref} {...props} />;
+
+export const DenDrawer = React.forwardRef(DenDrawerBase);
 
 export default DenDrawer;

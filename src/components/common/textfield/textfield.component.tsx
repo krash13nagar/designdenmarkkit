@@ -12,7 +12,7 @@ import style from './textfield.module.scss';
  * @param {	HTMLElement|Function} props.container -An HTML element, or a function that returns one. It's used to set the container the TextField is transitioning from.
  */
 
-export const DenTextField: React.FC<TextFieldProps> = React.forwardRef(
+export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
   (props, ref) => {
     const {
       label,

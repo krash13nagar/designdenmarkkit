@@ -11,8 +11,11 @@ import { SwitchTypes } from './switch.types';
  * @param {string} props.color - The color of the component.
  * @param {string} props.variant - The variant to use.
  */
-export const DenSwitch:React.FC<SwitchTypes> = React.forwardRef((props,ref) => (
-  <Switch {...props} ref={ref} />
-));
+const DenSwitchBase = (
+  props: SwitchTypes,
+  ref: React.ForwardedRef<HTMLButtonElement>
+) => <Switch {...props} ref={ref} />;
+
+export const DenSwitch = React.forwardRef(DenSwitchBase);
 
 export default DenSwitch;

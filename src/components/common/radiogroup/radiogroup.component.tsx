@@ -9,7 +9,11 @@ import { RadioGroupProps, RadioGroup } from '@mui/material';
  * @param {func} props.onChange - Callback fired when a radio button is selected.
  * @param {any} props.value - Value of the selected radio button. The DOM API casts this to a string.
  */
-export const DenRadioGroup: React.FC<RadioGroupProps> = React.forwardRef(
-  (props, ref) => <RadioGroup {...props} ref={ref} />
-);
+const DenRadioGroupBase = (
+  props: RadioGroupProps,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => <RadioGroup {...props} ref={ref} />;
+
+export const DenRadioGroup = React.forwardRef(DenRadioGroupBase);
+
 export default DenRadioGroup;

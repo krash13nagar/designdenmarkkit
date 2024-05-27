@@ -11,8 +11,8 @@ import { BadgeTypes } from './badge.types';
  * @param {string} props.color - The color of the component.
  * @param {string} props.variant - The variant to use.
  */
-export const DenBadge:React.FC<BadgeTypes> = React.forwardRef((props,ref) => (
-  <Badge {...props} ref={ref} />
-));
+export const DenBadge: React.FC = React.forwardRef<HTMLSpanElement, BadgeTypes>(
+  (props, ref) => <Badge {...props} ref={ref} />
+);
 
 export default DenBadge;

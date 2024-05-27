@@ -8,8 +8,11 @@ import { LoadingButtonTypes } from './loadingbutton.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenLoadingButton: React.FC<LoadingButtonTypes> = React.forwardRef(
-  (props, ref) => <LoadingButton ref={ref} {...props} />
-);
+const DenLoadingButtonBase = (
+  props: LoadingButtonTypes,
+  ref: React.ForwardedRef<HTMLButtonElement>
+) => <LoadingButton ref={ref} {...props} />;
+
+export const DenLoadingButton = React.forwardRef(DenLoadingButtonBase);
 
 export default DenLoadingButton;
