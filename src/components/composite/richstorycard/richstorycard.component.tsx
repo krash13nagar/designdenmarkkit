@@ -48,7 +48,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
-  const ingestionDate = moment(publishDateTimeEpoch).format('hh:mm, DD MMM');
+  const ingestionDate = moment(updatedDateTimeEpoch).format('hh:mm, DD MMM');
 
   const handleCTAFnc = (e: React.MouseEvent<HTMLButtonElement>) => {
     handleCTA(e);
