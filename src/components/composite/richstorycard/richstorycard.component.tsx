@@ -48,7 +48,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
-  const ingestionDate = moment(updatedDateTimeEpoch).format('hh:mm, DD MMM');
+  const ingestionDate = moment(updatedDateTimeEpoch).format('HH:mm, DD MMM');
 
   const handleCTAFnc = (e: React.MouseEvent<HTMLButtonElement>) => {
     handleCTA(e);
@@ -82,8 +82,9 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     <div>
       <DenCard
         classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
-        className={`${cssClassName['richStorycard-wrapper']} ${active ? cssClassName.active : ''
-          }`}
+        className={`${cssClassName['richStorycard-wrapper']} ${
+          active ? cssClassName.active : ''
+        }`}
         onClick={handleClick}
       >
         <div className={cssClassName['image-with-resolution-wrapper']}>
@@ -119,9 +120,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
               >{`Slides : ${slidesCount}`}</div>
             </div>
             <div className={cssClassName['cardAssestWrapper']}>
-
-              {
-                imagesCount &&
+              {imagesCount && (
                 <div className={cssClassName['imgCount']}>
                   <ImageIcon
                     width={12}
@@ -132,11 +131,9 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                   />
                   {imagesCount}
                 </div>
-              }
+              )}
 
-
-              {
-                videosCount &&
+              {videosCount && (
                 <div className={cssClassName['videoCount']}>
                   <VideoIcon
                     width={13}
@@ -146,17 +143,14 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                   />
                   {videosCount}
                 </div>
-              }
-
+              )}
             </div>
           </div>
         </div>
         <div className={cssClassName['card-action-wrapper']}>
           <div className={cssClassName['richStoryCard-channel']}>
-
             <div className={''}>
-              {
-                ingestionDate &&
+              {ingestionDate && (
                 <DenTooltip
                   arrow
                   placement="top-start"
@@ -172,15 +166,15 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                             Published at :{' '}
                           </span>
                           {moment(publishDateTimeEpoch).format(
-                            'h:mm,  DD MMM YYYY'
+                            'H:mm,  DD MMM YYYY'
                           )}
                         </DenTypography>
                       ) : null}
                       {updatedDateTimeEpoch ? (
                         <DenTypography color="inherit">
-                          <span className={style['addedAt']}>Updated at : </span>
+                          <span className={style['addedAt']}>Updated at :</span>
                           {moment(updatedDateTimeEpoch).format(
-                            'h:mm,  DD MMM YYYY'
+                            'H:mm,  DD MMM YYYY'
                           )}
                         </DenTypography>
                       ) : null}
@@ -189,10 +183,8 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 >
                   <span>{ingestionDate}</span>
                 </DenTooltip>
-              }
-              {hostName &&
-                <span> | {hostName}</span>
-              }
+              )}
+              {hostName && <span> | {hostName}</span>}
             </div>
 
             <div>
@@ -233,7 +225,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 onClick={(e) => handleContextClick(e, 1)}
                 className={cssClassName['more-icon-base']}
                 disableRipple
-              //disabled={action?.disabled}
+                //disabled={action?.disabled}
               >
                 <MoreVertIcon sx={{ width: '16px', height: '16px' }} />
               </DenIconButton>
