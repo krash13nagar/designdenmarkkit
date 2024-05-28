@@ -166,7 +166,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                             Published at :{' '}
                           </span>
                           {moment(publishDateTimeEpoch).format(
-                            'H:mm,  DD MMM YYYY'
+                            'HH:mm,  DD MMM YYYY'
                           )}
                         </DenTypography>
                       ) : null}
@@ -174,7 +174,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                         <DenTypography color="inherit">
                           <span className={style['addedAt']}>Updated at :</span>
                           {moment(updatedDateTimeEpoch).format(
-                            'H:mm,  DD MMM YYYY'
+                            'HH:mm,  DD MMM YYYY'
                           )}
                         </DenTypography>
                       ) : null}
