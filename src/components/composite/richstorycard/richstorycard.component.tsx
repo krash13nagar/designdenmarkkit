@@ -172,7 +172,9 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                       ) : null}
                       {updatedDateTimeEpoch ? (
                         <DenTypography color="inherit">
-                          <span className={style['addedAt']}>Updated at :</span>
+                          <span className={style['addedAt']}>
+                            Updated at :{' '}
+                          </span>
                           {moment(updatedDateTimeEpoch).format(
                             'HH:mm,  DD MMM YYYY'
                           )}
