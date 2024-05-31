@@ -1,6 +1,8 @@
 export interface cardMenuOptionsConfig {
     label: string;
     onClickFnc: React.MouseEventHandler<HTMLElement>;
+    disable?: boolean;
+    disableMsg?: string;
 }
 
 export interface richStoryCardConfig {
@@ -18,7 +20,8 @@ export interface richStoryCardConfig {
     handleClick?: React.MouseEventHandler<HTMLDivElement>,
     handleCTA: React.MouseEventHandler<HTMLElement>;
     classes?: {
-        "root"?: string
+        "root"?: string,
+        "menuOption"?:string
     }
     active?: boolean
 }
