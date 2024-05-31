@@ -139,11 +139,8 @@
     flex-wrap: wrap;
     align-content: center;
     align-items: center;
-    text-align: left;
     font: normal normal normal 12px / 16px "Source Sans 3";
-    letter-spacing: 0px;
     color: #818181;
-    opacity: 1;
 }
 
 .img_title {
@@ -181,6 +178,10 @@
 .active {
     background-color: #D3E4FD;
     border: 1px solid #0B88FF;
+}
+
+.disableMenuBtn{
+    opacity: 0.35;
 }
 
 .menuOptions {
