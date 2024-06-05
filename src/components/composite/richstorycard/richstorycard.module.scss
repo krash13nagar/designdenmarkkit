@@ -24,6 +24,15 @@
         object-fit: contain;
     }
 
+    .brokenImgClass{
+        text-align: center;
+        .brokenImgText{
+            margin-top: 8px;
+            font: normal normal normal 13px/16px "Source Sans 3";
+            font-weight: 500;
+        }
+    }
+
     .new-resolution {
         position: absolute;
         left: 0;

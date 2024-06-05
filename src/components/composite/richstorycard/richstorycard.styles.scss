@@ -5,3 +5,15 @@
         border: 1px solid #DDDDDD;
     }
 }
+
+.richstorycard-fallback-wrapper {
+    .fallback-image-wrapper{
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.show {
+            display:flex !important;
+        }
+    }
+}

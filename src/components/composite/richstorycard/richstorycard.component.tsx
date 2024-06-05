@@ -27,6 +27,8 @@ import VideoIcon from '../../../assets/cdsicons/videoicon';
 import SlideShowIcon from '../../../assets/cdsicons/slideshowicon';
 import WebStoryIcon from '../../../assets/cdsicons/webstoryicon';
 import clsx from 'clsx';
+import ImageWithFallback from '../../common/imagewithfallback/imagewithfallback';
+import BrokenImgIcon from '../../../assets/cdsicons/brokenimgicon';
 
 export const RichStoryCard = (props: richStoryCardConfig) => {
   const {
@@ -45,6 +47,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     handleCTA,
     classes = {},
     active,
+    showBrokenImgText
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -86,12 +89,14 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
           }`}
         onClick={handleClick}
       >
-        <div className={cssClassName['image-with-resolution-wrapper']}>
-          <DenCardMedia
-            sx={{ height: 143 }}
+        <div className={clsx(cssClassName['image-with-resolution-wrapper'], "richstorycard-fallback-wrapper")}>
+          <ImageWithFallback
             src={imageUrl}
-            component="img"
-            title=""
+            width={'100%'}
+            height={'143px'}
+            placeholderIcon={<div className={cssClassName['brokenImgClass']}><BrokenImgIcon />
+              {showBrokenImgText && <p className={cssClassName['brokenImgText']}>No Thumb Image</p>}
+            </div>}
             className={cssClassName['richstoryThumb']}
           />
           <div className={cssClassName['new-resolution']}>

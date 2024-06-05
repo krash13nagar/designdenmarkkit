@@ -19,9 +19,10 @@ export interface richStoryCardConfig {
     cardMenuOptions:cardMenuOptionsConfig[],
     handleClick?: React.MouseEventHandler<HTMLDivElement>,
     handleCTA: React.MouseEventHandler<HTMLElement>;
+    showBrokenImgText?:boolean
     classes?: {
         "root"?: string,
         "menuOption"?:string
     }
-    active?: boolean
+    active?: boolean;
 }
