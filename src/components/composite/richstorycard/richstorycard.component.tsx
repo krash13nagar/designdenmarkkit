@@ -47,7 +47,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     handleCTA,
     classes = {},
     active,
-    brokenImgText = 'No Image',
+    brokenImgText = '',
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
