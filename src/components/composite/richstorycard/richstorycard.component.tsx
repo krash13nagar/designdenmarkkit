@@ -47,7 +47,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     handleCTA,
     classes = {},
     active,
-    showBrokenImgText
+    brokenImgText = 'No Image',
   } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -85,23 +85,41 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
     <div>
       <DenCard
         classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
-        className={`${cssClassName['richStorycard-wrapper']} ${active ? cssClassName.active : ''
-          }`}
+        className={`${cssClassName['richStorycard-wrapper']} ${
+          active ? cssClassName.active : ''
+        }`}
         onClick={handleClick}
       >
-        <div className={clsx(cssClassName['image-with-resolution-wrapper'], "richstorycard-fallback-wrapper")}>
+        <div
+          className={clsx(
+            cssClassName['image-with-resolution-wrapper'],
+            'richstorycard-fallback-wrapper'
+          )}
+        >
           <ImageWithFallback
             src={imageUrl}
             width={'100%'}
             height={'143px'}
-            placeholderIcon={<div className={cssClassName['brokenImgClass']}><BrokenImgIcon />
-              {showBrokenImgText && <p className={cssClassName['brokenImgText']}>No Thumb Image</p>}
-            </div>}
+            placeholderIcon={
+              <div className={cssClassName['brokenImgClass']}>
+                <BrokenImgIcon />
+                {brokenImgText && (
+                  <p className={cssClassName['brokenImgText']}>
+                    {brokenImgText}
+                  </p>
+                )}
+              </div>
+            }
             className={cssClassName['richstoryThumb']}
           />
           <div className={cssClassName['new-resolution']}>
             <div className={cssClassName['slidesCnt']}>
-              <div title={`${contentType == 'slideshow' ? 'SlideShow' : 'WebStory'}`} className={cssClassName['slideImg']}>
+              <div
+                title={`${
+                  contentType == 'slideshow' ? 'SlideShow' : 'WebStory'
+                }`}
+                className={cssClassName['slideImg']}
+              >
                 {contentType == 'slideshow' && (
                   <SlideShowIcon
                     width={12.375}
@@ -125,7 +143,10 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
             </div>
             <div className={cssClassName['cardAssestWrapper']}>
               {imagesCount && (
-                <div title={`Images : ${imagesCount}`} className={cssClassName['imgCount']}>
+                <div
+                  title={`Images : ${imagesCount}`}
+                  className={cssClassName['imgCount']}
+                >
                   <ImageIcon
                     width={12}
                     height={11}
@@ -138,7 +159,10 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
               )}
 
               {videosCount && (
-                <div title={`Videos : ${videosCount}`} className={cssClassName['videoCount']}>
+                <div
+                  title={`Videos : ${videosCount}`}
+                  className={cssClassName['videoCount']}
+                >
                   <VideoIcon
                     width={13}
                     height={9.72}
@@ -231,7 +255,7 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 onClick={(e) => handleContextClick(e, 1)}
                 className={cssClassName['more-icon-base']}
                 disableRipple
-              //disabled={action?.disabled}
+                //disabled={action?.disabled}
               >
                 <MoreVertIcon sx={{ width: '16px', height: '16px' }} />
               </DenIconButton>
@@ -242,13 +266,18 @@ export const RichStoryCard = (props: richStoryCardConfig) => {
                 onClose={handleDenMenuOnClose}
               >
                 {cardMenuOptions?.map((option) => (
-                  <div className={`${option?.disable ? cssClassName['disableMenuBtn'] : ""}`} title={option?.disableMsg || ""}>
+                  <div
+                    className={`${
+                      option?.disable ? cssClassName['disableMenuBtn'] : ''
+                    }`}
+                    title={option?.disableMsg || ''}
+                  >
                     <DenMenuItem
                       key={option?.label}
                       disabled={option?.disable}
                       onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
                       classes={{
-                        root: classes?.menuOption
+                        root: classes?.menuOption,
                       }}
                     >
                       <DenTypography variant="inherit">

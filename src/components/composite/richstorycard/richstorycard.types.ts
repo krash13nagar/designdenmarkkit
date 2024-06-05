@@ -6,7 +6,7 @@ export interface cardMenuOptionsConfig {
 }
 
 export interface richStoryCardConfig {
-    id:string,
+    id: string,
     slidesCount: number,
     imagesCount: number,
     videosCount: number,
@@ -16,13 +16,13 @@ export interface richStoryCardConfig {
     publishDateTimeEpoch: number,
     imageUrl: string,
     imgTitle: string,
-    cardMenuOptions:cardMenuOptionsConfig[],
+    cardMenuOptions: cardMenuOptionsConfig[],
     handleClick?: React.MouseEventHandler<HTMLDivElement>,
     handleCTA: React.MouseEventHandler<HTMLElement>;
-    showBrokenImgText?:boolean
+    brokenImgText?: string
     classes?: {
         "root"?: string,
-        "menuOption"?:string
+        "menuOption"?: string
     }
     active?: boolean;
 }
