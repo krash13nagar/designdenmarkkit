@@ -15,8 +15,11 @@ import { DialogTypes } from './dialog.types';
  * for more details see http:localhost:6006
  */
 
-export const DenDialog: React.FC<DialogTypes> = React.forwardRef(
-  (props, ref) => <Dialog ref={ref} {...props} />
-);
+const DenDialogBase = (
+  props: DialogTypes,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => <Dialog ref={ref} {...props} />;
+
+export const DenDialog = React.forwardRef(DenDialogBase);
 
 export default DenDialog;

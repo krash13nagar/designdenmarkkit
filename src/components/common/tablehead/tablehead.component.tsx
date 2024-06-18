@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { TableHead } from '@mui/material';
-import { TableHeadTypes } from './tablehead.types'
+import { TableHeadTypes } from './tablehead.types';
 
 /**
  * Table Head Component.
  */
 
-export const DenTableHead: React.FC<TableHeadTypes> = React.forwardRef(
-    (props, ref) => <TableHead ref={ref} {...props} />
-);
+const DenTableHeadBase = (
+  props: TableHeadTypes,
+  ref: React.ForwardedRef<HTMLTableSectionElement>
+) => <TableHead ref={ref} {...props} />;
 
+export const DenTableHead = React.forwardRef(DenTableHeadBase);
 
 export default DenTableHead;

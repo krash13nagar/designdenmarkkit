@@ -10,8 +10,9 @@ import { InputLabelTypes } from './inputlabel.types';
  * @param {boolean} props.appear - Perform the enter transition when it first mounts if in is also true. Set this to false to disable this behavior.
  * @param {	HTMLElement|Function} props.container -An HTML element, or a function that returns one. It's used to set the container the InputLabel is transitioning from.
  */
-export const DenInputLabel: React.FC<InputLabelTypes> = React.forwardRef(
-  (props, ref) => <InputLabel {...props} ref={ref} />
-);
+export const DenInputLabel = React.forwardRef<
+  HTMLLabelElement,
+  InputLabelTypes
+>((props, ref) => <InputLabel {...props} ref={ref} />);
 
 export default DenInputLabel;

@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { TableBody } from '@mui/material';
-import { TableBodyTypes } from './tablebody.types'
+import { TableBodyTypes } from './tablebody.types';
 
 /**
  * Table Body Component.
  */
 
-export const DenTableBody: React.FC<TableBodyTypes> = React.forwardRef(
-    (props, ref) => <TableBody ref={ref} {...props} />
-);
+const DenTableBodyBase = (
+  props: TableBodyTypes,
+  ref: React.ForwardedRef<HTMLTableSectionElement>
+) => <TableBody ref={ref} {...props} />;
 
+export const DenTableBody = React.forwardRef(DenTableBodyBase);
 
 export default DenTableBody;

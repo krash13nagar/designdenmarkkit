@@ -12,8 +12,11 @@ import { DialogActionsTypes } from './dialogactions.types';
  * for more details see http:localhost:6006
  */
 
-export const DenDialogActions: React.FC<DialogActionsTypes> = React.forwardRef(
-  (props, ref) => <DialogActions ref={ref} {...props} />
-);
+export const DenDialogActionsBase = (
+  props: DialogActionsTypes,
+  ref: React.ForwardedRef<unknown>
+) => <DialogActions ref={ref} {...props} />;
+
+export const DenDialogActions = React.forwardRef(DenDialogActionsBase);
 
 export default DenDialogActions;

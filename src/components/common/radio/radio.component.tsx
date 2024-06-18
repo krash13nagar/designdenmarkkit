@@ -11,7 +11,11 @@ import { RadioProps, Radio } from '@mui/material';
  * @param {'medium' | 'small' | string} props.size - The size of the component. small is equivalent to the dense radio styling.
  * @param {string} props.id - The id of the input element.
  */
-export const DenRadio: React.FC<RadioProps> = React.forwardRef((props, ref) => (
-  <Radio {...props} ref={ref} />
-));
+const DenRadioBase = (
+  props: RadioProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => <Radio {...props} ref={ref} />;
+
+export const DenRadio = React.forwardRef(DenRadioBase);
+
 export default DenRadio;

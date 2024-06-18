@@ -8,6 +8,12 @@ import { GridTypes } from './grid.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenGrid: React.FC<GridTypes> = React.forwardRef((props,ref)=><Grid ref={ref} {...props} />)
+
+const DenGridBase = (
+  props: GridTypes,
+  ref: React.ForwardedRef<HTMLDivElement>
+) => <Grid ref={ref} {...props} />;
+
+export const DenGrid = React.forwardRef(DenGridBase);
 
 export default DenGrid;

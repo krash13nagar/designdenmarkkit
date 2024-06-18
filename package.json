@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.41",
+  "version": "1.0.48",
   "private": false,
   "description": "Denmark | Common design library based on React and Material UI",
   "main": "index.tsx",
@@ -54,6 +54,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
+    "css-loader": "^6.11.0",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.32.0",

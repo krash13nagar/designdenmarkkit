@@ -12,8 +12,11 @@ import { DialogContentTypes } from './dialogcontent.types';
  * for more details see http:localhost:6006
  */
 
-export const DenDialogContent: React.FC<DialogContentTypes> = React.forwardRef(
-  (props, ref) => <DialogContent ref={ref} {...props} />
-);
+export const DenDialogContentBase = (
+  props: DialogContentTypes,
+  ref: React.ForwardedRef<unknown>
+) => <DialogContent ref={ref} {...props} />;
+
+export const DenDialogContent = React.forwardRef(DenDialogContentBase);
 
 export default DenDialogContent;

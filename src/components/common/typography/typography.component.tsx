@@ -9,8 +9,11 @@ import { TypographyTypes } from './typography.types';
  * @param {string} props.children - text/content of typography component.
  */
 
-export const DenTypography: React.FC<TypographyTypes> = React.forwardRef(
-  (props, ref) => <Typography ref={ref} {...props} />
-);
+const DenTypographyBase = (
+  props: TypographyTypes,
+  ref: React.ForwardedRef<HTMLSpanElement>
+) => <Typography ref={ref} {...props} />;
+
+export const DenTypography = React.forwardRef(DenTypographyBase);
 
 export default DenTypography;

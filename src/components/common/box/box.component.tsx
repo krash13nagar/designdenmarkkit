@@ -8,8 +8,9 @@ import { BoxTypes } from './box.types';
  * for more details see http:localhost:6006
  */
 
-export const DenBox: React.FC<BoxTypes> = React.forwardRef((props, ref) => (
+const DenBoxBase = (props: BoxTypes, ref: React.ForwardedRef<unknown>) => (
   <Box ref={ref} {...props} />
-));
+);
 
+export const DenBox = React.forwardRef(DenBoxBase);
 export default DenBox;

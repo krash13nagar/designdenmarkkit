@@ -12,6 +12,10 @@ export interface imageSearchCardConfig {
     imageSource: string,
     resolution: string,
     ingestionDate: string,
+    classes?: {
+        "root"?: string
+    }
+    variant?:string
     imageCardMenuOptions:imageCardMenuOptionsConfig[],
     onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>;
 }
