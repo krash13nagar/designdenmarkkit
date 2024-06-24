@@ -30,3 +30,4 @@ export * from './wordcount';
 export * from './imagesearchcard';
 export * from './imagesearchcardwrapper';
 export * from './richstorycard';
+export * from './trendingsearchcardnewui';
