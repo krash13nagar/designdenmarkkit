@@ -15,3 +15,5 @@ export * from './expandmoreicon';
 export * from './morevertIcon';
 export * from './closeicon';
 export * from './openinnewicon';
+export * from './webstoryicon';
+export * from './rightarrowicon';

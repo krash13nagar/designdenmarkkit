@@ -1,0 +1,35 @@
+.tabsWrapper {
+    .count {
+        border-radius: 50%;
+        padding: 0 6px;
+        font-size: 14px;
+        line-height: 19px;
+        color: #FFFFFF;
+        background-color: rgba(0, 0, 0, 0.6);
+        margin-left: 8px;
+    }
+
+    .tabSelected {
+        .count {
+            background-color: rgb(14, 136, 255);
+        }
+    }
+
+
+    .tabRoot {
+        padding-bottom: 0px;
+        margin-bottom: -5px;
+        text-transform: none;
+        font: normal normal 500 14px/20px "Source Sans 3";
+
+    }
+
+    .tabsRoot {
+        min-height: 25px;
+
+        button {
+            padding-top: 0;
+            min-height: unset;
+        }
+    }
+}

@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { DenFormControl, DenInputBase, DenInputLabel } from '../../common';
+import {
+  DenFormControl,
+  DenInputLabel,
+  DenDefautTextField,
+} from '../../common';
 import { TextFieldProps } from './textfield.types';
 import style from './textfield.module.scss';
+import clsx from 'clsx';
 
 /**
  * TextField Component.
@@ -15,7 +20,7 @@ import style from './textfield.module.scss';
 export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
   (props, ref) => {
     const {
-      label,
+      label = '',
       value,
       id,
       fullWidth = false,
@@ -26,32 +31,52 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       valueClass = '',
       onChange = () => {},
       disabled = false,
+      showLabel = true,
+      InputProps = {},
     } = props;
+
+    const { classes: valueClasses = {}, ...restValueProps } = valueProps;
+
     return (
       <DenFormControl
-        className={wrapperClass}
+        className={clsx(wrapperClass, style.wrapper)}
         variant="standard"
         fullWidth={fullWidth}
         ref={ref}
         disabled={disabled}
       >
-        <DenInputLabel
-          shrink
-          htmlFor={id ?? 'bootstrap-input'}
-          className={labelClass}
-          {...labelProps}
-        >
-          {label}
-        </DenInputLabel>
-        <DenInputBase
+        {showLabel && label && (
+          <DenInputLabel
+            shrink
+            htmlFor={id ?? 'bootstrap-input'}
+            className={clsx(labelClass, style.label)}
+            {...labelProps}
+          >
+            {label}
+          </DenInputLabel>
+        )}
+        <DenDefautTextField
           className={valueClass}
-          classes={{ root: style['denLabel'], input: style['denInput'] }}
+          classes={{
+            ...valueClasses,
+            root: clsx(style['denLabel'], valueClasses.root),
+          }}
+          InputProps={{
+            ...InputProps,
+            classes: {
+              ...InputProps.classes,
+              input: clsx(
+                style['denInput'],
+                valueClasses.input,
+                InputProps?.classes?.input
+              ),
+            },
+            readOnly: valueProps?.readOnly,
+          }}
           value={value ?? ''}
-          defaultValue="react-bootstrap"
           id={id ?? 'bootstrap-input'}
-          {...valueProps}
+          {...restValueProps}
           onChange={onChange}
-          color="primary"
         />
       </DenFormControl>
     );

@@ -4,7 +4,7 @@ import { FormLabelTypes } from '../../common/formlabel/formlabel.types';
 export interface LabelValueProps {
   label: string;
   value: string | number | ArrayOfType<string | number | object>;
-  align?: AlingType;
+  align?: AlignType;
   labelProps?: FormLabelTypes;
   valueProps?: FormLabelTypes;
   className?: string;
@@ -21,7 +21,7 @@ export type ArrayOfType<T> = T extends string
   : T extends object
   ? object[]
   : never;
-export enum AlingType {
+export enum AlignType {
   column = 'column',
   row = 'row',
 }

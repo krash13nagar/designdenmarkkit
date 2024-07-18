@@ -1,0 +1,273 @@
+.cds-icon-menu-wrapper {
+    position: absolute;
+    flex-direction: column;
+    padding: 0px;
+    left: 0px;
+    align-items: flex-start;
+    background-color: #F0F0F7;
+    border-radius: 0 10px 10px 0;
+
+    &.media-action-cta {
+
+        &>.media-nav> {
+            [class*="MuiListItemButton-root"].media-nav-item {
+
+                &:first-of-type {
+                    border-top-right-radius: 10px;
+                }
+
+                &:last-of-type {
+                    border-bottom-right-radius: 10px;
+                }
+            }
+        }
+
+        .media-nav {
+            padding: 0px;
+            position: relative;
+
+            [class*="MuiListItemButton-root"].media-nav-item {
+                padding: 0px;
+                background: rgb(240, 240, 247);
+                margin: 0;
+                display: flex;
+                border: none;
+                border-radius: 0;
+
+                [class*="MuiListItemIcon-root"].media-nav-icon {
+                    min-width: max-content;
+
+                    button {
+                        &[class*="MuiIconButton-root"] {
+                            padding: 8px;
+                            border-radius: 2px;
+
+                            [class*="MuiIconButton-label"] {
+                                svg {
+                                    color: #888;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                [class*="MuiListItemText-root"].media-nav-text {
+                    background: rgb(240, 240, 247);
+
+                    [class*="MuiListItemText-primary"] {
+                        font: normal normal normal 12px/17px "Source Sans 3" !important;
+                        white-space: nowrap;
+                        padding-right: 8px;
+                        display: none;
+                    }
+                }
+
+                // [class*="MuiIconButton-root"]
+                .media-nav-button-expended {
+                    border-radius: 0;
+                    position: absolute;
+                    right: 0;
+                    z-index: 2;
+                    display: none;
+                }
+
+                .media-nav-button-expended-text {
+                    position: absolute;
+                    z-index: 1;
+                    left: 151px;
+                    background: #bbb;
+
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+
+                    .media-nav {
+                        margin-bottom: 1px;
+
+                        &:first-of-type {
+                            border-top-right-radius: 10px;
+
+                            div {
+                                border-top-right-radius: 10px;
+                            }
+                        }
+
+                        &:last-of-type {
+                            border-bottom-right-radius: 10px;
+
+                            div {
+                                border-bottom-right-radius: 10px;
+                            }
+                        }
+
+                        .media-nav-item {
+                            width: 95px !important;
+                            text-align: left;
+
+                            .media-nav-text {
+                                [class*="MuiTypography-root"] {
+                                    white-space: nowrap;
+                                    padding: 8px;
+                                    color: #333;
+
+                                }
+                            }
+
+                            &:hover {
+                                background: #f0f0f7;
+                                min-width: max-content;
+                                width: max-content;
+
+                                .media-nav-text {
+                                    [class*="MuiTypography-root"] {
+                                        white-space: nowrap;
+                                        color: #0F89FF;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    background: rgb(240, 240, 247);
+                    min-width: 155px;
+
+                    [class*="MuiListItemIcon-root"].media-nav-icon {
+                        min-width: max-content;
+
+                        button {
+                            &[class*="MuiIconButton-root"] {
+
+                                // [class*="MuiIconButton-label"] {
+                                svg {
+                                    color: #0F89FF;
+                                }
+
+                                // }
+                            }
+                        }
+                    }
+
+                    [class*="MuiListItemText-root"].media-nav-text {
+                        [class*="MuiListItemText-primary"] {
+                            display: initial;
+                            color: #0F89FF;
+                        }
+                    }
+
+                }
+
+                & {
+                    .media-nav-button-expended-text.nested {
+                        display: none;
+                    }
+
+                    &:hover {
+                        .media-nav-button-expended.nested {
+                            display: initial;
+                            color: #333;
+                        }
+
+                        .media-nav-button-expended-text.nested {
+                            display: initial;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            min-width: max-content;
+            border-radius: 0 10px 10px 0;
+            background: #F0F0F7;
+
+            [class*="MuiListItemButton-root"].media-nav-item {
+                [class*="MuiListItemText-root"].media-nav-text {
+                    background: rgb(240, 240, 247);
+
+                    [class*="MuiListItemText-primary"] {
+                        display: initial;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    @media screen and (max-width: 1366px) {
+        .media-action-cta {
+            .media-nav {
+                padding: 0px;
+
+                [class*="MuiListItemButton-root"].media-nav-item {
+                    [class*="MuiListItemIcon-root"].media-nav-icon {
+                        min-width: max-content;
+
+                        button {
+                            &[class*="MuiIconButton-root"] {
+                                padding: 5px;
+
+                                [class*="MuiIconButton-label"] {
+                                    svg {
+                                        height: 18px;
+                                        width: 18px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    [class*="MuiListItemText-root"].media-nav-text {
+                        background: rgb(240, 240, 247);
+
+                        [class*="MuiListItemText-primary"] {
+                            font-size: .80rem;
+                        }
+                    }
+
+                    [class*="MuiIconButton-root"].media-nav-button-expended {
+                        padding: 6.5px;
+                    }
+
+                    .media-nav-button-expended-text {
+                        left: 119px;
+
+                        .media-nav {
+                            margin-bottom: 1px;
+
+                            .media-nav-item {
+                                width: 80px !important;
+
+                                .media-nav-text {
+                                    [class*="MuiTypography-root"] {
+                                        white-space: nowrap;
+                                    }
+                                }
+
+                                &:hover {
+                                    min-width: max-content;
+
+                                    .media-nav-text {
+                                        [class*="MuiTypography-root"] {
+                                            white-space: nowrap;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        min-width: 120px;
+                    }
+
+
+                }
+
+
+            }
+
+        }
+    }
+}

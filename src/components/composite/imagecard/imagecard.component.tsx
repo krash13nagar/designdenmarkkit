@@ -3,6 +3,9 @@ import style from './imagecard.module.scss';
 import { ImageCardProps } from './imagecard.types';
 import { useAspectRatioImage } from './useaspectratio';
 import { DenCircularProgress } from '../../common/circularprogress/circularprogress.component';
+import clsx from 'clsx';
+import Iconmenu from '../iconmenu/iconmenu.component';
+import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 
 /**
  * ImageCard Component.
@@ -23,21 +26,32 @@ export const DenImageCard = (props: ImageCardProps) => {
     aspectRatio,
     imageClassName = style['image'],
     wrapperClassName = style['image-container'],
+    autoImageDimensions = true,
+    showIconMenu = false,
+    CTAs = [],
+    handleItemClick = () => {},
   } = props;
   const { isLoading, imageStyle } = useAspectRatioImage({
     src,
     aspectRatio,
     parentNode: parentRef?.current,
   });
+
   return (
-    <div className={wrapperClassName} ref={parentRef}>
-      {isLoading && <DenCircularProgress />}
+    <div
+      className={clsx(wrapperClassName, style['image-wrapper'])}
+      ref={parentRef}
+    >
+      {isLoading && <DenCircularProgress classes={{ root: style.loader }} />}
       <img
-        style={{ ...imageStyle }}
+        {...(autoImageDimensions && { style: { ...imageStyle } })}
         className={imageClassName}
         src={src}
         alt={alt}
       />
+      {showIconMenu && (
+        <Iconmenu CTAs={CTAs} handleItemClick={handleItemClick} />
+      )}
     </div>
   );
 };

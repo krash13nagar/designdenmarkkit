@@ -4,19 +4,32 @@
   align-items: baseline;
   font-size: 12px;
   margin: 0px;
+
   span {
     margin: 0;
   }
+
   &.row {
     flex-direction: row;
   }
+
   &.column {
     flex-direction: column;
   }
+
   .valueClass {
     font-weight: bold;
   }
+
   .seperatorClassName {
     margin: 0px 5px;
+  }
+
+  .label {
+    text-wrap: nowrap;
+  }
+
+  .value {
+    text-wrap: nowrap;
   }
 }

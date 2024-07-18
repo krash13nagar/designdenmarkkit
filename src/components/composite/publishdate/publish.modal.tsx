@@ -6,6 +6,7 @@ import { DenTextField } from '../../common/textfield/textfield.component';
 import { PublishModalProps } from './publishdate.types';
 import {
   DenButton,
+  DenDefautTextField,
   DenDialog,
   DenDialogActions,
   DenDialogContent,
@@ -267,8 +268,6 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
                     >
                       <DenTextField
                         value={publishDate}
-                        type="text"
-                        label=""
                         fullWidth
                         InputProps={{
                           startAdornment: (
@@ -372,44 +371,39 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
       >
         <DenGrid container item xs={12} justifyContent="space-between">
           <DenGrid container item xs={4}>
-            {props.visibleUpdateButton && (
-              <>
-                <HtmlTooltip
-                  title={
-                    <React.Fragment>
-                      <ul>
-                        <li>
-                          <strong>Last Updated:</strong> Automatically set to
-                          the latest time at which the content was updated. Only
-                          considers selected attributes.
-                        </li>
-                        <li>
-                          <strong>Created On:</strong> Timestamp at which the
-                          content was created.
-                        </li>
-                        <li>
-                          <strong>Max View Days:</strong> Maximum allowed view
-                          days from Created Timestamp according to the Agency
-                          contract.
-                        </li>
-                      </ul>
-                    </React.Fragment>
-                  }
-                  placement="top-end"
-                  arrow={true}
-                >
-                  <DenButton
-                    aria-label="info"
-                    size="small"
-                    color="inherit"
-                    startIcon={<HelpOutlineSharp name="Help Icon" />}
-                  >
-                    {' '}
-                    Know More
-                  </DenButton>
-                </HtmlTooltip>
-              </>
-            )}
+            <HtmlTooltip
+              title={
+                <React.Fragment>
+                  <ul>
+                    <li>
+                      <strong>Last Updated:</strong> Automatically set to the
+                      latest time at which the content was updated. Only
+                      considers selected attributes.
+                    </li>
+                    <li>
+                      <strong>Created On:</strong> Timestamp at which the
+                      content was created.
+                    </li>
+                    <li>
+                      <strong>Max View Days:</strong> Maximum allowed view days
+                      from Created Timestamp according to the Agency contract.
+                    </li>
+                  </ul>
+                </React.Fragment>
+              }
+              placement="top-end"
+              arrow={true}
+            >
+              <DenButton
+                aria-label="info"
+                size="small"
+                color="inherit"
+                startIcon={<HelpOutlineSharp name="Help Icon" />}
+              >
+                {' '}
+                Know More
+              </DenButton>
+            </HtmlTooltip>
           </DenGrid>
           <DenGrid
             container

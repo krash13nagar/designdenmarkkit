@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import TestCommon from './testcommon';
 import DenLink from './components/common/link/link.component';
-import { DenTypography, ImagePreview } from './components';
+import { DenTypography, ImagePreview, RichStoryCard } from './components';
 import { Cancel } from './assets';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
@@ -14,6 +14,11 @@ import {
   keywordsWrapperConfig,
   recommendedKeywords,
 } from './components/complex/keywords/keywords.types';
+import { richStoryCardSample } from './components/composite/richstorycard/sample';
+import { ImageAuthModel } from './components/complex/imageauth';
+// import '../src/styles/storybookBasesStyles.scss';
+import { IMAGE_AUTH_TABS } from './components/complex/imageauth/imageauth.constants';
+import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 
 declare const module: {
   hot: {
@@ -37,7 +42,7 @@ const breadcrumbs = [
     Breadcrumb
   </DenTypography>,
 ];
-const test = {
+export const test = {
   primeCategoryLabel: '',
   handlePrimeChange: () => {},
   isPublished: false,
@@ -80,7 +85,7 @@ const test = {
     captionChildError: '',
     captionChildWarning: '',
     onChange: (str: string) => {},
-    captionTitle: 'Title of caption',
+    captionTitle: 'Image Caption',
     captionRequired: false,
     onClick: (event: any) => {},
     countRequired: false,
@@ -93,8 +98,8 @@ const test = {
       fullWidth: true,
     },
     overrideLinkProps: {
-      label: 'Ovveride Link',
-      value: 'test Ovveride link',
+      label: 'Overide Link',
+      value: 'test Overide link',
       onChange: () => console.log(''),
       fullWidth: true,
     },
@@ -103,8 +108,9 @@ const test = {
     label: 'Image Title',
     value: 'Title value',
     onChange: () => console.log(''),
+    fullWidth: true,
   },
-  tabTitleList: ['Primary Data', 'Keywords', 'Meta Data'],
+  tabTitleList: IMAGE_AUTH_TABS,
   src: 'https://picsum.photos/1600/800',
   metaInformation: [
     { label: 'Original Resolutions', value: '120x120 px' },
@@ -115,9 +121,38 @@ const test = {
   ],
   msid: '123456',
   keywordConfig: config,
+  imageCTAs: [
+    { Icon: CropOutlinedIcon, label: 'Crop Image', value: 'crop' },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Download',
+      value: [
+        { label: 'Webp', value: 'webp' },
+        { label: 'Jpeg', value: 'jpeg' },
+      ],
+    },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Replace',
+      value: [
+        { label: 'Upload now', value: 'upload' },
+        { label: 'Search', value: 'search' },
+      ],
+    },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Set as thumbnail',
+      value: 'setThumbnail',
+    },
+  ],
+  handleItemClick: (val: any) => {
+    console.log(val);
+  },
+  metaClassName: 'cds-column-6',
 };
 
 const App = (props: AppProps) => {
+  const [selectedTab, setSelectedTab] = useState(test.tabTitleList[0]?.name);
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
   const [addKeywordState, setAddKeywords] = useState(
     config.addKeywordsConfig.addedKeywords
@@ -226,8 +261,13 @@ const App = (props: AppProps) => {
 
   return (
     <>
-      {/* <ImageAuthModel {...testConfig} /> */}
-      <TestCommon />
+      <ImageAuthModel
+        {...testConfig}
+        selectedTab={selectedTab}
+        handleTabChange={setSelectedTab}
+      />
+      {/* <TestCommon /> */}
+      {/* <RichStoryCard {...richStoryCardSample} /> */}
       {/* <ImageSearchCardWrapper imagesearchcardwrapper={imageSearchCardWrapperSample} /> */}
     </>
   );

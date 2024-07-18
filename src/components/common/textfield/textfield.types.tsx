@@ -1,18 +1,16 @@
-import {
-  InputBaseProps,
-  InputLabelProps,
-  StandardTextFieldProps,
-} from '@mui/material';
+import { InputLabelProps, StandardTextFieldProps } from '@mui/material';
+import { TextFieldProps as MUITextFieldProps } from '@mui/material/TextField';
 
 export interface TextFieldProps extends StandardTextFieldProps {
   id?: string;
   value?: string;
-  label: string;
+  label?: string;
   fullWidth?: boolean;
   labelProps?: InputLabelProps;
-  valueProps?: InputBaseProps;
+  valueProps?: MUITextFieldProps & MUITextFieldProps['InputProps'];
   wrapperClass?: string;
   labelClass?: string;
   valueClass?: string;
   disabled?: boolean;
+  showLabel?: boolean;
 }

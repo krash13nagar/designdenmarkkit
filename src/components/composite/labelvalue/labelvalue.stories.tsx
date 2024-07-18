@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { LabelValue } from './labelvalue.component';
 import React from 'react';
-import { AlingType } from './labelvalue.types';
+import { AlignType } from './labelvalue.types';
 
 const meta: Meta<typeof LabelValue> = {
   component: LabelValue,
@@ -17,7 +17,7 @@ export const Basic: Story = {
   args: {
     label: 'Basic',
     value: 'value',
-    align: AlingType.column,
+    align: AlignType.column,
     seperator: ':',
     renderValue: () => {
       return (

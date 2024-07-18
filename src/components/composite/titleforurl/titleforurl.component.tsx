@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DenTextField } from '../../common/textfield/textfield.component';
 import Count from '../wordcount/wordcount.component';
 import style from './titleforurl.module.scss';
-import { DenIconButton } from '../../common';
+import { DenIconButton, DenInputLabel } from '../../common';
 import { AddCircle } from '../../../assets/cdsicons/addcircleicon';
 import { Cancel } from '../../../assets/cdsicons/cancelicon';
 import { TitleForUrlProps } from './titleforurl.types';
@@ -15,13 +15,24 @@ import { TitleForUrlProps } from './titleforurl.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const TitleForUrl: React.FC<TitleForUrlProps> = (props) => {
+export const TitleForUrl: React.FC<TitleForUrlProps> = ({
+  seoTitleProps = {},
+  overrideLinkProps = {},
+}) => {
   const [isOvverrideVisible, setIsOvverideVisible] = React.useState(false);
   return (
     <div className={style['title-for-url-wrapper']}>
+      <DenInputLabel
+        shrink
+        htmlFor={seoTitleProps.id ?? 'bootstrap-input'}
+        className={style.label}
+      >
+        {seoTitleProps.label}
+      </DenInputLabel>
       <div className={style['title-for-url']}>
         <DenTextField
-          {...props.seoTitleProps}
+          {...seoTitleProps}
+          showLabel={false}
           valueProps={{
             classes: {
               root: style['denLabel'],
@@ -29,16 +40,32 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = (props) => {
             },
           }}
         />
-        <DenIconButton onClick={() => setIsOvverideVisible(true)}>
+        <DenIconButton
+          size="small"
+          className={style['icon-button']}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsOvverideVisible(true);
+          }}
+        >
           <AddCircle />
         </DenIconButton>
       </div>
-      <Count wordString={props.seoTitleProps.value ?? ''} />
+      <Count wordString={seoTitleProps.value ?? ''} />
       {isOvverrideVisible && (
         <>
+          <DenInputLabel
+            shrink
+            htmlFor={overrideLinkProps.id ?? 'bootstrap-input'}
+            className={style.label}
+          >
+            {overrideLinkProps.label}
+          </DenInputLabel>
           <div className={style['override-link']}>
             <DenTextField
-              {...props.overrideLinkProps}
+              {...overrideLinkProps}
+              showLabel={false}
               valueProps={{
                 classes: {
                   root: style['denLabel'],
@@ -46,11 +73,15 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = (props) => {
                 },
               }}
             />
-            <DenIconButton onClick={() => setIsOvverideVisible(false)}>
+            <DenIconButton
+              onClick={() => setIsOvverideVisible(false)}
+              size={'small'}
+              className={style['icon-button']}
+            >
               <Cancel />
             </DenIconButton>
           </div>
-          <Count wordString={props.overrideLinkProps.value ?? ''} />
+          <Count wordString={overrideLinkProps.value ?? ''} />
         </>
       )}
     </div>
