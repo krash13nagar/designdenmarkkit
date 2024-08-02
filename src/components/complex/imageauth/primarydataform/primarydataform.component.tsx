@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import {
+  EditorTextField,
   ImageCaption,
   LabelValue,
   Title,
@@ -11,11 +12,12 @@ import { PrimaryDataFormProps } from '../imageauth.types';
 import {
   DenCheckbox,
   DenFormControlLabel,
+  DenGrid,
   DenTextField,
   DenTypography,
 } from '../../../common';
-import AsyncAutoComplete from '../../../common/asynchronousautocomplete/asyncautocomplete.component';
-import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete/Autocomplete';
+import AutoCompleteInput from '../../../common/autocompleteinput/autocompleteinput.component';
+import AgencyIcon from '../../../../assets/cdsicons/agencyicon';
 
 export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
   msid,
@@ -23,56 +25,101 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
   titleForUrl,
   imageCaption,
   classes = {},
+  captionBylineProps,
+  photographerBylineProps,
+  captionAgencyProps,
+  imageAgencyProps,
+  isNotRelatedToAgency = false,
+  handleNotRelatedToAgencyChange = () => {},
+  justificationProps = {},
+  showAgencyMessage = false,
+  agencyMessage = '',
+  showBylineMessage = false,
+  bylineMessage = '',
 }) => {
   return (
     <div className={clsx(style['primary-data-wrapper'], classes.root)}>
       <LabelValue label="MSID" value={msid ?? 'New'} seperator=":" />
-      <Title {...title} wrapperClass={style['title-wrapper']} />
+      <EditorTextField {...title} isTitle />
       <TitleForUrl {...titleForUrl} />
-      <ImageCaption {...imageCaption} />
+      <EditorTextField {...imageCaption} />
       <DenTypography variant="h6">Credits</DenTypography>
       <div className={'cds-row'}>
         <DenFormControlLabel
-          control={<DenCheckbox defaultChecked />}
+          control={
+            <DenCheckbox
+              onChange={handleNotRelatedToAgencyChange}
+              checked={isNotRelatedToAgency}
+              disabled={
+                imageAgencyProps.value?.length > 0 ||
+                captionAgencyProps.value?.length > 0
+              }
+            />
+          }
           label="Not related to any agency"
-          className={'cds-column-12'}
           color="primary"
         />
         <DenTextField
+          wrapperClass={style['justification']}
           label="Justification"
-          wrapperClass={'cds-column-6'}
-          valueProps={{ sx: { mr: '25px', mb: '25px' } }}
-          disabled={true}
+          fullWidth
+          disabled={!isNotRelatedToAgency}
+          {...justificationProps}
         />
-        <AsyncAutoComplete
-          renderInput={function (
-            params: AutocompleteRenderInputParams
-          ): React.ReactNode {
-            throw new Error('Function not implemented.');
-          }}
-          options={[]}
-          label="Image Agency"
-        />
-        <AsyncAutoComplete
-          label="Add Caption Agency"
-          wrapperClass={'cds-column-6'}
-          renderInput={function (
-            params: AutocompleteRenderInputParams
-          ): React.ReactNode {
-            throw new Error('Function not implemented.');
-          }}
-          options={[]}
-        />
-        <AsyncAutoComplete
-          label="Add Photographer Byline"
-          wrapperClass={'cds-column-6'}
-          renderInput={function (
-            params: AutocompleteRenderInputParams
-          ): React.ReactNode {
-            throw new Error('Function not implemented.');
-          }}
-          options={[]}
-        />
+        <DenGrid container spacing={'16px'} sx={{ mb: '16px' }}>
+          <DenGrid item xs={6}>
+            <AutoCompleteInput
+              disabled={isNotRelatedToAgency}
+              hideSearchIcon
+              {...imageAgencyProps}
+            />
+          </DenGrid>
+          <DenGrid item xs={6}>
+            <AutoCompleteInput
+              disabled={isNotRelatedToAgency}
+              hideSearchIcon
+              {...captionAgencyProps}
+            />
+          </DenGrid>
+          <DenGrid
+            item
+            xs={12}
+            sx={{ pt: '2px !important', pb: '2px !important' }}
+          >
+            {showAgencyMessage && (
+              <div>
+                <AgencyIcon width="13" height="10" />
+                <span className={style['helper-text-agency']}>
+                  {agencyMessage}
+                </span>
+                <br />
+              </div>
+            )}
+          </DenGrid>
+        </DenGrid>
+        <DenGrid container spacing={'16px'} sx={{ mb: '16px' }}>
+          <DenGrid item xs={6}>
+            <AutoCompleteInput {...captionBylineProps} hideSearchIcon />
+          </DenGrid>
+          <DenGrid item xs={6}>
+            <AutoCompleteInput {...photographerBylineProps} hideSearchIcon />
+          </DenGrid>
+          <DenGrid
+            item
+            xs={12}
+            sx={{ pt: '2px !important', pb: '2px !important' }}
+          >
+            {showBylineMessage && (
+              <div>
+                <AgencyIcon width="13" height="10" />
+                <span className={style['helper-text-agency']}>
+                  {bylineMessage}
+                </span>
+                <br />
+              </div>
+            )}
+          </DenGrid>
+        </DenGrid>
       </div>
     </div>
   );

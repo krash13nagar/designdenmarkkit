@@ -1,0 +1,193 @@
+import React, { useEffect, useState } from 'react';
+import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import './autocompleteinput.styles.scss';
+import { DenDefautTextField } from '../defaulttextfield';
+import { AutocompleteInputProps } from './autocompleteinput.types';
+import { cleanXssCode } from '../../../utility/utils';
+import DenInputAdornment from '../inputadornment/inputadornment.component';
+import DenCircularProgress from '../circularprogress/circularprogress.component';
+import DenInputLabel from '../inputlabel/inputlabel.component';
+import DenAutocomplete from '../autocomplete/autocomplete.component';
+import clsx from 'clsx';
+import { ErrorIcon, Warning } from '../../../assets';
+import DenBox from '../box/box.component';
+
+const AutoCompleteInputBase = (
+  props: AutocompleteInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
+  const _id = props.id;
+  const readOnly = props.isReadOnly;
+  const {
+    options,
+    title,
+    limit,
+    disabled,
+    helperText,
+    placeholder,
+    useFor,
+    renderTags,
+    renderOptions,
+    classes = {},
+    wrapperClass,
+    isError = false,
+    errorMessage = '',
+    childError = {},
+  } = props;
+  const [value, setValues] = useState([]);
+  const [inputValue, setInputValue] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const loading = open;
+  const disableUnderline = props.disableUnderline
+    ? props.disableUnderline
+    : false;
+
+  useEffect(() => {
+    setValues(props.value ? props.value : []);
+  }, [props.value]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [props.options]);
+
+  const handleInputChange = (event: any, value: any) => {
+    if (props.onTextChange) {
+      setOpen(true);
+      props.onTextChange(value);
+    }
+  };
+
+  const handleChange = (event: any, value: any) => {
+    if (props.onChange) {
+      props.onChange(event, value);
+    }
+    setInputValue('');
+  };
+
+  const inputProps = {
+    disableUnderline: disableUnderline,
+    endAdornment: (
+      <DenInputAdornment key={4} position="end" className="autocompleteIcon">
+        {' '}
+        {loading ? (
+          <DenCircularProgress color="inherit" size={20} />
+        ) : !props.hideSearchIcon ? (
+          <SearchSharpIcon className="opacity" />
+        ) : null}
+      </DenInputAdornment>
+    ),
+  };
+
+  return (
+    <>
+      <div
+        className={clsx(
+          'cdsAutoCompleteWrapper',
+          props.isReadOnly ? ' read-only' : '',
+          wrapperClass
+        )}
+      >
+        {title && (
+          <DenInputLabel
+            key={0}
+            className="active_label label-wrapper"
+            required={props.required}
+            shrink
+            htmlFor={_id}
+            disabled={disabled}
+          >
+            {title}
+          </DenInputLabel>
+        )}
+        <DenAutocomplete
+          ref={ref}
+          key={2}
+          multiple
+          freeSolo
+          limitTags={limit}
+          id={_id}
+          options={options}
+          value={value}
+          disabled={disabled}
+          includeInputInList
+          inputValue={inputValue}
+          filterOptions={(x) => x}
+          getOptionLabel={(option) =>
+            typeof option === 'string' ? option : option.name || ''
+          }
+          onChange={handleChange}
+          onInputChange={handleInputChange}
+          className={
+            props.hideSearchIcon
+              ? 'customAutoComplete ' +
+                props.title.replace(/\s/g, '').toLowerCase()
+              : 'customAutoComplete  hideSearchIcon ' +
+                props.title.replace(/\s/g, '').toLowerCase()
+          }
+          classes={{
+            root: 'denLabel',
+            inputRoot: 'denInput',
+            input: 'inputRef',
+            ...classes,
+          }}
+          onClose={() => {
+            setOpen(false);
+          }}
+          renderTags={renderTags}
+          onClick={(event) => {
+            if (props.isReadOnly) {
+              event.stopPropagation();
+            }
+          }}
+          renderOption={renderOptions}
+          renderInput={(params) => (
+            <>
+              <DenDefautTextField
+                key={3}
+                ref={ref}
+                {...params}
+                className="autocompleteTextField"
+                placeholder={!readOnly ? placeholder : ''}
+                inputProps={{
+                  ...params.inputProps,
+                  readOnly: Boolean(props.isReadOnly),
+                }}
+                InputProps={{ ...params.InputProps, ...inputProps }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Backspace' || event.key === 'Enter') {
+                    event.stopPropagation();
+                  }
+                }}
+                onChange={(event) => {
+                  const newValue = event.target.value;
+                  const cleanValue = cleanXssCode(newValue);
+                  setInputValue(cleanValue);
+                }}
+                onClick={(event) => {
+                  if (props.isReadOnly) {
+                    event.stopPropagation();
+                  }
+                }}
+              />
+              <span className="helper-text">{helperText}</span>
+            </>
+          )}
+        />
+      </div>
+      {isError ? (
+        <DenBox sx={{ pt: '2px' }} className="has-error">
+          {errorMessage}
+        </DenBox>
+      ) : childError?.show ? (
+        <DenBox className="error-with-icon">
+          {childError['level'] == 'ERROR' ? <ErrorIcon /> : <Warning />}
+          <span className="errormessage">{childError['message']}</span>
+        </DenBox>
+      ) : null}
+    </>
+  );
+};
+
+export const AutoCompleteInput = React.forwardRef(AutoCompleteInputBase);
+export default AutoCompleteInput;

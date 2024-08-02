@@ -6,6 +6,17 @@
     overflow-y: auto;
     max-height: inherit;
     height: 100%;
+    padding-left: 16px;
+
+    .justification {
+        margin-bottom: 25px;
+    }
+
+    .helper-text-agency {
+        font-size: 10px;
+        text-align: justify;
+        font-style: italic;
+    }
 
     .title-wrapper {
         margin-top: css.pxToRem(16px);

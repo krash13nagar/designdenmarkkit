@@ -16,9 +16,10 @@ import {
 } from './components/complex/keywords/keywords.types';
 import { richStoryCardSample } from './components/composite/richstorycard/sample';
 import { ImageAuthModel } from './components/complex/imageauth';
-// import '../src/styles/storybookBasesStyles.scss';
+import '../src/styles/storybookBasesStyles.scss';
 import { IMAGE_AUTH_TABS } from './components/complex/imageauth/imageauth.constants';
 import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
+import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
 
 declare const module: {
   hot: {
@@ -42,6 +43,7 @@ const breadcrumbs = [
     Breadcrumb
   </DenTypography>,
 ];
+
 export const test = {
   primeCategoryLabel: '',
   handlePrimeChange: () => {},
@@ -54,6 +56,10 @@ export const test = {
       category: 'Prime Category 1',
     },
   ],
+  showAgencyMessage: true,
+  agencyMessage: 'Test Agency Message',
+  showBylineMessage: true,
+  bylineMessage: 'Test Byline Message',
   /*
    *Seperated publish date
    */
@@ -80,15 +86,14 @@ export const test = {
   activationChangeHandle: () => {},
   activationStatus: '0',
   imageCaption: {
-    caption: 'caption of image',
-    captionError: '',
-    captionChildError: '',
-    captionChildWarning: '',
+    title: 'Image Caption',
+    error: '',
+    childError: '',
+    childWarning: '',
     onChange: (str: string) => {},
-    captionTitle: 'Image Caption',
-    captionRequired: false,
-    onClick: (event: any) => {},
-    countRequired: false,
+    width: '100%',
+    height: '200px',
+    value: 'Caption value',
   },
   titleForUrl: {
     seoTitleProps: {
@@ -98,17 +103,50 @@ export const test = {
       fullWidth: true,
     },
     overrideLinkProps: {
-      label: 'Overide Link',
-      value: 'test Overide link',
+      label: 'Override Link',
+      value: 'test Override link',
       onChange: () => console.log(''),
       fullWidth: true,
     },
   },
   title: {
-    label: 'Image Title',
+    title: 'Image Title',
+    error: 'test error',
+    childError: '',
+    childWarning: '',
+    onChange: (str: string) => {},
+    required: true,
+    width: '100%',
     value: 'Title value',
+  },
+  justificationProps: {
+    label: 'Justification',
+    value: 'justification',
     onChange: () => console.log(''),
-    fullWidth: true,
+    errorText: 'Test Justification Error',
+  },
+  captionBylineProps: {
+    title: 'Add Caption Byline',
+    options: [] as string[],
+  },
+  photographerBylineProps: {
+    title: 'Add Photographer Byline',
+    options: [] as string[],
+  },
+  imageAgencyProps: {
+    title: 'Add Image Agency',
+    options: [] as string[],
+    isError: true,
+    errorMessage: 'Test Error Message',
+  },
+  captionAgencyProps: {
+    title: 'Add Caption Agency',
+    options: [] as string[],
+    childError: {
+      show: true,
+      message: 'Test Child Error',
+      level: 'WARNING' as AutocompleteInputProps['childError']['level'],
+    },
   },
   tabTitleList: IMAGE_AUTH_TABS,
   src: 'https://picsum.photos/1600/800',
@@ -257,7 +295,12 @@ const App = (props: AppProps) => {
     addKeywordsConfig,
     recommendConfig,
   };
+
+  const [title, setTitle] = useState('');
+  test.title.value = title;
+  test.title.onChange = (str) => setTitle(str);
   const testConfig = { ...test, keywordConfig: kewordConfig };
+  const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
   return (
     <>
@@ -265,6 +308,12 @@ const App = (props: AppProps) => {
         {...testConfig}
         selectedTab={selectedTab}
         handleTabChange={setSelectedTab}
+        isNotRelatedToAgency={isNotRelatedToAgency}
+        handleNotRelatedToAgencyChange={(
+          e: React.ChangeEvent<HTMLInputElement>
+        ) => {
+          setIsNotRelatedToAgency(e.target.checked);
+        }}
       />
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}

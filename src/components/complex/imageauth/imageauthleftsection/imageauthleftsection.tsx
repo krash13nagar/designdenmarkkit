@@ -25,14 +25,16 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
         handleItemClick={handleItemClick}
       />
       <div className={clsx(style['meta-info-wrapper'], 'cds-row')}>
-        {metaInformation.map((elm, i) => (
-          <LabelValue
-            key={i}
-            {...elm}
-            align={AlignType.column}
-            className={clsx(`cds-column-${metaColumnCount}`, metaClassName)}
-          />
-        ))}
+        {metaInformation
+          .filter((elm) => elm.label && elm.value)
+          .map((elm, i) => (
+            <LabelValue
+              key={i}
+              {...elm}
+              align={AlignType.column}
+              className={clsx(`cds-column-${metaColumnCount}`, metaClassName)}
+            />
+          ))}
       </div>
     </div>
   );

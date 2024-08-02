@@ -1,0 +1,148 @@
+.cdsAutoCompleteWrapper {
+
+    &.width50 {
+        width: 50%;
+    }
+
+    .label-wrapper {
+        &:focus-within {
+            color: #4b9cceef;
+        }
+    }
+
+    .customAutoComplete {
+        .autocompleteTextField {
+            div {
+                padding-top: 0;
+                padding-bottom: 0;
+
+                &[class*="MuiOutlinedInput-root"] {
+                    padding-top: 0;
+                    padding-bottom: 0;
+
+                    [class*="MuiAutocomplete-input"] {
+                        padding: 0.625rem;
+                    }
+                }
+
+                [class*="MuiChip-root"] {
+                    [class*="MuiChip-label"] {
+                        max-width: inherit;
+                        font-size: 0.85rem;
+                    }
+
+                    // [class*="MuiSvgIcon-root"]{}
+                }
+
+                &.autocompleteIcon {
+                    position: absolute;
+                    right: 0px;
+                    bottom: 1.1rem;
+
+                    .opacity {
+                        opacity: 0.4;
+                    }
+                }
+            }
+
+            [class*="MuiAutocomplete-inputRoot"][class*="MuiInput-root"][class*="MuiAutocomplete-input"] {
+                height: 36px;
+
+                &:first-child {
+                    padding: 2px 0;
+                }
+
+                [class*="MuiAutocomplete-tag"] {
+                    max-width: calc(16.071rem - 6px);
+                    height: 2rem;
+
+                    [class*="MuiChip-icon"] {
+                        width: 22px;
+                        margin-left: 2px;
+                    }
+
+                    svg {
+                        width: 1.286rem;
+                        height: 1.286rem;
+                    }
+                }
+
+                [class*="MuiAutocomplete-input"] {
+                    min-height: 1.5rem;
+                }
+            }
+        }
+
+        &.hideSearchIcon {
+            .autocompleteTextField {
+
+                // border: 1px solid yellowgreen;
+                div {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    padding-right: 5px;
+                }
+            }
+        }
+
+        .helper-text {
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .helper-text-agency {
+            font-size: 10px;
+            text-align: justify;
+            font-style: italic;
+        }
+
+        &.read-only {
+            .autocompleteTextField input {
+                visibility: hidden;
+            }
+        }
+
+        &.denLabel {
+            .denInput {
+                padding-left: 1px !important;
+                padding-top: 1px !important;
+                padding-bottom: 1px !important;
+            }
+
+            .inputRef {
+                padding: 5px 12px !important;
+            }
+        }
+    }
+
+
+
+    [class*="MuiAutocomplete-popper"] {
+        background-color: transparent;
+
+        ul {
+            &[class*="MuiAutocomplete-listbox"] {
+                li {
+                    padding: 8px;
+
+                    &[class*="MuiAutocomplete-option"] {
+                        img {
+                            max-width: 100%;
+                            margin-right: 8px;
+                            max-height: 85px;
+                        }
+                    }
+
+                    &:nth-child(odd) {
+                        background: #f3f3f34d;
+                    }
+
+                    &:nth-child(even) {
+                        background: #fff;
+                    }
+                }
+            }
+        }
+
+    }
+}

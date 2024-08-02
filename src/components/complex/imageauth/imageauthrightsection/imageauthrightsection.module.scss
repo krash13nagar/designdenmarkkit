@@ -3,7 +3,6 @@
 .image-auth-right-panel {
     flex-basis: 65%;
     height: 100%;
-    padding-left: 16px;
     display: flex;
     flex-direction: column;
 
@@ -15,5 +14,4 @@
         height: calc(100vh - 158px);
     }
 
-    // margin-bottom:86px;
 }

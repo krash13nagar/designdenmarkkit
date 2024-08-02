@@ -9,6 +9,8 @@ import ActivationStatus from '../../composite/activationstatus/activationstatus.
 import { ImageAuthoringProps } from './imageauth.types';
 import ImageAuthLeftSection from './imageauthleftsection/imageauthleftsection';
 import ImageAuthRightSection from './imageauthrightsection/imageauthrightsection';
+import clsx from 'clsx';
+import './imageauth.styles.scss';
 
 /**
  * Error should be field name plus Error if field is caption then error field would be captionError
@@ -54,11 +56,24 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     handleItemClick = () => {},
     metaClassName = '',
     metaColumnCount = 4,
+    captionBylineProps = {},
+    imageAgencyProps = {},
+    captionAgencyProps = {},
+    photographerBylineProps = {},
+    isNotRelatedToAgency = false,
+    handleNotRelatedToAgencyChange = () => {},
+    justificationProps = {},
+    showAgencyMessage = false,
+    agencyMessage = '',
+    showBylineMessage = false,
+    bylineMessage = '',
   } = props;
 
   return (
     <DenThemeProvider theme={DenmarkDefault}>
-      <div className={style['image-auth-wrapper']}>
+      <div
+        className={clsx(style['image-auth-wrapper'], 'cds-image-auth-wrapper')}
+      >
         <ImageAuthLeftSection
           src={src}
           metaInformation={metaInformation}
@@ -76,6 +91,17 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           imageCaption={imageCaption}
           keywordConfig={keywordConfig}
           msid={msid}
+          captionBylineProps={captionBylineProps}
+          photographerBylineProps={photographerBylineProps}
+          imageAgencyProps={imageAgencyProps}
+          captionAgencyProps={captionAgencyProps}
+          handleNotRelatedToAgencyChange={handleNotRelatedToAgencyChange}
+          isNotRelatedToAgency={isNotRelatedToAgency}
+          justificationProps={justificationProps}
+          showAgencyMessage={showAgencyMessage}
+          agencyMessage={agencyMessage}
+          showBylineMessage={showBylineMessage}
+          bylineMessage={bylineMessage}
         />
       </div>
       <Footer>

@@ -17,6 +17,17 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   imageCaption,
   keywordConfig,
   classes = {},
+  captionBylineProps,
+  photographerBylineProps,
+  captionAgencyProps,
+  imageAgencyProps,
+  handleNotRelatedToAgencyChange = () => {},
+  isNotRelatedToAgency = false,
+  justificationProps = {},
+  showAgencyMessage = false,
+  agencyMessage = '',
+  showBylineMessage = false,
+  bylineMessage = '',
 }) => {
   const handleChange = (event: React.SyntheticEvent, value: any) => {
     handleTabChange(value);
@@ -42,6 +53,17 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
           imageCaption={imageCaption}
           titleForUrl={titleForUrl}
           msid={msid}
+          captionBylineProps={captionBylineProps}
+          photographerBylineProps={photographerBylineProps}
+          captionAgencyProps={captionAgencyProps}
+          imageAgencyProps={imageAgencyProps}
+          handleNotRelatedToAgencyChange={handleNotRelatedToAgencyChange}
+          isNotRelatedToAgency={isNotRelatedToAgency}
+          justificationProps={justificationProps}
+          showAgencyMessage={showAgencyMessage}
+          agencyMessage={agencyMessage}
+          showBylineMessage={showBylineMessage}
+          bylineMessage={bylineMessage}
         />
       )}
       {selectedTab == TAB_MAP.keywords && (

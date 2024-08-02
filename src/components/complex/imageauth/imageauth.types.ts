@@ -1,12 +1,13 @@
 import { TextFieldProps } from '../../common';
+import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
   ImageCardProps,
   TitleForUrlProps,
   PrimeCategoryProps,
   PublishDateProps,
   ActivattionStatusProps,
-  ImageCaptionProps,
   LabelValueProps,
+  EditorTextfieldProps,
 } from '../../composite';
 import { TabType } from '../../composite/simpletabs/simpletabs.types';
 import { keywordsWrapperConfig } from '../keywords/keywords.types';
@@ -16,9 +17,9 @@ export interface ImageAuthoringProps
   PrimeCategoryProps,
   ActivattionStatusProps {
   metaInformation: LabelValueProps[];
-  title: TextFieldProps;
+  title: EditorTextfieldProps;
   titleForUrl: TitleForUrlProps;
-  imageCaption: ImageCaptionProps;
+  imageCaption: EditorTextfieldProps;
   publishDate: PublishDateProps;
   tabTitleList: TabType[];
   msid?: string;
@@ -31,7 +32,18 @@ export interface ImageAuthoringProps
   imageCTAs?: { Icon: any, label: string, value: any }[];
   handleItemClick?: (selectedItemValue: string) => void;
   metaClassName?: string;
-  metaColumnCount?: 12 | 6 | 4 | 3
+  metaColumnCount?: 12 | 6 | 4 | 3,
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  isNotRelatedToAgency?: boolean,
+  handleNotRelatedToAgencyChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  justificationProps?: JustificationProps,
+  showAgencyMessage?: boolean,
+  agencyMessage?: string,
+  showBylineMessage?: boolean,
+  bylineMessage?: string
 }
 
 export interface AnchorGeneric {
@@ -58,18 +70,44 @@ export interface ImageAuthRightSectionProps {
   selectedTab?: string | number;
   handleTabChange?: (value: any) => void;
   msid?: string;
-  title: TextFieldProps;
+  title: ImageAuthoringProps['title'];
   titleForUrl: TitleForUrlProps;
-  imageCaption: ImageCaptionProps;
+  imageCaption: ImageAuthoringProps['imageCaption'];
   keywordConfig: keywordsWrapperConfig;
-  classes?: { root?: string }
+  classes?: { root?: string },
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  handleNotRelatedToAgencyChange?: ImageAuthoringProps["handleNotRelatedToAgencyChange"],
+  isNotRelatedToAgency?: ImageAuthoringProps["isNotRelatedToAgency"],
+  justificationProps?: JustificationProps,
+  showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
+  agencyMessage?: ImageAuthoringProps["agencyMessage"],
+  showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
+  bylineMessage?: ImageAuthoringProps["bylineMessage"]
+}
+
+export interface JustificationProps extends TextFieldProps {
+
 }
 
 export interface PrimaryDataFormProps {
   msid?: string;
-  title: TextFieldProps;
+  title: ImageAuthoringProps['title'];
   titleForUrl: TitleForUrlProps;
-  imageCaption: ImageCaptionProps;
-  classes?: { root?: string }
+  imageCaption: ImageAuthoringProps['imageCaption'];
+  classes?: { root?: string },
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  handleNotRelatedToAgencyChange?: ImageAuthoringProps["handleNotRelatedToAgencyChange"],
+  isNotRelatedToAgency?: ImageAuthoringProps["isNotRelatedToAgency"],
+  justificationProps?: ImageAuthoringProps["justificationProps"],
+  showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
+  agencyMessage?: ImageAuthoringProps["agencyMessage"],
+  showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
+  bylineMessage?: ImageAuthoringProps["bylineMessage"]
 }
 

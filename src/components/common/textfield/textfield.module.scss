@@ -1,18 +1,11 @@
-@import url('../../global.scss');
-
-
-
 .wrapper {
   .denLabel {
-    // margin-top: 1.4rem;
-
     .denInput {
       border-radius: 4px;
       position: relative;
-      // border: 1px solid #d2d8df;
       font-size: 1.08rem;
       padding: 5px 12px !important;
-      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s, background 0.3s;
 
       &:focus {
         border-color: #0F89FF;

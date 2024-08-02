@@ -33,6 +33,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       disabled = false,
       showLabel = true,
       InputProps = {},
+      errorText = '',
     } = props;
 
     const { classes: valueClasses = {}, ...restValueProps } = valueProps;
@@ -48,7 +49,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
         {showLabel && label && (
           <DenInputLabel
             shrink
-            htmlFor={id ?? 'bootstrap-input'}
+            htmlFor={id}
             className={clsx(labelClass, style.label)}
             {...labelProps}
           >
@@ -61,6 +62,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
             ...valueClasses,
             root: clsx(style['denLabel'], valueClasses.root),
           }}
+          disabled={disabled}
           InputProps={{
             ...InputProps,
             classes: {
@@ -74,10 +76,11 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
             readOnly: valueProps?.readOnly,
           }}
           value={value ?? ''}
-          id={id ?? 'bootstrap-input'}
+          id={id}
           {...restValueProps}
           onChange={onChange}
         />
+        {errorText && <div className="has-error"> {errorText} </div>}
       </DenFormControl>
     );
   }

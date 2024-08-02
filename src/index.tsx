@@ -5,7 +5,7 @@
 import './muiclasssetup';
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './app';
+const App = React.lazy(() => import('./app'));
 import { Input, User } from './components/common';
 
 interface AppComponentProps {
@@ -30,7 +30,11 @@ if (
     console.log('== Inside React Project: renderApplication ===', element);
     const root = createRoot(element);
 
-    root.render(<App reqObj={reqObj} callbackNgFn={callbackNgFn} />);
+    root.render(
+      <React.Suspense fallback="Loading...">
+        <App reqObj={reqObj} callbackNgFn={callbackNgFn} />
+      </React.Suspense>
+    );
   };
   console.log('Looks like we are in development mode!');
   let element = document.getElementById('root');
