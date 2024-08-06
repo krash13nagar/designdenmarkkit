@@ -18,7 +18,8 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
  * @param {number} props.count - search count
  * @param {string} props.wrapperClassName - classname of wrapper node
  * @param {ReactNode} props.icon - icon component
- * @param {ReactNode} props.trendingFrom - topic trending from time
+ * @param {string} props.trendingFrom - topic trending from time
+ * @param {Function} props.copyToClipboard - Copy to Clipboard function
  * @param {Array} props.competitorNewsDetails - competitors published news details
  */
 
@@ -33,14 +34,17 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     wrapperClassName,
     competitorNewsDetails,
     trendingFrom,
+    copyToClipboard,
     handleClick,
 }) => {
 
     const [contentCopiedToClipboard, setContentCopiedToClipboard]=useState(false);
 
-    const copyKeywordstoClipboard =()=>{
+    const copyKeywordstoClipboard =(event:any)=>{
         navigator?.clipboard?.writeText(keywords.join(', '));
+        copyToClipboard(keywords.join(', '))
         setContentCopiedToClipboard(true);
+        event.stopPropagation();
     }
 
     const tooltipPopperProps={
@@ -53,12 +57,12 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             fontSize: '10px'
           },
           '& .MuiTooltip-arrow': {
-            color: '#E8ECEF'
+            color: '#E8ECEF !important' 
           },
         },
       };
 
-
+ 
     return (
         <div
             className={`${styles.card} ${wrapperClassName} ${active ? styles.active : ''}`}
@@ -72,7 +76,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                             <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
                               <span>{keywords.join(', ')}</span>
                               <DenIconButton
-                                onClick={copyKeywordstoClipboard}
+                                onClick={(e)=>copyKeywordstoClipboard(e)}
                                 size="small"
                                 style={{
                                   marginTop: '8px',
@@ -104,16 +108,18 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                 <div className={styles.iconsContainer}>
                     {competitorNewsDetails?.slice(0, 3).map((competitor: CompetitorInfoProps)=> (
                         <a href={competitor?.isPublished ? competitor?.newsURL : ''} target={competitor?.isPublished ? "_blank" : "" } className={styles.iconsDiv}>
-                            <DenTooltip title={competitor?.competitorName} arrow PopperProps={tooltipPopperProps} >
+                            <DenTooltip title={competitor?.competitorName} PopperProps={tooltipPopperProps} >
                                 <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${competitor?.isPublished ? '' : styles.competitorNotPublished}`} />
                             </DenTooltip>
                         </a>
                     ))}
-                    <DenTooltip title={competitorNewsDetails?.slice(3)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
-                        <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
-                            +{competitorNewsDetails?.length-3}    
-                        </div>
-                    </DenTooltip>
+                    {competitorNewsDetails?.length>3 &&
+                        <DenTooltip title={competitorNewsDetails?.slice(3)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
+                            <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
+                                +{competitorNewsDetails?.length-3}    
+                            </div>
+                        </DenTooltip>
+                    }
                 </div>
                 <div className={styles.trendingTime}>
                     <TrendingUpIcon />
