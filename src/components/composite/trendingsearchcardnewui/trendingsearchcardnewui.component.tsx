@@ -45,7 +45,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             <div className={styles.row}>
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
-                    <DenTooltip color="primary" title={keywords.join(", ")} >
+                    <DenTooltip color="primary" title="keywords" >
                         <ArrowDropDownIcon />
                     </DenTooltip>
                 </div>
@@ -68,7 +68,9 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                             <img src={competitor.iconURL} className={`${styles.competitorIcon} ${competitor.isPublished ? '' : styles.competitorNotPublished}`} title={competitor.competitorName} />
                         </a>
                     ))}
-                    <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`} >+{competitorNewsDetails.length-3}</div>
+                    <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
+                        +{competitorNewsDetails.length-3}    
+                    </div>
                 </div>
                 <div className={styles.trendingTime}>
                     <TrendingUpIcon />
