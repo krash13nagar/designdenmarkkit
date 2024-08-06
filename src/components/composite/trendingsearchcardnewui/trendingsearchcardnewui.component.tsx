@@ -41,7 +41,6 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     const [contentCopiedToClipboard, setContentCopiedToClipboard]=useState(false);
 
     const copyKeywordstoClipboard =(event:any)=>{
-        navigator?.clipboard?.writeText(keywords.join(', '));
         copyToClipboard(keywords.join(', '))
         setContentCopiedToClipboard(true);
         event.stopPropagation();
@@ -71,26 +70,28 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             <div className={styles.row}>
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
-                    <DenTooltip color="primary"
-                        title={
-                            <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
-                              <span>{keywords.join(', ')}</span>
-                              <DenIconButton
-                                onClick={(e)=>copyKeywordstoClipboard(e)}
-                                size="small"
-                                style={{
-                                  marginTop: '8px',
-                                  alignSelf: 'flex-end'
-                                }}
-                              >
-                                {!contentCopiedToClipboard ? <ContentCopyIcon fontSize="small" /> : <DoneAllIcon color='primary' fontSize='small' />}
-                              </DenIconButton>
-                            </DenBox>
-                          }
-                        PopperProps={tooltipPopperProps}
-                        >
-                        <ArrowDropDownIcon />
-                    </DenTooltip>
+                    {keywords?.length>0 && 
+                        <DenTooltip color="primary"
+                            title={
+                                <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
+                                <span>{keywords.join(', ')}</span>
+                                <DenIconButton
+                                    onClick={(e)=>copyKeywordstoClipboard(e)}
+                                    size="small"
+                                    style={{
+                                    marginTop: '8px',
+                                    alignSelf: 'flex-end'
+                                    }}
+                                >
+                                    {!contentCopiedToClipboard ? <ContentCopyIcon fontSize="small" /> : <DoneAllIcon color='primary' fontSize='small' />}
+                                </DenIconButton>
+                                </DenBox>
+                            }
+                            PopperProps={tooltipPopperProps}
+                            >
+                            <ArrowDropDownIcon />
+                        </DenTooltip>
+                    }
                 </div>
                 <div className={styles.statistics}>
                     <div className={styles.count}>{formatCount(count)}</div>
