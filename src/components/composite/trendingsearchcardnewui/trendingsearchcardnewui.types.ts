@@ -10,11 +10,11 @@ export interface TrendingSearchCardNewUiProps {
     wrapperClassName?: string;
     active?: boolean,
     trendingFrom?: string,
-    competitorNewsDetails?: Array<CompetitorInfo>,
+    competitorNewsDetails?: Array<CompetitorInfoProps>,
     handleClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
-export interface CompetitorInfo{
+export interface CompetitorInfoProps{
     competitorName: string;
     competitorCode: string;
     iconURL: string;

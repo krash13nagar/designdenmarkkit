@@ -1,11 +1,12 @@
 import React, { useState, ReactNode } from 'react';
 import styles from './trendingsearchcardnewui.module.scss';
-import { TrendingSearchCardNewUiProps, CompetitorInfo } from './trendingsearchcardnewui.types';
+import { TrendingSearchCardNewUiProps, CompetitorInfoProps} from './trendingsearchcardnewui.types';
 import { formatCount } from './trendingsearchcardnewui.utils';
-import { DenTooltip, DenIconButton} from '../../common';
-import {tooltipClasses } from "@mui/material/Tooltip";
+import { DenTooltip, DenIconButton, DenBox} from '../../common';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 /**
  * Trending search card Component.
@@ -35,6 +36,27 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     handleClick,
 }) => {
 
+    const [contentCopiedToClipboard, setContentCopiedToClipboard]=useState(false);
+
+    const copyKeywordstoClipboard =()=>{
+        navigator?.clipboard?.writeText(keywords.join(', '));
+        setContentCopiedToClipboard(true);
+    }
+
+    const tooltipPopperProps={
+        sx: {
+          '& .MuiTooltip-tooltip': {
+            backgroundColor: '#E8ECEF', 
+            color: '#2B2B2B', 
+            borderRadius: '2px',
+            padding: '3px 6px',
+            fontSize: '10px'
+          },
+          '& .MuiTooltip-arrow': {
+            color: '#E8ECEF'
+          },
+        },
+      };
 
 
     return (
@@ -45,7 +67,24 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             <div className={styles.row}>
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
-                    <DenTooltip color="primary" title={keywords?.join(',')} >
+                    <DenTooltip color="primary"
+                        title={
+                            <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
+                              <span>{keywords.join(', ')}</span>
+                              <DenIconButton
+                                onClick={copyKeywordstoClipboard}
+                                size="small"
+                                style={{
+                                  marginTop: '8px',
+                                  alignSelf: 'flex-end'
+                                }}
+                              >
+                                {!contentCopiedToClipboard ? <ContentCopyIcon fontSize="small" /> : <DoneAllIcon color='primary' fontSize='small' />}
+                              </DenIconButton>
+                            </DenBox>
+                          }
+                        PopperProps={tooltipPopperProps}
+                        >
                         <ArrowDropDownIcon />
                     </DenTooltip>
                 </div>
@@ -63,14 +102,18 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             </div>
             <div className={styles.trendsContainer}>
                 <div className={styles.iconsContainer}>
-                    {competitorNewsDetails?.slice(0, 3).map((competitor: CompetitorInfo)=> (
+                    {competitorNewsDetails?.slice(0, 3).map((competitor: CompetitorInfoProps)=> (
                         <a href={competitor?.isPublished ? competitor?.newsURL : ''} target={competitor?.isPublished ? "_blank" : "" } className={styles.iconsDiv}>
-                            <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${competitor?.isPublished ? '' : styles.competitorNotPublished}`} title={competitor?.competitorName} />
+                            <DenTooltip title={competitor?.competitorName} arrow PopperProps={tooltipPopperProps} >
+                                <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${competitor?.isPublished ? '' : styles.competitorNotPublished}`} />
+                            </DenTooltip>
                         </a>
                     ))}
-                    <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
-                        +{competitorNewsDetails?.length-3}    
-                    </div>
+                    <DenTooltip title={competitorNewsDetails?.slice(3)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
+                        <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
+                            +{competitorNewsDetails?.length-3}    
+                        </div>
+                    </DenTooltip>
                 </div>
                 <div className={styles.trendingTime}>
                     <TrendingUpIcon />
