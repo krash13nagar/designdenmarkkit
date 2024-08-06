@@ -45,7 +45,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             <div className={styles.row}>
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
-                    <DenTooltip color="primary" title="keywords" >
+                    <DenTooltip color="primary" title={keywords?.join(',')} >
                         <ArrowDropDownIcon />
                     </DenTooltip>
                 </div>
