@@ -63,13 +63,13 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             </div>
             <div className={styles.trendsContainer}>
                 <div className={styles.iconsContainer}>
-                    {competitorNewsDetails.slice(0, 3).map((competitor: CompetitorInfo)=> (
-                        <a href={competitor.isPublished ? competitor.newsURL : ''} target={competitor.isPublished ? "_blank" : "" } className={styles.iconsDiv}>
-                            <img src={competitor.iconURL} className={`${styles.competitorIcon} ${competitor.isPublished ? '' : styles.competitorNotPublished}`} title={competitor.competitorName} />
+                    {competitorNewsDetails?.slice(0, 3).map((competitor: CompetitorInfo)=> (
+                        <a href={competitor?.isPublished ? competitor?.newsURL : ''} target={competitor?.isPublished ? "_blank" : "" } className={styles.iconsDiv}>
+                            <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${competitor?.isPublished ? '' : styles.competitorNotPublished}`} title={competitor?.competitorName} />
                         </a>
                     ))}
                     <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
-                        +{competitorNewsDetails.length-3}    
+                        +{competitorNewsDetails?.length-3}    
                     </div>
                 </div>
                 <div className={styles.trendingTime}>
