@@ -61,6 +61,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
         },
       };
 
+    const showFrontCompetitors=3;
  
     return (
         <div
@@ -107,15 +108,23 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             </div>
             <div className={styles.trendsContainer}>
                 <div className={styles.iconsContainer}>
-                    {competitorNewsDetails?.slice(0, 3).map((competitor: CompetitorInfoProps)=> (
-                        <a href={competitor?.isPublished ? competitor?.newsURL : ''} target={competitor?.isPublished ? "_blank" : "" } className={styles.iconsDiv}>
-                            <DenTooltip title={competitor?.competitorName} PopperProps={tooltipPopperProps} >
-                                <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${competitor?.isPublished ? '' : styles.competitorNotPublished}`} />
-                            </DenTooltip>
-                        </a>
+                    {competitorNewsDetails?.slice(0, showFrontCompetitors).map((competitor: CompetitorInfoProps)=> (
+                        competitor?.isPublished ? (
+                            <a href={competitor.newsURL} target="_blank" className={styles.iconsDiv}>
+                                <DenTooltip title={competitor.competitorName} PopperProps={tooltipPopperProps}>
+                                    <img src={competitor.iconURL} className={styles.competitorIcon} />
+                                </DenTooltip>
+                            </a>
+                        ) : (
+                            <div className={styles.iconsDiv}>
+                                <DenTooltip title={competitor?.competitorName+'(not available)'} PopperProps={tooltipPopperProps}>
+                                    <img src={competitor?.iconURL} className={`${styles.competitorIcon} ${styles.competitorNotPublished}`} />
+                                </DenTooltip>
+                            </div>
+                        )
                     ))}
                     {competitorNewsDetails?.length>3 &&
-                        <DenTooltip title={competitorNewsDetails?.slice(3)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
+                        <DenTooltip title={competitorNewsDetails?.slice(showFrontCompetitors)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
                             <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
                                 +{competitorNewsDetails?.length-3}    
                             </div>

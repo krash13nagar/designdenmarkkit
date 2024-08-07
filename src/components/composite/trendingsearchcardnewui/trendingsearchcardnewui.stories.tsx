@@ -23,11 +23,6 @@ export const Basic: Story = {
             "ind vs sl odi",
             "india vs. sri lanka",
             "india vs sri lanka 2nd odi",
-            "sl बनाम ind",
-            "ind vs sl 2nd odi",
-            "india vs sri lanka odi",
-            "रोहित शर्मा",
-            "odi ind vs sl"
           ],
         trendingFrom: "5 mins ago",
         handleClick: () => console.log("clicked!"),
