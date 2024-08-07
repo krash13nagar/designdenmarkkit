@@ -1,7 +1,7 @@
 .card {
     min-width: 295px;
     max-width: 400px;
-    height: 140px !important;
+    height: 150px !important;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     opacity: 1;
     padding: 10px 8px;
@@ -90,7 +90,7 @@
 
     .description {
         width: 218px;
-        max-height: 36px;
+        max-height: 55px;
         /* 2 lines of 18px each */
         text-align: left;
         font: normal normal 500 13px/18px 'Source Sans 3';
@@ -137,6 +137,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding-top: 10px;
         .iconsContainer{
             display: flex;
             gap: 6px;
