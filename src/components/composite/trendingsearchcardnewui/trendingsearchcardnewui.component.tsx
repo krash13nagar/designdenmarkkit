@@ -21,6 +21,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
  * @param {string} props.trendingFrom - topic trending from time
  * @param {Function} props.copyToClipboard - Copy to Clipboard function
  * @param {Array} props.competitorNewsDetails - competitors published news details
+ * @param {Array} props.relatedNewsItems - related news items other than competitors view
  */
 
 export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = ({
@@ -35,6 +36,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     competitorNewsDetails,
     trendingFrom,
     copyToClipboard,
+    relatedNewsItems,
     handleClick,
 }) => {
 
@@ -123,10 +125,10 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                             </div>
                         )
                     ))}
-                    {competitorNewsDetails?.length>3 &&
-                        <DenTooltip title={competitorNewsDetails?.slice(showFrontCompetitors)?.map(comp => comp.competitorName)?.join(', ')} arrow PopperProps={tooltipPopperProps} >
+                    {relatedNewsItems &&
+                        <DenTooltip title={relatedNewsItems?.map(item => item.source)?.join(', ')} PopperProps={tooltipPopperProps} >
                             <div className={`${styles.competitorIcon} ${styles.moreCompetitors}`}>
-                                +{competitorNewsDetails?.length-3}    
+                                +{relatedNewsItems.length}    
                             </div>
                         </DenTooltip>
                     }

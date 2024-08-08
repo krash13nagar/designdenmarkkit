@@ -11,6 +11,7 @@ export interface TrendingSearchCardNewUiProps {
     active?: boolean,
     trendingFrom?: string,
     competitorNewsDetails?: Array<CompetitorInfoProps>,
+    relatedNewsItems?: Array<RelatedNewsItemProps>
     copyToClipboard?: Function,
     handleClick?: React.MouseEventHandler<HTMLDivElement>
 }
@@ -26,3 +27,11 @@ export interface CompetitorInfoProps{
     publishedDate?: string;
     metadata?: string;
 }
+
+export interface RelatedNewsItemProps{
+    description?: string;
+    source?: string;
+    title?: string;
+    url?: string;
+}
+

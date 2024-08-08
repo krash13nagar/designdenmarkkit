@@ -82,6 +82,20 @@ export const Basic: Story = {
                             "publishedDate": null,
                             "metadata": null
                         }
+                    ],
+        relatedNewsItems: [
+                        {
+                            "title": "IND vs SL highlights, 3rd ODI: Sri Lanka beats India by 110 runs to ...",
+                            "description": "IND vs SL highlights, 3rd ODI: Catch the scores, updates and commentary from the third ODI between India and Sri Lanka played in Colombo on Wednesday.",
+                            "url": "https://sportstar.thehindu.com/cricket/india-vs-sri-lanka-live-score-3rd-odi-ind-sl-match-weather-updates-scores-highlights-streaming-info/article68495882.ece",
+                            "source": "Sportstar"
+                        },
+                        {
+                            "title": "Wellalage five-for sends India crashing to 2-0 defeat",
+                            "description": "SL vs IND 2024, Sri Lanka vs India Match Report: Avishka Fernando's 96 took Sri Lanka to 248, paving the way for their first bilateral ODI series win ...",
+                            "url": "https://www.espncricinfo.com/series/india-in-sri-lanka-2024-1442984/sri-lanka-vs-india-3rd-odi-1442992/match-report",
+                            "source": "ESPNcricinfo.com"
+                        }
                     ]
     },
 };
