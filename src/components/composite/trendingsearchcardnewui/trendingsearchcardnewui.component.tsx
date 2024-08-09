@@ -45,6 +45,9 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     const copyKeywordstoClipboard =(event:any)=>{
         copyToClipboard(keywords.join(', '))
         setContentCopiedToClipboard(true);
+        setTimeout(()=>{
+            setContentCopiedToClipboard(false);
+        }, 5000)
         event.stopPropagation();
     }
 
@@ -83,6 +86,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                                     size="small"
                                     style={{
                                     marginTop: '8px',
+                                    marginLeft: '2px',
                                     alignSelf: 'flex-end'
                                     }}
                                 >
