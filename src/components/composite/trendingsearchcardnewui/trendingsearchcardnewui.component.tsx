@@ -2,7 +2,7 @@ import React, { useState, ReactNode } from 'react';
 import styles from './trendingsearchcardnewui.module.scss';
 import { TrendingSearchCardNewUiProps, CompetitorInfoProps} from './trendingsearchcardnewui.types';
 import { formatCount } from './trendingsearchcardnewui.utils';
-import { DenTooltip, DenIconButton, DenBox} from '../../common';
+import { DenTooltip, DenIconButton, DenBox, DenClickAwayListener} from '../../common';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -41,14 +41,15 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
 }) => {
 
     const [contentCopiedToClipboard, setContentCopiedToClipboard]=useState(false);
+    const [showKeywords, setShowKeywords]=useState(false);
 
     const copyKeywordstoClipboard =(event:any)=>{
+        event.stopPropagation();
         copyToClipboard(keywords.join(', '))
         setContentCopiedToClipboard(true);
         setTimeout(()=>{
             setContentCopiedToClipboard(false);
         }, 5000)
-        event.stopPropagation();
     }
 
     const tooltipPopperProps={
@@ -67,6 +68,16 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
       };
 
     const showFrontCompetitors=3;
+
+    const handleShowKeywords= (event: any) => {
+        event.stopPropagation();
+        setShowKeywords(true);
+    };
+
+    const handleShowKeywordsClose= (event: any) => {
+        event.stopPropagation();
+        setShowKeywords(false);
+    };
  
     return (
         <div
@@ -76,27 +87,33 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             <div className={styles.row}>
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
-                    {keywords?.length>0 && 
-                        <DenTooltip color="primary"
-                            title={
-                                <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
-                                <span>{keywords.join(', ')}</span>
-                                <DenIconButton
-                                    onClick={(e)=>copyKeywordstoClipboard(e)}
-                                    size="small"
-                                    style={{
-                                    marginLeft: '2px',
-                                    alignSelf: 'flex-end'
-                                    }}
+                    {keywords?.length > 0 &&
+                        <DenClickAwayListener onClickAway={handleShowKeywordsClose}>
+                            <div>
+                                <DenTooltip
+                                    open={showKeywords}
+                                    color="primary"
+                                    title={
+                                        <DenBox display="flex" flexDirection="row" alignItems="flex-start" maxWidth="350px">
+                                            <span>{keywords.join(', ')}</span>
+                                            <DenIconButton
+                                                onClick={copyKeywordstoClipboard}
+                                                size="small"
+                                                style={{
+                                                    marginLeft: '2px',
+                                                    alignSelf: 'flex-end'
+                                                }}
+                                            >
+                                                {!contentCopiedToClipboard ? <ContentCopyIcon fontSize="small" /> : <DoneAllIcon color='primary' fontSize='small' />}
+                                            </DenIconButton>
+                                        </DenBox>
+                                    }
+                                    PopperProps={tooltipPopperProps}
                                 >
-                                    {!contentCopiedToClipboard ? <ContentCopyIcon fontSize="small" /> : <DoneAllIcon color='primary' fontSize='small' />}
-                                </DenIconButton>
-                                </DenBox>
-                            }
-                            PopperProps={tooltipPopperProps}
-                            >
-                            <ArrowDropDownIcon />
-                        </DenTooltip>
+                                    <ArrowDropDownIcon onClick={handleShowKeywords} />
+                                </DenTooltip>
+                            </div>
+                        </DenClickAwayListener>
                     }
                 </div>
                 <div className={styles.statistics}>
