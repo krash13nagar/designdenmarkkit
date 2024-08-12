@@ -22,6 +22,9 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
  * @param {Function} props.copyToClipboard - Copy to Clipboard function
  * @param {Array} props.competitorNewsDetails - competitors published news details
  * @param {Array} props.relatedNewsItems - related news items other than competitors view
+ * @param {boolean} props.showKeywords - Determines if the keywords tooltip is shown
+ * @param {Function} props.onTooltipToggle - Function to toggle the keywords tooltip
+ * @param {number} props.cardIndex - Index of Card so as to show tooltip
  */
 
 export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = ({
@@ -38,10 +41,12 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
     copyToClipboard,
     relatedNewsItems,
     handleClick,
+    showKeywords,      
+    onTooltipToggle,
+    cardIndex
 }) => {
 
     const [contentCopiedToClipboard, setContentCopiedToClipboard]=useState(false);
-    const [showKeywords, setShowKeywords]=useState(false);
 
     const copyKeywordstoClipboard =(event:any)=>{
         event.stopPropagation();
@@ -68,16 +73,6 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
       };
 
     const showFrontCompetitors=3;
-
-    const handleShowKeywords= (event: any) => {
-        event.stopPropagation();
-        setShowKeywords(true);
-    };
-
-    const handleShowKeywordsClose= (event: any) => {
-        event.stopPropagation();
-        setShowKeywords(false);
-    };
  
     return (
         <div
@@ -88,7 +83,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                 <div className={styles.titleContainer}>
                     <div className={styles.label}>{label}</div>
                     {keywords?.length > 0 &&
-                        <DenClickAwayListener onClickAway={handleShowKeywordsClose}>
+                        <DenClickAwayListener onClickAway={() => onTooltipToggle(null)}>
                             <div>
                                 <DenTooltip
                                     open={showKeywords}
@@ -110,7 +105,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                                     }
                                     PopperProps={tooltipPopperProps}
                                 >
-                                    <ArrowDropDownIcon onClick={handleShowKeywords} />
+                                <ArrowDropDownIcon onClick={(e) => { e.stopPropagation(); onTooltipToggle(cardIndex); }} />
                                 </DenTooltip>
                             </div>
                         </DenClickAwayListener>

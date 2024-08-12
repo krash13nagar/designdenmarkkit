@@ -14,6 +14,9 @@ export interface TrendingSearchCardNewUiProps {
     relatedNewsItems?: Array<RelatedNewsItemProps>
     copyToClipboard?: Function,
     handleClick?: React.MouseEventHandler<HTMLDivElement>
+    showKeywords?: boolean,
+    onTooltipToggle?: Function
+    cardIndex?: Number
 }
 
 export interface CompetitorInfoProps{
