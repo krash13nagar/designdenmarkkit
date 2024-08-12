@@ -58,7 +58,7 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
             color: '#2B2B2B', 
             borderRadius: '2px',
             padding: '3px 6px',
-            fontSize: '10px'
+            fontSize: '12px'
           },
           '& .MuiTooltip-arrow': {
             color: '#E8ECEF !important' 
@@ -85,7 +85,6 @@ export const TrendingSearchCardNewUi: React.FC<TrendingSearchCardNewUiProps> = (
                                     onClick={(e)=>copyKeywordstoClipboard(e)}
                                     size="small"
                                     style={{
-                                    marginTop: '8px',
                                     marginLeft: '2px',
                                     alignSelf: 'flex-end'
                                     }}
