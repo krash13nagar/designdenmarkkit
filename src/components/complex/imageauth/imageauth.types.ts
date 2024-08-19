@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { TextFieldProps } from '../../common';
 import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
@@ -56,7 +57,7 @@ export interface ImageAuthModelProps extends ImageAuthoringProps {
 }
 
 export interface ImageAuthLeftSectionProps {
-  metaInformation: LabelValueProps[];
+  metaInformation: (LabelValueProps & { component?: ReactNode })[];
   src: ImageCardProps["src"];
   classes?: { root?: string };
   imageCTAs?: { Icon: any, label: string, value: any }[];

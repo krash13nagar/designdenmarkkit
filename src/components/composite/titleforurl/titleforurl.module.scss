@@ -11,6 +11,13 @@
     justify-content: center;
     // align-items: end;
 
+    .icon-button-fab {
+      width: unset;
+      height: unset;
+      background-color: transparent !important;
+      padding: 5px;
+    }
+
     .icon-button {
       position: absolute;
       right: 0;
@@ -18,6 +25,7 @@
       border-right: none;
       border-bottom: none;
       border-left: 1px solid rgba(0, 0, 0, 0.23); // border-left-width: 1px !important;
+      z-index: 10;
     }
 
     button {

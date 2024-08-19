@@ -45,12 +45,15 @@
                 }
             }
 
-            [class*="MuiAutocomplete-inputRoot"][class*="MuiInput-root"][class*="MuiAutocomplete-input"] {
-                height: 36px;
-
-                &:first-child {
-                    padding: 2px 0;
+            &.nowrap {
+                [class*="MuiAutocomplete-inputRoot"] {
+                    flex-wrap: nowrap;
                 }
+            }
+
+            [class*="MuiAutocomplete-inputRoot"][class*="MuiOutlinedInput-root"] {
+                min-height: 32px;
+
 
                 [class*="MuiAutocomplete-tag"] {
                     max-width: calc(16.071rem - 6px);
@@ -105,8 +108,6 @@
         &.denLabel {
             .denInput {
                 padding-left: 1px !important;
-                padding-top: 1px !important;
-                padding-bottom: 1px !important;
             }
 
             .inputRef {

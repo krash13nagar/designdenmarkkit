@@ -2,8 +2,8 @@ import { ReactElement, ReactHTMLElement, ReactNode } from 'react';
 import { FormLabelTypes } from '../../common/formlabel/formlabel.types';
 
 export interface LabelValueProps {
-  label: string;
-  value: string | number | ArrayOfType<string | number | object>;
+  label?: string;
+  value?: string | number | ArrayOfType<string | number | object>;
   align?: AlignType;
   labelProps?: FormLabelTypes;
   valueProps?: FormLabelTypes;

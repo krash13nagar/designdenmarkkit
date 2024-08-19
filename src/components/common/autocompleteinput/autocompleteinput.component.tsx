@@ -33,6 +33,7 @@ const AutoCompleteInputBase = (
     isError = false,
     errorMessage = '',
     childError = {},
+    nowrap = false,
   } = props;
   const [value, setValues] = useState([]);
   const [inputValue, setInputValue] = React.useState('');
@@ -147,7 +148,7 @@ const AutoCompleteInputBase = (
                 key={3}
                 ref={ref}
                 {...params}
-                className="autocompleteTextField"
+                className={`autocompleteTextField ${nowrap ? 'nowrap' : ''}`}
                 placeholder={!readOnly ? placeholder : ''}
                 inputProps={{
                   ...params.inputProps,

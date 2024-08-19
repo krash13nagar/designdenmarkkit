@@ -1,12 +1,6 @@
 import clsx from 'clsx';
 import React, { FC } from 'react';
-import {
-  EditorTextField,
-  ImageCaption,
-  LabelValue,
-  Title,
-  TitleForUrl,
-} from '../../../composite';
+import { EditorTextField, LabelValue, TitleForUrl } from '../../../composite';
 import style from './primarydataform.module.scss';
 import { PrimaryDataFormProps } from '../imageauth.types';
 import {
@@ -40,12 +34,16 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
   return (
     <div className={clsx(style['primary-data-wrapper'], classes.root)}>
       <LabelValue label="MSID" value={msid ?? 'New'} seperator=":" />
-      <EditorTextField {...title} isTitle />
+      <EditorTextField key={'title'} {...title} isTitle />
       <TitleForUrl {...titleForUrl} />
-      <EditorTextField {...imageCaption} />
+      <EditorTextField key={'caption'} {...imageCaption} />
       <DenTypography variant="h6">Credits</DenTypography>
       <div className={'cds-row'}>
         <DenFormControlLabel
+          sx={{
+            marginLeft: '-11px !important',
+            marginRight: '16px !important',
+          }}
           control={
             <DenCheckbox
               onChange={handleNotRelatedToAgencyChange}
@@ -72,6 +70,7 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
               disabled={isNotRelatedToAgency}
               hideSearchIcon
               {...imageAgencyProps}
+              nowrap
             />
           </DenGrid>
           <DenGrid item xs={6}>
@@ -79,6 +78,7 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
               disabled={isNotRelatedToAgency}
               hideSearchIcon
               {...captionAgencyProps}
+              nowrap
             />
           </DenGrid>
           <DenGrid

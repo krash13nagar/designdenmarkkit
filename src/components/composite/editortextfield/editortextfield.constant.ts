@@ -5,7 +5,7 @@ const modeValue: 'classic' | 'inline' | 'balloon' | 'balloon-always' =
 
 export const SUNEDITOR_DESCRIPTION_OPTIONS = {
   plugins: [table, list, link],
-  defaultTag: 'div',
+  defaultTag: 'p',
   resizingBar: false,
   showPathLabel: false,
   mode: modeValue,

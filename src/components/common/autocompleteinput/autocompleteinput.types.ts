@@ -26,5 +26,6 @@ export interface AutocompleteInputProps {
         show?: boolean
     },
     isError?: boolean,
-    errorMessage?: string
+    errorMessage?: string,
+    nowrap?: boolean
 }

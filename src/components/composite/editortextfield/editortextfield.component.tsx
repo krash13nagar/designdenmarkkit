@@ -61,6 +61,12 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     setFocus(false);
   };
 
+  //setting default tag value to p as defaultTag div does not work properly
+  const editorOptionsReceived = editorOptions;
+  if (editorOptionsReceived) {
+    editorOptionsReceived.defaultTag = 'p';
+  }
+
   return (
     <div
       className={clsx(
@@ -81,7 +87,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
         {...(height && { height: height })}
         autoFocus={autoFocus}
         onChange={handleChange}
-        setOptions={editorOptions || SUNEDITOR_DESCRIPTION_OPTIONS}
+        setOptions={editorOptionsReceived || SUNEDITOR_DESCRIPTION_OPTIONS}
         setContents={content}
         onBlur={handleBlur}
         onFocus={handleFocus}

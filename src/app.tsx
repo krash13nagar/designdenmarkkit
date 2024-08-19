@@ -20,6 +20,7 @@ import '../src/styles/storybookBasesStyles.scss';
 import { IMAGE_AUTH_TABS } from './components/complex/imageauth/imageauth.constants';
 import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
+import CustomSpeedDial from './components/composite/customspeeddial/customspeeddial.component';
 
 declare const module: {
   hot: {
@@ -93,7 +94,7 @@ export const test = {
     onChange: (str: string) => {},
     width: '100%',
     height: '200px',
-    value: 'Caption value',
+    value: '<div>Caption value</div>',
   },
   titleForUrl: {
     seoTitleProps: {
@@ -156,6 +157,7 @@ export const test = {
     { label: 'Type', value: 'jpeg' },
     { label: 'Original Resolutions', value: '120x120 px' },
     { label: 'Original Resolutions', value: '120x120 px' },
+    { component: <p>This is a test</p> },
   ],
   msid: '123456',
   keywordConfig: config,
@@ -296,7 +298,7 @@ const App = (props: AppProps) => {
     recommendConfig,
   };
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('My test title');
   test.title.value = title;
   test.title.onChange = (str) => setTitle(str);
   const testConfig = { ...test, keywordConfig: kewordConfig };

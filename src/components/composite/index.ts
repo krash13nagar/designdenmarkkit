@@ -32,3 +32,4 @@ export * from './imagesearchcardwrapper';
 export * from './richstorycard';
 export * from './trendingsearchcardnewui';
 export * from './editortextfield'
+export * from './customspeeddial'

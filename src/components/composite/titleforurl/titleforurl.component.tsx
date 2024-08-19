@@ -3,9 +3,10 @@ import { DenTextField } from '../../common/textfield/textfield.component';
 import Count from '../wordcount/wordcount.component';
 import style from './titleforurl.module.scss';
 import { DenIconButton, DenInputLabel } from '../../common';
-import { AddCircle } from '../../../assets/cdsicons/addcircleicon';
 import { Cancel } from '../../../assets/cdsicons/cancelicon';
 import { TitleForUrlProps } from './titleforurl.types';
+import CustomSpeedDial from '../customspeeddial/customspeeddial.component';
+import clsx from 'clsx';
 
 /**
  * Title for Url Component.
@@ -20,6 +21,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
   overrideLinkProps = {},
 }) => {
   const [isOvverrideVisible, setIsOvverideVisible] = React.useState(false);
+  const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
   return (
     <div className={style['title-for-url-wrapper']}>
       <DenInputLabel
@@ -40,17 +42,25 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
             },
           }}
         />
-        <DenIconButton
-          size="small"
-          className={style['icon-button']}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setIsOvverideVisible(true);
+        <CustomSpeedDial
+          actions={[
+            {
+              label: 'Override Link',
+              onClick: (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsOvverideVisible(true);
+                setSpeedDialOpen(false);
+              },
+            },
+          ]}
+          open={speedDialOpen}
+          setOpen={setSpeedDialOpen}
+          classes={{
+            root: clsx(style['icon-button'], style['icon-button-root']),
+            fab: style['icon-button-fab'],
           }}
-        >
-          <AddCircle />
-        </DenIconButton>
+        />
       </div>
       <Count wordString={seoTitleProps.value ?? ''} />
       {isOvverrideVisible && (
