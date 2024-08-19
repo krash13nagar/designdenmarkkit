@@ -19,6 +19,83 @@ export const Basic: Story = {
         icon: <TwitterIcon style={{ color: '#5da8dc' }} />,
         tags: "India TV",
         description: "India won the t-20 worldcup 2024 in westindies against the mighty England. ",
-        handleClick: () => console.log("clicked!")
+        keywords: [
+            "ind vs sl odi",
+            "india vs. sri lanka",
+            "india vs sri lanka 2nd odi",
+          ],
+        trendingFrom: "5 mins ago",
+        handleClick: () => console.log("clicked!"),
+        competitorNewsDetails: [
+                        {
+                            "competitorName": "Hindustan Times",
+                            "competitorCode": "HT",
+                            "iconURL": "https://cdn.freelogovectors.net/wp-content/uploads/2021/12/hindustan-times-logo-freelogovectors.net_.png",
+                            "newsURL": "https://www.hindustantimes.com/cricket/india-vs-sri-lanka-live-score-1st-odi-ind-vs-sl-scorecard-updates-today-match-2-august-2024-in-premadasa-stadium-colombo-101722575561546.html",
+                            "title": "India vs Sri Lanka, 1st ODI highlights: Series opener ends ...",
+                            "description": "Sri Lanka stunned India with a late comeback as Charith Asalanka took two successive wickets to force a tie in the 1st ODI. | Crickit.",
+                            "isPublished": true,
+                            "publishedDate": null,
+                            "metadata": null
+                        },
+                        {
+                            "competitorName": "NDTV",
+                            "competitorCode": "NDTV",
+                            "iconURL": "https://i.pinimg.com/736x/8b/12/52/8b125232501ef2f169a7085149b14a3b.jpg",
+                            "newsURL": "https://www.hindustantimes.com/cricket/india-vs-sri-lanka-live-score-1st-odi-ind-vs-sl-scorecard-updates-today-match-2-august-2024-in-premadasa-stadium-colombo-101722575561546.html",
+                            "title": "India vs Sri Lanka, 1st ODI highlights: Series opener ends ...",
+                            "description": "Sri Lanka stunned India with a late comeback as Charith Asalanka took two successive wickets to force a tie in the 1st ODI. | Crickit.",
+                            "isPublished": false,
+                            "publishedDate": null,
+                            "metadata": null
+                        },
+                        {
+                            "competitorName": "Zee News",
+                            "competitorCode": "ZEE",
+                            "iconURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKo21MHOGeneLudlfT2ABQwuw90BVxjRMYAMyhp8VyXzaGpIDupkl9-O3fSRDJrV4VXAs&usqp=CAU",
+                            "newsURL": "https://timesofindia.indiatimes.com/technology/tech-news/ex-microsoft-employee-who-got-fired-shares-why-he-is-thankful-to-microsoft/articleshow/112276762.cms",
+                            "title": "India vs Sri Lanka, 1st ODI highlights: Series opener ends ...",
+                            "description": "Sri Lanka stunned India with a late comeback as Charith Asalanka took two successive wickets to force a tie in the 1st ODI. | Crickit.",
+                            "isPublished": true,
+                            "publishedDate": null,
+                            "metadata": null
+                        },
+                        {
+                            "competitorName": "Zee News",
+                            "competitorCode": "ZEE",
+                            "iconURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKo21MHOGeneLudlfT2ABQwuw90BVxjRMYAMyhp8VyXzaGpIDupkl9-O3fSRDJrV4VXAs&usqp=CAU",
+                            "newsURL": "https://www.hindustantimes.com/cricket/india-vs-sri-lanka-live-score-1st-odi-ind-vs-sl-scorecard-updates-today-match-2-august-2024-in-premadasa-stadium-colombo-101722575561546.html",
+                            "title": "India vs Sri Lanka, 1st ODI highlights: Series opener ends ...",
+                            "description": "Sri Lanka stunned India with a late comeback as Charith Asalanka took two successive wickets to force a tie in the 1st ODI. | Crickit.",
+                            "isPublished": true,
+                            "publishedDate": null,
+                            "metadata": null
+                        },
+                        {
+                            "competitorName": "Zee News",
+                            "competitorCode": "ZEE",
+                            "iconURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKo21MHOGeneLudlfT2ABQwuw90BVxjRMYAMyhp8VyXzaGpIDupkl9-O3fSRDJrV4VXAs&usqp=CAU",
+                            "newsURL": "https://www.hindustantimes.com/cricket/india-vs-sri-lanka-live-score-1st-odi-ind-vs-sl-scorecard-updates-today-match-2-august-2024-in-premadasa-stadium-colombo-101722575561546.html",
+                            "title": "India vs Sri Lanka, 1st ODI highlights: Series opener ends ...",
+                            "description": "Sri Lanka stunned India with a late comeback as Charith Asalanka took two successive wickets to force a tie in the 1st ODI. | Crickit.",
+                            "isPublished": true,
+                            "publishedDate": null,
+                            "metadata": null
+                        }
+                    ],
+        relatedNewsItems: [
+                        {
+                            "title": "IND vs SL highlights, 3rd ODI: Sri Lanka beats India by 110 runs to ...",
+                            "description": "IND vs SL highlights, 3rd ODI: Catch the scores, updates and commentary from the third ODI between India and Sri Lanka played in Colombo on Wednesday.",
+                            "url": "https://sportstar.thehindu.com/cricket/india-vs-sri-lanka-live-score-3rd-odi-ind-sl-match-weather-updates-scores-highlights-streaming-info/article68495882.ece",
+                            "source": "Sportstar"
+                        },
+                        {
+                            "title": "Wellalage five-for sends India crashing to 2-0 defeat",
+                            "description": "SL vs IND 2024, Sri Lanka vs India Match Report: Avishka Fernando's 96 took Sri Lanka to 248, paving the way for their first bilateral ODI series win ...",
+                            "url": "https://www.espncricinfo.com/series/india-in-sri-lanka-2024-1442984/sri-lanka-vs-india-3rd-odi-1442992/match-report",
+                            "source": "ESPNcricinfo.com"
+                        }
+                    ]
     },
 };

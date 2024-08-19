@@ -1,7 +1,7 @@
 .card {
     min-width: 295px;
     max-width: 400px;
-    height: 131px;
+    height: 150px !important;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     opacity: 1;
     padding: 10px 8px;
@@ -28,6 +28,11 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+        
+        .titleContainer{
+            display: flex;
+            gap: 3.5px;
+        }
 
         &:last-child {
             margin-bottom: 0;
@@ -85,7 +90,7 @@
 
     .description {
         width: 218px;
-        max-height: 36px;
+        max-height: 55px;
         /* 2 lines of 18px each */
         text-align: left;
         font: normal normal 500 13px/18px 'Source Sans 3';
@@ -95,7 +100,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
     }
 
@@ -126,5 +131,47 @@
         letter-spacing: 0px;
         color: #818181;
         opacity: 1;
+    }
+
+    .trendsContainer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        .iconsContainer{
+            display: flex;
+            gap: 6px;
+            .iconsDiv{
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+                .competitorIcon{
+                    height: 24px;
+                    width: 24px;
+                    &.competitorNotPublished{
+                        opacity: 0.2;
+                    }
+                }
+            }
+            .moreCompetitors{
+                height: 24px;
+                width: 24px;
+                background: #E8ECEF;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+            }
+        }
+
+        .trendingTime{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            .trendingSinceText{
+                font-size: 12px;
+                color: #818181;
+            }
+        }
     }
 }
