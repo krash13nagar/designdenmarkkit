@@ -6,6 +6,7 @@ import KeywordsWrapper from '../../keywords/keywords.wrapper';
 import SimpleTabs from '../../../composite/simpletabs/simpletabs.component';
 import { TAB_MAP } from '../imageauth.constants';
 import PrimaryDataForm from '../primarydataform/primarydataform.component';
+import _ from 'lodash';
 
 export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   tabTitleList,
@@ -28,6 +29,7 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   agencyMessage = '',
   showBylineMessage = false,
   bylineMessage = '',
+  MetadataComp,
 }) => {
   const handleChange = (event: React.SyntheticEvent, value: any) => {
     handleTabChange(value);
@@ -78,7 +80,9 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
       )}
 
       {selectedTab == TAB_MAP.metadata && (
-        <div className={style['meta-data-wrapper']}></div>
+        <div className={style['meta-data-wrapper']}>
+          {!_.isEmpty(MetadataComp) && MetadataComp}
+        </div>
       )}
     </div>
   );

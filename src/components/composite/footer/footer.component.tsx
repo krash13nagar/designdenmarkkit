@@ -1,6 +1,7 @@
 import * as React from 'react';
 import style from './footer.module.scss';
 import { FooterProps, PropsWithChildren } from './footer.types';
+import clsx from 'clsx';
 /**
  * Footer Component.
  * @constructor
@@ -13,5 +14,9 @@ import { FooterProps, PropsWithChildren } from './footer.types';
  * for more details see http:localhost:6006
  */
 export const Footer: React.FC<PropsWithChildren<FooterProps>> = (props) => {
-  return <div className={style['footer']}>{props.children}</div>;
+  return (
+    <div className={clsx('cds-footer-wrapper', style['footer'])}>
+      {props.children}
+    </div>
+  );
 };

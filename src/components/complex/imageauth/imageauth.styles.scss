@@ -23,4 +23,25 @@
             letter-spacing: 0px;
         }
     }
+
+    &+.cds-footer-wrapper {
+        display: flex;
+
+        .image-auth-footer-wrapper {
+            padding: 0 16px;
+            display: flex;
+            justify-self: flex-end;
+
+        }
+
+        .cds-MuiSelect-select:focus {
+            background-color: unset;
+        }
+
+        .cds-action-buttons-wrapper {
+            button {
+                margin-left: 10px;
+            }
+        }
+    }
 }

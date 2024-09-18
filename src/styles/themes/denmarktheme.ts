@@ -3,7 +3,6 @@ import { createTheme } from '@mui/material/styles';
 export const DenmarkDefaultTheme = {
   typography: {
     fontFamily: '"Source Sans 3", "Open Sans", sans-serif',
-    color: '#818181',
     inputLabel: {
       color: '#818181',
       fontSize: 12,
@@ -12,7 +11,7 @@ export const DenmarkDefaultTheme = {
   palette: {
     primary: {
       main: '#0F89FF',
-      contrastText: '#818181',
+      // contrastText: '#818181',
     },
   },
   components: {

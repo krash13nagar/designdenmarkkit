@@ -1,3 +1,4 @@
+import { ButtonProps } from '@mui/material/Button';
 import { ReactNode } from 'react';
 import { TextFieldProps } from '../../common';
 import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
@@ -44,7 +45,17 @@ export interface ImageAuthoringProps
   showAgencyMessage?: boolean,
   agencyMessage?: string,
   showBylineMessage?: boolean,
-  bylineMessage?: string
+  bylineMessage?: string,
+  MetadataComp?: ReactNode,
+  actionButtonsList?: ActionButton[]
+}
+
+export interface ActionButton {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  label: string,
+  variant?: ButtonProps['variant'],
+  color?: ButtonProps['color'],
+  props?: ButtonProps
 }
 
 export interface AnchorGeneric {
@@ -54,6 +65,7 @@ export interface AnchorGeneric {
 export interface ImageAuthModelProps extends ImageAuthoringProps {
   containerHeader?: string;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
+  classes?: { root?: string }
 }
 
 export interface ImageAuthLeftSectionProps {
@@ -86,7 +98,8 @@ export interface ImageAuthRightSectionProps {
   showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
   agencyMessage?: ImageAuthoringProps["agencyMessage"],
   showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
-  bylineMessage?: ImageAuthoringProps["bylineMessage"]
+  bylineMessage?: ImageAuthoringProps["bylineMessage"],
+  MetadataComp?: ImageAuthoringProps["MetadataComp"]
 }
 
 export interface JustificationProps extends TextFieldProps {

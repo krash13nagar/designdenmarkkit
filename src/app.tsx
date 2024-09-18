@@ -21,6 +21,7 @@ import { IMAGE_AUTH_TABS } from './components/complex/imageauth/imageauth.consta
 import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
 import CustomSpeedDial from './components/composite/customspeeddial/customspeeddial.component';
+import { ButtonProps } from '@mui/material/Button';
 
 declare const module: {
   hot: {
@@ -46,15 +47,29 @@ const breadcrumbs = [
 ];
 
 export const test = {
-  primeCategoryLabel: '',
+  primeCategoryLabel: 'Prime Category',
   handlePrimeChange: () => {},
   isPublished: false,
   primeType: 0,
   isPrimeEnable: true,
-  primeCategoris: [
+  primeCategories: [
     {
       categoryId: 100,
       category: 'Prime Category 1',
+    },
+  ],
+  actionButtonsList: [
+    {
+      label: 'Secondary',
+      onClick: () => {},
+      variant: 'outlined' as ButtonProps['variant'],
+      color: 'secondary' as ButtonProps['color'],
+    },
+    {
+      label: 'Primary',
+      onClick: () => {},
+      variant: 'contained' as ButtonProps['variant'],
+      color: 'primary' as ButtonProps['color'],
     },
   ],
   showAgencyMessage: true,

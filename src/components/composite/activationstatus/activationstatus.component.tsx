@@ -6,7 +6,7 @@ import {
   DenSelect,
 } from '../../common';
 import { ActivattionStatusProps } from './activationstatus.types';
-import style from './activationstatus.module.scss';
+import './activationstatus.styles.scss';
 
 export const ActivationStatus = (props: ActivattionStatusProps) => {
   const {
@@ -23,7 +23,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
    */
 
   return (
-    <DenFormControl className="publish_status_dropdown">
+    <DenFormControl className="cds_publish_status_dropdown">
       <DenInputLabel
         id="demo-simple-select-label"
         className="activation-status-label"
@@ -31,11 +31,11 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
         {activationStatusLabel}
       </DenInputLabel>
       <DenSelect
-        variant='standard'
+        variant="standard"
         value={activationStatus}
         onChange={activationChangeHandle}
         disabled={disableActivationStatus}
-        className="publish_select_menu"
+        className="cds_publish_select_menu"
         plain
       >
         {activationStatusOptions.map((item, index) => (
@@ -53,7 +53,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
             </div> */}
             <div
               className={
-                'publish_select_menu_text  ' +
+                'cds_publish_select_menu_text  ' +
                 'status-' +
                 item.title.toLowerCase() +
                 `${menuItemClass ? ' ' + menuItemClass : ''}`
