@@ -10,7 +10,7 @@ export const RecommendWidget = (props: recommendWidget) => {
   const { recommendWidgetObj, addCallbckFnc } = props;
 
   return (
-    <>
+    <div className={styles['recommendCardWrapper']}>
       {Object.entries(recommendWidgetObj).map((item, i) => {
         return (
           <DenCard className={styles["Recommended-card"]} key={i}>
@@ -20,7 +20,7 @@ export const RecommendWidget = (props: recommendWidget) => {
                   className={styles["Recommended-group"]}
                   title={`${item[0]}(${item[1].length})`}
                 />
-                <DenCardContent>
+                <DenCardContent className={styles["Recommended-content"]}>
                   {item[1].map((elm, index = 1) => (
                     <DenGrid key={index} container>
                       <DenGrid item xs={1}>
@@ -51,7 +51,7 @@ export const RecommendWidget = (props: recommendWidget) => {
           </DenCard>
         );
       })}
-    </>
+    </div>
   );
 };
 

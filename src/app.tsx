@@ -13,6 +13,7 @@ import { config } from './components/complex/keywords/keywords.sample';
 import {
   keywordsWrapperConfig,
   recommendedKeywords,
+  suggestedData,
 } from './components/complex/keywords/keywords.types';
 import { richStoryCardSample } from './components/composite/richstorycard/sample';
 import { ImageAuthModel } from './components/complex/imageauth';
@@ -212,10 +213,12 @@ const App = (props: AppProps) => {
   const [addKeywordState, setAddKeywords] = useState(
     config.addKeywordsConfig.addedKeywords
   );
+  const [suggestedKeywordsDataState, setsuggestedKeywordsDataState] = useState(config.searchKeywordConfig.suggestedKeywordsData)
   const [recommndKeywordsState, setRecommndKeywordsState] = useState<
     recommendedKeywords[]
   >(config.recommendConfig.recommendedKeywords);
   const [searchKeywordVal, setSearchKeywordVal] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const removeCallbackFn = (index: number, val: number) => {
     const tmplist = addKeywordState.slice();
@@ -284,6 +287,8 @@ const App = (props: AppProps) => {
   const searchKeywordConfig = {
     ...config.searchKeywordConfig,
     searchCallbckfnc: handleSearchCallbckfnc,
+    suggestedKeywordsData: suggestedKeywordsDataState,
+    isSuggestedKeywordLoading: loading
   };
   const addBtnConfig = {
     ...config.addBtnConfig,

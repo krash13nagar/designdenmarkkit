@@ -6,12 +6,36 @@ import { metaInfo, recommendedKeywords } from './keywords.types';
 
 export const config = {
   searchKeywordConfig: {
-    autocomplete: false,
+    autocomplete: "off",
     label: 'Type Keyword',
     placeholder: 'Add multiple Keywords separated by comma(,)',
+    isSuggestedKeywordLoading: false,
+    suggestedKeywordsData: [
+      {
+        keywordName: 'Aisha Verma',
+        keyEnum: 'Denny',
+        source: 'Denny',
+        id: 1,
+      },
+      {
+        keywordName: 'Guru Divekar',
+        keyEnum: 'Denny',
+        source: 'Denny',
+        id: 2,
+      },
+      {
+        keywordName: 'young woman',
+        keyEnum: 'Denny',
+        source: 'Denny',
+        id: 3,
+      },
+    ],
     searchCallbckfnc: function () {
       console.log('search keyword call back fnc');
     },
+    handleOnSuggestedKeywordClick: function(val:any){
+      console.log(val)
+    }
   },
   addBtnConfig: {
     btnConfig: {

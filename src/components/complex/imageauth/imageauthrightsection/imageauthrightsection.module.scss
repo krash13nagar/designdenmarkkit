@@ -7,11 +7,12 @@
     flex-direction: column;
 
     .keywords-wrapper {
-        padding-right: 6px;
+        padding-right: 16px;
         width: 99%;
         overflow-y: auto;
         max-height: inherit;
         height: calc(100vh - 158px);
+        padding-left: 20px;
     }
 
 }

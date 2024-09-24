@@ -21,6 +21,13 @@ export interface recommendedKeywords {
     addKeywordIcon?: ReactNode;
 }
 
+export interface suggestedData {
+    id: number;
+    keywordName: string;
+    keyEnum?: string;
+    source?: string;
+}
+
 export interface RecommendedKeywordsConfig {
     recommendedConfig: recommendedConfig;
     recommendedKeywords: recommendedKeywords[];
@@ -53,12 +60,24 @@ export interface addedKeywordsConfig {
 }
 
 export interface searchKeywordConfig {
-    autocomplete: boolean;
+    autocomplete: string;
     label: string;
     placeholder: string;
+    isSuggestedKeywordLoading?: boolean;
+    suggestedKeywordsData?: suggestedData[];
     searchCallbckfnc: (val:string)=>void;
     searchKeywordVal?: string;
     handleSearchKeywordVal?:React.Dispatch<React.SetStateAction<string>>;
+    handleSuggestionKeywordFnc?:(val:boolean)=>void;
+    handleOnSuggestedKeywordClick?: (val:suggestedData)=>void; 
+}
+
+export interface suggestedConfig {
+    text:string, 
+    suggestedData: suggestedData[],
+    focus:boolean,
+    isDataLoading?: boolean,
+    handleOnSuggestedKeywordClick?: (val:suggestedData)=>void;
 }
 
 export interface addBtnConfig {
