@@ -6,6 +6,11 @@
     display: flex;
     flex-direction: column;
 
+
+    .image-tab-content-wrapper {
+        padding: 0px css.pxToRem(16px);
+    }
+
     .keywords-wrapper {
         padding-right: 6px;
         width: 99%;

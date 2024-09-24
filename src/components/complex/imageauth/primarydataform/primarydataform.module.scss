@@ -1,12 +1,10 @@
 @use '../../../../styles/' as css;
 
 .primary-data-wrapper {
-    padding-right: 21px;
     width: 99%;
     overflow-y: auto;
     max-height: inherit;
     height: 100%;
-    padding-left: 16px;
 
     .justification {
         margin-bottom: 25px;

@@ -1,11 +1,16 @@
 @use '../../../styles/' as css;
 
+@mixin wrapperPadding {
+  padding: 0;
+}
+
 .image-auth-wrapper {
   display: flex;
   flex-direction: row;
   padding: css.pxToRem(16px) 0px 0px css.pxToRem(16px);
   height: calc(100vh - css.pxToRem(102px));
   overflow: hidden;
+
 
 
   .row {
@@ -44,7 +49,8 @@
     // .parent {
     // padding: css.pxToRem(24px) 0px 0px css.pxToRem(24px);
     .primary-data-wrapper {
-      padding-right: 21px;
+      //padding-right: 21px;
+      @include wrapperPadding;
       width: 99%;
       overflow-y: auto;
       // overflow: hidden;
@@ -57,10 +63,9 @@
     }
 
     .keywords-wrapper {
-      padding-right: 6px;
+      @include wrapperPadding;
       width: 99%;
       overflow-y: auto;
-      // overflow: hidden;
       max-height: inherit;
       height: calc(100vh - 158px);
     }
