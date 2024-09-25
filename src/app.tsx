@@ -80,7 +80,7 @@ export const test = {
    *Seperated publish date
    */
   publishDate: {
-    PublishModalTitle: 'Publish and expiry Date',
+    PublishModalTitle: 'Publish and Expiry Date',
     onAutoCorrect: () => {},
     onReset: () => {},
     onClose: () => {},
@@ -94,10 +94,11 @@ export const test = {
   },
 
   activationStatusOptions: [
-    { title: 'Active', value: '0', icon: <Cancel /> },
-    { title: 'InActive', value: '1', icon: <Cancel /> },
-    { title: 'Unavaialble', value: '2', icon: <Cancel /> },
-    { title: 'block', value: '3', icon: <Cancel /> },
+    { title: 'INACTIVE', value: 'INACTIVE' },
+    { title: 'PENDING', value: 'PENDING_FOR_APPROVAL' },
+    { title: 'ACTIVE', value: 'ACTIVE' },
+    { title: 'CLOSED', value: 'CLOSED' },
+    { title: 'IGNORE', value: 'IGNORE' },
   ],
   activationChangeHandle: () => {},
   activationStatus: '0',

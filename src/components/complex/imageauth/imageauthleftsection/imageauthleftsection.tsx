@@ -4,6 +4,7 @@ import { AlignType, DenImageCard, LabelValue } from '../../../composite';
 import style from './imageauthleftsection.module.scss';
 import { ImageAuthLeftSectionProps } from '../imageauth.types';
 import { DenBox } from '../../../common';
+import { ErrorIcon } from '../../../../assets';
 
 export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
   src,
@@ -13,9 +14,16 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
   handleItemClick = () => {},
   metaClassName = '',
   metaColumnCount = 4,
+  imageError,
 }) => {
   return (
     <div className={clsx(style['image-auth-left-panel'], classes.root)}>
+      {imageError?.message && (
+        <div className={style['error-with-icon']}>
+          <ErrorIcon />
+          <span className={style['errormessage']}>{imageError.message}</span>
+        </div>
+      )}
       <DenImageCard
         src={src}
         wrapperClassName={style['image-container']}
