@@ -33,17 +33,29 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
 }) => {
   return (
     <div className={clsx(style['primary-data-wrapper'], classes.root)}>
-      <LabelValue label="MSID" value={msid ?? 'New'} seperator=":" />
-      <EditorTextField key={'title'} {...title} isTitle />
+      <LabelValue
+        className={style['msid']}
+        valueProps={{ className: style['msidValue'] }}
+        label="MSID"
+        value={msid ?? 'New'}
+        seperator=":"
+      />
+      <EditorTextField
+        key={'title'}
+        {...title}
+        classes={{ root: style['image-title'] }}
+        small
+      />
       <TitleForUrl {...titleForUrl} />
       <EditorTextField key={'caption'} {...imageCaption} />
-      <DenTypography variant="h6">Credits</DenTypography>
+      <DenTypography className={style['credits']}>Credits</DenTypography>
       <div className={'cds-row'}>
         <DenFormControlLabel
           sx={{
             marginLeft: '-11px !important',
             marginRight: '16px !important',
           }}
+          classes={{ label: 'mediumText' }}
           control={
             <DenCheckbox
               onChange={handleNotRelatedToAgencyChange}

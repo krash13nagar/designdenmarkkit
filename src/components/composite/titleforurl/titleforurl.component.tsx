@@ -25,9 +25,13 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
   return (
     <div className={style['title-for-url-wrapper']}>
       <DenInputLabel
-        shrink
+        shrink={seoTitleProps.shrinkLabel || false}
         htmlFor={seoTitleProps.id ?? 'bootstrap-input'}
-        className={style.label}
+        className={clsx(
+          style.label,
+          'cds-input-label',
+          seoTitleProps.shrinkLabel ? style['shrink'] : ''
+        )}
       >
         {seoTitleProps.label}
       </DenInputLabel>
@@ -66,9 +70,13 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
       {isOvverrideVisible && (
         <>
           <DenInputLabel
-            shrink
+            shrink={overrideLinkProps.shrinkLabel || false}
             htmlFor={overrideLinkProps.id ?? 'bootstrap-input'}
-            className={style.label}
+            className={clsx(
+              style.label,
+              'cds-input-label',
+              overrideLinkProps.shrinkLabel ? style['shrink'] : ''
+            )}
           >
             {overrideLinkProps.label}
           </DenInputLabel>

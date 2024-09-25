@@ -24,9 +24,11 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     countRequired = true,
     width = '',
     height = '',
-    isTitle = false,
     autoFocus = false,
     setAllPlugins = true,
+    shrinkLabel = false,
+    classes = {},
+    small = '',
   } = props;
   const [focus, setFocus] = React.useState(false);
   const [content, setContent] = React.useState('');
@@ -70,14 +72,20 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
   return (
     <div
       className={clsx(
-        style['ws-text-editor'],
+        style['cds-text-editor'],
         'cds-text-editor',
-        isTitle ? 'cds-image-title' : ''
+        classes.root,
+        small ? 'small' : ''
       )}
     >
       <DenInputLabel
-        className={focus ? style['focus'] : ''}
+        className={clsx(
+          focus ? style['focus'] : '',
+          shrinkLabel ? style['shrink'] : '',
+          'cds-input-label'
+        )}
         required={required ? true : false}
+        shrink={shrinkLabel}
       >
         {title}
       </DenInputLabel>

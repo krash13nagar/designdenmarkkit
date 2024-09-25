@@ -13,7 +13,9 @@ export interface EditorTextfieldProps {
   countRequired?: boolean;
   width?: string;
   height?: string;
-  isTitle?: boolean;
   setAllPlugins?: boolean,
-  autoFocus?: boolean
+  autoFocus?: boolean,
+  shrinkLabel?: boolean,
+  classes?: { root?: string },
+  small?: boolean
 }

@@ -34,6 +34,7 @@ const AutoCompleteInputBase = (
     errorMessage = '',
     childError = {},
     nowrap = false,
+    shrinkLabel = false,
   } = props;
   const [value, setValues] = useState([]);
   const [inputValue, setInputValue] = React.useState('');
@@ -91,10 +92,13 @@ const AutoCompleteInputBase = (
       >
         {title && (
           <DenInputLabel
-            key={0}
-            className="active_label label-wrapper"
+            className={clsx(
+              'label-wrapper',
+              shrinkLabel ? 'shrink' : '',
+              'cds-input-label'
+            )}
             required={props.required}
-            shrink
+            shrink={shrinkLabel}
             htmlFor={_id}
             disabled={disabled}
           >
@@ -102,8 +106,6 @@ const AutoCompleteInputBase = (
           </DenInputLabel>
         )}
         <DenAutocomplete
-          ref={ref}
-          key={2}
           multiple
           freeSolo
           limitTags={limit}

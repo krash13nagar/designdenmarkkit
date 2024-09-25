@@ -8,6 +8,10 @@
         &:focus-within {
             color: #4b9cceef;
         }
+
+        &:not(.shrink) {
+            margin-bottom: 6px;
+        }
     }
 
     .customAutoComplete {
