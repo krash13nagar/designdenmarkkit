@@ -22,7 +22,7 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   photographerBylineProps,
   captionAgencyProps,
   imageAgencyProps,
-  handleNotRelatedToAgencyChange = () => {},
+  handleNotRelatedToAgencyChange = () => { },
   isNotRelatedToAgency = false,
   justificationProps = {},
   showAgencyMessage = false,
@@ -49,41 +49,43 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
         handleChange={handleChange}
         tabsList={tabTitleList}
       />
-      {selectedTab == TAB_MAP.primary && (
-        <PrimaryDataForm
-          title={title}
-          imageCaption={imageCaption}
-          titleForUrl={titleForUrl}
-          msid={msid}
-          captionBylineProps={captionBylineProps}
-          photographerBylineProps={photographerBylineProps}
-          captionAgencyProps={captionAgencyProps}
-          imageAgencyProps={imageAgencyProps}
-          handleNotRelatedToAgencyChange={handleNotRelatedToAgencyChange}
-          isNotRelatedToAgency={isNotRelatedToAgency}
-          justificationProps={justificationProps}
-          showAgencyMessage={showAgencyMessage}
-          agencyMessage={agencyMessage}
-          showBylineMessage={showBylineMessage}
-          bylineMessage={bylineMessage}
-        />
-      )}
-      {selectedTab == TAB_MAP.keywords && (
-        <div className={style['keywords-wrapper']}>
-          <KeywordsWrapper
-            searchKeywordConfig={keywordConfig.searchKeywordConfig}
-            addBtnConfig={keywordConfig.addBtnConfig}
-            addKeywordsConfig={keywordConfig.addKeywordsConfig}
-            recommendConfig={keywordConfig.recommendConfig}
+      <div className={style['image-tab-content-wrapper']}>
+        {selectedTab == TAB_MAP.primary && (
+          <PrimaryDataForm
+            title={title}
+            imageCaption={imageCaption}
+            titleForUrl={titleForUrl}
+            msid={msid}
+            captionBylineProps={captionBylineProps}
+            photographerBylineProps={photographerBylineProps}
+            captionAgencyProps={captionAgencyProps}
+            imageAgencyProps={imageAgencyProps}
+            handleNotRelatedToAgencyChange={handleNotRelatedToAgencyChange}
+            isNotRelatedToAgency={isNotRelatedToAgency}
+            justificationProps={justificationProps}
+            showAgencyMessage={showAgencyMessage}
+            agencyMessage={agencyMessage}
+            showBylineMessage={showBylineMessage}
+            bylineMessage={bylineMessage}
           />
-        </div>
-      )}
+        )}
+        {selectedTab == TAB_MAP.keywords && (
+          <div className={style['keywords-wrapper']}>
+            <KeywordsWrapper
+              searchKeywordConfig={keywordConfig.searchKeywordConfig}
+              addBtnConfig={keywordConfig.addBtnConfig}
+              addKeywordsConfig={keywordConfig.addKeywordsConfig}
+              recommendConfig={keywordConfig.recommendConfig}
+            />
+          </div>
+        )}
 
-      {selectedTab == TAB_MAP.metadata && (
-        <div className={style['meta-data-wrapper']}>
-          {!_.isEmpty(MetadataComp) && MetadataComp}
-        </div>
-      )}
+        {selectedTab == TAB_MAP.metadata && (
+          <div className={style['meta-data-wrapper']}>
+            {!_.isEmpty(MetadataComp) && MetadataComp}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

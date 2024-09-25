@@ -48,6 +48,11 @@
                                 }
                             }
                         }
+
+                        &:hover {
+                            //pointer-events: none;
+                            background: transparent;
+                        }
                     }
                 }
 
@@ -76,9 +81,9 @@
                     z-index: 1;
                     left: 151px;
                     background: #bbb;
-
                     border-top-right-radius: 10px;
                     border-bottom-right-radius: 10px;
+                    top: 0;
 
                     .media-nav {
                         margin-bottom: 1px;

@@ -24,9 +24,10 @@
         object-fit: contain;
     }
 
-    .brokenImgClass{
+    .brokenImgClass {
         text-align: center;
-        .brokenImgText{
+
+        .brokenImgText {
             margin-top: 8px;
             font: normal normal normal 13px/16px "Source Sans 3";
             font-weight: 500;
@@ -189,7 +190,7 @@
     border: 1px solid #0B88FF;
 }
 
-.disableMenuBtn{
+.disableMenuBtn {
     opacity: 0.35;
 }
 
@@ -198,5 +199,7 @@
         min-width: 25px !important;
     }
 
-    color: red;
+    & {
+        color: red;
+    }
 }

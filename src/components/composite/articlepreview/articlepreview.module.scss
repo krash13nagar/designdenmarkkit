@@ -4,6 +4,7 @@
     padding: css.pxToRem(16px) css.pxToRem(40px);
     background-color: white;
     overflow: auto;
+    margin-right: css.pxToRem(5px);
 
     .popoutIcon {
         margin-left: css.pxToRem(5px);
@@ -15,7 +16,6 @@
             vertical-align: middle;
         }
 
-        margin-right: css.pxToRem(5px);
     }
 
     .topInfo {
