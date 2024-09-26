@@ -22,6 +22,8 @@ import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
 import CustomSpeedDial from './components/composite/customspeeddial/customspeeddial.component';
 import { ButtonProps } from '@mui/material/Button';
+import { DenThemeProvider } from './styles';
+import { ImageAuthoringTheme } from './styles/themes/denmarktheme';
 
 declare const module: {
   hot: {
@@ -321,7 +323,7 @@ const App = (props: AppProps) => {
   const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
   return (
-    <>
+    <DenThemeProvider theme={ImageAuthoringTheme}>
       <ImageAuthModel
         {...testConfig}
         selectedTab={selectedTab}
@@ -336,7 +338,7 @@ const App = (props: AppProps) => {
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}
       {/* <ImageSearchCardWrapper imagesearchcardwrapper={imageSearchCardWrapperSample} /> */}
-    </>
+    </DenThemeProvider>
   );
 };
 if (module?.hot) {
