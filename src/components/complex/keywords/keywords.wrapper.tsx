@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import RecommendKeywords from "./recommend.keywords";
-import { addKeywordsConfig, keywordsMappingObj, keywordsWrapperConfig } from "./keywords.types";
-import { Grid } from "@mui/material";
+import { keywordsWrapperConfig } from "./keywords.types";
 import Keywords from "./keywords";
-import { DenButton, DenGrid } from "../../common";
-import SearchKeyword from "./search.keyword";
 import SearchKeywordWrapper from "./keywords.searchwrapper";
+import AiImageTags from "./aiimagetags.keywords";
+import styles from './recommended.keywords.module.scss'
 
 
-export const KeywordsWrapper = (props : keywordsWrapperConfig) => {
-    const {searchKeywordConfig, addBtnConfig, addKeywordsConfig, recommendConfig} = props;
+export const KeywordsWrapper = (props: keywordsWrapperConfig) => {
+    const { searchKeywordConfig, addBtnConfig, addedKeywordsConfig, recommendConfig, aiImageTagsConfig } = props;
 
     return (
         <div>
             <SearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
-            <Keywords addedKeywordsConfig={addKeywordsConfig.addedKeywordsConfig}
-                addedKeywordslist={addKeywordsConfig.addedKeywords} />
-            <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig}
-                recommendedKeywords={recommendConfig.recommendedKeywords} />
+            <Keywords addedKeywordsConfig={addedKeywordsConfig} />
+            <div className={styles["recommend-aitag-wrapper"]}>
+                <RecommendKeywords recommendedConfig={recommendConfig.recommendedConfig}
+                    recommendedKeywords={recommendConfig.recommendedKeywords} />
+                <AiImageTags {...aiImageTagsConfig} />
+            </div>
         </div>
     )
 }

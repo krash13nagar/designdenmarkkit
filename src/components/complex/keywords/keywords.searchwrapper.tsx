@@ -25,8 +25,8 @@ export const SearchKeywordWrapper = (props: searchKeywordWrapper) => {
   return (
     <div className={styles.searchKeywordWrapper}>
       <div className={styles.keywordNsuggestionWrapper}>
-        <SearchKeyword autocomplete={searchKeywordConfig.autocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc}/>
-        <Suggestions suggestedData={searchKeywordConfig.suggestedKeywordsData} text={val} focus={focus} isDataLoading={searchKeywordConfig.isSuggestedKeywordLoading} handleOnSuggestedKeywordClick={searchKeywordConfig.handleOnSuggestedKeywordClick}/>
+        <SearchKeyword bautocomplete={searchKeywordConfig.bautocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc}/>
+        <Suggestions suggestedData={searchKeywordConfig.suggestedKeywordsData} text={val} focus={focus} isSuggestedKeywordSkeleton={searchKeywordConfig.isSuggestedKeywordSkeleton} onSelectKeywordClick={searchKeywordConfig.onSelectKeywordClick} handleSearchKeywordVal={setval}/>
       </div>
       <div>
         <DenButton onClick={handleClick} variant="outlined">Add</DenButton>

@@ -73,8 +73,9 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
           <KeywordsWrapper
             searchKeywordConfig={keywordConfig.searchKeywordConfig}
             addBtnConfig={keywordConfig.addBtnConfig}
-            addKeywordsConfig={keywordConfig.addKeywordsConfig}
+            addedKeywordsConfig={keywordConfig.addedKeywordsConfig}
             recommendConfig={keywordConfig.recommendConfig}
+            aiImageTagsConfig={keywordConfig.aiImageTagsConfig}
           />
         </div>
       )}

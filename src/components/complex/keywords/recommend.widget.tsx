@@ -7,33 +7,22 @@ import DenCardHeader from '../../common/cardheader/cardheader.component';
 import DenCardContent from '../../common/cardcontent/cardcontent.component';
 
 export const RecommendWidget = (props: recommendWidget) => {
-  const { recommendWidgetObj, addCallbckFnc } = props;
+  const { recommendWidgetArr, addCallbckFnc, label, addkeywordIcon } = props;
 
   return (
     <div className={styles['recommendCardWrapper']}>
-      {Object.entries(recommendWidgetObj).map((item, i) => {
-        return (
-          <DenCard className={styles["Recommended-card"]} key={i}>
-            {item[1].length > 0 && (
+          <DenCard className={styles["Recommended-card"]}>
+            {recommendWidgetArr.length > 0 && (
               <>
                 <DenCardHeader
                   className={styles["Recommended-group"]}
-                  title={`${item[0]}(${item[1].length})`}
+                  title={`${label}(${recommendWidgetArr.length})`}
                 />
                 <DenCardContent className={styles["Recommended-content"]}>
-                  {item[1].map((elm, index = 1) => (
-                    <DenGrid key={index} container>
-                      <DenGrid item xs={1}>
-                        {index + 1}
-                      </DenGrid>
+                  {recommendWidgetArr.map((elm, index = 1) => (
+                    <DenGrid key={index} className={styles["cardContentDiv"]} container>
                       <DenGrid item xs={5} className={styles.textEllipis}>
                         {elm.keywordName}{' '}
-                      </DenGrid>
-                      <DenGrid item xs={3}>
-                        {elm.keyEnum}{' '}
-                      </DenGrid>
-                      <DenGrid item xs={2}>
-                        {elm.relevance}{' '}
                       </DenGrid>
                       <DenGrid
                         item
@@ -41,7 +30,7 @@ export const RecommendWidget = (props: recommendWidget) => {
                         onClick={()=>{addCallbckFnc(elm)}}
                         className={styles.pointerCursor}
                       >
-                        {elm.addKeywordIcon}
+                        {addkeywordIcon}
                       </DenGrid>
                     </DenGrid>
                   ))}
@@ -49,8 +38,6 @@ export const RecommendWidget = (props: recommendWidget) => {
               </>
             )}
           </DenCard>
-        );
-      })}
     </div>
   );
 };

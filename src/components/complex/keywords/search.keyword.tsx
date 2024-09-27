@@ -5,7 +5,7 @@ import { DenIconButton, DenTextField } from "../../common";
 
 
 export const SearchKeyword = (props:searchKeywordConfig) => {
-  const { autocomplete, label, placeholder, searchCallbckfnc, searchKeywordVal, handleSearchKeywordVal, handleSuggestionKeywordFnc = () => { } } = props;
+  const { bautocomplete, label, placeholder, searchCallbckfnc, searchKeywordVal, handleSearchKeywordVal, handleSuggestionKeywordFnc = () => { } } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const val = e.target.value;
@@ -24,7 +24,7 @@ export const SearchKeyword = (props:searchKeywordConfig) => {
         <DenTextField fullWidth={true} label={label}
         onClick={()=>{handleSuggestionKeywordFnc(true)}} onBlur={handleBlur}
         InputProps={{
-          autoComplete : autocomplete
+          autoComplete : bautocomplete
         }}
         value={searchKeywordVal}
         onChange = {(event)=>handleChange(event)}
