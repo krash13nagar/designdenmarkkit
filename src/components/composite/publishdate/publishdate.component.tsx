@@ -26,7 +26,7 @@ const PublishDate = (props: PublishDateProps) => {
     <div className={publishDateWrapper}>
       <Today
         name="Today Icon"
-        className="vs-calendar-icon"
+        className="cds-calendar-icon"
         onClick={() => {
           setOpen(true);
         }}
@@ -52,12 +52,7 @@ const PublishDate = (props: PublishDateProps) => {
         ''
       )}
       {open && (
-        <PublishDateModalComponent
-          open={open}
-          setOpen={setOpen}
-          {...props}
-          isDragable={false}
-        />
+        <PublishDateModalComponent open={open} setOpen={setOpen} {...props} />
       )}
     </div>
   );

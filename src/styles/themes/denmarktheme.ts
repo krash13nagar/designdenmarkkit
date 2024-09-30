@@ -63,6 +63,33 @@ export const DenmarkDefaultTheme = {
     },
   },
 };
+
+export const ImageAuthoringThemeOptions = {
+  palette: {
+    primary: {
+      main: '#0E88FF',
+    },
+    secondary: {
+      main: '#4D4D4D',
+    },
+  },
+  typography: {
+    fontFamily: '"Source Sans 3", "Open Sans", sans-serif',
+    htmlFontSize: 16,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none' as any,
+          fontSize: '12px',
+          lineHeight: 'auto',
+        },
+      },
+    },
+  },
+}
 export const DenmarkDefault = createTheme(DenmarkDefaultTheme);
+export const ImageAuthoringTheme = createTheme(ImageAuthoringThemeOptions)
 
 export default DenmarkDefault;

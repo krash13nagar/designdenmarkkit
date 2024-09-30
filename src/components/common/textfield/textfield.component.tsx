@@ -34,6 +34,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       showLabel = true,
       InputProps = {},
       errorText = '',
+      shrinkLabel = false,
     } = props;
 
     const { classes: valueClasses = {}, ...restValueProps } = valueProps;
@@ -41,16 +42,21 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
     return (
       <DenFormControl
         className={clsx(wrapperClass, style.wrapper)}
-        variant="standard"
+        variant="outlined"
         fullWidth={fullWidth}
         ref={ref}
         disabled={disabled}
       >
         {showLabel && label && (
           <DenInputLabel
-            shrink
+            shrink={shrinkLabel}
             htmlFor={id}
-            className={clsx(labelClass, style.label)}
+            className={clsx(
+              labelClass,
+              style.label,
+              shrinkLabel ? style.shrink : '',
+              'cds-input-label'
+            )}
             {...labelProps}
           >
             {label}

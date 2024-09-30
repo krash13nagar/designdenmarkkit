@@ -9,6 +9,13 @@
 
     .image-tab-content-wrapper {
         padding: 0px css.pxToRem(16px);
+        overflow: auto;
+        margin-right: 16px;
+
+        >div {
+            overflow-y: unset;
+        }
+
     }
 
     .keywords-wrapper {

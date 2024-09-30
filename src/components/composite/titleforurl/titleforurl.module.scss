@@ -55,5 +55,9 @@
     // }
   }
 
-  .label {}
+  .label {
+    &:not(.shrink) {
+      margin-bottom: 6px;
+    }
+  }
 }

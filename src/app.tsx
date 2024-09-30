@@ -22,6 +22,8 @@ import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
 import CustomSpeedDial from './components/composite/customspeeddial/customspeeddial.component';
 import { ButtonProps } from '@mui/material/Button';
+import { DenThemeProvider } from './styles';
+import { ImageAuthoringTheme } from './styles/themes/denmarktheme';
 
 declare const module: {
   hot: {
@@ -80,7 +82,7 @@ export const test = {
    *Seperated publish date
    */
   publishDate: {
-    PublishModalTitle: 'Publish and expiry Date',
+    PublishModalTitle: 'Publish and Expiry Date',
     onAutoCorrect: () => {},
     onReset: () => {},
     onClose: () => {},
@@ -94,10 +96,11 @@ export const test = {
   },
 
   activationStatusOptions: [
-    { title: 'Active', value: '0', icon: <Cancel /> },
-    { title: 'InActive', value: '1', icon: <Cancel /> },
-    { title: 'Unavaialble', value: '2', icon: <Cancel /> },
-    { title: 'block', value: '3', icon: <Cancel /> },
+    { title: 'INACTIVE', value: 'INACTIVE' },
+    { title: 'PENDING', value: 'PENDING_FOR_APPROVAL' },
+    { title: 'ACTIVE', value: 'ACTIVE' },
+    { title: 'CLOSED', value: 'CLOSED' },
+    { title: 'IGNORE', value: 'IGNORE' },
   ],
   activationChangeHandle: () => {},
   activationStatus: '0',
@@ -320,7 +323,7 @@ const App = (props: AppProps) => {
   const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
   return (
-    <>
+    <DenThemeProvider theme={ImageAuthoringTheme}>
       <ImageAuthModel
         {...testConfig}
         selectedTab={selectedTab}
@@ -335,7 +338,7 @@ const App = (props: AppProps) => {
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}
       {/* <ImageSearchCardWrapper imagesearchcardwrapper={imageSearchCardWrapperSample} /> */}
-    </>
+    </DenThemeProvider>
   );
 };
 if (module?.hot) {

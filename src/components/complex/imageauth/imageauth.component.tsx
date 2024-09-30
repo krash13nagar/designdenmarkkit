@@ -1,8 +1,6 @@
 import React from 'react';
 import style from './imageauth.module.scss';
 import { Footer } from '../../composite';
-import { DenThemeProvider } from '../../../styles';
-import DenmarkDefault from '../../../styles/themes/denmarktheme';
 import PrimeCategory from '../../composite/primecategory/primecategory.component';
 import PublishDate from '../../composite/publishdate/publishdate.component';
 import ActivationStatus from '../../composite/activationstatus/activationstatus.component';
@@ -23,7 +21,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     titleForUrl,
     imageCaption,
     primeCategories,
-    primeCategoryLabel,
+    primeCategoryLabel = 'Prime Category',
     primeType,
     publishDate,
     isPrimeEnable,
@@ -53,10 +51,11 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     bylineMessage = '',
     MetadataComp,
     actionButtonsList = [],
+    imageError,
   } = props;
 
   return (
-    <DenThemeProvider theme={DenmarkDefault}>
+    <>
       <div
         className={clsx(style['image-auth-wrapper'], 'cds-image-auth-wrapper')}
       >
@@ -67,6 +66,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           handleItemClick={handleItemClick}
           metaClassName={metaClassName}
           metaColumnCount={metaColumnCount}
+          imageError={imageError}
         />
         <ImageAuthRightSection
           tabTitleList={tabTitleList}
@@ -125,7 +125,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           </div>
         </div>
       </Footer>
-    </DenThemeProvider>
+    </>
   );
 };
 export default ImageAuthoring;

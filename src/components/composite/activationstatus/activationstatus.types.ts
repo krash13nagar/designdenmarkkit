@@ -4,7 +4,6 @@ export interface ActivattionStatusProps {
   activationStatusOptions: {
     title: string;
     value: string;
-    icon: React.ReactNode;
   }[];
   disableActivationStatus?: boolean;
   activationChangeHandle: (

@@ -55,17 +55,21 @@
             border: 1px solid #D2D8DF;
             border-radius: 4px;
 
+            &:hover {
+                border-color: rgba(0, 0, 0, 0.87);
+            }
+
             .se-wrapper {
                 border-radius: 4px;
 
                 .se-wrapper-inner.sun-editor-editable {
-                    padding: 5px;
+                    padding: 8px;
                     min-height: 100px;
                     max-height: 250px;
                     height: max-content !important;
-                    font: normal normal normal 1rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
+                    font: normal normal 500 14px/17px "Source Sans 3", "Lato", Open Sans, sans-serif !important;
                     letter-spacing: 0px;
-                    color: #43425D !important;
+                    color: #4D4D4D !important;
 
                     div,
                     p {
@@ -80,7 +84,7 @@
         }
     }
 
-    &.cds-image-title {
+    &.small {
         .sun-editor-editable {
             min-height: 29px !important;
             max-height: 100px !important;

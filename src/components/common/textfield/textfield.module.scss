@@ -16,5 +16,10 @@
 
   .label {
     position: relative;
+
+    &:not(.shrink) {
+      margin-bottom: 6px;
+      transform: unset;
+    }
   }
 }

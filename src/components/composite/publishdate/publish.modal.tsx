@@ -1,53 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import moment, { Moment } from 'moment';
-import { Cancel, DateRangeIcon, HelpOutlineSharp } from '../../../assets';
+import { DateRangeIcon, HelpOutlineSharp } from '../../../assets';
 import DenCalender from '../../complex/imageauthoring/metadata/metawidgetcomponents/calender.component';
 import { DenTextField } from '../../common/textfield/textfield.component';
 import { PublishModalProps } from './publishdate.types';
 import {
   DenButton,
-  DenDefautTextField,
-  DenDialog,
-  DenDialogActions,
-  DenDialogContent,
-  DenDialogTitle,
   DenGrid,
-  DenIconButton,
   DenInputLabel,
   DenTooltip,
   DenTypography,
 } from '../../common';
 import DenInputAdornment from '../../common/inputadornment/inputadornment.component';
 import { TooltipProps, styled, tooltipClasses } from '@mui/material';
-import Draggable from 'react-draggable';
-import DenPaper from '../../common/paper/paper.component';
+import { CommonDialog } from '../commondialog';
+import './publish.modal.styles.scss';
 
 const PublishDateModalComponent = (props: PublishModalProps) => {
   const {
-    triggerMBDone,
-    autoCorrect,
     publishDate: pbDate,
     expiresIn,
     artInsDate,
     artUpdDate,
     setOpen,
+    onAutoCorrect,
+    onUpdate,
     open,
+    PublishModalTitle = 'Publish and Expiry Date',
   } = props;
   const [publishDate, setPublishDate] = useState('');
   const [publishDateUnix, setPublishDateUnix] = useState(null);
   const [expiryDate, setExpiryDate] = useState('');
   const [expiryDateUnix, setExpiryDateUnix] = useState(null);
   const [expireDays, setExpireDays] = useState<string | number>('');
-  function PaperComponent(props: any) {
-    return (
-      <Draggable
-        handle="#draggable-DenDialog-title"
-        cancel={'[class*="MuiDialogContent-root"]'}
-      >
-        <DenPaper {...props} />
-      </Draggable>
-    );
-  }
+
   useEffect(() => {
     if (pbDate) {
       const _pubDate = moment(new Date(pbDate)).format('DD/MM/YYYY HH:mm');
@@ -62,28 +48,6 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
       setExpiryDateUnix(expiresIn);
     }
   }, []);
-
-  useEffect(() => {
-    if (props.autoCorrect) {
-      setExpireDays('');
-      setExpiryDate('');
-      setExpiryDateUnix(null);
-      //props.handleAutoCorrect()
-    }
-  }, [autoCorrect]);
-
-  useEffect(() => {
-    if (props.triggerMBDone) {
-      const arr = [];
-      if (publishDateUnix) {
-        arr.push({ model: 'artDate', value: publishDateUnix });
-      }
-      if (expiryDateUnix) {
-        arr.push({ model: 'artExpDate', value: expiryDateUnix });
-      }
-      props.callback(arr);
-    }
-  }, [triggerMBDone]);
 
   const handlePublishChange = (date: Moment) => {
     setPublishDate(date.format('DD/MM/YYYY HH:mm'));
@@ -132,58 +96,37 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
     setExpiryDate('');
     setExpiryDateUnix(null);
   };
-  const handleReset = () => {
-    //handleClose()
-    if (props.onReset) {
-      props.onReset();
+
+  const handleDone = (event: any) => {
+    const arr = [];
+    if (publishDateUnix) {
+      arr.push({ model: 'artDate', value: publishDateUnix });
     }
+    if (expiryDateUnix) {
+      arr.push({ model: 'artExpDate', value: expiryDateUnix });
+    }
+    if (onUpdate) {
+      onUpdate(arr);
+    }
+    handleClose(event);
   };
 
-  const handleDone = () => {
-    //handleClose()
-    if (props.onDone) {
-      props.onDone(props.preventCloseOnDone);
-    }
-  };
   const handleAutoCorrect = () => {
-    if (props.onAutoCorrect) {
-      props.onAutoCorrect();
+    setExpireDays('');
+    setExpiryDate('');
+    setExpiryDateUnix(null);
+    if (onAutoCorrect) {
+      onAutoCorrect();
     }
   };
   const handleClose = (
     event: {},
     reason?: 'backdropClick' | 'escapeKeyDown'
   ) => {
-    if (props.overrideClose) {
-      if (typeof props.overrideClose == 'function') {
-        props.overrideClose();
-        setOpen(false);
-        return;
-      } else if (typeof props.overrideClose == 'string') {
-        if (methodMap[props.overrideClose as keyof typeof methodMap]) {
-          if (props.confirmBeforeClose) {
-            const confirm =
-              methodMap?.[props.overrideClose as keyof typeof methodMap](event);
-            // if (!confirm) {
-            //   return;
-            // }
-          } else {
-            methodMap?.[props.overrideClose as keyof typeof methodMap](event);
-          }
-          setOpen(false);
-          return;
-        }
-      }
+    if (reason == 'backdropClick' || reason == 'escapeKeyDown') {
+      return;
     }
-    // if (props.onClose) {
-    //   props.onClose();
-    // }
     setOpen(false);
-  };
-  const methodMap = {
-    reset: handleReset,
-    done: handleDone,
-    close: handleClose,
   };
 
   const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -197,7 +140,7 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
       border: '1px solid #dadde9',
       padding: '15px 20px',
     },
-    arrow: {
+    [`& .${tooltipClasses.arrow}`]: {
       '&::after': {
         backgroundColor: '#f5f5f9 !important',
         color: 'rgba(0, 0, 0, 0.87) !important',
@@ -211,164 +154,22 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
     },
   }));
 
-  const cursor = props.isDragable ? 'move' : 'default';
   return (
-    <DenDialog
-      onClose={handleClose}
-      aria-labelledby="draggable-DenDialog-title"
-      fullWidth={props?.fullWidth ?? false}
-      maxWidth={props?.maxWidth ?? false}
+    <CommonDialog
       open={open}
-      // PaperComponent={props.isDragable ? PaperComponent : null}
-      // scroll={'paper'}
-      // className={props.wrapperClass}
-    >
-      <DenDialogTitle
-        id="draggable-DenDialog-title"
-        style={{ cursor: cursor }}
-        // className={props.titleClass || "defaultthumb-DenDialog-title"}
-      >
-        <DenGrid container>
-          <DenGrid item xs={11}>
-            <DenTypography variant="h6">
-              {props.PublishModalTitle}
-            </DenTypography>
-          </DenGrid>
-          <DenGrid container item xs={1} alignContent={'flex-end'}>
-            <DenIconButton aria-label="close" onClick={handleClose}>
-              <Cancel />
-            </DenIconButton>
-          </DenGrid>
-        </DenGrid>
-      </DenDialogTitle>
-      <DenDialogContent
-        dividers
-        // className={props.contentClass}
-      >
-        <>
-          <DenGrid container item xs={12} spacing={4}>
-            <DenGrid item sm={9} className="metadataRightPanel">
-              <DenGrid container item xs={12} className="mb10">
-                <DenGrid item xs={12} className="mb10">
-                  <DenGrid
-                    item
-                    xs={12}
-                    className="mt10"
-                    data-meta-type={''}
-                    data-widget-type={''}
-                  >
-                    <DenInputLabel shrink> Publish Date:</DenInputLabel>
-
-                    <DenCalender
-                      handleCallback={handlePublishChange}
-                      styleCalender="vs-daterange"
-                      timePicker={true}
-                      format={'DD/MM/YYYY hh:mm'}
-                      drops="down"
-                    >
-                      <DenTextField
-                        value={publishDate}
-                        fullWidth
-                        InputProps={{
-                          startAdornment: (
-                            <DenInputAdornment position="start">
-                              <DateRangeIcon name="date range icon" />
-                            </DenInputAdornment>
-                          ),
-                        }}
-                      />
-                    </DenCalender>
-                  </DenGrid>
-                  <DenTypography
-                    className="publishDateLink"
-                    paragraph={true}
-                    onClick={handleSetCurrent}
-                  >
-                    Set to now
-                  </DenTypography>
-                </DenGrid>
-                <DenGrid item sm={9} className="mb10">
-                  <DenGrid item sm={12}>
-                    <DenInputLabel shrink>Valid Upto:</DenInputLabel>
-                    <DenCalender
-                      handleCallback={handleValidChange}
-                      timePicker={true}
-                      format={'DD/MM/YYYY hh:mm'}
-                      minDate={publishDateUnix ? publishDateUnix : new Date()}
-                    >
-                      <DenTextField
-                        value={expiryDate}
-                        label=""
-                        type="text"
-                        fullWidth
-                        InputProps={{
-                          startAdornment: (
-                            <DenInputAdornment position="start">
-                              <DateRangeIcon name="date range icon" />
-                            </DenInputAdornment>
-                          ),
-                        }}
-                      />
-                    </DenCalender>
-                  </DenGrid>
-
-                  <DenTypography
-                    className="publishDateLink"
-                    paragraph={true}
-                    onClick={handleSetToMax}
-                  >
-                    Set to max
-                  </DenTypography>
-                </DenGrid>
-                <DenGrid item sm={3} className="mb10 pt2">
-                  <DenTextField
-                    id="standard-basic"
-                    label="Expiry In Day(s)"
-                    name="expireDays"
-                    placeholder="NA"
-                    value={expireDays as string}
-                    onChange={handleExpiryChange}
-                  />
-                </DenGrid>
-              </DenGrid>
-            </DenGrid>
-
-            <DenGrid item xs={3} className="recommended-wrapper">
-              <div className="publishRightSection">
-                {artUpdDate && (
-                  <DenGrid item xs={12} className="mb10">
-                    <DenTypography color="textSecondary" variant="subtitle2">
-                      <strong>Last Updated</strong>
-                    </DenTypography>
-                    <DenTypography color="textSecondary" variant="subtitle2">
-                      {moment(artUpdDate).format('LLL')}
-                    </DenTypography>
-                  </DenGrid>
-                )}
-                {artInsDate && (
-                  <DenGrid item xs={12} className="mb10">
-                    <DenTypography color="textSecondary" variant="subtitle2">
-                      <strong>Created On</strong>
-                    </DenTypography>
-                    <DenTypography color="textSecondary" variant="subtitle2">
-                      {moment(artInsDate).format('LLL')}
-                    </DenTypography>
-                  </DenGrid>
-                )}
-
-                <DenGrid item xs={12} className="mb10">
-                  <DenTypography color="textSecondary" variant="subtitle2">
-                    <strong>Max view Days:</strong> Not Applicable
-                  </DenTypography>
-                </DenGrid>
-              </div>
-            </DenGrid>
-          </DenGrid>
-        </>
-      </DenDialogContent>
-      <DenDialogActions
-      // className={props.actionClass}
-      >
+      dialogTitleProps={{
+        id: 'publish-modal-dialog-title',
+      }}
+      handleClose={handleClose}
+      dialogProps={{
+        onClose: handleClose,
+        fullWidth: props?.fullWidth ?? false,
+        maxWidth: props?.maxWidth ?? false,
+        classes: { root: 'publish-modal-dialog-root' },
+      }}
+      title={PublishModalTitle}
+      titleVariant={'contained'}
+      actionChildren={
         <DenGrid container item xs={12} justifyContent="space-between">
           <DenGrid container item xs={4}>
             <HtmlTooltip
@@ -400,7 +201,6 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
                 color="inherit"
                 startIcon={<HelpOutlineSharp name="Help Icon" />}
               >
-                {' '}
                 Know More
               </DenButton>
             </HtmlTooltip>
@@ -412,71 +212,154 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
             justifyContent="flex-end"
             className="new-modal-footer"
           >
-            {props.visibleCorrectButton && (
-              <DenButton
-                onClick={handleAutoCorrect}
-                variant="outlined"
-                color="primary"
-                className="ml5 mr5"
-              >
-                Auto Correct
-              </DenButton>
-            )}
-            {props.visibleResetButton && (
-              <DenButton
-                onClick={handleReset}
-                variant="outlined"
-                color="primary"
-                className="ml5 mr5"
-              >
-                Reset
-              </DenButton>
-            )}
-            {props.visibleDoneButton && (
-              <DenButton
-                onClick={handleDone}
-                variant="contained"
-                color="primary"
-                className="ml5 mr5"
-              >
-                Save
-              </DenButton>
-            )}
-            {props.visibleCancelButton && (
-              <DenButton
-                onClick={handleClose}
-                variant="outlined"
-                color="primary"
-                className="ml5 mr5"
-              >
-                Cancel
-              </DenButton>
-            )}
-
-            {props.visibleUpdateButton && (
-              <DenButton
-                onClick={handleDone}
-                variant="contained"
-                color="primary"
-                className="ml5 mr5"
-              >
-                Update
-              </DenButton>
-            )}
-            {props.visibleOkayButton && (
-              <DenButton
-                onClick={handleClose}
-                variant="contained"
-                color="primary"
-                className="mb2"
-              >
-                Okay
-              </DenButton>
-            )}
+            <DenButton
+              onClick={handleAutoCorrect}
+              variant="outlined"
+              color="primary"
+              sx={{ mx: '5px' }}
+            >
+              Auto Correct
+            </DenButton>
+            <DenButton
+              onClick={handleClose}
+              variant="outlined"
+              color="primary"
+              sx={{ mx: '5px' }}
+            >
+              Cancel
+            </DenButton>
+            <DenButton
+              onClick={handleDone}
+              variant="contained"
+              color="primary"
+              sx={{ mx: '5px' }}
+            >
+              Update
+            </DenButton>
           </DenGrid>
         </DenGrid>
-      </DenDialogActions>
-    </DenDialog>
+      }
+      dialogContentProps={{ dividers: true }}
+    >
+      <DenGrid container item xs={12} spacing={4}>
+        <DenGrid item sm={9} className="metadataRightPanel">
+          <DenGrid container item xs={12} className="mb10">
+            <DenGrid item xs={12} className="mb10">
+              <DenGrid
+                item
+                xs={12}
+                className="mt10"
+                data-meta-type={''}
+                data-widget-type={''}
+              >
+                <DenInputLabel shrink> Publish Date:</DenInputLabel>
+
+                <DenCalender
+                  handleCallback={handlePublishChange}
+                  styleCalender="vs-daterange"
+                  timePicker={true}
+                  format={'DD/MM/YYYY hh:mm'}
+                  drops="down"
+                >
+                  <DenTextField
+                    value={publishDate}
+                    fullWidth
+                    InputProps={{
+                      startAdornment: (
+                        <DenInputAdornment position="start">
+                          <DateRangeIcon name="date range icon" />
+                        </DenInputAdornment>
+                      ),
+                    }}
+                  />
+                </DenCalender>
+              </DenGrid>
+              <DenTypography
+                className="publishDateLink"
+                paragraph={true}
+                onClick={handleSetCurrent}
+              >
+                Set to now
+              </DenTypography>
+            </DenGrid>
+            <DenGrid item sx={{ mr: '6px', flex: 1 }}>
+              <DenGrid item sm={12}>
+                <DenInputLabel shrink>Valid Upto:</DenInputLabel>
+                <DenCalender
+                  handleCallback={handleValidChange}
+                  timePicker={true}
+                  format={'DD/MM/YYYY hh:mm'}
+                  minDate={publishDateUnix ? publishDateUnix : new Date()}
+                >
+                  <DenTextField
+                    value={expiryDate}
+                    label=""
+                    type="text"
+                    fullWidth
+                    InputProps={{
+                      startAdornment: (
+                        <DenInputAdornment position="start">
+                          <DateRangeIcon name="date range icon" />
+                        </DenInputAdornment>
+                      ),
+                    }}
+                  />
+                </DenCalender>
+              </DenGrid>
+
+              <DenTypography
+                className="publishDateLink"
+                paragraph={true}
+                onClick={handleSetToMax}
+              >
+                Set to max
+              </DenTypography>
+            </DenGrid>
+            <DenTextField
+              id="standard-basic"
+              label="Expiry In Day(s)"
+              name="expireDays"
+              placeholder="NA"
+              value={expireDays as string}
+              onChange={handleExpiryChange}
+              wrapperClass="expiresInTextfield"
+              valueProps={{ inputProps: { type: 'number' } }}
+            />
+          </DenGrid>
+        </DenGrid>
+
+        <DenGrid item xs={3} className="recommended-wrapper">
+          <div className="publishRightSection">
+            {artUpdDate && (
+              <DenGrid item xs={12} className="mb10">
+                <DenTypography color="textSecondary" variant="subtitle2">
+                  <strong>Last Updated</strong>
+                </DenTypography>
+                <DenTypography color="textSecondary" variant="subtitle2">
+                  {moment(artUpdDate).format('LLL')}
+                </DenTypography>
+              </DenGrid>
+            )}
+            {artInsDate && (
+              <DenGrid item xs={12} className="mb10">
+                <DenTypography color="textSecondary" variant="subtitle2">
+                  <strong>Created On</strong>
+                </DenTypography>
+                <DenTypography color="textSecondary" variant="subtitle2">
+                  {moment(artInsDate).format('LLL')}
+                </DenTypography>
+              </DenGrid>
+            )}
+
+            <DenGrid item xs={12} className="mb10">
+              <DenTypography color="textSecondary" variant="subtitle2">
+                <strong>Max view Days:</strong> Not Applicable
+              </DenTypography>
+            </DenGrid>
+          </div>
+        </DenGrid>
+      </DenGrid>
+    </CommonDialog>
   );
 };
 

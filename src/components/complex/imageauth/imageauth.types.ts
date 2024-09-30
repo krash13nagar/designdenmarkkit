@@ -47,7 +47,10 @@ export interface ImageAuthoringProps
   showBylineMessage?: boolean,
   bylineMessage?: string,
   MetadataComp?: ReactNode,
-  actionButtonsList?: ActionButton[]
+  actionButtonsList?: ActionButton[],
+  imageError?: {
+    message?: string
+  }
 }
 
 export interface ActionButton {
@@ -75,7 +78,8 @@ export interface ImageAuthLeftSectionProps {
   imageCTAs?: { Icon: any, label: string, value: any }[];
   handleItemClick?: (selectedItemValue: string) => void,
   metaClassName?: string,
-  metaColumnCount?: 12 | 6 | 4 | 3
+  metaColumnCount?: 12 | 6 | 4 | 3,
+  imageError?: ImageAuthoringProps['imageError']
 }
 
 export interface ImageAuthRightSectionProps {

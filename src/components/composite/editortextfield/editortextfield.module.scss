@@ -1,9 +1,10 @@
-.ws-text-editor {
+.cds-text-editor {
   background: none;
 
   label {
-    transform: translate(0, 1.5px) scale(0.75);
-    transform-origin: top left;
+    &:not(.shrink) {
+      margin-bottom: 6px;
+    }
 
     &.focus {
       color: #4b9cceef;

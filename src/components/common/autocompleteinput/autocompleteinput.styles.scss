@@ -8,6 +8,10 @@
         &:focus-within {
             color: #4b9cceef;
         }
+
+        &:not(.shrink) {
+            margin-bottom: 6px;
+        }
     }
 
     .customAutoComplete {
@@ -113,6 +117,23 @@
             .inputRef {
                 padding: 5px 12px !important;
             }
+        }
+    }
+
+    &+.error-with-icon {
+        svg {
+            width: 15px;
+            height: 15px;
+            margin: -4px 4px;
+            top: 5px;
+        }
+
+        .errormessage {
+            color: #43425D;
+            background: rgba(221, 0, 0, 0.1);
+            padding: 2px;
+            font-weight: 600;
+            letter-spacing: 0px;
         }
     }
 
