@@ -217,6 +217,7 @@ export const config = {
     label: "AI Image Tags",
     nodatafound: 'Spot people or celebrities in your image?',
     clickForAItagsLabel: 'Click here for AI tags!',
+    showAiImageTag: false,
     cardHeader: 'Tags',
     addKeywordIcon: <AddCircleOutlineIcon />,
     aiTagCallbackFn: function(){console.log("clicked ai tag fnc")},

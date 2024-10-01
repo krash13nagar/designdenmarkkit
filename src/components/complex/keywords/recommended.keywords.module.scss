@@ -1,7 +1,7 @@
 .recommend-aitag-wrapper {
   display: flex;
   width: 100%;
-  gap: 6%;
+  gap: 0.75rem;
 
   .recommended-wrapper {
     padding: 5px 0px;
@@ -167,6 +167,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    .keywordSourceName {
+        font: normal normal normal 11px/15px 'Source Sans 3';
+        color: #4D4D4D;
+        opacity: 0.8;
+    }
+    .keywordDetails {
+      font: normal normal normal 11px/15px 'Source Sans 3';
+      color: #4D4D4D;
+      opacity: 0.8;
+    }
 }
 
 .addKeywordsWrapperClass {
@@ -192,7 +202,7 @@
 }
 
 .addKeywordsTitle {
-  font: normal normal 600 12px/17px Source Sans 3;
+  font: normal normal 600 12px/17px 'Source Sans 3';
   letter-spacing: 0px;
   color: #818181;
   opacity: 1;
@@ -227,20 +237,17 @@
   min-height: 32px;
   width: 100%;
   margin: auto;
-  border: 1px dashed #D2D8DF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //font: normal normal normal 0.75rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
-  text-align: center;
-  letter-spacing: 0px;
+  border: 1px dashed #d2d8df;
   color: #818181;
   opacity: 0.6;
+  font: normal normal normal 13px / 17px 'Source Sans 3';
+  align-content: center;
+  text-align: center;
 }
 
 .aiTagClickLabel {
   color: #0F89FF;
-  padding-left: 2px;
+  padding-left: 3px;
   cursor: pointer;
 }
 

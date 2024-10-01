@@ -155,6 +155,7 @@ export interface aiImageTagsConfig {
     label: string;
     nodatafound: string;
     clickForAItagsLabel: string;
+    showAiImageTag: boolean;
     cardHeader: string;
     addKeywordIcon: ReactNode;
     aiTagCallbackFn: ()=>void;
