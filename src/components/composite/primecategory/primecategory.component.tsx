@@ -18,7 +18,7 @@ const PrimeCategory = (props: PrimeCategoryProps) => {
     handlePrimeChange,
   } = props;
   return isPrimeEnable ? (
-    <DenFormControl className="cds-prime-category-root">
+    <DenFormControl className="cds-prime-category-root" sx={{ marginTop: '10px', marginRight: '10px' }}>
       <DenInputLabel id="cds-simple-select-label">
         {primeCategoryLabel}
       </DenInputLabel>

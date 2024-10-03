@@ -31,7 +31,8 @@
             padding: 0 16px;
             display: flex;
             justify-self: flex-end;
-
+            grid-gap: 2rem;
+            align-items: center;
         }
 
         .cds-MuiSelect-select:focus {
