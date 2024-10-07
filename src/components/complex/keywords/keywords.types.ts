@@ -130,7 +130,7 @@ export interface starLinkConfig {
     keyForStar: string,
     valueForStar: number,
     maxStarLimit: number,
-    callbackFn: ()=>void;
+    callbackFn: (index:number, item:addedKeywords)=>void;
 }
 
 export interface removeLinkConfig {

@@ -59,7 +59,7 @@ export const Keywords = (props : keywordsConfig) => {
                         </div>
                       </div>
                     </div>
-                    <div className={styles.starNonStarIcon} onClick={handlerConfig.starLinkConfig.callbackFn}>
+                    <div className={styles.starNonStarIcon} onClick={()=>{handlerConfig.starLinkConfig.callbackFn(index, item)}}>
                       {showStarIcon(index) ? handlerConfig.starLinkConfig.starKeywordIcon :
                         handlerConfig.starLinkConfig.nonStarKeywordIcon}
                     </div>

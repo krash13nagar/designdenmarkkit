@@ -5,6 +5,7 @@ import { DenGrid } from '../../common';
 import DenCard from '../../common/card/card.component';
 import DenCardHeader from '../../common/cardheader/cardheader.component';
 import DenCardContent from '../../common/cardcontent/cardcontent.component';
+import { Typography } from '@mui/material';
 
 export const RecommendWidget = (props: recommendWidget) => {
   const { recommendWidgetArr, addCallbckFnc, label, addkeywordIcon } = props;
@@ -21,14 +22,17 @@ export const RecommendWidget = (props: recommendWidget) => {
                 <DenCardContent className={styles["Recommended-content"]}>
                   {recommendWidgetArr.map((elm, index = 1) => (
                     <DenGrid key={index} className={styles["cardContentDiv"]} container>
-                      <DenGrid item xs={5} className={styles.textEllipis}>
-                        {elm.keywordName}{' '}
+                      <DenGrid item xs={11}>
+                       <Typography title={elm.keywordName} component="div" noWrap={true} className={styles.textEllipis}>{elm.keywordName}{' '}</Typography> 
                       </DenGrid>
                       <DenGrid
+                        container
                         item
                         xs={1}
                         onClick={()=>{addCallbckFnc(elm)}}
                         className={styles.pointerCursor}
+                        justifyContent={"flex-end"}
+                        alignContent={"center"}
                       >
                         {addkeywordIcon}
                       </DenGrid>

@@ -57,8 +57,7 @@
           overflow-y: auto;
           max-height: 138px;
           .cardContentDiv{
-            display: flex;
-            justify-content: space-between;
+            padding-bottom: 8px;
             .textEllipis{
               font: normal normal 600 13px/18px 'Source Sans 3';
               color: #4D4D4D;
