@@ -58,7 +58,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
   }
 
   return (
-    <DenFormControl className="cds_publish_status_dropdown">
+    <DenFormControl className="cds_publish_status_dropdown" sx={{ marginTop: '10px' }}>
       <DenInputLabel
         id="demo-simple-select-label"
         className="activation-status-label"
