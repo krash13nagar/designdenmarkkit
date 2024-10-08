@@ -22,7 +22,7 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   photographerBylineProps,
   captionAgencyProps,
   imageAgencyProps,
-  handleNotRelatedToAgencyChange = () => { },
+  handleNotRelatedToAgencyChange = () => {},
   isNotRelatedToAgency = false,
   justificationProps = {},
   showAgencyMessage = false,
@@ -74,12 +74,12 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
             <KeywordsWrapper
               searchKeywordConfig={keywordConfig.searchKeywordConfig}
               addBtnConfig={keywordConfig.addBtnConfig}
-              addKeywordsConfig={keywordConfig.addKeywordsConfig}
+              addedKeywordsConfig={keywordConfig.addedKeywordsConfig}
               recommendConfig={keywordConfig.recommendConfig}
+              aiImageTagsConfig={keywordConfig.aiImageTagsConfig}
             />
           </div>
         )}
-
         {selectedTab == TAB_MAP.metadata && (
           <div className={style['meta-data-wrapper']}>
             {!_.isEmpty(MetadataComp) && MetadataComp}

@@ -1,49 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { DenDefautTextField, DenGrid, DenIconButton, DenTypography } from '../../common';
+import { DenGrid, DenIconButton } from '../../common';
 import styles from './recommended.keywords.module.scss';
-import { keywordsConfig } from './keywords.types';
+import { addedKeywords, keywordsConfig } from './keywords.types';
 import _ from 'lodash';
 
 export const Keywords = (props : keywordsConfig) => {
-  const {addedKeywordsConfig, addedKeywordslist} = props;
-  const [addedKeywords, setKeywords] = useState(addedKeywordslist);
-  const timer = React.useRef(null);
+  const {label, addAutoLink, clearAllLink, showCount, noKeywordsLabel, handlerConfig, addedKeywordsList} = props.addedKeywordsConfig;
+  const [addedKeywords, setKeywords] = useState(addedKeywordsList);
+
   useEffect(()=>{
-    setKeywords(addedKeywordslist)
-  },[addedKeywordslist])
+    setKeywords(addedKeywordsList)
+  },[addedKeywordsList])
 
-  const nearestRound = (val: number) => {
-    if (val > 100) {
-      return 100
+  const showStarIcon = (index: number) => {
+    const list = addedKeywords.slice(0, index);
+    const key = handlerConfig?.starLinkConfig?.keyForStar as keyof addedKeywords;
+    const val = handlerConfig?.starLinkConfig?.valueForStar;
+    if (!key || !val) {
+      return false;
     }
-    if (val < 10) {
-      return 10
+    let hasRelevant = false;
+    for (let item of list) {
+      if (item[key] == val) {
+        hasRelevant = true;
+        break;
+      }
     }
-    return Math.round(val / 10) * 10
+    if (hasRelevant) {
+      return false;
+    }
+    const currentKeyword = addedKeywords[index];
+    return currentKeyword && currentKeyword[key] == val;
   }
-
-  const relevenceChange = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index:number)=>{
-    const _arr = _.cloneDeep(addedKeywords);
-    let value = Number(event.target.value);
-    _arr[index]['relevance'] = value;
-    setKeywords(_arr);
-    clearTimeout(timer.current);
-    if (value ) {
-      timer.current = setTimeout(() => {
-        let val = nearestRound(value);
-        if (val) {
-          _arr[index]['relevance'] = val;
-          const new_array = _.cloneDeep(_arr)
-          setKeywords(new_array);
-        }
-      }, 1000);
-    }
-}
 
   return (
     <>
       <div className={styles.addKeywordsTitle}>
-        {addedKeywordsConfig.title}{` (${addedKeywords.length}):`}
+        {label}{` (${addedKeywords.length}):`}
       </div>
       {addedKeywords.length > 0 &&
         <div className={styles.addKeywordsWrapperClass}>
@@ -55,32 +48,25 @@ export const Keywords = (props : keywordsConfig) => {
                     <div className={styles.removeIcondiv}>
                       <DenIconButton
                         size="small"
-                        onClick={() => { addedKeywordsConfig.removeCallbackFn(index, item.relevance) }}
+                        onClick={() => { handlerConfig.removeLinkConfig.callbackFn(index, item.relevance) }}
                       >
-                        {addedKeywordsConfig.removeKeywordIcon}
+                        {handlerConfig.removeLinkConfig.removeIcon}
                       </DenIconButton>
-                      <div>{item.keywordName}</div>
+                      <div>
+                        <div className={styles.keywordName}>{item.keywordName}</div>
+                        <div className={styles.keywordDetails}>
+                          {item.source}
+                        </div>
+                      </div>
                     </div>
-                    <div className={styles.addkeywordtextfield}>
-                      <DenDefautTextField
-                        value={item.relevance}
-                        onChange={(event) => relevenceChange(event, index)}
-                        type="number"
-                        variant="standard"
-                        size="small"
-                        inputProps={{
-                          max: 100,
-                          min: 10,
-                          step: 10,
-                        }}
-                        className={styles["marks-input"]}
-                      />
-                      {/* true && <div className="seprator">|</div> */}
+                    <div className={styles.starNonStarIcon} onClick={()=>{handlerConfig.starLinkConfig.callbackFn(index, item)}}>
+                      {showStarIcon(index) ? handlerConfig.starLinkConfig.starKeywordIcon :
+                        handlerConfig.starLinkConfig.nonStarKeywordIcon}
                     </div>
                   </div>
-                  <div className={styles.keywordSourceName}>
+                  {/* <div className={styles.keywordSourceName}>
                     <div className={styles.keywordDetails}>{item.source}</div>
-                  </div>
+                  </div> */}
                 </DenGrid>
               );
             })}
@@ -88,7 +74,7 @@ export const Keywords = (props : keywordsConfig) => {
         </div>
       }
       {addedKeywords.length < 1 && 
-        <div className={styles["no-keywords"]}>Please add keywords or select from recommendations</div>
+        <div className={styles["no-keywords"]}>{noKeywordsLabel}</div>
       }
     </>
   );

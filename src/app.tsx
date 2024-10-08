@@ -11,8 +11,10 @@ import { Cancel } from './assets';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
 import {
+  addedKeywords,
   keywordsWrapperConfig,
   recommendedKeywords,
+  suggestedData,
 } from './components/complex/keywords/keywords.types';
 import { richStoryCardSample } from './components/composite/richstorycard/sample';
 import { ImageAuthModel } from './components/complex/imageauth';
@@ -213,12 +215,15 @@ const App = (props: AppProps) => {
   const [selectedTab, setSelectedTab] = useState(test.tabTitleList[0]?.name);
   // <AppRoutes reqObj={props.reqObj} callbackNgFn={props.callbackNgFn} />
   const [addKeywordState, setAddKeywords] = useState(
-    config.addKeywordsConfig.addedKeywords
+    config.addedKeywordsConfig.addedKeywordsList
   );
+  const [suggestedKeywordsDataState, setsuggestedKeywordsDataState] = useState(config.searchKeywordConfig.suggestedKeywordsData)
   const [recommndKeywordsState, setRecommndKeywordsState] = useState<
     recommendedKeywords[]
   >(config.recommendConfig.recommendedKeywords);
+  const [aiImageTagsList, setAiImageTagsList] = useState<recommendedKeywords[]>(config.aiImageTagsConfig.aiTagsList);
   const [searchKeywordVal, setSearchKeywordVal] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const removeCallbackFn = (index: number, val: number) => {
     const tmplist = addKeywordState.slice();
@@ -284,21 +289,81 @@ const App = (props: AppProps) => {
     setRecommndKeywordsState(recommndList);
   };
 
+  const addCallbackFnForAIImg = (elm: recommendedKeywords) => {
+    const tmplist = addKeywordState.slice();
+    const recommndList = aiImageTagsList.slice();
+    const index = _.findIndex(recommndList, { keywordName: elm.keywordName });
+    const i = _.findIndex(tmplist, { keywordName: elm.keywordName });
+    if (i == -1) {
+      tmplist.push({
+        keyEnum: elm.keyEnum,
+        keywordName: elm.keywordName,
+        relevance: elm.relevance,
+        source: elm.source,
+      });
+    }
+    recommndList.splice(index, 1);
+    setAddKeywords(tmplist);
+    setAiImageTagsList(recommndList);
+  };
+
+  const handleOnSuggestedKeywordClickFnc = (item:suggestedData)=>{
+    let keywords = [...addKeywordState];
+    const i = _.findIndex(keywords, { "keywordName": item["keywordName"] });
+    //var hostId = Utils.getHostIdAnyHow(dependedModel)
+    //var growthRxObj = Utils.makeGrowthRxObj(hostId, storeData.msId, item.relevance, item.keywordName, item.source);
+    if (i == -1) {
+      //Utils.trackEvents(storeData.entityType,"KEYWORD-SUGGESTION","click",growthRxObj);
+      let newItem:addedKeywords = {
+        keyEnum: item.keyEnum,
+        keywordName: item.keywordName,
+        relevance: item.relevance ? Number(item.relevance): NaN,
+        source: item.source,
+      }
+      // if(item.metaInfo){
+      //   item.metaInfo= JSON.stringify(item.metaInfo);
+      // }
+      // if(item.relevance){
+      //   newItem.relevance= Number(item.relevance)
+      // }
+      // item.relevance = 20;
+      keywords.push(newItem);
+      setAddKeywords(keywords)
+    } else {
+      console.log("duplicate entry not allowed")
+    }
+  }
+
   const searchKeywordConfig = {
     ...config.searchKeywordConfig,
     searchCallbckfnc: handleSearchCallbckfnc,
+    suggestedKeywordsData: suggestedKeywordsDataState,
+    isSuggestedKeywordSkeleton: loading,
+    onSelectKeywordClick: handleOnSuggestedKeywordClickFnc
   };
   const addBtnConfig = {
     ...config.addBtnConfig,
     addBtnCallbckfnc: handleAddbtn,
   };
-  const addKeywordsConfig = {
-    ...config.addKeywordsConfig,
-    addedKeywordsConfig: {
-      ...config.addKeywordsConfig.addedKeywordsConfig,
-      removeCallbackFn: removeCallbackFn,
+  // const addKeywordsConfig = {
+  //   ...config.addKeywordsConfig,
+  //   addedKeywordsConfig: {
+  //     ...config.addKeywordsConfig.addedKeywordsConfig,
+  //     removeCallbackFn: removeCallbackFn,
+  //   },
+  //   addedKeywords: addKeywordState,
+  // };
+
+  const addedKeywordsConfig = {
+    ...config.addedKeywordsConfig,
+    handlerConfig : {
+      ...config.addedKeywordsConfig.handlerConfig,
+      removeLinkConfig: {
+        ...config.addedKeywordsConfig.handlerConfig.removeLinkConfig,
+        callbackFn: removeCallbackFn
+      }
     },
-    addedKeywords: addKeywordState,
+    addedKeywordsList: addKeywordState
   };
   const recommendConfig = {
     ...config.recommendConfig,
@@ -309,11 +374,18 @@ const App = (props: AppProps) => {
     recommendedKeywords: recommndKeywordsState,
   };
 
+  const aiImageTagsConfig = {
+    ...config.aiImageTagsConfig,
+    aiTagsList: aiImageTagsList,
+    addCallbackFn:addCallbackFnForAIImg
+  }
+
   const kewordConfig: keywordsWrapperConfig = {
     searchKeywordConfig,
     addBtnConfig,
-    addKeywordsConfig,
+    addedKeywordsConfig,
     recommendConfig,
+    aiImageTagsConfig
   };
 
   const [title, setTitle] = useState('My test title');
