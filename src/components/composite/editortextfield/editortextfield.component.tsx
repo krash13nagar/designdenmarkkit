@@ -41,7 +41,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
   const editor = useRef<SunEditorCore>();
   // The sunEditor parameter will be set to the core suneditor instance when this function is called
   const getSunEditorInstance = (sunEditor: SunEditorCore) => {
-    if (editor?.current) {
+    if (!editor?.current) {
       editor.current = sunEditor;
     }
   };
