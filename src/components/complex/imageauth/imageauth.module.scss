@@ -60,36 +60,6 @@
       letter-spacing: 0px;
     }
   }
-
-  .image-auth-right-panel {
-    flex-basis: 65%;
-
-    // .parent {
-    // padding: css.pxToRem(24px) 0px 0px css.pxToRem(24px);
-    .primary-data-wrapper {
-      //padding-right: 21px;
-      @include wrapperPadding;
-      width: 99%;
-      overflow-y: auto;
-      // overflow: hidden;
-      max-height: inherit;
-      height: calc(100vh - 158px);
-
-      .title-wrapper {
-        margin-top: css.pxToRem(16px);
-      }
-    }
-
-    .keywords-wrapper {
-      @include wrapperPadding;
-      width: 99%;
-      overflow-y: auto;
-      max-height: inherit;
-      height: calc(100vh - 158px);
-    }
-
-    // }
-  }
 }
 
 .custom-select-root {
@@ -160,10 +130,3 @@
     width: 1302px !important;
   }
 }
-
-// @media screen and (min-width: 750px) {
-//   .dialogRoot {
-//     min-height: 590px !important;
-//     margin: 10px !important;
-//   }
-// }

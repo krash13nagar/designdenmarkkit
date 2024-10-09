@@ -217,11 +217,15 @@ const App = (props: AppProps) => {
   const [addKeywordState, setAddKeywords] = useState(
     config.addedKeywordsConfig.addedKeywordsList
   );
-  const [suggestedKeywordsDataState, setsuggestedKeywordsDataState] = useState(config.searchKeywordConfig.suggestedKeywordsData)
+  const [suggestedKeywordsDataState, setsuggestedKeywordsDataState] = useState(
+    config.searchKeywordConfig.suggestedKeywordsData
+  );
   const [recommndKeywordsState, setRecommndKeywordsState] = useState<
     recommendedKeywords[]
   >(config.recommendConfig.recommendedKeywords);
-  const [aiImageTagsList, setAiImageTagsList] = useState<recommendedKeywords[]>(config.aiImageTagsConfig.aiTagsList);
+  const [aiImageTagsList, setAiImageTagsList] = useState<recommendedKeywords[]>(
+    config.aiImageTagsConfig.aiTagsList
+  );
   const [searchKeywordVal, setSearchKeywordVal] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -307,19 +311,19 @@ const App = (props: AppProps) => {
     setAiImageTagsList(recommndList);
   };
 
-  const handleOnSuggestedKeywordClickFnc = (item:suggestedData)=>{
+  const handleOnSuggestedKeywordClickFnc = (item: suggestedData) => {
     let keywords = [...addKeywordState];
-    const i = _.findIndex(keywords, { "keywordName": item["keywordName"] });
+    const i = _.findIndex(keywords, { keywordName: item['keywordName'] });
     //var hostId = Utils.getHostIdAnyHow(dependedModel)
     //var growthRxObj = Utils.makeGrowthRxObj(hostId, storeData.msId, item.relevance, item.keywordName, item.source);
     if (i == -1) {
       //Utils.trackEvents(storeData.entityType,"KEYWORD-SUGGESTION","click",growthRxObj);
-      let newItem:addedKeywords = {
+      let newItem: addedKeywords = {
         keyEnum: item.keyEnum,
         keywordName: item.keywordName,
-        relevance: item.relevance ? Number(item.relevance): NaN,
+        relevance: item.relevance ? Number(item.relevance) : NaN,
         source: item.source,
-      }
+      };
       // if(item.metaInfo){
       //   item.metaInfo= JSON.stringify(item.metaInfo);
       // }
@@ -328,18 +332,18 @@ const App = (props: AppProps) => {
       // }
       // item.relevance = 20;
       keywords.push(newItem);
-      setAddKeywords(keywords)
+      setAddKeywords(keywords);
     } else {
-      console.log("duplicate entry not allowed")
+      console.log('duplicate entry not allowed');
     }
-  }
+  };
 
   const searchKeywordConfig = {
     ...config.searchKeywordConfig,
     searchCallbckfnc: handleSearchCallbckfnc,
     suggestedKeywordsData: suggestedKeywordsDataState,
     isSuggestedKeywordSkeleton: loading,
-    onSelectKeywordClick: handleOnSuggestedKeywordClickFnc
+    onSelectKeywordClick: handleOnSuggestedKeywordClickFnc,
   };
   const addBtnConfig = {
     ...config.addBtnConfig,
@@ -356,14 +360,14 @@ const App = (props: AppProps) => {
 
   const addedKeywordsConfig = {
     ...config.addedKeywordsConfig,
-    handlerConfig : {
+    handlerConfig: {
       ...config.addedKeywordsConfig.handlerConfig,
       removeLinkConfig: {
         ...config.addedKeywordsConfig.handlerConfig.removeLinkConfig,
-        callbackFn: removeCallbackFn
-      }
+        callbackFn: removeCallbackFn,
+      },
     },
-    addedKeywordsList: addKeywordState
+    addedKeywordsList: addKeywordState,
   };
   const recommendConfig = {
     ...config.recommendConfig,
@@ -377,15 +381,15 @@ const App = (props: AppProps) => {
   const aiImageTagsConfig = {
     ...config.aiImageTagsConfig,
     aiTagsList: aiImageTagsList,
-    addCallbackFn:addCallbackFnForAIImg
-  }
+    addCallbackFn: addCallbackFnForAIImg,
+  };
 
   const kewordConfig: keywordsWrapperConfig = {
     searchKeywordConfig,
     addBtnConfig,
     addedKeywordsConfig,
     recommendConfig,
-    aiImageTagsConfig
+    aiImageTagsConfig,
   };
 
   const [title, setTitle] = useState('My test title');
