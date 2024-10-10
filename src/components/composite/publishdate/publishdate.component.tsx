@@ -18,7 +18,6 @@ const PublishDate = (props: PublishDateProps) => {
     publishDateLabelClass = style['publishDateLabel'],
   } = props;
 
-
   let days: number = 0;
   if (expiresIn && publishDate) {
     days = Math.ceil((expiresIn - publishDate) / (1000 * 3600 * 24));
@@ -36,19 +35,27 @@ const PublishDate = (props: PublishDateProps) => {
       />
 
       <div className={publishDateLabelClass}>
-        <label className={'publishDateLink'} onClick={() => setOpen(true)}>
+        <label className={'cdsPublishDateLink'} onClick={() => setOpen(true)}>
           {publishDateLabel}
         </label>
         {publishDate && (
-          <div className={'foramtted-date' + publishDateClass} style={{ paddingTop: '4px' }}>
+          <div
+            className={'foramtted-date' + publishDateClass}
+            style={{ paddingTop: '4px' }}
+          >
             {moment(publishDate)?.format(publishDateFormat)}
           </div>
         )}
       </div>
       {days ? (
-        <div className={style['expiryDateWrapper']} >
-          <label className={style['expiryDateLabel']}>{expiresInDaysLabel}:</label>
-          <div className="color-Red" style={{ paddingTop: '4px' }}>{`${days} days`}</div>
+        <div className={style['expiryDateWrapper']}>
+          <label className={style['expiryDateLabel']}>
+            {expiresInDaysLabel}:
+          </label>
+          <div
+            className="color-Red"
+            style={{ paddingTop: '4px' }}
+          >{`${days} days`}</div>
         </div>
       ) : (
         ''

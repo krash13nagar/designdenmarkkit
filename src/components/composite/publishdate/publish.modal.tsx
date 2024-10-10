@@ -242,9 +242,9 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
       dialogContentProps={{ dividers: true }}
     >
       <DenGrid container item xs={12} spacing={4}>
-        <DenGrid item sm={9} className="metadataRightPanel">
-          <DenGrid container item xs={12} className="mb10">
-            <DenGrid item xs={12} className="mb10">
+        <DenGrid item sm={9} className="datePanel">
+          <DenGrid container item xs={12}>
+            <DenGrid item xs={12} sx={{ mb: '10px' }}>
               <DenGrid
                 item
                 xs={12}
@@ -274,15 +274,11 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
                   />
                 </DenCalender>
               </DenGrid>
-              <DenTypography
-                className="publishDateLink"
-                paragraph={true}
-                onClick={handleSetCurrent}
-              >
+              <span className="cdsPublishDateLink" onClick={handleSetCurrent}>
                 Set to now
-              </DenTypography>
+              </span>
             </DenGrid>
-            <DenGrid item sx={{ mr: '6px', flex: 1 }}>
+            <DenGrid item sx={{ mr: '6px', flex: 1, mb: '10px' }}>
               <DenGrid item sm={12}>
                 <DenInputLabel shrink>Valid Upto:</DenInputLabel>
                 <DenCalender
@@ -307,17 +303,13 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
                 </DenCalender>
               </DenGrid>
 
-              <DenTypography
-                className="publishDateLink"
-                paragraph={true}
-                onClick={handleSetToMax}
-              >
+              <span className="cdsPublishDateLink" onClick={handleSetToMax}>
                 Set to max
-              </DenTypography>
+              </span>
             </DenGrid>
             <DenTextField
               id="standard-basic"
-              label="Expiry In Day(s)"
+              label="Expiry In Day(s):"
               name="expireDays"
               placeholder="NA"
               value={expireDays as string}
@@ -328,8 +320,8 @@ const PublishDateModalComponent = (props: PublishModalProps) => {
           </DenGrid>
         </DenGrid>
 
-        <DenGrid item xs={3} className="recommended-wrapper">
-          <div className="publishRightSection">
+        <DenGrid item xs={3} className="infoPanel">
+          <div className="cdsPublishRightSection">
             {artUpdDate && (
               <DenGrid item xs={12} className="mb10">
                 <DenTypography color="textSecondary" variant="subtitle2">

@@ -95,6 +95,8 @@ export const test = {
     publishDateLabel: 'Publish Date',
     publishDate: 1693819795753,
     expiresIn: 1693824566621,
+    artInsDate: 1693824566621,
+    artUpdDate: 1693824566621,
   },
 
   activationStatusOptions: [

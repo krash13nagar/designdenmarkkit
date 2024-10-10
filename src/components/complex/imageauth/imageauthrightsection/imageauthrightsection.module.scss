@@ -11,6 +11,7 @@
         padding: 0px css.pxToRem(16px);
         overflow: auto;
         margin-right: 16px;
+        flex: 1;
 
         >div {
             overflow-y: unset;
