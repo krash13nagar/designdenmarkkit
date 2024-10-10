@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.58",
+  "version": "1.0.59",
   "private": false,
   "description": "Denmark | Common design library based on React and Material UI",
   "main": "index.tsx",
