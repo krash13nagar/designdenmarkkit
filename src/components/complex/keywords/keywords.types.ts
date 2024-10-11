@@ -7,6 +7,7 @@ export interface recommendedConfig {
     noKeywordsLabel: string;
 	errorMsg: string;
     cardHeader: string;
+    isDataLoading?: boolean;
 	refreshIcon : ReactNode;
     addKeywordIcon: ReactNode;
 	refreshCallbackFn: React.MouseEventHandler<HTMLButtonElement>;

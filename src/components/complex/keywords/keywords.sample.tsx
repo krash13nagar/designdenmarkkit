@@ -154,6 +154,7 @@ export const config = {
       nodatafound: 'No recommendation found',
       noKeywordsLabel: "Less content available to recommend keywords.",
       errorMsg: 'API Error',
+      isDataLoading: false,
       cardHeader: "Keywords",
       refreshIcon: <CachedOutlined fontSize="inherit" />,
       addKeywordIcon: <AddCircleOutlineIcon />,
