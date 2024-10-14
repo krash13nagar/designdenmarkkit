@@ -67,6 +67,21 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.module.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]__[hash:base64:7]',
+              },
+            },
+          },
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
@@ -75,6 +90,7 @@ module.exports = {
           },
           'sass-loader',
         ],
+        exclude: /\.module.s[ac]ss$/,
       },
 
       {

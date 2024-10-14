@@ -6,32 +6,34 @@ import {
   DenFormControl,
 } from '../../common';
 import { PrimeCategoryProps } from './primecategory.types';
+import './primecategory.styles.scss';
+
 const PrimeCategory = (props: PrimeCategoryProps) => {
   const {
     primeCategoryLabel = 'Prime Category',
     primeType = 0,
-    primeCategoris = [],
+    primeCategories = [],
     isPrimeEnable = false,
     isPublished = false,
     handlePrimeChange,
   } = props;
   return isPrimeEnable ? (
-    <DenFormControl>
-      <DenInputLabel id="demo-simple-select-label" shrink>
+    <DenFormControl className="cds-prime-category-root" sx={{ marginTop: '10px', marginRight: '10px' }}>
+      <DenInputLabel id="cds-simple-select-label">
         {primeCategoryLabel}
       </DenInputLabel>
       <DenSelect
-        variant='outlined'
         value={primeType}
         onChange={handlePrimeChange}
-        className="primeSelector"
+        className="cds-prime-selector-root"
+        plain
       >
         {!isPublished && (
           <DenMenuItem key="0" value="0">
             Select
           </DenMenuItem>
         )}
-        {primeCategoris?.map((item, index) => (
+        {primeCategories?.map((item, index) => (
           <DenMenuItem key={index + 1} value={item.categoryId}>
             {item.category}
           </DenMenuItem>

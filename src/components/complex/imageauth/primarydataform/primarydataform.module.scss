@@ -1,0 +1,59 @@
+@use '../../../../styles/' as css;
+
+.primary-data-wrapper {
+    width: 99%;
+    overflow-y: auto;
+    max-height: inherit;
+    height: 100%;
+
+    .msid {
+        font: normal normal 600 14px/20px "Source Sans 3";
+        color: #4D4D4D;
+
+        .msidValue {
+            font-weight: 600;
+        }
+    }
+
+    .image-title {
+        margin-top: 12px;
+    }
+
+    :global(.cds-input-label) {
+        font: normal normal 500 13px/18px 'Source Sans 3';
+        color: #818181;
+    }
+
+    :global(.mediumText) {
+        font: normal normal 500 14px/20px "Source Sans 3";
+        color: #4D4D4D;
+    }
+
+    .credits {
+        font: normal normal 700 16px/22px "Source Sans 3";
+    }
+
+    :global(.cds-MuiInputBase-root) {
+        :global(.cds-MuiInputBase-input) {
+            font: normal normal 500 14px/17px "Source Sans 3";
+            color: #4D4D4D;
+            padding-left: 8px;
+        }
+    }
+
+
+
+    .justification {
+        margin-bottom: 25px;
+    }
+
+    .helper-text-agency {
+        font-size: 10px;
+        text-align: justify;
+        font-style: italic;
+    }
+
+    .title-wrapper {
+        margin-top: css.pxToRem(16px);
+    }
+}

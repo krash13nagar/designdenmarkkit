@@ -1,1 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import '~bootstrap-daterangepicker/daterangepicker.css';
+@import '~suneditor/dist/css/suneditor.min.css';
+
+.cds-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .cds-column {
+        font: normal normal normal 10px/18px 'source sans 3', sans-serif !important;
+        letter-spacing: 0px;
+
+        &-12 {
+            flex-basis: 100%;
+        }
+
+        &-6 {
+            flex-basis: 50%;
+        }
+
+        &-4 {
+            flex-basis: 33.33%;
+        }
+
+        &-3 {
+            flex-basis: 25%;
+        }
+    }
+}
+
+.cds-text-editor {
+    .sun-editor {
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 0px 0px 8px 8px;
+
+        label {
+            transform: translate(0, 1.5px) scale(0.75);
+            transform-origin: top left;
+        }
+
+        .se-container {
+            .se-toolbar {
+                outline-color: transparent;
+
+                .se-btn-tray {
+                    padding: 3px ​4px 0px;
+
+                    .se-btn-module {
+                        ul.se-menu-list {
+                            transition: all linear 0.5s;
+                            height: 20px;
+                            color: #333;
+
+                            li {
+                                button {
+                                    color: #333;
+                                }
+
+                                .fa-keyboard.o {
+                                    position: absolute;
+                                    height: 14px;
+                                    margin: 0 0 10px -10px;
+                                    bottom: 1px;
+                                }
+                            }
+
+                            .ico_add_Script-Grey {
+                                height: 14px;
+                                width: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .se-wrapper {
+
+                .se-wrapper-inner.sun-editor-editable {
+                    padding: 5px;
+                    min-height: inherit;
+                    max-height: inherit;
+                    height: max-content !important;
+
+                    div {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,33 @@
+.publish-modal-dialog-root {
+    .expiresInTextfield {
+        width: 130px;
+        max-width: 130px;
+
+        label {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    label {
+        font: normal normal 500 13px/18px 'Source Sans 3' !important;
+        color: #818181;
+        transform: unset !important;
+    }
+
+    .cdsPublishDateLink {
+        color: #1596d1;
+        cursor: pointer;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    .cdsPublishRightSection {
+        border: 1px dashed #ccc;
+        background: #fcfcfc;
+        min-height: 150px;
+        margin: auto;
+        padding: 5px;
+    }
+}

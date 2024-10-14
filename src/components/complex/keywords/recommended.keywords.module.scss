@@ -1,30 +1,78 @@
-.recommended-wrapper{
-    padding: 5px 0px;
-    .recommend{
-        font: normal normal 600 12px/17px Source Sans 3;
-        letter-spacing: 0px;
-        color: #818181;
-        opacity: 1;
-        display: flex;
-        align-items: center;
-        .recommended-refresh{
-           vertical-align: middle;
-        }
-    }
-    
-    .Recommended-card{
+.recommend-aitag-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 0.75rem;
+  padding-top: 9px;
 
-        .Recommended-group{
-            background-color: #f0f2f8;
-            padding:0.55rem;
-            [class*="MuiCardHeader-content"]{
-                [class*="MuiTypography-h5"] {
-                    font-size:0.893rem;
-                }
-            }
-        }
-        
+  .recommended-wrapper {
+    padding: 5px 0px;
+    width: 50%;
+
+    .recommend {
+      font: normal normal 600 12px/17px "Source Sans 3";
+      letter-spacing: 0px;
+      color: #818181;
+      opacity: 1;
+      display: flex;
+      align-items: center;
+
+      .recommended-refresh {
+        vertical-align: middle;
+      }
     }
+
+    .aiImageTag{
+      font: normal normal normal 13px/18px 'Source Sans 3';
+      letter-spacing: 0.13px;
+      min-height: 24px;
+      color: #818181;
+      display: flex;
+      align-items: center;
+    }
+
+    .recommendCardWrapper {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 5px;
+
+      .Recommended-card {
+        width: 100%;
+        height: 162px;
+        border: 1px solid #D2D8DF;
+        border-radius: 0;
+        box-shadow: none;
+
+        .Recommended-group {
+          background: #E6E9ED 0% 0% no-repeat padding-box;
+          padding: 0.55rem;
+
+          [class*="MuiCardHeader-content"] {
+            [class*="MuiTypography-h5"] {
+              font: normal normal 600 13px/18px 'Source Sans 3';
+              color: #4D4D4D;
+            }
+          }
+        }
+
+        .Recommended-content {
+          overflow-y: auto;
+          max-height: 138px;
+          .cardContentDiv{
+            padding-bottom: 8px;
+            .textEllipis{
+              font: normal normal 600 13px/18px 'Source Sans 3';
+              color: #4D4D4D;
+            }
+            .pointerCursor{
+              cursor: pointer;
+            }
+          }
+        }
+
+      }
+    }
+  }
 }
 
 .add_keyword_Wrapper {
@@ -94,12 +142,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-right: 13px;
+
+    .keywordName{
+      font: normal normal 600 13px/18px 'Source Sans 3';
+      color: #4D4D4D;
+    }
+
+    .starNonStarIcon{
+      cursor: pointer;
+    }
 }
 
 .keywordTypeEven{
-    border-right: 1px solid #ECEBEC;
+    border-right: 1px solid #D2D8DF;
 }
 
 .marks-input{
@@ -114,12 +171,22 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    .keywordSourceName {
+        font: normal normal normal 11px/15px 'Source Sans 3';
+        color: #4D4D4D;
+        opacity: 0.8;
+    }
+    .keywordDetails {
+      font: normal normal normal 11px/15px 'Source Sans 3';
+      color: #4D4D4D;
+      opacity: 0.8;
+    }
 }
 
 .addKeywordsWrapperClass {
-    width: 712px;
-    height: 210px;
-    background: #FFFDF4 0% 0% no-repeat padding-box;
+    width: 100%;
+    max-height: 210px;
+    background: #F7F7F7 0% 0% no-repeat padding-box;
     opacity: 1;
     overflow-x: hidden;
     overflow-y: auto;
@@ -139,7 +206,7 @@
 }
 
 .addKeywordsTitle {
-  font: normal normal 600 12px/17px Source Sans 3;
+  font: normal normal 600 12px/17px 'Source Sans 3';
   letter-spacing: 0px;
   color: #818181;
   opacity: 1;
@@ -152,32 +219,76 @@
   justify-content: space-between;
   margin-bottom: 16px;
   .search-keyword{
-    flex: 1;
-    margin-right: 10px;
+    // flex: 1;
+    // margin-right: 10px;
   }
   .searchkeywordlabel{
-    font-size: 18px;
-    letter-spacing: 0px;
+    font: normal 500 13px/18px 'Source Sans 3';
+    letter-spacing: 0.13px;
     color: #818181;
-    opacity: 1
+  }
+  .keywordNsuggestionWrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-right: 10px;
+    flex: 1;
   }
 }
 
 .no-keywords {
   min-height: 32px;
+  width: 100%;
   margin: auto;
-  border: 1px dashed #D2D8DF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: normal normal normal 0.75rem/1.571rem "Merriweather", "Lato", Open Sans, sans-serif !important;
-  text-align: center;
-  letter-spacing: 0px;
+  border: 1px dashed #d2d8df;
   color: #818181;
   opacity: 0.6;
+  font: normal normal normal 13px / 17px 'Source Sans 3';
+  align-content: center;
+  text-align: center;
+}
+
+.aiTagClickLabel {
+  color: #0F89FF;
+  padding-left: 3px;
+  cursor: pointer;
 }
 
 .addkeywordtextfield{
   max-width: 40px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+
+.keyword-suggestion-wrapper{
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  z-index: 10;
+  .keyword-suggestion-menuitem{
+      padding: 6px;
+      justify-content: space-between;
+      [class*="MuiTypography-body1"] {
+          font-size: 0.95rem;
+      }
+      .keyword-suggestion-button{
+          font-size: 10px;
+          padding: 2px 4px;
+          min-width: 20px;
+      }
+  }
+}
+
+.rotateRefreshIcon {
+  animation: rotation infinite 2s linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

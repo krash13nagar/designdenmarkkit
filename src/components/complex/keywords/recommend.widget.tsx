@@ -5,43 +5,36 @@ import { DenGrid } from '../../common';
 import DenCard from '../../common/card/card.component';
 import DenCardHeader from '../../common/cardheader/cardheader.component';
 import DenCardContent from '../../common/cardcontent/cardcontent.component';
+import { Typography } from '@mui/material';
 
 export const RecommendWidget = (props: recommendWidget) => {
-  const { recommendWidgetObj, addCallbckFnc } = props;
+  const { recommendWidgetArr, addCallbckFnc, label, addkeywordIcon } = props;
 
   return (
-    <>
-      {Object.entries(recommendWidgetObj).map((item, i) => {
-        return (
-          <DenCard className={styles["Recommended-card"]} key={i}>
-            {item[1].length > 0 && (
+    <div className={styles['recommendCardWrapper']}>
+          <DenCard className={styles["Recommended-card"]}>
+            {recommendWidgetArr.length > 0 && (
               <>
                 <DenCardHeader
                   className={styles["Recommended-group"]}
-                  title={`${item[0]}(${item[1].length})`}
+                  title={`${label}(${recommendWidgetArr.length})`}
                 />
-                <DenCardContent>
-                  {item[1].map((elm, index = 1) => (
-                    <DenGrid key={index} container>
-                      <DenGrid item xs={1}>
-                        {index + 1}
-                      </DenGrid>
-                      <DenGrid item xs={5} className={styles.textEllipis}>
-                        {elm.keywordName}{' '}
-                      </DenGrid>
-                      <DenGrid item xs={3}>
-                        {elm.keyEnum}{' '}
-                      </DenGrid>
-                      <DenGrid item xs={2}>
-                        {elm.relevance}{' '}
+                <DenCardContent className={styles["Recommended-content"]}>
+                  {recommendWidgetArr.map((elm, index = 1) => (
+                    <DenGrid key={index} className={styles["cardContentDiv"]} container>
+                      <DenGrid item xs={11}>
+                       <Typography title={elm.keywordName} component="div" noWrap={true} className={styles.textEllipis}>{elm.keywordName}{' '}</Typography> 
                       </DenGrid>
                       <DenGrid
+                        container
                         item
                         xs={1}
                         onClick={()=>{addCallbckFnc(elm)}}
                         className={styles.pointerCursor}
+                        justifyContent={"flex-end"}
+                        alignContent={"center"}
                       >
-                        {elm.addKeywordIcon}
+                        {addkeywordIcon}
                       </DenGrid>
                     </DenGrid>
                   ))}
@@ -49,9 +42,7 @@ export const RecommendWidget = (props: recommendWidget) => {
               </>
             )}
           </DenCard>
-        );
-      })}
-    </>
+    </div>
   );
 };
 

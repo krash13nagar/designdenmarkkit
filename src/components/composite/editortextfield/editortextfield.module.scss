@@ -1,0 +1,34 @@
+.cds-text-editor {
+  background: none;
+
+  label {
+    &:not(.shrink) {
+      margin-bottom: 6px;
+    }
+
+    &.focus {
+      color: #4b9cceef;
+    }
+  }
+
+  .warning-title {
+    position: absolute;
+    right: 10px;
+    z-index: 1;
+    color: #d67a0f;
+    width: 10%;
+
+    svg {
+      top: 5px;
+    }
+
+    .warning-text {
+      top: 15%;
+      left: 15%;
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      font-size: 11px;
+    }
+  }
+}

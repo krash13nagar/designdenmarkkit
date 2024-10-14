@@ -6,7 +6,10 @@ import Count from '../wordcount/wordcount.component';
 import { DenInputLabel } from '../../common';
 import { ErrorIcon, Warning } from '../../../assets';
 import style from './imagecaption.module.scss';
+import './suneditor.styles.scss';
 import { ImageCaptionProps } from './imagecaption.types';
+import clsx from 'clsx';
+import './imagecaption.styles.scss';
 
 export const ImageCaption: React.FC<ImageCaptionProps> = (props) => {
   const {
@@ -44,7 +47,7 @@ export const ImageCaption: React.FC<ImageCaptionProps> = (props) => {
   };
 
   return (
-    <div className={style['ws-text-editor']}>
+    <div className={clsx(style['ws-text-editor'], 'cds-text-editor')}>
       <DenInputLabel
         className={focus ? style['focus'] : ''}
         required={captionRequired ? true : false}
@@ -61,16 +64,17 @@ export const ImageCaption: React.FC<ImageCaptionProps> = (props) => {
         setContents={caption}
         onBlur={handleFocus}
         onFocus={handleFocus}
+        hideToolbar={!focus}
       />
       {captionError && <div className="has-error"> {captionError} </div>}
       {captionChildError && (
-        <div className="ws-error desc-ws-error">
+        <div className="error-with-icon desc-ws-error">
           <ErrorIcon />
           <span className={`errormessage`}>{captionChildError}</span>
         </div>
       )}
       {captionChildWarning && (
-        <div className="ws-error desc-ws-error">
+        <div className="error-with-icon desc-ws-error">
           <Warning />
           <span className={'warning'}>{captionChildWarning}</span>
         </div>

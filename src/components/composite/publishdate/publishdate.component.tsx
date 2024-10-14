@@ -17,47 +17,51 @@ const PublishDate = (props: PublishDateProps) => {
     publishDateClass = style['publishDate'],
     publishDateLabelClass = style['publishDateLabel'],
   } = props;
+
   let days: number = 0;
   if (expiresIn && publishDate) {
     days = Math.ceil((expiresIn - publishDate) / (1000 * 3600 * 24));
   }
   const [open, setOpen] = useState(false);
+
   return (
     <div className={publishDateWrapper}>
       <Today
         name="Today Icon"
-        className="vs-calendar-icon"
+        className="cds-calendar-icon"
         onClick={() => {
           setOpen(true);
         }}
       />
 
       <div className={publishDateLabelClass}>
-        <span className={'publishDateLink'} onClick={() => setOpen(true)}>
+        <label className={'cdsPublishDateLink'} onClick={() => setOpen(true)}>
           {publishDateLabel}
-        </span>
-
+        </label>
         {publishDate && (
-          <div className={'foramtted-date' + publishDateClass}>
+          <div
+            className={'foramtted-date' + publishDateClass}
+            style={{ paddingTop: '4px' }}
+          >
             {moment(publishDate)?.format(publishDateFormat)}
           </div>
         )}
       </div>
       {days ? (
-        <div>
-          <div className="">{expiresInDaysLabel}:</div>
-          <div className="color-Red">{`${days} days`}</div>
+        <div className={style['expiryDateWrapper']}>
+          <label className={style['expiryDateLabel']}>
+            {expiresInDaysLabel}:
+          </label>
+          <div
+            className="color-Red"
+            style={{ paddingTop: '4px' }}
+          >{`${days} days`}</div>
         </div>
       ) : (
         ''
       )}
       {open && (
-        <PublishDateModalComponent
-          open={open}
-          setOpen={setOpen}
-          {...props}
-          isDragable={false}
-        />
+        <PublishDateModalComponent open={open} setOpen={setOpen} {...props} />
       )}
     </div>
   );

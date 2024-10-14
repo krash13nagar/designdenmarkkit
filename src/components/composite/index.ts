@@ -31,3 +31,6 @@ export * from './imagesearchcard';
 export * from './imagesearchcardwrapper';
 export * from './richstorycard';
 export * from './trendingsearchcardnewui';
+export * from './editortextfield'
+export * from './customspeeddial'
+export * from './simpletabs/simpletabs.component'

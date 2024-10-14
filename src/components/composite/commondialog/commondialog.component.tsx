@@ -43,6 +43,7 @@ export const CommonDialog = React.forwardRef<
     actionOptionsList = [],
     container = null,
     children,
+    actionChildren = null,
   } = props;
   return (
     <DenDialog
@@ -93,7 +94,7 @@ export const CommonDialog = React.forwardRef<
       >
         {content || children}
       </DenDialogContent>
-      {actionOptionsList?.length > 0 && (
+      {(actionOptionsList?.length > 0 || actionChildren) && (
         <DenDialogActions
           classes={{ root: clsx(styles.footerRoot, classes.footerRoot) }}
           {...dialogActionProps}
@@ -109,6 +110,7 @@ export const CommonDialog = React.forwardRef<
               {action.label}
             </DenButton>
           ))}
+          {!actionOptionsList?.length && actionChildren}
         </DenDialogActions>
       )}
     </DenDialog>

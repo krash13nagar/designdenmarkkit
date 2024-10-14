@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { IconMenuProps } from '../iconmenu/iconmenu.types';
 
 export interface ImageCardProps {
   src: string;
@@ -6,6 +7,10 @@ export interface ImageCardProps {
   wrapperClassName?: string;
   imageClassName?: string;
   aspectRatio?: number;
+  autoImageDimensions?: boolean,
+  showIconMenu?: boolean,
+  CTAs?: { Icon: any, label: string, value: any }[],
+  handleItemClick?: (selectedItemValue: string) => void
 }
 
 export interface AspectRatioProps {

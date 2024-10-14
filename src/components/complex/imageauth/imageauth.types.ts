@@ -1,13 +1,17 @@
+import { ButtonProps } from '@mui/material/Button';
+import { ReactNode } from 'react';
 import { TextFieldProps } from '../../common';
+import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
   ImageCardProps,
   TitleForUrlProps,
   PrimeCategoryProps,
   PublishDateProps,
   ActivattionStatusProps,
-  ImageCaptionProps,
   LabelValueProps,
+  EditorTextfieldProps,
 } from '../../composite';
+import { TabType } from '../../composite/simpletabs/simpletabs.types';
 import { keywordsWrapperConfig } from '../keywords/keywords.types';
 
 export interface ImageAuthoringProps
@@ -15,16 +19,46 @@ export interface ImageAuthoringProps
   PrimeCategoryProps,
   ActivattionStatusProps {
   metaInformation: LabelValueProps[];
-  title: TextFieldProps;
+  title: EditorTextfieldProps;
   titleForUrl: TitleForUrlProps;
-  imageCaption: ImageCaptionProps;
+  imageCaption: EditorTextfieldProps;
   publishDate: PublishDateProps;
-  tabTitleList: string[];
+  tabTitleList: TabType[];
   msid?: string;
   keywordConfig: keywordsWrapperConfig;
-  dialogProps?: any,
-  metaProps?: any,
-  summaryProps?: any
+  dialogProps?: any;
+  metaProps?: any;
+  summaryProps?: any;
+  selectedTab?: string | number;
+  handleTabChange?: (value: any) => void;
+  imageCTAs?: { Icon: any, label: string, value: any }[];
+  handleItemClick?: (selectedItemValue: string) => void;
+  metaClassName?: string;
+  metaColumnCount?: 12 | 6 | 4 | 3,
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  isNotRelatedToAgency?: boolean,
+  handleNotRelatedToAgencyChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  justificationProps?: JustificationProps,
+  showAgencyMessage?: boolean,
+  agencyMessage?: string,
+  showBylineMessage?: boolean,
+  bylineMessage?: string,
+  MetadataComp?: ReactNode,
+  actionButtonsList?: ActionButton[],
+  imageError?: {
+    message?: string
+  }
+}
+
+export interface ActionButton {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  label: string,
+  variant?: ButtonProps['variant'],
+  color?: ButtonProps['color'],
+  props?: ButtonProps
 }
 
 export interface AnchorGeneric {
@@ -34,4 +68,64 @@ export interface AnchorGeneric {
 export interface ImageAuthModelProps extends ImageAuthoringProps {
   containerHeader?: string;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
+  classes?: { root?: string }
 }
+
+export interface ImageAuthLeftSectionProps {
+  metaInformation: (LabelValueProps & { component?: ReactNode })[];
+  src: ImageCardProps["src"];
+  classes?: { root?: string };
+  imageCTAs?: { Icon: any, label: string, value: any }[];
+  handleItemClick?: (selectedItemValue: string) => void,
+  metaClassName?: string,
+  metaColumnCount?: 12 | 6 | 4 | 3,
+  imageError?: ImageAuthoringProps['imageError']
+}
+
+export interface ImageAuthRightSectionProps {
+  tabTitleList: TabType[];
+  selectedTab?: string | number;
+  handleTabChange?: (value: any) => void;
+  msid?: string;
+  title: ImageAuthoringProps['title'];
+  titleForUrl: TitleForUrlProps;
+  imageCaption: ImageAuthoringProps['imageCaption'];
+  keywordConfig: keywordsWrapperConfig;
+  classes?: { root?: string },
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  handleNotRelatedToAgencyChange?: ImageAuthoringProps["handleNotRelatedToAgencyChange"],
+  isNotRelatedToAgency?: ImageAuthoringProps["isNotRelatedToAgency"],
+  justificationProps?: JustificationProps,
+  showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
+  agencyMessage?: ImageAuthoringProps["agencyMessage"],
+  showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
+  bylineMessage?: ImageAuthoringProps["bylineMessage"],
+  MetadataComp?: ImageAuthoringProps["MetadataComp"]
+}
+
+export interface JustificationProps extends TextFieldProps {
+
+}
+
+export interface PrimaryDataFormProps {
+  msid?: string;
+  title: ImageAuthoringProps['title'];
+  titleForUrl: TitleForUrlProps;
+  imageCaption: ImageAuthoringProps['imageCaption'];
+  classes?: { root?: string },
+  captionBylineProps: AutocompleteInputProps,
+  photographerBylineProps: AutocompleteInputProps
+  captionAgencyProps: AutocompleteInputProps,
+  imageAgencyProps: AutocompleteInputProps,
+  handleNotRelatedToAgencyChange?: ImageAuthoringProps["handleNotRelatedToAgencyChange"],
+  isNotRelatedToAgency?: ImageAuthoringProps["isNotRelatedToAgency"],
+  justificationProps?: ImageAuthoringProps["justificationProps"],
+  showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
+  agencyMessage?: ImageAuthoringProps["agencyMessage"],
+  showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
+  bylineMessage?: ImageAuthoringProps["bylineMessage"]
+}
+

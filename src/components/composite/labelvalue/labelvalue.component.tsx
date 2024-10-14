@@ -34,14 +34,16 @@ export const LabelValue = forwardRef(
       renderValue,
     } = props;
     const rendervalue: any = (renderValue && renderValue(value)) || (
-      <span {...valueProps}>{value as string}</span>
+      <span className={style['value']} {...valueProps}>
+        {value as string}
+      </span>
     );
     return (
       <DenFormLabel
         className={`${className} ${style['labelvalueWrapper']} ${style[align]}`}
         ref={ref}
       >
-        <span {...labelProps} aria-label={label}>
+        <span className={style['label']} {...labelProps} aria-label={label}>
           {label}
         </span>
         {seperator && align === 'row' && (

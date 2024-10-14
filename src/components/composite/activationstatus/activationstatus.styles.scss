@@ -1,0 +1,80 @@
+.cds_publish_select_menu.cds-MuiInputBase-root.cds-MuiInputBase-root {
+    margin-top: 0px;
+}
+
+.cds_publish_select_menu_text {
+    text-transform: capitalize;
+    font-size: 1rem;
+    margin-left: 5px;
+
+    &.status-inactive {
+        color: #f85454;
+    }
+
+    &.status-active {
+        color: #3ab43a;
+    }
+
+    &.status-pending {
+        color: #f3a94d;
+    }
+
+    &.status-closed {
+        color: #333333;
+    }
+
+    &.status-unavailable {
+        color: #715cc0;
+    }
+
+    &.status-ignore {
+        color: #4277BC;
+    }
+
+}
+
+.cds_publish_status_dropdown {
+    margin-top: 10px;
+
+    label {
+        font: normal normal 500 13px/18px 'Source Sans 3';
+        letter-spacing: 0.13px;
+        color: #818181;
+        transform: translate(0px, -13px) scale(1);
+    }
+
+    .cds_publish_select_menu {
+        min-width: 75px;
+        margin-top: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+        font: normal normal 500 13px/18px 'Source Sans 3';
+
+        .cds-MuiSelect-select {
+            display: flex;
+            align-items: center;
+
+            .statusIcon {
+                display: inline-flex;
+            }
+
+            .cds_publish_select_menu_text {
+                display: inline-flex;
+            }
+        }
+
+        // label.statusLabel {
+        //     margin: 0;
+        //     padding: 0;
+        //     color: red;
+        //     font: normal normal 500 13px/18px 'Source Sans 3';
+        //     letter-spacing: 0.13px;
+        //     transform: translate(0px, -13px) scale(1);
+        // }
+
+
+    }
+}

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import style from './imageauth.module.scss';
 import {
   DenDialog,
@@ -10,15 +10,25 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { ImageAuthModelProps } from './imageauth.types';
 import ImageAuthoring from './imageauth.component';
+import clsx from 'clsx';
 
-export const ImageAuthModel: FC<ImageAuthModelProps> = (props) => {
-  const { containerHeader = 'Image Authoring', onClose, ...rest } = props;
+export const ImageAuthModel: FC<PropsWithChildren<ImageAuthModelProps>> = (
+  props
+) => {
+  const {
+    containerHeader = 'Image Authoring',
+    onClose,
+    children = null,
+    classes = {},
+    ...rest
+  } = props;
 
   return (
     <DenDialog
       open={true}
       maxWidth="lg"
       classes={{ paperWidthLg: style['dialogRoot'] }}
+      className={clsx(classes.root, 'image-auth-modal-root-cds')}
     >
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
         <div className={style['titleWrapper']}>
@@ -33,7 +43,7 @@ export const ImageAuthModel: FC<ImageAuthModelProps> = (props) => {
         </div>
       </DenDialogTitle>
       <DenDialogContent classes={{ root: style['dialogContentWrapper'] }}>
-        <ImageAuthoring {...rest} />
+        {children ? children : <ImageAuthoring {...rest} />}
       </DenDialogContent>
     </DenDialog>
   );

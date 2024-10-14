@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./recommended.keywords.module.scss";
-import { RecommendedKeywordsConfig, keywordsMappingObj } from "./keywords.types";
+import { RecommendedKeywordsConfig } from "./keywords.types";
 import { DenIconButton } from "../../common";
 import RecommendWidget from "./recommend.widget";
 import _ from "lodash";
@@ -8,47 +8,6 @@ import _ from "lodash";
 
 export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
   const {recommendedConfig, recommendedKeywords} = props;
-  const [loading, setLoading] = useState<boolean>(false);
-  const [keywordsObj, setKeywordsObj] = useState<keywordsMappingObj>({});
-
-  useEffect(()=>{
-    console.log(keywordsMapping());
-    setKeywordsObj(keywordsMapping());    
-  },[recommendedKeywords])
-
-  const keywordsMapping = () => {
-    let obj: keywordsMappingObj = {};
-    
-    recommendedKeywords.forEach(item => obj[item.source] = []);
-    recommendedKeywords.forEach(item => {
-      //Utils.cleanRelevance(item,"relevance")
-      //if(item.metaInfo) item.metaInfo=JSON.stringify(item.metaInfo);
-      if(recommendedConfig.addCallbackFn && recommendedConfig.addKeywordIcon){
-        item["addKeywordIcon"] = recommendedConfig.addKeywordIcon;
-      }
-
-      if (item.source) {
-        const index = _.findIndex(obj[item.source], { "keywordName":item["keywordName"] })
-        if (obj[item.source]) {
-          if(index===-1)
-          obj[item.source].push(item);
-        } else {
-          obj[item.source] = [item];
-        }
-      } else {
-        let source = "Orion";
-        if (obj[source]) {
-          obj[source].push(item);
-        } else {
-          obj[source] = [item];
-        }
-
-      }
-    });
-
-    return obj;
-  }
-
 
   return (
     <div className={styles["recommended-wrapper"]}>
@@ -57,7 +16,7 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
         <DenIconButton
           onClick={recommendedConfig.refreshCallbackFn}
           aria-label="refresh"
-          className={styles["recommended-refresh"]}
+          className={`${styles["recommended-refresh"]} ${recommendedConfig.isDataLoading ? styles['rotateRefreshIcon'] : ''}`}
           size="small"
           color="primary"
         >
@@ -65,12 +24,12 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
         </DenIconButton>
       </div>
       {recommendedKeywords.length > 0 &&
-        <RecommendWidget recommendWidgetObj={keywordsObj} addCallbckFnc={recommendedConfig.addCallbackFn} />
+        <RecommendWidget recommendWidgetArr={recommendedKeywords} addCallbckFnc={recommendedConfig.addCallbackFn} label={recommendedConfig.cardHeader} addkeywordIcon={recommendedConfig.addKeywordIcon} />
       }
       {recommendedKeywords.length < 1 &&
-          <div className={styles["no-keywords"]}>Less content available to recommend keywords.</div>
+          <div className={styles["no-keywords"]}>{recommendedConfig.noKeywordsLabel}</div>
       }
-    </div>
+      </div>
   );
 };
 

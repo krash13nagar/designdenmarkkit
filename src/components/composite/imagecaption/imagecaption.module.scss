@@ -1,5 +1,4 @@
 // @import url('suneditor/dist/css/suneditor.min.css');
-@import '~suneditor/dist/css/suneditor.min.css';
 
 .ws-text-editor {
   background: none;
@@ -31,16 +30,6 @@
       position: absolute;
       width: 100%;
       font-size: 11px;
-    }
-  }
-
-  .desc-ws-error {
-    svg {
-      margin-top: 0.5%;
-    }
-
-    .errormessage {
-      margin: inherit;
     }
   }
 }

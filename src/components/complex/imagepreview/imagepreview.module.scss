@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background: #4d9aca;
+  color: #ffffff;
 
   .titleText {
     flex: 1;
@@ -13,12 +15,9 @@
 
   .titleIcon {
     button {
-      color: #ffffff;
+      color: #fff;
     }
   }
-
-  background: #4d9aca 0% 0% no-repeat padding-box;
-  color: #ffffff;
 }
 
 .titleRootWrapper {
@@ -58,7 +57,7 @@
         line-height: 20px;
       }
 
-      .contentDiv{
+      .contentDiv {
         margin: 10px 5px;
       }
 
