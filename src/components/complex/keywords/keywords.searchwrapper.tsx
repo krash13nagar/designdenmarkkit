@@ -25,7 +25,7 @@ export const SearchKeywordWrapper = (props: searchKeywordWrapper) => {
   return (
     <div className={styles.searchKeywordWrapper}>
       <div className={styles.keywordNsuggestionWrapper}>
-        <SearchKeyword bautocomplete={searchKeywordConfig.bautocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc}/>
+        <SearchKeyword bautocomplete={searchKeywordConfig.bautocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc} onEnterKeyPress={searchKeywordConfig.onEnterKeyPress}/>
         <Suggestions suggestedData={searchKeywordConfig.suggestedKeywordsData} text={val} focus={focus} isSuggestedKeywordSkeleton={searchKeywordConfig.isSuggestedKeywordSkeleton} onSelectKeywordClick={searchKeywordConfig.onSelectKeywordClick} handleSearchKeywordVal={setval}/>
       </div>
       <div>

@@ -168,19 +168,28 @@
 }
 
 .removeIcondiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 82%;
+
+  .keywordNSrcWrapper {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
     .keywordSourceName {
-        font: normal normal normal 11px/15px 'Source Sans 3';
-        color: #4D4D4D;
-        opacity: 0.8;
+      font: normal normal normal 11px/15px 'Source Sans 3';
+      color: #4D4D4D;
+      opacity: 0.8;
     }
+
     .keywordDetails {
       font: normal normal normal 11px/15px 'Source Sans 3';
       color: #4D4D4D;
       opacity: 0.8;
     }
+  }
 }
 
 .addKeywordsWrapperClass {

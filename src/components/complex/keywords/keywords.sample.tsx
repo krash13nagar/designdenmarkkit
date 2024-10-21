@@ -58,6 +58,9 @@ export const config = {
     },
     onSelectKeywordClick: function(val:any){
       console.log(val)
+    },
+    onEnterKeyPress: function(e:any){
+      console.log('pressed enter key',e);
     }
   },
   addBtnConfig: {
@@ -179,7 +182,7 @@ export const config = {
         relevance: 100,
       },
       {
-        keywordName: 'young woman',
+        keywordName: 'young woman union budget of india young woman union budget of india young woman union budget of india',
         keyEnum: 'Denny',
         source: 'Denny',
         relevance: 80,
