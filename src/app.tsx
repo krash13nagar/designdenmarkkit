@@ -397,6 +397,17 @@ const App = (props: AppProps) => {
   const [title, setTitle] = useState('My test title');
   test.title.value = title;
   test.title.onChange = (str) => setTitle(str);
+  const [imageCaption, setImageCaption] = useState(
+    '<p>test test</p><p><br /></p><p>test test</p><p><br /></p><p>test test</p>'
+  );
+  test.imageCaption = {
+    ...test.imageCaption,
+    value: imageCaption,
+    onChange: (str: string) => {
+      console.log(str);
+      setImageCaption(str);
+    },
+  };
   const testConfig = { ...test, keywordConfig: kewordConfig };
   const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
