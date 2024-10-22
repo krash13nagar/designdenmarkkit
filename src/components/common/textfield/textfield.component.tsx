@@ -37,6 +37,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       shrinkLabel = false,
       onBlur = () => {},
       onClick = () => {},
+      onKeyDown = () => {},
     } = props;
 
     const { classes: valueClasses = {}, ...restValueProps } = valueProps;
@@ -89,6 +90,7 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
           onChange={onChange}
           onClick={onClick}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
         />
         {errorText && <div className="has-error"> {errorText} </div>}
       </DenFormControl>

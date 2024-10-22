@@ -16,7 +16,7 @@ export const RecommendKeywords = (props: RecommendedKeywordsConfig) => {
         <DenIconButton
           onClick={recommendedConfig.refreshCallbackFn}
           aria-label="refresh"
-          className={styles["recommended-refresh"]}
+          className={`${styles["recommended-refresh"]} ${recommendedConfig.isDataLoading ? styles['rotateRefreshIcon'] : ''}`}
           size="small"
           color="primary"
         >

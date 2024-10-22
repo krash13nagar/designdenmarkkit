@@ -22,10 +22,18 @@ export const SearchKeywordWrapper = (props: searchKeywordWrapper) => {
     setFocus(val);
   }
 
+  const handleEnterKeyPressFnc = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (searchKeywordConfig.onEnterKeyPress) {
+      searchKeywordConfig.onEnterKeyPress(event);
+      setval("");
+      setFocus(false)
+    }
+  }
+
   return (
     <div className={styles.searchKeywordWrapper}>
       <div className={styles.keywordNsuggestionWrapper}>
-        <SearchKeyword bautocomplete={searchKeywordConfig.bautocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc}/>
+        <SearchKeyword bautocomplete={searchKeywordConfig.bautocomplete} label={searchKeywordConfig.label} placeholder={searchKeywordConfig.placeholder} searchCallbckfnc={searchKeywordConfig.searchCallbckfnc} searchKeywordVal={val} handleSearchKeywordVal={setval} handleSuggestionKeywordFnc={handleSuggestionKeywordFnc} onEnterKeyPress={handleEnterKeyPressFnc}/>
         <Suggestions suggestedData={searchKeywordConfig.suggestedKeywordsData} text={val} focus={focus} isSuggestedKeywordSkeleton={searchKeywordConfig.isSuggestedKeywordSkeleton} onSelectKeywordClick={searchKeywordConfig.onSelectKeywordClick} handleSearchKeywordVal={setval}/>
       </div>
       <div>
