@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@mui/material';
-import { ReactNode, ReactSVGElement } from 'react';
+import { MouseEventHandler } from 'react';
 export interface ActivattionStatusProps {
   activationStatusOptions: {
     title: string;
@@ -12,5 +12,8 @@ export interface ActivattionStatusProps {
   ) => void;
   activationStatus: string;
   activationStatusLabel?: string;
-  menuItemClass?: string
+  menuItemClass?: string,
+  showEditIcon?: boolean,
+  onEditIconClick?: MouseEventHandler<HTMLButtonElement>,
+  editIconTitle?: string
 }

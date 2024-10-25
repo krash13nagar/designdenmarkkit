@@ -31,6 +31,9 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatus,
     activationStatusOptions,
     activationStatusLabel,
+    showActivationStatusEditIcon = false,
+    onActivationStatusEditIconClick = () => {},
+    activationStatusEditIconTitle = '',
     keywordConfig,
     selectedTab = '',
     handleTabChange = () => {},
@@ -108,6 +111,9 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
             activationChangeHandle={activationChangeHandle}
             activationStatus={activationStatus}
             activationStatusLabel={activationStatusLabel}
+            showEditIcon={showActivationStatusEditIcon}
+            onEditIconClick={onActivationStatusEditIconClick}
+            editIconTitle={activationStatusEditIconTitle}
           />
 
           <div className="cds-action-buttons-wrapper">

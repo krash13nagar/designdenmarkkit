@@ -1,5 +1,5 @@
 import { ButtonProps } from '@mui/material/Button';
-import { ReactNode } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
 import { TextFieldProps } from '../../common';
 import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
@@ -50,7 +50,10 @@ export interface ImageAuthoringProps
   actionButtonsList?: ActionButton[],
   imageError?: {
     message?: string
-  }
+  },
+  showActivationStatusEditIcon?: boolean,
+  onActivationStatusEditIconClick?: MouseEventHandler<HTMLButtonElement>,
+  activationStatusEditIconTitle?: string
 }
 
 export interface ActionButton {

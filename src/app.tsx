@@ -108,6 +108,11 @@ export const test = {
   ],
   activationChangeHandle: () => {},
   activationStatus: '0',
+  showActivationStatusEditIcon: true,
+  onActivationStatusEditIconClick: () => {
+    console.log('Activation status edit button click');
+  },
+  activationStatusEditIconTitle: 'Status History',
   imageCaption: {
     title: 'Image Caption',
     error: '',
