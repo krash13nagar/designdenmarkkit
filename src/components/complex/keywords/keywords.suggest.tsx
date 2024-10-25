@@ -53,6 +53,7 @@ export const Suggestions = ({
                   }}
                 >
                   <Typography noWrap>{option.keywordName}</Typography>
+                  <div>
                   {option.keyEnum && (
                     <Button
                       size="small"
@@ -69,6 +70,7 @@ export const Suggestions = ({
                   >
                     {option.source}
                   </Button>
+                  </div>
                 </MenuItem>
               ))}
             </>

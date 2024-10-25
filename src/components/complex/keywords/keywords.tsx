@@ -47,6 +47,7 @@ export const Keywords = (props : keywordsConfig) => {
                   <div className={styles.keywordflexContainer}>
                     <div className={styles.removeIcondiv}>
                       <DenIconButton
+                        sx={{paddingTop:0}}
                         size="small"
                         onClick={() => { handlerConfig.removeLinkConfig.callbackFn(index, item.relevance) }}
                       >

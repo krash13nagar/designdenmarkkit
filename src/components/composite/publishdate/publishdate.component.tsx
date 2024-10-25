@@ -5,7 +5,7 @@ import PublishDateModalComponent from './publish.modal';
 import style from './publishdate.module.scss';
 import moment from 'moment';
 
-const PublishDate = (props: PublishDateProps) => {
+export const PublishDate = (props: PublishDateProps) => {
   const {
     publishDate,
     publishDateLabel = 'Publish Date',
