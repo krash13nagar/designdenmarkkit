@@ -59,6 +59,11 @@
                 border-color: rgba(0, 0, 0, 0.87);
             }
 
+            &:focus-within {
+                border-color: #0f89ff;
+                border-width: 2px;
+            }
+
             .se-wrapper {
                 border-radius: 4px;
 

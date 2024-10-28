@@ -11,6 +11,10 @@
         border-color: #0F89FF;
         border-width: 2px;
       }
+
+      &:disabled {
+        background-color: #F2F4F6;
+      }
     }
   }
 

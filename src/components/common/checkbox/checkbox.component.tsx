@@ -15,7 +15,7 @@ import { CheckboxTypes } from './checkbox.types';
  * for more details see http:localhost:6006
  */
 export const DenCheckbox: React.FC<CheckboxTypes> = (props) => (
-  <Checkbox {...props} />
+  <Checkbox sx={{ color: '#0E88FF' }} {...props} />
 );
 
 export default DenCheckbox;
