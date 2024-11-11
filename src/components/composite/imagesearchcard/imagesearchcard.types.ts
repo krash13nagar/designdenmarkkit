@@ -19,7 +19,7 @@ export interface imageSearchCardConfig {
     variant?: string
     imageCardMenuOptions: imageCardMenuOptionsConfig[],
     onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>,
-    actionButtonsList: ActionButton[]
+    actionButtonsList?: ActionButton[]
 }
 
 export interface imageCardMenuOptionsConfig {
