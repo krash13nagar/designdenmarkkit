@@ -247,6 +247,8 @@
 
   .card-footer-btn-wrapper {
     flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
   }
 }
 
@@ -294,8 +296,13 @@
 }
 
 .primaryButton-cds {
-  padding: 5px 8px;
+  padding: 5px 8px !important;
   font: normal normal normal 9px/10px "Source Sans 3" !important;
+  text-transform: unset !important;
+
+  &:last-of-type {
+    margin: 0 !important;
+  }
 }
 
 .btn {
