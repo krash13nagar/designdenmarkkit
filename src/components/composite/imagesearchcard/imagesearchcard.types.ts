@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
+import { ActionButton } from "../../complex/imageauth/imageauth.types";
 
 export interface imageSearchCardConfig {
-    msid?:string,
+    msid?: string,
     type: string,
     name: string,
     fromNow: string,
@@ -15,9 +16,10 @@ export interface imageSearchCardConfig {
     classes?: {
         "root"?: string
     }
-    variant?:string
-    imageCardMenuOptions:imageCardMenuOptionsConfig[],
-    onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>;
+    variant?: string
+    imageCardMenuOptions: imageCardMenuOptionsConfig[],
+    onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>,
+    actionButtonsList: ActionButton[]
 }
 
 export interface imageCardMenuOptionsConfig {
@@ -28,11 +30,12 @@ export interface imageCardMenuOptionsConfig {
 
 export interface imageSearchCardHoverConfig {
     name: string;
-	agencyName: string;
-	dataSource: string;
-	ingestionDate : string;
+    agencyName: string;
+    dataSource: string;
+    ingestionDate: string;
     resolution: string;
     agencyUsageData: any;
     onCallbackMenufnc: React.MouseEventHandler<HTMLElement>;
     onCallbackSelectImagefnc: React.MouseEventHandler<HTMLElement>;
+    actionButtonsList: ActionButton[]
 }
