@@ -34,3 +34,5 @@ export * from './trendingsearchcardnewui';
 export * from './editortextfield'
 export * from './customspeeddial'
 export * from './simpletabs/simpletabs.component'
+export * from './keyvaluecopy/keyvaluecopy.component'
+export * from './copyiconbutton/copyiconbutton.component'

@@ -5,6 +5,7 @@ import style from './imageauthleftsection.module.scss';
 import { ImageAuthLeftSectionProps } from '../imageauth.types';
 import { DenBox } from '../../../common';
 import { ErrorIcon } from '../../../../assets';
+import KeyValueCopy from '../../../composite/keyvaluecopy/keyvaluecopy.component';
 
 export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
   src,
@@ -15,6 +16,8 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
   metaClassName = '',
   metaColumnCount = 4,
   imageError,
+  msid,
+  parentMsid,
 }) => {
   return (
     <div className={clsx(style['image-auth-left-panel'], classes.root)}>
@@ -24,6 +27,15 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
           <span className={style['errormessage']}>{imageError.message}</span>
         </div>
       )}
+      <div className={style.idWrapper}>
+        <KeyValueCopy keyText="ID : " valueText={msid ?? 'New'} />
+        {parentMsid ? (
+          <div className={style.parentMsidWrapper}>
+            <div className={style.separator}></div>
+            <KeyValueCopy keyText="Parent ID : " valueText={parentMsid} />
+          </div>
+        ) : null}
+      </div>
       <DenImageCard
         src={src}
         wrapperClassName={style['image-container']}

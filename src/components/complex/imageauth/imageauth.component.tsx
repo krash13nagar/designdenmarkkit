@@ -17,6 +17,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     src,
     tabTitleList,
     msid,
+    parentMsid,
     title,
     titleForUrl,
     imageCaption,
@@ -70,6 +71,8 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           metaClassName={metaClassName}
           metaColumnCount={metaColumnCount}
           imageError={imageError}
+          msid={msid}
+          parentMsid={parentMsid}
         />
         <ImageAuthRightSection
           tabTitleList={tabTitleList}

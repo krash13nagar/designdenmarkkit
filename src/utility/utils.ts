@@ -9,3 +9,12 @@ export const cleanXssCode = function (html = "") {
   }
   return html;
 }
+
+export const copyToClipboard = async (str: string) => {
+
+  try {
+    await navigator.clipboard.writeText(str);
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+}

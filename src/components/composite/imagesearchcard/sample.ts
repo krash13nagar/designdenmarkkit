@@ -1,3 +1,5 @@
+import { ButtonProps } from "@mui/material"
+
 export const IMAGE_CARD_MENU_OPTIONS = [
     { label: "Preview", icon: "", onClickFnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected preview") } } },
     { label: "Download", icon: "", onClickFnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected download") } } },
@@ -30,5 +32,16 @@ export const imageSearchCardSample = {
     resolution: "5369 x 3580",
     ingestionDate: "6th Feb 2024 03:53 PM",
     imageCardMenuOptions: IMAGE_CARD_MENU_OPTIONS,
-    onCallbackSelectImagefnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected image card") } }
+    onCallbackSelectImagefnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected image card") } },
+    actionButtonsList: [{
+        label: 'Add To Related',
+        variant: "outlined" as ButtonProps['variant'],
+        onClick: () => { console.log("Add to related clicked!") }
+    },
+    {
+        label: 'Embed In Body',
+        variant: 'contained' as ButtonProps['variant'],
+        onClick: () => { console.log("Embed in body clicked!") }
+    }
+    ]
 }

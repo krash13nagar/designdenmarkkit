@@ -187,6 +187,7 @@ export const test = {
     { component: <p>This is a test</p> },
   ],
   msid: '123456',
+  parentMsid: '987656',
   keywordConfig: config,
   imageCTAs: [
     { Icon: CropOutlinedIcon, label: 'Crop Image', value: 'crop' },

@@ -53,7 +53,8 @@ export interface ImageAuthoringProps
   },
   showActivationStatusEditIcon?: boolean,
   onActivationStatusEditIconClick?: MouseEventHandler<HTMLButtonElement>,
-  activationStatusEditIconTitle?: string
+  activationStatusEditIconTitle?: string,
+  parentMsid?: string
 }
 
 export interface ActionButton {
@@ -82,7 +83,10 @@ export interface ImageAuthLeftSectionProps {
   handleItemClick?: (selectedItemValue: string) => void,
   metaClassName?: string,
   metaColumnCount?: 12 | 6 | 4 | 3,
-  imageError?: ImageAuthoringProps['imageError']
+  imageError?: ImageAuthoringProps['imageError'],
+  msid?: string,
+  parentMsid?: ImageAuthoringProps['parentMsid']
+
 }
 
 export interface ImageAuthRightSectionProps {
