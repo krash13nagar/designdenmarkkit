@@ -17,3 +17,5 @@ export * from './closeicon';
 export * from './openinnewicon';
 export * from './webstoryicon';
 export * from './rightarrowicon';
+export * from './copyicon';
+export * from './checkicon';
