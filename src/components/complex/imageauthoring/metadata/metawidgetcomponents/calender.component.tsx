@@ -11,7 +11,7 @@ for calender documentations
 https://github.com/skratchdot/react-bootstrap-daterangepicker/
 */
 
-const DenCalender = (props: any) => {
+export const DenCalender = (props: any) => {
   const [startDate, setStartDate] = useState(new Date());
 
   const styleref: any = useRef();
