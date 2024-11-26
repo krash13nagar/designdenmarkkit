@@ -1,4 +1,5 @@
 import { ButtonProps } from "@mui/material"
+import { imageSearchCardConfig } from "./imagesearchcard.types"
 
 export const IMAGE_CARD_MENU_OPTIONS = [
     { label: "Preview", icon: "", onClickFnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected preview") } } },
@@ -45,3 +46,31 @@ export const imageSearchCardSample = {
     }
     ]
 }
+
+export const imageSearchCardSample2 = {
+    type: "3-0",
+    name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+    agencyName: "Getty Images",
+    entityType: "IMAGES",
+    imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+    dataSource: "GETTYFEED",
+    imageSource: "DAM",
+    classes: { "root": "cardWrapperClass" },
+    resolution: "5369 x 3580",
+    ingestionDateTimestamp: 1731926561848,
+    imageCardMenuOptions: IMAGE_CARD_MENU_OPTIONS,
+    onCallbackSelectImagefnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected image card") } },
+    actionButtonsList: [{
+        label: 'Add To Related',
+        variant: "outlined" as ButtonProps['variant'],
+        onClick: () => { console.log("Add to related clicked!") }
+    },
+    {
+        label: 'Embed In Body',
+        variant: 'contained' as ButtonProps['variant'],
+        onClick: () => { console.log("Embed in body clicked!") }
+    }
+    ],
+    cardStyle: "minimal" as imageSearchCardConfig['cardStyle']
+}
+

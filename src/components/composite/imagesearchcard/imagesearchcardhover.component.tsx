@@ -4,6 +4,7 @@ import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
 import { ICONS } from './imagesearchcard.constant';
 import { DenButton } from '../../common';
+import moment from 'moment';
 
 export const ImageSearchCardHoverDetails = (
   props: imageSearchCardHoverConfig
@@ -17,11 +18,19 @@ export const ImageSearchCardHoverDetails = (
     agencyUsageData,
     onCallbackMenufnc,
     onCallbackSelectImagefnc,
+    ingestionDateTimestamp,
     actionButtonsList = [],
+    cardStyle = 'standard',
   } = props;
 
   const [agencyCount, setAgencyCount] = useState('Unlimited');
   const [agencyQuotaStyle, setAgencyQuotaStyle] = useState('agency-unlimited');
+
+  const dateToShow =
+    ingestionDate ||
+    (ingestionDateTimestamp
+      ? moment(ingestionDateTimestamp).format('Do MMM YYYY hh:mm A')
+      : '');
 
   useEffect(() => {
     if (agencyUsageData?.defaultMessage) {
@@ -49,14 +58,15 @@ export const ImageSearchCardHoverDetails = (
   const handleSelectImage = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    if (props.onCallbackSelectImagefnc) {
-      props.onCallbackSelectImagefnc(e);
+    e.stopPropagation();
+    if (onCallbackSelectImagefnc) {
+      onCallbackSelectImagefnc(e);
     }
   };
 
   const handleCardMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (props.onCallbackMenufnc) {
-      props.onCallbackMenufnc(e);
+    if (onCallbackMenufnc) {
+      onCallbackMenufnc(e);
     }
   };
 
@@ -79,48 +89,79 @@ export const ImageSearchCardHoverDetails = (
           {name}
         </div>
 
-        <div className={`${style['mb7']} ${style['vc-ellipsis']}`}>
-          {agencyName && (
-            <span title={`Agency:${agencyName}`}>
-              <span className={style['secondaryText']}>Agency:</span>
-              <span className={style['primaryText']}>{agencyName + ' | '}</span>
-            </span>
-          )}
-          <span title={`Source : ${dataSource}`}>
-            <span className={style['secondaryText']}>Source:</span>
-            <span className={style['primaryText']}>{dataSource}</span>
-          </span>
-        </div>
+        {cardStyle == 'standard' && (
+          <div className={`${style['mb7']} ${style['vc-ellipsis']}`}>
+            {agencyName && (
+              <span title={`Agency:${agencyName}`}>
+                <span className={style['secondaryText']}>Agency:</span>
+                <span className={style['primaryText']}>{agencyName}</span>
+              </span>
+            )}
+            {agencyName && dataSource && (
+              <span className={style['primaryText']}> | </span>
+            )}
+            {dataSource && (
+              <span title={`Source : ${dataSource}`}>
+                <span className={style['secondaryText']}>Source:</span>
+                <span className={style['primaryText']}>{dataSource}</span>
+              </span>
+            )}
+          </div>
+        )}
+        {cardStyle == 'minimal' && (
+          <div className={`${style['mb7']} ${style['vc-ellipsis']}`}>
+            {agencyName && (
+              <span title={`Agency:${agencyName}`}>
+                <span className={style['secondaryText']}>{agencyName}</span>
+              </span>
+            )}
+            {agencyName && resolution && (
+              <span className={style['secondaryText']}> | </span>
+            )}
+            {resolution && (
+              <span title={resolution}>
+                <span className={style['secondaryText']}>{resolution}</span>
+              </span>
+            )}
+          </div>
+        )}
         <div
           className={`${style['mb7']} ${style['vc-ellipsis']}`}
-          title={ingestionDate}
+          title={dateToShow}
         >
-          <span className={`${style['mr4']} ${style['icon']}`}>
-            {ICONS.pubDate}
-          </span>
-          <span className={style['secondaryText']}>{ingestionDate}</span>
-        </div>
-        <div
-          className={`${style['mb7']} ${style['secondaryText']} ${style['vc-ellipsis']}`}
-        >
-          <span title={resolution}>{resolution}</span>
-          <span> | </span>
-          <span title={`Agency Usage Quota : ${agencyCount}`}>
-            Usage Quota :{' '}
-            <span
-              className={`${style['agencyQuota']} ${style[agencyQuotaStyle]}`}
-            >
-              {agencyCount}
+          {cardStyle == 'standard' && (
+            <span className={`${style['mr4']} ${style['icon']}`}>
+              {ICONS.pubDate}
             </span>
-          </span>
+          )}
+          <span className={style['secondaryText']}>{dateToShow}</span>
         </div>
+        {cardStyle == 'standard' && (
+          <div
+            className={`${style['mb7']} ${style['secondaryText']} ${style['vc-ellipsis']}`}
+          >
+            <span title={resolution}>{resolution}</span>
+            <span> | </span>
+            <span title={`Agency Usage Quota : ${agencyCount}`}>
+              Usage Quota :{' '}
+              <span
+                className={`${style['agencyQuota']} ${style[agencyQuotaStyle]}`}
+              >
+                {agencyCount}
+              </span>
+            </span>
+          </div>
+        )}
       </div>
       <div className={style['card-footer']}>
         <div className={style['card-footer-btn-wrapper']}>
           {actionButtonsList?.length > 0 &&
             actionButtonsList.map((btn, i) => (
               <DenButton
-                onClick={btn.onClick || function () {}}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  btn?.onClick?.(e);
+                }}
                 variant={btn.variant || 'contained'}
                 color={btn.color || 'primary'}
                 key={i}
@@ -151,7 +192,10 @@ export const ImageSearchCardHoverDetails = (
           )}
         </div>
         <div
-          onClick={(e) => handleCardMenu(e)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCardMenu(e);
+          }}
           className={style['card-menu-button']}
         >
           <svg

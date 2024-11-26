@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import cssClassName from './imagesearchcard.module.scss';
 import { DenCard, DenCardActions, DenCardMedia } from '../../common';
-import { cleanHTML } from '../../../utility/utils';
+import { calculateFromNow, cleanHTML } from '../../../utility/utils';
 import ImageSearchCardHoverDetails from './imagesearchcardhover.component';
 import { ClickAwayListener } from '@mui/material';
 import clsx from 'clsx';
@@ -28,11 +28,20 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
     variant = '',
     imageCardMenuOptions,
     actionButtonsList = [],
+    ingestionDateTimestamp,
     onCallbackSelectImagefnc,
+    cardStyle = 'standard',
   } = props;
 
   const [showCardMenu, setShowCardMenu] = useState(false);
   const [cardMenuBtnClass, setCardMenuBtnClass] = useState('');
+
+  const fromNowText = useMemo(() => {
+    return (
+      fromNow ||
+      (ingestionDateTimestamp ? calculateFromNow(ingestionDateTimestamp) : '')
+    );
+  }, [ingestionDateTimestamp, fromNow]);
 
   let variantClassName = '';
   const changeVariantClassName = (variantType: string) => {
@@ -132,8 +141,9 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
           {isShowResolution && resolution && (
             <div className={cssClassName['new-resolution']}>
               <span className={cssClassName['primaryText']}>
-                {agencyName ? agencyName + ' | ' : ''}
-                {fromNow}
+                {agencyName ? agencyName : ''}
+                {agencyName && fromNowText ? ' | ' : ''}
+                {fromNowText}
               </span>
               <span className={cssClassName['secondaryText']}>
                 {resolution}
@@ -151,6 +161,8 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
               onCallbackMenufnc={handleShowCardMenu}
               onCallbackSelectImagefnc={onCallbackSelectImagefnc}
               actionButtonsList={actionButtonsList}
+              ingestionDateTimestamp={ingestionDateTimestamp}
+              cardStyle={cardStyle}
             />
           )}
         </div>
@@ -188,13 +200,14 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
             <div
               className={`${cssClassName['card-menu']} ${cssClassName[cardMenuBtnClass]}`}
             >
-              {imageCardMenuOptions.map((cardMenuItem, index) => {
+              {imageCardMenuOptions?.map((cardMenuItem, index) => {
                 return (
                   <>
                     <div
                       className={cssClassName['card-menu-item']}
                       key={index}
                       onClick={(e) => {
+                        e.stopPropagation();
                         handleOnCardMenuClick(e, cardMenuItem);
                       }}
                     >
