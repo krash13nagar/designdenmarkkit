@@ -20,7 +20,7 @@ const AutoCompleteInputBase = (
   const readOnly = props.isReadOnly;
   const {
     options,
-    title,
+    title = '',
     limit,
     disabled,
     helperText,

@@ -20,6 +20,7 @@ export const ImageAuthModel: FC<PropsWithChildren<ImageAuthModelProps>> = (
     onClose,
     children = null,
     classes = {},
+    dialogProps = {},
     ...rest
   } = props;
 
@@ -29,6 +30,7 @@ export const ImageAuthModel: FC<PropsWithChildren<ImageAuthModelProps>> = (
       maxWidth="lg"
       classes={{ paperWidthLg: style['dialogRoot'] }}
       className={clsx(classes.root, 'image-auth-modal-root-cds')}
+      {...dialogProps}
     >
       <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
         <div className={style['titleWrapper']}>

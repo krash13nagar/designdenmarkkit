@@ -28,7 +28,7 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
         </div>
       )}
       <div className={style.idWrapper}>
-        <KeyValueCopy keyText="ID : " valueText={msid ?? 'New'} />
+        <KeyValueCopy keyText="ID : " valueText={msid || 'New'} />
         {parentMsid ? (
           <div className={style.parentMsidWrapper}>
             <div className={style.separator}></div>
