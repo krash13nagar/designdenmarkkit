@@ -78,6 +78,8 @@ export const DenCalender = (props: any) => {
       onCallback={handleCallback}
       onApply={onApply}
       onCancel={onCancel}
+      onShow={props.onShow ? props.onShow : ()=>{}}
+      onShowCalendar={props.onShowCalendar ? props.onShowCalendar : ()=>{}}
     >
       {props.children ? props.children : template}
     </DateRangePicker>
