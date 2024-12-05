@@ -86,7 +86,8 @@ export * from './stack/stack.component';
 export * from './listitemtext/listitemtext.component';
 export * from './readmoreless/readmoreless.component';
 export * from './drawer/drawer.component';
-export * from '../common/autocompleteinput/autocompleteinput.component';
+export * from './autocompleteinput/autocompleteinput.component';
+export * from './imagewithfallback/imagewithfallback'
 
 
 
