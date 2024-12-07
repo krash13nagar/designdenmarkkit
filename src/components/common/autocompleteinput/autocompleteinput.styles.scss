@@ -59,20 +59,20 @@
                 min-height: 32px;
 
 
-                [class*="MuiAutocomplete-tag"] {
-                    max-width: calc(16.071rem - 6px);
-                    height: 2rem;
+                // [class*="MuiAutocomplete-tag"] {
+                //     max-width: calc(16.071rem - 6px);
+                //     height: 2rem;
 
-                    [class*="MuiChip-icon"] {
-                        width: 22px;
-                        margin-left: 2px;
-                    }
+                //     [class*="MuiChip-icon"] {
+                //         width: 22px;
+                //         margin-left: 2px;
+                //     }
 
-                    svg {
-                        width: 1.286rem;
-                        height: 1.286rem;
-                    }
-                }
+                //     svg {
+                //         width: 1.286rem;
+                //         height: 1.286rem;
+                //     }
+                // }
 
                 [class*="MuiAutocomplete-input"] {
                     min-height: 1.5rem;
