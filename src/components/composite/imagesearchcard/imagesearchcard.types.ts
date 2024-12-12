@@ -21,13 +21,15 @@ export interface imageSearchCardConfig {
     imageCardMenuOptions?: imageCardMenuOptionsConfig[],
     onCallbackSelectImagefnc?: React.MouseEventHandler<HTMLElement>,
     actionButtonsList?: ActionButton[],
-    cardStyle?: 'standard' | 'minimal'
+    cardStyle?: 'standard' | 'minimal',
+    onCardClick?: React.MouseEventHandler<HTMLElement>
 }
 
 export interface imageCardMenuOptionsConfig {
     label: string;
     icon: ReactNode;
     onClickFnc: React.MouseEventHandler<HTMLElement>;
+    children?: imageCardMenuOptionsConfig[],
 }
 
 export interface imageSearchCardHoverConfig {
@@ -41,5 +43,7 @@ export interface imageSearchCardHoverConfig {
     onCallbackSelectImagefnc?: React.MouseEventHandler<HTMLElement>;
     actionButtonsList?: ActionButton[],
     ingestionDateTimestamp?: number | undefined,
-    cardStyle?: imageSearchCardConfig['cardStyle']
+    cardStyle?: imageSearchCardConfig['cardStyle'],
+    imageCardMenuOptions?: imageCardMenuOptionsConfig[],
+    showCardMenu?: boolean
 }

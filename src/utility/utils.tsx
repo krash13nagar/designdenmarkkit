@@ -1,7 +1,10 @@
+import { RightArrowIcon } from '../assets';
+import { DenNestedMenuItem, DenNestedMenuSubItem } from '../components/composite/nestedmenu/nestedmenu';
 export const cleanHTML = function (str = '') {
   const regex = /(<([^>]+)>)/gi;
   return str.replace(regex, '');
 };
+import React from 'react'
 
 export const cleanXssCode = function (html = "") {
   if (window?.AppSDK?.common?.clean) {
@@ -69,4 +72,22 @@ export const calculateFromNow = function (date: any) {
   if (seconds >= 0 && seconds <= 45) {
     return futureDate ? 'in few seconds' : 'a few seconds ago';
   }
+}
+
+export const renderMenu = (menuOptions: any) => {
+  return menuOptions.map((option: any) => {
+    if (option.children?.length) {
+      return <DenNestedMenuSubItem
+        label={option.label}
+        rightIcon={<RightArrowIcon />}
+        leftIcon={option.icon}
+        menu={renderMenu(option.children)}
+      />
+    }
+    return <DenNestedMenuItem
+      onClick={(e: any) => option?.onClickFnc?.(e)}
+      leftIcon={option.icon}
+      label={option.label}
+    />
+  })
 }

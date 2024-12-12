@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './imagesearchcard.module.scss';
 import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
 import { ICONS } from './imagesearchcard.constant';
-import { DenButton } from '../../common';
+import { DenButton, DenIconButton } from '../../common';
 import moment from 'moment';
+import MoreVert from '@mui/icons-material/MoreVert';
+import { DenNestedMenu } from '../nestedmenu/nestedmenu';
+import { renderMenu } from '../../../utility/utils';
 
 export const ImageSearchCardHoverDetails = (
   props: imageSearchCardHoverConfig
@@ -21,6 +24,7 @@ export const ImageSearchCardHoverDetails = (
     ingestionDateTimestamp,
     actionButtonsList = [],
     cardStyle = 'standard',
+    imageCardMenuOptions = []
   } = props;
 
   const [agencyCount, setAgencyCount] = useState('Unlimited');
@@ -81,6 +85,10 @@ export const ImageSearchCardHoverDetails = (
     }
     setAgencyQuotaStyle(customClass);
   };
+
+  const renderMenuOptions = (menuOptions: any) => {
+    return renderMenu(menuOptions)
+  }
 
   return (
     <div className={`${style['card-reveal']} ${style['card-reveal-show']}`}>
@@ -191,23 +199,14 @@ export const ImageSearchCardHoverDetails = (
             </div>
           )}
         </div>
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            handleCardMenu(e);
-          }}
-          className={style['card-menu-button']}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="20px"
-            width="20px"
-            fill="#D2D8DF"
-          >
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-          </svg>
-        </div>
+        {imageCardMenuOptions?.length > 0 &&
+          <DenNestedMenu
+            trigger={
+              <DenIconButton sx={{ color: "#FFFFFF", padding: 0 }} disableRipple>
+                <MoreVert />
+              </DenIconButton>}
+            menu={renderMenuOptions(imageCardMenuOptions)}
+          />}
       </div>
     </div>
   );

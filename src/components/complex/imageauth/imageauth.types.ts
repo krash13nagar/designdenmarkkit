@@ -55,7 +55,15 @@ export interface ImageAuthoringProps
   showActivationStatusEditIcon?: boolean,
   onActivationStatusEditIconClick?: MouseEventHandler<HTMLButtonElement>,
   activationStatusEditIconTitle?: string,
-  parentMsid?: string
+  parentMsid?: string,
+  footerCheckBoxList?: {
+    label: string,
+    id: string,
+    disabled?: boolean,
+    hide?: boolean,
+    checked?: boolean,
+  }[],
+  onFooterCheckBoxChange?: (checkbox: { index: number | string, id: string, checked: boolean }) => void
 }
 
 export interface ActionButton {

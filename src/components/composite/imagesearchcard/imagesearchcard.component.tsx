@@ -3,25 +3,22 @@ import cssClassName from './imagesearchcard.module.scss';
 import { DenCard, DenCardActions, DenCardMedia } from '../../common';
 import { calculateFromNow, cleanHTML } from '../../../utility/utils';
 import ImageSearchCardHoverDetails from './imagesearchcardhover.component';
-import { ClickAwayListener } from '@mui/material';
+
 import clsx from 'clsx';
 import {
-  imageCardMenuOptionsConfig,
   imageSearchCardConfig,
 } from './imagesearchcard.types';
 
-export const ImageSearchCard = (props: imageSearchCardConfig) => {
+export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, ref: React.MutableRefObject<any>) => {
   const isShowResolution = true;
   const {
     msid,
     type,
     name,
     agencyName,
-    entityType,
     fromNow,
     imageUrl,
     dataSource,
-    imageSource,
     resolution,
     ingestionDate,
     classes = {},
@@ -31,10 +28,8 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
     ingestionDateTimestamp,
     onCallbackSelectImagefnc,
     cardStyle = 'standard',
+    onCardClick = () => { }
   } = props;
-
-  const [showCardMenu, setShowCardMenu] = useState(false);
-  const [cardMenuBtnClass, setCardMenuBtnClass] = useState('');
 
   const fromNowText = useMemo(() => {
     return (
@@ -49,40 +44,30 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
   };
   changeVariantClassName(variant);
 
-  const handleShowCardMenu = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setShowCardMenu(!showCardMenu);
-    if (e.currentTarget) {
-      var list = e.currentTarget.closest('.cds-imagesearchCardWrapper');
-      if (list) {
-        var menuBtnRect = e.currentTarget.getBoundingClientRect();
-        var listRect = list.getBoundingClientRect();
-        if (listRect.right - menuBtnRect.right < 200) {
-          var shiftToLeft = true;
-          setCardMenuBtnClass('shiftToLeft');
-        } else if (listRect.bottom - menuBtnRect.bottom < 120) {
-          if (shiftToLeft) {
-            setCardMenuBtnClass('shiftToLeft shiftToTop');
-          } else {
-            setCardMenuBtnClass('shiftToTop');
-          }
-        } else {
-          setCardMenuBtnClass('');
-        }
-      }
-    }
-  };
-
-  const handleOnCardMenuClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    item: imageCardMenuOptionsConfig
-  ) => {
-    if (item.onClickFnc) {
-      item.onClickFnc(e);
-      setShowCardMenu(false);
-    }
-  };
+  // const handleShowCardMenu = (
+  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) => {
+  //   setShowCardMenu(!showCardMenu);
+  //   if (e.currentTarget) {
+  //     var list = e.currentTarget.closest('.cds-imagesearchCardWrapper');
+  //     if (list) {
+  //       var menuBtnRect = e.currentTarget.getBoundingClientRect();
+  //       var listRect = list.getBoundingClientRect();
+  //       if (listRect.right - menuBtnRect.right < 200) {
+  //         var shiftToLeft = true;
+  //         setCardMenuBtnClass('shiftToLeft');
+  //       } else if (listRect.bottom - menuBtnRect.bottom < 120) {
+  //         if (shiftToLeft) {
+  //           setCardMenuBtnClass('shiftToLeft shiftToTop');
+  //         } else {
+  //           setCardMenuBtnClass('shiftToTop');
+  //         }
+  //       } else {
+  //         setCardMenuBtnClass('');
+  //       }
+  //     }
+  //   }
+  // };;
 
   return (
     <div className={cssClassName[variantClassName]}>
@@ -91,9 +76,8 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
         id={`vs-item-${msid}`}
         key={msid}
         className={clsx(cssClassName['default-card-wrapper'], classes?.root)}
-        onMouseLeave={() => {
-          setShowCardMenu(false);
-        }}
+        ref={ref}
+        onClick={onCardClick}
       >
         <div
           aria-describedby="order of section children"
@@ -125,11 +109,10 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
             component="img"
             title={name}
             classes={{
-              img: `${
-                isShowResolution
-                  ? clsx(cssClassName['newCardMedia-image'], classes?.root)
-                  : cssClassName['cardMedia-image']
-              }`,
+              img: `${isShowResolution
+                ? clsx(cssClassName['newCardMedia-image'], classes?.root)
+                : cssClassName['cardMedia-image']
+                }`,
             }}
             onError={(e) => {
               // ImageUtils.imageFallback(src, type).then(function (url) {
@@ -158,11 +141,11 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
               ingestionDate={ingestionDate}
               resolution={resolution}
               agencyUsageData={{}}
-              onCallbackMenufnc={handleShowCardMenu}
               onCallbackSelectImagefnc={onCallbackSelectImagefnc}
               actionButtonsList={actionButtonsList}
               ingestionDateTimestamp={ingestionDateTimestamp}
               cardStyle={cardStyle}
+              imageCardMenuOptions={imageCardMenuOptions}
             />
           )}
         </div>
@@ -191,41 +174,8 @@ export const ImageSearchCard = (props: imageSearchCardConfig) => {
             </div>
           </DenCardActions>
         )}
-        {isShowResolution && showCardMenu && (
-          <ClickAwayListener
-            onClickAway={() => {
-              setShowCardMenu(false);
-            }}
-          >
-            <div
-              className={`${cssClassName['card-menu']} ${cssClassName[cardMenuBtnClass]}`}
-            >
-              {imageCardMenuOptions?.map((cardMenuItem, index) => {
-                return (
-                  <>
-                    <div
-                      className={cssClassName['card-menu-item']}
-                      key={index}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOnCardMenuClick(e, cardMenuItem);
-                      }}
-                    >
-                      <span
-                        className={`${cssClassName['menu-icon']} ${cssClassName['mr6']}`}
-                      >
-                        {cardMenuItem.icon}
-                      </span>
-                      {cardMenuItem.label}
-                    </div>
-                  </>
-                );
-              })}
-            </div>
-          </ClickAwayListener>
-        )}
       </DenCard>
     </div>
   );
-};
+})
 export default ImageSearchCard;

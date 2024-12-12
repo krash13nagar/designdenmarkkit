@@ -414,7 +414,51 @@ const App = (props: AppProps) => {
       setImageCaption(str);
     },
   };
-  const testConfig = { ...test, keywordConfig: kewordConfig };
+
+  const [footerCheckBoxList, setFooterCheckBoxList] = useState([
+    {
+      label: 'Set as Thumbnail',
+      id: 'setasthumb',
+      checked: false,
+    },
+    {
+      label: 'Embed in body',
+      id: 'embedinbody',
+      checked: false,
+    },
+    {
+      label: 'Add as Related',
+      id: 'addasrelated',
+      checked: false,
+    },
+  ]);
+
+  React.useEffect(() => {
+    console.log(footerCheckBoxList);
+
+    // return () => {
+    //   second
+    // }
+  }, [footerCheckBoxList]);
+
+  const testConfig = {
+    ...test,
+    keywordConfig: kewordConfig,
+    footerCheckBoxList: footerCheckBoxList,
+    onFooterCheckBoxChange: ({
+      checked,
+      index,
+    }: {
+      checked: boolean;
+      index: number | string;
+    }) => {
+      setFooterCheckBoxList((list) => {
+        const newList = [...list];
+        newList[index as number].checked = checked;
+        return newList;
+      });
+    },
+  };
   const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
   return (
