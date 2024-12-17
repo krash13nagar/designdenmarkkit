@@ -14,7 +14,7 @@ import DenBox from '../box/box.component';
 
 const AutoCompleteInputBase = (
   props: AutocompleteInputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.MutableRefObject<unknown>
 ) => {
   const _id = props.id;
   const readOnly = props.isReadOnly;
@@ -35,6 +35,7 @@ const AutoCompleteInputBase = (
     childError = {},
     nowrap = false,
     shrinkLabel = false,
+    noBorder = false
   } = props;
   const [value, setValues] = useState([]);
   const [inputValue, setInputValue] = React.useState('');
@@ -124,9 +125,9 @@ const AutoCompleteInputBase = (
           className={
             props.hideSearchIcon
               ? 'customAutoComplete ' +
-                props.title.replace(/\s/g, '').toLowerCase()
+              props.title.replace(/\s/g, '').toLowerCase()
               : 'customAutoComplete  hideSearchIcon ' +
-                props.title.replace(/\s/g, '').toLowerCase()
+              props.title.replace(/\s/g, '').toLowerCase()
           }
           classes={{
             root: 'denLabel',
@@ -172,6 +173,13 @@ const AutoCompleteInputBase = (
                     event.stopPropagation();
                   }
                 }}
+                {...(noBorder && {
+                  sx: {
+                    "& .cds-MuiOutlinedInput-notchedOutline": {
+                      border: "0px !important",
+                    }
+                  }
+                })}
               />
               <span className="helper-text">{helperText}</span>
             </>
