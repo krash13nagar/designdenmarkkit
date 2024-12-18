@@ -22,7 +22,7 @@ export const ImageSearchCardHoverDetails = (
     onCallbackMenufnc,
     onCallbackSelectImagefnc,
     ingestionDateTimestamp,
-    actionButtonsList = [],
+    actionButtonsList,
     cardStyle = 'standard',
     imageCardMenuOptions = []
   } = props;
@@ -189,7 +189,7 @@ export const ImageSearchCardHoverDetails = (
                 {btn.label}
               </DenButton>
             ))}
-          {!actionButtonsList?.length && (
+          {!actionButtonsList && (
             <div onClick={handleSelectImage}>
               <button
                 className={`${style['btn']} ${style['primaryButton-cds']}`}

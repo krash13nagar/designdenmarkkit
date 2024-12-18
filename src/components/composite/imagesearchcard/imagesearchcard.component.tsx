@@ -24,7 +24,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
     classes = {},
     variant = '',
     imageCardMenuOptions,
-    actionButtonsList = [],
+    actionButtonsList,
     ingestionDateTimestamp,
     onCallbackSelectImagefnc,
     cardStyle = 'standard',
