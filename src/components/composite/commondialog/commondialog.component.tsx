@@ -31,7 +31,7 @@ export const CommonDialog = React.forwardRef<
   const {
     classes = {},
     open,
-    handleClose = () => {},
+    handleClose = () => { },
     title = '',
     content = '',
     titleVariant = 'plain',
@@ -50,9 +50,8 @@ export const CommonDialog = React.forwardRef<
       ref={ref}
       open={open}
       onClose={handleClose}
-      className={`${classes?.root ? classes.root : ''} ${
-        styles.commonDialogRoot
-      } ${container ? styles.absolutePos : ''}`}
+      className={`${classes?.root ? classes.root : ''} ${styles.commonDialogRoot
+        } ${container ? styles.absolutePos : ''}`}
       slotProps={{
         backdrop: { classes: { root: styles.absolutePos || '' } },
       }}
@@ -73,9 +72,9 @@ export const CommonDialog = React.forwardRef<
           classes={{ root: styles.titleRootContained }}
           {...dialogTitleProps}
         >
-          <DenTypography className={styles.titletext} variant="h6">
+          <div className={styles.titletext}>
             {props.title}
-          </DenTypography>
+          </div>
           <DenIconButton
             className={styles.titleicon}
             style={{ color: '#fff' }}

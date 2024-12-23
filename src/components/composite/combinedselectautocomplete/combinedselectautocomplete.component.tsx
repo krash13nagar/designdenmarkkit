@@ -6,6 +6,7 @@ import { styled } from "@mui/system";
 import { AutoCompleteInput, DenBox, DenFormControl, DenInputLabel, DenMenuItem, DenSelect } from "../../common";
 import { AutocompleteInputProps } from "../../common/autocompleteinput/autocompleteinput.types";
 import './combinedselectautocomplete.styles.scss'
+import clsx from "clsx";
 
 interface BoxWithFocus extends BoxProps {
     focused?: boolean,
@@ -29,7 +30,11 @@ export interface CombinedSelectAutocompleteProps {
     selectedDropdownValue?: string,
     onDropdownSelect?: (event: any) => void,
     dropdownDisabled?: boolean,
-    dropdownOptions?: { label?: string, value: string }[]
+    dropdownOptions?: { label?: string, value: string }[],
+    classes?: {
+        list?: string,
+        paper?: string
+    }
 }
 
 export const CombinedSelectAutocomplete = React.forwardRef(({
@@ -40,7 +45,8 @@ export const CombinedSelectAutocomplete = React.forwardRef(({
     selectedDropdownValue = "",
     onDropdownSelect = () => { },
     dropdownDisabled = false,
-    dropdownOptions = []
+    dropdownOptions = [],
+    classes = {}
 }: CombinedSelectAutocompleteProps, ref: React.MutableRefObject<unknown>) => {
 
     const [focused, setFocused] = useState(false);
@@ -91,6 +97,12 @@ export const CombinedSelectAutocomplete = React.forwardRef(({
                         className="cds-combined-selector-root"
                         displayEmpty
                         disableUnderline
+                        MenuProps={{
+                            classes: {
+                                list: clsx("cds-combined-selector-list-root", classes.list),
+                                paper: clsx("cds-combined-selector-paper-root", classes.paper)
+                            }
+                        }}
                         renderValue={(option: any) => {
                             if (!option) {
                                 return <span>Select</span>;
