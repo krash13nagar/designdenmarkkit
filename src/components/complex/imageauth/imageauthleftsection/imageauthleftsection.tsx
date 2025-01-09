@@ -12,7 +12,7 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
   metaInformation = [],
   classes = {},
   imageCTAs = [],
-  handleItemClick = () => {},
+  handleItemClick = () => { },
   metaClassName = '',
   metaColumnCount = 4,
   imageError,
@@ -28,7 +28,7 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
         </div>
       )}
       <div className={style.idWrapper}>
-        <KeyValueCopy keyText="ID : " valueText={msid || 'New'} />
+        <KeyValueCopy keyText="ID : " valueText={msid || 'New'} showCopy={!!msid} />
         {parentMsid ? (
           <div className={style.parentMsidWrapper}>
             <div className={style.separator}></div>
