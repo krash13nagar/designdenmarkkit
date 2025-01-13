@@ -173,6 +173,7 @@ const AutoCompleteInputBase = (
                     event.stopPropagation();
                   }
                 }}
+                error={!noBorder && isError}
                 {...(noBorder && {
                   sx: {
                     "& .cds-MuiOutlinedInput-notchedOutline": {
