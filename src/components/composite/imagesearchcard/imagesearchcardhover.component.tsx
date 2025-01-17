@@ -118,12 +118,10 @@ export const ImageSearchCardHoverDetails = (
         )}
         {cardStyle == 'minimal' && (
           <div className={`${style['mb7']} ${style['vc-ellipsis']}`}>
-            {agencyName && (
-              <span title={`Agency:${agencyName}`}>
-                <span className={style['secondaryText']}>{agencyName}</span>
-              </span>
-            )}
-            {agencyName && resolution && (
+            <span title={`Agency:${agencyName || "NA"}`}>
+              <span className={style['secondaryText']}>{agencyName || "Agency:NA"}</span>
+            </span>
+            {resolution && (
               <span className={style['secondaryText']}> | </span>
             )}
             {resolution && (
