@@ -10,13 +10,13 @@ import clsx from "clsx";
 
 interface BoxWithFocus extends BoxProps {
     focused?: boolean,
-    isError?: boolean
+    iserror?: boolean
 }
 
-const HighlightContainer = styled(DenBox)<BoxWithFocus>(({ theme, focused, isError }) => ({
+const HighlightContainer = styled(DenBox)<BoxWithFocus>(({ theme, focused, iserror }) => ({
     display: "flex",
     alignItems: "center",
-    border: `${isError ? "1px solid red !important" : (focused ? "1px solid #0F89FF !important" : "1px solid #E5E9ED")}`,
+    border: `${iserror ? "1px solid red !important" : (focused ? "1px solid #0F89FF !important" : "1px solid #E5E9ED")}`,
     borderRadius: theme.shape.borderRadius,
     transition: "border-color 0.3s",
     padding: 0,
@@ -82,7 +82,7 @@ export const CombinedSelectAutocomplete = React.forwardRef(({
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 tabIndex={-1}
-                isError={isError}
+                iserror={isError}
                 sx={{
                     "&:hover": {
                         borderColor: "rgba(0, 0, 0, 0.87)",

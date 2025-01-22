@@ -187,7 +187,7 @@ const AutoCompleteInputBase = (
           )}
         />
       </div>
-      {isError ? (
+      {(isError && errorMessage) ? (
         <DenBox sx={{ pt: '2px' }} className="has-error">
           {errorMessage}
         </DenBox>
