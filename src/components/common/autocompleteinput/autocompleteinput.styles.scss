@@ -74,7 +74,7 @@
                 //     }
                 // }
 
-                .Mui-error {
+                &.Mui-error {
                     [class*="MuiOutlinedInput-notchedOutline"] {
                         border-color: 1px solid red;
                     }
