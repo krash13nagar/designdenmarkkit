@@ -20,7 +20,7 @@ export const StatusActiveIcon = (props: Partial<SVGTypes>) => (
       <g
         id="Top-nav-bar"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
         fillRule="evenodd"
       >
@@ -29,8 +29,8 @@ export const StatusActiveIcon = (props: Partial<SVGTypes>) => (
           <g
             id="Group-10"
             transform="translate(3.399994, 4.500000)"
-            stroke-linecap="square"
-            stroke-width="1.5"
+            strokeLinecap="square"
+            strokeWidth="1.5"
           >
             <path
               d="M0.590909091,2.95454545 L2.36363636,4.72727273"

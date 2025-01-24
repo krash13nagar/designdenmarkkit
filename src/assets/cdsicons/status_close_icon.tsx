@@ -29,8 +29,8 @@ export const StatusCloseIcon = (props: Partial<SVGTypes>) => (
           <g
             id="Group-10"
             transform="translate(4.500000, 5.000000)"
-            stroke-linecap="square"
-            stroke-width="1.5"
+            strokeLinecap="square"
+            strokeWidth="1.5"
           >
             <path
               d="M0.590909091,0.590909091 L4.13636364,4.13636364"

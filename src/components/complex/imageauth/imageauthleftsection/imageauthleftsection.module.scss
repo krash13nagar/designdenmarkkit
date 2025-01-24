@@ -44,7 +44,7 @@
             object-fit: contain;
             max-height: 100%;
             max-width: 100%;
-
+            word-break: break-all;
             transition: aspect-ratio 2s ease-out;
         }
     }

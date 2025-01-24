@@ -42,6 +42,7 @@ export const ImageAuthLeftSection: FC<ImageAuthLeftSectionProps> = ({
         imageClassName={style['image']}
         autoImageDimensions={false}
         showIconMenu
+        alt={src}
         CTAs={imageCTAs}
         handleItemClick={handleItemClick}
       />
