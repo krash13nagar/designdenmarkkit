@@ -28,6 +28,8 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
     showEditIcon = false,
     onEditIconClick = () => {},
     editIconTitle = '',
+    editIconClass='',
+    activationMenuClick = () => {},
   } = props;
   /**
    *
@@ -87,6 +89,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
             <DenMenuItem
               key={index}
               value={item.value}
+              onClick={(event)=>{activationMenuClick(event, item.value)}}
               className={
                 'activation-status-menu-item status-' + item.title.toLowerCase()
               }
@@ -112,6 +115,7 @@ export const ActivationStatus = (props: ActivattionStatusProps) => {
           disableRipple
           title={editIconTitle}
           onClick={onEditIconClick}
+          className={editIconClass}
         >
           <CreateIcon htmlColor="#0E88ff" width="14px" height="14px" />
         </DenIconButton>
