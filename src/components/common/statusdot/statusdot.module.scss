@@ -11,3 +11,37 @@
     }
 
 }
+
+.status-dot {
+    border-radius: 50%;
+    display: inline-block;
+
+    &.status-inactive {
+        background-color: #f85454;
+    }
+
+    &.status-active {
+        background-color: #38E53F;
+    }
+
+    &.status-pending_for_approval,
+    &.status-pending {
+        background-color: #f3a94d;
+    }
+
+    &.status-closed {
+        background-color: #333333;
+    }
+
+    &.status-unavailable {
+        background-color: #715cc0;
+    }
+
+    &.status-removed {
+        background-color: #ff0505;
+    }
+
+    &.status-ignore {
+        background-color: #4277BC;
+    }
+}
