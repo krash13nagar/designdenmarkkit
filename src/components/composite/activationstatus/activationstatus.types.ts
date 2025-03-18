@@ -15,5 +15,7 @@ export interface ActivattionStatusProps {
   menuItemClass?: string,
   showEditIcon?: boolean,
   onEditIconClick?: MouseEventHandler<HTMLButtonElement>,
-  editIconTitle?: string
+  editIconTitle?: string,
+  editIconClass?: string,
+  activationMenuClick?: (event:React.MouseEvent<HTMLLIElement, MouseEvent>, value: any) => void;
 }
