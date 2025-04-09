@@ -35,10 +35,17 @@ const AutoCompleteInputBase = (
     childError = {},
     nowrap = false,
     shrinkLabel = false,
-    noBorder = false
+    noBorder = false,
+    inputValueProp = null,
+    setInputValueProp = null
   } = props;
   const [value, setValues] = useState([]);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValueState, setInputValueState] = React.useState('');
+
+  const inputValue = inputValueProp || inputValueState;
+  const setInputValue = setInputValueProp || setInputValueState;
+
+
   const [open, setOpen] = React.useState(false);
 
   const loading = open;

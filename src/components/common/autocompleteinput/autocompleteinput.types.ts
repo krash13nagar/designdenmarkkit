@@ -17,6 +17,8 @@ export interface AutocompleteInputProps {
     hideSearchIcon?: boolean,
     renderTags?: AutocompleteProps<any, any, any, any, any>["renderTags"],
     renderOptions?: AutocompleteProps<any, any, any, any, any>["renderOption"],
+    inputValueProp?: string | null,
+    setInputValueProp?: Function | null,
     required?: boolean
     classes?: AutocompleteProps<any, any, any, any, any>["classes"],
     wrapperClass?: string,

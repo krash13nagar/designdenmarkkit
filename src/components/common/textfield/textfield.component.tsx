@@ -29,15 +29,17 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
       wrapperClass = '',
       labelClass = '',
       valueClass = '',
-      onChange = () => {},
+      onChange = () => { },
       disabled = false,
       showLabel = true,
       InputProps = {},
       errorText = '',
       shrinkLabel = false,
-      onBlur = () => {},
-      onClick = () => {},
-      onKeyDown = () => {},
+      onBlur = () => { },
+      onClick = () => { },
+      onKeyDown = () => { },
+      noBorder = false,
+      isError = false,
     } = props;
 
     const { classes: valueClasses = {}, ...restValueProps } = valueProps;
@@ -91,6 +93,14 @@ export const DenTextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
           onClick={onClick}
           onBlur={onBlur}
           onKeyDown={onKeyDown}
+          error={!noBorder && isError}
+          {...(noBorder && {
+            sx: {
+              "& .cds-MuiOutlinedInput-notchedOutline": {
+                border: "0px !important",
+              }
+            }
+          })}
         />
         {errorText && <div className="has-error"> {errorText} </div>}
       </DenFormControl>
