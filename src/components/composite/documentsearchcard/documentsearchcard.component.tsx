@@ -82,6 +82,8 @@ export const DocumentSearchCard = React.forwardRef((props: documentSearchCardCon
             actionButtonsList={actionButtonsList}
             cardMenuOptions={cardMenuOptions}
             handleOpenInNew={handleOpenInNew}
+            title={title}
+            subtitle={subtitle}
           />
         </div>
       </DenCard>

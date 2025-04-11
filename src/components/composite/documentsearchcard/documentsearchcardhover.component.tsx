@@ -6,6 +6,7 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import { DenNestedMenu } from '../nestedmenu/nestedmenu';
 import { renderMenu } from '../../../utility/utils';
 import OpenInNewIcon from '../../../assets/cdsicons/openinnewicon';
+import clsx from 'clsx';
 
 export const DocumentSearchCardHoverDetails = (
   props: documentSearchCardHoverConfig
@@ -13,7 +14,9 @@ export const DocumentSearchCardHoverDetails = (
   const {
     actionButtonsList,
     cardMenuOptions = [],
-    handleOpenInNew
+    handleOpenInNew,
+    title,
+    subtitle
   } = props;
 
 
@@ -23,6 +26,12 @@ export const DocumentSearchCardHoverDetails = (
 
   return (
     <div className={`${style['card-reveal']} ${style['card-reveal-show']}`}>
+      <div className={style['card-details']}>
+        <div title={title} className={style['hover-title']}>
+          {title}
+        </div>
+        {subtitle && <div title={subtitle} className={clsx(style['hover-title'], style['hover-subtitle'])}>{subtitle}</div>}
+      </div>
       <div className={style['card-hover-footer']}>
         <div className={style['card-footer-btn-wrapper']}>
           {actionButtonsList?.length > 0 &&
@@ -62,8 +71,8 @@ export const DocumentSearchCardHoverDetails = (
           />}
         {
           handleOpenInNew &&
-          <DenIconButton onClick={handleOpenInNew} disableRipple>
-            <OpenInNewIcon htmlColor='#FFFFFF' width={16} height={16} />
+          <DenIconButton onClick={handleOpenInNew} disableRipple title={"Open in new tab"}>
+            <OpenInNewIcon htmlColor='#FFFFFF' hoverHtmlColor='#0F89FF' width={16} height={16} />
           </DenIconButton>
         }
       </div>

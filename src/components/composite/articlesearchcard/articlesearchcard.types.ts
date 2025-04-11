@@ -48,5 +48,7 @@ export interface articleSearchCardHoverConfig {
     cardStyle?: articleSearchCardConfig['cardStyle'],
     cardMenuOptions?: articleCardMenuOptionsConfig[],
     showCardMenu?: boolean,
-    handleOpenInNew?: () => void
+    handleOpenInNew?: () => void,
+    title?: string,
+    subtitle?: string
 }

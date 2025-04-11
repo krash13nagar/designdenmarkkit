@@ -82,6 +82,8 @@ export const ArticleSearchCard = React.forwardRef((props: articleSearchCardConfi
             actionButtonsList={actionButtonsList}
             cardMenuOptions={cardMenuOptions}
             handleOpenInNew={handleOpenInNew}
+            title={title}
+            subtitle={subtitle}
           />
         </div>
       </DenCard>
