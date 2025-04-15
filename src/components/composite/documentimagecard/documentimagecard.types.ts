@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 import { ActionButton } from "../../complex/imageauth/imageauth.types";
 
 export interface documentImageCardConfig {
-    name?: string,
-    agencyName?: string,
-    imageUrl?: string,
+    name: string,
+    agencyName: string,
+    imageUrl: string,
     classes?: {
         "root"?: string
     }
