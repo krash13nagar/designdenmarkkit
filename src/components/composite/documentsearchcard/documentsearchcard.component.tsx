@@ -27,7 +27,8 @@ export const DocumentSearchCard = React.forwardRef((props: documentSearchCardCon
     onCardClick = () => { },
     status,
     handleOpenInNew,
-    selected
+    selected,
+    type
   } = props;
 
   const fromNowText = useMemo(() => {
@@ -77,6 +78,7 @@ export const DocumentSearchCard = React.forwardRef((props: documentSearchCardCon
               {agencyName && fromNowText ? ' | ' : ''}
               {fromNowText}
             </DenBox>
+            {type && <DenBox className={cssClassName['card-type']}>{type}</DenBox>}
           </div>
           <DocumentSearchCardHoverDetails
             actionButtonsList={actionButtonsList}

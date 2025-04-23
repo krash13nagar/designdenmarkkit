@@ -207,9 +207,6 @@
     }
   }
 
-
-
-
   .card-footer {
     // position: absolute;
     // left: 0;
@@ -222,6 +219,15 @@
     display: flex;
     align-items: center;
     font: normal normal normal 12px "Source Sans 3";
+    justify-content: space-between;
+
+    .card-type {
+      margin-left: auto;
+      font: normal normal bold 10px/12px "Source Sans 3";
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     span {
       margin: 0;
