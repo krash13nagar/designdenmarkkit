@@ -72,12 +72,14 @@ export const DocumentSearchCard = React.forwardRef((props: documentSearchCardCon
           </div>
 
           <div className={cssClassName['card-footer']}>
-            {status && <StatusDotNew status={status} />}
-            <DenBox sx={{ ml: "3px" }} className={cssClassName['primaryText']}>
-              {agencyName ? agencyName : ''}
-              {agencyName && fromNowText ? ' | ' : ''}
-              {fromNowText}
-            </DenBox>
+            <div className={cssClassName['footer-left-content']}>
+              {status && <StatusDotNew status={status} />}
+              <DenBox sx={{ ml: "3px" }} className={cssClassName['primaryText']}>
+                {agencyName ? agencyName : ''}
+                {agencyName && fromNowText ? ' | ' : ''}
+                {fromNowText}
+              </DenBox>
+            </div>
             {type && <DenBox className={cssClassName['card-type']}>{type}</DenBox>}
           </div>
           <DocumentSearchCardHoverDetails
