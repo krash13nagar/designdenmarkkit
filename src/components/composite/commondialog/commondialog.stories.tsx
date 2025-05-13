@@ -12,19 +12,19 @@ type Story = StoryObj<typeof CommonDialog>;
 export const Basic: Story = {
   args: {
     open: true,
-    handleClose: () => {},
+    handleClose: () => { },
     title: 'Warning!',
     content:
       'If you proceed to the previous page, your current selection will be lost. Are you sure you want to continue?',
     actionOptionsList: [
       {
-        onClick: () => {},
+        onClick: () => { },
         label: 'Yes',
         variant: 'outlined',
         color: 'error',
       },
       {
-        onClick: () => {},
+        onClick: () => { },
         label: 'No',
         variant: 'contained',
         color: 'primary',
@@ -32,3 +32,31 @@ export const Basic: Story = {
     ],
   },
 };
+
+export const Confirmation: Story = {
+  args: {
+    open: true,
+    renderAtTop: true,
+    handleClose: () => { },
+    title: 'Warning!',
+    showCloseIconForPlainTitle: true,
+    content:
+      'If you proceed to the previous page, your current selection will be lost. Are you sure you want to continue?',
+    actionOptionsList: [
+      {
+        onClick: () => { },
+        label: 'Yes',
+        variant: 'outlined',
+        color: 'error',
+      },
+      {
+        onClick: () => { },
+        label: 'No',
+        variant: 'contained',
+        color: 'primary',
+      },
+    ],
+  },
+};
+
+

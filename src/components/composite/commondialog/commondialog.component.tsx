@@ -44,6 +44,7 @@ export const CommonDialog = React.forwardRef<
     container = null,
     children,
     actionChildren = null,
+    showCloseIconForPlainTitle = false,
   } = props;
   return (
     <DenDialog
@@ -65,6 +66,15 @@ export const CommonDialog = React.forwardRef<
           {...dialogTitleProps}
         >
           {title}
+          {showCloseIconForPlainTitle && <DenIconButton
+            className={styles.titleicon}
+            aria-label="close"
+            onClick={(e: React.MouseEvent) => {
+              handleClose(e);
+            }}
+          >
+            <Close />
+          </DenIconButton>}
         </DenDialogTitle>
       )}
       {title && titleVariant == 'contained' && (

@@ -27,5 +27,6 @@ export interface CommonDialogProps {
     actionOptionsList?: ActionOptions[],
     renderAtTop?: boolean,
     container?: DialogProps['container'],
-    actionChildren?: ReactNode
+    actionChildren?: ReactNode,
+    showCloseIconForPlainTitle?: boolean
 }
