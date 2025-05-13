@@ -24,7 +24,7 @@ export interface documentSearchCardConfig {
     ImageFallback?: ReactNode,
     status?: string,
     handleOpenInNew?: () => void,
-    selected?: boolean
+    selected?: boolean,
 }
 
 export interface documentCardMenuOptionsConfig {

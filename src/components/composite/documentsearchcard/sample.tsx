@@ -69,7 +69,8 @@ export const documentsearchcardSample = {
         onClick: () => { console.log("Embed in body clicked!") }
     }
     ],
-    status: 'ACTIVE'
+    status: 'ACTIVE',
+    type: 'PPT'
 }
 
 export const documentsearchcardSample2 = {
