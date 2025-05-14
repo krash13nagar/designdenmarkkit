@@ -54,6 +54,7 @@ export * from './textfield';
 export * from './defaulttextfield';
 export * from './box/box.component';
 export * from './dotloader';
+export * from './ellipsisloader';
 export * from './datecalendar/datecalendar.component';
 export * from './svgicon';
 export * from './formcontrollabel/formcontrolllabel.component';
