@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DenGrid, DenIconButton } from '../../common';
+import { DenGrid, DenIconButton, DenTypography } from '../../common';
 import styles from './recommended.keywords.module.scss';
 import { addedKeywords, keywordsConfig } from './keywords.types';
 import _ from 'lodash';
@@ -47,13 +47,14 @@ export const Keywords = (props : keywordsConfig) => {
                   <div className={styles.keywordflexContainer}>
                     <div className={styles.removeIcondiv}>
                       <DenIconButton
+                        sx={{paddingTop:0}}
                         size="small"
                         onClick={() => { handlerConfig.removeLinkConfig.callbackFn(index, item.relevance) }}
                       >
                         {handlerConfig.removeLinkConfig.removeIcon}
                       </DenIconButton>
-                      <div>
-                        <div className={styles.keywordName}>{item.keywordName}</div>
+                      <div className={styles.keywordNSrcWrapper}>
+                        <DenTypography title={item.keywordName} component="div" noWrap={true} className={styles.keywordName}>{item.keywordName}</DenTypography>
                         <div className={styles.keywordDetails}>
                           {item.source}
                         </div>

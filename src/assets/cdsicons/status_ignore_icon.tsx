@@ -50,8 +50,8 @@ export const StatusIgnoreIcon = (props: Partial<SVGTypes>) => (
                 transform="matrix(0.839, 0.545, -0.545, 0.839, 6934.479, 9435.154)"
                 fill="none"
                 stroke="#4277bc"
-                stroke-linecap="round"
-                stroke-width="8"
+                strokeLinecap="round"
+                strokeWidth="8"
               />
               <rect
                 id="Rectangle_1909"
@@ -66,8 +66,8 @@ export const StatusIgnoreIcon = (props: Partial<SVGTypes>) => (
                 data-name="IGNORE"
                 transform="translate(6919.873 9481.459) rotate(-20)"
                 fill="#f7f7f7"
-                font-size="12"
-                font-family="SourceSansPro-Regular, Source Sans Pro"
+                fontSize="12"
+                fontFamily="SourceSansPro-Regular, Source Sans Pro"
               >
                 <tspan x="0" y="0">
                   IGNORE

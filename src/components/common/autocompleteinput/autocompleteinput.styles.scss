@@ -39,9 +39,9 @@
                 }
 
                 &.autocompleteIcon {
-                    position: absolute;
-                    right: 0px;
-                    bottom: 1.1rem;
+                    // position: absolute;
+                    // right: 0px;
+                    // bottom: 1.1rem;
 
                     .opacity {
                         opacity: 0.4;
@@ -56,21 +56,27 @@
             }
 
             [class*="MuiAutocomplete-inputRoot"][class*="MuiOutlinedInput-root"] {
-                min-height: 32px;
+                // min-height: 32px;
 
 
-                [class*="MuiAutocomplete-tag"] {
-                    max-width: calc(16.071rem - 6px);
-                    height: 2rem;
+                // [class*="MuiAutocomplete-tag"] {
+                //     max-width: calc(16.071rem - 6px);
+                //     height: 2rem;
 
-                    [class*="MuiChip-icon"] {
-                        width: 22px;
-                        margin-left: 2px;
-                    }
+                //     [class*="MuiChip-icon"] {
+                //         width: 22px;
+                //         margin-left: 2px;
+                //     }
 
-                    svg {
-                        width: 1.286rem;
-                        height: 1.286rem;
+                //     svg {
+                //         width: 1.286rem;
+                //         height: 1.286rem;
+                //     }
+                // }
+
+                &.Mui-error {
+                    [class*="MuiOutlinedInput-notchedOutline"] {
+                        border-color: red;
                     }
                 }
 
@@ -93,7 +99,7 @@
         }
 
         .helper-text {
-            font-size: 10px;
+            font-size: 12px;
             opacity: 0.6;
         }
 

@@ -1,0 +1,30 @@
+.keyValueCopyRoot {
+    display: flex;
+    align-items: center;
+
+    .keyText {
+        background: #EBEDEF;
+        color: #4D4D4D;
+        // border-radius: 2px 0px 0px 2px;
+        font: normal normal 600 14px/18px "Source Sans 3";
+        padding: 0px 4px;
+    }
+
+    .keyValueWrapper {
+        border-radius: 2px;
+        border: 1px solid #EBEDEF;
+        display: flex;
+    }
+
+    .valueText {
+        background: #FFFFFF;
+        // border-radius: 0px 2px 2px 0px;
+        font: normal normal normal 14px/18px "Source Sans 3";
+        color: #2B2B2B;
+        padding: 0px 4px;
+    }
+
+    .cds-copy-icon-button-wrapper {
+        margin-left: 4px;
+    }
+}

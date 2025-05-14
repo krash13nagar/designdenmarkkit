@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { FC } from 'react';
-import { EditorTextField, LabelValue, TitleForUrl } from '../../../composite';
+import { EditorTextField, TitleForUrl } from '../../../composite';
 import style from './primarydataform.module.scss';
 import { PrimaryDataFormProps } from '../imageauth.types';
 import {
@@ -33,13 +33,6 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
 }) => {
   return (
     <div className={clsx(style['primary-data-wrapper'], classes.root)}>
-      <LabelValue
-        className={style['msid']}
-        valueProps={{ className: style['msidValue'] }}
-        label="MSID"
-        value={msid ?? 'New'}
-        seperator=":"
-      />
       <EditorTextField
         key={'title'}
         {...title}

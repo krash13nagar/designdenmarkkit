@@ -54,6 +54,7 @@ export * from './textfield';
 export * from './defaulttextfield';
 export * from './box/box.component';
 export * from './dotloader';
+export * from './ellipsisloader';
 export * from './datecalendar/datecalendar.component';
 export * from './svgicon';
 export * from './formcontrollabel/formcontrolllabel.component';
@@ -85,7 +86,9 @@ export * from './modal/modal.component';
 export * from './stack/stack.component';
 export * from './listitemtext/listitemtext.component';
 export * from './readmoreless/readmoreless.component';
-export * from './drawer/drawer.component'
+export * from './drawer/drawer.component';
+export * from './autocompleteinput/autocompleteinput.component';
+export * from './imagewithfallback/imagewithfallback'
 
 
 

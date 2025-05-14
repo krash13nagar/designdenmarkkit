@@ -20,7 +20,7 @@ export const StatusUnavailableIcon = (props: Partial<SVGTypes>) => (
       <g
         id="Top-nav-bar"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
         fillRule="evenodd"
       >
@@ -29,8 +29,8 @@ export const StatusUnavailableIcon = (props: Partial<SVGTypes>) => (
           <g
             id="Group-10"
             transform="translate(1.500000, 2.500000)"
-            stroke-linecap="square"
-            stroke-width="1.5"
+            strokeLinecap="square"
+            strokeWidth="1.5"
           >
             <path
               d="M1.45454545,0.472222222 L10.4545455,8.5"

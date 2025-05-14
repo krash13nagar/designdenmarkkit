@@ -1,16 +1,16 @@
 import { SelectChangeEvent } from '@mui/material';
 
-export interface PrimeCategory {
+export interface PrimeCategoryTypes {
   categoryId: number;
   category: string;
 }
 export interface Categories {
-  [key: string]: PrimeCategory[];
+  [key: string]: PrimeCategoryTypes[];
 }
 
 export interface PrimeCategoryProps {
   primeCategoryLabel: string;
-  primeCategories: PrimeCategory[];
+  primeCategories: PrimeCategoryTypes[];
   isPrimeEnable: boolean;
   primeType: number;
   isPublished: boolean;

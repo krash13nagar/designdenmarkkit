@@ -9,7 +9,14 @@ import ImageAuthLeftSection from './imageauthleftsection/imageauthleftsection';
 import ImageAuthRightSection from './imageauthrightsection/imageauthrightsection';
 import clsx from 'clsx';
 import './imageauth.styles.scss';
-import { DenBox, DenButton } from '../../common';
+import {
+  DenBox,
+  DenButton,
+  DenCheckbox,
+  DenFormControlLabel,
+} from '../../common';
+import DenFormGroup from '../../common/formgroup/formgroup.component';
+import { CheckboxTypes } from '../../common/checkbox/checkbox.types';
 
 export const ImageAuthoring = (props: ImageAuthoringProps) => {
   const {
@@ -17,6 +24,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     src,
     tabTitleList,
     msid,
+    parentMsid,
     title,
     titleForUrl,
     imageCaption,
@@ -31,6 +39,9 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatus,
     activationStatusOptions,
     activationStatusLabel,
+    showActivationStatusEditIcon = false,
+    onActivationStatusEditIconClick = () => {},
+    activationStatusEditIconTitle = '',
     keywordConfig,
     selectedTab = '',
     handleTabChange = () => {},
@@ -52,6 +63,8 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     MetadataComp,
     actionButtonsList = [],
     imageError,
+    footerCheckBoxList = [],
+    onFooterCheckBoxChange = () => {},
   } = props;
 
   return (
@@ -67,6 +80,8 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           metaClassName={metaClassName}
           metaColumnCount={metaColumnCount}
           imageError={imageError}
+          msid={msid}
+          parentMsid={parentMsid}
         />
         <ImageAuthRightSection
           tabTitleList={tabTitleList}
@@ -92,7 +107,51 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
         />
       </div>
       <Footer>
-        <DenBox sx={{ flex: 1 }}></DenBox>
+        <DenBox sx={{ flex: 1, pl: '8px !important' }}>
+          <DenFormGroup sx={{ flexDirection: 'row' }}>
+            {footerCheckBoxList?.length > 0 &&
+              footerCheckBoxList.map((chkbox, i) => {
+                if (!chkbox.hide) {
+                  return (
+                    <DenFormControlLabel
+                      key={(chkbox.id || i) as React.Key}
+                      sx={{
+                        marginLeft: '-11px !important',
+                        marginRight: '16px !important',
+                        '& .cds-MuiTypography-root': {
+                          font: "normal normal normal 12px/17px 'Source Sans 3'",
+                          color: '#4D4D4D',
+                        },
+                      }}
+                      classes={{ label: 'mediumText' }}
+                      control={
+                        <DenCheckbox
+                          sx={{
+                            padding: '4px',
+                            pl: '12px',
+                          }}
+                          disableRipple
+                          id={chkbox.id}
+                          onChange={(event) => {
+                            onFooterCheckBoxChange?.({
+                              id: chkbox.id,
+                              checked: event.target.checked,
+                              index: i,
+                            });
+                          }}
+                          checked={chkbox.checked}
+                          disabled={chkbox.disabled}
+                        />
+                      }
+                      label={chkbox.label}
+                      color="primary"
+                    />
+                  );
+                }
+                return null;
+              })}
+          </DenFormGroup>
+        </DenBox>
         <div className="image-auth-footer-wrapper">
           <PrimeCategory
             primeCategories={primeCategories}
@@ -108,6 +167,9 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
             activationChangeHandle={activationChangeHandle}
             activationStatus={activationStatus}
             activationStatusLabel={activationStatusLabel}
+            showEditIcon={showActivationStatusEditIcon}
+            onEditIconClick={onActivationStatusEditIconClick}
+            editIconTitle={activationStatusEditIconTitle}
           />
 
           <div className="cds-action-buttons-wrapper">

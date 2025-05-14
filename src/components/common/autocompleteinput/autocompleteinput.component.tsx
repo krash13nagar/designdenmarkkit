@@ -14,13 +14,13 @@ import DenBox from '../box/box.component';
 
 const AutoCompleteInputBase = (
   props: AutocompleteInputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.MutableRefObject<unknown>
 ) => {
   const _id = props.id;
   const readOnly = props.isReadOnly;
   const {
     options,
-    title,
+    title = '',
     limit,
     disabled,
     helperText,
@@ -35,9 +35,17 @@ const AutoCompleteInputBase = (
     childError = {},
     nowrap = false,
     shrinkLabel = false,
+    noBorder = false,
+    inputValueProp = null,
+    setInputValueProp = null
   } = props;
   const [value, setValues] = useState([]);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValueState, setInputValueState] = React.useState('');
+
+  const inputValue = inputValueProp || inputValueState;
+  const setInputValue = setInputValueProp || setInputValueState;
+
+
   const [open, setOpen] = React.useState(false);
 
   const loading = open;
@@ -124,9 +132,9 @@ const AutoCompleteInputBase = (
           className={
             props.hideSearchIcon
               ? 'customAutoComplete ' +
-                props.title.replace(/\s/g, '').toLowerCase()
+              props.title.replace(/\s/g, '').toLowerCase()
               : 'customAutoComplete  hideSearchIcon ' +
-                props.title.replace(/\s/g, '').toLowerCase()
+              props.title.replace(/\s/g, '').toLowerCase()
           }
           classes={{
             root: 'denLabel',
@@ -172,13 +180,21 @@ const AutoCompleteInputBase = (
                     event.stopPropagation();
                   }
                 }}
+                error={!noBorder && isError}
+                {...(noBorder && {
+                  sx: {
+                    "& .cds-MuiOutlinedInput-notchedOutline": {
+                      border: "0px !important",
+                    }
+                  }
+                })}
               />
               <span className="helper-text">{helperText}</span>
             </>
           )}
         />
       </div>
-      {isError ? (
+      {(isError && errorMessage) ? (
         <DenBox sx={{ pt: '2px' }} className="has-error">
           {errorMessage}
         </DenBox>

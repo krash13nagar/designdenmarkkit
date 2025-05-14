@@ -1,24 +1,26 @@
-.card-root{
+.card-root {
   overflow: unset !important;
 }
-.cardMedia-image{   
-    height: 5.357rem;
-    min-height: 5.357rem;
-    max-height: 100%;
-    object-fit: contain;
-    object-position: center center;
-    //background: rgba(255, 188, 0, 0.1);
-}
-.newCardMedia-image{
-    max-height: 100%;
-    object-fit: contain;
-    object-position: center center;
-    width: 100%;
-    height: 160px !important;
-    //background: rgba(255, 188, 0, 0.1); 
+
+.cardMedia-image {
+  height: 5.357rem;
+  min-height: 5.357rem;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  //background: rgba(255, 188, 0, 0.1);
 }
 
-.default-card-wrapper{
+.newCardMedia-image {
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  width: 100%;
+  height: 160px !important;
+  //background: rgba(255, 188, 0, 0.1); 
+}
+
+.default-card-wrapper {
   padding: 0px;
   width: inherit;
   position: relative;
@@ -41,38 +43,49 @@
     transition: all linear 0.1s;
     color: #fff;
     visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     .primaryText {
       font: normal normal bold 10px/12px "Source Sans 3";
-      color:#FFF;
+      color: #FFF;
     }
+
     .secondaryText {
       font: normal normal normal 10px/12px "Source Sans 3";
-      color:#FFF;
+      color: #FFF;
     }
+
     .agencyQuota {
       color: #000000;
       background-color: #FFC700;
-      border-radius:2px;
+      border-radius: 2px;
       display: inline-block;
-      padding:2px 2px;
+      padding: 2px 2px;
+
       &.agency-red {
-        color:#000000;
+        color: #000000;
         background-color: #E31628;
       }
+
       &.agency-yellow {
-        color:#000000;
+        color: #000000;
         background-color: #FFC700;
       }
+
       &.agency-green {
-        color:#3CB2A4;
+        color: #3CB2A4;
         background-color: transparent;
       }
+
       &.agency-unlimited {
         font-style: italic;
         color: #FFF;
-        background-color:transparent;
+        background-color: transparent;
       }
     }
+
     .img_title {
       display: -webkit-box;
       white-space: normal;
@@ -84,107 +97,119 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
+
     .card-title {
       font-size: 14px;
     }
   }
- 
-   &:hover{
+
+  &:hover {
     .card-hover-details {
-         transform: scaleY(1);
-         visibility: visible;
-         height: 100%;
-         position: absolute;
-         background: rgba($color: #000000, $alpha: 0.5);
-         width: 100%;
-         
-     }
-     .card-reveal {
-        opacity: 1;
-        visibility: visible;
-        animation: flipbottomtop 1s;
-      }
-      .new-resolution {
-        display: none !important;
-      }
-   }
+      transform: scaleY(1);
+      visibility: visible;
+      height: 100%;
+      position: absolute;
+      background: rgba($color: #000000, $alpha: 0.5);
+      width: 100%;
+
+    }
+
+    .card-reveal {
+      opacity: 1;
+      visibility: visible;
+      animation: flipbottomtop 1s;
+    }
+
+    .new-resolution {
+      display: none !important;
+    }
+  }
 
 }
 
-.image-with-resolution-wrapper{
+.image-with-resolution-wrapper {
   position: relative;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 4px;
-  .resolution{
-      position: absolute;
-      bottom: 0;
-      text-align: start;
-      left: 0;
-      color: white;
-      background-color: #959292;
-      position: absolute;
-      font-size: 10px;
-      padding: 0 5px;
-      letter-spacing: 0.6px;
+
+  .resolution {
+    position: absolute;
+    bottom: 0;
+    text-align: start;
+    left: 0;
+    color: white;
+    background-color: #959292;
+    position: absolute;
+    font-size: 10px;
+    padding: 0 5px;
+    letter-spacing: 0.6px;
   }
+
   .new-resolution {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      color: #fff;
-      z-index: 9;
-      background: rgba(0, 0, 0, 0.6);
-      height: 20px;
-      padding: 0 7px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font: normal normal bold 12px "Source Sans 3";
-      span {
-        margin:0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 95.99%;
-        white-space: nowrap;
-      }
-      .primaryText {
-        font: normal normal bold 10px/12px "Source Sans 3";
-      }
-      .secondaryText {
-        font: normal normal normal 10px/10px "Source Sans 3";
-      }
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.6);
+    height: 20px;
+    padding: 0 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: normal normal bold 12px "Source Sans 3";
+
+    span {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 95.99%;
+      white-space: nowrap;
+    }
+
+    .primaryText {
+      font: normal normal bold 10px/12px "Source Sans 3";
+    }
+
+    .secondaryText {
+      font: normal normal normal 10px/10px "Source Sans 3";
+    }
   }
+
   .bulkAddition-checkbox-wrapper {
-      position: absolute;
-      right: 2px;
-      top: 2px;
-      z-index: 5;
-      margin: 0px;
-      min-height: max-content;
-      padding: 0px 0px 0px 0px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    z-index: 5;
+    margin: 0px;
+    min-height: max-content;
+    padding: 0px 0px 0px 0px;
   }
+
   .bulkAddition-checkbox {
-      // border: 4px solid #E8E9EC;
-      border-radius: 2px;
-      margin: 0px;
-      padding: 4px;
-      &[class*="MuiIconButton-root"] {
-          [class*="MuiIconButton-label"] {
-              svg {color: #008FFF;
-                  background: #fff;
-                  }
-          }
+    // border: 4px solid #E8E9EC;
+    border-radius: 2px;
+    margin: 0px;
+    padding: 4px;
+
+    &[class*="MuiIconButton-root"] {
+      [class*="MuiIconButton-label"] {
+        svg {
+          color: #008FFF;
+          background: #fff;
+        }
       }
-          }
+    }
+  }
 
 
   .bulkAddition-checkbox input[type="checkbox"] {
-      left: -5px;
-      top: -5px;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
+    left: -5px;
+    top: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
   }
 
 }
@@ -201,61 +226,83 @@
 
 .card-button-pos {
   position: absolute;
-  bottom:10px;
-  left:8px;
+  bottom: 10px;
+  left: 8px;
 }
 
 .card-menu-button {
-  position: absolute;
-  bottom:10px;
+  // position: absolute;
+  bottom: 10px;
   right: 10px;
   z-index: 100;
   cursor: pointer;
 }
 
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 6px;
+  padding-bottom: 6px;
+  padding-left: 4px;
+
+  .card-footer-btn-wrapper {
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+
 .card-menu {
-  position:absolute;
-  border-radius:4px;
-  box-shadow:0px 3px 6px #00000029;
+  position: absolute;
+  border-radius: 4px;
+  box-shadow: 0px 3px 6px #00000029;
   z-index: 10;
   background-color: white;
   top: calc(100% - 30px);
   left: calc(100% - 12px);
-  display:flex;
+  display: flex;
   flex-direction: column;
-  padding:8px;
-  width:max-content;
+  padding: 8px;
+  width: max-content;
+
   .card-menu-item {
     color: #2B2B2B;
     font: normal normal normal 12px/24px "Source Sans 3";
     cursor: pointer;
     padding: 0 4px;
+
     &:hover {
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(0, 0, 0, 0.1);
     }
+
     .menu-icon {
       svg {
         vertical-align: middle;
       }
     }
   }
+
   &.shiftToLeft {
     transform: translateX(-107%);
   }
+
   &.shiftToTop {
     transform: translateY(calc(-100% + 18px));
   }
+
   &.shiftToLeft .shiftToTop {
-    transform: translate(-107%,calc(-100% + 18px));
+    transform: translate(-107%, calc(-100% + 18px));
   }
 }
 
-.primaryButton-vc {
-  padding:5px 8px;
+.primaryButton-cds {
+  padding: 5px 8px !important;
   font: normal normal normal 9px/10px "Source Sans 3" !important;
-  color:#FFF;
-  border-radius:4px;
-  background-color: #4D9ACA;
+  text-transform: unset !important;
+
+  &:last-of-type {
+    margin: 0 !important;
+  }
 }
 
 .btn {
@@ -273,6 +320,8 @@
   line-height: 1.428571429;
   border-radius: 4px;
   user-select: none;
+  color: #FFF;
+  background-color: #4D9ACA;
 }
 
 .mr6 {
@@ -289,20 +338,21 @@
   margin-right: 4px;
 }
 
-.card-wrapper{
+.card-wrapper {
   width: 152px;
 }
 
 @mixin cardVariant($variant: medium) {
-  @if $variant == small{
-    .default-card-wrapper .card-reveal .img_title{
+  @if $variant ==small {
+    .default-card-wrapper .card-reveal .img_title {
       font: normal normal bold 10px / 12px "Source Sans 3";
       margin-bottom: 2px;
     }
+
     .mb7 {
       margin-bottom: 2px;
     }
-  
+
     .btn {
       padding: 6px 6px;
     }

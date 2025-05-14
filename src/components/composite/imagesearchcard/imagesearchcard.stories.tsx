@@ -2,8 +2,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import ImageSearchCard from './imagesearchcard.component';
-import { imageSearchCardSample } from './sample';
-
+import { imageSearchCardSample, imageSearchCardSample2 } from './sample';
 
 const meta: Meta<typeof ImageSearchCard> = {
   component: ImageSearchCard,
@@ -12,6 +11,10 @@ const meta: Meta<typeof ImageSearchCard> = {
 export default meta;
 type Story = StoryObj<typeof ImageSearchCard>;
 
-export const Primary: Story = {
+export const Variant1: Story = {
   args: imageSearchCardSample,
+};
+
+export const Variant2: Story = {
+  args: imageSearchCardSample2,
 };

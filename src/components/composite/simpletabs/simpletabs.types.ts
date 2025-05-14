@@ -1,5 +1,6 @@
 import { TabsProps } from '@mui/material';
 import { TabProps } from "@mui/material/Tab"
+import { ReactNode } from 'react';
 
 
 export interface TabType {
@@ -8,7 +9,8 @@ export interface TabType {
   tooltip?: string,
   disabled?: boolean,
   count?: number,
-  countLabel?: string
+  countLabel?: string,
+  icon?: ReactNode
 }
 
 export interface SimpleTabsProps {

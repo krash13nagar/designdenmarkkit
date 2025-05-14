@@ -1,5 +1,6 @@
+import { DialogProps } from '@mui/material';
 import { ButtonProps } from '@mui/material/Button';
-import { ReactNode } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
 import { TextFieldProps } from '../../common';
 import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
@@ -50,7 +51,19 @@ export interface ImageAuthoringProps
   actionButtonsList?: ActionButton[],
   imageError?: {
     message?: string
-  }
+  },
+  showActivationStatusEditIcon?: boolean,
+  onActivationStatusEditIconClick?: MouseEventHandler<HTMLButtonElement>,
+  activationStatusEditIconTitle?: string,
+  parentMsid?: string,
+  footerCheckBoxList?: {
+    label: string,
+    id: string,
+    disabled?: boolean,
+    hide?: boolean,
+    checked?: boolean,
+  }[],
+  onFooterCheckBoxChange?: (checkbox: { index: number | string, id: string, checked: boolean }) => void
 }
 
 export interface ActionButton {
@@ -68,7 +81,8 @@ export interface AnchorGeneric {
 export interface ImageAuthModelProps extends ImageAuthoringProps {
   containerHeader?: string;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
-  classes?: { root?: string }
+  classes?: { root?: string },
+  dialogProps?: DialogProps
 }
 
 export interface ImageAuthLeftSectionProps {
@@ -79,7 +93,10 @@ export interface ImageAuthLeftSectionProps {
   handleItemClick?: (selectedItemValue: string) => void,
   metaClassName?: string,
   metaColumnCount?: 12 | 6 | 4 | 3,
-  imageError?: ImageAuthoringProps['imageError']
+  imageError?: ImageAuthoringProps['imageError'],
+  msid?: string,
+  parentMsid?: ImageAuthoringProps['parentMsid']
+
 }
 
 export interface ImageAuthRightSectionProps {

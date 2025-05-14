@@ -108,6 +108,11 @@ export const test = {
   ],
   activationChangeHandle: () => {},
   activationStatus: '0',
+  showActivationStatusEditIcon: true,
+  onActivationStatusEditIconClick: () => {
+    console.log('Activation status edit button click');
+  },
+  activationStatusEditIconTitle: 'Status History',
   imageCaption: {
     title: 'Image Caption',
     error: '',
@@ -182,6 +187,7 @@ export const test = {
     { component: <p>This is a test</p> },
   ],
   msid: '123456',
+  parentMsid: '987656',
   keywordConfig: config,
   imageCTAs: [
     { Icon: CropOutlinedIcon, label: 'Crop Image', value: 'crop' },
@@ -397,7 +403,62 @@ const App = (props: AppProps) => {
   const [title, setTitle] = useState('My test title');
   test.title.value = title;
   test.title.onChange = (str) => setTitle(str);
-  const testConfig = { ...test, keywordConfig: kewordConfig };
+  const [imageCaption, setImageCaption] = useState(
+    '<p>test test</p><p><br /></p><p>test test</p><p><br /></p><p>test test</p>'
+  );
+  test.imageCaption = {
+    ...test.imageCaption,
+    value: imageCaption,
+    onChange: (str: string) => {
+      console.log(str);
+      setImageCaption(str);
+    },
+  };
+
+  const [footerCheckBoxList, setFooterCheckBoxList] = useState([
+    {
+      label: 'Set as Thumbnail',
+      id: 'setasthumb',
+      checked: false,
+    },
+    {
+      label: 'Embed in body',
+      id: 'embedinbody',
+      checked: false,
+    },
+    {
+      label: 'Add as Related',
+      id: 'addasrelated',
+      checked: false,
+    },
+  ]);
+
+  React.useEffect(() => {
+    console.log(footerCheckBoxList);
+
+    // return () => {
+    //   second
+    // }
+  }, [footerCheckBoxList]);
+
+  const testConfig = {
+    ...test,
+    keywordConfig: kewordConfig,
+    footerCheckBoxList: footerCheckBoxList,
+    onFooterCheckBoxChange: ({
+      checked,
+      index,
+    }: {
+      checked: boolean;
+      index: number | string;
+    }) => {
+      setFooterCheckBoxList((list) => {
+        const newList = [...list];
+        newList[index as number].checked = checked;
+        return newList;
+      });
+    },
+  };
   const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
 
   return (

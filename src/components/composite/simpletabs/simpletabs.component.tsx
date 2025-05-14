@@ -9,6 +9,7 @@ const getLabel = (tab: TabType) => {
     return (
       <DenTooltip key={tab.name} title={tab.tooltip}>
         <span>
+          {tab.icon}
           {tab.label}
           {!tab.disabled && tab.count >= 0 && (
             <span className={clsx(styles.count)} title={tab.countLabel}>
@@ -20,6 +21,7 @@ const getLabel = (tab: TabType) => {
     );
   return (
     <span key={tab.name}>
+      {tab.icon}
       {tab.label}
       {!tab.disabled && tab.count >= 0 && (
         <span className={styles.count} title={tab.countLabel}>
@@ -30,7 +32,7 @@ const getLabel = (tab: TabType) => {
   );
 };
 
-const SimpleTabs = (props: SimpleTabsProps) => {
+export const SimpleTabs = (props: SimpleTabsProps) => {
   const {
     value,
     handleChange,

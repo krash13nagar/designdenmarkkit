@@ -16,14 +16,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
  * for more details see http:localhost:6006
  */
 export const DenSelect: React.FC<SelectTypes> = (props) => {
-  const PlainProps: SelectTypes = props.plain
+  const { plain, ...restProps } = props ?? {}
+  const PlainProps: SelectTypes = plain
     ? {
       disableUnderline: true,
       IconComponent: ExpandMoreIcon,
       variant: 'standard',
-      ...props
+      ...restProps
     }
-    : { ...props };
+    : { ...restProps };
 
   return <Select {...PlainProps} />;
 };

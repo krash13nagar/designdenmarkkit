@@ -9,3 +9,5 @@ export const Create = (props: Partial<SVGTypes>) => {
     </DenSvgIcon>
   );
 };
+
+export default Create;

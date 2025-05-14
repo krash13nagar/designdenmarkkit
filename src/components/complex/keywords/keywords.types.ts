@@ -78,7 +78,8 @@ export interface searchKeywordConfig {
     searchKeywordVal?: string;
     handleSearchKeywordVal?:React.Dispatch<React.SetStateAction<string>>;
     handleSuggestionKeywordFnc?:(val:boolean)=>void;
-    onSelectKeywordClick?: (val:suggestedData)=>void; 
+    onSelectKeywordClick?: (val:suggestedData)=>void;
+    onEnterKeyPress?: (e:React.KeyboardEvent<HTMLDivElement>)=>void;
 }
 
 export interface suggestedConfig {

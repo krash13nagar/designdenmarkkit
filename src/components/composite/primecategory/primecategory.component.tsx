@@ -8,7 +8,7 @@ import {
 import { PrimeCategoryProps } from './primecategory.types';
 import './primecategory.styles.scss';
 
-const PrimeCategory = (props: PrimeCategoryProps) => {
+export const PrimeCategory = (props: PrimeCategoryProps) => {
   const {
     primeCategoryLabel = 'Prime Category',
     primeType = 0,

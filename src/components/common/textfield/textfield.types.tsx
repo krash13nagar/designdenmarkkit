@@ -15,4 +15,6 @@ export interface TextFieldProps extends StandardTextFieldProps {
   showLabel?: boolean;
   errorText?: string;
   shrinkLabel?: boolean;
+  noBorder?: boolean;
+  isError?: boolean;
 }

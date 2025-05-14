@@ -14,8 +14,8 @@ import { CheckboxTypes } from './checkbox.types';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const DenCheckbox: React.FC<CheckboxTypes> = (props) => (
-  <Checkbox {...props} />
+export const DenCheckbox: React.FC<CheckboxTypes> = ({ sx = {}, ...props }) => (
+  <Checkbox sx={{ color: '#0E88FF', ...sx }} {...props} />
 );
 
 export default DenCheckbox;

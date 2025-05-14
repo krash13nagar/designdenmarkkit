@@ -61,7 +61,7 @@
           .cardContentDiv{
             padding-bottom: 8px;
             .textEllipis{
-              font: normal normal 600 13px/18px 'Source Sans 3';
+              font: normal normal 600 13px/20px 'Source Sans 3';
               color: #4D4D4D;
             }
             .pointerCursor{
@@ -146,7 +146,7 @@
     margin-right: 13px;
 
     .keywordName{
-      font: normal normal 600 13px/18px 'Source Sans 3';
+      font: normal normal 600 13px/20px 'Source Sans 3';
       color: #4D4D4D;
     }
 
@@ -168,19 +168,28 @@
 }
 
 .removeIcondiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 82%;
+
+  .keywordNSrcWrapper {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
     .keywordSourceName {
-        font: normal normal normal 11px/15px 'Source Sans 3';
-        color: #4D4D4D;
-        opacity: 0.8;
+      font: normal normal normal 11px/15px 'Source Sans 3';
+      color: #4D4D4D;
+      opacity: 0.8;
     }
+
     .keywordDetails {
       font: normal normal normal 11px/15px 'Source Sans 3';
       color: #4D4D4D;
       opacity: 0.8;
     }
+  }
 }
 
 .addKeywordsWrapperClass {
@@ -268,13 +277,16 @@
   .keyword-suggestion-menuitem{
       padding: 6px;
       justify-content: space-between;
+      font: normal normal medium 12px/24px 'Source Sans 3';
       [class*="MuiTypography-body1"] {
-          font-size: 0.95rem;
+          font: inherit;
       }
       .keyword-suggestion-button{
-          font-size: 10px;
           padding: 2px 4px;
           min-width: 20px;
+          color: #4D4D4D;
+          border: none;
+          margin-left: 20px;
       }
   }
 }
