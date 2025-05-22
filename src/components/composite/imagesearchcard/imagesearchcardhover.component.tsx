@@ -181,6 +181,7 @@ export const ImageSearchCardHoverDetails = (
                       border: '1px solid #FFFFFF,',
                     },
                   }),
+                  ...(btn.props?.sx || {})
                 }}
                 {...btn.props}
               >
