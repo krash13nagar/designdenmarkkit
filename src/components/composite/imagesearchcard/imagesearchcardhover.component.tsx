@@ -27,6 +27,8 @@ export const ImageSearchCardHoverDetails = (
     imageCardMenuOptions = []
   } = props;
 
+
+
   const [agencyCount, setAgencyCount] = useState('Unlimited');
   const [agencyQuotaStyle, setAgencyQuotaStyle] = useState('agency-unlimited');
 
@@ -162,8 +164,10 @@ export const ImageSearchCardHoverDetails = (
       <div className={style['card-footer']}>
         <div className={style['card-footer-btn-wrapper']}>
           {actionButtonsList?.length > 0 &&
-            actionButtonsList.map((btn, i) => (
-              <DenButton
+            actionButtonsList.map((btn, i) => {
+
+              const {sx,...btnProps} = btn.props || {};
+             return <DenButton
                 onClick={(e) => {
                   e.stopPropagation();
                   btn?.onClick?.(e);
@@ -183,11 +187,11 @@ export const ImageSearchCardHoverDetails = (
                   }),
                   ...(btn.props?.sx || {})
                 }}
-                {...btn.props}
+                {...btnProps}
               >
                 {btn.label}
               </DenButton>
-            ))}
+})}
           {!actionButtonsList && (
             <div onClick={handleSelectImage}>
               <button

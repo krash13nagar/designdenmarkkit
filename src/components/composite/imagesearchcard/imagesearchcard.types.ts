@@ -45,5 +45,6 @@ export interface imageSearchCardHoverConfig {
     ingestionDateTimestamp?: number | undefined,
     cardStyle?: imageSearchCardConfig['cardStyle'],
     imageCardMenuOptions?: imageCardMenuOptionsConfig[],
-    showCardMenu?: boolean
+    showCardMenu?: boolean,
+    sx?: any
 }
