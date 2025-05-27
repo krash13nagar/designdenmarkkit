@@ -22,7 +22,7 @@ export const DiscardImageCard= React.forwardRef((props: DiscardImageCardConfig, 
     animatedClass=''
   } = props;
 
-  const [selectedOption,setSelectedOption]=useState('select');
+  const [selectedOption,setSelectedOption]=useState(dropdownOptions.length>0?'select':'');
 
   const handleMenuChange=(e:any)=>{
     setSelectedOption(e.target.value);
@@ -40,7 +40,8 @@ export const DiscardImageCard= React.forwardRef((props: DiscardImageCardConfig, 
 
   return (
     <div className={clsx(cssClassName['discard-card-wrapper'], animatedClass ? cssClassName[animatedClass] : '', cssClassName[wrapperClass])}>
-      <div className={cssClassName['card-title']}>{title}</div>
+        <div className={cssClassName['discard-card-container-top']}>
+        <div className={cssClassName['card-title']}>{title}</div>
       {dropdownOptions && dropdownOptions.length > 0 && <div className={cssClassName['card-menu']}>
       <div className={cssClassName['dropdown-label']}>{dropdownLabel}</div>
       <DenFormControl fullWidth className={cssClassName['discard-form-control']}>
@@ -72,7 +73,9 @@ export const DiscardImageCard= React.forwardRef((props: DiscardImageCardConfig, 
         </DenSelect>
       </DenFormControl>
       </div>} 
-      <div className={cssClassName['action-buttons']}>
+        </div>
+        <div className={cssClassName['discard-card-container-bottom']}>
+        <div className={cssClassName['action-buttons']}>
         <DenButton className={cssClassName['primaryButton-cds']} variant="outlined" sx={{color:'#FFFFFF',border:'1px solid #FFFFFF','&:hover':{border:'1px solid #FFFFFF'}}}  onClick={handleCancel}>
           Cancel
         </DenButton>
@@ -80,6 +83,7 @@ export const DiscardImageCard= React.forwardRef((props: DiscardImageCardConfig, 
           Confirm
         </DenButton>
       </div>
+        </div>
     </div>
   );
 })

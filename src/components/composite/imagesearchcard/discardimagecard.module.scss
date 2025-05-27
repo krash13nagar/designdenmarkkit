@@ -22,6 +22,9 @@ to   { transform: rotateY(90deg); opacity: 0; }
   backface-visibility: hidden;
   perspective: 1000px;
   transition: transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &.flip-in {
     animation: flipIn 0.5s forwards;
