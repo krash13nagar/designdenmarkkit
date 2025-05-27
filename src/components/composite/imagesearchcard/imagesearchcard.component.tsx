@@ -37,8 +37,16 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
   const [animatedClass, setAnimatedClass] = useState('');
 
   const discardImageCardCallBack = (from: number) => {
-    setToShowDiscardImageCard(!toShowDiscardImageCard);
-    setAnimatedClass(from === 0 ? 'flip-in' : 'flip-out');
+    if (from === 0) {
+      setAnimatedClass('flip-in');
+      setToShowDiscardImageCard(true);
+    } else {
+      setAnimatedClass('flip-out');
+      setTimeout(() => {
+        setToShowDiscardImageCard(false);
+        setAnimatedClass('');
+      }, 500);
+    }
   }
 
   const fromNowText = useMemo(() => {

@@ -39,7 +39,7 @@ export const DiscardImageCard= React.forwardRef((props: DiscardImageCardConfig, 
   }
 
   return (
-    <div className={clsx(cssClassName['discard-card-wrapper'], wrapperClass, animatedClass)}>
+    <div className={clsx(cssClassName['discard-card-wrapper'], animatedClass ? cssClassName[animatedClass] : '', cssClassName[wrapperClass])}>
       <div className={cssClassName['card-title']}>{title}</div>
       {dropdownOptions && dropdownOptions.length > 0 && <div className={cssClassName['card-menu']}>
       <div className={cssClassName['dropdown-label']}>{dropdownLabel}</div>
