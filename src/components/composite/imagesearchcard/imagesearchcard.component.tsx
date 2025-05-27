@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import {
   imageSearchCardConfig,
 } from './imagesearchcard.types';
+import DiscardImageCard from './discardimagecard.component';
 
 export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, ref: React.MutableRefObject<any>) => {
   const isShowResolution = true;
@@ -28,8 +29,17 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
     ingestionDateTimestamp,
     onCallbackSelectImagefnc,
     cardStyle = 'standard',
-    onCardClick = () => { }
+    onCardClick = () => { },
+    discardImageProps={}
   } = props;
+
+  const [toShowDiscardImageCard, setToShowDiscardImageCard] = useState(false);
+  const [animatedClass, setAnimatedClass] = useState('');
+
+  const discardImageCardCallBack = (from: number) => {
+    setToShowDiscardImageCard(!toShowDiscardImageCard);
+    setAnimatedClass(from === 0 ? 'flip-in' : 'flip-out');
+  }
 
   const fromNowText = useMemo(() => {
     return (
@@ -37,6 +47,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
       (ingestionDateTimestamp ? calculateFromNow(ingestionDateTimestamp) : '')
     );
   }, [ingestionDateTimestamp, fromNow]);
+
 
   let variantClassName = '';
   const changeVariantClassName = (variantType: string) => {
@@ -69,7 +80,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
   //   }
   // };;
 
-  return (
+  return toShowDiscardImageCard ? <DiscardImageCard animatedClass={animatedClass} discardImageCardCallBack={discardImageCardCallBack} {...discardImageProps}/> : (
     <div className={cssClassName[variantClassName]}>
       <DenCard
         classes={{ root: 'card-root' }}
@@ -146,6 +157,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               ingestionDateTimestamp={ingestionDateTimestamp}
               cardStyle={cardStyle}
               imageCardMenuOptions={imageCardMenuOptions}
+              discardImageCardCallBack={discardImageCardCallBack}
             />
           )}
         </div>

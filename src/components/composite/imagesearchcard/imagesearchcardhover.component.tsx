@@ -24,7 +24,8 @@ export const ImageSearchCardHoverDetails = (
     ingestionDateTimestamp,
     actionButtonsList,
     cardStyle = 'standard',
-    imageCardMenuOptions = []
+    imageCardMenuOptions = [],
+    discardImageCardCallBack
   } = props;
 
 
@@ -188,6 +189,13 @@ export const ImageSearchCardHoverDetails = (
                   ...(btn.props?.sx || {})
                 }}
                 {...btnProps}
+                {...(btn.isDiscardButton && {
+                  onClick: (e) => {
+                    discardImageCardCallBack?.(0);
+                    e.stopPropagation();
+                    btn?.onClick?.(e);
+                  }
+                })}
               >
                 {btn.label}
               </DenButton>
