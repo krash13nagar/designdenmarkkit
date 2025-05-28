@@ -3,7 +3,7 @@ import style from './imagesearchcard.module.scss';
 import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
 import { ICONS } from './imagesearchcard.constant';
-import { DenButton, DenIconButton } from '../../common';
+import { DenButton, DenIconButton, DenTooltip } from '../../common';
 import moment from 'moment';
 import MoreVert from '@mui/icons-material/MoreVert';
 import { DenNestedMenu } from '../nestedmenu/nestedmenu';
@@ -93,6 +93,17 @@ export const ImageSearchCardHoverDetails = (
     return renderMenu(menuOptions)
   }
 
+  const getTooltipTitle = (label: any) => {
+    if(label=='Report'){
+      return 'Report Image'
+    }else if(label=='Embed'){
+      return 'Embed in Body'
+    }
+      return 'Add as Related'
+    
+  }
+  
+
   return (
     <div className={`${style['card-reveal']} ${style['card-reveal-show']}`}>
       <div className={style['card-details']}>
@@ -168,7 +179,10 @@ export const ImageSearchCardHoverDetails = (
             actionButtonsList.map((btn, i) => {
 
               const {sx,...btnProps} = btn.props || {};
-             return <DenButton
+             return (
+             <DenTooltip title={getTooltipTitle(btn.label)} arrow>
+              <div className={style['card-footer-btn-wrapper-tooltip']}>
+                 <DenButton
                 onClick={(e) => {
                   e.stopPropagation();
                   btn?.onClick?.(e);
@@ -191,14 +205,18 @@ export const ImageSearchCardHoverDetails = (
                 {...btnProps}
                 {...(btn.isDiscardButton && {
                   onClick: (e) => {
-                    discardImageCardCallBack?.(0);
                     e.stopPropagation();
+                    discardImageCardCallBack?.(0);
                     btn?.onClick?.(e);
                   }
                 })}
               >
                 {btn.label}
               </DenButton>
+              </div>
+             </DenTooltip>
+             )
+            
 })}
           {!actionButtonsList && (
             <div onClick={handleSelectImage}>

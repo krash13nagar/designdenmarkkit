@@ -249,6 +249,9 @@
     flex: 1;
     display: flex;
     flex-wrap: nowrap;
+    .card-footer-btn-wrapper-tooltip{
+      margin-right: 8px;
+    }
   }
 }
 
