@@ -94,12 +94,14 @@ export const ImageSearchCardHoverDetails = (
   }
 
   const getTooltipTitle = (label: any) => {
-    if(label=='Report'){
+    if(label.toLowerCase()=='report'){
       return 'Report Image'
-    }else if(label=='Embed'){
+    }else if(label.toLowerCase()=='embed'){
       return 'Embed in Body'
+    }else if(label.toLowerCase()=='select'){
+      return 'Select'
     }
-      return 'Add as Related'
+    return 'Add as Related'
     
   }
   
