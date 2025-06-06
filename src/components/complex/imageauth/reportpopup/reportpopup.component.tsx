@@ -7,41 +7,19 @@ import { DenTypography } from '../../../common';
 import { ReportPopupConfig } from './reportpopup.types';
 import clsx from 'clsx';
 import './reportpopup.styles.scss';
+import DiscardImageCard from '../../../composite/imagesearchcard/discardimagecard.component';
 
 export const ReportPopup = React.forwardRef((props: ReportPopupConfig, ref: React.MutableRefObject<any>) => {
     const btnPopupRef = useRef<HTMLDivElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
     const {
         isOpen = false,
-        title = 'Report this image to ensure it is permanently removed from future search results.',
-        message = '',
-        dropdownLabel = 'Please specify the reason for your report.',
-        dropdownOptions = [],
-        dropdownDefaultOption = 'Select Reason',
-        onCancel = () => { },
-        onConfirm = () => { },
-        confirmButtonText = 'Confirm',
-        cancelButtonText = 'Cancel',
+        reportButtonProps,
+        onCancel,
+        onConfirm,
         position = { top: '-280px', right: '0px' },
-        wrapperClass = '',
-        animatedClass = ''
     } = props;
 
-    const [selectedOption, setSelectedOption] = useState(dropdownOptions.length > 0 ? 'select' : '');
-
-    const handleMenuChange = (e: any) => {
-        setSelectedOption(e.target.value);
-    };
-
-    const handleCancel = () => {
-        setSelectedOption(dropdownOptions.length > 0 ? 'select' : '');
-        onCancel?.();
-    };
-
-    const handleConfirm = () => {
-        onConfirm?.(selectedOption);
-        setSelectedOption(dropdownOptions.length > 0 ? 'select' : '');
-    };
 
     useEffect(() => {
         if (btnPopupRef.current && isOpen) {
@@ -78,7 +56,7 @@ export const ReportPopup = React.forwardRef((props: ReportPopupConfig, ref: Reac
     return (
         <div
             ref={btnPopupRef}
-            className={clsx('report-popup-container', wrapperClass, animatedClass)}
+            className={clsx('report-popup-container')}
             style={{
                 top: position.top,
                 right: position.right,
@@ -86,7 +64,7 @@ export const ReportPopup = React.forwardRef((props: ReportPopupConfig, ref: Reac
                 bottom: position.bottom,
             }}
         >
-            <div className="report-popup-content">
+            {/* <div className="report-popup-content">
                 <div>
                     <DenTypography
                         variant="body2"
@@ -216,7 +194,13 @@ export const ReportPopup = React.forwardRef((props: ReportPopupConfig, ref: Reac
                         {confirmButtonText}
                     </DenButton>
                 </div>
-            </div>
+            </div> */}
+            <DiscardImageCard
+                {...reportButtonProps}
+                onCancel={onCancel}
+                onConfirm={onConfirm}
+                discardImageCardCallBack={() => { }}
+            />
         </div>
     );
 });

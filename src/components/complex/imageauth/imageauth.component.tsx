@@ -220,16 +220,10 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           {/* Report Popup */}
           <ReportPopup
             isOpen={isReportPopupOpen}
-            title={reportButtonProps.title}
-            message={reportButtonProps.message}
-            dropdownLabel={reportButtonProps.dropdownLabel}
-            dropdownOptions={reportButtonProps.dropdownOptions}
-            dropdownDefaultOption={reportButtonProps.dropdownDefaultOption}
-            confirmButtonText={reportButtonProps.confirmButtonText}
-            cancelButtonText={reportButtonProps.cancelButtonText}
+            reportButtonProps={reportButtonProps}
             onCancel={handleReportCancel}
             onConfirm={handleReportConfirm}
-            position={{ top: '-132px', right: '195px' }}
+            position={{ top: '-160px', right: '197px' }}
           />
         </div>
       </Footer>
