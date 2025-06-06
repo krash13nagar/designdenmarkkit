@@ -52,7 +52,7 @@ const breadcrumbs = [
 
 export const test = {
   primeCategoryLabel: 'Prime Category',
-  handlePrimeChange: () => {},
+  handlePrimeChange: () => { },
   isPublished: false,
   primeType: 0,
   isPrimeEnable: true,
@@ -65,13 +65,13 @@ export const test = {
   actionButtonsList: [
     {
       label: 'Secondary',
-      onClick: () => {},
+      onClick: () => { },
       variant: 'outlined' as ButtonProps['variant'],
       color: 'secondary' as ButtonProps['color'],
     },
     {
       label: 'Primary',
-      onClick: () => {},
+      onClick: () => { },
       variant: 'contained' as ButtonProps['variant'],
       color: 'primary' as ButtonProps['color'],
     },
@@ -85,13 +85,13 @@ export const test = {
    */
   publishDate: {
     PublishModalTitle: 'Publish and Expiry Date',
-    onAutoCorrect: () => {},
-    onReset: () => {},
-    onClose: () => {},
-    onDone: () => {},
+    onAutoCorrect: () => { },
+    onReset: () => { },
+    onClose: () => { },
+    onDone: () => { },
     preventCloseOnDone: false,
     overrideClose: '',
-    callback: () => {},
+    callback: () => { },
     publishDateLabel: 'Publish Date',
     publishDate: 1693819795753,
     expiresIn: 1693824566621,
@@ -106,7 +106,7 @@ export const test = {
     { title: 'CLOSED', value: 'CLOSED' },
     { title: 'IGNORE', value: 'IGNORE' },
   ],
-  activationChangeHandle: () => {},
+  activationChangeHandle: () => { },
   activationStatus: '0',
   showActivationStatusEditIcon: true,
   onActivationStatusEditIconClick: () => {
@@ -118,7 +118,7 @@ export const test = {
     error: '',
     childError: '',
     childWarning: '',
-    onChange: (str: string) => {},
+    onChange: (str: string) => { },
     width: '100%',
     height: '200px',
     value: '<div>Caption value</div>',
@@ -142,7 +142,7 @@ export const test = {
     error: 'test error',
     childError: '',
     childWarning: '',
-    onChange: (str: string) => {},
+    onChange: (str: string) => { },
     required: true,
     width: '100%',
     value: 'Title value',
@@ -217,6 +217,19 @@ export const test = {
     console.log(val);
   },
   metaClassName: 'cds-column-6',
+  enableReportButton: true,
+  reportButtonProps: {
+    onConfirm: (value: string) => {
+      console.log(value);
+    },
+    onCancel: () => {
+      console.log('Cancel');
+    },
+    title: "Report this image to ensure it is permanently removed from future search results.",
+    dropdownLabel: 'Please specify the reason for your report',
+    dropdownOptions: [{ id: 1, label: 'Irrelevant Image', value: 'Irrelevant Image' }, { id: 2, label: 'Incorrect Image', value: 'Incorrect Image' }],
+    dropdownDefaultOption: 'Select',
+  },
 };
 
 const App = (props: AppProps) => {
@@ -486,7 +499,7 @@ if (module?.hot) {
 
 App.defaultProps = {
   reqObj: {},
-  callbackNgFn: () => {},
+  callbackNgFn: () => { },
 };
 
 export default App;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import style from './imageauth.module.scss';
 import { Footer } from '../../composite';
 import PrimeCategory from '../../composite/primecategory/primecategory.component';
@@ -7,6 +7,7 @@ import ActivationStatus from '../../composite/activationstatus/activationstatus.
 import { ImageAuthoringProps } from './imageauth.types';
 import ImageAuthLeftSection from './imageauthleftsection/imageauthleftsection';
 import ImageAuthRightSection from './imageauthrightsection/imageauthrightsection';
+import ReportPopup from './reportpopup/reportpopup.component';
 import clsx from 'clsx';
 import './imageauth.styles.scss';
 import {
@@ -40,13 +41,13 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatusOptions,
     activationStatusLabel,
     showActivationStatusEditIcon = false,
-    onActivationStatusEditIconClick = () => {},
+    onActivationStatusEditIconClick = () => { },
     activationStatusEditIconTitle = '',
     keywordConfig,
     selectedTab = '',
-    handleTabChange = () => {},
+    handleTabChange = () => { },
     imageCTAs = [],
-    handleItemClick = () => {},
+    handleItemClick = () => { },
     metaClassName = '',
     metaColumnCount = 4,
     captionBylineProps = {},
@@ -54,7 +55,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     captionAgencyProps = {},
     photographerBylineProps = {},
     isNotRelatedToAgency = false,
-    handleNotRelatedToAgencyChange = () => {},
+    handleNotRelatedToAgencyChange = () => { },
     justificationProps = {},
     showAgencyMessage = false,
     agencyMessage = '',
@@ -64,8 +65,27 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     actionButtonsList = [],
     imageError,
     footerCheckBoxList = [],
-    onFooterCheckBoxChange = () => {},
+    onFooterCheckBoxChange = () => { },
+    enableReportButton = false,
+    reportButtonProps = {}
   } = props;
+
+  const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
+  const reportButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleReportButtonClick = () => {
+    setIsReportPopupOpen(prev => !prev);
+  };
+
+  const handleReportCancel = () => {
+    setIsReportPopupOpen(false);
+    reportButtonProps.onCancel?.();
+  };
+
+  const handleReportConfirm = (selectedOption: string) => {
+    setIsReportPopupOpen(false);
+    reportButtonProps.onConfirm?.(selectedOption);
+  };
 
   return (
     <>
@@ -152,7 +172,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
               })}
           </DenFormGroup>
         </DenBox>
-        <div className="image-auth-footer-wrapper">
+        <div className="image-auth-footer-wrapper" style={{ position: 'relative' }}>
           <PrimeCategory
             primeCategories={primeCategories}
             primeCategoryLabel={primeCategoryLabel}
@@ -173,6 +193,17 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           />
 
           <div className="cds-action-buttons-wrapper">
+            {enableReportButton && (
+              <DenButton
+                ref={reportButtonRef}
+                variant="outlined"
+                color="error"
+                onClick={handleReportButtonClick}
+              >
+                Report
+              </DenButton>
+            )}
+
             {actionButtonsList?.map((action) => (
               <DenButton
                 key={action.label}
@@ -185,6 +216,21 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
               </DenButton>
             ))}
           </div>
+
+          {/* Report Popup */}
+          <ReportPopup
+            isOpen={isReportPopupOpen}
+            title={reportButtonProps.title}
+            message={reportButtonProps.message}
+            dropdownLabel={reportButtonProps.dropdownLabel}
+            dropdownOptions={reportButtonProps.dropdownOptions}
+            dropdownDefaultOption={reportButtonProps.dropdownDefaultOption}
+            confirmButtonText={reportButtonProps.confirmButtonText}
+            cancelButtonText={reportButtonProps.cancelButtonText}
+            onCancel={handleReportCancel}
+            onConfirm={handleReportConfirm}
+            position={{ top: '-132px', right: '195px' }}
+          />
         </div>
       </Footer>
     </>
