@@ -84,7 +84,8 @@ export interface ActionButton {
   variant?: ButtonProps['variant'],
   color?: ButtonProps['color'],
   props?: ButtonProps,
-  isDiscardButton?: boolean
+  isDiscardButton?: boolean,
+  toolTip?: string
 }
 
 export interface AnchorGeneric {
