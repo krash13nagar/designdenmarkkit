@@ -171,8 +171,9 @@ export const ImageSearchCardHoverDetails = (
               actionButtonsList.map((btn, i) => {
 
                 const { sx, ...btnProps } = btn.props || {};
+                const btnTooltip = btn?.tooltip || "";
                 return (
-                  <DenTooltip title={btn?.tooltip || ""} arrow>
+                  <DenTooltip title={btnTooltip} arrow>
                     <div className={style['card-footer-btn-wrapper-tooltip']}>
                       <DenButton
                         onClick={(e) => {
