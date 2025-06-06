@@ -25,6 +25,10 @@ export interface imageSearchCardConfig {
     cardStyle?: 'standard' | 'minimal',
     onCardClick?: React.MouseEventHandler<HTMLElement>,
     discardImageProps?: any,
+    showImageHoverFooter?: boolean,
+    onCheckboxClick?: React.MouseEventHandler<HTMLElement>,
+    isCheckboxChecked?: boolean,
+    showImageCheckbox?: boolean
 }
 
 export interface imageCardMenuOptionsConfig {
@@ -49,5 +53,6 @@ export interface imageSearchCardHoverConfig {
     imageCardMenuOptions?: imageCardMenuOptionsConfig[],
     showCardMenu?: boolean,
     sx?: any,
-    discardImageCardCallBack?: (from: number) => void
+    discardImageCardCallBack?: (from: number) => void,
+    showImageHoverFooter?: boolean
 }

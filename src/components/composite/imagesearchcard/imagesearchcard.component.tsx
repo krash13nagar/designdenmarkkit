@@ -9,6 +9,7 @@ import {
   imageSearchCardConfig,
 } from './imagesearchcard.types';
 import DiscardImageCard from './discardimagecard.component';
+import { Checkbox } from '@mui/material';
 
 export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, ref: React.MutableRefObject<any>) => {
   const isShowResolution = true;
@@ -30,7 +31,11 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
     onCallbackSelectImagefnc,
     cardStyle = 'standard',
     onCardClick = () => { },
-    discardImageProps={}
+    discardImageProps={},
+    showImageHoverFooter = true,
+    onCheckboxClick = () => {},
+    isCheckboxChecked = false,
+    showImageCheckbox = false
   } = props;
 
   const [toShowDiscardImageCard, setToShowDiscardImageCard] = useState(false);
@@ -123,6 +128,15 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               : ''
           }
         >
+          {showImageCheckbox && <div className={cssClassName["bulkAddition-checkbox-wrapper"]}>
+            <Checkbox
+              checked={isCheckboxChecked}
+              onClick={onCheckboxClick}
+              color="primary"
+              className={cssClassName["bulkAddition-checkbox"]}
+            />
+          </div>
+          }
           <DenCardMedia
             src={imageUrl}
             component="img"
@@ -166,6 +180,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               cardStyle={cardStyle}
               imageCardMenuOptions={imageCardMenuOptions}
               discardImageCardCallBack={discardImageCardCallBack}
+              showImageHoverFooter={showImageHoverFooter}
             />
           )}
         </div>

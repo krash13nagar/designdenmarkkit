@@ -194,14 +194,15 @@
     margin: 0px;
     padding: 4px;
 
-    &[class*="MuiIconButton-root"] {
-      [class*="MuiIconButton-label"] {
-        svg {
-          color: #008FFF;
-          background: #fff;
-        }
-      }
+    //&[class*="MuiIconButton-root"] {
+    // [class*="MuiIconButton-label"] {
+    svg {
+      color: #008FFF;
+      background: #fff;
     }
+
+    //   }
+    //}
   }
 
 
