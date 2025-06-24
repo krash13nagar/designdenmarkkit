@@ -27,7 +27,7 @@ export const ArticleSearchCard = React.forwardRef((props: articleSearchCardConfi
     onCardClick = () => { },
     status,
     handleOpenInNew,
-    selected
+    selected,
   } = props;
 
   const fromNowText = useMemo(() => {

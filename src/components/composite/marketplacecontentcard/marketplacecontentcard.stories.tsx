@@ -13,7 +13,7 @@ export default meta;
 type Story = StoryObj<typeof MarketplaceContentCard>;
 
 export const Variant1: Story = {
-    args: marketplaceContentCardSample2,
+    args: marketplaceContentCardSample,
 };
 
 export const Variant2: Story = {

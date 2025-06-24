@@ -6,9 +6,6 @@ export interface MarketplaceContentCardConfig {
     type?: string,
     title?: string,
     subtitle?: string,
-    fromNow?: string,
-    agencyName?: string,
-    entityType?: string,
     imageUrl?: string,
     ingestionDate?: string,
     ingestionDateTimestamp?: string | undefined,
@@ -17,14 +14,11 @@ export interface MarketplaceContentCardConfig {
         "root"?: string,
         "menuOption"?: string
     }
-    variant?: string
     cardMenuOptions?: MarketplaceCardMenuOptionsConfig[],
     actionButtonsList?: ActionButton[],
     cardStyle?: 'standard' | 'minimal',
     onCardClick?: React.MouseEventHandler<HTMLElement>,
     ImageFallback?: ReactNode,
-    status?: string,
-    handleOpenInNew?: () => void,
     selected?: boolean,
     imagesCount?: number,
     videosCount?: number,
@@ -38,8 +32,10 @@ export interface MarketplaceContentCardConfig {
         label: string,
         icon: React.ReactElement<any, string | React.JSXElementConstructor<any>>
     }[],
-    isChecked?: boolean,
-    onCheckboxClick?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
+    checkboxProps?: MarketPlaceCardCheckboxProps
+    headerTooltipContent?: ReactNode,
+    view?: string,
+    showAllCheckboxes?: boolean,
 }
 
 export interface MarketplaceCardMenuOptionsConfig {
@@ -47,26 +43,12 @@ export interface MarketplaceCardMenuOptionsConfig {
     onClickFnc: React.MouseEventHandler<HTMLElement>;
 }
 
-
-
-export interface MarketplaceContentCardHoverConfig {
-    name?: string;
-    agencyName?: string;
-    dataSource?: string;
-    ingestionDate?: string;
-    resolution?: string;
-    agencyUsageData?: any;
-    onCallbackMenufnc?: React.MouseEventHandler<HTMLElement>;
-    onCallbackSelectImagefnc?: React.MouseEventHandler<HTMLElement>;
-    actionButtonsList?: ActionButton[],
-    ingestionDateTimestamp?: number | undefined,
-    cardStyle?: MarketplaceContentCardConfig['cardStyle'],
-    cardMenuOptions?: MarketplaceCardMenuOptionsConfig[],
-    showCardMenu?: boolean,
-    handleOpenInNew?: () => void,
-    title?: string,
-    subtitle?: string,
+export interface MarketPlaceCardCheckboxProps {
+    isChecked?: boolean,
+    onCheckboxClick?: (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => void,
+    tooltipText?: string
 }
+
 
 export interface AnchorGeneric {
     [key: string]: HTMLElement;
