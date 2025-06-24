@@ -1,0 +1,92 @@
+@use '../../../../styles/' as css;
+
+.media-auth-left-panel {
+    flex-basis: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    .error-with-icon {
+        align-self: start;
+
+        svg {
+            width: 15px;
+            height: 15px;
+            margin: -4px 4px;
+            top: 5px;
+        }
+
+        .errormessage {
+            color: #43425D;
+            background: rgba(221, 0, 0, 0.1);
+            padding: 2px;
+            font-weight: 600;
+            letter-spacing: 0px;
+        }
+    }
+
+    .media-container {
+        flex-basis: 70%;
+        height: 55%;
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #e8e9ec;
+        border-radius: 4px;
+        border: 2px solid #E8E9EC;
+
+        .media {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            max-height: 100%;
+            max-width: 100%;
+            word-break: break-all;
+            transition: aspect-ratio 2s ease-out;
+        }
+    }
+
+    .meta-info-wrapper {
+        padding: css.pxToRem(24px) 0 0 0;
+        width: 100%;
+        box-sizing: border-box;
+        // flex-basis: 45%;
+
+        label {
+            font-size: 12px;
+            line-height: 20px;
+            color: #818181;
+            margin-bottom: css.pxToRem(20px);
+
+            span:last-child {
+                font-size: css.pxToRem(14px);
+                letter-spacing: 0px;
+                color: #4d4d4d;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .idWrapper {
+        display: flex;
+        margin-bottom: 6px;
+        align-self: flex-start;
+
+        .parentMsidWrapper {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .separator {
+        width: 1px;
+        height: 20px;
+        background-color: #D2D8DF;
+        margin-right: 8px;
+        margin-left: 5px;
+    }
+
+}
