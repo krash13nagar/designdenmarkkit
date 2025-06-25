@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import SunEditor from 'suneditor-react';
 import SunEditorCore from 'suneditor/src/lib/core';
-import { SUNEDITOR_DESCRIPTION_OPTIONS } from './editortextfield.constant';
+import { SUNEDITOR_CAPTION_OPTIONS, SUNEDITOR_DESCRIPTION_OPTIONS, SUNEDITOR_TITLE_OPTIONS } from './editortextfield.constant';
 import Count from '../wordcount/wordcount.component';
 import { DenBox, DenInputLabel } from '../../common';
 import { ErrorIcon, Warning } from '../../../assets';
@@ -10,6 +10,7 @@ import './suneditor.styles.scss';
 import { EditorTextfieldProps } from './editortextfield.types';
 import clsx from 'clsx';
 import './editortextfield.styles.scss';
+import { SunEditorOptions } from 'suneditor/src/options';
 
 export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
   const {
@@ -21,6 +22,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     childWarning,
     onChange,
     editorOptions,
+    editorOptionsType = 'caption',
     countRequired = true,
     width = '',
     height = '',
@@ -69,6 +71,16 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     editorOptionsReceived.defaultTag = 'p';
   }
 
+  const getEditorOptions = useMemo(() => {
+    if (editorOptionsType === 'title') {
+      return SUNEDITOR_TITLE_OPTIONS;
+    }
+    if (editorOptionsType === 'caption') {
+      return SUNEDITOR_CAPTION_OPTIONS;
+    }
+    return SUNEDITOR_DESCRIPTION_OPTIONS;
+  }, [editorOptionsType]);
+
   return (
     <div
       className={clsx(
@@ -95,7 +107,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
         {...(height && { height: height })}
         autoFocus={autoFocus}
         onChange={handleChange}
-        setOptions={editorOptionsReceived || SUNEDITOR_DESCRIPTION_OPTIONS}
+        setOptions={editorOptionsReceived || getEditorOptions as SunEditorOptions}
         setContents={content}
         onBlur={handleBlur}
         onFocus={handleFocus}
