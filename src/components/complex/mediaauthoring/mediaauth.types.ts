@@ -1,4 +1,4 @@
-import { DialogProps } from '@mui/material';
+import { DialogContentProps, DialogProps } from '@mui/material';
 import { ButtonProps } from '@mui/material/Button';
 import { ReactNode, MouseEventHandler } from 'react';
 import { TextFieldProps } from '../../common';
@@ -87,7 +87,9 @@ export interface MediaAuthModelProps extends MediaAuthoringProps {
   containerHeader?: string;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
   classes?: { root?: string },
-  dialogProps?: DialogProps
+  dialogProps?: DialogProps,
+  dialogContentProps?: DialogContentProps,
+  container?: HTMLElement
 }
 
 export interface MediaAuthLeftSectionProps {

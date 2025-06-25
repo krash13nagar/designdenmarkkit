@@ -8,10 +8,8 @@
   display: flex;
   flex-direction: row;
   padding: css.pxToRem(16px) 0px 0px css.pxToRem(16px);
-  height: calc(100vh - css.pxToRem(102px));
+  height: calc(100% - 62px);
   overflow: hidden;
-
-
 
   .row {
     display: flex;
@@ -76,26 +74,19 @@
 .dialogContentWrapper {
   padding: 0px !important;
 
-  .media-auth-wrapper {
-    height: calc(100vh - css.pxToRem(150px));
-  }
+  // .media-auth-wrapper {
+  //   height: calc(100vh - css.pxToRem(150px));
+  // }
 
-  .primary-data-wrapper {
-    height: calc(100vh - 220px) !important;
-  }
-}
-
-.imagePreviewWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
+  // .primary-data-wrapper {
+  //   height: calc(100vh - 220px) !important;
+  // }
 }
 
 .dialogRoot {
-  max-width: 1250px !important;
-  min-width: calc(100vw - 48px);
-  min-height: calc(100vh - 40px) !important;
+  // max-width: 1250px !important;
+  // min-width: calc(100vw - 48px);
+  // min-height: calc(100vh - 40px) !important;
 
   .titleRootWrapper {
     padding: 0px !important;
@@ -124,9 +115,9 @@
   }
 }
 
-@media screen and (min-width: 1350px) {
-  .dialogRoot {
-    max-width: 1302px !important;
-    width: 1302px !important;
-  }
-}
+// @media screen and (min-width: 1350px) {
+//   .dialogRoot {
+//     max-width: 1302px !important;
+//     width: 1302px !important;
+//   }
+// }
