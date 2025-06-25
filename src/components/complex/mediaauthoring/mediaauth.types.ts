@@ -67,6 +67,10 @@ export interface MediaAuthoringProps
     dropdownOptions?: { id: string | number, label: string, value: string }[],
     dropdownDefaultOption?: string,
   }
+  publishSectionProps?: any;
+  primaryAuthorProps?: any;
+  secondaryAuthorProps?: any;
+  agencyProps?: any;
 }
 
 export interface ActionButton {
@@ -116,7 +120,11 @@ export interface MediaAuthRightSectionProps {
   mediaSummary: MediaAuthoringProps['mediaSummary'];
   keywordConfig: keywordsWrapperConfig;
   classes?: { root?: string },
-  MetadataComp?: MediaAuthoringProps["MetadataComp"]
+  MetadataComp?: MediaAuthoringProps["MetadataComp"],
+  publishSectionProps?: any,
+  primaryAuthorProps?: any,
+  secondaryAuthorProps?: any,
+  agencyProps?: any
 }
 
 export interface JustificationProps extends TextFieldProps {
@@ -130,5 +138,9 @@ export interface MediaPrimaryDataFormProps {
   mediaCaption: MediaAuthoringProps['mediaCaption'];
   mediaSummary: MediaAuthoringProps['mediaSummary'];
   classes?: { root?: string },
+  publishSectionProps?: any,
+  primaryAuthorProps?: any,
+  secondaryAuthorProps?: any,
+  agencyProps?: any
 }
 

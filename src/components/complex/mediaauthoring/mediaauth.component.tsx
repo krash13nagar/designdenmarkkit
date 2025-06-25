@@ -57,7 +57,11 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     footerCheckBoxList = [],
     onFooterCheckBoxChange = () => { },
     enableReportButton = false,
-    reportButtonProps = {}
+    reportButtonProps = {},
+    publishSectionProps = {},
+    primaryAuthorProps = {},
+    secondaryAuthorProps = {},
+    agencyProps = {}
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
@@ -105,6 +109,10 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           keywordConfig={keywordConfig}
           msid={msid}
           MetadataComp={MetadataComp}
+          publishSectionProps={publishSectionProps}
+          primaryAuthorProps={primaryAuthorProps}
+          secondaryAuthorProps={secondaryAuthorProps}
+          agencyProps={agencyProps}
         />
       </div>
       <Footer>
