@@ -13,10 +13,12 @@ import clsx from 'clsx';
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
-export const Footer: React.FC<PropsWithChildren<FooterProps>> = (props) => {
+export const Footer = React.forwardRef<HTMLDivElement, PropsWithChildren<FooterProps>>((props, ref) => {
   return (
-    <div className={clsx('cds-footer-wrapper', style['footer'])}>
+    <div ref={ref} className={clsx('cds-footer-wrapper', style['footer'])}>
       {props.children}
     </div>
   );
-};
+});
+
+Footer.displayName = 'Footer';

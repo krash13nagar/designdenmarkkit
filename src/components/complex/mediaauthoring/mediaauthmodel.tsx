@@ -28,7 +28,8 @@ export const MediaAuthModel: FC<PropsWithChildren<MediaAuthModelProps>> = (
       titleVariant="contained"
       dialogProps={{
         maxWidth: "lg",
-        classes: { paperWidthLg: style['dialogRoot'] },
+        disablePortal: true,
+        classes: { paper: style['dialogRoot'] },
         ...dialogProps
       }}
       dialogContentProps={{ ...dialogContentProps }}

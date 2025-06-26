@@ -89,7 +89,7 @@ export interface MediaAuthModelProps extends MediaAuthoringProps {
   classes?: { root?: string },
   dialogProps?: DialogProps,
   dialogContentProps?: DialogContentProps,
-  container?: HTMLElement
+  container?: DialogProps['container']
 }
 
 export interface MediaAuthLeftSectionProps {

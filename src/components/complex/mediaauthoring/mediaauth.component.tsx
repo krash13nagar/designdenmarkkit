@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import style from './mediaauth.module.scss';
 import { Footer } from '../../composite';
 import PrimeCategory from '../../composite/primecategory/primecategory.component';
@@ -61,7 +61,15 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
+  const [footerHeight, setFooterHeight] = useState(65);
   const reportButtonRef = useRef<HTMLButtonElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (footerRef.current) {
+      setFooterHeight(footerRef.current.clientHeight);
+    }
+  }, []);
 
   const handleReportButtonClick = () => {
     setIsReportPopupOpen(prev => !prev);
@@ -79,8 +87,11 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
 
   return (
     <>
-      <div
+      <DenBox
         className={clsx(style['media-auth-wrapper'], 'cds-media-auth-wrapper')}
+        sx={{
+          height: `calc(100% - ${footerHeight + 2}px)`,
+        }}
       >
         <MediaAuthLeftSection
           src={src}
@@ -106,8 +117,8 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           msid={msid}
           MetadataComp={MetadataComp}
         />
-      </div>
-      <Footer>
+      </DenBox>
+      <Footer ref={footerRef}>
         <DenBox sx={{ flex: 1, pl: '8px !important' }}>
           <DenFormGroup sx={{ flexDirection: 'row' }}>
             {footerCheckBoxList?.length > 0 &&

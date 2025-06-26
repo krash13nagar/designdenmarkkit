@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: row;
   padding: css.pxToRem(16px) 0px 0px css.pxToRem(16px);
-  height: calc(100% - 62px);
   overflow: hidden;
 
   .row {
@@ -87,6 +86,17 @@
   // max-width: 1250px !important;
   // min-width: calc(100vw - 48px);
   // min-height: calc(100vh - 40px) !important;
+
+  height: 100% !important;
+  max-height: calc(100% - 32px) !important;
+  width: 100%;
+  max-width: 1400px !important;
+
+  overflow: visible !important;
+
+  :global(.cds-MuiDialogTitle-root) {
+    border-radius: 4px 4px 0 0;
+  }
 
   .titleRootWrapper {
     padding: 0px !important;
