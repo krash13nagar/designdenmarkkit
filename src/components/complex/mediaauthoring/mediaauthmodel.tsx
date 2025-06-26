@@ -1,13 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
 import style from './mediaauth.module.scss';
-import {
-  DenDialog,
-  DenDialogTitle,
-  DenTypography,
-  DenIconButton,
-  DenDialogContent,
-} from '../../common';
-import CloseIcon from '@mui/icons-material/Close';
+import { CommonDialog } from '../../composite/commondialog';
 import { MediaAuthModelProps } from './mediaauth.types';
 import MediaAuthoring from './mediaauth.component';
 import clsx from 'clsx';
@@ -21,33 +14,32 @@ export const MediaAuthModel: FC<PropsWithChildren<MediaAuthModelProps>> = (
     children = null,
     classes = {},
     dialogProps = {},
+    dialogContentProps = {},
+    container,
     ...rest
   } = props;
 
   return (
-    <DenDialog
+    <CommonDialog
       open={true}
-      maxWidth="lg"
-      classes={{ paperWidthLg: style['dialogRoot'] }}
-      className={clsx(classes.root, 'media-auth-modal-root-cds')}
-      {...dialogProps}
+      handleClose={onClose}
+      title={containerHeader}
+      container={container}
+      titleVariant="contained"
+      dialogProps={{
+        maxWidth: "lg",
+        disablePortal: true,
+        classes: { paper: style['dialogRoot'] },
+        ...dialogProps
+      }}
+      dialogContentProps={{ ...dialogContentProps }}
+      classes={{
+        root: clsx(classes.root, 'media-auth-modal-root-cds'),
+        contentRoot: style['dialogContentWrapper']
+      }}
     >
-      <DenDialogTitle classes={{ root: style['titleRootWrapper'] }}>
-        <div className={style['titleWrapper']}>
-          <div className={style['titleText']}>
-            <DenTypography variant="h6">{containerHeader}</DenTypography>
-          </div>
-          <div className={style['titleIcon']}>
-            <DenIconButton aria-label="close" onClick={onClose}>
-              <CloseIcon />
-            </DenIconButton>
-          </div>
-        </div>
-      </DenDialogTitle>
-      <DenDialogContent classes={{ root: style['dialogContentWrapper'] }}>
-        {children ? children : <MediaAuthoring {...rest} />}
-      </DenDialogContent>
-    </DenDialog>
+      {children ? children : <MediaAuthoring {...rest} />}
+    </CommonDialog>
   );
 };
 export default MediaAuthModel;
