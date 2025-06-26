@@ -35,16 +35,14 @@ export const MediaPrimaryDataForm: FC<MediaPrimaryDataFormProps> = ({
       <EditorTextField key={'caption'} {...mediaCaption} />
       <EditorTextField key={'summary'} {...mediaSummary} />
       <DenTypography className={style['credits']}>Credits</DenTypography>
-      <DenGrid container justifyContent={'space-between'} sx={{marginTop: '14px'}}>
-        <DenGrid item xs={6} className={style['media-grid-field']}>
+      <DenGrid container spacing={2} justifyContent={'space-between'} sx={{marginTop: '14px'}}>
+        <DenGrid item xs={6}>
           <Author {...primaryAuthorProps} />
         </DenGrid>
-        <DenGrid item xs={6} className={style['media-grid-field']}>
+        <DenGrid item xs={6}>
           <Author {...secondaryAuthorProps} />
         </DenGrid>
-      </DenGrid>
-      <DenGrid container sx={{marginTop: '14px'}}>
-        <DenGrid item xs={6} className={style['media-grid-field']}>
+        <DenGrid item xs={6}>
           <AutoCompleteInput {...agencyProps} />
         </DenGrid>
       </DenGrid>
