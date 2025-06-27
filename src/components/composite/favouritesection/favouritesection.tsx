@@ -24,7 +24,7 @@ const FavouriteSection: React.FC<FavouriteSectionProps> = (props) => {
 
         <Popover
           open={Boolean(favAnchorEl)}
-          anchorEl={favAnchorEl?.current}
+          anchorEl={favAnchorEl}
           onClose={handleFavClose}
           anchorOrigin={{
             vertical: 'bottom',

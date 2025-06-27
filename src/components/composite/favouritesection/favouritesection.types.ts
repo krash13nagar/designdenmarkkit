@@ -16,6 +16,6 @@ export interface FavouriteSectionProps {
   anchorElFavourite?: HTMLElement | null;
   handleFavouriteSection?: (event: React.MouseEvent<HTMLElement>) => void;
   handleFavClose?: () => void;
-  favAnchorEl?: RefObject<HTMLElement>;
+  favAnchorEl?: HTMLElement | null;
   renderFavouriteOptions?: (fav: any, index: any) => React.ReactElement;
 }

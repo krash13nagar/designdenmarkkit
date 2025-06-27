@@ -100,7 +100,7 @@ export interface PublishSectionProps {
   publishSectionFilters?: PublishSectionFilter[];
   isTextFieldVisible?: boolean;
   renderOptions?: (props: any, option: any) => React.ReactElement;
-  favAnchorEl?: RefObject<HTMLElement>;
+  favAnchorEl?: HTMLElement | null;
   renderFavouriteOptions?: (fav: any, index: any) => React.ReactElement;
 }
 
