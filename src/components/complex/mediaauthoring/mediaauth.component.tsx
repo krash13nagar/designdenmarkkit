@@ -57,7 +57,8 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     footerCheckBoxList = [],
     onFooterCheckBoxChange = () => { },
     enableReportButton = false,
-    reportButtonProps = {}
+    reportButtonProps = {},
+    mediaUploaderLoaderProps = {}
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
@@ -104,6 +105,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           msid={msid}
           parentMsid={parentMsid}
           slikeId={slikeId}
+          mediaUploaderLoaderProps={mediaUploaderLoaderProps}
         />
         <MediaAuthRightSection
           tabTitleList={tabTitleList}

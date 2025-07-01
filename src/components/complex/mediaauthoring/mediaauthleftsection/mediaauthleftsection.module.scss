@@ -89,4 +89,81 @@
         margin-left: 5px;
     }
 
+    // Media uploader loader styles
+    .media-preview-container {
+        width: 100%;
+        padding: 16px 0;
+        text-align: center;
+        aspect-ratio: 3/2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid #E8E9EC;
+        border-radius: 2px;
+    }
+
+    .media-uploader-container {
+        width: 100%;
+        height: 100%;
+        background-color: #EBEDEF;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 0 16px;
+    }
+
+    .media-uploader-icon {
+        width: 64px;
+        height: 64px;
+        background-color: #FFF;
+        border-radius: 50%;
+    }
+
+    .media-uploader-progress-container {
+        justify-self: flex-end;
+        position: absolute;
+        bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        left: 16px;
+        width: calc(100% - 32px);
+    }
+
+    .media-uploader-progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .media-uploader-progress-text {}
+
+    .media-uploader-progress-percentage {
+        margin-right: 26px
+    }
+
+    .media-uploader-progress-bar {
+        height: 6px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    .media-uploader-progress-bar-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .media-uploader-close-button {
+        flex-shrink: 0;
+        padding: 4px;
+        color: #666;
+
+        &:hover {
+            color: #333;
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+    }
 }
