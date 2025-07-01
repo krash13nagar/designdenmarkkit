@@ -58,6 +58,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     onFooterCheckBoxChange = () => { },
     enableReportButton = false,
     reportButtonProps = {},
+    mediaUploaderLoaderProps = {},
     publishSectionProps = {},
     primaryAuthorProps = {},
     secondaryAuthorProps = {},
@@ -110,6 +111,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           parentMsid={parentMsid}
           slikeId={slikeId}
           thumbComp={thumbComp}
+          mediaUploaderLoaderProps={mediaUploaderLoaderProps}
         />
         <MediaAuthRightSection
           tabTitleList={tabTitleList}

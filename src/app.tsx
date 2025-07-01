@@ -652,6 +652,17 @@ const App = (props: AppProps) => {
         {...testMediaConfig}
         selectedTab={selectedTab}
         handleTabChange={setSelectedTab}
+        mediaUploaderLoaderProps={{
+          showProgress: true,
+          progressText: "Uploading",
+          progressValue: 40,
+          onClose: () => {
+            console.log('Close test');
+          },
+          onUpload: () => {
+            console.log('Upload');
+          },
+        }}
       />
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}

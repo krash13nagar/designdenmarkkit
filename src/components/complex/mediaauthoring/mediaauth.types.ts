@@ -66,6 +66,15 @@ export interface MediaAuthoringProps
     dropdownLabel?: string,
     dropdownOptions?: { id: string | number, label: string, value: string }[],
     dropdownDefaultOption?: string,
+  },
+  mediaUploaderLoaderProps?: {
+    showProgress?: boolean,
+    progressText?: string,
+    progressValue?: number,
+    isFileUploadInProgress?: boolean,
+    uploadComplete?: boolean,
+    onClose?: () => void,
+    onUpload?: () => void
   }
   publishSectionProps?: any;
   primaryAuthorProps?: any;
@@ -109,7 +118,8 @@ export interface MediaAuthLeftSectionProps {
   msid?: string,
   parentMsid?: MediaAuthoringProps['parentMsid'],
   slikeId?: MediaAuthoringProps['slikeId'],
-  thumbComp?: MediaAuthoringProps['thumbComp']
+  thumbComp?: MediaAuthoringProps['thumbComp'],
+  mediaUploaderLoaderProps?: MediaAuthoringProps['mediaUploaderLoaderProps']
 }
 
 export interface MediaAuthRightSectionProps {
