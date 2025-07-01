@@ -20,6 +20,10 @@ export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
   keywordConfig,
   classes = {},
   MetadataComp,
+  publishSectionProps={},
+  primaryAuthorProps={},
+  secondaryAuthorProps={},
+  agencyProps={}
 }) => {
   const handleChange = (event: React.SyntheticEvent, value: any) => {
     handleTabChange(value);
@@ -47,6 +51,10 @@ export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
             mediaSummary={mediaSummary}
             titleForUrl={titleForUrl}
             msid={msid}
+            publishSectionProps={publishSectionProps}
+            primaryAuthorProps={primaryAuthorProps}
+            secondaryAuthorProps={secondaryAuthorProps}
+            agencyProps={agencyProps}
           />
         )}
         {selectedTab == TAB_MAP.keywords && (

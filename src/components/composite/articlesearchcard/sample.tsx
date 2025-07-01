@@ -92,6 +92,6 @@ export const articleSearchCardSample2 = {
     }
     ],
     handleOpenInNew: () => { console.log("open in new clicked!") },
-    selected: true
+    selected: true,
 }
 

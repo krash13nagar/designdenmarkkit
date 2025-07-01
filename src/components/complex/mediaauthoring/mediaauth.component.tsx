@@ -58,7 +58,11 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     onFooterCheckBoxChange = () => { },
     enableReportButton = false,
     reportButtonProps = {},
-    mediaUploaderLoaderProps = {}
+    mediaUploaderLoaderProps = {},
+    publishSectionProps = {},
+    primaryAuthorProps = {},
+    secondaryAuthorProps = {},
+    agencyProps = {}
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
@@ -118,6 +122,10 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           keywordConfig={keywordConfig}
           msid={msid}
           MetadataComp={MetadataComp}
+          publishSectionProps={publishSectionProps}
+          primaryAuthorProps={primaryAuthorProps}
+          secondaryAuthorProps={secondaryAuthorProps}
+          agencyProps={agencyProps}
         />
       </DenBox>
       <Footer ref={footerRef}>

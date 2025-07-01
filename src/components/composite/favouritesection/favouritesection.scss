@@ -1,0 +1,108 @@
+.article3-fav-wrapper {
+    position: relative;
+   .fav-icon{
+     cursor: pointer;
+        &.active {
+            color: #1596d1;
+        }
+  }
+}
+
+.article-favourite-section-popover {
+    .fav-content-area {
+      max-height: 300px;
+      width:100%;
+      display: flex;
+      flex-direction: column;
+      
+      &:hover .tooltiptext {
+        visibility: visible;
+      }
+
+      padding:8px;
+
+      li {
+        padding:8px;
+        cursor: pointer;
+        &:hover {
+          background-color: #0F89FF1A;
+        }
+
+        &:not(:first-child) {
+          border-top: 1px solid #F2F4F6;
+        }
+      }
+      
+      }
+      
+      .chip{
+        background-color: #fff !important;
+        color: #43425D !important;
+        margin-bottom: 5px !important;
+        .vc-MuiChip-label{
+          width: 150px;
+          font-size: 0.85rem;
+        }
+    }
+    .icon_Itimes {background-position: 0 0 !important;}
+    .icon_TOIonline {background-position: -18px 0 !important;}
+    .icon_NBT-ONLINE {background-position: -36px 0 !important;}
+    .icon_MumbaiMirror {background-position: -54px 0 !important;}
+    .icon_MTOnline {background-position: -72px 0 !important;}
+    .icon_AhmedabadMirror {background-position: -90px 0 !important;}
+    .icon_IndiatimesVijayKarnataka {background-position: -108px 0 !important;}
+    .icon_FeminaMissIndia {background-position: -126px 0 !important;}
+    .icon_ET-hfi {background-position: -144px 0 !important;}
+    .icon_ZoomTv {background-position: -162px 0 !important;}
+    .icon_Astrospeak {background-position: -180px 0 !important;}
+    .icon_BangaloreMirror {background-position: -198px 0 !important;}
+    .icon_BangloreMirror {background-position: -198px 0 !important;}
+    .icon_BombayTimes {background-position: -216px 0 !important;}
+    .icon_FilmiPop {background-position: -234px 0 !important;}
+    .icon_BusinessInsider {background-position: 0px -16px !important;}
+    .icon_CricketNext {background-position:-18px -16px !important;}
+    .icon_eisamay {background-position:-36px -16px !important;}
+    .icon_ETAuto {background-position: -54px -16px !important;}
+    .icon_ETBFSI {background-position: -72px -16px !important;}
+    .icon_ETCIO {background-position: -90px -16px !important;}
+    .icon_ETEnergy {background-position: -108px -16px !important;}
+    .icon_ETHealthcare {background-position:-126px -16px !important;}
+    .icon_ETRetail {background-position:-144px -16px !important;}
+    .icon_ETTelecom {background-position:-162px -16px !important;}
+    .icon_ETPortfolio {background-position:-180px -16px !important;}
+    .icon_Gizmodo {background-position: -198px -16px !important;}
+    .icon_Lifehacker {background-position:-216px -16px !important;}
+    .icon_Malayalam {background-position:-234px -16px !important;}
+    .icon_NavgujaratSamay {background-position:-0px -32px !important;}
+    .icon_PuneMirror {background-position: -18px -32px !important;}
+    .icon_Tamil {background-position:-36px -32px !important;}
+    .icon_GadgetsNow {background-position:-54px -32px !important;}
+    .icon_Formula1 {background-position:-72px -32px !important;}
+    .icon_IPL {background-position:-90px -32px !important;}
+    .icon_misskyra {background-position: -108px -32px !important;}
+    .icon_TechRadar {background-position: -126px -32px !important;}
+    .icon_Techspot {background-position: -144px -32px !important;}
+    .icon_TimesSocialAwards {background-position:-180px -32px !important;}
+    .icon_TimesFood {background-position:-198px -32px !important;}
+    .icon_TimesMusic {background-position: -216px -32px !important;}
+    .icon_bband {background-position:-234px -32px !important;}
+    .icon_IndiatimesPhotogallery {background-position: -0px -48px !important;}
+    .icon_TimesNow {background-position: -18px -48px !important;}
+    
+    
+    .favouriteIconsImg {
+      display: inline-flex;
+       img {
+        width: 24px;
+        margin-left: 2px;
+     }
+    }
+    
+    .channelSpriteIconWs{
+      zoom: 0.9;
+    }  
+}
+
+.favourite-section-popover-lhs{
+  left: 419px !important;
+}

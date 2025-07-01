@@ -76,6 +76,10 @@ export interface MediaAuthoringProps
     onClose?: () => void,
     onUpload?: () => void
   }
+  publishSectionProps?: any;
+  primaryAuthorProps?: any;
+  secondaryAuthorProps?: any;
+  agencyProps?: any;
 }
 
 export interface ActionButton {
@@ -127,7 +131,11 @@ export interface MediaAuthRightSectionProps {
   mediaSummary: MediaAuthoringProps['mediaSummary'];
   keywordConfig: keywordsWrapperConfig;
   classes?: { root?: string },
-  MetadataComp?: MediaAuthoringProps["MetadataComp"]
+  MetadataComp?: MediaAuthoringProps["MetadataComp"],
+  publishSectionProps?: any,
+  primaryAuthorProps?: any,
+  secondaryAuthorProps?: any,
+  agencyProps?: any
 }
 
 export interface JustificationProps extends TextFieldProps {
@@ -141,5 +149,9 @@ export interface MediaPrimaryDataFormProps {
   mediaCaption: MediaAuthoringProps['mediaCaption'];
   mediaSummary: MediaAuthoringProps['mediaSummary'];
   classes?: { root?: string },
+  publishSectionProps?: any,
+  primaryAuthorProps?: any,
+  secondaryAuthorProps?: any,
+  agencyProps?: any
 }
 
