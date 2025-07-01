@@ -17,5 +17,6 @@ export interface EditorTextfieldProps {
   autoFocus?: boolean,
   shrinkLabel?: boolean,
   classes?: { root?: string },
-  small?: boolean
+  small?: boolean,
+  editorOptionsType?: 'title' | 'caption'
 }

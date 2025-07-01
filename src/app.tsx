@@ -4,10 +4,8 @@
  */
 
 import React, { useState } from 'react';
-import TestCommon from './testcommon';
 import DenLink from './components/common/link/link.component';
-import { DenTypography, ImagePreview, RichStoryCard } from './components';
-import { Cancel } from './assets';
+import { DenTypography } from './components';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
 import {
@@ -18,11 +16,11 @@ import {
 } from './components/complex/keywords/keywords.types';
 import { richStoryCardSample } from './components/composite/richstorycard/sample';
 import { ImageAuthModel } from './components/complex/imageauth';
+import { MediaAuthModel } from './components/complex/mediaauthoring';
 import '../src/styles/storybookBasesStyles.scss';
 import { IMAGE_AUTH_TABS } from './components/complex/imageauth/imageauth.constants';
 import CropOutlinedIcon from '@mui/icons-material/CropOutlined';
 import { AutocompleteInputProps } from './components/common/autocompleteinput/autocompleteinput.types';
-import CustomSpeedDial from './components/composite/customspeeddial/customspeeddial.component';
 import { ButtonProps } from '@mui/material/Button';
 import { DenThemeProvider } from './styles';
 import { ImageAuthoringTheme } from './styles/themes/denmarktheme';
@@ -217,7 +215,171 @@ export const test = {
     console.log(val);
   },
   metaClassName: 'cds-column-6',
-  enableReportButton: true,
+  enableReportButton: false,
+  reportButtonProps: {
+    onConfirm: (value: string) => {
+      console.log(value);
+    },
+    onCancel: () => {
+      console.log('Cancel');
+    },
+    title: "Report this image to ensure it is permanently removed from future search results.",
+    dropdownLabel: 'Please specify the reason for your report',
+    dropdownOptions: [{ id: 1, label: 'Irrelevant Image', value: 'Irrelevant Image' }, { id: 2, label: 'Incorrect Image', value: 'Incorrect Image' }],
+    dropdownDefaultOption: 'Select',
+  },
+};
+
+export const testMedia = {
+  primeCategoryLabel: 'Prime Category',
+  handlePrimeChange: () => { },
+  isPublished: false,
+  primeType: 0,
+  isPrimeEnable: true,
+  primeCategories: [
+    {
+      categoryId: 100,
+      category: 'Prime Category 1',
+    },
+  ],
+  actionButtonsList: [
+    {
+      label: 'Secondary',
+      onClick: () => { },
+      variant: 'outlined' as ButtonProps['variant'],
+      color: 'secondary' as ButtonProps['color'],
+    },
+    {
+      label: 'Primary',
+      onClick: () => { },
+      variant: 'contained' as ButtonProps['variant'],
+      color: 'primary' as ButtonProps['color'],
+    },
+  ],
+  showAgencyMessage: true,
+  agencyMessage: 'Test Agency Message',
+  showBylineMessage: true,
+  bylineMessage: 'Test Byline Message',
+  /*
+   *Seperated publish date
+   */
+  publishDate: {
+    PublishModalTitle: 'Publish and Expiry Date',
+    onAutoCorrect: () => { },
+    onReset: () => { },
+    onClose: () => { },
+    onDone: () => { },
+    preventCloseOnDone: false,
+    overrideClose: '',
+    callback: () => { },
+    publishDateLabel: 'Publish Date',
+    publishDate: 1693819795753,
+    expiresIn: 1693824566621,
+    artInsDate: 1693824566621,
+    artUpdDate: 1693824566621,
+  },
+
+  activationStatusOptions: [
+    { title: 'INACTIVE', value: 'INACTIVE' },
+    { title: 'PENDING', value: 'PENDING_FOR_APPROVAL' },
+    { title: 'ACTIVE', value: 'ACTIVE' },
+    { title: 'CLOSED', value: 'CLOSED' },
+    { title: 'IGNORE', value: 'IGNORE' },
+  ],
+  activationChangeHandle: () => { },
+  activationStatus: '0',
+  showActivationStatusEditIcon: true,
+  onActivationStatusEditIconClick: () => {
+    console.log('Activation status edit button click');
+  },
+  activationStatusEditIconTitle: 'Status History',
+  mediaCaption: {
+    title: 'Media Caption',
+    error: '',
+    childError: '',
+    childWarning: '',
+    onChange: (str: string) => { },
+    width: '100%',
+    height: '200px',
+    value: '<div>Caption value</div>',
+  },
+  mediaSummary: {
+    title: 'Media Summary',
+    error: '',
+    childError: '',
+    childWarning: '',
+    onChange: (str: string) => { },
+    width: '100%',
+    height: '200px',
+    value: '<div>Summary value</div>',
+  },
+  titleForUrl: {
+    seoTitleProps: {
+      label: 'Title for URL',
+      value: 'seo title',
+      onChange: () => console.log(''),
+      fullWidth: true,
+    },
+    overrideLinkProps: {
+      label: 'Override Link',
+      value: 'test Override link',
+      onChange: () => console.log(''),
+      fullWidth: true,
+    },
+  },
+  title: {
+    title: 'Media Title',
+    error: 'test error',
+    childError: '',
+    childWarning: '',
+    onChange: (str: string) => { },
+    required: true,
+    width: '100%',
+    value: 'Title value',
+  },
+  tabTitleList: IMAGE_AUTH_TABS,
+  src: 'https://picsum.photos/1600/800',
+  metaInformation: [
+    { label: 'Original Resolutions', value: '120x120 px' },
+    { label: 'Original File Size', value: '31KB' },
+    { label: 'Type', value: 'jpeg' },
+    { label: 'Original Resolutions', value: '120x120 px' },
+    { label: 'Original Resolutions', value: '120x120 px' },
+    { component: <p>This is a test</p> },
+  ],
+  msid: '123456',
+  parentMsid: '987656',
+  slikeId: '123456789',
+  keywordConfig: config,
+  imageCTAs: [
+    { Icon: CropOutlinedIcon, label: 'Crop Image', value: 'crop' },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Download',
+      value: [
+        { label: 'Webp', value: 'webp' },
+        { label: 'Jpeg', value: 'jpeg' },
+      ],
+    },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Replace',
+      value: [
+        { label: 'Upload now', value: 'upload' },
+        { label: 'Search', value: 'search' },
+      ],
+    },
+    {
+      Icon: CropOutlinedIcon,
+      label: 'Set as thumbnail',
+      value: 'setThumbnail',
+    },
+  ],
+  handleItemClick: (val: any) => {
+    console.log(val);
+  },
+  metaClassName: 'cds-column-6',
+  enableReportButton: false,
   reportButtonProps: {
     onConfirm: (value: string) => {
       console.log(value);
@@ -279,14 +441,6 @@ const App = (props: AppProps) => {
             source: 'Orion',
           });
         }
-        // else if(tmplist[i] && tmplist[i].botKeyword) {
-        //     tmplist.push({
-        //         "keyEnum": "General",
-        //         "keywordName": element.trim(),
-        //         "relevance": 20,
-        //         "source": "Orion"
-        //     })
-        // }
       }
     });
     setAddKeywords(tmplist);
@@ -472,20 +626,32 @@ const App = (props: AppProps) => {
       });
     },
   };
-  const [isNotRelatedToAgency, setIsNotRelatedToAgency] = useState(false);
+
+  const testMediaConfig = {
+    ...testMedia,
+    keywordConfig: kewordConfig,
+    footerCheckBoxList: footerCheckBoxList,
+    onFooterCheckBoxChange: ({
+      checked,
+      index,
+    }: {
+      checked: boolean;
+      index: number | string;
+    }) => {
+      setFooterCheckBoxList((list) => {
+        const newList = [...list];
+        newList[index as number].checked = checked;
+        return newList;
+      });
+    },
+  }
 
   return (
     <DenThemeProvider theme={ImageAuthoringTheme}>
-      <ImageAuthModel
-        {...testConfig}
+      <MediaAuthModel
+        {...testMediaConfig}
         selectedTab={selectedTab}
         handleTabChange={setSelectedTab}
-        isNotRelatedToAgency={isNotRelatedToAgency}
-        handleNotRelatedToAgencyChange={(
-          e: React.ChangeEvent<HTMLInputElement>
-        ) => {
-          setIsNotRelatedToAgency(e.target.checked);
-        }}
       />
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}

@@ -1,0 +1,133 @@
+@use '../../../styles/' as css;
+
+@mixin wrapperPadding {
+  padding: 0;
+}
+
+.media-auth-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: css.pxToRem(16px) 0px 0px css.pxToRem(16px);
+  overflow: hidden;
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    // margin: 10px 5px;
+
+    .column {
+      font: normal normal normal 10px/18px 'source sans 3', sans-serif !important;
+      letter-spacing: 0px;
+      // margin: 10px 0px;
+
+      &-12 {
+        flex-basis: 100%;
+      }
+
+      &-6 {
+        flex-basis: 50%;
+      }
+
+      &-4 {
+        flex-basis: 33.33%;
+      }
+
+      &-3 {
+        flex-basis: 25%;
+      }
+    }
+  }
+
+
+  .error-with-icon {
+    svg {
+      width: 15px;
+      height: 15px;
+      margin: -4px 4px;
+      top: 5px;
+    }
+
+    .errormessage {
+      color: #43425D;
+      background: rgba(221, 0, 0, 0.1);
+      padding: 2px;
+      font-weight: 600;
+      letter-spacing: 0px;
+    }
+  }
+}
+
+.custom-select-root {
+  border-bottom: unset !important;
+
+  ::after {
+    content: none !important;
+    border-bottom: 0px !important;
+  }
+}
+
+
+
+.dialogContentWrapper {
+  padding: 0px !important;
+
+  // .media-auth-wrapper {
+  //   height: calc(100vh - css.pxToRem(150px));
+  // }
+
+  // .primary-data-wrapper {
+  //   height: calc(100vh - 220px) !important;
+  // }
+}
+
+.dialogRoot {
+  // max-width: 1250px !important;
+  // min-width: calc(100vw - 48px);
+  // min-height: calc(100vh - 40px) !important;
+
+  height: 100% !important;
+  max-height: calc(100% - 32px) !important;
+  width: 100%;
+  max-width: 1400px !important;
+
+  overflow: visible !important;
+
+  :global(.cds-MuiDialogTitle-root) {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .titleRootWrapper {
+    padding: 0px !important;
+
+    .titleWrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: #102563;
+      color: #fff;
+
+      .titleText {
+        flex: 1;
+        padding-left: 2rem;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+      .titleIcon {
+        button {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+// @media screen and (min-width: 1350px) {
+//   .dialogRoot {
+//     max-width: 1302px !important;
+//     width: 1302px !important;
+//   }
+// }
