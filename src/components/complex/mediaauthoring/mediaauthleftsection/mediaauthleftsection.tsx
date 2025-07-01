@@ -19,6 +19,7 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
   msid,
   parentMsid,
   slikeId,
+  thumbComp
 }) => {
   return (
     <div className={clsx(style['media-auth-left-panel'], classes.root)}>
@@ -80,6 +81,9 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
               />
             );
           })}
+      </div>
+      <div className={clsx(style['media-auth-left-section-thumbnail'])}>
+        {thumbComp}
       </div>
     </div>
   );

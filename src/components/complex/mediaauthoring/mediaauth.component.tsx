@@ -61,7 +61,8 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     publishSectionProps = {},
     primaryAuthorProps = {},
     secondaryAuthorProps = {},
-    agencyProps = {}
+    agencyProps = {},
+    thumbComp
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
@@ -108,6 +109,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           msid={msid}
           parentMsid={parentMsid}
           slikeId={slikeId}
+          thumbComp={thumbComp}
         />
         <MediaAuthRightSection
           tabTitleList={tabTitleList}

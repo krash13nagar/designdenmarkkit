@@ -71,6 +71,7 @@ export interface MediaAuthoringProps
   primaryAuthorProps?: any;
   secondaryAuthorProps?: any;
   agencyProps?: any;
+  thumbComp?: ReactNode;
 }
 
 export interface ActionButton {
@@ -108,7 +109,7 @@ export interface MediaAuthLeftSectionProps {
   msid?: string,
   parentMsid?: MediaAuthoringProps['parentMsid'],
   slikeId?: MediaAuthoringProps['slikeId'],
-
+  thumbComp?: MediaAuthoringProps['thumbComp']
 }
 
 export interface MediaAuthRightSectionProps {
