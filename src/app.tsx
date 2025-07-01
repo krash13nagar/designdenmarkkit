@@ -663,6 +663,19 @@ const App = (props: AppProps) => {
             console.log('Upload');
           },
         }}
+        primaryAuthorProps={{
+          bylineAutocompleteProps: {
+            title: 'Primary Author',
+          }
+        }}
+        secondaryAuthorProps={{
+          bylineAutocompleteProps: {
+            title: 'Secondary Author',
+          }
+        }}
+        agencyProps={{
+          title: 'Agency',
+        }}
       />
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}
