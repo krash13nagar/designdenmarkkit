@@ -1,0 +1,350 @@
+.seoKeywordsWrapper {
+    .seoAddedKeywords {
+      .addedKeywordsWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .added-keywords {
+          font: normal normal 600 14px/20px 'Source Sans 3';
+          color: #2b2b2b;
+          display: flex;
+          align-items: center;
+          .preview_seprator{
+            background-color:#D2D8DF;
+            width: 1px;
+            height: 15px;
+            margin: 2.5px 8px;
+          }
+          .seo_complianticon{
+            display: flex;
+            align-items: center;
+            margin-left: 4px;
+          }
+        }
+  
+        .autoAdd-keywords {
+          display: flex;
+  
+          .autoAdd-label {
+            font: normal normal 12px/14px 'Source Sans 3';
+            color: #0f89ff;
+  
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+  
+          .seperator {
+            color: #e5e9ed;
+            margin: 0 4px 0 4px;
+            width: 1px;
+            border-right: 1px solid #e5e9ed;
+          }
+  
+          .clearAll {
+            font: normal normal 12px/14px 'Source Sans 3';
+            color: #dc3545;
+            cursor: pointer;
+          }
+        }
+      }
+  
+      .no-keywords {
+        font: normal normal normal 12px/17px 'Source Sans 3';
+        color: #818181;
+        margin-top: 21px;
+        margin-bottom: 20px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px dashed #E5E9ED;
+        border-radius: 4px;
+      }
+  
+      .addedKeywordsChips {
+        display: flex;
+        gap: 8px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        margin-top: 16px;
+  
+        .added-chip {
+          background-color: #e5f3ff;
+          border-radius: 2px;
+          border: none;
+          max-width: 155px;
+          font: normal normal 12px/13px 'Source Sans 3';
+          color: #2b2b2b;
+          height: 24px;
+          position: relative;
+  
+          &:hover {
+            background: #e5f3ff;
+            color: #0f89ff;
+  
+            .chipIconBox {
+              .chipDefaultIcon {
+                display: inherit;
+              }
+  
+              .chipStarIcon {
+                display: none;
+              }
+            }
+          }
+  
+          .cds-MuiChip-label {
+            padding-left: 20px;
+            padding-right: 13px;
+          }
+  
+          .chipIconBox {
+            display: flex;
+            position: absolute;
+            left: 0;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s ease;
+            margin-left: 3px;
+  
+            .chipDefaultIcon {
+              display: none;
+            }
+  
+            .chipStarIcon {
+              display: inherit;
+            }
+          }
+          .deleteIconBox {
+            display: flex;
+            border-radius: 50%; 
+            margin-right: 9px !important;
+            z-index: 2;
+          }
+        }
+      }
+    }
+  
+    .searchKeywordWrapper {
+      margin-top: 17px;
+      display: flex;
+  
+      .search-keyword {
+        position: relative;
+        width: 100%;
+  
+        .textField-cls {
+          .cds-MuiInputBase-root {
+            padding-right: 0;
+            border-radius: 2px;
+          }
+        }
+  
+        .keyword-suggestion-wrapper {
+          position: absolute;
+          width: 100%;
+          max-height: 200px;
+          overflow: auto;
+          z-index: 10;
+  
+          .keyword-suggestion-menuitem {
+            padding: 6px;
+            justify-content: space-between;
+            font: normal normal medium 12px/24px 'Source Sans 3';
+  
+            [class*="MuiTypography-body1"] {
+              font: inherit;
+            }
+          }
+  
+          .keyword-source{
+            width: 35px;
+            height: 16px;
+            border: 1px solid #E5E9EC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #818181;
+            margin-right: 80px;
+            font-family: 'Source Sans 3';
+          }
+        }
+      }
+  
+      .add-btn {
+        border: 1px solid #0f89ff;
+        border-radius: 2px;
+        margin-left: 4px;
+      }
+    }
+  
+    .suggest-keywords {
+      margin-top: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      font: normal normal 12px/17px 'Source Sans 3';
+      color: #0f89ff;
+  
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  
+    .no-recommendation {
+      margin-top: 20px;
+      margin-bottom: 21px;
+      margin-left: 20px;
+      margin-right: 20px;
+      height: 24px;
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      border: 1px dashed #E5E9ED;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      font: normal normal 12px/17px 'Source Sans 3';
+      color: #818181;
+      align-items: center;
+    }
+  
+    .suggestError {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16px;
+      margin-bottom: 16px;
+  
+      .suggestError-title {
+        font: normal normal 12px / 17px 'Source Sans 3';
+        color: #818181;
+      }
+  
+      .suggestError-retry-wrapper {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+  
+        .suggestError-icon {
+          display: flex;
+        }
+  
+        .suggestError-retry {
+          font: normal normal 12px/17px 'Source Sans 3';
+          color: #0F89FF;
+          cursor: pointer;
+        }
+      }
+    }
+  
+    .suggestKeywordsChips {
+      display: flex;
+      gap: 8px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
+      margin-top: 16px;
+      margin-bottom: 18px;
+  
+      .recommend-chip {
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border: 1px solid #e5e9eb;
+        border-radius: 2px;
+        max-width: 145px;
+        height: 24px;
+        font: normal normal 500 12px/13px 'Source Sans 3';
+        color: #4d4d4d;
+  
+        &:hover {
+          color: #0f89ff;
+        }
+      }
+    }
+  
+    .meta-container {
+      width: 100%;
+      margin: 20px auto;
+  
+      .meta-container-title {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+  
+        .meta-title {
+          font: normal normal 600 12px/17px 'Source Sans 3';
+          color: #2b2b2b;
+        }
+  
+        .meta-auto-add-clearAll-wrapper {
+          display: flex;
+  
+          .auto-add-metas {
+            font: normal normal 12px/14px 'Source Sans 3';
+            color: #0f89ff;
+  
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+  
+          .seperator {
+            color: #e5e9ed;
+            margin: 0 4px 0 4px;
+            width: 1px;
+            border-right: 1px solid #e5e9ed;
+          }
+  
+          .clear-all {
+            font: normal normal 12px/14px 'Source Sans 3';
+            color: #dc3545;
+            cursor: pointer;
+          }
+        }
+      }
+  
+      .metaTitle-txtfield {
+        input {
+          font: normal normal 500 13px/13px 'Source Sans 3';
+          color: #2b2b2b;
+        }
+      }
+  
+      .metaKeyword-txtfield input {
+        font: normal normal 500 13px/13px 'Source Sans 3';
+        color: #2b2b2b;
+      }
+  
+      .metaDescrptn-txtfield input {
+        font: normal normal 500 13px/13px 'Source Sans 3';
+        color: #2b2b2b;
+      }
+  
+      .meta-keywords-title {
+        font: normal normal 600 12px/17px 'Source Sans 3';
+        color: #2b2b2b;
+        margin-bottom: 8px;
+      }
+  
+      .meta-description-title {
+        font: normal normal 600 12px/17px 'Source Sans 3';
+        color: #2b2b2b;
+        margin-bottom: 8px;
+      }
+    }
+  
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
