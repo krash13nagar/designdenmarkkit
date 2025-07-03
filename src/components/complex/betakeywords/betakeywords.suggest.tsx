@@ -15,7 +15,7 @@ const SkeletonWrap = () => {
   );
 };
 
-const BetaKeywordsSuggestions = (props: BetaKeywordsSuggestionsProps) => {
+export const BetaKeywordsSuggestions = (props: BetaKeywordsSuggestionsProps) => {
   const {
     text,
     suggestedData,

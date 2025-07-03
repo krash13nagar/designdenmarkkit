@@ -3,7 +3,7 @@ import styles from './betakeywords.module.scss';
 import { BetaKeywordsAddedChipsProps, KeywordItem } from './betakeywords.types';
 import { DenBox, DenChip } from '../../common';
 
-const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
+export const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
   const {
     keywords,
     removeCallbackFn = () => {},

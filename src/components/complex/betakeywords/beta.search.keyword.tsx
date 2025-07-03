@@ -3,7 +3,7 @@ import { BetaSearchKeywordProps } from "./betakeywords.types";
 import { DenTextField } from "../../common";
 import styles from './betakeywords.module.scss';
 
-const BetaSearchKeyword = (props: BetaSearchKeywordProps) => {
+export const BetaSearchKeyword = (props: BetaSearchKeywordProps) => {
     const { 
         bautocomplete, 
         label, 

@@ -4,7 +4,7 @@ import { KeywordItem, BetaRecommendChipsProps } from './betakeywords.types';
 import { DenBox, DenChip, DenCircularProgress } from '../../common';
 import _ from 'lodash';
 
-const BetaRecommendChips = (props: BetaRecommendChipsProps) => {
+export const BetaRecommendChips = (props: BetaRecommendChipsProps) => {
   const {
     suggestedChips,
     addSuggestedChipFn,

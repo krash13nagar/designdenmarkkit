@@ -7,7 +7,7 @@ import styles from './betakeywords.module.scss';
 import { BetaKeywordsMetaFieldsProps } from './betakeywords.types';
 import { DenBox, DenTextField, DenTypography } from '../../common';
 
-const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
+export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
   const {
     metaDescriptionPlaceholder,
     metaDescriptionLabel,

@@ -5,7 +5,7 @@ import { DenButton } from '../../common';
 import { BetaSearchKeywordWrapperProps } from './betakeywords.types';
 import styles from './betakeywords.module.scss';
 
-const BetaSearchKeywordWrapper = (props: BetaSearchKeywordWrapperProps) => {
+export const BetaSearchKeywordWrapper = (props: BetaSearchKeywordWrapperProps) => {
   const { searchKeywordConfig, addBtnConfig } = props;
   const [val, setval] = useState<string>('');
   const [focus, setFocus] = useState<boolean>(false);
