@@ -14,6 +14,94 @@ export const NonStarKeywordIcon = () => {
   );
 }
 
+export const StarIcon = (props: { width?: number, height?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width || 13}
+    height={props.height || 13.13}
+    viewBox="0 0 10.675 10.025"
+  >
+    <path
+      id="kid_star_24dp_818181_FILL0_wght300_GRAD0_opsz24"
+      d="M104.114-856.4l-3.056,1.018a.2.2,0,0,0-.132.132.183.183,0,0,0,.029.183l1.969,2.779-.073,2.986a.192.192,0,0,0,.077.174.194.194,0,0,0,.186.032l3.137-.881,3.137.9a.2.2,0,0,0,.187-.032.192.192,0,0,0,.077-.173l-.073-3,1.969-2.746a.183.183,0,0,0,.029-.183.2.2,0,0,0-.132-.132l-3.056-1.052-1.977-2.609a.185.185,0,0,0-.161-.084.185.185,0,0,0-.161.084ZM106.251-854.076Z"
+      transform="translate(-100.914 859.09)"
+      fill="#ffce53"
+    />
+  </svg>
+);
+
+export const StarHoverIcon = (props: { width?: number, height?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={13}
+    height={13.13}
+    viewBox="0 0 10.675 10.025"
+    {...props}
+  >
+    <path
+      id="kid_star_24dp_818181_FILL0_wght300_GRAD0_opsz24"
+      d="M104.114-856.4l-3.056,1.018a.2.2,0,0,0-.132.132.183.183,0,0,0,.029.183l1.969,2.779-.073,2.986a.192.192,0,0,0,.077.174.194.194,0,0,0,.186.032l3.137-.881,3.137.9a.2.2,0,0,0,.187-.032.192.192,0,0,0,.077-.173l-.073-3,1.969-2.746a.183.183,0,0,0,.029-.183.2.2,0,0,0-.132-.132l-3.056-1.052-1.977-2.609a.185.185,0,0,0-.161-.084.185.185,0,0,0-.161.084ZM106.251-854.076Z"
+      transform="translate(-100.914 859.09)"
+      fill="#ffce53"
+      stroke="#B3B3B3"
+      strokeWidth="1"
+    />
+  </svg>
+);
+
+export const CrossIcon = (props: { width?: number, height?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width ? props.width : 15}
+    height={props.height ? props.height : 15}
+    viewBox="0 0 16 16"
+  >
+    <g
+      id="Group_164169"
+      data-name="Group 164169"
+      transform="translate(24551 4892)"
+    >
+      <path
+        id="Path_39244"
+        data-name="Path 39244"
+        d="M8,0A8,8,0,1,1,0,8,8,8,0,0,1,8,0Z"
+        transform="translate(-24551 -4892)"
+        fill="#fff"
+      />
+      <g
+        id="Group_1648"
+        data-name="Group 1648"
+        transform="translate(-24547 -4888.023)"
+      >
+        <path
+          id="Path_846"
+          data-name="Path 846"
+          d="M9.2,17.26l8-8.063"
+          transform="translate(-9.197 -9.197)"
+          fill="none"
+          stroke="#4d4d4d"
+          strokeLinecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+          strokeWidth="1.2"
+        />
+        <path
+          id="Path_847"
+          data-name="Path 847"
+          d="M9.2,9.2l8,8.063"
+          transform="translate(-9.197 -9.197)"
+          fill="none"
+          stroke="#4d4d4d"
+          strokeLinecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+          strokeWidth="1.2"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
 export const StarKeywordIcon = () => {
   return (
     <>
@@ -74,11 +162,15 @@ export const betaKeywordsConfig = {
   addedKeywordsConfig: {
     label: 'Added Keywords',
     noKeywordsLabel: "Please add relevant keywords or choose from recommendations (min 5, max 10 keywords).",
-    isAutoAddKeywordLoading: false,
+    isAutoAddKeywordLoading: true,
     isAutoAddEnable: true,
     autoAddLabel: 'Auto Add',
     clearAllLabel: 'Clear All',
     showArticlePreview: false,
+    crossIcon: <CrossIcon />,
+    starIcon: <StarIcon />,
+    starHoverIcon: <StarHoverIcon />,
+    apiError: false,
     handleAutoAddBtn: function () {
       console.log('handle auto add btn');
     },

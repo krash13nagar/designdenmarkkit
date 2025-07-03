@@ -55,6 +55,12 @@ const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
                 }}
                 deleteIcon={<DenBox className={styles.deleteIconBox}>{crossIcon}</DenBox>}
                 classes={{ root: styles['added-chip'] }}
+                sx={{
+                  "& .cds-MuiChip-label": {
+                    paddingLeft: "20px",
+                    paddingRight: "13px",
+                  },
+                }}
               />
             );
           })}
