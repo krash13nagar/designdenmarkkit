@@ -6,6 +6,10 @@
     max-height: inherit;
     height: 100%;
 
+    :global(.cds-MuiInputLabel-root){
+        font: normal normal 600 12px/17px 'Source Sans 3' !important;
+        color: #2B2B2B !important;
+    }
     .msid {
         font: normal normal 600 14px/20px "Source Sans 3";
         color: #4D4D4D;

@@ -12,6 +12,7 @@ export const Author: React.FC<AuthorProps> = ({
     errorMessage = '',
     bylineAutocompleteProps = {},
     isError = false,
+    autoCompleteRef=null
 }) => {
     return (
         <DenBox
@@ -73,7 +74,7 @@ export const Author: React.FC<AuthorProps> = ({
               ))}
             </DenSelect>
           )}
-          <DenBox sx={{ flex: 1 }}>
+          <DenBox sx={{ flex: 1}} ref={autoCompleteRef}>
             <AutoCompleteInput wrapperClass='autocomplete-wrapper' {...bylineAutocompleteProps} disabled={disabled} hideSearchIcon 
             errorMessage={errorMessage}
             isError={isError}

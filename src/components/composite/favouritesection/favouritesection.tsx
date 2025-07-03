@@ -10,6 +10,9 @@ const FavouriteSection: React.FC<FavouriteSectionProps> = (props) => {
 
   const toggleClassIcon =  favAnchorEl? 'active' : 'default';
 
+  // Get the width from containerRef
+  const popoverWidth = containerRef?.current?.clientWidth || '300px';
+
   return (
     <>
       <div className="article3-fav-wrapper">
@@ -28,18 +31,23 @@ const FavouriteSection: React.FC<FavouriteSectionProps> = (props) => {
           onClose={handleFavClose}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'right',
           }}
-          sx={{
-            '.a3-MuiPaper-root': {
-              width: containerRef?.current?.clientWidth || '300px',
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+
+          PaperProps={{
+            sx: {
+              width: popoverWidth,
               maxHeight: '500px',
-              minHeight:'100px',
+              minHeight: '100px',
               overflowY: 'auto',
-              display:"flex",
-              justifyContent:'center',
-              alignItems:'center'
-            },
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }
           }}
           classes={{ paper: `article-favourite-section-popover ${ props.openedFrom === "lhs" && "favourite-section-popover-lhs"}` }}
         >

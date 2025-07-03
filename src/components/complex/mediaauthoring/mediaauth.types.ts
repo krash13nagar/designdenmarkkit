@@ -74,7 +74,8 @@ export interface MediaAuthoringProps
     isFileUploadInProgress?: boolean,
     uploadComplete?: boolean,
     onClose?: () => void,
-    onUpload?: () => void
+    onUpload?: () => void,
+    supportedTypes?: string | ReactNode
   }
   publishSectionProps?: any;
   primaryAuthorProps?: any;

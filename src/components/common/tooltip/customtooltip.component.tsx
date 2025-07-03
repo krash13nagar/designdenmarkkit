@@ -10,7 +10,7 @@ interface DenCustomTooltipProps extends TooltipProps {
     font?: string;
 }
 
-const DenCustomTooltip = styled(({
+export const DenCustomTooltip = styled(({
     className,
     backgroundColor = "#FFFFFF",
     textColor,
