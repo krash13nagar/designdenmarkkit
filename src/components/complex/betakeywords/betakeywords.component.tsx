@@ -10,7 +10,7 @@ import BetaKeywordsMetaFields from './betakeywords.metafields';
 import BetaKeywordsAddedChips from './betakeywords.addedchips';
 import BetaSearchKeywordWrapper from './betakeywords.searchwrapper';
 
-const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
+export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
   const {
     searchKeywordConfig,
     addBtnConfig,
