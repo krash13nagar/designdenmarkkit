@@ -120,7 +120,7 @@ import {
               ref={inputRef}
               dropdownOptions={dropdownOptions}
               onDropdownSelect={handleChannelSelect}
-              dropdownDisabled={isHostDropdownDisabled ?? isPrimarySectionMode}
+              dropdownDisabled={isHostDropdownDisabled}
               selectedDropdownValue={
                getHostId()
               }
@@ -169,7 +169,7 @@ import {
               variant="outlined"
               clickable={true}
               handleFavChange={handleFavChange}
-              favourite={isPrimarySectionMode ? favourite?.filter((fav) => fav.parents?.[0]?.hostId === getHostId()) : favourite}
+              favourite={(isPrimarySectionMode && !enableMultipublish) ? favourite?.filter((fav) => fav.parents?.[0]?.hostId === getHostId()) : favourite}
               containerRef={containerRef}
               filterCurrentHostFavs
               openedFrom={openedFrom}
