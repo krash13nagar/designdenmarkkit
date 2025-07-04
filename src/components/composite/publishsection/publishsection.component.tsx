@@ -9,7 +9,7 @@ import {
     DenInputLabel,
   } from '../../common';
   import { CombinedSelectAutocomplete } from '..';
-  import React from 'react';
+  import React, { useRef } from 'react';
   import FavouriteSection from '../favouritesection/favouritesection';
   import './publishsection.style.scss';
   import { 
@@ -39,7 +39,6 @@ import {
     dropdownOptions = [],
     handleChannelSelect = () => {},
     inputRef = null,
-    containerRef = null,
     renderPrimarySectionChips = () => null,
     renderSecondarySectionChips = () => null,
     errorMessage = '',
@@ -61,7 +60,8 @@ import {
     const placeHolder = `${placeholder} ${
       isPrimarySectionMode ? 'Primary Section' : 'Secondary Section'
     }`;
-  
+   
+    const containerRef = useRef<HTMLDivElement>(null);
     return (
       <DenGrid container direction={'column'} className="publish_section_wrapper" ref={containerRef}>
         <DenGrid item xs={12}>
@@ -120,7 +120,7 @@ import {
               ref={inputRef}
               dropdownOptions={dropdownOptions}
               onDropdownSelect={handleChannelSelect}
-              dropdownDisabled={isHostDropdownDisabled ?? isPrimarySectionMode}
+              dropdownDisabled={isHostDropdownDisabled}
               selectedDropdownValue={
                getHostId()
               }
@@ -169,7 +169,7 @@ import {
               variant="outlined"
               clickable={true}
               handleFavChange={handleFavChange}
-              favourite={isPrimarySectionMode ? favourite?.filter((fav) => fav.parents?.[0]?.hostId === getHostId()) : favourite}
+              favourite={(isPrimarySectionMode && !enableMultipublish) ? favourite?.filter((fav) => fav.parents?.[0]?.hostId === getHostId()) : favourite}
               containerRef={containerRef}
               filterCurrentHostFavs
               openedFrom={openedFrom}

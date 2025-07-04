@@ -5,6 +5,7 @@ import style from './mediaprimarydataform.module.scss';
 import { MediaPrimaryDataFormProps } from '../mediaauth.types';
 import {
   AutoCompleteInput,
+  DenBox,
   DenGrid,
   DenTypography,
 } from '../../../common';
@@ -31,9 +32,15 @@ export const MediaPrimaryDataForm: FC<MediaPrimaryDataFormProps> = ({
         small
       />
       <TitleForUrl {...titleForUrl} />
-      <PublishSection {...publishSectionProps} />
-      <EditorTextField key={'caption'} {...mediaCaption} />
-      <EditorTextField key={'summary'} {...mediaSummary} />
+      <DenBox sx={{ marginTop: '16px' }}>
+        <PublishSection {...publishSectionProps}/>
+      </DenBox>
+      <DenBox sx={{ marginTop: '16px' }}>
+        <EditorTextField key={'caption'} {...mediaCaption} />
+      </DenBox>
+      <DenBox>
+        <EditorTextField key={'summary'} {...mediaSummary} />
+      </DenBox>
       <DenTypography className={style['credits']}>Credits</DenTypography>
       <DenGrid container spacing={2} justifyContent={'space-between'} sx={{marginTop: '14px'}}>
         <DenGrid item xs={6}>

@@ -662,6 +662,7 @@ const App = (props: AppProps) => {
           onUpload: () => {
             console.log('Upload');
           },
+          supportedTypes: <div><span style={{color: '#4D4D4D'}}>Supported types - </span> <span style={{color: 'red'}}>Mp3</span> <span style={{color: '#0F89FF'}}>Mp4</span></div>
         }}
         primaryAuthorProps={{
           bylineAutocompleteProps: {

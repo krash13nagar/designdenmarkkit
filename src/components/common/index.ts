@@ -31,6 +31,7 @@ export * from './menuitem/menuitem.component';
 export * from './menu/menu.component';
 export * from './slide/slide.component';
 export * from './tooltip/tooltip.component';
+export * from './tooltip/customtooltip.component';
 export * from './formlabel/formlabel.component';
 export * from './inputlabel/inputlabel.component';
 export * from './formhelpertext/formhelpertext.component';

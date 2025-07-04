@@ -1,5 +1,27 @@
 @use '../../../../styles/' as css;
 
+.media_video_properties_label{
+    font: normal normal normal 12px/18px 'Source Sans 3' !important;
+    color: #4D4D4D !important;
+}
+
+.media_video_properties_value{
+    font: normal normal 600 14px/18px 'Source Sans 3' !important;
+    color: #4D4D4D !important;
+}
+
+.meta-info-wrapper {
+    padding: css.pxToRem(4px) 0 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    // flex-basis: 45%;
+
+    label {
+        margin-bottom: 20px;
+    }
+   
+}
+
 .media-auth-left-panel {
     flex-basis: 35%;
     display: flex;
@@ -9,6 +31,7 @@
 
     .media-auth-left-section-thumbnail{
         width: -webkit-fill-available;
+        margin-right: 10px;
     }
 
     .error-with-icon {
@@ -53,26 +76,8 @@
         }
     }
 
-    .meta-info-wrapper {
-        padding: css.pxToRem(24px) 0 0 0;
-        width: 100%;
-        box-sizing: border-box;
-        // flex-basis: 45%;
+   
 
-        label {
-            font-size: 12px;
-            line-height: 20px;
-            color: #818181;
-            margin-bottom: css.pxToRem(20px);
-
-            span:last-child {
-                font-size: css.pxToRem(14px);
-                letter-spacing: 0px;
-                color: #4d4d4d;
-                font-weight: 600;
-            }
-        }
-    }
 
     .idWrapper {
         display: flex;
@@ -123,12 +128,15 @@
         height: 64px;
         background-color: #FFF;
         border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .media-uploader-progress-container {
         justify-self: flex-end;
         position: absolute;
-        bottom: 40px;
+        bottom: 55px;
         display: flex;
         flex-direction: column;
         left: 16px;
@@ -168,6 +176,13 @@
         &:hover {
             color: #333;
             background-color: rgba(0, 0, 0, 0.04);
+        }
+    }
+    .media-auth-left-section-video-properties-title{
+        cursor: pointer;
+        font: normal normal normal 12px/17px 'Source Sans 3';
+        &:hover{
+            color: #0F89FF;
         }
     }
 }
