@@ -143,11 +143,11 @@ export const betaKeywordsConfig = {
     searchCallbckfnc: function () {
       console.log('search keyword call back fnc');
     },
-    onSelectKeywordClick: function(val:any){
+    onSelectKeywordClick: function (val: any) {
       console.log(val)
     },
-    onEnterKeyPress: function(e:any){
-      console.log('pressed enter key',e);
+    onEnterKeyPress: function (e: any) {
+      console.log('pressed enter key', e);
     }
   },
   addBtnConfig: {
@@ -224,72 +224,51 @@ export const betaKeywordsConfig = {
     ],
   },
   recommendConfig: {
-    recommendedConfig: {
-      suggestKeywordsBtnLabel: 'Suggest Keywords',
-      isDataLoading: false,
-      story: 'Recommendations story',
-      apiError: false,
-      retryIcon: <CachedOutlined fontSize="inherit" />,
-      apiErrorMsg: 'Unable to fetch keywords, Please try again.',
-      keywordValidationMsg: 'The body should be longer than 100 words for keyword recommendation.',
-      addSuggestedChipFn: function (elm: KeywordItem) {
-        console.log('clicked refresh btn');
-      },
-      callFetchKeywordFnc: function () {
-        console.log('clicked refresh btn');
-      },
-      handleRetry: function () {
-        console.log('clicked refresh btn');
-      },
+    suggestKeywordsBtnLabel: 'Suggest Keywords',
+    isDataLoading: false,
+    story: 'Recommendations story',
+    apiError: false,
+    retryIcon: <CachedOutlined fontSize="inherit" />,
+    apiErrorMsg: 'Unable to fetch keywords, Please try again.',
+    keywordValidationMsg: 'The body should be longer than 100 words for keyword recommendation.',
+    addSuggestedChipFn: function (elm: KeywordItem) {
+      console.log('clicked refresh btn');
     },
-    suggestedChips: [
-      {
-        keywordName: 'Aisha Verma',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 100,
-      },
-      {
-        keywordName: 'Guru Divekar',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 100,
-      },
-      {
-        keywordName: 'young woman union budget of india young woman union budget of india young woman union budget of india',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 80,
-        metaInfo: {
-          hostId: 83,
-          aliasName:
-            'union budget of india,Indian union budget,budget session india,indias budget session,annual budget of india,india annual budget',
-          entityName: 'budget',
-          keywordSubtype: 'undefined',
-          entityId: 'budget',
-          seoPath: 'politics/budget',
-          msId: 62690834,
-        },
-      },
-      {
-        keywordName: 'defenestration',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 80,
-      },
-      {
-        keywordName: 'masked man',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 80,
-      },
-      {
-        keywordName: 'CBI',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 20,
-      }
-    ]
+    callFetchKeywordFnc: function () {
+      console.log('clicked refresh btn');
+    },
+    handleRetry: function () {
+      console.log('clicked refresh btn');
+    },
+    suggestedChips: [] as KeywordItem[]
+      // {
+      //   keywordName: 'Aisha Verma',
+      //   keyEnum: 'Denny',
+      //   source: 'Denny',
+      //   relevance: 100,
+      // },
+      // {
+      //   keywordName: 'Guru Divekar',
+      //   keyEnum: 'Denny',
+      //   source: 'Denny',
+      //   relevance: 100,
+      // },
+      // {
+      //   keywordName: 'young woman union budget of india young woman union budget of india young woman union budget of india',
+      //   keyEnum: 'Denny',
+      //   source: 'Denny',
+      //   relevance: 80,
+      //   metaInfo: {
+      //     hostId: 83,
+      //     aliasName:
+      //       'union budget of india,Indian union budget,budget session india,indias budget session,annual budget of india,india annual budget',
+      //     entityName: 'budget',
+      //     keywordSubtype: 'undefined',
+      //     entityId: 'budget',
+      //     seoPath: 'politics/budget',
+      //     msId: 62690834,
+      //   },
+      // }
   },
   metaKeywordsConfig: {
     metaDescriptionPlaceholder: 'Enter Meta Description',
@@ -306,20 +285,20 @@ export const betaKeywordsConfig = {
     isClearAllMetaBtnEnable: true,
     autoAddMetaLabel: 'Auto Add Metas',
     clearAllMetaLabel: 'Clear All',
-    handleAutoAddMetasFnc: ()=>{
+    handleAutoAddMetasFnc: () => {
       console.log('handle auto add metas');
     },
-    handleClearAllMetaFnc: ()=>{
+    handleClearAllMetaFnc: () => {
       console.log('handle clear all meta');
     },
-    handleMetaDescriptionFnc: (e:React.ChangeEvent<HTMLInputElement>)=>{
-      console.log('handle meta description',e);
+    handleMetaDescriptionFnc: (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('handle meta description', e);
     },
-    handleMetaKeywordsFnc: (e:React.ChangeEvent<HTMLInputElement>)=>{
-      console.log('handle meta keyword',e);
+    handleMetaKeywordsFnc: (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('handle meta keyword', e);
     },
-    handleMetaTitleFnc: (e:React.ChangeEvent<HTMLInputElement>)=>{
-      console.log('handle meta title',e);
+    handleMetaTitleFnc: (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('handle meta title', e);
     }
   }
 };
