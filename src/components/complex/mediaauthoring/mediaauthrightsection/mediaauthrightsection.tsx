@@ -6,7 +6,7 @@ import SimpleTabs from '../../../composite/simpletabs/simpletabs.component';
 import { TAB_MAP } from '../mediaauth.constants';
 import MediaPrimaryDataForm from '../mediaprimarydataform/mediaprimarydataform.component';
 import _ from 'lodash';
-import BetaKeywordsWrapper from '../../betakeywords/betakeywords.component';
+// import BetaKeywordsWrapper from '../../betakeywords/betakeywords.component';
 
 export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
   tabTitleList,
@@ -59,13 +59,13 @@ export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
         )}
         {selectedTab == TAB_MAP.keywords && (
           <div className={style['keywords-wrapper']}>
-            <BetaKeywordsWrapper
+            {/* <BetaKeywordsWrapper
               searchKeywordConfig={keywordConfig.searchKeywordConfig}
               addBtnConfig={keywordConfig.addBtnConfig}
               addedKeywordsConfig={keywordConfig.addedKeywordsConfig}
               recommendConfig={keywordConfig.recommendConfig}
               metaKeywordsConfig={keywordConfig.metaKeywordsConfig}
-            />
+            /> */}
           </div>
         )}
         {selectedTab == TAB_MAP.metadata && (

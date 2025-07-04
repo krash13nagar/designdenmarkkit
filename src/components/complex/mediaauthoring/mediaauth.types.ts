@@ -28,7 +28,7 @@ export interface MediaAuthoringProps
   publishDate: PublishDateProps;
   tabTitleList: TabType[];
   msid?: string;
-  keywordConfig: BetaKeywordsWrapperProps;
+  keywordConfig: keywordsWrapperConfig;
   dialogProps?: any;
   metaProps?: any;
   summaryProps?: any;
@@ -132,7 +132,7 @@ export interface MediaAuthRightSectionProps {
   titleForUrl: TitleForUrlProps;
   mediaCaption: MediaAuthoringProps['mediaCaption'];
   mediaSummary: MediaAuthoringProps['mediaSummary'];
-  keywordConfig: BetaKeywordsWrapperProps;
+  keywordConfig: keywordsWrapperConfig;
   classes?: { root?: string },
   MetadataComp?: MediaAuthoringProps["MetadataComp"],
   publishSectionProps?: any,
