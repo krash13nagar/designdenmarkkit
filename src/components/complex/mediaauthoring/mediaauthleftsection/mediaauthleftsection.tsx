@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { AlignType, DenImageCard, LabelValue } from '../../../composite';
 import style from './mediaauthleftsection.module.scss';
 import { MediaAuthLeftSectionProps } from '../mediaauth.types';
@@ -8,6 +8,10 @@ import { ErrorIcon, Close, CheckIcon } from '../../../../assets';
 import KeyValueCopy from '../../../composite/keyvaluecopy/keyvaluecopy.component';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
+import { Popover } from '@mui/material';
+import { VideoPropertiesIcon } from '../../../../assets/cdsicons/video_properties_icon';
+import VideoMediaIcon from '../../../../assets/cdsicons/video_media_icon';
+import UploadIcon from '../../../../assets/cdsicons/upload_icon';
 
 export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
   metaInformation = [],
@@ -21,6 +25,62 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
   thumbComp,
   mediaUploaderLoaderProps
 }) => {
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+    }
+  }, []);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleVideoPropertiesClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const renderVideoProperties = () => {
+    return (
+      <div className={clsx(style['meta-info-wrapper'], 'cds-row')}>
+      {metaInformation
+        .filter((elm) => (elm.label && elm.value) || elm.component)
+        .map((elm, i) => {
+          if (elm.component) {
+            return (
+              <DenBox
+                key={i}
+                className={clsx(
+                  `cds-column-${metaColumnCount}`,
+                  metaClassName,
+                  elm.className,
+                )}
+              >
+                {elm.component}
+              </DenBox>
+            );
+          }
+          return (
+            <LabelValue
+              key={i}
+              {...elm}
+              align={AlignType.column}
+              className={clsx(`cds-column-${metaColumnCount}`, metaClassName)}
+              labelProps={{ className: style['media_video_properties_label'] }}
+              valueProps={{ className: style['media_video_properties_value'] }}
+            />
+          );
+        })}
+    </div>
+    )
+  }
+  
   return (
     <div className={clsx(style['media-auth-left-panel'], classes.root)}>
       {mediaError?.message && (
@@ -45,10 +105,11 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
         ) : null}
       </div>
 
-      <DenBox className={style['media-preview-container']}>
+      <DenBox className={style['media-preview-container']} ref={containerRef}>
         {(mediaUploaderLoaderProps?.showProgress || mediaUploaderLoaderProps?.uploadComplete) && (
           <DenBox className={clsx(style['media-uploader-container'], style['media-loader-container'])}>
             <DenBox className={style['media-uploader-icon']}>
+              <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
             </DenBox>
             <DenBox className={style['media-uploader-progress-container']}>
               <DenBox className={style['media-uploader-progress-header']}>
@@ -78,44 +139,67 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
         {!mediaUploaderLoaderProps?.uploadComplete && !mediaUploaderLoaderProps?.showProgress && (
           <DenBox className={style['media-uploader-container']}>
             <DenBox className={style['media-uploader-icon']}>
+            <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
             </DenBox>
-            <DenButton onClick={mediaUploaderLoaderProps.onUpload} className={style['media-uploader-upload-button']}>Upload Media</DenButton>
+            <DenBox sx={{display: 'flex',alignItems: 'center',justifyContent: 'space-between',marginTop:'8px'}}>
+              <UploadIcon height={16} width={16} htmlColor='#0F89FF'/>
+              <DenButton onClick={mediaUploaderLoaderProps.onUpload} className={style['media-uploader-upload-button']}>Upload Media</DenButton>
+            </DenBox>
             <DenBox className={style['media-uploader-progress-container']}>
-              <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
-                Supported types
-              </DenTypography>
+              {mediaUploaderLoaderProps?.supportedTypes ? (
+                typeof mediaUploaderLoaderProps.supportedTypes === 'string' ? (
+                  <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
+                    {mediaUploaderLoaderProps.supportedTypes}
+                  </DenTypography>
+                ) : (
+                  <div className={style['media-uploader-supported-types']}>
+                    {mediaUploaderLoaderProps.supportedTypes}
+                  </div>
+                )
+              ) : (
+                <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
+                  Supported types
+                </DenTypography>
+              )}
             </DenBox>
           </DenBox>
         )}
       </DenBox>
-      <div className={clsx(style['meta-info-wrapper'], 'cds-row')}>
-        {metaInformation
-          .filter((elm) => (elm.label && elm.value) || elm.component)
-          .map((elm, i) => {
-            if (elm.component) {
-              return (
-                <DenBox
-                  key={i}
-                  className={clsx(
-                    `cds-column-${metaColumnCount}`,
-                    metaClassName,
-                    elm.className
-                  )}
-                >
-                  {elm.component}
-                </DenBox>
-              );
-            }
-            return (
-              <LabelValue
-                key={i}
-                {...elm}
-                align={AlignType.column}
-                className={clsx(`cds-column-${metaColumnCount}`, metaClassName)}
-              />
-            );
-          })}
-      </div>
+      <DenBox className={style['media-auth-left-section-video-properties']} onClick={handleVideoPropertiesClick} sx={{alignSelf: 'flex-end',display: 'flex',alignItems: 'center',color: open ? '#0F89FF' : '#4D4D4D',marginRight:'10px'}}>
+        <DenIconButton>
+          <VideoPropertiesIcon htmlColor={open ? '#0F89FF' : '#818181'}/>
+        </DenIconButton>
+        <DenTypography className={style['media-auth-left-section-video-properties-title']} >
+          Video Properties
+        </DenTypography>
+      </DenBox>
+      <Popover
+            id={id}
+            className={'video-prop-popover'}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            
+            slotProps={{
+              paper: {
+                sx: {
+                  overflow: 'visible',
+                  padding:'12px',
+                  width: containerWidth
+                },
+              },
+            }}
+          >
+            {renderVideoProperties()}
+          </Popover>
       <div className={clsx(style['media-auth-left-section-thumbnail'])}>
         {thumbComp}
       </div>

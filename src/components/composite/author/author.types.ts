@@ -20,5 +20,5 @@ export interface AuthorProps {
   errorMessage?: string;
   bylineAutocompleteProps?: BylineAutocompleteProps;
   isError?: boolean;
-  targetRef?: React.RefObject<HTMLDivElement>;
+  autoCompleteRef?: React.RefObject<HTMLDivElement>;
 }
