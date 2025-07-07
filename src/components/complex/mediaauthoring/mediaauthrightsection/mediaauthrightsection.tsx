@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import React, { FC } from 'react';
 import style from './mediaauthrightsection.module.scss';
 import { MediaAuthRightSectionProps } from '../mediaauth.types';
-import KeywordsWrapper from '../../keywords/keywords.wrapper';
 import SimpleTabs from '../../../composite/simpletabs/simpletabs.component';
 import { TAB_MAP } from '../mediaauth.constants';
 import MediaPrimaryDataForm from '../mediaprimarydataform/mediaprimarydataform.component';
 import _ from 'lodash';
+import BetaKeywordsWrapper from '../../betakeywords/betakeywords.component';
 
 export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
   tabTitleList,
@@ -59,12 +59,12 @@ export const MediaAuthRightSection: FC<MediaAuthRightSectionProps> = ({
         )}
         {selectedTab == TAB_MAP.keywords && (
           <div className={style['keywords-wrapper']}>
-            <KeywordsWrapper
+            <BetaKeywordsWrapper
               searchKeywordConfig={keywordConfig.searchKeywordConfig}
               addBtnConfig={keywordConfig.addBtnConfig}
               addedKeywordsConfig={keywordConfig.addedKeywordsConfig}
               recommendConfig={keywordConfig.recommendConfig}
-              aiImageTagsConfig={keywordConfig.aiImageTagsConfig}
+              metaKeywordsConfig={keywordConfig.metaKeywordsConfig}
             />
           </div>
         )}

@@ -13,7 +13,7 @@ import {
   EditorTextfieldProps,
 } from '../../composite';
 import { TabType } from '../../composite/simpletabs/simpletabs.types';
-import { keywordsWrapperConfig } from '../keywords/keywords.types';
+import { BetaKeywordsWrapperProps } from '../betakeywords/betakeywords.types';
 
 export interface MediaAuthoringProps
   extends ImageCardProps,
@@ -27,7 +27,7 @@ export interface MediaAuthoringProps
   publishDate: PublishDateProps;
   tabTitleList: TabType[];
   msid?: string;
-  keywordConfig: keywordsWrapperConfig;
+  keywordConfig: BetaKeywordsWrapperProps;
   dialogProps?: any;
   metaProps?: any;
   summaryProps?: any;
@@ -133,7 +133,7 @@ export interface MediaAuthRightSectionProps {
   titleForUrl: TitleForUrlProps;
   mediaCaption: MediaAuthoringProps['mediaCaption'];
   mediaSummary: MediaAuthoringProps['mediaSummary'];
-  keywordConfig: keywordsWrapperConfig;
+  keywordConfig: BetaKeywordsWrapperProps;
   classes?: { root?: string },
   MetadataComp?: MediaAuthoringProps["MetadataComp"],
   publishSectionProps?: any,
