@@ -31,18 +31,16 @@ export const MediaPrimaryDataForm: FC<MediaPrimaryDataFormProps> = ({
         classes={{ root: style['media-title'] }}
         small
       />
-      <TitleForUrl {...titleForUrl} />
+      <DenBox sx={{ marginTop: '16px' }}>
+        <TitleForUrl {...titleForUrl} />
+      </DenBox>
       <DenBox sx={{ marginTop: '16px' }}>
         <PublishSection {...publishSectionProps}/>
       </DenBox>
-      <DenBox sx={{ marginTop: '16px' }}>
-        <EditorTextField key={'caption'} {...mediaCaption} />
-      </DenBox>
-      <DenBox>
-        <EditorTextField key={'summary'} {...mediaSummary} />
-      </DenBox>
-      <DenTypography className={style['credits']}>Credits</DenTypography>
-      <DenGrid container spacing={2} justifyContent={'space-between'} sx={{marginTop: '14px'}}>
+      <EditorTextField key={'caption'} classes={{ root: style['media-caption'] }} {...mediaCaption} />
+      <EditorTextField key={'summary'} classes={{ root: style['media-summary'] }} {...mediaSummary} />
+      <DenTypography sx={{ marginTop: '16px' }} className={style['credits']}>Credits</DenTypography>
+      <DenGrid container spacing={2} justifyContent={'space-between'} sx={{marginTop: '16px'}}>
         <DenGrid item xs={6}>
           <Author {...primaryAuthorProps} />
         </DenGrid>

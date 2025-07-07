@@ -63,7 +63,8 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     primaryAuthorProps = {},
     secondaryAuthorProps = {},
     agencyProps = {},
-    thumbComp
+    thumbComp,
+    loading = false
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);

@@ -82,6 +82,7 @@ export interface MediaAuthoringProps
   secondaryAuthorProps?: any;
   agencyProps?: any;
   thumbComp?: ReactNode;
+  loading?: boolean;
 }
 
 export interface ActionButton {
