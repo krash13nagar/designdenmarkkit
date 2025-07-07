@@ -24,6 +24,8 @@ import { AutocompleteInputProps } from './components/common/autocompleteinput/au
 import { ButtonProps } from '@mui/material/Button';
 import { DenThemeProvider } from './styles';
 import { ImageAuthoringTheme } from './styles/themes/denmarktheme';
+import { BetaKeywordsWrapperProps } from './components/complex/betakeywords/betakeywords.types';
+import { betaKeywordsConfig } from './components/complex/betakeywords/betakeywords.sample';
 
 declare const module: {
   hot: {
@@ -514,15 +516,15 @@ const App = (props: AppProps) => {
   };
 
   const searchKeywordConfig = {
-    ...config.searchKeywordConfig,
-    searchCallbckfnc: handleSearchCallbckfnc,
-    suggestedKeywordsData: suggestedKeywordsDataState,
-    isSuggestedKeywordSkeleton: loading,
-    onSelectKeywordClick: handleOnSuggestedKeywordClickFnc,
+    ...betaKeywordsConfig.searchKeywordConfig,
+    // searchCallbckfnc: handleSearchCallbckfnc,
+    // suggestedKeywordsData: suggestedKeywordsDataState,
+    // isSuggestedKeywordSkeleton: loading,
+    // onSelectKeywordClick: handleOnSuggestedKeywordClickFnc,
   };
   const addBtnConfig = {
-    ...config.addBtnConfig,
-    addBtnCallbckfnc: handleAddbtn,
+    ...betaKeywordsConfig.addBtnConfig,
+    // addBtnCallbckfnc: handleAddbtn,
   };
   // const addKeywordsConfig = {
   //   ...config.addKeywordsConfig,
@@ -534,37 +536,23 @@ const App = (props: AppProps) => {
   // };
 
   const addedKeywordsConfig = {
-    ...config.addedKeywordsConfig,
-    handlerConfig: {
-      ...config.addedKeywordsConfig.handlerConfig,
-      removeLinkConfig: {
-        ...config.addedKeywordsConfig.handlerConfig.removeLinkConfig,
-        callbackFn: removeCallbackFn,
-      },
-    },
-    addedKeywordsList: addKeywordState,
+    ...betaKeywordsConfig.addedKeywordsConfig,    
   };
+
   const recommendConfig = {
-    ...config.recommendConfig,
-    recommendedConfig: {
-      ...config.recommendConfig.recommendedConfig,
-      addCallbackFn: addCallbackFn,
-    },
-    recommendedKeywords: recommndKeywordsState,
+    ...betaKeywordsConfig.recommendConfig,
   };
 
-  const aiImageTagsConfig = {
-    ...config.aiImageTagsConfig,
-    aiTagsList: aiImageTagsList,
-    addCallbackFn: addCallbackFnForAIImg,
+  const metaKeywordsConfig = {
+    ...betaKeywordsConfig.metaKeywordsConfig,
   };
 
-  const kewordConfig: keywordsWrapperConfig = {
+  const kewordConfig: BetaKeywordsWrapperProps = {
     searchKeywordConfig,
     addBtnConfig,
     addedKeywordsConfig,
     recommendConfig,
-    aiImageTagsConfig,
+    metaKeywordsConfig,
   };
 
   const [title, setTitle] = useState('My test title');
