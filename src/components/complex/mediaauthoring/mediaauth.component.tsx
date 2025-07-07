@@ -14,6 +14,7 @@ import {
   DenBox,
   DenButton,
   DenCheckbox,
+  DenCircularProgress,
   DenFormControlLabel,
 } from '../../common';
 import DenFormGroup from '../../common/formgroup/formgroup.component';
@@ -93,7 +94,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
   };
 
   return (
-    <>
+    <div style={{ position: 'relative', height: '100%', overflow: 'hidden' }}>
       <DenBox
         className={clsx(style['media-auth-wrapper'], 'cds-media-auth-wrapper')}
         sx={{
@@ -232,7 +233,16 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           />
         </div>
       </Footer>
-    </>
+      {loading && (
+        <div className={style["loader-overlay"]}>
+          <div className={style["lodercls"]}>
+            <DenBox display="flex" justifyContent="center" alignItems="center"> 
+              <DenCircularProgress />
+            </DenBox>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 export default MediaAuthoring;

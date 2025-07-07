@@ -165,11 +165,13 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
           </DenBox>
         )}
       </DenBox>
-      <DenBox className={style['media-auth-left-section-video-properties']} onClick={handleVideoPropertiesClick} sx={{alignSelf: 'flex-end',display: 'flex',alignItems: 'center',color: open ? '#0F89FF' : '#4D4D4D',marginRight:'10px'}}>
-        <DenIconButton>
+      <DenBox className={`${style['media-auth-left-section-video-properties']} ${open ? style['open'] : ''}`} onClick={handleVideoPropertiesClick} sx={{alignSelf: 'flex-end',display: 'flex',alignItems: 'center',marginRight:'10px' }}>
+        <DenIconButton sx={{'&:hover': {
+          backgroundColor: 'transparent',
+        }}}>
           <VideoPropertiesIcon htmlColor={open ? '#0F89FF' : '#818181'}/>
         </DenIconButton>
-        <DenTypography className={style['media-auth-left-section-video-properties-title']} >
+        <DenTypography className={style['media-auth-left-section-video-properties-title']}>
           Video Properties
         </DenTypography>
       </DenBox>
