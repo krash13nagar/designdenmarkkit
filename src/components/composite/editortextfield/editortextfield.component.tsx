@@ -101,19 +101,21 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
       >
         {title}
       </DenInputLabel>
-      <SunEditor
-        getSunEditorInstance={getSunEditorInstance}
-        {...(width && { width: width })}
-        {...(height && { height: height })}
-        autoFocus={autoFocus}
-        onChange={handleChange}
-        setOptions={editorOptionsReceived || getEditorOptions as SunEditorOptions}
-        setContents={content}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        hideToolbar={!focus}
-        setAllPlugins={setAllPlugins}
-      />
+      <div className={clsx('editor-wrapper', error ? 'has-error' : '')}>
+        <SunEditor
+          getSunEditorInstance={getSunEditorInstance}
+          {...(width && { width: width })}
+          {...(height && { height: height })}
+          autoFocus={autoFocus}
+          onChange={handleChange}
+          setOptions={editorOptionsReceived || getEditorOptions as SunEditorOptions}
+          setContents={content}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          hideToolbar={!focus}
+          setAllPlugins={setAllPlugins}
+        />
+      </div>
       <DenBox sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <DenBox sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
           {error && <div className="has-error"> {error} </div>}

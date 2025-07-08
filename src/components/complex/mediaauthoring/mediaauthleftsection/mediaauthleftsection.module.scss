@@ -191,8 +191,37 @@
     .media-auth-left-section-video-properties-title{
         cursor: pointer;
         font: normal normal normal 12px/17px 'Source Sans 3';
-        &:hover{
+        color: #4D4D4D;
+        transition: color 0.2s ease;
+    }
+
+    .media-auth-left-section-video-properties {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #4D4D4D;
+        
+        &.open {
             color: #0F89FF;
+            
+            .media-auth-left-section-video-properties-title {
+                color: #0F89FF;
+            }
+            
+            svg path {
+                fill: #0F89FF;
+            }
+        }
+        
+        &:hover {
+            color: #0F89FF !important;
+            
+            .media-auth-left-section-video-properties-title {
+                color: #0F89FF !important;
+            }
+            
+            svg path {
+                fill: #0F89FF !important;
+            }
         }
     }
 }
