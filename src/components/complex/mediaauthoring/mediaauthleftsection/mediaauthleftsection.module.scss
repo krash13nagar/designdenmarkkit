@@ -109,6 +109,16 @@
         justify-content: center;
         border: 2px solid #E8E9EC;
         border-radius: 2px;
+
+        .slike-iframe-container {
+            width: 100%;
+            height: 100%;
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        }
     }
 
     .media-uploader-container {

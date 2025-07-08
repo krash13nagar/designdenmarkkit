@@ -23,7 +23,8 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
   parentMsid,
   slikeId,
   thumbComp,
-  mediaUploaderLoaderProps
+  mediaUploaderLoaderProps,
+  previewProps
 }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -106,63 +107,78 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
       </div>
 
       <DenBox className={style['media-preview-container']} ref={containerRef}>
-        {(mediaUploaderLoaderProps?.showProgress || mediaUploaderLoaderProps?.uploadComplete) && (
-          <DenBox className={clsx(style['media-uploader-container'], style['media-loader-container'])}>
-            <DenBox className={style['media-uploader-icon']}>
-              <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
-            </DenBox>
-            <DenBox className={style['media-uploader-progress-container']}>
-              <DenBox className={style['media-uploader-progress-header']}>
-                <Typography variant="body2" color="textSecondary" className={style['media-uploader-progress-text']}>
-                  {mediaUploaderLoaderProps.uploadComplete ? <CheckIcon htmlColor='#28A745' width={12} height={10} /> : null}
-                  {mediaUploaderLoaderProps.progressText || ''}
-                </Typography>
-                <Typography variant="caption" color="textSecondary" className={style['media-uploader-progress-percentage']}>
-                  {`${mediaUploaderLoaderProps.uploadComplete ? 100 : (mediaUploaderLoaderProps.progressValue || 0)}%`}
-                </Typography>
+        {previewProps?.showPreview ? (
+          <div className={style['slike-iframe-container']}>
+            <iframe
+              key={previewProps?.id}
+              src={previewProps?.src}
+              allow={previewProps?.allow}
+              allowFullScreen={previewProps?.allowFullScreen}
+              referrerPolicy={previewProps?.referrerPolicy}
+              title={previewProps?.title}
+            />
+          </div>
+        ) : (
+          <>
+            {(mediaUploaderLoaderProps?.showProgress || mediaUploaderLoaderProps?.uploadComplete) && (
+              <DenBox className={clsx(style['media-uploader-container'], style['media-loader-container'])}>
+                <DenBox className={style['media-uploader-icon']}>
+                  <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
+                </DenBox>
+                <DenBox className={style['media-uploader-progress-container']}>
+                  <DenBox className={style['media-uploader-progress-header']}>
+                    <Typography variant="body2" color="textSecondary" className={style['media-uploader-progress-text']}>
+                      {mediaUploaderLoaderProps.uploadComplete ? <CheckIcon htmlColor='#28A745' width={12} height={10} /> : null}
+                      {mediaUploaderLoaderProps.progressText || ''}
+                    </Typography>
+                    <Typography variant="caption" color="textSecondary" className={style['media-uploader-progress-percentage']}>
+                      {`${mediaUploaderLoaderProps.uploadComplete ? 100 : (mediaUploaderLoaderProps.progressValue || 0)}%`}
+                    </Typography>
+                  </DenBox>
+                  <DenBox className={style['media-uploader-progress-bar-container']}>
+                    <LinearProgress variant="determinate" value={mediaUploaderLoaderProps.progressValue || 0} className={style['media-uploader-progress-bar']} />
+                    {!mediaUploaderLoaderProps.uploadComplete && <DenIconButton className={style['media-uploader-close-button']} size="small" sx={{
+                      padding: '0px'
+                    }}
+                      onClick={() => {
+                        mediaUploaderLoaderProps.onClose?.();
+                      }}
+                    >
+                      <Close />
+                    </DenIconButton>}
+                  </DenBox>
+                </DenBox>
               </DenBox>
-              <DenBox className={style['media-uploader-progress-bar-container']}>
-                <LinearProgress variant="determinate" value={mediaUploaderLoaderProps.progressValue || 0} className={style['media-uploader-progress-bar']} />
-                {!mediaUploaderLoaderProps.uploadComplete && <DenIconButton className={style['media-uploader-close-button']} size="small" sx={{
-                  padding: '0px'
-                }}
-                  onClick={() => {
-                    mediaUploaderLoaderProps.onClose?.();
-                  }}
-                >
-                  <Close />
-                </DenIconButton>}
+            )}
+            {!mediaUploaderLoaderProps?.uploadComplete && !mediaUploaderLoaderProps?.showProgress && (
+              <DenBox className={style['media-uploader-container']}>
+                <DenBox className={style['media-uploader-icon']}>
+                <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
+                </DenBox>
+                <DenBox sx={{display: 'flex',alignItems: 'center',justifyContent: 'space-between',marginTop:'8px'}}>
+                  <UploadIcon height={16} width={16} htmlColor='#0F89FF'/>
+                  <DenButton onClick={mediaUploaderLoaderProps.onUpload} className={style['media-uploader-upload-button']}>Upload Media</DenButton>
+                </DenBox>
+                <DenBox className={style['media-uploader-progress-container']}>
+                  {mediaUploaderLoaderProps?.supportedTypes ? (
+                    typeof mediaUploaderLoaderProps.supportedTypes === 'string' ? (
+                      <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
+                        {mediaUploaderLoaderProps.supportedTypes}
+                      </DenTypography>
+                    ) : (
+                      <div className={style['media-uploader-supported-types']}>
+                        {mediaUploaderLoaderProps.supportedTypes}
+                      </div>
+                    )
+                  ) : (
+                    <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
+                      Supported types
+                    </DenTypography>
+                  )}
+                </DenBox>
               </DenBox>
-            </DenBox>
-          </DenBox>
-        )}
-        {!mediaUploaderLoaderProps?.uploadComplete && !mediaUploaderLoaderProps?.showProgress && (
-          <DenBox className={style['media-uploader-container']}>
-            <DenBox className={style['media-uploader-icon']}>
-            <VideoMediaIcon height={45} width={45} htmlColor='#4D4D4D'/>
-            </DenBox>
-            <DenBox sx={{display: 'flex',alignItems: 'center',justifyContent: 'space-between',marginTop:'8px'}}>
-              <UploadIcon height={16} width={16} htmlColor='#0F89FF'/>
-              <DenButton onClick={mediaUploaderLoaderProps.onUpload} className={style['media-uploader-upload-button']}>Upload Media</DenButton>
-            </DenBox>
-            <DenBox className={style['media-uploader-progress-container']}>
-              {mediaUploaderLoaderProps?.supportedTypes ? (
-                typeof mediaUploaderLoaderProps.supportedTypes === 'string' ? (
-                  <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
-                    {mediaUploaderLoaderProps.supportedTypes}
-                  </DenTypography>
-                ) : (
-                  <div className={style['media-uploader-supported-types']}>
-                    {mediaUploaderLoaderProps.supportedTypes}
-                  </div>
-                )
-              ) : (
-                <DenTypography variant="body2" color="textSecondary" className={style['media-uploader-supported-types']}>
-                  Supported types
-                </DenTypography>
-              )}
-            </DenBox>
-          </DenBox>
+            )}
+          </>
         )}
       </DenBox>
       <DenBox className={`${style['media-auth-left-section-video-properties']} ${open ? style['open'] : ''}`} onClick={handleVideoPropertiesClick} sx={{alignSelf: 'flex-end',display: 'flex',alignItems: 'center',marginRight:'10px' }}>

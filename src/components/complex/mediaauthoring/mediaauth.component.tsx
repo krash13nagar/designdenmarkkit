@@ -60,6 +60,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     enableReportButton = false,
     reportButtonProps = {},
     mediaUploaderLoaderProps = {},
+    previewProps = {},
     publishSectionProps = {},
     primaryAuthorProps = {},
     secondaryAuthorProps = {},
@@ -114,6 +115,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
           slikeId={slikeId}
           thumbComp={thumbComp}
           mediaUploaderLoaderProps={mediaUploaderLoaderProps}
+          previewProps={previewProps}
         />
         <MediaAuthRightSection
           tabTitleList={tabTitleList}

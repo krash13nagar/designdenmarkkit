@@ -1,6 +1,6 @@
 import { DialogContentProps, DialogProps } from '@mui/material';
 import { ButtonProps } from '@mui/material/Button';
-import { ReactNode, MouseEventHandler } from 'react';
+import { ReactNode, MouseEventHandler, HTMLAttributeReferrerPolicy } from 'react';
 import { TextFieldProps } from '../../common';
 import { AutocompleteInputProps } from '../../common/autocompleteinput/autocompleteinput.types';
 import {
@@ -76,6 +76,15 @@ export interface MediaAuthoringProps
     onClose?: () => void,
     onUpload?: () => void,
     supportedTypes?: string | ReactNode
+  },
+  previewProps?: {
+    showPreview?: boolean,
+    src?: string,
+    id?: string | number,
+    allow?: string,
+    allowFullScreen?: boolean,
+    referrerPolicy?: HTMLAttributeReferrerPolicy,
+    title?: string
   }
   publishSectionProps?: any;
   primaryAuthorProps?: any;
@@ -121,7 +130,8 @@ export interface MediaAuthLeftSectionProps {
   parentMsid?: MediaAuthoringProps['parentMsid'],
   slikeId?: MediaAuthoringProps['slikeId'],
   thumbComp?: MediaAuthoringProps['thumbComp'],
-  mediaUploaderLoaderProps?: MediaAuthoringProps['mediaUploaderLoaderProps']
+  mediaUploaderLoaderProps?: MediaAuthoringProps['mediaUploaderLoaderProps'],
+  previewProps?: MediaAuthoringProps['previewProps']
 }
 
 export interface MediaAuthRightSectionProps {

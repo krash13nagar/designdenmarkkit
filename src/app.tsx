@@ -652,6 +652,15 @@ const App = (props: AppProps) => {
           },
           supportedTypes: <div><span style={{color: '#4D4D4D'}}>Supported types - </span> <span style={{color: 'red'}}>Mp3</span> <span style={{color: '#0F89FF'}}>Mp4</span></div>
         }}
+        previewProps={{
+          showPreview: false,
+          src: 'https://www.youtube.com/embed/sq2MVbuHs-M',
+          id: '123456789',
+          allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+          allowFullScreen: true,
+          referrerPolicy: 'origin',
+          title: 'Test Title'
+        }}
         primaryAuthorProps={{
           bylineAutocompleteProps: {
             title: 'Primary Author',
