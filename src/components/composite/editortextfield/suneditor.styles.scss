@@ -95,4 +95,20 @@
             max-height: 100px !important;
         }
     }
+
+    .editor-wrapper {
+        &.has-error {
+            .sun-editor .se-container {
+                border-color: red;
+                
+                &:hover {
+                    border-color: red;
+                }
+                
+                &:focus-within {
+                    border-color: red;
+                }
+            }
+        }
+    }
 }
