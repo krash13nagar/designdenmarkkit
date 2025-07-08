@@ -15,17 +15,17 @@ export const DenCustomTooltip = styled(({
     backgroundColor = "#FFFFFF",
     textColor,
     borderColor,
-    maxWidth = 220,
+    maxWidth,
     fontSize = 12,
     font = 'normal normal 400 13px/18px "Source Sans 3"',
     ...props
 }: DenCustomTooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} arrow />
-))(({ theme, backgroundColor = "#FFFFFF", textColor, borderColor, maxWidth = 220, fontSize = 12, font = 'normal normal 400 13px/18px "Source Sans 3"' }) => ({
+))(({ theme, backgroundColor = "#FFFFFF", textColor, borderColor, maxWidth, fontSize = 12, font = 'normal normal 400 13px/18px "Source Sans 3"' }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: backgroundColor,
         color: textColor || theme.palette.text.primary,
-        maxWidth: maxWidth,
+        ...(maxWidth !== undefined && { maxWidth }),
         fontSize: theme.typography.pxToRem(fontSize),
         border: `1px solid ${borderColor || theme.palette.divider}`,
         font: font,

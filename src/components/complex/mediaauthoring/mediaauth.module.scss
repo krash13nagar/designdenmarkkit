@@ -13,14 +13,14 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
-  z-index: 3; /* Higher z-index to cover footer which has z-index: 2 */
+  z-index: 10; /* Higher z-index to cover footer which has z-index: 2 */
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: all;
 }
 .lodercls {
-  z-index: 4; /* Ensure loader is above overlay and footer */
+  z-index: 11; /* Ensure loader is above overlay and footer */
 }
 .media-auth-wrapper {
   display: flex;
