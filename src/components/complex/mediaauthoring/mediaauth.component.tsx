@@ -99,7 +99,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
       <DenBox
         className={clsx(style['media-auth-wrapper'], 'cds-media-auth-wrapper')}
         sx={{
-          height: `calc(100% - ${footerHeight + 2}px)`,
+          height: `calc(100% - ${footerHeight + 8}px)`,
         }}
       >
         <MediaAuthLeftSection

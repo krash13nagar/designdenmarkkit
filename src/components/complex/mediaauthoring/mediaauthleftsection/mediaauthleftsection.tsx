@@ -100,7 +100,7 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
         ) : null}
         {slikeId ? (
           <div className={style.parentMsidWrapper}>
-            {parentMsid && slikeId ? <div className={style.separator}></div> : null}
+          <div className={style.separator}></div>
             <KeyValueCopy keyText="Slike ID : " valueText={slikeId} />
           </div>
         ) : null}
@@ -188,7 +188,7 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
           <VideoPropertiesIcon htmlColor={open ? '#0F89FF' : '#818181'}/>
         </DenIconButton>
         <DenTypography className={style['media-auth-left-section-video-properties-title']}>
-          Video Properties
+          Media Properties
         </DenTypography>
       </DenBox>
       <Popover
