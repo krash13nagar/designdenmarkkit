@@ -37,19 +37,19 @@ export interface PublishSectionProps {
   storeKey?: string;
   primarySectionModel?: string;
   secondarySectionModel?: string;
-  
+
   // Event handlers
   onSelectPublishSection?: (section: any) => void;
   onDeletePublishSection?: (section: any) => void;
   onChannelSelect?: (channel: any) => void;
-  
+
   // Values
   hostId?: string;
   channelList?: any[];
   primarySectionValue?: any;
   secondarySectionValue?: any[];
   selectedChannel?: any;
-  
+
   // Display options
   showFav?: boolean;
   isPublished?: boolean;
@@ -59,7 +59,7 @@ export interface PublishSectionProps {
   enableMultipublish?: boolean;
   openedFrom?: string;
   isHostDropdownDisabled?: boolean | null;
-  
+
   // Mode and options
   mode?: string;
   options?: PublishSectionOption[];
@@ -72,7 +72,7 @@ export interface PublishSectionProps {
   showFilter?: boolean;
   favourite?: FavouriteItem[];
   isPrimarySectionMode?: boolean;
-  
+
   // Handler functions
   handleAddfav?: (item: any) => void;
   handleFavChange?: (value: any) => void;
@@ -102,6 +102,7 @@ export interface PublishSectionProps {
   renderOptions?: (props: any, option: any) => React.ReactElement;
   favAnchorEl?: HTMLElement | null;
   renderFavouriteOptions?: (fav: any, index: any) => React.ReactElement;
+  required?: boolean;
 }
 
 export interface ElementWithOverridenLinkContentNode {
