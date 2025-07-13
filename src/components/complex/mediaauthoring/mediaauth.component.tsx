@@ -66,7 +66,8 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
     secondaryAuthorProps = {},
     agencyProps = {},
     thumbComp,
-    loading = false
+    loading = false,
+    disableActivationStatus = false
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
@@ -198,6 +199,7 @@ export const MediaAuthoring = (props: MediaAuthoringProps) => {
             showEditIcon={showActivationStatusEditIcon}
             onEditIconClick={onActivationStatusEditIconClick}
             editIconTitle={activationStatusEditIconTitle}
+            disableActivationStatus={disableActivationStatus}
           />
 
           <div className="cds-action-buttons-wrapper">

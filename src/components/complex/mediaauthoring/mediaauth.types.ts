@@ -92,6 +92,7 @@ export interface MediaAuthoringProps
   agencyProps?: any;
   thumbComp?: ReactNode;
   loading?: boolean;
+  disableActivationStatus?: boolean;
 }
 
 export interface ActionButton {
