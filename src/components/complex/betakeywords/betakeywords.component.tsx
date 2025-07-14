@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './betakeywords.module.scss';
 import { Divider } from '@mui/material';
-import { 
+import {
   BetaKeywordsWrapperProps
 } from './betakeywords.types';
-import { DenBox, DenCircularProgress } from '../../common';
+import { DenBox, DenCircularProgress, DenLink } from '../../common';
 import BetaRecommendChips from './betarecommendchips';
 import BetaKeywordsMetaFields from './betakeywords.metafields';
 import BetaKeywordsAddedChips from './betakeywords.addedchips';
@@ -19,29 +19,30 @@ export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
     metaKeywordsConfig
   } = props;
 
+  useEffect(() => {
+    if (addedKeywordsConfig?.autoPopulateKeywordsAndMeta) {
+      addedKeywordsConfig.handleAutoPopulateKeywordsAndMeta();
+    }
+  }, []);
+
   return (
     <div className={styles.seoKeywordsWrapper}>
       <div className={styles.seoAddedKeywords}>
         <div className={styles.addedKeywordsWrapper}>
           <div className={styles['added-keywords']}>
             {`${addedKeywordsConfig.label} (${addedKeywordsConfig.keywords?.length || 0})`}
-            {/* {addedKeywordsConfig.showComplianceIcons && <div className={styles.seo_complianticon}>
-              {addedKeywordsConfig.showNonCompliantIcon ? 
-                {addedKeywordsConfig.nonCompliantIcon} : 
-                {addedKeywordsConfig.complianceIcon}
-              }
-            </div>
-            } */}
-            {addedKeywordsConfig.showArticlePreview && 
-            <>
-            <div className={styles.preview_seprator}></div>
-            {/* <ArticlePreview 
-              seoArticlePreviewCallBck={seoArticlePreviewCallBck} 
-              isEscKeyPressed={isEscKeyPressed} 
-              setIsEscKeyPressed={setIsEscKeyPressed}
-            /> */}
-            <div>Article Preview</div>
-            </>
+            {addedKeywordsConfig.showComplianceIcons && (
+              <div className={styles.seo_complianticon}>
+                {addedKeywordsConfig.showNonCompliantIcon ? addedKeywordsConfig.nonCompliantIcon : addedKeywordsConfig.complianceIcon}
+              </div>
+            )}
+            {addedKeywordsConfig.showPreviewLabel &&
+              <>
+                <div className={styles.preview_seprator}></div>
+                <DenLink component='div' className={styles.preview_label} underline="hover" onClick={addedKeywordsConfig.handlePreviewCallBack}>
+                  {addedKeywordsConfig.previewLabel}
+                </DenLink>
+              </>
             }
           </div>
           <div className={styles['autoAdd-keywords']}>
@@ -78,8 +79,12 @@ export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
       </div>
       <BetaSearchKeywordWrapper searchKeywordConfig={searchKeywordConfig} addBtnConfig={addBtnConfig} />
       <BetaRecommendChips {...recommendConfig} />
-      <Divider />
-      <BetaKeywordsMetaFields {...metaKeywordsConfig} />
+      {!metaKeywordsConfig?.hideMetaComponent && (
+        <>
+          <Divider />
+          <BetaKeywordsMetaFields {...metaKeywordsConfig} />
+        </>
+      )}
     </div>
   );
 };

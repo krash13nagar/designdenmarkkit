@@ -162,7 +162,7 @@ export const betaKeywordsConfig = {
   addedKeywordsConfig: {
     label: 'Added Keywords',
     noKeywordsLabel: "Please add relevant keywords or choose from recommendations (min 5, max 10 keywords).",
-    isAutoAddKeywordLoading: true,
+    isAutoAddKeywordLoading: false,
     isAutoAddEnable: true,
     autoAddLabel: 'Auto Add',
     clearAllLabel: 'Clear All',
@@ -201,27 +201,21 @@ export const betaKeywordsConfig = {
         keyEnum: 'Denny',
         source: 'Denny',
         relevance: 100,
-      },
-      {
-        keywordName: 'masked man',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 80,
-      },
-      {
-        keywordName: 'CBI',
-        keyEnum: 'Denny',
-        source: 'Denny',
-        relevance: 20,
-      },
-      {
-        keywordName: 'Mumbai',
-        keyEnum: 'TOPIC',
-        keywordType: 'place',
-        source: 'TOPIC',
-        relevance: 60,
-      },
+      }
     ],
+    showComplianceIcons: true,
+    showNonCompliantIcon: true,
+    nonCompliantIcon: <NonStarKeywordIcon />,
+    complianceIcon: <StarKeywordIcon />,
+    showPreviewLabel: false,
+    previewLabel: 'View Article',
+    autoPopulateKeywordsAndMeta: false,
+    handleAutoPopulateKeywordsAndMeta: function () {
+      console.log('handle auto populate keywords and meta');
+    },
+    handlePreviewCallBack: function () {
+      console.log('handle preview call back');
+    }
   },
   recommendConfig: {
     suggestKeywordsBtnLabel: 'Suggest Keywords',
@@ -241,34 +235,34 @@ export const betaKeywordsConfig = {
       console.log('clicked refresh btn');
     },
     suggestedChips: [] as KeywordItem[]
-      // {
-      //   keywordName: 'Aisha Verma',
-      //   keyEnum: 'Denny',
-      //   source: 'Denny',
-      //   relevance: 100,
-      // },
-      // {
-      //   keywordName: 'Guru Divekar',
-      //   keyEnum: 'Denny',
-      //   source: 'Denny',
-      //   relevance: 100,
-      // },
-      // {
-      //   keywordName: 'young woman union budget of india young woman union budget of india young woman union budget of india',
-      //   keyEnum: 'Denny',
-      //   source: 'Denny',
-      //   relevance: 80,
-      //   metaInfo: {
-      //     hostId: 83,
-      //     aliasName:
-      //       'union budget of india,Indian union budget,budget session india,indias budget session,annual budget of india,india annual budget',
-      //     entityName: 'budget',
-      //     keywordSubtype: 'undefined',
-      //     entityId: 'budget',
-      //     seoPath: 'politics/budget',
-      //     msId: 62690834,
-      //   },
-      // }
+    // {
+    //   keywordName: 'Aisha Verma',
+    //   keyEnum: 'Denny',
+    //   source: 'Denny',
+    //   relevance: 100,
+    // },
+    // {
+    //   keywordName: 'Guru Divekar',
+    //   keyEnum: 'Denny',
+    //   source: 'Denny',
+    //   relevance: 100,
+    // },
+    // {
+    //   keywordName: 'young woman union budget of india young woman union budget of india young woman union budget of india',
+    //   keyEnum: 'Denny',
+    //   source: 'Denny',
+    //   relevance: 80,
+    //   metaInfo: {
+    //     hostId: 83,
+    //     aliasName:
+    //       'union budget of india,Indian union budget,budget session india,indias budget session,annual budget of india,india annual budget',
+    //     entityName: 'budget',
+    //     keywordSubtype: 'undefined',
+    //     entityId: 'budget',
+    //     seoPath: 'politics/budget',
+    //     msId: 62690834,
+    //   },
+    // }
   },
   metaKeywordsConfig: {
     metaDescriptionPlaceholder: 'Enter Meta Description',
@@ -278,13 +272,14 @@ export const betaKeywordsConfig = {
     metaKeywordsPlaceholder: 'Enter Meta Keywords',
     metaTitlePlaceholder: 'Enter Meta Title',
     metaDescriptionValue: 'Meta Description Value',
-    metaKeywordsValue: 'Meta Keywords Value',
+    metaKeywordsValue: '',
     metaTitleValue: 'Meta Title Value',
     isMetaDataLoading: false,
     isAutoAddMetaBtnEnable: true,
     isClearAllMetaBtnEnable: true,
     autoAddMetaLabel: 'Auto Add Metas',
     clearAllMetaLabel: 'Clear All',
+    hideMetaComponent: false,
     handleAutoAddMetasFnc: () => {
       console.log('handle auto add metas');
     },

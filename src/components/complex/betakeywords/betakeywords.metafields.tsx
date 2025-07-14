@@ -36,9 +36,8 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
         <DenTypography className={styles['meta-title']}>{metaTitleLabel}</DenTypography>
         <DenBox className={styles['meta-auto-add-clearAll-wrapper']}>
           <div
-            className={`${styles['auto-add-metas']} ${
-              isAutoAddMetaBtnEnable ? '' : styles.disabled
-            }`}
+            className={`${styles['auto-add-metas']} ${isAutoAddMetaBtnEnable ? '' : styles.disabled
+              }`}
             onClick={handleAutoAddMetasFnc}
           >
             {autoAddMetaLabel}
@@ -54,11 +53,12 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
       </DenBox>
 
       <DenTextField
-        placeholder={isMetaDataLoading && !metaTitleValue ? '' : metaTitlePlaceholder}
+        valueProps={{
+          placeholder: isMetaDataLoading && !metaTitleValue ? '' : metaTitlePlaceholder,
+        }}
         fullWidth
         wrapperClass={styles['metaTitle-txtfield']}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleMetaTitleFnc(event)}
-        autoComplete="off"
         value={isMetaDataLoading && !metaTitleValue ? '' : metaTitleValue}
         InputProps={{
           startAdornment: isMetaDataLoading && !metaTitleValue ? (
@@ -71,17 +71,19 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
             marginBottom: "16px",
             borderRadius: "2px",
           },
+          autoComplete: 'off',
         }}
       />
 
       <DenTypography className={styles['meta-keywords-title']}>{metaKeywordsLabel}</DenTypography>
 
       <DenTextField
-        placeholder={isMetaDataLoading && !metaKeywordsValue ? '' : metaKeywordsPlaceholder}
+        valueProps={{
+          placeholder: isMetaDataLoading && !metaKeywordsValue ? '' : metaKeywordsPlaceholder,
+        }}
         fullWidth
         wrapperClass={styles['metaKeyword-txtfield']}
         onChange={handleMetaKeywordsFnc}
-        autoComplete="off"
         value={isMetaDataLoading && !metaKeywordsValue ? '' : metaKeywordsValue}
         InputProps={{
           startAdornment: isMetaDataLoading && !metaKeywordsValue ? (
@@ -94,6 +96,7 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
             marginBottom: "16px",
             borderRadius: "2px",
           },
+          autoComplete: 'off',
         }}
       />
 
@@ -102,11 +105,12 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
       </DenTypography>
 
       <DenTextField
-        placeholder={isMetaDataLoading && !metaDescriptionValue ? '' : metaDescriptionPlaceholder}
+        valueProps={{
+          placeholder: isMetaDataLoading && !metaDescriptionValue ? '' : metaDescriptionPlaceholder,
+        }}
         fullWidth
         wrapperClass={styles['metaDescrptn-txtfield']}
         onChange={handleMetaDescriptionFnc}
-        autoComplete="off"
         value={isMetaDataLoading && !metaDescriptionValue ? '' : metaDescriptionValue}
         InputProps={{
           startAdornment: isMetaDataLoading && !metaDescriptionValue ? (
@@ -119,6 +123,7 @@ export const BetaKeywordsMetaFields = (props: BetaKeywordsMetaFieldsProps) => {
             marginBottom: "16px",
             borderRadius: "2px",
           },
+          autoComplete: 'off',
         }}
       />
     </DenBox>
