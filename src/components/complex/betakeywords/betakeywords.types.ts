@@ -68,11 +68,12 @@ export interface BetaKeywordsMetaFieldsProps {
   isClearAllMetaBtnEnable?: boolean;
   autoAddMetaLabel?: string;
   clearAllMetaLabel?: string;
+  hideMetaComponent?: boolean;
   handleAutoAddMetasFnc?: () => void;
   handleClearAllMetaFnc?: () => void;
-  handleMetaDescriptionFnc?: (e:React.ChangeEvent<HTMLInputElement>) => void;
-  handleMetaKeywordsFnc?: (e:React.ChangeEvent<HTMLInputElement>) => void;
-  handleMetaTitleFnc?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  handleMetaDescriptionFnc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMetaKeywordsFnc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMetaTitleFnc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface BetaKeywordsSuggestionsProps {
@@ -123,9 +124,14 @@ export interface BetaKeywordsAddedChipsProps {
   clearAllLabel?: string;
   handleAutoAddBtn?: () => void;
   handleClearAll?: () => void;
-  showArticlePreview?: boolean;
   label?: string;
   showComplianceIcons?: boolean;
+  showNonCompliantIcon?: boolean;
   nonCompliantIcon?: React.ReactNode;
   complianceIcon?: React.ReactNode;
+  showPreviewLabel?: boolean;
+  previewLabel?: string;
+  handlePreviewCallBack?: () => void;
+  autoPopulateKeywordsAndMeta?: boolean;
+  handleAutoPopulateKeywordsAndMeta?: () => void;
 }
