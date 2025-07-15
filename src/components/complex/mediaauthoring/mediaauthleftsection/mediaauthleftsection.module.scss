@@ -83,10 +83,16 @@
         display: flex;
         margin-bottom: 6px;
         align-self: flex-start;
+        flex-wrap: wrap;
+
 
         .parentMsidWrapper {
             display: flex;
             align-items: center;
+        }
+
+        :global(.cds-key-value-copy-root){
+            margin-bottom:8px;
         }
     }
 
@@ -96,6 +102,7 @@
         background-color: #D2D8DF;
         margin-right: 8px;
         margin-left: 5px;
+        margin-bottom:8px;
     }
 
     // Media uploader loader styles

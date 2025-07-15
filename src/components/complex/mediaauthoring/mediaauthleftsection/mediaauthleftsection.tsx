@@ -81,6 +81,47 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
     </div>
     )
   }
+
+  const idWrapperRef = useRef<HTMLDivElement>(null);
+
+  const [isIdWrapperWrapping, setIsIdWrapperWrapping] = useState(false);
+
+  useEffect(() => {
+    const checkWrapping = () => {
+      if (idWrapperRef.current) {
+        const children = idWrapperRef.current.querySelectorAll('.cds-id-wrapper > *');
+        let top = (children[0] as HTMLElement)?.offsetTop;
+        let isWrapping = false;
+        
+        for (let i = 1; i < children.length; i++) {
+          if ((children[i] as HTMLElement).offsetTop !== top) {
+            isWrapping = true;
+            break;
+          }
+        }
+        setIsIdWrapperWrapping(isWrapping)     
+      }
+    };
+
+    // Debounced version for resize events
+    let resizeTimeout: NodeJS.Timeout;
+    const debouncedCheckWrapping = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(checkWrapping, 100);
+    };
+
+    // Check on mount
+    checkWrapping();
+
+    // Add resize event listener with debounce
+    window.addEventListener('resize', debouncedCheckWrapping);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', debouncedCheckWrapping);
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
   
   return (
     <div className={clsx(style['media-auth-left-panel'], classes.root)}>
@@ -90,7 +131,7 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
           <span className={style['errormessage']}>{mediaError.message}</span>
         </div>
       )}
-      <div className={style.idWrapper}>
+      <div className={clsx('cds-id-wrapper',style.idWrapper)} ref={idWrapperRef}>
         <KeyValueCopy keyText="ID : " valueText={msid || 'New'} showCopy={!!msid} />
         {parentMsid ? (
           <div className={style.parentMsidWrapper}>
@@ -99,8 +140,8 @@ export const MediaAuthLeftSection: FC<MediaAuthLeftSectionProps> = ({
           </div>
         ) : null}
         {slikeId ? (
-          <div className={style.parentMsidWrapper}>
-          <div className={style.separator}></div>
+          <div className={clsx(style.parentMsidWrapper, isIdWrapperWrapping ? style['id-wrapper-wrapping'] : '')}>
+          {!isIdWrapperWrapping ? <div className={style.separator}></div> : null}
             <KeyValueCopy keyText="Slike ID : " valueText={slikeId} />
           </div>
         ) : null}
