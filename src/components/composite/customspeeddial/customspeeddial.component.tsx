@@ -8,12 +8,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { CustomSpeedDialProps } from './customspeeddial.types';
 import clsx from 'clsx';
 
-export default function CustomSpeedDial({
+export const CustomSpeedDial = function ({
   actions = [],
   classes = {},
   open = false,
-  setOpen = () => {},
-  onSpeedDialClick = () => {},
+  setOpen = () => { },
+  onSpeedDialClick = () => { },
 }: CustomSpeedDialProps) {
   const MySpeedDialAction = styled(SpeedDialAction)(({ theme }) => {
     return {
@@ -112,3 +112,5 @@ export default function CustomSpeedDial({
     </ClickAwayListener>
   );
 }
+
+export default CustomSpeedDial;
