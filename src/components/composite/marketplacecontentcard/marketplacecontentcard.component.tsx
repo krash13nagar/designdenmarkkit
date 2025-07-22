@@ -1,0 +1,257 @@
+import React, { useCallback, useMemo } from 'react';
+import cssClassName from './marketplacecontentcard.module.scss';
+import { DenBox, DenCard, DenCheckbox, DenChip, DenIconButton, DenMenu, DenMenuItem, DenSvgIcon, DenTooltip, DenTypography, ImageWithFallback, StatusDotNew, } from '../../common';
+import { formatDateString, formatDateWithMoment } from '../../../utility/utils';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import clsx from 'clsx';
+import {
+    AnchorGeneric,
+    MarketplaceContentCardConfig,
+} from './marketplacecontentcard.types';
+import ImageIcon from '../../../assets/cdsicons/imageicon';
+import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon';
+import { Chip } from '@mui/material';
+import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
+
+export const MarketplaceContentCard = React.forwardRef((props: MarketplaceContentCardConfig, ref: React.MutableRefObject<any>) => {
+
+    const {
+        id,
+        title,
+        subtitle,
+        imageUrl,
+        cardMenuOptions,
+        ImageFallback,
+        onCardClick = () => { },
+        selected,
+        publishDateTimestamp,
+        classes,
+        imagesCount,
+        videosCount,
+        wordCount,
+        dataSource,
+        tags,
+        checkboxProps,
+        headerTooltipContent,
+        view = 'grid',
+        showAllCheckboxes = false
+    } = props;
+
+    const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
+
+    const headerDate = useMemo(() => {
+        return (
+            (publishDateTimestamp ? formatDateWithMoment(publishDateTimestamp) : '')
+        );
+    }, [publishDateTimestamp]);
+
+    const variantClassName = useMemo(() => {
+        if (view === 'single') return 'singleViewVariant';
+        return '';
+    }, [view]);
+
+    const handleClose = (
+        event: React.SyntheticEvent<HTMLElement> | undefined,
+        index: number,
+        cb?: Function | undefined
+    ) => {
+        setAnchorEl((prev: any) => ({ ...prev, [index]: null }));
+        event?.stopPropagation();
+        if (cb) cb(event);
+    };
+
+    const handleDenMenuOnClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+        handleClose(undefined, 1);
+        e.stopPropagation();
+    };
+    const handleContextClick = (
+        event: React.SyntheticEvent<HTMLElement>,
+        index: number
+    ) => {
+        setAnchorEl((prev: any) => ({ ...prev, [index]: event.currentTarget }));
+        event.stopPropagation();
+    };
+
+    const tooltipstyles = useMemo(() => {
+        return {
+            font: 'normal normal 400 13px/18px "Source Sans 3"',
+            textColor: '#4D4D4D',
+        }
+    }, [])
+
+    const tagsTooltip = useCallback((label: string) => {
+        return (
+            <React.Fragment>
+                <DenTypography variant="body2" color="textPrimary">
+                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>Category:</span> <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>{label || '-'}</span>
+                </DenTypography>
+            </React.Fragment>
+        )
+    }, [])
+
+    return (
+        <div className={cssClassName[variantClassName]}>
+            <DenCard
+                classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
+                className={clsx(cssClassName['default-card-wrapper'], classes?.root, selected ? cssClassName['selected-card'] : '')}
+                ref={ref}
+                onClick={onCardClick}
+            >
+                <div
+                    className={cssClassName['image-with-details-wrapper']}
+                >
+                    <div className={cssClassName['card-header']}>
+                        <div className={cssClassName['card-header-lhs']}>
+                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow>
+                                <DenCheckbox
+                                    className={clsx(
+                                        cssClassName['card-header-lhs-checkbox'],
+                                        checkboxProps?.isChecked && cssClassName['checkbox-visible'],
+                                        showAllCheckboxes && cssClassName['show-all-checkboxes']
+                                    )}
+                                    checked={checkboxProps?.isChecked}
+                                    onChange={checkboxProps?.onCheckboxClick}
+                                />
+                            </DenTooltip>
+                            <DenCustomTooltip
+                                title={headerTooltipContent}
+                                arrow
+                                placement='top'
+                            >
+                                <DenBox className={cssClassName['card-header-date']}>{headerDate}</DenBox>
+                            </DenCustomTooltip>
+                        </div>
+                        <div className={cssClassName['card-header-rhs']}>
+                            <DenBox className={cssClassName['card-header-menu']}>
+                                <DenIconButton
+                                    aria-label="more"
+                                    id={''}
+                                    aria-haspopup="true"
+                                    onClick={(e) => handleContextClick(e, 1)}
+                                    className={clsx(cssClassName['more-icon-base'], Boolean(anchorEl?.[1]) && cssClassName['menu-open'])}
+                                    disableRipple
+
+                                //disabled={action?.disabled}
+                                >
+                                    <MoreVertIcon sx={{ fontSize: '24px', color: 'inherit' }} />
+                                </DenIconButton>
+                                <DenMenu
+                                    id="long-menu"
+                                    anchorEl={anchorEl?.[1]}
+                                    open={Boolean(anchorEl?.[1])}
+                                    onClose={handleDenMenuOnClose}
+                                >
+                                    {cardMenuOptions?.map((option) => (
+                                        <DenMenuItem
+                                            key={option?.label}
+                                            onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                                            classes={{
+                                                root: classes?.menuOption,
+                                            }}
+                                        >
+                                            <DenTypography variant="inherit">
+                                                {option.label}
+                                            </DenTypography>
+                                        </DenMenuItem>
+                                    ))}
+                                </DenMenu>
+                            </DenBox>
+                        </div>
+                    </div>
+                    <div className={cssClassName['card-details-section']}>
+                        <div className={cssClassName['card-image-wrapper']}>
+                            <DenBox>
+                                {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                    <DenBox title={title} className={cssClassName['card-title']}>
+                                        {title}
+                                    </DenBox>
+                                </DenCustomTooltip>}
+                                {subtitle && <p className={cssClassName['card-subtitle']}>{subtitle}</p>}
+                            </DenBox>
+                            {imageUrl && <div className={cssClassName['card-image']}>
+                                <ImageWithFallback
+                                    src={imageUrl}
+                                    placeholderIcon={ImageFallback}
+                                    showFallbackBorder={false}
+                                />
+                            </div>}
+                        </div>
+
+                    </div>
+                    {view !== 'single' && (
+                        <div className={cssClassName['card-tags-wrapper']}>
+                            {
+                                tags?.map((tag, index) => (
+                                    <DenCustomTooltip title={tagsTooltip(tag.label)} arrow {...tooltipstyles} placement='top'>
+                                        <Chip
+                                            className={cssClassName['card-tag']}
+                                            size="small"
+                                            key={index}
+                                            icon={tag.icon}
+                                            label={tag.label}
+                                            variant="outlined"
+                                        />
+                                    </DenCustomTooltip>
+                                ))
+                            }
+                        </div>
+                    )}
+
+                    <div className={cssClassName['card-footer']}>
+                        <DenBox className={cssClassName['card-footer-lhs']}>
+                            <DenCustomTooltip title={`Images : ${imagesCount || '-'}`} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['image']}>
+                                    <MarketplaceImageIcon width="14px" height="14px" />
+                                    <DenTypography>
+                                        {imagesCount || '-'}
+                                    </DenTypography>
+                                </DenBox>
+                            </DenCustomTooltip>
+                            <DenCustomTooltip title={`Videos : ${videosCount || '-'}`} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['video']}>
+                                    <MarketplaceImageIcon width="14px" height="14px" />
+                                    <DenTypography>
+                                        {videosCount || '-'}
+                                    </DenTypography>
+                                </DenBox>
+                            </DenCustomTooltip>
+                            <DenCustomTooltip title={`Word Count : ${wordCount || '-'}`} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['wordcount']}>
+                                    <DenTypography>
+                                        WC : {wordCount || '-'}
+                                    </DenTypography>
+                                </DenBox>
+                            </DenCustomTooltip>
+                        </DenBox>
+                        <DenBox className={cssClassName['card-footer-rhs']}>
+                            {view === 'single' && tags && tags.length > 0 && (
+                                <DenBox className={cssClassName['card-tags-single-view']}>
+                                    {
+                                        tags?.map((tag, index) => (
+                                            <DenCustomTooltip title={tagsTooltip(tag.label)} arrow {...tooltipstyles} placement='top' key={index}>
+                                                <Chip
+                                                    className={cssClassName['card-tag']}
+                                                    size="small"
+                                                    icon={tag.icon}
+                                                    label={tag.label}
+                                                    variant="outlined"
+                                                />
+                                            </DenCustomTooltip>
+                                        ))
+                                    }
+                                </DenBox>
+                            )}
+                            <DenCustomTooltip title={dataSource?.name} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['datasoruce']}>
+                                    <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
+                                    <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
+                                </DenBox>
+                            </DenCustomTooltip>
+                        </DenBox>
+                    </div>
+                </div>
+            </DenCard >
+        </div >
+    );
+})
+export default MarketplaceContentCard; 

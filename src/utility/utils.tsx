@@ -1,9 +1,12 @@
 import { RightArrowIcon } from '../assets';
 import { DenNestedMenuItem, DenNestedMenuSubItem } from '../components/composite/nestedmenu/nestedmenu';
+import moment from 'moment';
+
 export const cleanHTML = function (str = '') {
   const regex = /(<([^>]+)>)/gi;
   return str.replace(regex, '');
 };
+
 import React from 'react'
 
 export const cleanXssCode = function (html = "") {
@@ -21,6 +24,9 @@ export const copyToClipboard = async (str: string) => {
     console.error('Failed to copy: ', err);
   }
 }
+
+
+
 
 export const calculateFromNow = function (date: any) {
   var futureDate = false
@@ -91,3 +97,30 @@ export const renderMenu = (menuOptions: any) => {
     />
   })
 }
+
+export const formatDateString = (dateString: string): string => {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date string');
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    day: 'numeric',
+    month: 'long',
+  };
+
+  // Format the date to '16:41, 7 June'
+  return date.toLocaleTimeString('en-GB', options) + ', ' + date.toLocaleDateString('en-GB', options);
+};
+
+export const formatDateWithMoment = (dateString: string): string => {
+  const date = moment(dateString, 'ddd MMM DD HH:mm:ss Z YYYY');
+  if (!date.isValid()) {
+    throw new Error('Invalid date string');
+  }
+
+  // Format the date to '16:41, 7 June'
+  return date.format('HH:mm, D MMMM');
+};

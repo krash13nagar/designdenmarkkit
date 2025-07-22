@@ -3,7 +3,7 @@ import style from './imagesearchcard.module.scss';
 import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
 import { ICONS } from './imagesearchcard.constant';
-import { DenButton, DenIconButton } from '../../common';
+import { DenButton, DenIconButton, DenTooltip } from '../../common';
 import moment from 'moment';
 import MoreVert from '@mui/icons-material/MoreVert';
 import { DenNestedMenu } from '../nestedmenu/nestedmenu';
@@ -24,8 +24,12 @@ export const ImageSearchCardHoverDetails = (
     ingestionDateTimestamp,
     actionButtonsList,
     cardStyle = 'standard',
-    imageCardMenuOptions = []
+    imageCardMenuOptions = [],
+    discardImageCardCallBack,
+    showImageHoverFooter = true
   } = props;
+
+
 
   const [agencyCount, setAgencyCount] = useState('Unlimited');
   const [agencyQuotaStyle, setAgencyQuotaStyle] = useState('agency-unlimited');
@@ -89,6 +93,7 @@ export const ImageSearchCardHoverDetails = (
   const renderMenuOptions = (menuOptions: any) => {
     return renderMenu(menuOptions)
   }
+
 
   return (
     <div className={`${style['card-reveal']} ${style['card-reveal-show']}`}>
@@ -159,53 +164,72 @@ export const ImageSearchCardHoverDetails = (
           </div>
         )}
       </div>
-      <div className={style['card-footer']}>
-        <div className={style['card-footer-btn-wrapper']}>
-          {actionButtonsList?.length > 0 &&
-            actionButtonsList.map((btn, i) => (
-              <DenButton
-                onClick={(e) => {
-                  e.stopPropagation();
-                  btn?.onClick?.(e);
-                }}
-                variant={btn.variant || 'contained'}
-                color={btn.color || 'primary'}
-                key={i}
-                className={style['primaryButton-cds']}
-                sx={{
-                  mr: '8px',
-                  ...(btn.variant == 'outlined' && {
-                    color: '#FFFFFF',
-                    border: '1px solid #FFFFFF',
-                    '&:hover': {
-                      border: '1px solid #FFFFFF,',
-                    },
-                  }),
-                }}
-                {...btn.props}
-              >
-                {btn.label}
-              </DenButton>
-            ))}
-          {!actionButtonsList && (
-            <div onClick={handleSelectImage}>
-              <button
-                className={`${style['btn']} ${style['primaryButton-cds']}`}
-              >
-                Select Image
-              </button>
-            </div>
-          )}
+      {showImageHoverFooter &&
+        <div className={style['card-footer']}>
+          <div className={style['card-footer-btn-wrapper']}>
+            {actionButtonsList?.length > 0 &&
+              actionButtonsList.map((btn, i) => {
+
+                const { sx, ...btnProps } = btn.props || {};
+                return (
+                  <DenTooltip title={btn?.toolTip || ""} arrow>
+                    <div className={style['card-footer-btn-wrapper-tooltip']}>
+                      <DenButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          btn?.onClick?.(e);
+                        }}
+                        variant={btn.variant || 'contained'}
+                        color={btn.color || 'primary'}
+                        key={i}
+                        className={style['primaryButton-cds']}
+                        sx={{
+                          mr: '8px',
+                          ...(btn.variant == 'outlined' && {
+                            color: '#FFFFFF',
+                            border: '1px solid #FFFFFF',
+                            '&:hover': {
+                              border: '1px solid #FFFFFF,',
+                            },
+                          }),
+                          ...(btn.props?.sx || {})
+                        }}
+                        {...btnProps}
+                        {...(btn.isDiscardButton && {
+                          onClick: (e) => {
+                            e.stopPropagation();
+                            discardImageCardCallBack?.(0);
+                            btn?.onClick?.(e);
+                          }
+                        })}
+                      >
+                        {btn.label}
+                      </DenButton>
+                    </div>
+                  </DenTooltip>
+                )
+
+              })}
+            {!actionButtonsList && (
+              <div onClick={handleSelectImage}>
+                <button
+                  className={`${style['btn']} ${style['primaryButton-cds']}`}
+                >
+                  Select Image
+                </button>
+              </div>
+            )}
+          </div>
+          {imageCardMenuOptions?.length > 0 &&
+            <DenNestedMenu
+              trigger={
+                <DenIconButton sx={{ color: "#FFFFFF", padding: 0 }} disableRipple>
+                  <MoreVert />
+                </DenIconButton>}
+              menu={renderMenuOptions(imageCardMenuOptions)}
+            />}
         </div>
-        {imageCardMenuOptions?.length > 0 &&
-          <DenNestedMenu
-            trigger={
-              <DenIconButton sx={{ color: "#FFFFFF", padding: 0 }} disableRipple>
-                <MoreVert />
-              </DenIconButton>}
-            menu={renderMenuOptions(imageCardMenuOptions)}
-          />}
-      </div>
+      }
     </div>
   );
 };

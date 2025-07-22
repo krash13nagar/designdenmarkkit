@@ -1,6 +1,6 @@
 {
   "name": "@denui/denmark-ui-components",
-  "version": "1.0.94",
+  "version": "1.0.109",
   "private": false,
   "description": "Denmark | Common design library based on React and Material UI",
   "main": "index.tsx",
@@ -10,7 +10,6 @@
     "start": "webpack serve --config config/webpack.start.js --port 3100",
     "format": "prettier --write \"src/**/*.tsx\"",
     "babelbuild": "babel src -d build",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "publish:npm": "rm -rf dist && mkdir dist &&  babel src/components -d dist --copy-files",
     "clean": "rm -rf dist",

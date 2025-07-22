@@ -64,6 +64,18 @@ export interface ImageAuthoringProps
     checked?: boolean,
   }[],
   onFooterCheckBoxChange?: (checkbox: { index: number | string, id: string, checked: boolean }) => void
+  enableReportButton?: boolean
+  reportButtonProps?: {
+    onConfirm?: (value: string) => void,
+    onCancel?: () => void,
+    title?: string,
+    message?: string,
+    confirmButtonText?: string,
+    cancelButtonText?: string,
+    dropdownLabel?: string,
+    dropdownOptions?: { id: string | number, label: string, value: string }[],
+    dropdownDefaultOption?: string,
+  }
 }
 
 export interface ActionButton {
@@ -71,7 +83,9 @@ export interface ActionButton {
   label: string,
   variant?: ButtonProps['variant'],
   color?: ButtonProps['color'],
-  props?: ButtonProps
+  props?: ButtonProps,
+  isDiscardButton?: boolean,
+  toolTip?: string
 }
 
 export interface AnchorGeneric {

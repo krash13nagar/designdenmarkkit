@@ -1,0 +1,22 @@
+.article3_content_editable_container{
+    padding: 0;
+    width: 100%;  
+    .input_box{
+        border: 1px solid #E5E9ED;
+        border-radius: 2px;
+        padding: 2px 8px 2px 8px;
+        font: normal normal normal 12px/20px 'Source Sans 3';
+        min-height: 26px;
+        &.disabled.disabled.disabled.disabled {
+            background-color:#F6F7F9 !important;
+            color: #D2D8DF !important;
+            pointer-events: none;
+        }
+    }
+        label{
+         margin-bottom: 5px;
+            font: normal normal 600 12px/17px 'Source Sans 3';
+            color: #2B2B2B;
+   }
+
+}

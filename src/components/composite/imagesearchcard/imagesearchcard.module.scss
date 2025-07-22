@@ -194,14 +194,15 @@
     margin: 0px;
     padding: 4px;
 
-    &[class*="MuiIconButton-root"] {
-      [class*="MuiIconButton-label"] {
-        svg {
-          color: #008FFF;
-          background: #fff;
-        }
-      }
+    //&[class*="MuiIconButton-root"] {
+    // [class*="MuiIconButton-label"] {
+    svg {
+      color: #008FFF;
+      background: #fff;
     }
+
+    //   }
+    //}
   }
 
 
@@ -249,6 +250,10 @@
     flex: 1;
     display: flex;
     flex-wrap: nowrap;
+
+    .card-footer-btn-wrapper-tooltip {
+      margin-right: 8px;
+    }
   }
 }
 
@@ -297,7 +302,7 @@
 
 .primaryButton-cds {
   padding: 5px 8px !important;
-  font: normal normal normal 9px/10px "Source Sans 3" !important;
+  font: normal normal normal 10px/10px "Source Sans 3" !important;
   text-transform: unset !important;
 
   &:last-of-type {

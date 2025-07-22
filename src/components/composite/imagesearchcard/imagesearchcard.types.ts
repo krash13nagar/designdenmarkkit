@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ActionButton } from "../../complex/imageauth/imageauth.types";
+import { DiscardImageCardConfig } from "./discardimagecard.types";
 
 export interface imageSearchCardConfig {
     msid?: string,
@@ -22,7 +23,12 @@ export interface imageSearchCardConfig {
     onCallbackSelectImagefnc?: React.MouseEventHandler<HTMLElement>,
     actionButtonsList?: ActionButton[],
     cardStyle?: 'standard' | 'minimal',
-    onCardClick?: React.MouseEventHandler<HTMLElement>
+    onCardClick?: React.MouseEventHandler<HTMLElement>,
+    discardImageProps?: any,
+    showImageHoverFooter?: boolean,
+    onCheckboxClick?: React.MouseEventHandler<HTMLElement>,
+    isCheckboxChecked?: boolean,
+    showImageCheckbox?: boolean
 }
 
 export interface imageCardMenuOptionsConfig {
@@ -45,5 +51,8 @@ export interface imageSearchCardHoverConfig {
     ingestionDateTimestamp?: number | undefined,
     cardStyle?: imageSearchCardConfig['cardStyle'],
     imageCardMenuOptions?: imageCardMenuOptionsConfig[],
-    showCardMenu?: boolean
+    showCardMenu?: boolean,
+    sx?: any,
+    discardImageCardCallBack?: (from: number) => void,
+    showImageHoverFooter?: boolean
 }

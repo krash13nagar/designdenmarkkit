@@ -31,6 +31,7 @@ export * from './menuitem/menuitem.component';
 export * from './menu/menu.component';
 export * from './slide/slide.component';
 export * from './tooltip/tooltip.component';
+export * from './tooltip/customtooltip.component';
 export * from './formlabel/formlabel.component';
 export * from './inputlabel/inputlabel.component';
 export * from './formhelpertext/formhelpertext.component';
@@ -89,6 +90,7 @@ export * from './readmoreless/readmoreless.component';
 export * from './drawer/drawer.component';
 export * from './autocompleteinput/autocompleteinput.component';
 export * from './imagewithfallback/imagewithfallback'
+export * from './autocomplete/autocomplete.component';
 
 
 
