@@ -36,8 +36,6 @@ export const marketplaceContentCardSample = {
     publishDateTimestamp: "Tue Feb 08 18:31:23 IST 2022",
     cardMenuOptions: CARD_MENU_OPTIONS,
     imagesCount: 18,
-    videosCount: 18,
-    wordCount: 18,
     dataSource: {
         name: "Hindustan Times",
         icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -46,7 +44,8 @@ export const marketplaceContentCardSample = {
                 <path id="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24_1_" data-name="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24 (1)" d="M141.225-808.479a1.183,1.183,0,0,1-.869-.356A1.183,1.183,0,0,1,140-809.7v-9.07a1.182,1.182,0,0,1,.356-.869,1.182,1.182,0,0,1,.869-.356h9.07a1.182,1.182,0,0,1,.869.356,1.182,1.182,0,0,1,.356.869v9.07a1.183,1.183,0,0,1-.356.869,1.183,1.183,0,0,1-.869.356Zm0-1.017h9.07a.2.2,0,0,0,.143-.065.2.2,0,0,0,.065-.143v-9.07a.2.2,0,0,0-.065-.143.2.2,0,0,0-.143-.065h-9.07a.2.2,0,0,0-.143.065.2.2,0,0,0-.065.143v9.07a.2.2,0,0,0,.065.143A.2.2,0,0,0,141.225-809.5Zm.977-1.525h7.168l-2.228-2.971-1.9,2.476-1.355-1.733Zm-1.186,1.525v0Z" transform="translate(-140 822)" fill="#818181" />
             </g>
         </svg>
-        )
+        ),
+        onClick: () => { console.log("data source clicked!") }
 
     },
     tags: [
@@ -94,7 +93,8 @@ export const marketplaceContentCardSample = {
             <path id="Path_38794" data-name="Path 38794" d="M23.246,9.39a2.841,2.841,0,0,0-2.771,2.771,2.771,2.771,0,1,0,5.542,0A2.841,2.841,0,0,0,23.246,9.39ZM33.407,2H7.542A5.443,5.443,0,0,0,2,7.542V33.407a5.443,5.443,0,0,0,5.542,5.542H33.407a5.443,5.443,0,0,0,5.542-5.542V7.542A5.443,5.443,0,0,0,33.407,2Zm1.847,21.985-3.51-3.51a5.7,5.7,0,0,0-7.759,0l-1.663,1.663L16.964,16.78a5.7,5.7,0,0,0-7.759,0l-3.51,3.51V7.542A1.745,1.745,0,0,1,7.542,5.695H33.407a1.745,1.745,0,0,1,1.847,1.847Z" transform="translate(-0.901 -0.99)" fill="#e5e9ed" />
         </svg>
     ),
-    showAllCheckboxes: false
+    showAllCheckboxes: false,
+    onCardClick: () => { console.log("card clicked!") }
 }
 
 export const marketplaceContentCardSample2 = {

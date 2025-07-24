@@ -25,7 +25,8 @@ export interface MarketplaceContentCardConfig {
     wordCount?: number,
     dataSource?: {
         name: string,
-        icon: ReactNode
+        icon: ReactNode,
+        onClick?: React.MouseEventHandler<HTMLElement>
     },
     tags?: {
         id: number,

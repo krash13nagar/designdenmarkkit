@@ -34,7 +34,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         checkboxProps,
         headerTooltipContent,
         view = 'grid',
-        showAllCheckboxes = false
+        showAllCheckboxes = false,
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -79,11 +79,16 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         }
     }, [])
 
-    const tagsTooltip = useCallback((label: string) => {
+    const tagsTooltip = useCallback((tags: any) => {
         return (
             <React.Fragment>
                 <DenTypography variant="body2" color="textPrimary">
-                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>Category:</span> <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>{label || '-'}</span>
+                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
+                        Category:
+                    </span>{' '}
+                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
+                        {tags?.slice(1).map((tag: any) => tag.label).join(', ')}
+                    </span>
                 </DenTypography>
             </React.Fragment>
         )
@@ -181,18 +186,22 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     {view !== 'single' && (
                         <div className={cssClassName['card-tags-wrapper']}>
                             {
-                                tags?.map((tag, index) => (
-                                    <DenCustomTooltip title={tagsTooltip(tag.label)} arrow {...tooltipstyles} placement='top'>
-                                        <Chip
-                                            className={cssClassName['card-tag']}
-                                            size="small"
-                                            key={index}
-                                            icon={tag.icon}
-                                            label={tag.label}
-                                            variant="outlined"
-                                        />
-                                    </DenCustomTooltip>
-                                ))
+
+                                (tags?.length > 0 && <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
+                                    <Chip
+                                        className={cssClassName['card-tag']}
+                                        size="small"
+                                        icon={tags[0].icon}
+                                        label={
+                                            tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                                <span>{tags[0].label}</span>
+                                                <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
+                                            </span> : tags[0].label
+                                        }
+                                        variant="outlined"
+                                    />
+                                </DenCustomTooltip>
+                                )
                             }
                         </div>
                     )}
@@ -208,41 +217,49 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                 </DenBox>
                             </DenCustomTooltip>
                             <DenCustomTooltip title={`Videos : ${videosCount || '-'}`} arrow {...tooltipstyles}>
-                                <DenBox className={cssClassName['video']}>
+                                {videosCount && <DenBox className={cssClassName['video']}>
                                     <MarketplaceImageIcon width="14px" height="14px" />
                                     <DenTypography>
                                         {videosCount || '-'}
                                     </DenTypography>
-                                </DenBox>
+                                </DenBox>}
                             </DenCustomTooltip>
                             <DenCustomTooltip title={`Word Count : ${wordCount || '-'}`} arrow {...tooltipstyles}>
-                                <DenBox className={cssClassName['wordcount']}>
+                                {wordCount && <DenBox className={cssClassName['wordcount']}>
                                     <DenTypography>
                                         WC : {wordCount || '-'}
                                     </DenTypography>
                                 </DenBox>
+                                }
                             </DenCustomTooltip>
                         </DenBox>
                         <DenBox className={cssClassName['card-footer-rhs']}>
                             {view === 'single' && tags && tags.length > 0 && (
                                 <DenBox className={cssClassName['card-tags-single-view']}>
                                     {
-                                        tags?.map((tag, index) => (
-                                            <DenCustomTooltip title={tagsTooltip(tag.label)} arrow {...tooltipstyles} placement='top' key={index}>
-                                                <Chip
-                                                    className={cssClassName['card-tag']}
-                                                    size="small"
-                                                    icon={tag.icon}
-                                                    label={tag.label}
-                                                    variant="outlined"
-                                                />
-                                            </DenCustomTooltip>
-                                        ))
+                                        (tags?.length > 0 && <DenCustomTooltip title={tagsTooltip(tags)} arrow {...tooltipstyles} placement='top'>
+                                            <Chip
+                                                className={cssClassName['card-tag']}
+                                                size="small"
+                                                icon={tags[0].icon}
+                                                label={
+                                                    tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                                        <span>{tags[0].label}</span>
+                                                        <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
+                                                    </span> : tags[0].label
+                                                }
+                                                variant="outlined"
+                                            />
+                                        </DenCustomTooltip>
+                                        )
                                     }
                                 </DenBox>
                             )}
-                            <DenCustomTooltip title={dataSource?.name} arrow {...tooltipstyles}>
-                                <DenBox className={cssClassName['datasoruce']}>
+                            <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
+                                    e.stopPropagation();
+                                    dataSource?.onClick?.(e);
+                                }}>
                                     <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
                                     <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
                                 </DenBox>
