@@ -125,6 +125,7 @@
 
         .card-tag {
             height: 20px;
+            transition: all 0.3s ease;
 
             & svg {
                 background-color: #E5F3FF;
@@ -134,6 +135,11 @@
 
             &.cds-MuiChip-root {
                 height: 20px;
+            }
+
+            &:hover {
+                // transform: translateZ(-10px);
+                box-shadow: 0px 3px 6px #00000029 !important;
             }
         }
 
