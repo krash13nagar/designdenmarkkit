@@ -105,18 +105,21 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 <div
                     className={cssClassName['image-with-details-wrapper']}
                 >
-                    <div className={cssClassName['card-header']}>
+                    <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow>
-                                <DenCheckbox
-                                    className={clsx(
-                                        cssClassName['card-header-lhs-checkbox'],
-                                        checkboxProps?.isChecked && cssClassName['checkbox-visible'],
-                                        showAllCheckboxes && cssClassName['show-all-checkboxes']
-                                    )}
-                                    checked={checkboxProps?.isChecked}
-                                    onChange={checkboxProps?.onCheckboxClick}
-                                />
+                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
+                            >
+                                <span>
+                                    <DenCheckbox
+                                        className={clsx(
+                                            cssClassName['card-header-lhs-checkbox'],
+                                            checkboxProps?.isChecked && cssClassName['checkbox-visible'],
+                                            showAllCheckboxes && cssClassName['show-all-checkboxes']
+                                        )}
+                                        checked={checkboxProps?.isChecked}
+                                        onChange={checkboxProps?.onCheckboxClick}
+                                    />
+                                </span>
                             </DenTooltip>
                             <DenCustomTooltip
                                 title={headerTooltipContent}

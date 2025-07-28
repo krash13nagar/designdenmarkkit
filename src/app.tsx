@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import DenLink from './components/common/link/link.component';
-import { DenTypography } from './components';
+import { DenTypography, MarketplaceContentCard, marketplaceContentCardSample } from './components';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
 import {
@@ -536,7 +536,7 @@ const App = (props: AppProps) => {
   // };
 
   const addedKeywordsConfig = {
-    ...betaKeywordsConfig.addedKeywordsConfig,    
+    ...betaKeywordsConfig.addedKeywordsConfig,
   };
 
   const recommendConfig = {
@@ -636,7 +636,7 @@ const App = (props: AppProps) => {
 
   return (
     <DenThemeProvider theme={ImageAuthoringTheme}>
-      <MediaAuthModel
+      {/* <MediaAuthModel
         {...testMediaConfig}
         selectedTab={selectedTab}
         handleTabChange={setSelectedTab}
@@ -674,10 +674,11 @@ const App = (props: AppProps) => {
         agencyProps={{
           title: 'Agency',
         }}
-      />
+      /> */}
       {/* <TestCommon /> */}
       {/* <RichStoryCard {...richStoryCardSample} /> */}
       {/* <ImageSearchCardWrapper imagesearchcardwrapper={imageSearchCardWrapperSample} /> */}
+      <MarketplaceContentCard {...marketplaceContentCardSample} />
     </DenThemeProvider>
   );
 };

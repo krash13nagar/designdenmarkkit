@@ -47,7 +47,8 @@ export interface MarketplaceCardMenuOptionsConfig {
 export interface MarketPlaceCardCheckboxProps {
     isChecked?: boolean,
     onCheckboxClick?: (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => void,
-    tooltipText?: string
+    tooltipText?: string,
+    PopperProps?: any
 }
 
 

@@ -74,14 +74,17 @@ export const marketplaceContentCardSample = {
     checkboxProps: {
         isChecked: false,
         onCheckboxClick: (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => { console.log("checkbox clicked!", e, checked) },
-        tooltipText: "This is conditional tooltip text"
+        tooltipText: "This is conditional tooltip text",
+        PopperProps: {
+            className: 'marketplace-checkbox-tooltip'
+        }
     },
     headerTooltipContent: (
         <React.Fragment>
-            <DenTypography variant="body2" color="textPrimary">
+            <DenTypography variant="body2" color="textPrimary" >
                 <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>Published at:</span> <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>12:29, 7 Jun 2025</span>
             </DenTypography>
-            <DenTypography variant="body2" color="textPrimary">
+            <DenTypography variant="body2" color="textPrimary" sx={{ marginTop: '6px' }}>
                 <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>Ingested at :</span> <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>11:40, 7 Jun 2025</span>
             </DenTypography>
         </React.Fragment>
