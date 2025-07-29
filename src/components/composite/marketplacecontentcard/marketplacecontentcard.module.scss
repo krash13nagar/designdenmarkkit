@@ -54,6 +54,10 @@
         color: #4D4D4D;
         align-items: center;
 
+        &.card-header-with-checkbox {
+            background-color: #E5F3FF;
+        }
+
         .card-header-lhs {
             display: flex;
             align-items: center;
