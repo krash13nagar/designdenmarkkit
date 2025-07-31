@@ -1,6 +1,6 @@
 .card-root {
     overflow: unset !important;
-    border: 1px solid #EAEAEA !important;
+    border: 1px solid #EAEAEA;
 }
 
 
@@ -28,7 +28,7 @@
     }
 
     &.selected-card {
-        border: 1px solid #0F89FF;
+        border: 1px solid #0F89FF !important;
     }
 
 
