@@ -213,7 +213,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         <DenBox className={cssClassName['card-footer-lhs']}>
                             <DenCustomTooltip title={`Images : ${imagesCount || '-'}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['image']}>
-                                    <MarketplaceImageIcon width="14px" height="14px" />
+                                    <MarketplaceImageIcon width="16px" height="16px" />
                                     <DenTypography>
                                         {imagesCount || '-'}
                                     </DenTypography>

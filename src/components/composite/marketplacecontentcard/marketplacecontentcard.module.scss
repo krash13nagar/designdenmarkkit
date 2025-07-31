@@ -1,5 +1,6 @@
 .card-root {
     overflow: unset !important;
+    border: 1px solid #EAEAEA !important;
 }
 
 
@@ -217,6 +218,7 @@
         letter-spacing: 0.12px;
         opacity: 1;
         color: #4D4D4D;
+        border-top: 1px solid #EAEAEA;
 
         .card-footer-lhs {
             display: flex;
@@ -251,6 +253,10 @@
                 align-items: center;
                 gap: 4px;
 
+                svg {
+                    border-radius: 50%;
+                }
+
                 .datasource-text {
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: horizontal;
@@ -276,10 +282,16 @@
                 .card-tag {
                     height: 20px;
 
+                    span {
+                        font: normal normal normal 11px/15px "Source Sans 3" !important;
+                    }
+
                     & svg {
                         background-color: #E5F3FF;
                         color: #E5F3FF;
                         border-radius: 50%;
+                        height: 16px;
+                        width: 16px;
                     }
 
                     &.cds-MuiChip-root {
