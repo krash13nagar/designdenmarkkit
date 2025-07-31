@@ -194,14 +194,23 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
 
           <div className="cds-action-buttons-wrapper">
             {enableReportButton && (
-              <DenButton
-                ref={reportButtonRef}
-                variant="outlined"
-                color="error"
-                onClick={handleReportButtonClick}
-              >
-                Report
-              </DenButton>
+              <DenBox sx={{ position: 'relative' }}>
+                <DenButton
+                  ref={reportButtonRef}
+                  variant="outlined"
+                  color="error"
+                  onClick={handleReportButtonClick}
+                >
+                  Report
+                </DenButton>
+                <ReportPopup
+                  isOpen={isReportPopupOpen}
+                  reportButtonProps={reportButtonProps}
+                  onCancel={handleReportCancel}
+                  onConfirm={handleReportConfirm}
+                  position={{ top: '-165px', right: '0px' }}
+                />
+              </DenBox>
             )}
 
             {actionButtonsList?.map((action) => (
@@ -218,13 +227,6 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           </div>
 
           {/* Report Popup */}
-          <ReportPopup
-            isOpen={isReportPopupOpen}
-            reportButtonProps={reportButtonProps}
-            onCancel={handleReportCancel}
-            onConfirm={handleReportConfirm}
-            position={{ top: '-160px', right: '197px' }}
-          />
         </div>
       </Footer>
     </>
