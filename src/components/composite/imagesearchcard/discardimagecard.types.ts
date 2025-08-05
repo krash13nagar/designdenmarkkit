@@ -8,5 +8,6 @@ export interface DiscardImageCardConfig {
     dropdownDefaultOption?: string;
     discardImageCardCallBack?: (from: number) => void,
     wrapperClass?: string,
-    animatedClass?: string
+    animatedClass?: string,
+    reportImageVariant?: string
 }
