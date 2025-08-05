@@ -91,6 +91,7 @@ export * from './drawer/drawer.component';
 export * from './autocompleteinput/autocompleteinput.component';
 export * from './imagewithfallback/imagewithfallback'
 export * from './autocomplete/autocomplete.component';
+export * from './formgroup/formgroup.component';
 
 
 
