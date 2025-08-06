@@ -10,7 +10,7 @@ import {
 } from './marketplacecontentcard.types';
 import ImageIcon from '../../../assets/cdsicons/imageicon';
 import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon';
-import { Chip } from '@mui/material';
+import { Chip, Divider } from '@mui/material';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 
 export const MarketplaceContentCard = React.forwardRef((props: MarketplaceContentCardConfig, ref: React.MutableRefObject<any>) => {
@@ -35,6 +35,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         headerTooltipContent,
         view = 'grid',
         showAllCheckboxes = false,
+        channels = [],
+        isBreakingCard = false,
+        isUpdatedCard = false,
+        agency = ''
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -94,6 +98,94 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         )
     }, [])
 
+    // Channel display logic
+    const visibleChannels = useMemo(() => {
+        return channels.slice(0, 2);
+    }, [channels]);
+
+    const remainingChannels = useMemo(() => {
+        return channels.slice(2);
+    }, [channels]);
+
+    const hasRemainingChannels = remainingChannels.length > 0;
+
+    // Channel tooltip content
+    const getChannelTooltipContent = useCallback((channel: any) => {
+        return (
+            <React.Fragment>
+                <DenBox className={cssClassName['channel-tooltip-container']}>
+                    <DenBox className={cssClassName['channel-tooltip-header-row']}>
+                        <StatusDotNew status="ACTIVE" size={6} />
+                        <DenTypography className={cssClassName['channel-tooltip-header-msid']}>
+                            MSID:
+                        </DenTypography>
+                        <DenTypography className={cssClassName['channel-tooltip-header-msid-val']}>
+                            {channel.sectionInfo.msid}
+                        </DenTypography>
+                        <Divider sx={{ height: '16px' }} className='channel-tooltip-header-divider' orientation="vertical" />
+                        <DenTypography className={cssClassName['channel-tooltip-header-timestamp']}>
+                            {channel.sectionInfo.timeStamp}
+                        </DenTypography>
+                    </DenBox>
+                    <DenBox className={cssClassName['channel-tooltip-channel-row']}>
+                        <DenChip
+                            label={
+                                <DenBox sx={{ display: 'flex' }}>
+                                    <DenSvgIcon>{channel.channelIcon}</DenSvgIcon>
+                                    <DenTypography className={cssClassName['channel-tooltip-section-name']}>
+                                        {channel.sectionInfo.sectionName}
+                                    </DenTypography>
+                                </DenBox>
+                            }
+                            size="small"
+                            className={cssClassName['channel-tooltip-section-chip']}
+                        />
+                    </DenBox>
+                    <DenTypography className={cssClassName['channel-tooltip-username']}>
+                        {channel.sectionInfo.userName}
+                    </DenTypography>
+                    <DenBox className={cssClassName['channel-tooltip-actions-row']}>
+                        <DenTypography
+                            className={cssClassName['channel-tooltip-action-link']}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                channel.sectionInfo.onPreviewClick?.(e);
+                            }}
+                        >
+                            Preview
+                        </DenTypography>
+                        <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
+                        <DenTypography
+                            className={cssClassName['channel-tooltip-action-link']}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                channel.sectionInfo.onFullStoryClick?.(e);
+                            }}
+                        >
+                            Full Story
+                        </DenTypography>
+                    </DenBox>
+                </DenBox>
+            </React.Fragment>
+        );
+    }, []);
+
+    // Remaining channels tooltip content
+    const getRemainingChannelsTooltipContent = useCallback(() => {
+        return (
+            <DenBox className={cssClassName['channel-list-tooltip-container']}>
+                {remainingChannels.map((channel, index) => (
+                    <React.Fragment key={index}>
+                        {getChannelTooltipContent(channel)}
+                        {index < remainingChannels.length - 1 && (
+                            <Divider sx={{ margin: '0px 4px 0px 4px' }} />
+                        )}
+                    </React.Fragment>
+                ))}
+            </DenBox>
+        );
+    }, [remainingChannels, getChannelTooltipContent]);
+
     return (
         <div className={cssClassName[variantClassName]}>
             <DenCard
@@ -105,7 +197,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 <div
                     className={cssClassName['image-with-details-wrapper']}
                 >
-                    <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'])}>
+                    <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
                             <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
                             >
@@ -121,6 +213,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     />
                                 </span>
                             </DenTooltip>
+                            {isBreakingCard && <DenTypography className={cssClassName['card-header-breaking-label']}>BREAKING</DenTypography>}
+                            {isUpdatedCard && <DenTypography className={cssClassName['card-header-updated-label']}>UPDATED</DenTypography>}
+                            {(isBreakingCard || isUpdatedCard) && <Divider sx={{ height: '16px', margin: '0px 2px 0px 2px' }} orientation="vertical" />}
                             <DenCustomTooltip
                                 title={headerTooltipContent}
                                 arrow
@@ -186,26 +281,78 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         </div>
 
                     </div>
+                    {/* Tags and Channels Section for Grid View */}
                     {view !== 'single' && (
-                        <div className={cssClassName['card-tags-wrapper']}>
-                            {
-
-                                (tags?.length > 0 && <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
-                                    <Chip
-                                        className={cssClassName['card-tag']}
-                                        size="small"
-                                        icon={tags[0].icon}
-                                        label={
-                                            tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                <span>{tags[0].label}</span>
-                                                <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                            </span> : tags[0].label
-                                        }
-                                        variant="outlined"
-                                    />
-                                </DenCustomTooltip>
-                                )
-                            }
+                        <div className={cssClassName['tags-channels-section']}>
+                            {/* Channels */}
+                            {channels && channels.length > 0 && (
+                                <DenBox className={cssClassName['channels-wrapper']}>
+                                    {visibleChannels.map((channel, index) => (
+                                        <DenTooltip
+                                            key={index}
+                                            title={getChannelTooltipContent(channel)}
+                                            arrow
+                                            placement="top"
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        backgroundColor: 'white',
+                                                        padding: '0',
+                                                        boxShadow: '0px 3px 6px #00000029'
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            <DenBox className={cssClassName['channel-chip']}>
+                                                <DenTypography className={cssClassName['channel-name']}>
+                                                    {channel.channelName}
+                                                </DenTypography>
+                                            </DenBox>
+                                        </DenTooltip>
+                                    ))}
+                                    {hasRemainingChannels && (
+                                        <DenTooltip
+                                            title={getRemainingChannelsTooltipContent()}
+                                            arrow
+                                            placement="top"
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        backgroundColor: 'white',
+                                                        padding: '0',
+                                                        boxShadow: '0px 3px 6px #00000029'
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            <DenBox className={cssClassName['channel-chip']}>
+                                                <DenTypography className={cssClassName['channel-plus']}>
+                                                    +{remainingChannels.length}
+                                                </DenTypography>
+                                            </DenBox>
+                                        </DenTooltip>
+                                    )}
+                                </DenBox>
+                            )}
+                            {/* Tags */}
+                            {tags?.length > 0 && (
+                                <DenBox className={cssClassName['tags-wrapper']}>
+                                    <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
+                                        <Chip
+                                            className={cssClassName['card-tag']}
+                                            size="small"
+                                            icon={tags[0].icon}
+                                            label={
+                                                tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                                    <span>{tags[0].label}</span>
+                                                    <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
+                                                </span> : tags[0].label
+                                            }
+                                            variant="outlined"
+                                        />
+                                    </DenCustomTooltip>
+                                </DenBox>
+                            )}
                         </div>
                     )}
 
@@ -237,6 +384,63 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             </DenCustomTooltip>
                         </DenBox>
                         <DenBox className={cssClassName['card-footer-rhs']}>
+                            {view === 'single' && channels && channels.length > 0 && (
+                                <DenBox className={cssClassName['channels-wrapper']}>
+                                    {visibleChannels.map((channel, index) => (
+                                        <DenTooltip
+                                            key={index}
+                                            title={getChannelTooltipContent(channel)}
+                                            arrow
+                                            placement="top"
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        backgroundColor: 'white',
+                                                        padding: '0',
+                                                        boxShadow: '0px 3px 6px #00000029',
+                                                    },
+                                                    '& .cds-MuiTooltip-arrow': {
+                                                        color: '#fff'
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            <DenBox className={cssClassName['channel-chip']}>
+                                                <DenTypography className={cssClassName['channel-name']}>
+                                                    {channel.channelName}
+                                                </DenTypography>
+                                            </DenBox>
+                                        </DenTooltip>
+                                    ))}
+                                    {hasRemainingChannels && (
+                                        <DenTooltip
+                                            title={getRemainingChannelsTooltipContent()}
+                                            arrow
+                                            placement="top"
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        backgroundColor: 'white',
+                                                        padding: '0',
+                                                        boxShadow: '0px 3px 6px #00000029',
+                                                    },
+                                                    '& .cds-MuiTooltip-arrow': {
+                                                        color: '#fff'
+                                                    }
+
+                                                }
+                                            }}
+                                        >
+                                            <DenBox className={cssClassName['channel-chip']}>
+                                                <DenTypography className={cssClassName['channel-plus']}>
+                                                    +{remainingChannels.length}
+                                                </DenTypography>
+                                            </DenBox>
+                                        </DenTooltip>
+                                    )}
+                                </DenBox>
+                            )}
+                            {view === 'single' && channels && channels.length > 0 && <Divider sx={{ height: '14px' }} orientation="vertical" />}
                             {view === 'single' && tags && tags.length > 0 && (
                                 <DenBox className={cssClassName['card-tags-single-view']}>
                                     {
@@ -258,7 +462,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
-                            <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
+                            {dataSource && <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();
                                     dataSource?.onClick?.(e);
@@ -266,7 +470,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
                                     <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
                                 </DenBox>
-                            </DenCustomTooltip>
+                            </DenCustomTooltip>}
+                            {agency && <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
                         </DenBox>
                     </div>
                 </div>
