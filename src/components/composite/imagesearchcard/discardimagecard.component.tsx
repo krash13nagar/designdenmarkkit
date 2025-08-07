@@ -45,7 +45,7 @@ export const DiscardImageCard = React.forwardRef((props: DiscardImageCardConfig,
         <div className={cssClassName['card-title']}>{title}</div>
         {dropdownOptions && dropdownOptions.length > 0 && <div className={cssClassName['card-menu']}>
           <div className={cssClassName['dropdown-label']}>{dropdownLabel}</div>
-          <DenFormControl fullWidth className={cssClassName['discard-form-control']}>
+          <DenFormControl fullWidth className={cssClassName['discard-form-control-TestingClass']}>
             <DenSelect
               value={selectedOption}
               variant="outlined"
