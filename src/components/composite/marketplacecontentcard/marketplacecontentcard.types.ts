@@ -37,6 +37,21 @@ export interface MarketplaceContentCardConfig {
     headerTooltipContent?: ReactNode,
     view?: string,
     showAllCheckboxes?: boolean,
+    isBreakingCard?: boolean,
+    isUpdatedCard?: boolean,
+    channels?: {
+        channelName: string,
+        channelIcon: ReactNode,
+        sectionInfo: {
+            sectionName: string,
+            msid: string,
+            userName: string,
+            timeStamp: string,
+            onPreviewClick?: React.MouseEventHandler<HTMLElement>,
+            onFullStoryClick?: React.MouseEventHandler<HTMLElement>
+        }
+    }[],
+    agency?: string
 }
 
 export interface MarketplaceCardMenuOptionsConfig {
