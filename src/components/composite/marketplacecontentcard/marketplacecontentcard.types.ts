@@ -51,7 +51,8 @@ export interface MarketplaceContentCardConfig {
             onFullStoryClick?: React.MouseEventHandler<HTMLElement>
         }
     }[],
-    agency?: string
+    agency?: string,
+    isWireCard?: boolean
 }
 
 export interface MarketplaceCardMenuOptionsConfig {

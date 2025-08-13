@@ -38,7 +38,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         channels = [],
         isBreakingCard = false,
         isUpdatedCard = false,
-        agency = ''
+        agency = '',
+        isWireCard = false
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -154,7 +155,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         >
                             Preview
                         </DenTypography>
-                        <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
+                        {/* <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
                         <DenTypography
                             className={cssClassName['channel-tooltip-action-link']}
                             onClick={(e) => {
@@ -163,7 +164,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             }}
                         >
                             Full Story
-                        </DenTypography>
+                        </DenTypography> */}
                     </DenBox>
                 </DenBox>
             </React.Fragment>
@@ -462,7 +463,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
-                            {dataSource && <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
+                            {!isWireCard ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();
                                     dataSource?.onClick?.(e);
@@ -470,8 +471,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
                                     <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
                                 </DenBox>
-                            </DenCustomTooltip>}
-                            {agency && <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
+                            </DenCustomTooltip> : <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
                         </DenBox>
                     </div>
                 </div>
