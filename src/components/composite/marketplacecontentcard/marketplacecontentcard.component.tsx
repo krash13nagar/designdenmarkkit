@@ -341,7 +341,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         <Chip
                                             className={cssClassName['card-tag']}
                                             size="small"
-                                            icon={tags[0].icon}
+                                            icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
                                             label={
                                                 tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                                                     <span>{tags[0].label}</span>
@@ -448,7 +448,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             <Chip
                                                 className={cssClassName['card-tag']}
                                                 size="small"
-                                                icon={tags[0].icon}
+                                                icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
                                                 label={
                                                     tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                                                         <span>{tags[0].label}</span>
