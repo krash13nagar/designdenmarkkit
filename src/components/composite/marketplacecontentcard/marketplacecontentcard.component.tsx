@@ -336,7 +336,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             )}
                             {/* Tags */}
                             {tags?.length > 0 && (
-                                <DenBox className={cssClassName['tags-wrapper']}>
+                                <DenBox className={cssClassName['tags-wrapper']} sx={{ marginLeft: 'auto' }}>
                                     <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
                                         <Chip
                                             className={cssClassName['card-tag']}
@@ -349,6 +349,11 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                 </span> : tags[0].label
                                             }
                                             variant="outlined"
+                                            sx={{
+                                                '& .cds-MuiChip-icon': {
+                                                    marginTop: '5px'
+                                                }
+                                            }}
                                         />
                                     </DenCustomTooltip>
                                 </DenBox>
@@ -444,7 +449,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             {view === 'single' && tags && tags.length > 0 && (
                                 <DenBox className={cssClassName['card-tags-single-view']}>
                                     {
-                                        (tags?.length > 0 && <DenCustomTooltip title={tagsTooltip(tags)} arrow {...tooltipstyles} placement='top'>
+                                        (tags?.length > 0 && <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
                                             <Chip
                                                 className={cssClassName['card-tag']}
                                                 size="small"
@@ -456,6 +461,11 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                     </span> : tags[0].label
                                                 }
                                                 variant="outlined"
+                                                sx={{
+                                                    '& .cds-MuiChip-icon': {
+                                                        marginTop: '5px'
+                                                    }
+                                                }}
                                             />
                                         </DenCustomTooltip>
                                         )
