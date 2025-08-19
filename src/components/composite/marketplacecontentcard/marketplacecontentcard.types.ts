@@ -52,7 +52,7 @@ export interface MarketplaceContentCardConfig {
         }
     }[],
     agency?: string,
-    isWireCard?: boolean
+    isCompetitor?: boolean
 }
 
 export interface MarketplaceCardMenuOptionsConfig {

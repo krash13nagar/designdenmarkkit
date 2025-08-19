@@ -309,6 +309,10 @@
             align-items: center;
             gap: 5px;
 
+            p {
+                font: normal normal normal 11px/12px "Source Sans 3";
+            }
+
             .image {
                 display: flex;
                 align-items: center;
@@ -324,6 +328,10 @@
             .wordcount {
                 border-left: 1px solid #D2D8DF;
                 padding-left: 6px;
+
+                .wordcount-label {
+                    color: #818181;
+                }
             }
         }
 

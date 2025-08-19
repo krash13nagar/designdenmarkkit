@@ -39,7 +39,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         isBreakingCard = false,
         isUpdatedCard = false,
         agency = '',
-        isWireCard = false
+        isCompetitor = true
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -200,7 +200,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 >
                     <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
+                            {isCompetitor && <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
                             >
                                 <span>
                                     <DenCheckbox
@@ -213,7 +213,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         onChange={checkboxProps?.onCheckboxClick}
                                     />
                                 </span>
-                            </DenTooltip>
+                            </DenTooltip>}
                             {isBreakingCard && <DenTypography className={cssClassName['card-header-breaking-label']}>BREAKING</DenTypography>}
                             {isUpdatedCard && <DenTypography className={cssClassName['card-header-updated-label']}>UPDATED</DenTypography>}
                             {(isBreakingCard || isUpdatedCard) && <Divider sx={{ height: '16px', margin: '0px 2px 0px 2px' }} orientation="vertical" />}
@@ -378,7 +378,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             <DenCustomTooltip title={`Word Count : ${wordCount || '-'}`} arrow {...tooltipstyles}>
                                 {wordCount && <DenBox className={cssClassName['wordcount']}>
                                     <DenTypography>
-                                        WC : {wordCount || '-'}
+                                        <span className={cssClassName['wordcount-label']}>WC :</span> {wordCount || '-'}
                                     </DenTypography>
                                 </DenBox>
                                 }
@@ -463,7 +463,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
-                            {!isWireCard ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
+                            {isCompetitor ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();
                                     dataSource?.onClick?.(e);
