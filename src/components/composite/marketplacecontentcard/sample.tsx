@@ -29,8 +29,10 @@ export const AGENCY_USAGE_QUOTA = {
 export const marketplaceContentCardSample = {
     title: "Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War",
     subtitle: "Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing",
+    slugTitle: "checking Slug Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+    story: "Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing",
     entityType: "IMAGES",
-    imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+    imageUrl: "",
     classes: { "root": "cardWrapperClass" },
     ingestionDate: "6th Feb 2024 03:53 PM",
     publishDateTimestamp: "Tue Feb 08 18:31:23 IST 2022",
@@ -51,7 +53,7 @@ export const marketplaceContentCardSample = {
     tags: [
         {
             id: 1,
-            label: "Sports",
+            label: "Entertainmentscdsbchcdhscdhsbchdshccdhshcdshcd",
             icon: (<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                 <g id="Group_166238" data-name="Group 166238" transform="translate(-206 -344)">
                     <rect id="Rectangle_142422" data-name="Rectangle 142422" width="12" height="12" transform="translate(206 344)" fill="none" />
@@ -206,7 +208,8 @@ export const marketplaceContentCardSample = {
     }],
     isBreakingCard: true,
     agency: "Agency",
-    isWireCard: true,
+    wordCount: 100
+
 }
 
 export const marketplaceContentCardSample2 = {

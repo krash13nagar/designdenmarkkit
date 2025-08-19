@@ -18,7 +18,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     const {
         id,
         title,
+        slugTitle,
         subtitle,
+        story,
         imageUrl,
         cardMenuOptions,
         ImageFallback,
@@ -270,7 +272,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         {title}
                                     </DenBox>
                                 </DenCustomTooltip>}
-                                {subtitle && <p className={cssClassName['card-subtitle']}>{subtitle}</p>}
+                                {slugTitle && <p className={cssClassName['card-slug-title']}>{slugTitle}</p>}
+                                {(subtitle || story) && (
+                                    <p className={cssClassName['card-subtitle']}>{subtitle || story}</p>
+                                )}
                             </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>
                                 <ImageWithFallback
@@ -345,9 +350,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             icon={tags[0].icon}
                                             label={
                                                 tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                    <span>{tags[0].label}</span>
+                                                    <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                                     <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                                </span> : tags[0].label
+                                                </span> : <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                             }
                                             variant="outlined"
                                         />
