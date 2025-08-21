@@ -32,8 +32,6 @@
     }
 
 
-
-
 }
 
 .image-with-details-wrapper {
@@ -59,6 +57,14 @@
             background-color: #E5F3FF;
         }
 
+        &.card-header-breaking {
+            background-color: #F8D5D4;
+        }
+
+        &.card-header-updated {
+            background-color: #E5F3FF;
+        }
+
         .card-header-lhs {
             display: flex;
             align-items: center;
@@ -70,6 +76,7 @@
                 padding-top: 2px;
                 padding-left: 2px;
             }
+
 
             .card-header-lhs-checkbox {
                 display: none;
@@ -87,6 +94,18 @@
                     opacity: 1;
                     padding: 0;
                 }
+            }
+
+            .card-header-breaking-label {
+                margin: 6px 4px 4px 4px;
+                font: normal normal 600 12px/14px "Source Sans 3";
+                color: #D92D2C;
+            }
+
+            .card-header-updated-label {
+                margin: 6px 4px 4px 4px;
+                font: normal normal 600 12px/14px "Source Sans 3";
+                color: #0F89FF;
             }
         }
 
@@ -153,6 +172,69 @@
         }
 
     }
+
+    .tags-channels-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        margin: 8px 5px;
+        padding: 0 5px;
+
+        .channels-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #4D4D4D;
+
+            .channel-chip {
+                display: flex;
+                align-items: center;
+                padding: 4px 5px;
+                background-color: #E5F3FF;
+                border-radius: 20px;
+                cursor: pointer;
+
+                p {
+                    font: normal normal normal 11px/16px "Source Sans 3";
+                }
+
+                &:hover {
+                    color: #0F89FF;
+                }
+
+            }
+        }
+
+        .tags-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .card-tag {
+                height: 20px;
+                transition: all 0.3s ease;
+
+                & svg {
+                    background-color: #E5F3FF;
+                    color: #E5F3FF;
+                    border-radius: 50%;
+                    height: 18px;
+                    width: 18px;
+                }
+
+                &.cds-MuiChip-root {
+                    height: 20px;
+                }
+
+                &:hover {
+                    box-shadow: 0px 3px 6px #00000029 !important;
+                }
+            }
+        }
+    }
+
+
 
     .card-details-section {
         flex: 1;
@@ -248,7 +330,31 @@
         .card-footer-rhs {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 7px;
+
+            .channels-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                .channel-chip {
+                    display: flex;
+                    align-items: center;
+                    padding: 4px 5px;
+                    background-color: #E5F3FF;
+                    border-radius: 20px;
+                    cursor: pointer;
+
+                    p {
+                        font: normal normal normal 11px/16px "Source Sans 3";
+                    }
+
+                    &:hover {
+                        color: #0F89FF;
+                    }
+
+                }
+            }
 
             .datasoruce {
                 display: flex;
@@ -301,11 +407,18 @@
                     }
                 }
             }
+
+            .agency-text {
+                font: normal normal normal 11px/12px 'Source Sans 3';
+                color: #4D4D4D;
+            }
         }
 
 
 
     }
+
+
 }
 
 
@@ -372,4 +485,104 @@
             }
         }
     }
+}
+
+// Tooltip content styles
+.channel-tooltip-container {
+    padding: 10px 10px 10px 10px;
+
+    .channel-tooltip-header-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 9px;
+        font: normal normal normal 12px/17px "Source Sans 3";
+        color: #4D4D4D;
+
+        .channel-tooltip-header-msid {
+            color: #818181;
+        }
+
+
+    }
+
+    .channel-tooltip-header-text {
+        font: normal normal 400 13px/18px "Source Sans 3";
+        color: #4D4D4D;
+    }
+
+    .channel-tooltip-channel-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+
+    .channel-tooltip-section-chip {
+        background-color: #E5F3FF;
+        font: normal normal 600 12px/16px "Source Sans 3";
+        height: 20px;
+        color: #2B2B2B;
+
+        span {
+            padding-left: 0px;
+        }
+
+        svg {
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+    }
+
+    .channel-tooltip-username {
+        font: normal normal normal 13px/18px "Source Sans 3";
+        color: #4D4D4D;
+        margin-bottom: 6px;
+    }
+
+    .channel-tooltip-actions-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .channel-tooltip-action-link {
+        font: normal normal normal 13px/18px "Source Sans 3";
+        color: #0F89FF;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+// Channel list tooltip container for multiple channels
+.channel-list-tooltip-container {
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 0;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #D2D8DF;
+        border-radius: 3px;
+
+        &:hover {
+            background: #a8a8a8;
+        }
+    }
+
+    // Firefox scrollbar
 }
