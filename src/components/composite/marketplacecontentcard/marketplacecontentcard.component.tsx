@@ -384,7 +384,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             </DenCustomTooltip>}
                             {!!imagesCount && <DenCustomTooltip title={imagesCount ? `Images : ${imagesCount}` : ''} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['image']}>
-                                    <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />
+                                    {!!wordCount && <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />}
                                     <MarketplaceImageIcon width="16px" height="16px" />
                                     <DenTypography>
                                         {imagesCount}
