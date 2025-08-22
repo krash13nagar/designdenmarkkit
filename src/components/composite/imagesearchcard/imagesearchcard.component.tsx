@@ -40,6 +40,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
     usedInHosts,
     usedInHostsIconMap,
     usedInHostsClassName = '', // new prop for custom className
+    isHoverable = true,  // new prop for showing hover details
   } = props;
 
   const [toShowDiscardImageCard, setToShowDiscardImageCard] = useState(false);
@@ -189,7 +190,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               </span>
             </div>
           )}
-          {isShowResolution && (
+          {isShowResolution && isHoverable && (
             <ImageSearchCardHoverDetails
               name={name}
               agencyName={agencyName}

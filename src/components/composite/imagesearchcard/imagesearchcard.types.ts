@@ -30,6 +30,7 @@ export interface imageSearchCardConfig {
     isCheckboxChecked?: boolean,
     showImageCheckbox?: boolean,
     relatedImages?: RelatedImage[],
+    isHoverable?: boolean,
     /**
      * Array of host IDs to show under the image card. Only the first host's icon is shown, and if more, a '+N' badge is shown as the second circle.
      * Example: usedInHosts: ['toi', 'bbc', 'cnn']
