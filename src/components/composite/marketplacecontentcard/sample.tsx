@@ -37,7 +37,7 @@ export const marketplaceContentCardSample = {
     ingestionDate: "6th Feb 2024 03:53 PM",
     publishDateTimestamp: "Tue Feb 08 18:31:23 IST 2022",
     cardMenuOptions: CARD_MENU_OPTIONS,
-    imagesCount: 18,
+    imagesCount: 0,
     dataSource: {
         name: "Hindustan Times",
         icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -206,9 +206,13 @@ export const marketplaceContentCardSample = {
             onFullStoryClick: () => { console.log("full story clicked!") },
         }
     }],
-    isBreakingCard: true,
     agency: "Agency",
-    wordCount: 100
+    wordCount: 100,
+    isCompetitor: false,
+    videosCount: 0,
+    onTitleClick: () => {
+        console.log("Title clicked-------");
+    }
 
 }
 

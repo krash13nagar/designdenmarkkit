@@ -20,6 +20,7 @@ export interface MarketplaceContentCardConfig {
     actionButtonsList?: ActionButton[],
     cardStyle?: 'standard' | 'minimal',
     onCardClick?: React.MouseEventHandler<HTMLElement>,
+    onTitleClick?: React.MouseEventHandler<HTMLElement>,
     ImageFallback?: ReactNode,
     selected?: boolean,
     imagesCount?: number,
