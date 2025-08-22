@@ -31,6 +31,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     shrinkLabel = false,
     classes = {},
     small = '',
+    placeholder = '',
   } = props;
   const [focus, setFocus] = React.useState(false);
   const [content, setContent] = React.useState('');
@@ -114,6 +115,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
           onFocus={handleFocus}
           hideToolbar={!focus}
           setAllPlugins={setAllPlugins}
+          placeholder={placeholder}
         />
       </div>
       <DenBox sx={{ display: 'flex', justifyContent: 'flex-end' }}>

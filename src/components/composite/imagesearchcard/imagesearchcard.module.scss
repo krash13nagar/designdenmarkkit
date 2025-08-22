@@ -367,3 +367,37 @@
 .smallVariant {
   @include cardVariant(small)
 }
+
+.used-in-hosts-wrapper {
+  display: inline-flex;
+  position: relative;
+  bottom: 50px;
+  margin-left: 8px;
+}
+
+.used-in-hosts-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #E31628;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.used-in-hosts-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e5ebf1;
+  font: normal normal medium 12px/16px 'Source Sans 3';
+  letter-spacing: 0px;
+  color: #2B2B2B;
+  margin-left: 4px;
+}
