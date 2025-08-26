@@ -297,7 +297,7 @@ export const quizSurveyCardSample = {
     "pollOptions": [
         {
             "msidPollOptions": 123393133,
-            "optionNo": 2,
+            "optionNo": 1,
             "isCorrect": false,
             "anscount": 263,
             "percentage": 35.12,
@@ -305,7 +305,7 @@ export const quizSurveyCardSample = {
         },
         {
             "msidPollOptions": 123393134,
-            "optionNo": 1,
+            "optionNo": 2,
             "isCorrect": false,
             "anscount": 486,
             "percentage": 64.88,
@@ -314,7 +314,7 @@ export const quizSurveyCardSample = {
 
         {
             "msidPollOptions": 123393133,
-            "optionNo": 2,
+            "optionNo": 3,
             "isCorrect": false,
             "anscount": 263,
             "percentage": 25.12,
@@ -322,7 +322,7 @@ export const quizSurveyCardSample = {
         },
         {
             "msidPollOptions": 123393134,
-            "optionNo": 1,
+            "optionNo": 4,
             "isCorrect": false,
             "anscount": 486,
             "percentage": 14.88,
@@ -330,7 +330,7 @@ export const quizSurveyCardSample = {
         },
         {
             "msidPollOptions": 123393133,
-            "optionNo": 2,
+            "optionNo": 5,
             "isCorrect": false,
             "anscount": 263,
             "percentage": 5.12,

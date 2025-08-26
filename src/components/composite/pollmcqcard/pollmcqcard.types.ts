@@ -41,6 +41,13 @@ export interface PollMCQCardConfig {
     headerTooltipContent?: ReactNode;
     view?: 'grid' | 'single';
     showAllCheckboxes?: boolean;
+    ischeckboxRequired?: boolean;
+    className?: string;
+    headerClassName?: string;
+    contentClassName?: string;
+    optionsClassName?: string;
+    circleIconClassName?: string;
+    footerClassName?: string;
     onOptionClick?: (option: PollOption, event: React.MouseEvent) => void;
     onVoteClick?: (event: React.MouseEvent) => void;
     showResults?: boolean;

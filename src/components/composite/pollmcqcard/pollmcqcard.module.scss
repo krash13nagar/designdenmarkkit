@@ -1,4 +1,6 @@
-// Poll/MCQ Card Styles - Following MarketplaceContentCard structure exactly
+@use '../../../styles/' as css;
+
+
 .card-root {
     overflow: unset !important;
     border: 1px solid #EAEAEA;
@@ -8,7 +10,7 @@
     padding: 0px;
     width: inherit;
     position: relative;
-    height: 241px;
+    // height: 340px;
     cursor: pointer;
     box-shadow: 0px 3px 6px transparent !important;
     border-bottom: 1px solid #E0E0E0;
@@ -65,7 +67,7 @@
             align-items: center;
 
             .card-header-date {
-                font: italic normal 600 12px/14px "Source Sans 3";
+                font: italic normal 600 css.pxToRem(12px) / css.pxToRem(14px) "Source Sans 3";
                 letter-spacing: 0.13px;
                 color: #4D4D4D;
                 padding-top: 2px;
@@ -116,7 +118,7 @@
     }
 
     .card-details-section {
-        padding: 12px;
+        padding: 8px;
         //flex: 1;
 
         .card-image-wrapper {
@@ -129,7 +131,7 @@
                 max-height: 55px;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
-                font: normal normal 600 13px / 17px "Source Sans 3";
+                font: normal normal 600 css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
                 letter-spacing: 0px;
                 color: #2B2B2B;
                 opacity: 1;
@@ -138,10 +140,10 @@
     }
 
     .poll-options-section {
-        padding: 0 12px 12px 12px;
+        padding: 0 12px 0px 8px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 2px;
 
         .poll-option-item {
             padding: 0;
@@ -160,42 +162,42 @@
                 .poll-option-text {
                     display: flex;
                     align-items: center;
-                    gap: 8px;
                     flex: 1;
 
                     .poll-option-number {
-                        font: normal normal 600 14px/18px "Source Sans 3";
-                        color: #666;
-                        min-width: 20px;
+                        font: normal normal normal css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
+                        color: #4D4D4D;
+                        margin-right: 5px;
                     }
 
                     .poll-option-text-content {
-                        font: normal normal 400 14px/18px "Source Sans 3";
-                        color: #2B2B2B;
+                        font: normal normal medium css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
+                        color: #4D4D4D;
                         flex: 1;
                     }
                 }
 
                 .poll-option-percentage {
-                    font: normal normal 600 14px/18px "Source Sans 3";
-                    color: #2B2B2B;
-                    padding: 4px 8px;
-                    border-radius: 4px;
-                    min-width: 40px;
+                    font: normal normal normal css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
+                    padding: 2px 4px;
+                    border-radius: 2px;
                     text-align: center;
                     margin-left: auto;
 
                     // Different colors based on position
                     &[data-percentage="first"] {
                         background: #C8E6C9; // Green for first (highest percentage)
+                        color: darken(#C8E6C9, 30%);
                     }
 
                     &[data-percentage="second"] {
                         background: #FDF3CC; // Light yellow for second
+                        color: darken(#FDF3CC, 30%);
                     }
 
                     &[data-percentage="other"] {
                         background: #F8D5D4; // Light red for others
+                        color: darken(#F8D5D4, 30%);
                     }
                 }
             }
@@ -232,39 +234,34 @@
         }
     }
 
-    .vote-button-section {
-        padding: 0 12px 12px 12px;
-        display: flex;
-        justify-content: center;
-
-        .vote-button {
-            padding: 8px 24px;
-            font: normal normal 600 14px/18px "Source Sans 3";
-            text-transform: none;
-            border-radius: 6px;
-
-            &:disabled {
-                background-color: #E0E0E0;
-                color: #999;
-            }
-        }
-    }
-
     .card-footer {
-        padding: 12px;
+        padding: 8px;
         border-top: 1px solid #E0E0E0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #FAFAFA;
+        // background: #FAFAFA;
 
         .card-footer-lhs {
             display: flex;
             align-items: center;
 
             .vote-count {
-                font: normal normal 400 12px/16px "Source Sans 3";
-                color: #666;
+                font: normal normal normal css.pxToRem(11px) / css.pxToRem(12px) "Source Sans 3";
+                letter-spacing: 0.12px;
+                color: #4D4D4D;
+
+                label {
+                    font: normal normal normal css.pxToRem(11px) / css.pxToRem(12px) "Source Sans 3";
+                    letter-spacing: 0.12px;
+                    color: #818181;
+                }
+
+                .votecountvalue {
+                    font: normal normal normal css.pxToRem(11px) / css.pxToRem(12px) "Source Sans 3";
+                    letter-spacing: 0.12px;
+                    color: #4D4D4D;
+                }
             }
         }
 
@@ -287,24 +284,24 @@
                 }
 
                 .datasource-text {
-                    font: normal normal 400 11px/14px "Source Sans 3";
+                    font: normal normal 400 css.pxToRem(11px) / css.pxToRem(14px) "Source Sans 3";
                     color: #666;
                 }
             }
 
             .agency-text {
-                font: normal normal 400 11px/14px "Source Sans 3";
+                font: normal normal 400 css.pxToRem(11px) / css.pxToRem(14px) "Source Sans 3";
                 color: #999;
             }
         }
 
         .poll-option-more {
-            padding: 8px 0;
+            padding: 5px 0;
             text-align: center;
 
             .poll-option-more-text {
-                font: normal normal 400 14px/18px "Source Sans 3";
-                color: #818181;
+                font: normal normal normal css.pxToRem(12px) / css.pxToRem(17px) "Source Sans 3";
+                color: #4D4D4D;
                 cursor: pointer;
             }
         }
@@ -312,12 +309,12 @@
 
     .circle-icon-container {
         display: flex;
-        justify-content: center;
-        margin: 16px 0;
+        justify-content: start;
+        margin: 0 0 5px 8px;
 
         .circle-icon {
-            width: 32px;
-            height: 32px;
+            width: 21px;
+            height: 21px;
             border-radius: 50%;
             background: #E3F2FD;
             display: flex;
@@ -326,8 +323,8 @@
             border: 1px solid #BBDEFB;
 
             .circle-icon-text {
-                font: normal normal 600 12px/16px "Source Sans 3";
-                color: #1976D2;
+                font: normal normal normal css.pxToRem(11px) / css.pxToRem(16px) "Source Sans 3";
+                color: #4D4D4D;
             }
         }
     }
