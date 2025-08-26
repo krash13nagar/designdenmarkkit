@@ -1,6 +1,5 @@
 @use '../../../styles/' as css;
 
-
 .card-root {
     overflow: unset !important;
     border: 1px solid #EAEAEA;
@@ -10,20 +9,26 @@
     padding: 0px;
     width: inherit;
     position: relative;
-    // height: 340px;
     cursor: pointer;
     box-shadow: 0px 3px 6px transparent !important;
     border-bottom: 1px solid #E0E0E0;
     border-radius: 0px !important;
     box-sizing: border-box;
     transition: box-shadow 0.2s ease;
+    height: 280px;
 
     &:hover {
         box-shadow: 0px 3px 6px #00000029 !important;
 
-        .image-with-details-wrapper .card-header .card-header-lhs .card-header-lhs-checkbox:not(.checkbox-visible) {
-            display: flex;
-            opacity: 1;
+        .poll-card-details-wrapper {
+            .card-header {
+                .card-header-lhs {
+                    .card-header-lhs-checkbox:not(.checkbox-visible) {
+                        display: flex;
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
 
@@ -39,7 +44,7 @@
     }
 }
 
-.image-with-details-wrapper {
+.poll-card-details-wrapper {
     position: relative;
     overflow: hidden;
     background: #FFF;
@@ -80,11 +85,7 @@
                 transition: all 0.2s ease;
                 padding: 0;
 
-                &.checkbox-visible {
-                    display: flex;
-                    opacity: 1;
-                }
-
+                &.checkbox-visible,
                 &.show-all-checkboxes {
                     display: flex;
                     opacity: 1;
@@ -103,11 +104,7 @@
                     color: #666;
                     transition: all 0.2s ease;
 
-                    &:hover {
-                        color: #0F89FF;
-                        background-color: rgba(15, 137, 255, 0.08);
-                    }
-
+                    &:hover,
                     &.menu-open {
                         color: #0F89FF;
                         background-color: rgba(15, 137, 255, 0.08);
@@ -119,7 +116,6 @@
 
     .card-details-section {
         padding: 8px;
-        //flex: 1;
 
         .card-image-wrapper {
             .card-title {
@@ -144,15 +140,10 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
+        flex: 1;
 
         .poll-option-item {
             padding: 0;
-            // border: 1px solid #E0E0E0;
-            // border-radius: 4px;
-            // cursor: default;
-            // transition: all 0.2s ease;
-            // background: #FAFAFA;
-            // position: relative;
 
             .poll-option-content {
                 display: flex;
@@ -184,19 +175,18 @@
                     text-align: center;
                     margin-left: auto;
 
-                    // Different colors based on position
                     &[data-percentage="first"] {
-                        background: #C8E6C9; // Green for first (highest percentage)
+                        background: #C8E6C9;
                         color: darken(#C8E6C9, 30%);
                     }
 
                     &[data-percentage="second"] {
-                        background: #FDF3CC; // Light yellow for second
+                        background: #FDF3CC;
                         color: darken(#FDF3CC, 30%);
                     }
 
                     &[data-percentage="other"] {
-                        background: #F8D5D4; // Light red for others
+                        background: #F8D5D4;
                         color: darken(#F8D5D4, 30%);
                     }
                 }
@@ -217,17 +207,16 @@
                     right: 0;
                     top: 0;
 
-                    // Different colors based on position
                     &[data-percentage="first"] {
-                        background-color: #4CAF50; // Green for first (highest percentage)
+                        background-color: #4CAF50;
                     }
 
                     &[data-percentage="second"] {
-                        background-color: #FFB74D; // Orange for second
+                        background-color: #FFB74D;
                     }
 
                     &[data-percentage="other"] {
-                        background-color: #F44336; // Red for others
+                        background-color: #F44336;
                     }
                 }
             }
@@ -240,7 +229,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // background: #FAFAFA;
 
         .card-footer-lhs {
             display: flex;

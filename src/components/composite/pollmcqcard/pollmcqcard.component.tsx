@@ -16,7 +16,6 @@ import clsx from 'clsx';
 import { AnchorGeneric, PollMCQCardConfig, PollOption } from './pollmcqcard.types';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 
-// ===== MODULAR COMPONENTS =====
 
 // Header Component
 interface PollCardHeaderProps {
@@ -312,7 +311,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                 ref={ref}
                 onClick={onCardClick}
             >
-                <div className={cssClassName['image-with-details-wrapper']}>
+                <div className={cssClassName['poll-card-details-wrapper']}>
                     {/* Modular Header Component */}
                     <PollCardHeader
                         ischeckboxRequired={ischeckboxRequired}
