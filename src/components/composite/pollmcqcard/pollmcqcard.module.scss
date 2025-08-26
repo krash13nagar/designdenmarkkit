@@ -1,0 +1,334 @@
+// Poll/MCQ Card Styles - Following MarketplaceContentCard structure exactly
+.card-root {
+    overflow: unset !important;
+    border: 1px solid #EAEAEA;
+}
+
+.default-card-wrapper {
+    padding: 0px;
+    width: inherit;
+    position: relative;
+    height: 241px;
+    cursor: pointer;
+    box-shadow: 0px 3px 6px transparent !important;
+    border-bottom: 1px solid #E0E0E0;
+    border-radius: 0px !important;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow: 0px 3px 6px #00000029 !important;
+
+        .image-with-details-wrapper .card-header .card-header-lhs .card-header-lhs-checkbox:not(.checkbox-visible) {
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    &.selected-card {
+        border: 1px solid #0F89FF !important;
+    }
+}
+
+.singleViewVariant {
+    .default-card-wrapper {
+        height: auto;
+        min-height: 320px;
+    }
+}
+
+.image-with-details-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .card-header {
+        background-color: #EAEAEA;
+        display: flex;
+        width: 100%;
+        padding: 4px;
+        justify-content: space-between;
+        height: 24px;
+        color: #4D4D4D;
+        align-items: center;
+
+        &.card-header-with-checkbox {
+            background-color: #E5F3FF;
+        }
+
+        .card-header-lhs {
+            display: flex;
+            align-items: center;
+
+            .card-header-date {
+                font: italic normal 600 12px/14px "Source Sans 3";
+                letter-spacing: 0.13px;
+                color: #4D4D4D;
+                padding-top: 2px;
+                padding-left: 2px;
+            }
+
+            .card-header-lhs-checkbox {
+                display: none;
+                opacity: 0;
+                transition: all 0.2s ease;
+                padding: 0;
+
+                &.checkbox-visible {
+                    display: flex;
+                    opacity: 1;
+                }
+
+                &.show-all-checkboxes {
+                    display: flex;
+                    opacity: 1;
+                    padding: 0;
+                }
+            }
+        }
+
+        .card-header-rhs {
+            display: flex;
+            align-items: center;
+
+            .card-header-menu {
+                .more-icon-base {
+                    padding: 4px;
+                    color: #666;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        color: #0F89FF;
+                        background-color: rgba(15, 137, 255, 0.08);
+                    }
+
+                    &.menu-open {
+                        color: #0F89FF;
+                        background-color: rgba(15, 137, 255, 0.08);
+                    }
+                }
+            }
+        }
+    }
+
+    .card-details-section {
+        padding: 12px;
+        //flex: 1;
+
+        .card-image-wrapper {
+            .card-title {
+                display: -webkit-box;
+                white-space: normal;
+                overflow: hidden;
+                max-width: 100%;
+                color: #4D4D4D;
+                max-height: 55px;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                font: normal normal 600 13px / 17px "Source Sans 3";
+                letter-spacing: 0px;
+                color: #2B2B2B;
+                opacity: 1;
+            }
+        }
+    }
+
+    .poll-options-section {
+        padding: 0 12px 12px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .poll-option-item {
+            padding: 0;
+            // border: 1px solid #E0E0E0;
+            // border-radius: 4px;
+            // cursor: default;
+            // transition: all 0.2s ease;
+            // background: #FAFAFA;
+            // position: relative;
+
+            .poll-option-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .poll-option-text {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex: 1;
+
+                    .poll-option-number {
+                        font: normal normal 600 14px/18px "Source Sans 3";
+                        color: #666;
+                        min-width: 20px;
+                    }
+
+                    .poll-option-text-content {
+                        font: normal normal 400 14px/18px "Source Sans 3";
+                        color: #2B2B2B;
+                        flex: 1;
+                    }
+                }
+
+                .poll-option-percentage {
+                    font: normal normal 600 14px/18px "Source Sans 3";
+                    color: #2B2B2B;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    min-width: 40px;
+                    text-align: center;
+                    margin-left: auto;
+
+                    // Different colors based on position
+                    &[data-percentage="first"] {
+                        background: #C8E6C9; // Green for first (highest percentage)
+                    }
+
+                    &[data-percentage="second"] {
+                        background: #FDF3CC; // Light yellow for second
+                    }
+
+                    &[data-percentage="other"] {
+                        background: #F8D5D4; // Light red for others
+                    }
+                }
+            }
+
+            .poll-option-progress {
+                margin-top: 8px;
+                height: 6px;
+                background-color: #F0F0F0;
+                border-radius: 3px;
+                overflow: hidden;
+                position: relative;
+
+                .poll-option-progress-bar {
+                    height: 100%;
+                    transition: width 0.3s ease;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+
+                    // Different colors based on position
+                    &[data-percentage="first"] {
+                        background-color: #4CAF50; // Green for first (highest percentage)
+                    }
+
+                    &[data-percentage="second"] {
+                        background-color: #FFB74D; // Orange for second
+                    }
+
+                    &[data-percentage="other"] {
+                        background-color: #F44336; // Red for others
+                    }
+                }
+            }
+        }
+    }
+
+    .vote-button-section {
+        padding: 0 12px 12px 12px;
+        display: flex;
+        justify-content: center;
+
+        .vote-button {
+            padding: 8px 24px;
+            font: normal normal 600 14px/18px "Source Sans 3";
+            text-transform: none;
+            border-radius: 6px;
+
+            &:disabled {
+                background-color: #E0E0E0;
+                color: #999;
+            }
+        }
+    }
+
+    .card-footer {
+        padding: 12px;
+        border-top: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #FAFAFA;
+
+        .card-footer-lhs {
+            display: flex;
+            align-items: center;
+
+            .vote-count {
+                font: normal normal 400 12px/16px "Source Sans 3";
+                color: #666;
+            }
+        }
+
+        .card-footer-rhs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .datasource {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                cursor: pointer;
+                padding: 4px 8px;
+                border-radius: 4px;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: #E8E8E8;
+                }
+
+                .datasource-text {
+                    font: normal normal 400 11px/14px "Source Sans 3";
+                    color: #666;
+                }
+            }
+
+            .agency-text {
+                font: normal normal 400 11px/14px "Source Sans 3";
+                color: #999;
+            }
+        }
+
+        .poll-option-more {
+            padding: 8px 0;
+            text-align: center;
+
+            .poll-option-more-text {
+                font: normal normal 400 14px/18px "Source Sans 3";
+                color: #818181;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .circle-icon-container {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0;
+
+        .circle-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #E3F2FD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #BBDEFB;
+
+            .circle-icon-text {
+                font: normal normal 600 12px/16px "Source Sans 3";
+                color: #1976D2;
+            }
+        }
+    }
+}
