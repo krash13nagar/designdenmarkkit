@@ -13,7 +13,7 @@ import {
 import { formatTimestampWithMoment } from '../../../utility/utils';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import clsx from 'clsx';
-import { AnchorGeneric, PollMCQCardConfig, PollOption } from './pollmcqcard.types';
+import { PollMCQAnchorGeneric, PollMCQCardConfig, PollOption } from './pollmcqcard.types';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 
 
@@ -25,10 +25,12 @@ interface PollCardHeaderProps {
     headerDate: string;
     headerTooltipContent?: React.ReactNode;
     showAllCheckboxes: boolean;
-    anchorEl: AnchorGeneric;
+    anchorEl: PollMCQAnchorGeneric;
     cardMenuOptions?: any[];
     classes?: any;
     className?: string;
+    updateDate?: string;
+    insertDate?: string;
     onContextClick: (event: React.SyntheticEvent<HTMLElement>, index: number) => void;
     onDenMenuClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
     onClose: (event: React.SyntheticEvent<HTMLElement> | undefined, index: number, cb?: Function | undefined) => void;
@@ -45,6 +47,8 @@ const PollCardHeader: React.FC<PollCardHeaderProps> = ({
     cardMenuOptions,
     classes,
     className,
+    updateDate,
+    insertDate,
     onContextClick,
     onDenMenuClose,
     onClose
@@ -68,7 +72,22 @@ const PollCardHeader: React.FC<PollCardHeaderProps> = ({
             )}
 
             <DenCustomTooltip
-                title={headerTooltipContent}
+                title={
+                    <React.Fragment>
+                        <DenTypography variant="body2" color="textPrimary">
+                            <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
+                                Inserted at: {insertDate}
+                            </span>
+                        </DenTypography>
+                        {updateDate && (
+                            <DenTypography variant="body2" color="textPrimary">
+                                <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
+                                    Updated at: {updateDate}
+                                </span>
+                            </DenTypography>
+                        )}
+                    </React.Fragment>
+                }
                 arrow
                 placement='top'
             >
@@ -181,14 +200,15 @@ const PollCardOptions: React.FC<PollCardOptionsProps> = ({ cssClassName, sortedO
 interface PollCardCircleIconProps {
     cssClassName: any;
     hostid: any;
+    channelName?: string;
     className?: string;
 }
 
-const PollCardCircleIcon: React.FC<PollCardCircleIconProps> = ({ cssClassName, hostid, className }) => (
+const PollCardCircleIcon: React.FC<PollCardCircleIconProps> = ({ cssClassName, hostid, channelName, className }) => (
     <div className={clsx(cssClassName['circle-icon-container'], className)}>
         <div className={cssClassName['circle-icon']}>
             <DenTypography className={cssClassName['circle-icon-text']}>
-                {hostid}
+                {channelName ? channelName : hostid}
             </DenTypography>
         </div>
     </div>
@@ -261,11 +281,19 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
         footerClassName
     } = props;
 
-    const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
+    const [anchorEl, setAnchorEl] = React.useState<PollMCQAnchorGeneric>({});
 
     const headerDate = useMemo(() => {
         return data.publish_s_date && data.publish_s_date > 0 ? formatTimestampWithMoment(data.publish_s_date) : '';
     }, [data.publish_s_date]);
+
+    const updateDate = useMemo(() => {
+        return data.updateDate && Number(data.updateDate) > 0 ? formatTimestampWithMoment(Number(data.updateDate)) : '';
+    }, [data.updateDate]);
+
+    const insertDate = useMemo(() => {
+        return data.insertDate && Number(data.insertDate) > 0 ? formatTimestampWithMoment(Number(data.insertDate)) : '';
+    }, [data.insertDate]);
 
     const getOptionText = useCallback((option: PollOption) => {
         return option.optionText || `Option ${option.optionNo}`;
@@ -324,6 +352,8 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                         cardMenuOptions={cardMenuOptions}
                         classes={classes}
                         className={headerClassName}
+                        updateDate={updateDate}
+                        insertDate={insertDate}
                         onContextClick={handleContextClick}
                         onDenMenuClose={handleDenMenuOnClose}
                         onClose={handleClose}
@@ -348,6 +378,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                     <PollCardCircleIcon
                         cssClassName={cssClassName}
                         hostid={data.hostid}
+                        channelName={data.channelName}
                         className={circleIconClassName}
                     />
 

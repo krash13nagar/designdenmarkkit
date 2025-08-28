@@ -14,6 +14,7 @@ export interface PollMCQCardData {
     updateDate: string | number;
     insertDate: string | number;
     hostid: number[];
+    channelName?: string;
     contenttypeid: number;
     contentsubtypeid: number;
     title: string;
@@ -72,6 +73,6 @@ export interface PollMCQCardCheckboxProps {
     PopperProps?: any;
 }
 
-export interface AnchorGeneric {
+export interface PollMCQAnchorGeneric {
     [key: string]: HTMLElement;
 }
