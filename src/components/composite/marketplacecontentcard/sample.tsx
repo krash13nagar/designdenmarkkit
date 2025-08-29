@@ -29,29 +29,31 @@ export const AGENCY_USAGE_QUOTA = {
 export const marketplaceContentCardSample = {
     title: "Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War",
     subtitle: "Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing",
+    slugTitle: "checking Slug Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War,Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+    story: "Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing,Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing",
     entityType: "IMAGES",
-    imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+    imageUrl: "",
     classes: { "root": "cardWrapperClass" },
     ingestionDate: "6th Feb 2024 03:53 PM",
     publishDateTimestamp: "Tue Feb 08 18:31:23 IST 2022",
     cardMenuOptions: CARD_MENU_OPTIONS,
-    imagesCount: 18,
-    // dataSource: {
-    //     name: "Hindustan Times",
-    //     icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-    //         <g id="Group_165990" data-name="Group 165990" transform="translate(2)">
-    //             <rect id="Rectangle_142395" data-name="Rectangle 142395" width="16" height="16" transform="translate(-2)" fill="none" />
-    //             <path id="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24_1_" data-name="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24 (1)" d="M141.225-808.479a1.183,1.183,0,0,1-.869-.356A1.183,1.183,0,0,1,140-809.7v-9.07a1.182,1.182,0,0,1,.356-.869,1.182,1.182,0,0,1,.869-.356h9.07a1.182,1.182,0,0,1,.869.356,1.182,1.182,0,0,1,.356.869v9.07a1.183,1.183,0,0,1-.356.869,1.183,1.183,0,0,1-.869.356Zm0-1.017h9.07a.2.2,0,0,0,.143-.065.2.2,0,0,0,.065-.143v-9.07a.2.2,0,0,0-.065-.143.2.2,0,0,0-.143-.065h-9.07a.2.2,0,0,0-.143.065.2.2,0,0,0-.065.143v9.07a.2.2,0,0,0,.065.143A.2.2,0,0,0,141.225-809.5Zm.977-1.525h7.168l-2.228-2.971-1.9,2.476-1.355-1.733Zm-1.186,1.525v0Z" transform="translate(-140 822)" fill="#818181" />
-    //         </g>
-    //     </svg>
-    //     ),
-    //     onClick: () => { console.log("data source clicked!") }
+    imagesCount: 0,
+    dataSource: {
+        name: "Hindustan Times",
+        icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+            <g id="Group_165990" data-name="Group 165990" transform="translate(2)">
+                <rect id="Rectangle_142395" data-name="Rectangle 142395" width="16" height="16" transform="translate(-2)" fill="none" />
+                <path id="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24_1_" data-name="image_24dp_5F6368_FILL0_wght300_GRAD0_opsz24 (1)" d="M141.225-808.479a1.183,1.183,0,0,1-.869-.356A1.183,1.183,0,0,1,140-809.7v-9.07a1.182,1.182,0,0,1,.356-.869,1.182,1.182,0,0,1,.869-.356h9.07a1.182,1.182,0,0,1,.869.356,1.182,1.182,0,0,1,.356.869v9.07a1.183,1.183,0,0,1-.356.869,1.183,1.183,0,0,1-.869.356Zm0-1.017h9.07a.2.2,0,0,0,.143-.065.2.2,0,0,0,.065-.143v-9.07a.2.2,0,0,0-.065-.143.2.2,0,0,0-.143-.065h-9.07a.2.2,0,0,0-.143.065.2.2,0,0,0-.065.143v9.07a.2.2,0,0,0,.065.143A.2.2,0,0,0,141.225-809.5Zm.977-1.525h7.168l-2.228-2.971-1.9,2.476-1.355-1.733Zm-1.186,1.525v0Z" transform="translate(-140 822)" fill="#818181" />
+            </g>
+        </svg>
+        ),
+        onClick: () => { console.log("data source clicked!") }
 
-    // },
+    },
     tags: [
         {
             id: 1,
-            label: "Sports",
+            label: "Entertainmentscdsbchcdhscdhsbchdshccdhshcdshcd",
             icon: (<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                 <g id="Group_166238" data-name="Group 166238" transform="translate(-206 -344)">
                     <rect id="Rectangle_142422" data-name="Rectangle 142422" width="12" height="12" transform="translate(206 344)" fill="none" />
@@ -204,8 +206,14 @@ export const marketplaceContentCardSample = {
             onFullStoryClick: () => { console.log("full story clicked!") },
         }
     }],
-    isBreakingCard: true,
-    agency: "Agency"
+    agency: "Agency",
+    wordCount: 100,
+    isCompetitor: false,
+    videosCount: 0,
+    onTitleClick: () => {
+        console.log("Title clicked-------");
+    }
+
 }
 
 export const marketplaceContentCardSample2 = {
