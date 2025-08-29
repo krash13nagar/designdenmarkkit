@@ -18,11 +18,14 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     const {
         id,
         title,
+        slugTitle,
         subtitle,
+        story,
         imageUrl,
         cardMenuOptions,
         ImageFallback,
         onCardClick = () => { },
+        onTitleClick = () => { },
         selected,
         publishDateTimestamp,
         classes,
@@ -38,7 +41,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         channels = [],
         isBreakingCard = false,
         isUpdatedCard = false,
-        agency = ''
+        agency = '',
+        isCompetitor = true
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -75,6 +79,11 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         setAnchorEl((prev: any) => ({ ...prev, [index]: event.currentTarget }));
         event.stopPropagation();
     };
+
+    const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
+        if (onTitleClick) onTitleClick(event);
+        event.stopPropagation();
+    }
 
     const tooltipstyles = useMemo(() => {
         return {
@@ -154,7 +163,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         >
                             Preview
                         </DenTypography>
-                        <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
+                        {/* <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
                         <DenTypography
                             className={cssClassName['channel-tooltip-action-link']}
                             onClick={(e) => {
@@ -163,7 +172,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             }}
                         >
                             Full Story
-                        </DenTypography>
+                        </DenTypography> */}
                     </DenBox>
                 </DenBox>
             </React.Fragment>
@@ -199,7 +208,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 >
                     <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
+                            {isCompetitor && <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
                             >
                                 <span>
                                     <DenCheckbox
@@ -212,7 +221,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         onChange={checkboxProps?.onCheckboxClick}
                                     />
                                 </span>
-                            </DenTooltip>
+                            </DenTooltip>}
                             {isBreakingCard && <DenTypography className={cssClassName['card-header-breaking-label']}>BREAKING</DenTypography>}
                             {isUpdatedCard && <DenTypography className={cssClassName['card-header-updated-label']}>UPDATED</DenTypography>}
                             {(isBreakingCard || isUpdatedCard) && <Divider sx={{ height: '16px', margin: '0px 2px 0px 2px' }} orientation="vertical" />}
@@ -265,11 +274,14 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         <div className={cssClassName['card-image-wrapper']}>
                             <DenBox>
                                 {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
-                                    <DenBox title={title} className={cssClassName['card-title']}>
+                                    <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
                                         {title}
                                     </DenBox>
                                 </DenCustomTooltip>}
-                                {subtitle && <p className={cssClassName['card-subtitle']}>{subtitle}</p>}
+                                {slugTitle && <p className={cssClassName['card-slug-title']}>{slugTitle}</p>}
+                                {(subtitle || story) && (
+                                    <p className={cssClassName['card-subtitle']}>{subtitle || story}</p>
+                                )}
                             </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>
                                 <ImageWithFallback
@@ -290,7 +302,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     {visibleChannels.map((channel, index) => (
                                         <DenTooltip
                                             key={index}
-                                            title={getChannelTooltipContent(channel)}
+                                            title={''}
                                             arrow
                                             placement="top"
                                             PopperProps={{
@@ -312,7 +324,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     ))}
                                     {hasRemainingChannels && (
                                         <DenTooltip
-                                            title={getRemainingChannelsTooltipContent()}
+                                            title={''}
                                             arrow
                                             placement="top"
                                             PopperProps={{
@@ -344,9 +356,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
                                             label={
                                                 tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                    <span>{tags[0].label}</span>
+                                                    <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                                     <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                                </span> : tags[0].label
+                                                </span> : <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                             }
                                             variant="outlined"
                                             sx={{
@@ -363,30 +375,30 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
 
                     <div className={cssClassName['card-footer']}>
                         <DenBox className={cssClassName['card-footer-lhs']}>
-                            <DenCustomTooltip title={`Images : ${imagesCount || '-'}`} arrow {...tooltipstyles}>
+                            {!!wordCount && <DenCustomTooltip title={wordCount ? `Word Count : ${wordCount}` : ''} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['wordcount']}>
+                                    <DenTypography>
+                                        <span className={cssClassName['wordcount-label']}>WC :</span> {wordCount}
+                                    </DenTypography>
+                                </DenBox>
+                            </DenCustomTooltip>}
+                            {!!imagesCount && <DenCustomTooltip title={imagesCount ? `Images : ${imagesCount}` : ''} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['image']}>
+                                    {!!wordCount && <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />}
                                     <MarketplaceImageIcon width="16px" height="16px" />
                                     <DenTypography>
-                                        {imagesCount || '-'}
+                                        {imagesCount}
                                     </DenTypography>
                                 </DenBox>
-                            </DenCustomTooltip>
-                            <DenCustomTooltip title={`Videos : ${videosCount || '-'}`} arrow {...tooltipstyles}>
-                                {videosCount && <DenBox className={cssClassName['video']}>
+                            </DenCustomTooltip>}
+                            {!!videosCount && <DenCustomTooltip title={videosCount ? `Videos : ${videosCount}` : ''} arrow {...tooltipstyles}>
+                                <DenBox className={cssClassName['video']}>
                                     <MarketplaceImageIcon width="14px" height="14px" />
                                     <DenTypography>
-                                        {videosCount || '-'}
-                                    </DenTypography>
-                                </DenBox>}
-                            </DenCustomTooltip>
-                            <DenCustomTooltip title={`Word Count : ${wordCount || '-'}`} arrow {...tooltipstyles}>
-                                {wordCount && <DenBox className={cssClassName['wordcount']}>
-                                    <DenTypography>
-                                        WC : {wordCount || '-'}
+                                        {videosCount}
                                     </DenTypography>
                                 </DenBox>
-                                }
-                            </DenCustomTooltip>
+                            </DenCustomTooltip>}
                         </DenBox>
                         <DenBox className={cssClassName['card-footer-rhs']}>
                             {view === 'single' && channels && channels.length > 0 && (
@@ -394,7 +406,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     {visibleChannels.map((channel, index) => (
                                         <DenTooltip
                                             key={index}
-                                            title={getChannelTooltipContent(channel)}
+                                            title={''}
                                             arrow
                                             placement="top"
                                             PopperProps={{
@@ -419,7 +431,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     ))}
                                     {hasRemainingChannels && (
                                         <DenTooltip
-                                            title={getRemainingChannelsTooltipContent()}
+                                            title={''}
                                             arrow
                                             placement="top"
                                             PopperProps={{
@@ -456,9 +468,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                 icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
                                                 label={
                                                     tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                        <span>{tags[0].label}</span>
+                                                        <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                                         <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                                    </span> : tags[0].label
+                                                    </span> : <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
                                                 }
                                                 variant="outlined"
                                                 sx={{
@@ -472,7 +484,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
-                            {dataSource && <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
+                            {isCompetitor ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();
                                     dataSource?.onClick?.(e);
@@ -480,8 +492,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
                                     <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
                                 </DenBox>
-                            </DenCustomTooltip>}
-                            {agency && <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
+                            </DenCustomTooltip> : <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
                         </DenBox>
                     </div>
                 </div>
