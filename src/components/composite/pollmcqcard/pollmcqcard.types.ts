@@ -37,6 +37,7 @@ export interface PollMCQCardConfig {
     };
     cardMenuOptions?: PollMCQCardMenuOptionsConfig[];
     onCardClick?: React.MouseEventHandler<HTMLElement>;
+    onTitleClick?: React.MouseEventHandler<HTMLElement>;
     selected?: boolean;
     checkboxProps?: PollMCQCardCheckboxProps;
     headerTooltipContent?: ReactNode;
