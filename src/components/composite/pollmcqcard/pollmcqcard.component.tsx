@@ -147,14 +147,15 @@ interface PollCardContentProps {
     title: string;
     className?: string;
     tooltipstyles?: any;
+    onTitleClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const PollCardContent: React.FC<PollCardContentProps> = ({ cssClassName, title, className, tooltipstyles }) => (
+const PollCardContent: React.FC<PollCardContentProps> = ({ cssClassName, title, className, tooltipstyles, onTitleClick }) => (
     <div className={clsx(cssClassName['card-details-section'], className)}>
         <div className={cssClassName['card-image-wrapper']}>
             <DenBox>
-                {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} placement='bottom-start' >
-                    <DenBox title={title} className={cssClassName['card-title']}>
+                {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                    <DenBox title={title} className={cssClassName['card-title']} onClick={onTitleClick}>
                         {title}
                     </DenBox>
                 </DenCustomTooltip>}
@@ -275,6 +276,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
         type = 'poll',
         cardMenuOptions,
         onCardClick = () => { },
+        onTitleClick = () => { },
         selected,
         classes,
         checkboxProps,
@@ -344,6 +346,11 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
         }
     }, []);
 
+    const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
+        if (onTitleClick) onTitleClick(event);
+        event.stopPropagation();
+    }
+
     return (
         <div className={view === 'single' ? cssClassName['singleViewVariant'] : ''}>
             <DenCard
@@ -383,6 +390,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                         title={data.title}
                         className={contentClassName}
                         tooltipstyles={tooltipstyles}
+                        onTitleClick={handleOnTitleClick}
                     />
 
                     {/* Modular Options Component */}
