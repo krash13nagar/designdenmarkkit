@@ -73,20 +73,30 @@ const PollCardHeader: React.FC<PollCardHeaderProps> = ({
 
             <DenCustomTooltip
                 title={
-                    <React.Fragment>
-                        <DenTypography variant="body2" color="textPrimary">
-                            <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
-                                Inserted at: {insertDate}
-                            </span>
-                        </DenTypography>
-                        {updateDate && (
-                            <DenTypography variant="body2" color="textPrimary">
-                                <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
-                                    Updated at: {updateDate}
-                                </span>
-                            </DenTypography>
-                        )}
-                    </React.Fragment>
+                    headerTooltipContent || (
+                        <React.Fragment>
+                            <DenBox sx={{ padding: '4px' }}>
+                                <DenTypography variant="body2" color="textPrimary">
+                                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
+                                        Published at:
+                                    </span>{' '}
+                                    <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
+                                        {headerDate}
+                                    </span>
+                                </DenTypography>
+                                {updateDate && (
+                                    <DenTypography variant="body2" color="textPrimary" sx={{ marginTop: '6px' }}>
+                                        <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#818181' }}>
+                                            Ingested at :
+                                        </span>{' '}
+                                        <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
+                                            {updateDate}
+                                        </span>
+                                    </DenTypography>
+                                )}
+                            </DenBox>
+                        </React.Fragment>
+                    )
                 }
                 arrow
                 placement='top'
@@ -136,13 +146,14 @@ interface PollCardContentProps {
     cssClassName: any;
     title: string;
     className?: string;
+    tooltipstyles?: any;
 }
 
-const PollCardContent: React.FC<PollCardContentProps> = ({ cssClassName, title, className }) => (
+const PollCardContent: React.FC<PollCardContentProps> = ({ cssClassName, title, className, tooltipstyles }) => (
     <div className={clsx(cssClassName['card-details-section'], className)}>
         <div className={cssClassName['card-image-wrapper']}>
             <DenBox>
-                {title && <DenCustomTooltip arrow title={title} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} placement='bottom-start' >
                     <DenBox title={title} className={cssClassName['card-title']}>
                         {title}
                     </DenBox>
@@ -326,6 +337,13 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
         event.stopPropagation();
     };
 
+    const tooltipstyles = useMemo(() => {
+        return {
+            font: 'normal normal 400 13px/18px "Source Sans 3"',
+            textColor: '#4D4D4D',
+        }
+    }, []);
+
     return (
         <div className={view === 'single' ? cssClassName['singleViewVariant'] : ''}>
             <DenCard
@@ -364,6 +382,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                         cssClassName={cssClassName}
                         title={data.title}
                         className={contentClassName}
+                        tooltipstyles={tooltipstyles}
                     />
 
                     {/* Modular Options Component */}
