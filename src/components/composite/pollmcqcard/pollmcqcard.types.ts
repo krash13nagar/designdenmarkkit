@@ -15,6 +15,7 @@ export interface PollMCQCardData {
     insertDate: string | number;
     hostid: number[];
     channelName?: string;
+    channelTolltip?: string;
     contenttypeid: number;
     contentsubtypeid: number;
     title: string;

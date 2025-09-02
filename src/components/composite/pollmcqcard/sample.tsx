@@ -16,6 +16,7 @@ export const pollMCQCardSample = {
     "status": "2",
     "voteCount": 749,
     "channelName": "TOI",
+    "channelTolltip": "Times of India",
     "pollOptions": [
         {
             "msidPollOptions": 123393133,
@@ -23,7 +24,7 @@ export const pollMCQCardSample = {
             "isCorrect": false,
             "anscount": 263,
             "percentage": 35.12,
-            "optionText": "Yes, they should be free to express emotions"
+            "optionText": "Yes, they should be free to express emotions Yes, they should be free to express emotionsYes, they should be free to express emotionsYes, they should be free to express emotionsYes, they should be free to express emotionsYes, they should be free to express emotions"
         },
         {
             "msidPollOptions": 123393134,
