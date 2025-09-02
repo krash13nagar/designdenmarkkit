@@ -182,9 +182,14 @@ const PollCardOptions: React.FC<PollCardOptionsProps> = ({ cssClassName, sortedO
                 <div className={cssClassName['poll-option-content']}>
                     <div className={cssClassName['poll-option-text']}>
                         <span className={cssClassName['poll-option-number']}>{option.optionNo}.</span>
-                        <DenTypography className={cssClassName['poll-option-text-content']}>
-                            {getOptionText(option, index)}
-                        </DenTypography>
+                        <DenCustomTooltip title={getOptionText(option, index)} arrow>
+                            <DenTypography noWrap
+                                sx={{
+                                    maxWidth: '195px', // must be a string
+                                }} className={cssClassName['poll-option-text-content']}>
+                                {getOptionText(option, index)}
+                            </DenTypography>
+                        </DenCustomTooltip>
                     </div>
                     <div
                         className={cssClassName['poll-option-percentage']}
@@ -213,15 +218,18 @@ interface PollCardCircleIconProps {
     cssClassName: any;
     hostid: any;
     channelName?: string;
+    channelTolltip?: string;
     className?: string;
 }
 
-const PollCardCircleIcon: React.FC<PollCardCircleIconProps> = ({ cssClassName, hostid, channelName, className }) => (
+const PollCardCircleIcon: React.FC<PollCardCircleIconProps> = ({ cssClassName, hostid, channelName, channelTolltip, className }) => (
     <div className={clsx(cssClassName['circle-icon-container'], className)}>
         <div className={cssClassName['circle-icon']}>
-            <DenTypography className={cssClassName['circle-icon-text']}>
-                {channelName ? channelName : hostid}
-            </DenTypography>
+            <DenCustomTooltip title={channelTolltip} arrow>
+                <DenTypography className={cssClassName['circle-icon-text']}>
+                    {channelName ? channelName : hostid}
+                </DenTypography>
+            </DenCustomTooltip>
         </div>
     </div>
 );
@@ -406,6 +414,7 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
                         cssClassName={cssClassName}
                         hostid={data.hostid}
                         channelName={data.channelName}
+                        channelTolltip={data.channelTolltip}
                         className={circleIconClassName}
                     />
 
