@@ -158,7 +158,8 @@
                 .poll-option-text {
                     display: flex;
                     align-items: center;
-                    flex: 1;
+                    //flex: 1;
+                    justify-content: space-between;
 
                     .poll-option-number {
                         font: normal normal normal css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
@@ -169,7 +170,7 @@
                     .poll-option-text-content {
                         font: normal normal medium css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
                         color: #4D4D4D;
-                        flex: 1;
+                        // flex: 1;
                     }
                 }
 
