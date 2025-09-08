@@ -9,7 +9,7 @@ import {
 import clsx from 'clsx';
 import { QuizSurveyCardContentProps } from './quizsurveycontent.types';
 import DenCustomTooltip from '../../../common/tooltip/customtooltip.component';
-import { BrokenImgIcon } from '../../../../assets/cdsicons';
+import BrokenImgIcon from '../../../../assets/cdsicons/brokenimgicon';
 
 const QuizSurveyCardContent: React.FC<QuizSurveyCardContentProps> = ({
     title,

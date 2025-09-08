@@ -24,8 +24,8 @@ export interface QuizSurveyCardData {
     path: string;
     primeCategoryId: number;
     status: string;
-    questions: number;
-    responses: number;
+    quesCount: number;
+    responseCount: number;
     channelName?: string;
     channelTolltip?: string;
 }

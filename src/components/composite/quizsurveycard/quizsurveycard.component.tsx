@@ -143,8 +143,8 @@ export const QuizSurveyCard = React.forwardRef((props: QuizSurveyCardConfig, ref
                     {/* Modular Footer Component */}
                     <QuizSurveyCardFooter
                         cssClassName={cssClassName}
-                        responses={data.responses}
-                        questions={data.questions}
+                        responses={data.responseCount}
+                        questions={data.quesCount}
                         dataSource={dataSource}
                         agency={agency}
                         className={footerClassName}

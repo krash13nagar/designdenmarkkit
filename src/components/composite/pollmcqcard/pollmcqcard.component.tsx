@@ -320,9 +320,13 @@ export const PollMCQCard = React.forwardRef((props: PollMCQCardConfig, ref: Reac
         return option.optionText || `Option ${option.optionNo}`;
     }, []);
 
+    const pollOptions = useMemo(() => {
+        return data?.pollOptions ?? [];
+    }, [data?.pollOptions]);
+
     const sortedOptions = useMemo(() => {
-        return [...data.pollOptions].sort((a: PollOption, b: PollOption) => a.optionNo - b.optionNo);
-    }, [data.pollOptions]);
+        return [...pollOptions].sort((a: PollOption, b: PollOption) => a.optionNo - b.optionNo);
+    }, [pollOptions]);
 
     const handleClose = (
         event: React.SyntheticEvent<HTMLElement> | undefined,
