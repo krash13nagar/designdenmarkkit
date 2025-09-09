@@ -20,27 +20,26 @@ const QuizSurveyCardContent: React.FC<QuizSurveyCardContentProps> = ({
     onTitleClick
 }) => (
     <div className={clsx(cssClassName['card-details-section'], className)}>
-        <div className={cssClassName['card-image-wrapper']}>
-            <DenGrid container>
-                <DenGrid item xs={thumbnailUrl ? 9 : 12}>
-                    <DenBox>
-                        {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' placement='bottom-start' >
-                            <DenBox title={title} className={cssClassName['card-title']} onClick={onTitleClick}>
-                                {title}
-                            </DenBox>
-                        </DenCustomTooltip>}
-                    </DenBox>
-                </DenGrid>
+        <div className={cssClassName['card-content-wrapper']}>
+            <div className={cssClassName['card-title-thumbnail-wrapper']}>
+                <DenBox>
+                    {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' placement='bottom-start' >
+                        <DenBox title={title} className={cssClassName['card-title']} onClick={onTitleClick}>
+                            {title}
+                        </DenBox>
+                    </DenCustomTooltip>}
+                </DenBox>
                 {thumbnailUrl &&
-                    <DenGrid item xs={3}><div className={cssClassName['card-image']}>
+                    <div className={cssClassName['card-image']}>
                         <ImageWithFallback
                             src={thumbnailUrl}
                             placeholderIcon={BrokenImgIcon}
                             showFallbackBorder={false}
                         />
-                    </div> </DenGrid>
+                    </div>
                 }
-            </DenGrid>
+            </div>
+
             <div className={cssClassName['card-description-wrapper']}>
                 {description && (
                     <DenTypography className={cssClassName['card-description']}>
@@ -48,7 +47,7 @@ const QuizSurveyCardContent: React.FC<QuizSurveyCardContentProps> = ({
                     </DenTypography>
                 )}</div>
         </div>
-    </div>
+    </div >
 );
 
 export default QuizSurveyCardContent;
