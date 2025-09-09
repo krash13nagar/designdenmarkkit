@@ -3,13 +3,19 @@
     border: 1px solid #EAEAEA;
 }
 
+.card-tag-label {
+    max-width: 82px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 
 .default-card-wrapper {
     padding: 0px;
     width: inherit;
     position: relative;
-    height: 241px;
+    height: 257px;
     cursor: pointer;
     box-shadow: 0px 3px 6px transparent !important;
     border-bottom: 1px solid #E0E0E0;
@@ -30,8 +36,6 @@
     &.selected-card {
         border: 1px solid #0F89FF !important;
     }
-
-
 
 
 }
@@ -59,6 +63,14 @@
             background-color: #E5F3FF;
         }
 
+        &.card-header-breaking {
+            background-color: #F8D5D4;
+        }
+
+        &.card-header-updated {
+            background-color: #E5F3FF;
+        }
+
         .card-header-lhs {
             display: flex;
             align-items: center;
@@ -70,6 +82,7 @@
                 padding-top: 2px;
                 padding-left: 2px;
             }
+
 
             .card-header-lhs-checkbox {
                 display: none;
@@ -87,6 +100,18 @@
                     opacity: 1;
                     padding: 0;
                 }
+            }
+
+            .card-header-breaking-label {
+                margin: 6px 4px 4px 4px;
+                font: normal normal 600 12px/14px "Source Sans 3";
+                color: #D92D2C;
+            }
+
+            .card-header-updated-label {
+                margin: 6px 4px 4px 4px;
+                font: normal normal 600 12px/14px "Source Sans 3";
+                color: #0F89FF;
             }
         }
 
@@ -142,6 +167,7 @@
                 width: 18px;
             }
 
+
             &.cds-MuiChip-root {
                 height: 20px;
             }
@@ -153,6 +179,69 @@
         }
 
     }
+
+    .tags-channels-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        margin: 8px 5px;
+        padding: 0 5px;
+
+        .channels-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #4D4D4D;
+
+            .channel-chip {
+                display: flex;
+                align-items: center;
+                padding: 4px 5px;
+                background-color: #E5F3FF;
+                border-radius: 20px;
+                cursor: pointer;
+
+                p {
+                    font: normal normal normal 11px/16px "Source Sans 3";
+                }
+
+                &:hover {
+                    color: #0F89FF;
+                }
+
+            }
+        }
+
+        .tags-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .card-tag {
+                height: 20px;
+                transition: all 0.3s ease;
+
+                & svg {
+                    background-color: #E5F3FF;
+                    color: #E5F3FF;
+                    border-radius: 50%;
+                    height: 18px;
+                    width: 18px;
+                }
+
+                &.cds-MuiChip-root {
+                    height: 20px;
+                }
+
+                &:hover {
+                    box-shadow: 0px 3px 6px #00000029 !important;
+                }
+            }
+        }
+    }
+
+
 
     .card-details-section {
         flex: 1;
@@ -169,14 +258,33 @@
                 white-space: normal;
                 overflow: hidden;
                 max-width: 100%;
-                color: #4D4D4D;
-                max-height: 55px;
+                color: #2B2B2B;
+                max-height: 52px;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 font: normal normal 600 13px/17px "Source Sans 3";
                 letter-spacing: 0px;
                 color: #2B2B2B;
                 opacity: 1;
+            }
+
+            .card-title-wire {
+                &:hover {
+                    color: #0F89FF !important;
+                    text-decoration: underline;
+                }
+            }
+
+            .card-slug-title {
+                font: italic normal normal 12px/16px 'Source Sans 3';
+                color: #818181;
+                max-height: 34px;
+                margin-top: 8px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: normal;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
             }
 
 
@@ -195,16 +303,16 @@
         }
 
         .card-subtitle {
-            font: italic normal normal 12px/16px "Source Sans 3";
-            letter-spacing: 0.13px;
-            color: #818181;
+            font: normal normal normal 13px/16px "Source Sans 3";
+            letter-spacing: 0.14px;
+            color: #4D4D4D;
             opacity: 1;
-            margin-top: 2px;
+            margin-top: 8px;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: normal;
-            max-height: 72px;
-            -webkit-line-clamp: 4;
+            max-height: 52px;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             display: -webkit-box;
         }
@@ -227,6 +335,10 @@
             align-items: center;
             gap: 5px;
 
+            p {
+                font: normal normal normal 11px/12px "Source Sans 3";
+            }
+
             .image {
                 display: flex;
                 align-items: center;
@@ -240,15 +352,42 @@
             }
 
             .wordcount {
-                border-left: 1px solid #D2D8DF;
                 padding-left: 6px;
+
+                .wordcount-label {
+                    color: #818181;
+                }
             }
         }
 
         .card-footer-rhs {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 7px;
+
+            .channels-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                .channel-chip {
+                    display: flex;
+                    align-items: center;
+                    padding: 4px 5px;
+                    background-color: #E5F3FF;
+                    border-radius: 20px;
+                    cursor: pointer;
+
+                    p {
+                        font: normal normal normal 11px/16px "Source Sans 3";
+                    }
+
+                    &:hover {
+                        color: #0F89FF;
+                    }
+
+                }
+            }
 
             .datasoruce {
                 display: flex;
@@ -301,11 +440,18 @@
                     }
                 }
             }
+
+            .agency-text {
+                font: normal normal normal 11px/12px 'Source Sans 3';
+                color: #4D4D4D;
+            }
         }
 
 
 
     }
+
+
 }
 
 
@@ -316,7 +462,7 @@
 
 .singleViewVariant {
     .default-card-wrapper {
-        height: 120px;
+        height: 145px;
 
         .image-with-details-wrapper {
             .card-details-section {
@@ -372,4 +518,104 @@
             }
         }
     }
+}
+
+// Tooltip content styles
+.channel-tooltip-container {
+    padding: 10px 10px 10px 10px;
+
+    .channel-tooltip-header-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 9px;
+        font: normal normal normal 12px/17px "Source Sans 3";
+        color: #4D4D4D;
+
+        .channel-tooltip-header-msid {
+            color: #818181;
+        }
+
+
+    }
+
+    .channel-tooltip-header-text {
+        font: normal normal 400 13px/18px "Source Sans 3";
+        color: #4D4D4D;
+    }
+
+    .channel-tooltip-channel-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+
+    .channel-tooltip-section-chip {
+        background-color: #E5F3FF;
+        font: normal normal 600 12px/16px "Source Sans 3";
+        height: 20px;
+        color: #2B2B2B;
+
+        span {
+            padding-left: 0px;
+        }
+
+        svg {
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+    }
+
+    .channel-tooltip-username {
+        font: normal normal normal 13px/18px "Source Sans 3";
+        color: #4D4D4D;
+        margin-bottom: 6px;
+    }
+
+    .channel-tooltip-actions-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .channel-tooltip-action-link {
+        font: normal normal normal 13px/18px "Source Sans 3";
+        color: #0F89FF;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+// Channel list tooltip container for multiple channels
+.channel-list-tooltip-container {
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 0;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #D2D8DF;
+        border-radius: 3px;
+
+        &:hover {
+            background: #a8a8a8;
+        }
+    }
+
+    // Firefox scrollbar
 }

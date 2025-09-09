@@ -28,7 +28,22 @@ export interface imageSearchCardConfig {
     showImageHoverFooter?: boolean,
     onCheckboxClick?: React.MouseEventHandler<HTMLElement>,
     isCheckboxChecked?: boolean,
-    showImageCheckbox?: boolean
+    showImageCheckbox?: boolean,
+    relatedImages?: RelatedImage[],
+    isHoverable?: boolean,
+    /**
+     * Array of host IDs to show under the image card. Only the first host's icon is shown, and if more, a '+N' badge is shown as the second circle.
+     * Example: usedInHosts: ['toi', 'bbc', 'cnn']
+     */
+    usedInHosts?: string[],
+    /**
+     * Optional className for the used-in-hosts wrapper div for custom styling.
+     */
+    usedInHostsClassName?: string,
+    /**
+     * Mapping from hostId to icon (ReactNode). Example: { toi: <ToiIcon />, bbc: <BbcIcon /> }
+     */
+    usedInHostsIconMap?: Record<string, React.ReactNode>,
 }
 
 export interface imageCardMenuOptionsConfig {
@@ -55,4 +70,17 @@ export interface imageSearchCardHoverConfig {
     sx?: any,
     discardImageCardCallBack?: (from: number) => void,
     showImageHoverFooter?: boolean
+}
+
+export interface RelatedImage {
+    id: string;
+    imageUrl: string;
+    title?: string;
+    source?: string;
+    thumbnailUrl?: string;
+    linkUrl?: string;
+    badge?: string;
+    dimensions?: string;
+    date?: string;
+    [key: string]: any;
 }

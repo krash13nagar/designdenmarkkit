@@ -18,5 +18,6 @@ export interface EditorTextfieldProps {
   shrinkLabel?: boolean,
   classes?: { root?: string },
   small?: boolean,
-  editorOptionsType?: 'title' | 'caption'
+  editorOptionsType?: 'title' | 'caption',
+  placeholder?: string,
 }

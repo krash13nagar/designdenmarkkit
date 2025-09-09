@@ -10,6 +10,7 @@ import {
 } from './imagesearchcard.types';
 import DiscardImageCard from './discardimagecard.component';
 import { Checkbox } from '@mui/material';
+import { DenTooltip } from '../../common';
 
 export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, ref: React.MutableRefObject<any>) => {
   const isShowResolution = true;
@@ -31,11 +32,15 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
     onCallbackSelectImagefnc,
     cardStyle = 'standard',
     onCardClick = () => { },
-    discardImageProps={},
+    discardImageProps = {},
     showImageHoverFooter = true,
-    onCheckboxClick = () => {},
+    onCheckboxClick = () => { },
     isCheckboxChecked = false,
-    showImageCheckbox = false
+    showImageCheckbox = false,
+    usedInHosts,
+    usedInHostsIconMap,
+    usedInHostsClassName = '', // new prop for custom className
+    isHoverable = true,  // new prop for showing hover details
   } = props;
 
   const [toShowDiscardImageCard, setToShowDiscardImageCard] = useState(false);
@@ -93,7 +98,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
   //   }
   // };;
 
-  return toShowDiscardImageCard ? <DiscardImageCard animatedClass={animatedClass} discardImageCardCallBack={discardImageCardCallBack} {...discardImageProps}/> : (
+  return toShowDiscardImageCard ? <DiscardImageCard animatedClass={animatedClass} discardImageCardCallBack={discardImageCardCallBack} {...discardImageProps} /> : (
     <div className={cssClassName[variantClassName]}>
       <DenCard
         classes={{ root: 'card-root' }}
@@ -120,6 +125,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
 
                         </span>
                     } */}
+
         </div>
         <div
           className={
@@ -154,6 +160,24 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               // })
             }}
           />
+          {/* Render UsedInHosts icons if provided */}
+          {usedInHosts && usedInHosts.length > 0 && usedInHostsIconMap && (
+            <div className={clsx(cssClassName['used-in-hosts-wrapper'], usedInHostsClassName)}>
+              {/* First host icon */}
+              <span className={cssClassName['used-in-hosts-icon']}>
+                {usedInHostsIconMap[usedInHosts[0]]}
+              </span>
+              {/* +N badge if more hosts */}
+              {usedInHosts.length > 1 && (
+                <DenTooltip title={`+${usedInHosts.length - 1} more hosts`} arrow>
+                  <span className={cssClassName['used-in-hosts-badge']}>
+                    +{usedInHosts.length - 1}
+                  </span>
+                </DenTooltip>
+              )}
+            </div>
+          )}
+
           {isShowResolution && resolution && (
             <div className={cssClassName['new-resolution']}>
               <span className={cssClassName['primaryText']}>
@@ -166,7 +190,7 @@ export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, r
               </span>
             </div>
           )}
-          {isShowResolution && (
+          {isShowResolution && isHoverable && (
             <ImageSearchCardHoverDetails
               name={name}
               agencyName={agencyName}

@@ -124,3 +124,18 @@ export const formatDateWithMoment = (dateString: string): string => {
   // Format the date to '16:41, 7 June'
   return date.format('HH:mm, D MMMM');
 };
+
+export const formatTimestampWithMoment = (timestamp: number): string => {
+  if (!timestamp || timestamp <= 0) {
+    return '';
+  }
+
+  const date = moment(timestamp);
+  if (!date.isValid()) {
+    console.warn('Invalid timestamp:', timestamp);
+    return '';
+  }
+
+  // Format the date to '16:41, 7 June'
+  return date.format('HH:mm, D MMMM');
+};

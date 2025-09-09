@@ -52,7 +52,8 @@ export const DiscardImageCard = React.forwardRef((props: DiscardImageCardConfig,
               className={cssClassName['discard-select']}
               sx={{
                 '& .cds-MuiSelect-select': {
-                  padding: '5px 0px 5px 8px'
+                  padding: '5px 0px 5px 8px',
+                  display: 'inherit'
                 },
               }}
               onChange={handleMenuChange}

@@ -5,7 +5,9 @@ export interface MarketplaceContentCardConfig {
     id?: string,
     type?: string,
     title?: string,
+    slugTitle?: string,
     subtitle?: string,
+    story?: string,
     imageUrl?: string,
     ingestionDate?: string,
     ingestionDateTimestamp?: string | undefined,
@@ -18,6 +20,7 @@ export interface MarketplaceContentCardConfig {
     actionButtonsList?: ActionButton[],
     cardStyle?: 'standard' | 'minimal',
     onCardClick?: React.MouseEventHandler<HTMLElement>,
+    onTitleClick?: React.MouseEventHandler<HTMLElement>,
     ImageFallback?: ReactNode,
     selected?: boolean,
     imagesCount?: number,
@@ -37,6 +40,22 @@ export interface MarketplaceContentCardConfig {
     headerTooltipContent?: ReactNode,
     view?: string,
     showAllCheckboxes?: boolean,
+    isBreakingCard?: boolean,
+    isUpdatedCard?: boolean,
+    channels?: {
+        channelName: string,
+        channelIcon: ReactNode,
+        sectionInfo: {
+            sectionName: string,
+            msid: string,
+            userName: string,
+            timeStamp: string,
+            onPreviewClick?: React.MouseEventHandler<HTMLElement>,
+            onFullStoryClick?: React.MouseEventHandler<HTMLElement>
+        }
+    }[],
+    agency?: string,
+    isCompetitor?: boolean
 }
 
 export interface MarketplaceCardMenuOptionsConfig {
