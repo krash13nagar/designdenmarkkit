@@ -5,7 +5,8 @@
   flex-direction: column;
 
   .title-for-url,
-  .override-link {
+  .override-link,
+  .alternate-title {
     position: relative;
     display: flex;
     justify-content: center;
@@ -37,6 +38,12 @@
       border-left-width: 1px;
 
       // transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    #customspeeddial-actions {
+      button {
+        border-radius: unset !important;
+      }
     }
 
     .denLabel {
