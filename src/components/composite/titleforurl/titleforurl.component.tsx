@@ -13,14 +13,17 @@ import clsx from 'clsx';
  * @constructor
  * @param {string} props.seoTitleProps* - extends the text field props
  * @param {string} props.overridelinkProps* - extends the text field props
+ * @param {string} props.alternateTitleProps* - extends the text field props
  * The ref is forwarded to the root element.
  * for more details see http:localhost:6006
  */
 export const TitleForUrl: React.FC<TitleForUrlProps> = ({
   seoTitleProps = {},
   overrideLinkProps = {},
+  alternateTitleProps = {},
 }) => {
   const [isOvverrideVisible, setIsOvverideVisible] = React.useState(false);
+  const [isAlternateTitleVisible, setIsAlternateTitleVisible] = React.useState(false);
   const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
   return (
     <div className={style['title-for-url-wrapper']}>
@@ -54,6 +57,15 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
                 e.preventDefault();
                 e.stopPropagation();
                 setIsOvverideVisible(true);
+                setSpeedDialOpen(false);
+              },
+            },
+            {
+              label: 'Alternate Title',
+              onClick: (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsAlternateTitleVisible(true);
                 setSpeedDialOpen(false);
               },
             },
@@ -100,6 +112,41 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
             </DenIconButton>
           </div>
           <Count wordString={overrideLinkProps.value ?? ''} />
+        </>
+      )}
+      {isAlternateTitleVisible && (
+        <>
+          <DenInputLabel
+            shrink={alternateTitleProps.shrinkLabel || false}
+            htmlFor={alternateTitleProps.id ?? 'bootstrap-input'}
+            className={clsx(
+              style.label,
+              'cds-input-label',
+              alternateTitleProps.shrinkLabel ? style['shrink'] : ''
+            )}
+          >
+            {alternateTitleProps.label}
+          </DenInputLabel>
+          <div className={style['alternate-title']}>
+            <DenTextField
+              {...alternateTitleProps}
+              showLabel={false}
+              valueProps={{
+                classes: {
+                  root: style['denLabel'],
+                  input: style['denInput'],
+                },
+              }}
+            />
+            <DenIconButton
+              onClick={() => setIsAlternateTitleVisible(false)}
+              size={'small'}
+              className={style['icon-button']}
+            >
+              <Cancel />
+            </DenIconButton>
+          </div>
+          <Count wordString={alternateTitleProps.value ?? ''} />
         </>
       )}
     </div>
