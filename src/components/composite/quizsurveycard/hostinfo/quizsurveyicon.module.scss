@@ -1,0 +1,23 @@
+@use '../../../../styles/' as css;
+
+.circle-icon-container {
+    display: flex;
+    justify-content: start;
+    margin: 0 0 #{css.pxToRem(5)} #{css.pxToRem(8)};
+
+    .circle-icon {
+        width: #{css.pxToRem(21)};
+        height: #{css.pxToRem(21)};
+        border-radius: 50%;
+        background: #E3F2FD;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #BBDEFB;
+
+        .circle-icon-text {
+            font: normal normal normal #{css.pxToRem(11)}/#{css.pxToRem(16)} "Source Sans 3";
+            color: #4D4D4D;
+        }
+    }
+}

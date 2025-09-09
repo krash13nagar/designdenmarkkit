@@ -1,0 +1,72 @@
+@use '../../../../styles/' as css;
+
+.card-footer {
+    padding: #{css.pxToRem(5)};
+    border-top: 1px solid #E0E0E0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-footer-lhs {
+        display: flex;
+        align-items: center;
+
+        .info-stats {
+            display: flex;
+            gap: #{css.pxToRem(16)};
+            align-items: center;
+
+            .info-item {
+                display: flex;
+                gap: #{css.pxToRem(4)};
+                align-items: center;
+                font: normal normal 400 #{css.pxToRem(11)}/#{css.pxToRem(12)} "Source Sans 3";
+                color: #666;
+
+                .info-label {
+                    color: #818181;
+                }
+
+                .info-value {
+                    font-weight: 600;
+                    color: #4D4D4D;
+                }
+            }
+        }
+
+        .response-count {
+            font: normal normal 400 #{css.pxToRem(12)}/#{css.pxToRem(16)} "Source Sans 3";
+            color: #666;
+        }
+    }
+
+    .card-footer-rhs {
+        display: flex;
+        align-items: center;
+        gap: #{css.pxToRem(8)};
+
+        .datasource {
+            display: flex;
+            align-items: center;
+            gap: #{css.pxToRem(4)};
+            cursor: pointer;
+            padding: #{css.pxToRem(4)} #{css.pxToRem(8)};
+            border-radius: #{css.pxToRem(4)};
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: #E8E8E8;
+            }
+
+            .datasource-text {
+                font: normal normal 400 #{css.pxToRem(11)}/#{css.pxToRem(14)} "Source Sans 3";
+                color: #666;
+            }
+        }
+
+        .agency-text {
+            font: normal normal 400 #{css.pxToRem(11)}/#{css.pxToRem(14)} "Source Sans 3";
+            color: #999;
+        }
+    }
+}

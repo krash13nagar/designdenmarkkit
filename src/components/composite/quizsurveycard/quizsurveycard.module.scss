@@ -1,0 +1,160 @@
+@use '../../../styles/' as css;
+
+.card-root {
+    overflow: unset !important;
+    border: 1px solid #EAEAEA;
+}
+
+.default-card-wrapper {
+    padding: 0;
+    width: inherit;
+    position: relative;
+    height: #{css.pxToRem(241)};
+    cursor: pointer;
+    box-shadow: 0 3px 6px transparent !important;
+    border-bottom: 1px solid #E0E0E0;
+    border-radius: 0 !important;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 3px 6px #00000029 !important;
+
+        // Hover effect for checkbox in header component
+        .quiz-survey-card-details-wrapper :global(.card-header) :global(.card-header-lhs) :global(.card-header-lhs-checkbox):not(:global(.checkbox-visible)) {
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    &.selected-card {
+        border: 1px solid #0F89FF !important;
+    }
+}
+
+.singleViewVariant {
+    .default-card-wrapper {
+        height: auto;
+        min-height: #{css.pxToRem(320)};
+    }
+}
+
+.quiz-survey-card-details-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    // Header styles moved to separate component
+
+    // Content styles moved to separate component
+
+    .info-container {
+        padding: 0 #{css.pxToRem(12)} #{css.pxToRem(12)} #{css.pxToRem(12)};
+        display: flex;
+        flex-wrap: wrap;
+        gap: #{css.pxToRem(12)};
+        align-items: center;
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: #{css.pxToRem(4)};
+
+            .info-label {
+                font: normal normal 400 #{css.pxToRem(12)}/#{css.pxToRem(16)} "Source Sans 3";
+                color: #666;
+            }
+
+            .info-value {
+                font: normal normal 600 #{css.pxToRem(12)}/#{css.pxToRem(16)} "Source Sans 3";
+                color: #2B2B2B;
+            }
+
+            .score-value {
+                font: normal normal 600 #{css.pxToRem(14)}/#{css.pxToRem(18)} "Source Sans 3";
+                color: #4CAF50;
+            }
+
+            .timer-icon {
+                width: #{css.pxToRem(14)};
+                height: #{css.pxToRem(14)};
+                color: #FF9800;
+            }
+        }
+    }
+
+    .progress-container {
+        padding: 0 #{css.pxToRem(12)} #{css.pxToRem(12)} #{css.pxToRem(12)};
+        display: flex;
+        flex-direction: column;
+        gap: #{css.pxToRem(8)};
+
+        .quiz-progress {
+            height: #{css.pxToRem(8)};
+            border-radius: #{css.pxToRem(4)};
+            background-color: #F0F0F0;
+
+            .MuiLinearProgress-bar {
+                background-color: #9C27B0;
+                border-radius: #{css.pxToRem(4)};
+            }
+        }
+
+        .progress-text {
+            font: normal normal 400 #{css.pxToRem(12)}/#{css.pxToRem(16)} "Source Sans 3";
+            color: #666;
+            text-align: center;
+        }
+    }
+
+    .quiz-options-section {
+        padding: 0 #{css.pxToRem(8)} #{css.pxToRem(8)} #{css.pxToRem(8)};
+        display: flex;
+        flex-direction: column;
+        gap: #{css.pxToRem(8)};
+
+        .quiz-option-item {
+            padding: #{css.pxToRem(8)};
+            cursor: default;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+    }
+
+    .action-button-section {
+        padding: 0 #{css.pxToRem(12)} #{css.pxToRem(12)} #{css.pxToRem(12)};
+        display: flex;
+        justify-content: center;
+        gap: #{css.pxToRem(12)};
+
+        .submit-button,
+        .start-button {
+            padding: #{css.pxToRem(10)} #{css.pxToRem(24)};
+            font: normal normal 600 #{css.pxToRem(14)}/#{css.pxToRem(18)} "Source Sans 3";
+            text-transform: none;
+            border-radius: #{css.pxToRem(6)};
+            min-width: #{css.pxToRem(120)};
+
+            &:disabled {
+                background-color: #E0E0E0;
+                color: #999;
+            }
+        }
+
+        .start-button {
+            background-color: #4CAF50;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+    }
+
+    // Circle icon styles moved to separate component
+
+    // Footer styles moved to separate component
+}
