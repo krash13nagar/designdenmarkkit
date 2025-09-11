@@ -1,0 +1,70 @@
+@use '../../../../styles/' as css;
+
+.card-header {
+    background-color: #EAEAEA;
+    display: flex;
+    width: 100%;
+    padding: #{css.pxToRem(4)};
+    justify-content: space-between;
+    height: #{css.pxToRem(24)};
+    color: #4D4D4D;
+    align-items: center;
+
+    &.card-header-with-checkbox {
+        background-color: #E5F3FF;
+    }
+
+    .card-header-lhs {
+        display: flex;
+        align-items: center;
+
+        .card-header-date {
+            font: italic normal 600 #{css.pxToRem(12)}/#{css.pxToRem(14)} "Source Sans 3";
+            letter-spacing: 0.13px;
+            color: #4D4D4D;
+            padding-top: #{css.pxToRem(2)};
+            padding-left: #{css.pxToRem(2)};
+        }
+
+        .card-header-lhs-checkbox {
+            display: none;
+            opacity: 0;
+            transition: all 0.2s ease;
+            padding: 0;
+
+            &.checkbox-visible {
+                display: flex;
+                opacity: 1;
+            }
+
+            &.show-all-checkboxes {
+                display: flex;
+                opacity: 1;
+                padding: 0;
+            }
+        }
+    }
+
+    .card-header-rhs {
+        display: flex;
+        align-items: center;
+
+        .card-header-menu {
+            .more-icon-base {
+                padding: #{css.pxToRem(4)};
+                color: #666;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: #0F89FF;
+                    background-color: rgba(15, 137, 255, 0.08);
+                }
+
+                &.menu-open {
+                    color: #0F89FF;
+                    background-color: rgba(15, 137, 255, 0.08);
+                }
+            }
+        }
+    }
+}

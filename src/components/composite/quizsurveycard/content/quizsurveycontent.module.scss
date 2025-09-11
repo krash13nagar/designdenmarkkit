@@ -1,0 +1,76 @@
+@use '../../../../styles/' as css;
+
+.card-details-section {
+    padding: #{css.pxToRem(8)};
+    flex: 1;
+
+    .card-content-wrapper {
+        display: flex;
+        gap:0 #{css.pxToRem(8)};
+        align-items: flex-start;
+        flex-direction: column;
+
+        .card-title-thumbnail-wrapper {
+            display: flex;
+            gap: #{css.pxToRem(5)};
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+
+            .card-title {
+                display: -webkit-box;
+                white-space: normal;
+                overflow: hidden;
+                max-width: 100%;
+                color: #4D4D4D;
+                max-height: 55px;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                font: normal normal 600 css.pxToRem(13px) / css.pxToRem(17px) "Source Sans 3";
+                letter-spacing: 0px;
+                color: #2B2B2B;
+                opacity: 1;
+                word-break: break-word;
+
+                &:hover {
+                    color: #0F89FF;
+                    text-decoration: underline;
+                }
+            }
+
+            .card-image {
+                width: #{css.pxToRem(40)};
+                height: #{css.pxToRem(40)};
+                border-radius: #{css.pxToRem(2)};
+                overflow: hidden;
+                flex-shrink: 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: fill;
+                    object-position: center center;
+                }
+            }
+        }
+
+
+
+        .card-description {
+            font: italic normal normal #{css.pxToRem(12)}/#{css.pxToRem(16)} "Source Sans 3";
+            letter-spacing: 0.13px;
+            color: #818181;
+            margin-bottom: #{css.pxToRem(8)};
+            display: -webkit-box;
+            white-space: normal;
+            overflow: hidden;
+            max-width: 100%;
+            max-height: 75px;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            margin-top: #{css.pxToRem(8)};
+        }
+
+
+    }
+}
