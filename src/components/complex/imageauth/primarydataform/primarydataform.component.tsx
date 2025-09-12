@@ -30,6 +30,7 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
   agencyMessage = '',
   showBylineMessage = false,
   bylineMessage = '',
+  isThumb = false,
 }) => {
   return (
     <div className={clsx(style['primary-data-wrapper'], classes.root)}>
@@ -39,7 +40,7 @@ export const PrimaryDataForm: FC<PrimaryDataFormProps> = ({
         classes={{ root: style['image-title'] }}
         small
       />
-      <TitleForUrl {...titleForUrl} />
+      <TitleForUrl {...titleForUrl} isThumb={isThumb} />
       <EditorTextField key={'caption'} {...imageCaption} />
       <DenTypography className={style['credits']}>Credits</DenTypography>
       <div className={'cds-row'}>

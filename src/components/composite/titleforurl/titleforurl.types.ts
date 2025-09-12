@@ -5,4 +5,5 @@ export interface TitleForUrlProps {
   seoTitleProps: TextFieldProps;
   overrideLinkProps: TextFieldProps;
   alternateTitleProps: EditorTextfieldProps;
+  isThumb?: boolean;
 }

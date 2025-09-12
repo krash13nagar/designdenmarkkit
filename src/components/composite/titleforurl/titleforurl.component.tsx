@@ -38,11 +38,42 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
     onChange: () => {},
     title: '',
   },
+  isThumb = false,
 }) => {
   const [isOvverrideVisible, setIsOvverideVisible] = React.useState(false);
   const [isAlternateTitleVisible, setIsAlternateTitleVisible] =
     React.useState(false);
   const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
+
+  // Filter actions based on isThumb prop
+  const getSpeedDialActions = () => {
+    const allActions = [
+      {
+        label: 'Alternate Title',
+        onClick: (e: React.MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsAlternateTitleVisible(true);
+          setSpeedDialOpen(false);
+        },
+      },
+      {
+        label: 'Override Link',
+        onClick: (e: React.MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOvverideVisible(true);
+          setSpeedDialOpen(false);
+        },
+      },
+    ];
+
+    // Filter out Alternate Title if isThumb is truthy
+    return isThumb
+      ? allActions.filter((action) => action.label !== 'Alternate Title')
+      : allActions;
+  };
+
   return (
     <div className={style['title-for-url-wrapper']}>
       <DenInputLabel
@@ -68,26 +99,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
           }}
         />
         <CustomSpeedDial
-          actions={[
-            {
-              label: 'Alternate Title',
-              onClick: (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsAlternateTitleVisible(true);
-                setSpeedDialOpen(false);
-              },
-            },
-            {
-              label: 'Override Link',
-              onClick: (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsOvverideVisible(true);
-                setSpeedDialOpen(false);
-              },
-            },
-          ]}
+          actions={getSpeedDialActions()}
           open={speedDialOpen}
           setOpen={setSpeedDialOpen}
           classes={{
@@ -132,7 +144,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
           <Count wordString={overrideLinkProps.value ?? ''} />
         </>
       )}
-      {isAlternateTitleVisible && (
+      {isAlternateTitleVisible && !isThumb && (
         <>
           <DenInputLabel
             shrink={false}
