@@ -45,6 +45,19 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
     React.useState(false);
   const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
 
+  // Automatically show alternate title if it has a value
+  React.useEffect(() => {
+    if (alternateTitleProps.value && alternateTitleProps.value.trim() !== '') {
+      setIsAlternateTitleVisible(true);
+    }
+  }, [alternateTitleProps.value]);
+
+  React.useEffect(() => {
+    if (overrideLinkProps.value && overrideLinkProps.value.trim() !== '') {
+      setIsOvverideVisible(true);
+    }
+  }, [overrideLinkProps.value]);
+
   // Filter actions based on isThumb prop
   const getSpeedDialActions = () => {
     const allActions = [
