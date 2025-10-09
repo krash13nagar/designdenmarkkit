@@ -198,11 +198,6 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         );
     }, [remainingChannels, getChannelTooltipContent]);
 
-    const handleTypeIconClick = (e: React.MouseEvent<HTMLOrSVGElement>) => {
-        e.stopPropagation();
-        console.log("type icon clicked!")
-    }
-
     return (
         <div className={cssClassName[variantClassName]}>
             <DenCard
@@ -250,7 +245,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         }
                                     }
                                 }}>
-                                    <DenSvgIcon handleClick={handleTypeIconClick} className='card-header-type-icon'>{typeIcon}</DenSvgIcon>
+                                    <DenSvgIcon className='card-header-type-icon'>{typeIcon}</DenSvgIcon>
                                 </DenTooltip>
 
                             }
