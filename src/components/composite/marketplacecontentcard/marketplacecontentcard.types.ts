@@ -55,7 +55,9 @@ export interface MarketplaceContentCardConfig {
         }
     }[],
     agency?: string,
-    isCompetitor?: boolean
+    isCompetitor?: boolean,
+    typeIcon?: ReactNode,
+    typeLabel?: string
 }
 
 export interface MarketplaceCardMenuOptionsConfig {

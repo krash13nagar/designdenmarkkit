@@ -42,7 +42,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         isBreakingCard = false,
         isUpdatedCard = false,
         agency = '',
-        isCompetitor = true
+        isCompetitor = true,
+        typeIcon,
+        typeLabel = ''
+
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -195,6 +198,11 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         );
     }, [remainingChannels, getChannelTooltipContent]);
 
+    const handleTypeIconClick = (e: React.MouseEvent<HTMLOrSVGElement>) => {
+        e.stopPropagation();
+        console.log("type icon clicked!")
+    }
+
     return (
         <div className={cssClassName[variantClassName]}>
             <DenCard
@@ -232,6 +240,20 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             >
                                 <DenBox className={cssClassName['card-header-date']}>{headerDate}</DenBox>
                             </DenCustomTooltip>
+                            {typeIcon &&
+                                <DenTooltip title={typeLabel} PopperProps={{
+                                    sx: {
+                                        '& .cds-MuiTooltip-tooltip': {
+                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                            padding: "1px 4px 1px 4px !important",
+                                            backgroundColor: "#4D4D4D !important",
+                                        }
+                                    }
+                                }}>
+                                    <DenSvgIcon handleClick={handleTypeIconClick} className='card-header-type-icon'>{typeIcon}</DenSvgIcon>
+                                </DenTooltip>
+
+                            }
                         </div>
                         <div className={cssClassName['card-header-rhs']}>
                             <DenBox className={cssClassName['card-header-menu']}>
