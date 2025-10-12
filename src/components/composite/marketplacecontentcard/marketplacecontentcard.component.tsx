@@ -211,7 +211,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 >
                     <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            {isCompetitor && <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
+                            {<DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
                             >
                                 <span>
                                     <DenCheckbox
