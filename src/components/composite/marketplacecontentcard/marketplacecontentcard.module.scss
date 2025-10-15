@@ -264,14 +264,14 @@
                 overflow: hidden;
                 max-width: 100%;
                 color: #2B2B2B;
-                max-height: 52px;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 font: normal normal 600 13px/17px "Source Sans 3";
+                line-height: 1.35;
                 letter-spacing: 0px;
                 color: #2B2B2B;
                 opacity: 1;
-                padding-top: 4px;
+                padding-top: 8px;
             }
 
             .card-title-wire {
@@ -317,8 +317,8 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: normal;
-            max-height: 52px;
             -webkit-line-clamp: 3;
+            line-height: 1.35;
             -webkit-box-orient: vertical;
             display: -webkit-box;
             padding-top: 4px;
