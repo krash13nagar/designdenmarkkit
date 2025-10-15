@@ -103,7 +103,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         Category:
                     </span>{' '}
                     <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
-                        {tags?.slice(1).map((tag: any) => tag.label).join(', ')}
+                        {tags?.map((tag: any) => tag.label).join(', ')}
                     </span>
                 </DenTypography>
             </React.Fragment>
