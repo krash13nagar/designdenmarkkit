@@ -289,7 +289,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            <DenBox>
+                            <DenBox sx={{ width: '100%' }}>
                                 {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                     <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
                                         {title}
