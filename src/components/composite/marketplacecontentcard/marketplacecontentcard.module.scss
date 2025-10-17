@@ -11,11 +11,10 @@
 }
 
 
-.default-card-wrapper {
+.marketplace-default-card-wrapper {
     padding: 0px;
     width: inherit;
     position: relative;
-    height: 257px;
     cursor: pointer;
     box-shadow: 0px 3px 6px transparent !important;
     border-bottom: 1px solid #E0E0E0;
@@ -83,10 +82,7 @@
                 padding-left: 2px;
             }
 
-            svg {
-                margin-left: 6px;
-                margin-top: 4px;
-            }
+
 
 
             .card-header-lhs-checkbox {
@@ -317,7 +313,7 @@
             overflow: hidden;
             white-space: normal;
             -webkit-line-clamp: 3;
-            line-height: 1.50;
+            line-height: 1.55;
             -webkit-box-orient: vertical;
             display: -webkit-box;
         }
@@ -465,9 +461,8 @@
 
 
 
-.singleViewVariant {
-    .default-card-wrapper {
-        height: 145px;
+.marketplaceSingleViewVariant {
+    .marketplace-default-card-wrapper {
 
         .image-with-details-wrapper {
             .card-details-section {

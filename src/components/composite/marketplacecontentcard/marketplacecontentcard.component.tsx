@@ -57,7 +57,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     }, [publishDateTimestamp]);
 
     const variantClassName = useMemo(() => {
-        if (view === 'single') return 'singleViewVariant';
+        if (view === 'single') return 'marketplaceSingleViewVariant';
         return '';
     }, [view]);
 
@@ -202,7 +202,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         <div className={cssClassName[variantClassName]}>
             <DenCard
                 classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
-                className={clsx(cssClassName['default-card-wrapper'], classes?.root, selected ? cssClassName['selected-card'] : '')}
+                className={clsx(cssClassName['marketplace-default-card-wrapper'], classes?.root, selected ? cssClassName['selected-card'] : '')}
                 ref={ref}
                 onClick={onCardClick}
             >
@@ -245,7 +245,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         }
                                     }
                                 }}>
-                                    <DenSvgIcon className='card-header-type-icon'>{typeIcon}</DenSvgIcon>
+                                    <DenSvgIcon sx={{ marginLeft: '6px', marginTop: '4px' }} className='marketplace-card-header-type-icon'>{typeIcon}</DenSvgIcon>
                                 </DenTooltip>
 
                             }
