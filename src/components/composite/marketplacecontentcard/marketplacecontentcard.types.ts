@@ -63,6 +63,8 @@ export interface MarketplaceContentCardConfig {
 export interface MarketplaceCardMenuOptionsConfig {
     label: string;
     onClickFnc: React.MouseEventHandler<HTMLElement>;
+    disabled?: boolean;
+    disabledMsg?: string;
 }
 
 export interface MarketPlaceCardCheckboxProps {

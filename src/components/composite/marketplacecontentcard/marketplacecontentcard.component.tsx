@@ -271,17 +271,35 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     onClose={handleDenMenuOnClose}
                                 >
                                     {cardMenuOptions?.map((option) => (
-                                        <DenMenuItem
+                                        <DenTooltip
                                             key={option?.label}
-                                            onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
-                                            classes={{
-                                                root: classes?.menuOption,
+                                            title={option?.disabled ? option?.disabledMsg : ''}
+                                            disableHoverListener={!option?.disabled}
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                        padding: "1px 4px 1px 4px !important",
+                                                        backgroundColor: "#4D4D4D !important",
+                                                    }
+                                                }
                                             }}
+                                            arrow
                                         >
-                                            <DenTypography variant="inherit">
-                                                {option.label}
-                                            </DenTypography>
-                                        </DenMenuItem>
+                                            <span>
+                                                <DenMenuItem
+                                                    onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                                                    classes={{
+                                                        root: classes?.menuOption,
+                                                    }}
+                                                    disabled={option?.disabled}
+                                                >
+                                                    <DenTypography variant="inherit">
+                                                        {option.label}
+                                                    </DenTypography>
+                                                </DenMenuItem>
+                                            </span>
+                                        </DenTooltip>
                                     ))}
                                 </DenMenu>
                             </DenBox>
