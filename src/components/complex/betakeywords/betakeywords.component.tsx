@@ -12,6 +12,9 @@ import BetaSearchKeywordWrapper from './betakeywords.searchwrapper';
 
 export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
   const {
+    wrapperClassName,
+    addedKeywordsClassName,
+    autoAddKeywordsClassName,
     searchKeywordConfig,
     addBtnConfig,
     addedKeywordsConfig,
@@ -26,10 +29,10 @@ export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
   }, []);
 
   return (
-    <div className={styles.seoKeywordsWrapper}>
+    <div className={`${styles.seoKeywordsWrapper} ${wrapperClassName ? ' ' + wrapperClassName : ''}`}>
       <div className={styles.seoAddedKeywords}>
         <div className={styles.addedKeywordsWrapper}>
-          <div className={styles['added-keywords']}>
+          <div className={`${styles['added-keywords']} ${addedKeywordsClassName ? ' ' + addedKeywordsClassName : ''}`}>
             {`${addedKeywordsConfig.label} (${addedKeywordsConfig.keywords?.length || 0})`}
             {addedKeywordsConfig.showComplianceIcons && (
               <div className={styles.seo_complianticon}>
@@ -45,7 +48,7 @@ export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
               </>
             }
           </div>
-          <div className={styles['autoAdd-keywords']}>
+          <div className={`${styles['autoAdd-keywords']} ${autoAddKeywordsClassName ? ' ' + autoAddKeywordsClassName : ''}`}>
             <div
               className={`${styles['autoAdd-label']} ${addedKeywordsConfig.isAutoAddEnable ? '' : styles.disabled}`}
               onClick={addedKeywordsConfig.handleAutoAddBtn}

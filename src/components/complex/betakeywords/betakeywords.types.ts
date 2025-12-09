@@ -35,6 +35,9 @@ export interface BetaRecommendChipsProps {
 }
 
 export interface BetaKeywordsWrapperProps {
+  wrapperClassName?: string;
+  addedKeywordsClassName?: string;
+  autoAddKeywordsClassName?: string;
   searchKeywordConfig: BetaSearchKeywordProps;
   addBtnConfig: BetaAddButtonProps;
   addedKeywordsConfig: BetaKeywordsAddedChipsProps;
@@ -111,6 +114,8 @@ export interface BetaSearchKeywordProps {
 }
 
 export interface BetaKeywordsAddedChipsProps {
+  addedKeywordsChipsClassName?: string;
+  addedChipClassName?: string;
   keywords: KeywordItem[];
   noKeywordsLabel?: string;
   removeCallbackFn?: (index: number, val: number) => void;
