@@ -30,6 +30,7 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
   showBylineMessage = false,
   bylineMessage = '',
   MetadataComp,
+  isThumb = false,
 }) => {
   const handleChange = (event: React.SyntheticEvent, value: any) => {
     handleTabChange(value);
@@ -67,6 +68,7 @@ export const ImageAuthRightSection: FC<ImageAuthRightSectionProps> = ({
             agencyMessage={agencyMessage}
             showBylineMessage={showBylineMessage}
             bylineMessage={bylineMessage}
+            isThumb={isThumb}
           />
         )}
         {selectedTab == TAB_MAP.keywords && (

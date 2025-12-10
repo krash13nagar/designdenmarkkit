@@ -26,6 +26,7 @@ export interface ImageAuthoringProps
   publishDate: PublishDateProps;
   tabTitleList: TabType[];
   msid?: string;
+  isThumb?: boolean;
   keywordConfig: keywordsWrapperConfig;
   dialogProps?: any;
   metaProps?: any;
@@ -134,7 +135,8 @@ export interface ImageAuthRightSectionProps {
   agencyMessage?: ImageAuthoringProps["agencyMessage"],
   showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
   bylineMessage?: ImageAuthoringProps["bylineMessage"],
-  MetadataComp?: ImageAuthoringProps["MetadataComp"]
+  MetadataComp?: ImageAuthoringProps["MetadataComp"],
+  isThumb?: ImageAuthoringProps["isThumb"]
 }
 
 export interface JustificationProps extends TextFieldProps {
@@ -157,6 +159,7 @@ export interface PrimaryDataFormProps {
   showAgencyMessage?: ImageAuthoringProps["showAgencyMessage"],
   agencyMessage?: ImageAuthoringProps["agencyMessage"],
   showBylineMessage?: ImageAuthoringProps["showBylineMessage"],
-  bylineMessage?: ImageAuthoringProps["bylineMessage"]
+  bylineMessage?: ImageAuthoringProps["bylineMessage"],
+  isThumb?: ImageAuthoringProps["isThumb"]
 }
 

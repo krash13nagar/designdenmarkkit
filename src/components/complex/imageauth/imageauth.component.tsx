@@ -41,13 +41,13 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     activationStatusOptions,
     activationStatusLabel,
     showActivationStatusEditIcon = false,
-    onActivationStatusEditIconClick = () => { },
+    onActivationStatusEditIconClick = () => {},
     activationStatusEditIconTitle = '',
     keywordConfig,
     selectedTab = '',
-    handleTabChange = () => { },
+    handleTabChange = () => {},
     imageCTAs = [],
-    handleItemClick = () => { },
+    handleItemClick = () => {},
     metaClassName = '',
     metaColumnCount = 4,
     captionBylineProps = {},
@@ -55,7 +55,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     captionAgencyProps = {},
     photographerBylineProps = {},
     isNotRelatedToAgency = false,
-    handleNotRelatedToAgencyChange = () => { },
+    handleNotRelatedToAgencyChange = () => {},
     justificationProps = {},
     showAgencyMessage = false,
     agencyMessage = '',
@@ -65,16 +65,17 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
     actionButtonsList = [],
     imageError,
     footerCheckBoxList = [],
-    onFooterCheckBoxChange = () => { },
+    onFooterCheckBoxChange = () => {},
     enableReportButton = false,
-    reportButtonProps = {}
+    reportButtonProps = {},
+    isThumb = false,
   } = props;
 
   const [isReportPopupOpen, setIsReportPopupOpen] = useState(false);
   const reportButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleReportButtonClick = () => {
-    setIsReportPopupOpen(prev => !prev);
+    setIsReportPopupOpen((prev) => !prev);
   };
 
   const handleReportCancel = () => {
@@ -124,6 +125,7 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
           showBylineMessage={showBylineMessage}
           bylineMessage={bylineMessage}
           MetadataComp={MetadataComp}
+          isThumb={isThumb}
         />
       </div>
       <Footer>
@@ -172,7 +174,10 @@ export const ImageAuthoring = (props: ImageAuthoringProps) => {
               })}
           </DenFormGroup>
         </DenBox>
-        <div className="image-auth-footer-wrapper" style={{ position: 'relative' }}>
+        <div
+          className="image-auth-footer-wrapper"
+          style={{ position: 'relative' }}
+        >
           <PrimeCategory
             primeCategories={primeCategories}
             primeCategoryLabel={primeCategoryLabel}

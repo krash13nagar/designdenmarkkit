@@ -42,7 +42,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         isBreakingCard = false,
         isUpdatedCard = false,
         agency = '',
-        isCompetitor = true
+        isCompetitor = true,
+        typeIcon,
+        typeLabel = ''
+
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
@@ -54,7 +57,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     }, [publishDateTimestamp]);
 
     const variantClassName = useMemo(() => {
-        if (view === 'single') return 'singleViewVariant';
+        if (view === 'single') return 'marketplaceSingleViewVariant';
         return '';
     }, [view]);
 
@@ -100,7 +103,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         Category:
                     </span>{' '}
                     <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
-                        {tags?.slice(1).map((tag: any) => tag.label).join(', ')}
+                        {tags?.map((tag: any) => tag.label).join(', ')}
                     </span>
                 </DenTypography>
             </React.Fragment>
@@ -199,7 +202,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         <div className={cssClassName[variantClassName]}>
             <DenCard
                 classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
-                className={clsx(cssClassName['default-card-wrapper'], classes?.root, selected ? cssClassName['selected-card'] : '')}
+                className={clsx(cssClassName['marketplace-default-card-wrapper'], classes?.root, selected ? cssClassName['selected-card'] : '')}
                 ref={ref}
                 onClick={onCardClick}
             >
@@ -208,7 +211,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 >
                     <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            {isCompetitor && <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
+                            {<DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
                             >
                                 <span>
                                     <DenCheckbox
@@ -232,6 +235,20 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             >
                                 <DenBox className={cssClassName['card-header-date']}>{headerDate}</DenBox>
                             </DenCustomTooltip>
+                            {typeIcon &&
+                                <DenTooltip title={typeLabel} PopperProps={{
+                                    sx: {
+                                        '& .cds-MuiTooltip-tooltip': {
+                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                            padding: "1px 4px 1px 4px !important",
+                                            backgroundColor: "#4D4D4D !important",
+                                        }
+                                    }
+                                }}>
+                                    <DenSvgIcon sx={{ marginLeft: '6px', marginTop: '4px' }} className='marketplace-card-header-type-icon'>{typeIcon}</DenSvgIcon>
+                                </DenTooltip>
+
+                            }
                         </div>
                         <div className={cssClassName['card-header-rhs']}>
                             <DenBox className={cssClassName['card-header-menu']}>
@@ -254,17 +271,35 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     onClose={handleDenMenuOnClose}
                                 >
                                     {cardMenuOptions?.map((option) => (
-                                        <DenMenuItem
+                                        <DenTooltip
                                             key={option?.label}
-                                            onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
-                                            classes={{
-                                                root: classes?.menuOption,
+                                            title={option?.disabled ? option?.disabledMsg : ''}
+                                            disableHoverListener={!option?.disabled}
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                        padding: "1px 4px 1px 4px !important",
+                                                        backgroundColor: "#4D4D4D !important",
+                                                    }
+                                                }
                                             }}
+                                            arrow
                                         >
-                                            <DenTypography variant="inherit">
-                                                {option.label}
-                                            </DenTypography>
-                                        </DenMenuItem>
+                                            <span>
+                                                <DenMenuItem
+                                                    onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                                                    classes={{
+                                                        root: classes?.menuOption,
+                                                    }}
+                                                    disabled={option?.disabled}
+                                                >
+                                                    <DenTypography variant="inherit">
+                                                        {option.label}
+                                                    </DenTypography>
+                                                </DenMenuItem>
+                                            </span>
+                                        </DenTooltip>
                                     ))}
                                 </DenMenu>
                             </DenBox>
@@ -272,7 +307,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            <DenBox>
+                            <DenBox sx={{ width: '100%' }}>
                                 {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                     <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
                                         {title}

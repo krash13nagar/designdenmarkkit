@@ -55,12 +55,16 @@ export interface MarketplaceContentCardConfig {
         }
     }[],
     agency?: string,
-    isCompetitor?: boolean
+    isCompetitor?: boolean,
+    typeIcon?: ReactNode,
+    typeLabel?: string
 }
 
 export interface MarketplaceCardMenuOptionsConfig {
     label: string;
     onClickFnc: React.MouseEventHandler<HTMLElement>;
+    disabled?: boolean;
+    disabledMsg?: string;
 }
 
 export interface MarketPlaceCardCheckboxProps {

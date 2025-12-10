@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DenTextField } from '../../common/textfield/textfield.component';
+import { EditorTextField } from '../editortextfield/editortextfield.component';
 import Count from '../wordcount/wordcount.component';
 import style from './titleforurl.module.scss';
 import { DenIconButton, DenInputLabel } from '../../common';
@@ -18,13 +19,74 @@ import clsx from 'clsx';
  * for more details see http:localhost:6006
  */
 export const TitleForUrl: React.FC<TitleForUrlProps> = ({
-  seoTitleProps = {},
-  overrideLinkProps = {},
-  alternateTitleProps = {},
+  seoTitleProps = {
+    shrinkLabel: false,
+    id: 'bootstrap-input',
+    label: '',
+    value: '',
+    onChange: () => {},
+  },
+  overrideLinkProps = {
+    shrinkLabel: false,
+    id: 'bootstrap-input',
+    label: '',
+    value: '',
+    onChange: () => {},
+  },
+  alternateTitleProps = {
+    value: '',
+    onChange: () => {},
+    title: '',
+  },
+  isThumb = false,
 }) => {
   const [isOvverrideVisible, setIsOvverideVisible] = React.useState(false);
-  const [isAlternateTitleVisible, setIsAlternateTitleVisible] = React.useState(false);
+  const [isAlternateTitleVisible, setIsAlternateTitleVisible] =
+    React.useState(false);
   const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
+
+  // Automatically show alternate title if it has a value
+  React.useEffect(() => {
+    if (alternateTitleProps.value && alternateTitleProps.value.trim() !== '') {
+      setIsAlternateTitleVisible(true);
+    }
+  }, [alternateTitleProps.value]);
+
+  React.useEffect(() => {
+    if (overrideLinkProps.value && overrideLinkProps.value.trim() !== '') {
+      setIsOvverideVisible(true);
+    }
+  }, [overrideLinkProps.value]);
+
+  // Filter actions based on isThumb prop
+  const getSpeedDialActions = () => {
+    const allActions = [
+      {
+        label: 'Alternate Title',
+        onClick: (e: React.MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsAlternateTitleVisible(true);
+          setSpeedDialOpen(false);
+        },
+      },
+      {
+        label: 'Override Link',
+        onClick: (e: React.MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOvverideVisible(true);
+          setSpeedDialOpen(false);
+        },
+      },
+    ];
+
+    // Filter out Alternate Title if isThumb is truthy
+    return isThumb
+      ? allActions.filter((action) => action.label !== 'Alternate Title')
+      : allActions;
+  };
+
   return (
     <div className={style['title-for-url-wrapper']}>
       <DenInputLabel
@@ -50,26 +112,7 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
           }}
         />
         <CustomSpeedDial
-          actions={[
-            {
-              label: 'Override Link',
-              onClick: (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsOvverideVisible(true);
-                setSpeedDialOpen(false);
-              },
-            },
-            {
-              label: 'Alternate Title',
-              onClick: (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsAlternateTitleVisible(true);
-                setSpeedDialOpen(false);
-              },
-            },
-          ]}
+          actions={getSpeedDialActions()}
           open={speedDialOpen}
           setOpen={setSpeedDialOpen}
           classes={{
@@ -114,29 +157,27 @@ export const TitleForUrl: React.FC<TitleForUrlProps> = ({
           <Count wordString={overrideLinkProps.value ?? ''} />
         </>
       )}
-      {isAlternateTitleVisible && (
+      {isAlternateTitleVisible && !isThumb && (
         <>
           <DenInputLabel
-            shrink={alternateTitleProps.shrinkLabel || false}
-            htmlFor={alternateTitleProps.id ?? 'bootstrap-input'}
+            shrink={false}
+            htmlFor={'bootstrap-input'}
             className={clsx(
               style.label,
               'cds-input-label',
               alternateTitleProps.shrinkLabel ? style['shrink'] : ''
             )}
           >
-            {alternateTitleProps.label}
+            {alternateTitleProps.title}
           </DenInputLabel>
           <div className={style['alternate-title']}>
-            <DenTextField
+            <EditorTextField
               {...alternateTitleProps}
-              showLabel={false}
-              valueProps={{
-                classes: {
-                  root: style['denLabel'],
-                  input: style['denInput'],
-                },
-              }}
+              title=""
+              editorOptionsType="title"
+              setAllPlugins={false}
+              countRequired={false}
+              small={true}
             />
             <DenIconButton
               onClick={() => setIsAlternateTitleVisible(false)}

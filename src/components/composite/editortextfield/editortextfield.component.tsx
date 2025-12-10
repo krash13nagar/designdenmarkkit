@@ -1,7 +1,11 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import SunEditor from 'suneditor-react';
 import SunEditorCore from 'suneditor/src/lib/core';
-import { SUNEDITOR_CAPTION_OPTIONS, SUNEDITOR_DESCRIPTION_OPTIONS, SUNEDITOR_TITLE_OPTIONS } from './editortextfield.constant';
+import {
+  SUNEDITOR_CAPTION_OPTIONS,
+  SUNEDITOR_DESCRIPTION_OPTIONS,
+  SUNEDITOR_TITLE_OPTIONS,
+} from './editortextfield.constant';
 import Count from '../wordcount/wordcount.component';
 import { DenBox, DenInputLabel } from '../../common';
 import { ErrorIcon, Warning } from '../../../assets';
@@ -91,17 +95,19 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
         small ? 'small' : ''
       )}
     >
-      <DenInputLabel
-        className={clsx(
-          focus ? style['focus'] : '',
-          shrinkLabel ? style['shrink'] : '',
-          'cds-input-label'
-        )}
-        required={required ? true : false}
-        shrink={shrinkLabel}
-      >
-        {title}
-      </DenInputLabel>
+      {title && (
+        <DenInputLabel
+          className={clsx(
+            focus ? style['focus'] : '',
+            shrinkLabel ? style['shrink'] : '',
+            'cds-input-label'
+          )}
+          required={required ? true : false}
+          shrink={shrinkLabel}
+        >
+          {title}
+        </DenInputLabel>
+      )}
       <div className={clsx('editor-wrapper', error ? 'has-error' : '')}>
         <SunEditor
           getSunEditorInstance={getSunEditorInstance}
@@ -109,7 +115,9 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
           {...(height && { height: height })}
           autoFocus={autoFocus}
           onChange={handleChange}
-          setOptions={editorOptionsReceived || getEditorOptions as SunEditorOptions}
+          setOptions={
+            editorOptionsReceived || (getEditorOptions as SunEditorOptions)
+          }
           setContents={content}
           onBlur={handleBlur}
           onFocus={handleFocus}

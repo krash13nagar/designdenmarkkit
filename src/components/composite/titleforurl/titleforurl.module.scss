@@ -10,6 +10,12 @@
     position: relative;
     display: flex;
     justify-content: center;
+
+    :global {
+      .cds-text-editor {
+        width: 100%;
+      }
+    }
     // align-items: end;
 
     .icon-button-fab {
@@ -30,7 +36,7 @@
     }
 
     button {
-      border-radius: 3px;
+      border-radius: 0;
       min-height: 100%;
       max-height: 100%;
       padding-top: 0;
