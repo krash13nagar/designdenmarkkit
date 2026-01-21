@@ -44,7 +44,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         agency = '',
         isCompetitor = true,
         typeIcon,
-        typeLabel = ''
+        typeLabel = '',
+        translateLanguageErrorMsg = ''
 
     } = props;
 
@@ -316,6 +317,9 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                 {slugTitle && <p className={cssClassName['card-slug-title']}>{slugTitle}</p>}
                                 {(subtitle || story) && (
                                     <p className={cssClassName['card-subtitle']}>{subtitle || story}</p>
+                                )}
+                                {translateLanguageErrorMsg && (
+                                    <p className={cssClassName['card-translate-error']}>{translateLanguageErrorMsg}</p>
                                 )}
                             </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>

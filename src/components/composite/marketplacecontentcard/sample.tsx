@@ -40,6 +40,7 @@ export const marketplaceContentCardSample = {
     publishDateTimestamp: "Tue Feb 08 18:31:23 IST 2022",
     cardMenuOptions: CARD_MENU_OPTIONS,
     imagesCount: 0,
+    translateLanguageErrorMsg: 'English Title is not present.',
     dataSource: {
         name: "Hindustan Times",
         icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
