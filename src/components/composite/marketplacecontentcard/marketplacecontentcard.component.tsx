@@ -318,9 +318,6 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                 {(subtitle || story) && (
                                     <p className={cssClassName['card-subtitle']}>{subtitle || story}</p>
                                 )}
-                                {translateLanguageErrorMsg && (
-                                    <p className={cssClassName['card-translate-error']}>{translateLanguageErrorMsg}</p>
-                                )}
                             </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>
                                 <ImageWithFallback
@@ -332,6 +329,12 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         </div>
 
                     </div>
+                    {/* Translate Error Message */}
+                    {translateLanguageErrorMsg && (
+                        <div className={cssClassName['translate-error-section']}>
+                            <p className={cssClassName['card-translate-error']}>{translateLanguageErrorMsg}</p>
+                        </div>
+                    )}
                     {/* Tags and Channels Section for Grid View */}
                     {view !== 'single' && (
                         <div className={cssClassName['tags-channels-section']}>

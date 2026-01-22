@@ -317,13 +317,18 @@
             -webkit-box-orient: vertical;
             display: -webkit-box;
         }
+    }
+
+    .translate-error-section {
+        padding: 0 13px;
+        margin-top: 8px;
 
         .card-translate-error {
             font: normal normal normal 13px/16px 'Source Sans 3';
             letter-spacing: 0.14px;
             color: #D92D2C;
             opacity: 1;
-            margin-top: 8px;
+            margin: 0;
         }
     }
 
