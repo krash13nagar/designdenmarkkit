@@ -311,12 +311,12 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             <DenBox sx={{ width: '100%' }}>
                                 {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                     <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
-                                        {title}
+                                        {<p dangerouslySetInnerHTML={{ __html: title }} />}
                                     </DenBox>
                                 </DenCustomTooltip>}
-                                {slugTitle && <p className={cssClassName['card-slug-title']}>{slugTitle}</p>}
+                                {slugTitle && <p className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                                 {(subtitle || story) && (
-                                    <p className={cssClassName['card-subtitle']}>{subtitle || story}</p>
+                                    <p className={cssClassName['card-subtitle']} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
                                 )}
                             </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>
