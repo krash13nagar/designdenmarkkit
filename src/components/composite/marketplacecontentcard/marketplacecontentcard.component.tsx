@@ -96,6 +96,13 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         }
     }, [])
 
+    const decodeHtmlEntities = useCallback((text: string): string => {
+        if (!text) return text;
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = text;
+        return textarea.value;
+    }, [])
+
     const tagsTooltip = useCallback((tags: any) => {
         return (
             <React.Fragment>
@@ -309,7 +316,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
                             <DenBox sx={{ width: '100%' }}>
-                                {title && <DenCustomTooltip arrow title={title} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                {title && <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                     <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
                                         {<p dangerouslySetInnerHTML={{ __html: title }} />}
                                     </DenBox>
