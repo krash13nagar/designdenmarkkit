@@ -6,13 +6,13 @@ import clsx from 'clsx';
 
 export const KeyValueCopy = forwardRef(
   (
-    { keyText, valueText, showCopy = true }: KeyValueCopyProps,
+    { keyText, valueText, showCopy = true, className }: KeyValueCopyProps,
     ref: Ref<HTMLDivElement>
   ) => {
     return (
       <div
         ref={ref}
-        className={clsx('cds-key-value-copy-root', style.keyValueCopyRoot)}
+        className={clsx('cds-key-value-copy-root', style.keyValueCopyRoot, className)}
       >
         <div className={style.keyValueWrapper}>
           <div className={style.keyText}>{keyText}</div>
