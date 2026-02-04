@@ -1,2 +1,50 @@
-// Context menu styles are in the main module.scss file
-// This file is kept for consistency with component structure
+// Context Menu Styles
+.card-header-menu {
+    cursor: pointer;
+    width: 22px;
+
+    .more-icon-base {
+        padding: 0;
+
+        &:hover {
+            background-color: #E5F3FF;
+            padding: 0;
+
+            svg {
+                color: #0F89FF;
+            }
+        }
+
+        &.menu-open {
+            background-color: #E5F3FF;
+
+            svg {
+                color: #0F89FF;
+            }
+        }
+    }
+}
+
+// Menu Item Styles
+.menu-list-wrapper {
+    padding: 5px 8px;
+}
+
+.menu-item {
+    font: normal normal normal 14px/20px "Source Sans 3";
+    color: #4D4D4D ;
+    padding: 5px 8px;
+    // min-height: 28px;
+    // height: 28px ;
+
+    &:hover {
+        background:rgba(57, 137, 255, 0.06) !important;
+        color: #0F89FF;
+        cursor: pointer;
+    }
+
+    &.cds-MuiMenuItem-root.Mui-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

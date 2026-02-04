@@ -1,3 +1,6 @@
+@import './components/header/header.module.scss';
+@import './components/footer/footer.module.scss';
+
 .card-root {
     overflow: unset !important;
     border: 1px solid #EAEAEA;
@@ -47,91 +50,7 @@
     width: 100%;
 }
 
-// Header Styles
-.card-header {
-    background-color: #EAEAEA;
-    display: flex;
-    width: 100%;
-    padding: 2px;
-    justify-content: space-between;
-    min-height: 24px;
-    color: #4D4D4D;
-    align-items: center;
-
-    &.card-header-with-checkbox {
-        background-color: #E5F3FF;
-    }
-
-    .card-header-lhs {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-
-        .card-header-lhs-checkbox {
-            display: none;
-            opacity: 0;
-            transition: all 0.2s ease;
-            padding: 0;
-
-            &.checkbox-visible {
-                display: flex;
-                opacity: 1;
-            }
-
-            &.show-all-checkboxes {
-                display: flex;
-                opacity: 1;
-                padding: 0;
-            }
-        }
-
-        .card-header-date {
-            font: italic normal 600 12px/14px "Source Sans 3";
-            letter-spacing: 0.13px;
-            color: #4D4D4D;
-            padding-top: 2px;
-            padding-left: 2px;
-        }
-
-        .card-header-icon {
-            display: flex;
-            align-items: center;
-            margin-top: 2px;
-        }
-    }
-
-    .card-header-rhs {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-
-        .card-header-menu {
-            cursor: pointer;
-            width: 22px;
-
-            .more-icon-base {
-                padding: 0;
-
-                &:hover {
-                    background-color: #E5F3FF;
-                    padding: 0;
-
-                    svg {
-                        color: #0F89FF;
-                    }
-                }
-
-                &.menu-open {
-                    background-color: #E5F3FF;
-
-                    svg {
-                        color: #0F89FF;
-                    }
-                }
-            }
-        }
-    }
-}
+// Header styles moved to components/header/header.module.scss
 
 // Middle Section - Image
 .card-middle {
@@ -348,56 +267,6 @@
 }
 
 
-// Footer Styles
-.card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px;
-    gap: 5px;
-    font: normal normal normal 11px/12px "Source Sans 3";
-    letter-spacing: 0.12px;
-    opacity: 1;
-    color: #4D4D4D;
-    background-color: #EAEAEA;
-    min-height: 24px;
+// Footer styles moved to components/footer/footer.module.scss
 
-    .card-footer-lhs {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-        .card-footer-dimensions {
-            font: normal normal normal 11px/12px "Source Sans 3";
-            color: #4D4D4D;
-        }
-    }
-
-    .card-footer-rhs {
-        display: flex;
-        align-items: center;
-
-        .card-footer-right-text {
-            font: normal normal normal 11px/12px "Source Sans 3";
-            color: #4D4D4D;
-        }
-    }
-}
-
-// Menu Item Styles
-.menu-item {
-    font: normal normal normal 13px/18px "Source Sans 3" !important;
-    color: #4D4D4D !important;
-    padding: 8px 16px !important;
-    min-height: 40px !important;
-
-    &:hover {
-        background-color: #E5F3FF !important;
-        color: #0F89FF !important;
-    }
-
-    &.cds-MuiMenuItem-root.Mui-disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-}
+// Menu Item styles moved to components/contextmenu/contextmenu.module.scss

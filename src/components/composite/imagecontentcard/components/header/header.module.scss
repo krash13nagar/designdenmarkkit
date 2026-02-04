@@ -1,2 +1,57 @@
-// Header styles are in the main module.scss file
-// This file is kept for consistency with component structure
+// Header Styles
+.card-header {
+    background-color: #EAEAEA;
+    display: flex;
+    width: 100%;
+    padding: 2px;
+    justify-content: space-between;
+    min-height: 24px;
+    color: #4D4D4D;
+    align-items: center;
+
+    &.card-header-with-checkbox {
+        background-color: #E5F3FF;
+    }
+
+    .card-header-lhs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .card-header-lhs-checkbox {
+            display: none;
+            opacity: 0;
+            transition: all 0.2s ease;
+            padding: 0;
+
+            &.checkbox-visible {
+                display: flex;
+                opacity: 1;
+            }
+
+            &.show-all-checkboxes {
+                display: flex;
+                opacity: 1;
+                padding: 0;
+            }
+        }
+
+        .card-header-date {
+            font: italic normal 500 13px/20px "Source Sans 3";
+            letter-spacing: 0.13px;
+            color: #4D4D4D;
+        }
+
+        .card-header-icon {
+            display: flex;
+            align-items: center;
+            margin-top: 2px;
+        }
+    }
+
+    .card-header-rhs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+}

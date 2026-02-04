@@ -1,2 +1,35 @@
-// Footer styles are in the main module.scss file
-// This file is kept for consistency with component structure
+// Footer Styles
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    gap: 5px;
+    font: normal normal normal 11px/12px "Source Sans 3";
+    letter-spacing: 0.12px;
+    opacity: 1;
+    color: #4D4D4D;
+    background-color: #EAEAEA;
+    min-height: 24px;
+
+    .card-footer-lhs {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .card-footer-dimensions {
+            font: normal normal normal 11px/12px "Source Sans 3";
+            color: #4D4D4D;
+        }
+    }
+
+    .card-footer-rhs {
+        display: flex;
+        align-items: center;
+
+        .card-footer-right-text {
+            font: normal normal normal 11px/12px "Source Sans 3";
+            color: #4D4D4D;
+        }
+    }
+}

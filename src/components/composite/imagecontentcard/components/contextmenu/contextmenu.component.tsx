@@ -1,5 +1,5 @@
 import React from 'react';
-import cssClassName from './contextmenu.module.scss';
+import style from './contextmenu.module.scss';
 import {
     DenBox,
     DenIconButton,
@@ -20,19 +20,19 @@ const ImageContentCardContextMenu: React.FC<ImageContentCardContextMenuProps> = 
     onContextClick,
     onDenMenuClose,
     onClose,
-    cssClassName: parentCssClassName,
+    cssClassName: parentCssClassName = {},
     className
 }) => {
     return (
-        <DenBox className={clsx(parentCssClassName['card-header-menu'], className)}>
+        <DenBox className={clsx(style['card-header-menu'], className)}>
             <DenIconButton
                 aria-label="more"
                 id={id || ''}
                 aria-haspopup="true"
                 onClick={(e) => onContextClick(e, 1)}
                 className={clsx(
-                    parentCssClassName['more-icon-base'],
-                    Boolean(anchorEl?.[1]) && parentCssClassName['menu-open']
+                    style['more-icon-base'],
+                    Boolean(anchorEl?.[1]) && style['menu-open']
                 )}
                 disableRipple
             >
@@ -73,7 +73,7 @@ const ImageContentCardContextMenu: React.FC<ImageContentCardContextMenuProps> = 
                                 onClick={(e) => onClose(e, 1, option?.onClick)}
                                 classes={{
                                     root: clsx(
-                                        parentCssClassName['menu-item'],
+                                        style['menu-item'],
                                         classes?.menuOption
                                     ),
                                 }}

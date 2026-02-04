@@ -2,6 +2,7 @@ import React from 'react';
 import { DenBox, DenTypography } from '../../../../common';
 import clsx from 'clsx';
 import { ImageContentCardFooterProps } from './footer.types';
+import style from './footer.module.scss';
 
 const ImageContentCardFooter: React.FC<ImageContentCardFooterProps> = ({
     dimensions = '1600 X 900',
@@ -10,17 +11,17 @@ const ImageContentCardFooter: React.FC<ImageContentCardFooterProps> = ({
     className
 }) => {
     return (
-        <div className={clsx(parentCssClassName['card-footer'], className)}>
-            <DenBox className={parentCssClassName['card-footer-lhs']}>
+        <div className={clsx(style['card-footer'], className)}>
+            <DenBox className={style['card-footer-lhs']}>
                 {dimensions && (
-                    <DenTypography className={parentCssClassName['card-footer-dimensions']}>
+                    <DenTypography className={style['card-footer-dimensions']}>
                         {dimensions}
                     </DenTypography>
                 )}
             </DenBox>
             {footerRightText && (
-                <DenBox className={parentCssClassName['card-footer-rhs']}>
-                    <DenTypography className={parentCssClassName['card-footer-right-text']}>
+                <DenBox className={style['card-footer-rhs']}>
+                    <DenTypography className={style['card-footer-right-text']}>
                         {footerRightText}
                     </DenTypography>
                 </DenBox>

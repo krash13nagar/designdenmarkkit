@@ -11,6 +11,6 @@ export interface ImageContentCardContextMenuProps {
     onContextClick: (event: React.SyntheticEvent<HTMLElement>, index: number) => void;
     onDenMenuClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
     onClose: (event: React.SyntheticEvent<HTMLElement> | undefined, index: number, cb?: Function | undefined) => void;
-    cssClassName: any;
+    cssClassName?: any;
     className?: string;
 }

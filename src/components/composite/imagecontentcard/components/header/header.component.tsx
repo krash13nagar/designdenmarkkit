@@ -4,6 +4,7 @@ import DenCustomTooltip from '../../../../common/tooltip/customtooltip.component
 import clsx from 'clsx';
 import { ImageContentCardHeaderProps } from './header.types';
 import ImageContentCardContextMenu from '../contextmenu/contextmenu.component';
+import style from './header.module.scss';
 
 const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
     headerDate,
@@ -23,18 +24,18 @@ const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
 }) => {
     return (
         <div className={clsx(
-            parentCssClassName['card-header'],
-            checkboxProps?.isChecked && parentCssClassName['card-header-with-checkbox'],
+            style['card-header'],
+            checkboxProps?.isChecked && style['card-header-with-checkbox'],
             className
         )}>
-            <div className={parentCssClassName['card-header-lhs']}>
+            <div className={style['card-header-lhs']}>
                 {<DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}>
                     <span>
                         <DenCheckbox
                             className={clsx(
-                                parentCssClassName['card-header-lhs-checkbox'],
-                                checkboxProps?.isChecked && parentCssClassName['checkbox-visible'],
-                                showAllCheckboxes && parentCssClassName['show-all-checkboxes']
+                                style['card-header-lhs-checkbox'],
+                                checkboxProps?.isChecked && style['checkbox-visible'],
+                                showAllCheckboxes && style['show-all-checkboxes']
                             )}
                             checked={checkboxProps?.isChecked}
                             onChange={checkboxProps?.onCheckboxClick}
@@ -48,16 +49,16 @@ const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
                         arrow
                         placement='top'
                     >
-                        <DenBox className={parentCssClassName['card-header-date']}>{headerDate}</DenBox>
+                        <DenBox className={style['card-header-date']}>{headerDate}</DenBox>
                     </DenCustomTooltip>
                 )}
                 {imageIcon && (
-                    <DenBox className={parentCssClassName['card-header-icon']}>
+                    <DenBox className={style['card-header-icon']}>
                         {imageIcon}
                     </DenBox>
                 )}
             </div>
-            <div className={parentCssClassName['card-header-rhs']}>
+            <div className={style['card-header-rhs']}>
                 <ImageContentCardContextMenu
                     id={id}
                     anchorEl={anchorEl}
@@ -66,7 +67,6 @@ const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
                     onContextClick={onContextClick}
                     onDenMenuClose={onDenMenuClose}
                     onClose={onClose}
-                    cssClassName={parentCssClassName}
                 />
             </div>
         </div>
