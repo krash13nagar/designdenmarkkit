@@ -114,9 +114,9 @@ export const ImageContentCardHoverDetails: React.FC<ImageContentCardHoverConfig>
                                 )
                             })}
 
-                        {id && (
+                        {/* {id && (
                             <KeyValueCopy className={'msid-copy-wrapper'} key={id} keyText="ID:" valueText={id} showCopy={true} />
-                        )}
+                        )} */}
 
                         {!actionButtonsList && (
                             <div onClick={handleSelectImage}>

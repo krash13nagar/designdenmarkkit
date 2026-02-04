@@ -61,6 +61,8 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
 
     const reportImageCardCallBack = (from: number) => {
         if (from === 0) {
+            // Close context menu when showing report card
+            setAnchorEl({});
             setAnimatedClass('flip-in');
             setToShowReportImageCard(true);
         } else {
@@ -172,6 +174,15 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
             onClick={onCardClick}
         >
             <div className={clsx(cssClassName['card-content-wrapper'], classes?.middle)}>
+                {/* Report Image Card Overlay - Full Card Coverage */}
+                {toShowReportImageCard && reportImageProps && (
+                    <ReportImageCard
+                        {...reportImageProps}
+                        reportImageCardCallBack={reportImageCardCallBack}
+                        animatedClass={animatedClass}
+                    />
+                )}
+                
                 {/* Header Section */}
                 <ImageContentCardHeader
                     headerDate={headerDate}
@@ -193,13 +204,6 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                 <div className={clsx(cssClassName['card-middle'], classes?.middle)} onClick={onImageClick}>
                     {imageUrl && (
                         <div className={clsx(cssClassName['card-image-container'], classes?.imageContainer)}>
-                            {toShowReportImageCard && reportImageProps && (
-                                <ReportImageCard
-                                    {...reportImageProps}
-                                    reportImageCardCallBack={reportImageCardCallBack}
-                                    animatedClass={animatedClass}
-                                />
-                            )}
                             <ImageWithFallback
                                 src={imageUrl}
                                 placeholderIcon={ImageFallback}
