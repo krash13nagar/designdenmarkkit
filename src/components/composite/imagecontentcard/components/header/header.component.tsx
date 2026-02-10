@@ -7,6 +7,7 @@ import ImageContentCardContextMenu from '../contextmenu/contextmenu.component';
 import style from './header.module.scss';
 
 const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
+    menuResetKey = 0,
     headerDate,
     imageIcon,
     id,
@@ -60,6 +61,7 @@ const ImageContentCardHeader: React.FC<ImageContentCardHeaderProps> = ({
             </div>
             <div className={style['card-header-rhs']}>
                 <ImageContentCardContextMenu
+                    key={`contextmenu-${menuResetKey}`}
                     id={id}
                     anchorEl={anchorEl}
                     menuOptions={menuOptions}

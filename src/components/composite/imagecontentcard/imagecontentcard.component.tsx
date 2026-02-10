@@ -58,6 +58,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
     const [anchorEl, setAnchorEl] = useState<ImageContentCardAnchorGeneric>({});
     const [toShowReportImageCard, setToShowReportImageCard] = useState(false);
     const [animatedClass, setAnimatedClass] = useState('');
+    const [menuResetKey, setMenuResetKey] = useState(0);
 
     const reportImageCardCallBack = (from: number) => {
         if (from === 0) {
@@ -72,6 +73,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
             setTimeout(() => {
                 setToShowReportImageCard(false);
                 setAnimatedClass('');
+                setMenuResetKey((k) => k + 1);
             }, 500);
         }
     };
@@ -185,8 +187,9 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                     />
                 )}
 
-                {/* Header Section */}
+                {/* Header Section - menuResetKey passed so only context menu remounts after report close (keeps checkbox/hover intact) */}
                 <ImageContentCardHeader
+                    menuResetKey={menuResetKey}
                     headerDate={headerDate}
                     imageIcon={imageIcon}
                     id={id}

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { ImageContentCardAnchorGeneric, ImageContentCardCheckboxProps } from "../../imagecontentcard.types";
 
 export interface ImageContentCardHeaderProps {
+    menuResetKey?: number;
     headerDate?: string;
     imageIcon?: ReactNode;
     id?: string;
