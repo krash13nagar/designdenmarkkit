@@ -24,7 +24,8 @@ export const ReportImageCard: React.FC<ReportImageCardConfig> = ({
         setSelectedOption(e.target.value);
     }
 
-    const handleCancel = () => {
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         reportImageCardCallBack?.(1);
         onCancel?.();
     }
@@ -35,7 +36,11 @@ export const ReportImageCard: React.FC<ReportImageCardConfig> = ({
     }
 
     return (
-        <div className={clsx(cssClassName['report-card-overlay'], animatedClass ? cssClassName[animatedClass] : '')}>
+        <div
+            className={clsx(cssClassName['report-card-overlay'], animatedClass ? cssClassName[animatedClass] : '')}
+            data-report-overlay="true"
+            onClick={(e) => e.stopPropagation()}
+        >
             <div className={cssClassName['report-card-container-top']}>
                 <div className={cssClassName['card-title']}>{title}</div>
                 {dropdownOptions && dropdownOptions.length > 0 && (

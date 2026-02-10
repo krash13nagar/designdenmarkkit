@@ -66,6 +66,8 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
             setAnimatedClass('flip-in');
             setToShowReportImageCard(true);
         } else {
+            // Clear anchor immediately so context menu can open again on next click
+            setAnchorEl({});
             setAnimatedClass('flip-out');
             setTimeout(() => {
                 setToShowReportImageCard(false);
@@ -182,7 +184,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                         animatedClass={animatedClass}
                     />
                 )}
-                
+
                 {/* Header Section */}
                 <ImageContentCardHeader
                     headerDate={headerDate}
