@@ -57,7 +57,8 @@ export interface MarketplaceContentCardConfig {
     agency?: string,
     isCompetitor?: boolean,
     typeIcon?: ReactNode,
-    typeLabel?: string
+    typeLabel?: string,
+    translateLanguageErrorMsg?: string
 }
 
 export interface MarketplaceCardMenuOptionsConfig {
