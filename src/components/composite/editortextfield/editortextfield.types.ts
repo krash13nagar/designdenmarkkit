@@ -20,4 +20,5 @@ export interface EditorTextfieldProps {
   small?: boolean,
   editorOptionsType?: 'title' | 'caption',
   placeholder?: string,
+  disabled?: boolean,
 }
