@@ -1,0 +1,31 @@
+.epaper-card-wrapper {
+    height: 190px;
+}
+
+.pdfBody {
+    padding: 0;
+}
+
+.pdfImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.continueRow {
+    margin-top: auto;
+    margin-bottom: 2px;
+}
+
+.footer-lhs-no-gap {
+    gap: 0 !important;
+}
+
+.footer-rhs-no-gap {
+    gap: 0 !important;
+}
+
+.wordcount-no-pad {
+    padding-left: 0 !important;
+}
