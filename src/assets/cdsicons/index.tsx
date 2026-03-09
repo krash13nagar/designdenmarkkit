@@ -19,3 +19,6 @@ export * from './webstoryicon';
 export * from './rightarrowicon';
 export * from './copyicon';
 export * from './checkicon';
+export * from './epaperpdficon';
+export * from './epaperstoriesicon';
+export * from './epapermissingstoriesicon';

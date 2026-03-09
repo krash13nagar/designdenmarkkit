@@ -1,256 +1,424 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 import { Divider } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import LinkIcon from '@mui/icons-material/Link';
+import EpaperPdfIcon from '../../../assets/cdsicons/epaperpdficon';
+import EpaperStoriesIcon from '../../../assets/cdsicons/epaperstoriesicon';
+import EpaperMissingStoriesIcon from '../../../assets/cdsicons/epapermissingstoriesicon';
 import ImageIcon from '../../../assets/cdsicons/imageicon';
 import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon';
 import marketplaceCss from '../marketplacecontentcard/marketplacecontentcard.module.scss';
 import cssClassName from './epapercontentcard.module.scss';
-import { DenCustomTooltip } from '../../common';
+import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 
 import {
     DenBox,
     DenCard,
+    DenCheckbox,
     DenIconButton,
+    DenMenu,
+    DenMenuItem,
+    DenTooltip,
     DenTypography,
     ImageWithFallback,
 } from '../../common';
-import { EpaperContentCardProps } from './epapercontentcard.types';
+import {
+    EpaperContentCardProps,
+    EpaperAnchorGeneric,
+    EpaperMissingStoriesCardData,
+    EpaperPdfCardData,
+    EpaperStoryCardData,
+} from './epapercontentcard.types';
 
-const getImageSrc = (data: any): string | undefined => {
-    return (
-        data?.fileLocation ||
-        data?.imageUrl ||
-        data?.imageURL ||
-        data?.thumbnailUrl ||
-        data?.thumbnailURL ||
-        data?.url
+const STORY_DESCRIPTION_FALLBACK = 'Story description is currently unavailable.';
+const DESCRIPTION_MAX_LENGTH_WITH_CONTINUE = 115;
+
+const formatInsertTime = (insertDate?: string): string => {
+    if (!insertDate) return '-';
+
+    const parsedDate = new Date(insertDate);
+    if (Number.isNaN(parsedDate.getTime())) return String(insertDate);
+
+    return new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        day: 'numeric',
+        month: 'short',
+        hour12: false,
+    }).format(parsedDate).replace(',', '');
+};
+
+export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps, ref: React.MutableRefObject<any>) => {
+    const {
+        variant,
+        data,
+        classes,
+        selected,
+        cardMenuOptions,
+        checkboxProps,
+        showCheckbox = true,
+        showAllCheckboxes = false,
+        onCardClick = () => { },
+        onTitleClick,
+        onMergedClick,
+    } = props;
+
+    const [anchorEl, setAnchorEl] = React.useState<EpaperAnchorGeneric>({});
+
+    const tooltipstyles = useMemo(() => {
+        return {
+            font: 'normal normal 400 13px/18px "Source Sans 3"',
+            textColor: '#4D4D4D',
+        };
+    }, []);
+
+    const isPdfVariant = variant === 'pdf';
+    const isMissingStoriesVariant = variant === 'missingStories';
+    const isStoriesVariant = variant === 'stories';
+    const pdfData = isPdfVariant ? (data as EpaperPdfCardData) : undefined;
+    const missingStoriesData = isMissingStoriesVariant ? (data as EpaperMissingStoriesCardData) : undefined;
+    const storyData = isStoriesVariant ? (data as EpaperStoryCardData) : undefined;
+    const mergedStoryInfo = storyData?.mergedStoryInfo;
+
+    const resolvedTitle = useMemo(() => {
+        if (!isStoriesVariant) return '';
+        return mergedStoryInfo?.title || storyData?.title || '-';
+    }, [isStoriesVariant, mergedStoryInfo?.title, storyData?.title]);
+
+    const resolvedWordCount = useMemo(() => {
+        if (!isStoriesVariant) return '-';
+        return String(mergedStoryInfo?.wordCount ?? storyData?.wordCount ?? '-');
+    }, [isStoriesVariant, mergedStoryInfo?.wordCount, storyData?.wordCount]);
+
+    const resolvedImageCount = useMemo(() => {
+        if (!isStoriesVariant) return '-';
+        return String(storyData?.imageCount ?? '-');
+    }, [isStoriesVariant, storyData?.imageCount]);
+
+    const cardPage = useMemo(() => {
+        return pdfData?.page || missingStoriesData?.page || '-';
+    }, [pdfData?.page, missingStoriesData?.page]);
+
+    const headerTime = useMemo(() => {
+        if (isPdfVariant || isMissingStoriesVariant) return `Page ${cardPage}`;
+        return formatInsertTime(storyData?.insertDate);
+    }, [isPdfVariant, isMissingStoriesVariant, cardPage, storyData?.insertDate]);
+
+    const shouldShowStoryThumbnail = useMemo(() => {
+        if (!isStoriesVariant) return false;
+        return Number(storyData?.imageCount || 0) > 0;
+    }, [isStoriesVariant, storyData?.imageCount]);
+
+    const storyDescription = useMemo(() => {
+        if (!isStoriesVariant) return '';
+        return storyData?.description || STORY_DESCRIPTION_FALLBACK;
+    }, [isStoriesVariant, storyData?.description]);
+
+    const shouldShowContinueOn = useMemo(() => {
+        if (!isStoriesVariant) return false;
+        return Boolean(mergedStoryInfo?.page);
+    }, [isStoriesVariant, mergedStoryInfo?.page]);
+
+    const missingStoriesThumb = useMemo(() => {
+        return (
+            missingStoriesData?.indesignThumbUrl?.[0] ||
+            missingStoriesData?.thumbnailUrl ||
+            ''
+        );
+    }, [missingStoriesData?.indesignThumbUrl, missingStoriesData?.thumbnailUrl]);
+
+    const mergedPage = mergedStoryInfo?.page;
+
+    const descriptionPrefix = useMemo(() => {
+        if (!shouldShowContinueOn) return storyDescription;
+
+        const continueText = ` Continued on P${mergedPage}`;
+        const allowedLength = Math.max(
+            0,
+            DESCRIPTION_MAX_LENGTH_WITH_CONTINUE - continueText.length
+        );
+
+        if (storyDescription.length <= allowedLength) return storyDescription;
+        return `${storyDescription.slice(0, Math.max(0, allowedLength - 1)).trimEnd()}…`;
+    }, [storyDescription, shouldShowContinueOn, mergedPage]);
+
+    const handleClose = useCallback(
+        (
+            event: React.SyntheticEvent<HTMLElement> | undefined,
+            index: number,
+            cb?: React.MouseEventHandler<HTMLElement>
+        ) => {
+            setAnchorEl((prev: EpaperAnchorGeneric) => ({ ...prev, [index]: null }));
+            event?.stopPropagation();
+            if (cb && event) cb(event as unknown as React.MouseEvent<HTMLElement>);
+        },
+        []
     );
-};
 
-const getWordCount = (data: any): string => {
-    const wc = data?.wordCount ?? data?.wc ?? data?.word_count;
-    if (wc === 0) return '0';
-    return wc ? String(wc) : '-';
-};
+    const handleDenMenuOnClose = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+        handleClose(undefined, 1);
+        event.stopPropagation();
+    }, [handleClose]);
 
-const getCentre = (data: any): string => {
-    return String(
-        data?.centre ??
-        data?.center ??
-        data?.publication ??
-        data?.edition ??
-        data?.centreName ??
-        data?.dataSource ??
-        data?.source ??
-        ''
-    ).trim();
-};
+    const handleContextClick = useCallback(
+        (event: React.SyntheticEvent<HTMLElement>, index: number) => {
+            setAnchorEl((prev: EpaperAnchorGeneric) => ({ ...prev, [index]: event.currentTarget as HTMLElement }));
+            event.stopPropagation();
+        },
+        []
+    );
 
-const getPage = (data: any): string => {
-    const page = data?.page ?? data?.pageNo ?? data?.pageNumber ?? data?.pageno;
-    return page ? String(page) : '';
-};
+    const handleCardTitleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
+        onTitleClick?.(event);
+        event.stopPropagation();
+    }, [onTitleClick]);
 
-const getAgency = (data: any): string => {
-    return String(data?.agency ?? data?.agencyName ?? data?.source ?? '').trim();
-};
+    const handleCheckboxChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+        event.stopPropagation();
+        checkboxProps?.onCheckboxClick?.(event, checked);
+    }, [checkboxProps]);
 
-const getImageCount = (data: any): string => {
-    const ic = data?.imagesCount ?? data?.imageCount ?? data?.images_count;
-    if (ic === 0) return '0';
-    return ic ? String(ic) : '-';
-}
+    const hasCardMenuOptions = Boolean(cardMenuOptions?.length);
 
-const getSubtitle = (data: any): string => {
-    return String(data?.subtitle ?? data?.story ?? data?.summary ?? data?.description ?? '').trim();
-};
-
-
-
-export const EpaperContentCard = React.forwardRef(
-    (props: EpaperContentCardProps, ref: React.MutableRefObject<any>) => {
-        const {
-            type,
-            pdfVariant = 'normal',
-            data,
-            showMergedLink = true,
-            onMergedClick,
-            renderIcon,
-        } = props;
-
-        const imageSrc = getImageSrc(data);
-        const page = getPage(data);
-        const agency = getAgency(data);
-        const wordCount = getWordCount(data);
-        const imageCount = getImageCount(data)
-        const centre = getCentre(data);
-        const subtitle = getSubtitle(data);
-
-        const headerLabel =
-            type === 'pdf'
-                ? `Page${page ? ` ${page}` : ''}`
-                : String(data?.time ?? data?.timestamp ?? data?.headerText ?? '');
-
-        const headerIcon = renderIcon?.({ type, pdfVariant });
-
-        const mergedPage = data?.mergedStoryInfo?.page;
-        const shouldShowMergedLink =
-            type === 'story' && showMergedLink && Boolean(mergedPage);
-
-        const tooltipstyles = useMemo(() => {
-            return {
-                font: 'normal normal 400 13px/18px "Source Sans 3"',
-                textColor: '#4D4D4D',
-            }
-        }, [])
+    const renderBody = useMemo(() => {
+        if (isPdfVariant || isMissingStoriesVariant) {
+            return (
+                <div className={clsx(marketplaceCss['card-details-section'], cssClassName['pdfBody'])}>
+                    <DenBox className={clsx(cssClassName['pdfImageWrap'], cssClassName['pdfImageFrame'])}>
+                        <ImageWithFallback
+                            src={isMissingStoriesVariant ? missingStoriesThumb : (pdfData?.thumbnailUrl || '')}
+                            className={cssClassName['pdfImage']}
+                            alt={`Page ${cardPage}`}
+                            width="100%"
+                            height="100%"
+                            style={{ display: 'block', objectFit: 'cover' }}
+                            showFallbackBorder={false}
+                            placeholderIcon={<ImageIcon />}
+                        />
+                    </DenBox>
+                </div>
+            );
+        }
 
         return (
-            <DenCard
-                classes={{ root: marketplaceCss['card-root'] }}
-                className={clsx(
-                    marketplaceCss['marketplace-default-card-wrapper'],
-                    cssClassName['epaper-card-wrapper']
-                )}
-                ref={ref}
-            >
-                <div className={marketplaceCss['image-with-details-wrapper']}>
-                    <div className={marketplaceCss['card-header']}>
-                        <div className={marketplaceCss['card-header-lhs']}>
-                            <DenBox sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                {!!headerLabel && (
-                                    <DenTypography className={marketplaceCss['card-header-date']}>
-                                        {headerLabel}
-                                    </DenTypography>
-                                )}
-                                {headerIcon}
+            <div className={clsx(marketplaceCss['card-details-section'], cssClassName['storyBody'])}>
+                <div className={marketplaceCss['card-image-wrapper']}>
+                    <DenBox sx={{ minWidth: 0, flex: 1 }}>
+                        <DenCustomTooltip arrow title={resolvedTitle} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
+                            <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'])} onClick={handleCardTitleClick}>
+                                {resolvedTitle}
                             </DenBox>
-                        </div>
+                        </DenCustomTooltip>
+                        <p className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>
+                            {descriptionPrefix}
+                            {shouldShowContinueOn && (
+                                <span
+                                    className={cssClassName['inlineContinueLink']}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onMergedClick?.(String(mergedPage));
+                                    }}
+                                >
+                                    {` Continued on P${mergedPage}`}
+                                </span>
+                            )}
+                        </p>
+                    </DenBox>
+                    {shouldShowStoryThumbnail && (
+                        <DenBox className={clsx(marketplaceCss['card-image'], cssClassName['storyThumbWrap'])}>
+                            <ImageWithFallback
+                                src={storyData?.thumbnailUrl || ''}
+                                alt={storyData?.title || 'Story image'}
+                                width="100%"
+                                height="100%"
+                                style={{ display: 'block', objectFit: 'cover' }}
+                                showFallbackBorder={false}
+                                placeholderIcon={<ImageIcon />}
+                            />
+                        </DenBox>
+                    )}
+                </div>
+
+            </div>
+        );
+    }, [
+        isPdfVariant,
+        isMissingStoriesVariant,
+        pdfData?.thumbnailUrl,
+        missingStoriesThumb,
+        cardPage,
+        resolvedTitle,
+        tooltipstyles,
+        handleCardTitleClick,
+        storyDescription,
+        descriptionPrefix,
+        shouldShowStoryThumbnail,
+        storyData?.thumbnailUrl,
+        storyData?.title,
+        shouldShowContinueOn,
+        mergedPage,
+        onMergedClick,
+    ]);
+
+    const renderFooter = useMemo(() => {
+        return (
+            <div className={marketplaceCss['card-footer']}>
+                <DenBox className={marketplaceCss['card-footer-lhs']}>
+                    <DenCustomTooltip title={isPdfVariant ? '' : `Word Count : ${resolvedWordCount}`} arrow {...tooltipstyles}>
+                        <DenBox className={marketplaceCss['wordcount']}>
+                            <DenTypography>
+                                <span className={marketplaceCss['wordcount-label']}>WC :</span> {resolvedWordCount}
+                            </DenTypography>
+                        </DenBox>
+                    </DenCustomTooltip>
+
+                    <DenCustomTooltip title={isPdfVariant ? '' : `Images : ${resolvedImageCount}`} arrow {...tooltipstyles}>
+                        <DenBox className={marketplaceCss['image']}>
+                            <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />
+                            <MarketplaceImageIcon width="16px" height="16px" />
+                            <DenTypography>{resolvedImageCount}</DenTypography>
+                        </DenBox>
+                    </DenCustomTooltip>
+
+                    <Divider sx={{ height: '14px', margin: '0px 2px' }} orientation="vertical" />
+                    <DenBox className={marketplaceCss['card-footer-rhs']}>
+                        <DenTypography className={cssClassName['footerMetaText']}>{data?.datasource || '-'}</DenTypography>
+                        {(isPdfVariant || isMissingStoriesVariant) && (
+                            <>
+                                <Divider sx={{ height: '14px' }} orientation="vertical" />
+                                <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
+                            </>
+                        )}
+                        <Divider sx={{ height: '14px' }} orientation="vertical" />
+                        <DenTypography className={cssClassName['footerMetaText']}>{data.coverage || '-'}</DenTypography>
+                    </DenBox>
+                </DenBox>
+            </div>
+        );
+    }, [
+        isPdfVariant,
+        isMissingStoriesVariant,
+        resolvedWordCount,
+        tooltipstyles,
+        resolvedImageCount,
+        data.label,
+        cardPage,
+        data.coverage,
+    ]);
+
+    const HeaderTypeIcon = useMemo(() => {
+        if (isMissingStoriesVariant) return EpaperMissingStoriesIcon;
+        if (isPdfVariant) return EpaperPdfIcon;
+        return EpaperStoriesIcon;
+    }, [isMissingStoriesVariant, isPdfVariant]);
+
+    return (
+        <DenCard
+            classes={{ root: clsx(marketplaceCss['card-root'], classes?.root) }}
+            className={clsx(
+                marketplaceCss['marketplace-default-card-wrapper'],
+                cssClassName['epaper-card-wrapper'],
+                classes?.root,
+                selected ? marketplaceCss['selected-card'] : ''
+            )}
+            ref={ref}
+            onClick={onCardClick}
+        >
+            <div className={marketplaceCss['image-with-details-wrapper']}>
+                <div className={clsx(marketplaceCss['card-header'], checkboxProps?.isChecked && marketplaceCss['card-header-with-checkbox'])}>
+                    <div className={marketplaceCss['card-header-lhs']}>
+                        {showCheckbox && (
+                            checkboxProps?.tooltipText ? (
+                                <DenTooltip title={checkboxProps?.tooltipText} arrow PopperProps={checkboxProps?.PopperProps}>
+                                    <span onClick={(e) => e.stopPropagation()}>
+                                        <DenCheckbox
+                                            className={clsx(
+                                                marketplaceCss['card-header-lhs-checkbox'],
+                                                checkboxProps?.isChecked && marketplaceCss['checkbox-visible'],
+                                                showAllCheckboxes && marketplaceCss['show-all-checkboxes']
+                                            )}
+                                            checked={checkboxProps?.isChecked}
+                                            onChange={handleCheckboxChange}
+                                        />
+                                    </span>
+                                </DenTooltip>
+                            ) : (
+                                <span onClick={(e) => e.stopPropagation()}>
+                                    <DenCheckbox
+                                        className={clsx(
+                                            marketplaceCss['card-header-lhs-checkbox'],
+                                            checkboxProps?.isChecked && marketplaceCss['checkbox-visible'],
+                                            showAllCheckboxes && marketplaceCss['show-all-checkboxes']
+                                        )}
+                                        checked={checkboxProps?.isChecked}
+                                        onChange={handleCheckboxChange}
+                                    />
+                                </span>
+                            )
+                        )}
+                        <DenBox className={cssClassName['header-info']}>
+                            <DenBox className={marketplaceCss['card-header-date']}>{headerTime}</DenBox>
+                            <HeaderTypeIcon width="20px" height="20px" className={cssClassName['header-icon']} />
+                        </DenBox>
+                    </div>
+
+                    {hasCardMenuOptions && (
                         <div className={marketplaceCss['card-header-rhs']}>
                             <DenBox className={marketplaceCss['card-header-menu']}>
                                 <DenIconButton
                                     aria-label="more"
-                                    disabled
-                                    className={marketplaceCss['more-icon-base']}
+                                    onClick={(e) => handleContextClick(e, 1)}
+                                    className={clsx(marketplaceCss['more-icon-base'], Boolean(anchorEl?.[1]) && marketplaceCss['menu-open'])}
+                                    disableRipple
                                 >
-                                    <MoreVertIcon />
+                                    <MoreVertIcon sx={{ fontSize: '24px', color: 'inherit' }} />
                                 </DenIconButton>
+
+                                <DenMenu
+                                    id="epaper-card-menu"
+                                    anchorEl={anchorEl?.[1]}
+                                    open={Boolean(anchorEl?.[1])}
+                                    onClose={handleDenMenuOnClose}
+                                >
+                                    {cardMenuOptions?.map((option) => (
+                                        <DenTooltip
+                                            key={option?.label}
+                                            title={option?.disabled ? option?.disabledMsg : ''}
+                                            disableHoverListener={!option?.disabled}
+                                            PopperProps={{
+                                                sx: {
+                                                    '& .cds-MuiTooltip-tooltip': {
+                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                        padding: '1px 4px 1px 4px !important',
+                                                        backgroundColor: '#4D4D4D !important',
+                                                    },
+                                                },
+                                            }}
+                                            arrow
+                                        >
+                                            <span>
+                                                <DenMenuItem
+                                                    onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                                                    classes={{ root: classes?.menuOption }}
+                                                    disabled={option?.disabled}
+                                                >
+                                                    <DenTypography variant="inherit">{option.label}</DenTypography>
+                                                </DenMenuItem>
+                                            </span>
+                                        </DenTooltip>
+                                    ))}
+                                </DenMenu>
                             </DenBox>
-                        </div>
-                    </div>
-
-                    {type === 'pdf' ? (
-                        <div
-                            className={clsx(
-                                marketplaceCss['card-details-section'],
-                                cssClassName['pdfBody']
-                            )}
-                        >
-                            <ImageWithFallback
-                                src={imageSrc ?? ''}
-                                className={cssClassName['pdfImage']}
-                                alt={headerLabel || 'PDF'}
-                                showFallbackBorder={false}
-                                placeholderIcon={<ImageIcon />}
-                            />
-                        </div>
-                    ) : (
-                        <div className={marketplaceCss['card-details-section']}>
-                            <div className={marketplaceCss['card-image-wrapper']}>
-                                <DenTypography className={marketplaceCss['card-title']}>
-                                    {String(data?.title ?? '')}
-                                </DenTypography>
-                                {!!imageSrc && (
-                                    <DenBox className={marketplaceCss['card-image']}>
-                                        <ImageWithFallback
-                                            src={imageSrc ?? ''}
-                                            width={'38px'}
-                                            height={'38px'}
-                                            alt={String(data?.title ?? 'Story image')}
-                                            showFallbackBorder={false}
-                                            placeholderIcon={<ImageIcon />}
-                                        />
-                                    </DenBox>
-                                )}
-                            </div>
-
-                            {!!subtitle && (
-                                <DenTypography
-                                    className={marketplaceCss['card-subtitle']}
-                                    sx={{ fontStyle: 'italic' }}
-                                >
-                                    {subtitle}
-                                </DenTypography>
-                            )}
-
-                            {shouldShowMergedLink && (
-                                <DenBox
-                                    className={cssClassName['continueRow']}
-                                    sx={{ display: 'flex', justifyContent: 'flex-end' }}
-                                >
-                                    <DenTypography
-                                        variant="body2"
-                                        color="primary"
-                                        sx={{
-                                            cursor: 'pointer',
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '4px',
-                                            '&:hover': { textDecoration: 'underline' },
-                                        }}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            onMergedClick?.(String(mergedPage));
-                                        }}
-                                    >
-                                        <LinkIcon fontSize="inherit" />
-                                        {`Continued on P${mergedPage}`}
-                                    </DenTypography>
-                                </DenBox>
-                            )}
                         </div>
                     )}
-
-                    <div className={marketplaceCss['card-footer']}>
-                        <DenBox className={clsx(marketplaceCss['card-footer-lhs'], cssClassName['footer-lhs-no-gap'])}>
-                            <DenBox className={clsx(marketplaceCss['wordcount'], cssClassName['wordcount-no-pad'])}>
-                                <DenTypography>
-                                    <span className={marketplaceCss['wordcount-label']}>
-                                        WC :
-                                    </span>{' '}
-                                    {wordCount}
-                                </DenTypography>
-                            </DenBox>
-
-                            <DenCustomTooltip
-                                title={imageCount && imageCount !== '-' ? `Images : ${imageCount}` : ''}
-                                arrow
-                                {...tooltipstyles}
-                            >
-                                <DenBox className={marketplaceCss['image']}>
-                                    <Divider
-                                        orientation="vertical"
-                                        sx={{ height: '16px', margin: '0px 6px' }}
-                                    />
-                                    <MarketplaceImageIcon width="16px" height="16px" />
-                                    <DenTypography>{imageCount}</DenTypography>
-                                </DenBox>
-                            </DenCustomTooltip>
-                        </DenBox>
-                        <DenBox className={clsx(marketplaceCss['card-footer-rhs'], cssClassName['footer-rhs-no-gap'])}>
-                            <DenTypography>{centre || '-'}</DenTypography>
-                            <Divider sx={{ height: '14px', margin: '0px 6px' }} orientation="vertical" />
-                            <DenTypography>{page ? `P${page}` : '-'}</DenTypography>
-                            <Divider sx={{ height: '14px', margin: '0px 6px' }} orientation="vertical" />
-                            <DenTypography>{agency || '-'}</DenTypography>
-                        </DenBox>
-                    </div>
                 </div>
-            </DenCard>
-        );
-    }
-);
+
+                {renderBody}
+                {renderFooter}
+            </div>
+        </DenCard>
+    );
+});
 
 EpaperContentCard.displayName = 'EpaperContentCard';
 
