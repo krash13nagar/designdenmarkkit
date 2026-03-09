@@ -247,7 +247,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                 <DenTooltip title={typeLabel} PopperProps={{
                                     sx: {
                                         '& .cds-MuiTooltip-tooltip': {
-                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                            font: "normal normal normal 12px/20px 'Source Sans 3' !important",
                                             padding: "1px 4px 1px 4px !important",
                                             backgroundColor: "#4D4D4D !important",
                                         }
@@ -286,7 +286,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             PopperProps={{
                                                 sx: {
                                                     '& .cds-MuiTooltip-tooltip': {
-                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                        font: "normal normal normal 12px/20px 'Source Sans 3' !important",
                                                         padding: "1px 4px 1px 4px !important",
                                                         backgroundColor: "#4D4D4D !important",
                                                     }
