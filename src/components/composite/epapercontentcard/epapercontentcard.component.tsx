@@ -30,7 +30,6 @@ import {
     EpaperStoryCardData,
 } from './epapercontentcard.types';
 
-const STORY_DESCRIPTION_FALLBACK = 'Story description is currently unavailable.';
 const DESCRIPTION_MAX_LENGTH_WITH_CONTINUE = 115;
 
 const formatInsertTime = (insertDate?: string): string => {
@@ -111,7 +110,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
     const storyDescription = useMemo(() => {
         if (!isStoriesVariant) return '';
-        return storyData?.description || STORY_DESCRIPTION_FALLBACK;
+        return storyData?.description || '';
     }, [isStoriesVariant, storyData?.description]);
 
     const shouldShowContinueOn = useMemo(() => {
