@@ -36,6 +36,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     classes = {},
     small = '',
     placeholder = '',
+    disabled = false,
   } = props;
   const [focus, setFocus] = React.useState(false);
   const [content, setContent] = React.useState('');
@@ -92,7 +93,8 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
         style['cds-text-editor'],
         'cds-text-editor',
         classes.root,
-        small ? 'small' : ''
+        small ? 'small' : '',
+        disabled ? 'disabled' : ''
       )}
     >
       {title && (
@@ -104,6 +106,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
           )}
           required={required ? true : false}
           shrink={shrinkLabel}
+          disabled={disabled}
         >
           {title}
         </DenInputLabel>
@@ -124,7 +127,10 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
           hideToolbar={!focus}
           setAllPlugins={setAllPlugins}
           placeholder={placeholder}
+          disable={disabled}
+          readOnly={disabled}
         />
+        {disabled && <div className="editor-disabled-overlay" />}
       </div>
       <DenBox sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <DenBox sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>

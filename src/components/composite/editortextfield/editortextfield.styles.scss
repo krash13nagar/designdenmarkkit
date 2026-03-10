@@ -1,4 +1,28 @@
 .cds-text-editor {
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: not-allowed;
+
+        .sun-editor {
+            .se-container {
+                border-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+
+    .editor-wrapper {
+        position: relative;
+    }
+
+    .editor-disabled-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        cursor: not-allowed;
+        background: transparent;
+    }
+
     .desc-ws-error {
         svg {
             margin-top: 0.5%;
