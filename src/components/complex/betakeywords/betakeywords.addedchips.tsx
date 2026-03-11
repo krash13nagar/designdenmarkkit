@@ -11,7 +11,9 @@ export const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
     noKeywordsLabel,
     starIcon,
     starHoverIcon,
-    crossIcon
+    crossIcon,
+    addedKeywordsChipsClassName,
+    addedChipClassName
   } = props;
 
   const handleClick = (item: KeywordItem, index: number): void => {
@@ -32,7 +34,7 @@ export const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
           {noKeywordsLabel}
         </div>
       ) : (
-        <div className={styles.addedKeywordsChips}>
+        <div className={`${styles.addedKeywordsChips} ${addedKeywordsChipsClassName ? ' ' + addedKeywordsChipsClassName : ''}`}>
           {keywords.map((item: KeywordItem, index: number) => {
             return (
               <DenChip
@@ -54,7 +56,7 @@ export const BetaKeywordsAddedChips = (props: BetaKeywordsAddedChipsProps) => {
                   handleDelete(index, Number(item.relevance), event);
                 }}
                 deleteIcon={<DenBox className={styles.deleteIconBox}>{crossIcon}</DenBox>}
-                classes={{ root: styles['added-chip'] }}
+                classes={{ root: `${styles['added-chip']}${addedChipClassName ? ' ' + addedChipClassName : ''}` }}
                 sx={{
                   "& .cds-MuiChip-label": {
                     paddingLeft: "20px",
