@@ -10,6 +10,7 @@ import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon'
 import marketplaceCss from '../marketplacecontentcard/marketplacecontentcard.module.scss';
 import cssClassName from './epapercontentcard.module.scss';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
+import DenSkeleton from '../../common/skeleton/skeleton.component';
 
 import {
     DenBox,
@@ -20,6 +21,7 @@ import {
     DenMenuItem,
     DenTooltip,
     DenTypography,
+    DenSvgIcon,
     ImageWithFallback,
 } from '../../common';
 import {
@@ -29,14 +31,17 @@ import {
     EpaperPdfCardData,
     EpaperStoryCardData,
 } from './epapercontentcard.types';
+import { parseInsertDate } from '../../../utility/utils';
 
 const DESCRIPTION_MAX_LENGTH_WITH_CONTINUE = 115;
 
-const formatInsertTime = (insertDate?: string): string => {
-    if (!insertDate) return '-';
 
-    const parsedDate = new Date(insertDate);
-    if (Number.isNaN(parsedDate.getTime())) return String(insertDate);
+
+const formatInsertTime = (insertDate?: string | number | Date): string => {
+    if (insertDate === undefined || insertDate === null || insertDate === '') return '-';
+
+    const parsedDate = parseInsertDate(insertDate);
+    if (!parsedDate) return String(insertDate);
 
     return new Intl.DateTimeFormat('en-GB', {
         hour: '2-digit',
@@ -53,6 +58,10 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         data,
         classes,
         selected,
+        imageLoading = false,
+        headerTooltipContent,
+        view = 'grid',
+        typeLabel = '',
         cardMenuOptions,
         checkboxProps,
         showCheckbox = true,
@@ -70,6 +79,11 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
             textColor: '#4D4D4D',
         };
     }, []);
+
+    const variantClassName = useMemo(() => {
+        if (view === 'single') return 'epaperSingleViewVariant';
+        return '';
+    }, [view]);
 
     const isPdfVariant = variant === 'pdf';
     const isMissingStoriesVariant = variant === 'missingStories';
@@ -102,6 +116,13 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         if (isPdfVariant || isMissingStoriesVariant) return `Page ${cardPage}`;
         return formatInsertTime(storyData?.insertDate);
     }, [isPdfVariant, isMissingStoriesVariant, cardPage, storyData?.insertDate]);
+
+    const resolvedHeaderTooltipContent = useMemo(() => {
+        if (headerTooltipContent) return headerTooltipContent;
+        if (data?.headerTooltipContent) return data.headerTooltipContent;
+
+        return undefined;
+    }, [headerTooltipContent, data?.headerTooltipContent, isPdfVariant, isMissingStoriesVariant, cardPage, data?.coverage]);
 
     const shouldShowStoryThumbnail = useMemo(() => {
         if (!isStoriesVariant) return false;
@@ -183,17 +204,27 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         if (isPdfVariant || isMissingStoriesVariant) {
             return (
                 <div className={clsx(marketplaceCss['card-details-section'], cssClassName['pdfBody'])}>
-                    <DenBox className={clsx(cssClassName['pdfImageWrap'], cssClassName['pdfImageFrame'])}>
-                        <ImageWithFallback
-                            src={isMissingStoriesVariant ? missingStoriesThumb : (pdfData?.thumbnailUrl || '')}
-                            className={cssClassName['pdfImage']}
-                            alt={`Page ${cardPage}`}
-                            width="100%"
-                            height="100%"
-                            style={{ display: 'block', objectFit: 'cover' }}
-                            showFallbackBorder={false}
-                            placeholderIcon={<ImageIcon />}
-                        />
+                    <DenBox className={clsx(cssClassName['pdfImageWrap'], cssClassName['pdfImageFrame'], imageLoading && cssClassName['pdfImageFrameLoading'])}>
+                        {imageLoading ? (
+                            <DenSkeleton
+                                className={clsx(cssClassName['pdfImage'], cssClassName['imageSkeleton'], cssClassName['pdfImageSkeleton'])}
+                                variant="rounded"
+                                animation="wave"
+                                width="100%"
+                                height="100%"
+                            />
+                        ) : (
+                            <ImageWithFallback
+                                src={isMissingStoriesVariant ? missingStoriesThumb : (pdfData?.thumbnailUrl || '')}
+                                className={cssClassName['pdfImage']}
+                                alt={`Page ${cardPage}`}
+                                width="100%"
+                                height="100%"
+                                style={{ display: 'block' }}
+                                showFallbackBorder={false}
+                                placeholderIcon={<ImageIcon />}
+                            />
+                        )}
                     </DenBox>
                 </div>
             );
@@ -225,15 +256,25 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                     </DenBox>
                     {shouldShowStoryThumbnail && (
                         <DenBox className={clsx(marketplaceCss['card-image'], cssClassName['storyThumbWrap'])}>
-                            <ImageWithFallback
-                                src={storyData?.thumbnailUrl || ''}
-                                alt={storyData?.title || 'Story image'}
-                                width="100%"
-                                height="100%"
-                                style={{ display: 'block', objectFit: 'cover' }}
-                                showFallbackBorder={false}
-                                placeholderIcon={<ImageIcon />}
-                            />
+                            {imageLoading ? (
+                                <DenSkeleton
+                                    className={clsx(cssClassName['imageSkeleton'], cssClassName['storyThumbSkeleton'])}
+                                    variant="rounded"
+                                    animation="wave"
+                                    width="100%"
+                                    height="100%"
+                                />
+                            ) : (
+                                <ImageWithFallback
+                                    src={storyData?.thumbnailUrl || ''}
+                                    alt={storyData?.title || 'Story image'}
+                                    width="100%"
+                                    height="100%"
+                                    style={{ display: 'block', objectFit: 'cover' }}
+                                    showFallbackBorder={false}
+                                    placeholderIcon={<ImageIcon />}
+                                />
+                            )}
                         </DenBox>
                     )}
                 </div>
@@ -243,6 +284,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     }, [
         isPdfVariant,
         isMissingStoriesVariant,
+        imageLoading,
         pdfData?.thumbnailUrl,
         missingStoriesThumb,
         cardPage,
@@ -263,7 +305,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         return (
             <div className={marketplaceCss['card-footer']}>
                 <DenBox className={marketplaceCss['card-footer-lhs']}>
-                    <DenCustomTooltip title={isPdfVariant ? '' : `Word Count : ${resolvedWordCount}`} arrow {...tooltipstyles}>
+                    <DenCustomTooltip title={`Word Count : ${resolvedWordCount}`} arrow {...tooltipstyles}>
                         <DenBox className={marketplaceCss['wordcount']}>
                             <DenTypography>
                                 <span className={marketplaceCss['wordcount-label']}>WC :</span> {resolvedWordCount}
@@ -271,7 +313,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                         </DenBox>
                     </DenCustomTooltip>
 
-                    <DenCustomTooltip title={isPdfVariant ? '' : `Images : ${resolvedImageCount}`} arrow {...tooltipstyles}>
+                    <DenCustomTooltip title={`Images : ${resolvedImageCount}`} arrow {...tooltipstyles}>
                         <DenBox className={marketplaceCss['image']}>
                             <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />
                             <MarketplaceImageIcon width="16px" height="16px" />
@@ -281,15 +323,21 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
                     <Divider sx={{ height: '14px', margin: '0px 2px' }} orientation="vertical" />
                     <DenBox className={marketplaceCss['card-footer-rhs']}>
-                        <DenTypography className={cssClassName['footerMetaText']}>{data?.datasource || '-'}</DenTypography>
+                        <DenCustomTooltip title={`Datasource : ${data?.datasource || '-'}`} arrow {...tooltipstyles}>
+                            <DenTypography className={cssClassName['footerMetaText']}>{data?.datasource || '-'}</DenTypography>
+                        </DenCustomTooltip>
                         {(isPdfVariant || isMissingStoriesVariant) && (
                             <>
                                 <Divider sx={{ height: '14px' }} orientation="vertical" />
-                                <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
+                                <DenCustomTooltip title={`Page : ${cardPage}`} arrow {...tooltipstyles}>
+                                    <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
+                                </DenCustomTooltip>
                             </>
                         )}
                         <Divider sx={{ height: '14px' }} orientation="vertical" />
-                        <DenTypography className={cssClassName['footerMetaText']}>{data.coverage || '-'}</DenTypography>
+                        <DenCustomTooltip title={`Center : ${data.coverage || '-'}`} arrow {...tooltipstyles}>
+                            <DenTypography className={cssClassName['footerMetaText']}>{data.coverage || '-'}</DenTypography>
+                        </DenCustomTooltip>
                     </DenBox>
                 </DenBox>
             </div>
@@ -300,9 +348,9 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         resolvedWordCount,
         tooltipstyles,
         resolvedImageCount,
-        data.label,
+        data?.datasource,
         cardPage,
-        data.coverage,
+        data?.coverage,
     ]);
 
     const HeaderTypeIcon = useMemo(() => {
@@ -312,23 +360,37 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     }, [isMissingStoriesVariant, isPdfVariant]);
 
     return (
-        <DenCard
-            classes={{ root: clsx(marketplaceCss['card-root'], classes?.root) }}
-            className={clsx(
-                marketplaceCss['marketplace-default-card-wrapper'],
-                cssClassName['epaper-card-wrapper'],
-                classes?.root,
-                selected ? marketplaceCss['selected-card'] : ''
-            )}
-            ref={ref}
-            onClick={onCardClick}
-        >
-            <div className={marketplaceCss['image-with-details-wrapper']}>
-                <div className={clsx(marketplaceCss['card-header'], checkboxProps?.isChecked && marketplaceCss['card-header-with-checkbox'])}>
-                    <div className={marketplaceCss['card-header-lhs']}>
-                        {showCheckbox && (
-                            checkboxProps?.tooltipText ? (
-                                <DenTooltip title={checkboxProps?.tooltipText} arrow PopperProps={checkboxProps?.PopperProps}>
+        <div className={cssClassName[variantClassName]}>
+            <DenCard
+                classes={{ root: clsx(marketplaceCss['card-root'], classes?.root) }}
+                className={clsx(
+                    marketplaceCss['marketplace-default-card-wrapper'],
+                    cssClassName['epaper-card-wrapper'],
+                    classes?.root,
+                    selected ? marketplaceCss['selected-card'] : ''
+                )}
+                ref={ref}
+                onClick={onCardClick}
+            >
+                <div className={marketplaceCss['image-with-details-wrapper']}>
+                    <div className={clsx(marketplaceCss['card-header'], checkboxProps?.isChecked && marketplaceCss['card-header-with-checkbox'])}>
+                        <div className={marketplaceCss['card-header-lhs']}>
+                            {showCheckbox && (
+                                checkboxProps?.tooltipText ? (
+                                    <DenTooltip title={checkboxProps?.tooltipText} arrow PopperProps={checkboxProps?.PopperProps}>
+                                        <span onClick={(e) => e.stopPropagation()}>
+                                            <DenCheckbox
+                                                className={clsx(
+                                                    marketplaceCss['card-header-lhs-checkbox'],
+                                                    checkboxProps?.isChecked && marketplaceCss['checkbox-visible'],
+                                                    showAllCheckboxes && marketplaceCss['show-all-checkboxes']
+                                                )}
+                                                checked={checkboxProps?.isChecked}
+                                                onChange={handleCheckboxChange}
+                                            />
+                                        </span>
+                                    </DenTooltip>
+                                ) : (
                                     <span onClick={(e) => e.stopPropagation()}>
                                         <DenCheckbox
                                             className={clsx(
@@ -340,82 +402,88 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                                             onChange={handleCheckboxChange}
                                         />
                                     </span>
+                                )
+                            )}
+                            <DenBox className={cssClassName['header-info']}>
+                                <DenCustomTooltip
+                                    title={resolvedHeaderTooltipContent}
+                                    arrow
+                                    placement='top'
+                                >
+                                    <DenBox className={marketplaceCss['card-header-date']}>{headerTime}</DenBox>
+                                </DenCustomTooltip>
+                                <DenTooltip title={typeLabel} PopperProps={{
+                                    sx: {
+                                        '& .cds-MuiTooltip-tooltip': {
+                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                            padding: "1px 4px 1px 4px !important",
+                                            backgroundColor: "#4D4D4D !important",
+                                        }
+                                    }
+                                }}>
+                                    <DenSvgIcon sx={{ marginLeft: '6px', marginTop: '4px' }} className='marketplace-card-header-type-icon'>
+                                        <HeaderTypeIcon width="20px" height="20px" />
+                                    </DenSvgIcon>
                                 </DenTooltip>
-                            ) : (
-                                <span onClick={(e) => e.stopPropagation()}>
-                                    <DenCheckbox
-                                        className={clsx(
-                                            marketplaceCss['card-header-lhs-checkbox'],
-                                            checkboxProps?.isChecked && marketplaceCss['checkbox-visible'],
-                                            showAllCheckboxes && marketplaceCss['show-all-checkboxes']
-                                        )}
-                                        checked={checkboxProps?.isChecked}
-                                        onChange={handleCheckboxChange}
-                                    />
-                                </span>
-                            )
-                        )}
-                        <DenBox className={cssClassName['header-info']}>
-                            <DenBox className={marketplaceCss['card-header-date']}>{headerTime}</DenBox>
-                            <HeaderTypeIcon width="20px" height="20px" className={cssClassName['header-icon']} />
-                        </DenBox>
-                    </div>
-
-                    {hasCardMenuOptions && (
-                        <div className={marketplaceCss['card-header-rhs']}>
-                            <DenBox className={marketplaceCss['card-header-menu']}>
-                                <DenIconButton
-                                    aria-label="more"
-                                    onClick={(e) => handleContextClick(e, 1)}
-                                    className={clsx(marketplaceCss['more-icon-base'], Boolean(anchorEl?.[1]) && marketplaceCss['menu-open'])}
-                                    disableRipple
-                                >
-                                    <MoreVertIcon sx={{ fontSize: '24px', color: 'inherit' }} />
-                                </DenIconButton>
-
-                                <DenMenu
-                                    id="epaper-card-menu"
-                                    anchorEl={anchorEl?.[1]}
-                                    open={Boolean(anchorEl?.[1])}
-                                    onClose={handleDenMenuOnClose}
-                                >
-                                    {cardMenuOptions?.map((option) => (
-                                        <DenTooltip
-                                            key={option?.label}
-                                            title={option?.disabled ? option?.disabledMsg : ''}
-                                            disableHoverListener={!option?.disabled}
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
-                                                        padding: '1px 4px 1px 4px !important',
-                                                        backgroundColor: '#4D4D4D !important',
-                                                    },
-                                                },
-                                            }}
-                                            arrow
-                                        >
-                                            <span>
-                                                <DenMenuItem
-                                                    onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
-                                                    classes={{ root: classes?.menuOption }}
-                                                    disabled={option?.disabled}
-                                                >
-                                                    <DenTypography variant="inherit">{option.label}</DenTypography>
-                                                </DenMenuItem>
-                                            </span>
-                                        </DenTooltip>
-                                    ))}
-                                </DenMenu>
                             </DenBox>
                         </div>
-                    )}
-                </div>
 
-                {renderBody}
-                {renderFooter}
-            </div>
-        </DenCard>
+                        {hasCardMenuOptions && (
+                            <div className={marketplaceCss['card-header-rhs']}>
+                                <DenBox className={marketplaceCss['card-header-menu']}>
+                                    <DenIconButton
+                                        aria-label="more"
+                                        onClick={(e) => handleContextClick(e, 1)}
+                                        className={clsx(marketplaceCss['more-icon-base'], Boolean(anchorEl?.[1]) && marketplaceCss['menu-open'])}
+                                        disableRipple
+                                    >
+                                        <MoreVertIcon sx={{ fontSize: '24px', color: 'inherit' }} />
+                                    </DenIconButton>
+
+                                    <DenMenu
+                                        id="epaper-card-menu"
+                                        anchorEl={anchorEl?.[1]}
+                                        open={Boolean(anchorEl?.[1])}
+                                        onClose={handleDenMenuOnClose}
+                                    >
+                                        {cardMenuOptions?.map((option) => (
+                                            <DenTooltip
+                                                key={option?.label}
+                                                title={option?.disabled ? option?.disabledMsg : ''}
+                                                disableHoverListener={!option?.disabled}
+                                                PopperProps={{
+                                                    sx: {
+                                                        '& .cds-MuiTooltip-tooltip': {
+                                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                            padding: '1px 4px 1px 4px !important',
+                                                            backgroundColor: '#4D4D4D !important',
+                                                        },
+                                                    },
+                                                }}
+                                                arrow
+                                            >
+                                                <span>
+                                                    <DenMenuItem
+                                                        onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                                                        classes={{ root: classes?.menuOption }}
+                                                        disabled={option?.disabled}
+                                                    >
+                                                        <DenTypography variant="inherit">{option.label}</DenTypography>
+                                                    </DenMenuItem>
+                                                </span>
+                                            </DenTooltip>
+                                        ))}
+                                    </DenMenu>
+                                </DenBox>
+                            </div>
+                        )}
+                    </div>
+
+                    {renderBody}
+                    {renderFooter}
+                </div>
+            </DenCard>
+        </div>
     );
 });
 

@@ -61,6 +61,7 @@ export const marketplaceContentCardSamplePdf: EpaperPdfCardData = {
     thumbnailUrl: 'https://images.pexels.com/photos/14576628/pexels-photo-14576628.jpeg',
     storyCount: '14',
     rank: '1',
+    typeLabel: 'PDF',
 };
 
 export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
@@ -73,6 +74,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         label: 'Book1',
         insertDate: '2026-02-25 12:38:59',
         merged: false,
+        typeLabel: 'Stories',
     },
     {
         id: 'story-2',
@@ -88,6 +90,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
             page: '24',
             title: 'Peter Mandelson, former UK envoy to US, arrested in probe into Epstein ties',
         },
+        typeLabel: 'Stories',
     },
     {
         id: 'story-3',
@@ -98,6 +101,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         label: 'Book1',
         insertDate: '2026-02-25 12:39:09',
         merged: false,
+        typeLabel: 'Stories',
     },
 ];
 

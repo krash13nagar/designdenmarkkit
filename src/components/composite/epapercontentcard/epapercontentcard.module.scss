@@ -17,17 +17,24 @@
 
 .pdfBody {
     padding: 0 !important;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .pdfImageWrap {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     line-height: 0;
 }
 
 .pdfImageFrame {
     width: calc(100% - 78px);
+    max-width: 100%;
+    height: 100%;
     margin-left: 39px;
     margin-right: 39px;
     border-left: 1px solid #EAEAEA;
@@ -35,11 +42,29 @@
     box-sizing: border-box;
 }
 
+.pdfImageFrameLoading {
+    aspect-ratio: 3 / 4;
+    min-height: 220px;
+    height: auto;
+}
+
 .pdfImage {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     display: block;
+}
+
+.imageSkeleton {
+    display: block;
+}
+
+.pdfImageSkeleton {
+    height: 100% !important;
+    min-height: 220px;
+    transform: none;
+    border-radius: 0px !important;
 }
 
 .storyBody {
@@ -51,12 +76,17 @@
     line-height: 0;
 }
 
+.storyThumbSkeleton {
+    border-radius: 4px;
+}
+
 .story-title {
     cursor: pointer;
 }
 
 .story-description {
     margin-top: 4px !important;
+    line-clamp: 2;
     -webkit-line-clamp: 2 !important;
 }
 
@@ -73,4 +103,43 @@
     font: normal normal normal 11px/12px "Source Sans 3";
     letter-spacing: 0.12px;
     color: #4D4D4D;
+}
+
+.epaperSingleViewVariant {
+    .epaper-card-wrapper {
+        .storyBody {
+            padding: 4px !important;
+        }
+
+        .story-title {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            font: normal normal 600 13px/17px "Source Sans 3";
+            letter-spacing: 0;
+            color: #2B2B2B;
+        }
+
+        .story-description {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1 !important;
+            font: italic normal 400 12px/16px "Source Sans 3";
+            letter-spacing: 0.13px;
+            color: #818181;
+        }
+
+        .storyThumbWrap {
+            height: 42px;
+            width: 56px;
+            min-width: 56px;
+            min-height: 42px;
+            border-radius: 4px;
+        }
+    }
 }

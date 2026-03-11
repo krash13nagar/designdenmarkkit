@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface EpaperCardMenuOptionsConfig {
     label: string;
     onClickFnc: React.MouseEventHandler<HTMLElement>;
@@ -22,6 +24,8 @@ export interface EpaperBaseCardData {
     coverage: string;
     label: string;
     datasource?: string;
+    typeLabel?: string;
+    headerTooltipContent?: ReactNode,
 }
 
 export interface EpaperPdfCardData extends EpaperBaseCardData {
@@ -48,6 +52,7 @@ export interface EpaperStoryCardData extends EpaperBaseCardData {
     description?: string;
     thumbnailUrl?: string;
     datasource?: string;
+    typeLabel?: string;
 }
 
 export interface EpaperMissingStoriesCardData extends EpaperPdfCardData {
@@ -60,9 +65,13 @@ export interface EpaperMissingStoriesCardData extends EpaperPdfCardData {
 export interface EpaperContentCardCommonProps {
     classes?: EpaperCardClassOverrides;
     selected?: boolean;
+    imageLoading?: boolean;
     onCardClick?: React.MouseEventHandler<HTMLElement>;
     onTitleClick?: React.MouseEventHandler<HTMLElement>;
     onMergedClick?: (page: string) => void;
+    headerTooltipContent?: ReactNode;
+    view?: string;
+    typeLabel?: string;
     checkboxProps?: EpaperCardCheckboxProps;
     showCheckbox?: boolean;
     cardMenuOptions?: EpaperCardMenuOptionsConfig[];

@@ -139,3 +139,64 @@ export const formatTimestampWithMoment = (timestamp: number): string => {
   // Format the date to '16:41, 7 June'
   return date.format('HH:mm, D MMMM');
 };
+
+export const parseInsertDate = (insertDate?: string | number | Date): Date | null => {
+  if (insertDate === undefined || insertDate === null || insertDate === '') return null;
+
+  if (insertDate instanceof Date) {
+    return Number.isNaN(insertDate.getTime()) ? null : insertDate;
+  }
+
+  const normalizeEpochValue = (value: number): number => {
+    return value < 1e12 ? value * 1000 : value;
+  };
+
+  if (typeof insertDate === 'number') {
+    const parsedEpochDate = new Date(normalizeEpochValue(insertDate));
+    return Number.isNaN(parsedEpochDate.getTime()) ? null : parsedEpochDate;
+  }
+
+  const trimmedDate = String(insertDate).trim();
+  if (!trimmedDate) return null;
+
+  if (/^\d+$/.test(trimmedDate)) {
+    const parsedEpochDate = new Date(normalizeEpochValue(Number(trimmedDate)));
+    return Number.isNaN(parsedEpochDate.getTime()) ? null : parsedEpochDate;
+  }
+
+  const namedDateMatch = trimmedDate.match(
+    /^(?:\w{3}\s)?(\w{3})\s(\d{1,2})\s(\d{2}):(\d{2}):(\d{2})(?:\s(?:[A-Z]{2,5}|GMT[+-]\d{4}|[+-]\d{4}))?\s(\d{4})$/
+  );
+  if (namedDateMatch) {
+    const [, monthLabel, day, hour, minute, second, year] = namedDateMatch;
+    const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(monthLabel);
+
+    if (monthIndex !== -1) {
+      const parsedNamedDate = new Date(
+        Number(year),
+        monthIndex,
+        Number(day),
+        Number(hour),
+        Number(minute),
+        Number(second)
+      );
+
+      if (!Number.isNaN(parsedNamedDate.getTime())) return parsedNamedDate;
+    }
+  }
+
+  const directParsedDate = new Date(trimmedDate);
+  if (!Number.isNaN(directParsedDate.getTime())) return directParsedDate;
+
+  const normalizedSqlLikeDate = trimmedDate.match(
+    /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})(?:\.(\d+))?$/
+  );
+  if (normalizedSqlLikeDate) {
+    const [, datePart, timePart, fractionalSeconds] = normalizedSqlLikeDate;
+    const isoLikeDate = `${datePart}T${timePart}${fractionalSeconds ? `.${fractionalSeconds}` : ''}`;
+    const parsedSqlLikeDate = new Date(isoLikeDate);
+    if (!Number.isNaN(parsedSqlLikeDate.getTime())) return parsedSqlLikeDate;
+  }
+
+  return null;
+};
