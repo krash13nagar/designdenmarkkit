@@ -21,7 +21,7 @@ export interface EpaperCardClassOverrides {
 
 export interface EpaperBaseCardData {
     id?: string;
-    coverage: string;
+    agency: string;
     label: string;
     datasource?: string;
     typeLabel?: string;
@@ -40,16 +40,20 @@ export interface MergedStoryInfo {
     wordCount: number;
     page: string;
     title: string;
+    damId?: string;
 }
 
 export interface EpaperStoryCardData extends EpaperBaseCardData {
     title: string;
-    wordCount: number;
-    imageCount: number;
+    wordCount: number | string;
+    imageCount: number | string;
     insertDate: string;
     merged: boolean;
     mergedStoryInfo?: MergedStoryInfo;
     description?: string;
+    story?: string;
+    predictionScore?: number;
+    damid?: string;
     thumbnailUrl?: string;
     datasource?: string;
     typeLabel?: string;

@@ -1,6 +1,7 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Divider } from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EpaperPdfIcon from '../../../assets/cdsicons/epaperpdficon';
 import EpaperStoriesIcon from '../../../assets/cdsicons/epaperstoriesicon';
@@ -33,7 +34,8 @@ import {
 } from './epapercontentcard.types';
 import { parseInsertDate } from '../../../utility/utils';
 
-const DESCRIPTION_MAX_LENGTH_WITH_CONTINUE = 115;
+const DESCRIPTION_MAX_LINES = 4;
+const DESCRIPTION_LINE_HEIGHT = 16;
 
 
 
@@ -122,7 +124,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         if (data?.headerTooltipContent) return data.headerTooltipContent;
 
         return undefined;
-    }, [headerTooltipContent, data?.headerTooltipContent, isPdfVariant, isMissingStoriesVariant, cardPage, data?.coverage]);
+    }, [headerTooltipContent, data?.headerTooltipContent, isPdfVariant, isMissingStoriesVariant, cardPage, data?.agency]);
 
     const shouldShowStoryThumbnail = useMemo(() => {
         if (!isStoriesVariant) return false;
@@ -148,19 +150,119 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     }, [missingStoriesData?.indesignThumbUrl, missingStoriesData?.thumbnailUrl]);
 
     const mergedPage = mergedStoryInfo?.page;
+    const continueText = useMemo(() => {
+        if (!shouldShowContinueOn) return '';
+        return ` Continued on P${mergedPage}`;
+    }, [shouldShowContinueOn, mergedPage]);
+    const shouldMeasureDescription = shouldShowContinueOn && Boolean(storyDescription);
 
-    const descriptionPrefix = useMemo(() => {
-        if (!shouldShowContinueOn) return storyDescription;
+    const descriptionRef = useRef<HTMLParagraphElement>(null);
+    const descriptionMeasureRef = useRef<HTMLParagraphElement>(null);
+    const descriptionPrefixMeasureRef = useRef<HTMLSpanElement>(null);
+    const descriptionSuffixMeasureRef = useRef<HTMLSpanElement>(null);
+    const descriptionMeasurementKeyRef = useRef('');
+    const [descriptionPrefix, setDescriptionPrefix] = useState(storyDescription);
 
-        const continueText = ` Continued on P${mergedPage}`;
-        const allowedLength = Math.max(
-            0,
-            DESCRIPTION_MAX_LENGTH_WITH_CONTINUE - continueText.length
-        );
+    const buildDescriptionCandidate = useCallback((value: string, length: number) => {
+        if (length >= value.length) return value;
 
-        if (storyDescription.length <= allowedLength) return storyDescription;
-        return `${storyDescription.slice(0, Math.max(0, allowedLength - 1)).trimEnd()}…`;
-    }, [storyDescription, shouldShowContinueOn, mergedPage]);
+        const truncatedValue = value.slice(0, length).trimEnd();
+        return truncatedValue ? `${truncatedValue}…` : '';
+    }, []);
+
+    const updateDescriptionPrefix = useCallback((nextValue: string) => {
+        setDescriptionPrefix((currentValue) => (currentValue === nextValue ? currentValue : nextValue));
+    }, []);
+
+    useEffect(() => {
+        if (!shouldMeasureDescription) {
+            descriptionMeasurementKeyRef.current = '';
+            updateDescriptionPrefix(storyDescription);
+            return undefined;
+        }
+
+        const descriptionElement = descriptionRef.current;
+        const measureElement = descriptionMeasureRef.current;
+        const prefixMeasureElement = descriptionPrefixMeasureRef.current;
+        const suffixMeasureElement = descriptionSuffixMeasureRef.current;
+
+        if (!descriptionElement || !measureElement || !prefixMeasureElement) {
+            descriptionMeasurementKeyRef.current = '';
+            updateDescriptionPrefix(storyDescription);
+            return undefined;
+        }
+
+        const measureDescription = () => {
+            const width = Math.floor(descriptionElement.getBoundingClientRect().width);
+            if (!width) {
+                descriptionMeasurementKeyRef.current = '';
+                updateDescriptionPrefix(storyDescription);
+                return;
+            }
+
+            const measurementKey = `${width}-${storyDescription}-${continueText}`;
+            if (descriptionMeasurementKeyRef.current === measurementKey) return;
+
+            measureElement.style.width = `${width}px`;
+            if (suffixMeasureElement) {
+                suffixMeasureElement.textContent = continueText;
+            }
+
+            const maxHeight = DESCRIPTION_MAX_LINES * DESCRIPTION_LINE_HEIGHT;
+            const fits = (candidate: string) => {
+                prefixMeasureElement.textContent = candidate;
+                return measureElement.scrollHeight <= maxHeight;
+            };
+
+            if (fits(storyDescription)) {
+                descriptionMeasurementKeyRef.current = measurementKey;
+                updateDescriptionPrefix(storyDescription);
+                return;
+            }
+
+            let low = 0;
+            let high = storyDescription.length;
+            let bestFit = '';
+
+            while (low <= high) {
+                const mid = Math.floor((low + high) / 2);
+                const candidate = buildDescriptionCandidate(storyDescription, mid);
+
+                if (fits(candidate)) {
+                    bestFit = candidate;
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+
+            descriptionMeasurementKeyRef.current = measurementKey;
+            updateDescriptionPrefix(bestFit);
+        };
+
+        let frameId = window.requestAnimationFrame(measureDescription);
+
+        if (typeof ResizeObserver === 'undefined') {
+            window.addEventListener('resize', measureDescription);
+
+            return () => {
+                window.cancelAnimationFrame(frameId);
+                window.removeEventListener('resize', measureDescription);
+            };
+        }
+
+        const resizeObserver = new ResizeObserver(() => {
+            window.cancelAnimationFrame(frameId);
+            frameId = window.requestAnimationFrame(measureDescription);
+        });
+
+        resizeObserver.observe(descriptionElement);
+
+        return () => {
+            window.cancelAnimationFrame(frameId);
+            resizeObserver.disconnect();
+        };
+    }, [storyDescription, continueText, shouldMeasureDescription, buildDescriptionCandidate, updateDescriptionPrefix]);
 
     const handleClose = useCallback(
         (
@@ -233,14 +335,14 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         return (
             <div className={clsx(marketplaceCss['card-details-section'], cssClassName['storyBody'])}>
                 <div className={marketplaceCss['card-image-wrapper']}>
-                    <DenBox sx={{ minWidth: 0, flex: 1 }}>
+                    <DenBox sx={{ minWidth: 0, flex: 1, position: 'relative' }}>
                         <DenCustomTooltip arrow title={resolvedTitle} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
                             <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'])} onClick={handleCardTitleClick}>
                                 {resolvedTitle}
                             </DenBox>
                         </DenCustomTooltip>
-                        <p className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>
-                            {descriptionPrefix}
+                        <p ref={descriptionRef} className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>
+                            <span className={cssClassName['story-description-prefix']}>{descriptionPrefix}</span>
                             {shouldShowContinueOn && (
                                 <span
                                     className={cssClassName['inlineContinueLink']}
@@ -249,10 +351,24 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                                         onMergedClick?.(String(mergedPage));
                                     }}
                                 >
-                                    {` Continued on P${mergedPage}`}
+                                    <LinkIcon className={cssClassName['inlineContinueIcon']} />
+                                    <span>{continueText}</span>
                                 </span>
                             )}
                         </p>
+                        {shouldMeasureDescription && (
+                            <p
+                                aria-hidden="true"
+                                ref={descriptionMeasureRef}
+                                className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'], cssClassName['story-description-measure'])}
+                            >
+                                <span ref={descriptionPrefixMeasureRef} className={cssClassName['story-description-prefix']} />
+                                <span className={cssClassName['inlineContinueLink']}>
+                                    <LinkIcon className={cssClassName['inlineContinueIcon']} />
+                                    <span ref={descriptionSuffixMeasureRef} />
+                                </span>
+                            </p>
+                        )}
                     </DenBox>
                     {shouldShowStoryThumbnail && (
                         <DenBox className={clsx(marketplaceCss['card-image'], cssClassName['storyThumbWrap'])}>
@@ -291,13 +407,14 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         resolvedTitle,
         tooltipstyles,
         handleCardTitleClick,
-        storyDescription,
         descriptionPrefix,
+        shouldMeasureDescription,
         shouldShowStoryThumbnail,
         storyData?.thumbnailUrl,
         storyData?.title,
         shouldShowContinueOn,
         mergedPage,
+        continueText,
         onMergedClick,
     ]);
 
@@ -335,8 +452,8 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                             </>
                         )}
                         <Divider sx={{ height: '14px' }} orientation="vertical" />
-                        <DenCustomTooltip title={`Center : ${data.coverage || '-'}`} arrow {...tooltipstyles}>
-                            <DenTypography className={cssClassName['footerMetaText']}>{data.coverage || '-'}</DenTypography>
+                        <DenCustomTooltip title={`Center : ${data.agency || '-'}`} arrow {...tooltipstyles}>
+                            <DenTypography className={cssClassName['footerMetaText']}>{data.agency || '-'}</DenTypography>
                         </DenCustomTooltip>
                     </DenBox>
                 </DenBox>
@@ -350,7 +467,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         resolvedImageCount,
         data?.datasource,
         cardPage,
-        data?.coverage,
+        data?.agency,
     ]);
 
     const HeaderTypeIcon = useMemo(() => {

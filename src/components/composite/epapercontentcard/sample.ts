@@ -5,7 +5,7 @@ import {
 } from './epapercontentcard.types';
 
 export const epaperBaseDsObject: EpaperPdfCardData & { stories: EpaperStoryCardData[] } = {
-    coverage: 'Delhi',
+    agency: 'Delhi',
     label: 'Book1',
     page: '1',
     fileLocation: 'https://stagingdam.indiatimes.com/apis/epaper/getPdfUrl/MS/TOISTG/sample.pdf',
@@ -19,7 +19,7 @@ export const epaperBaseDsObject: EpaperPdfCardData & { stories: EpaperStoryCardD
             title: 'India unveils first-ever counter-terror policy',
             wordCount: 165,
             imageCount: 0,
-            coverage: 'Delhi',
+            agency: 'Delhi',
             label: 'Book1',
             insertDate: '2026-02-25 12:38:59',
             merged: false,
@@ -29,7 +29,7 @@ export const epaperBaseDsObject: EpaperPdfCardData & { stories: EpaperStoryCardD
             title: 'Ex-UK envoy Mandelson held over Epstein ties',
             wordCount: 345,
             imageCount: 1,
-            coverage: 'Delhi',
+            agency: 'Delhi',
             label: 'Book1',
             insertDate: '2026-02-25 13:20:51',
             merged: true,
@@ -44,7 +44,7 @@ export const epaperBaseDsObject: EpaperPdfCardData & { stories: EpaperStoryCardD
             title: 'Ranchi-Delhi air ambulance crashes, all 7 on board killed',
             wordCount: 109,
             imageCount: 0,
-            coverage: 'Delhi',
+            agency: 'Delhi',
             label: 'Book1',
             insertDate: '2026-02-25 12:39:09',
             merged: false,
@@ -54,7 +54,7 @@ export const epaperBaseDsObject: EpaperPdfCardData & { stories: EpaperStoryCardD
 
 export const marketplaceContentCardSamplePdf: EpaperPdfCardData = {
     id: 'epaper-page-1',
-    coverage: 'Delhi',
+    agency: 'Delhi',
     label: 'Book1',
     page: '1',
     fileLocation: 'https://stagingdam.indiatimes.com/apis/epaper/getPdfUrl/MS/TOISTG/sample.pdf',
@@ -65,30 +65,24 @@ export const marketplaceContentCardSamplePdf: EpaperPdfCardData = {
 };
 
 export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
-    {
-        id: 'story-1',
-        title: 'India unveils first-ever counter-terror policy',
-        wordCount: 165,
-        imageCount: 0,
-        coverage: 'Delhi',
-        label: 'Book1',
-        insertDate: '2026-02-25 12:38:59',
-        merged: false,
-        typeLabel: 'Stories',
-    },
+
     {
         id: 'story-2',
-        title: 'Ex-UK envoy Mandelson held over Epstein ties',
-        wordCount: 345,
-        imageCount: 1,
-        coverage: 'Delhi',
+        title: 'Oil tops $100, nears 4-yr high as Saudis cut prodn',
+        wordCount: 625,
+        imageCount: '0',
+        agency: 'Delhi',
         label: 'Book1',
-        insertDate: '2026-02-25 13:20:51',
+        insertDate: '2026-03-10 10:25:17',
         merged: true,
+        damid: '69afa1c7316fb45a183175f7',
+        predictionScore: 0,
+        description: "<p>TNN & Agencies</p><p>Oil prices surged to $120 a barrel before retreating to $102 Monday as Saudi Arabia was reported to be cutting output, adding to the supply squeeze due to disruption in the Strait of Hormuz.</p><p>Finance ministers of developed G7 nations, who met Monday evening, deferred plans to tap their strategic reserves to cool down the global flare-up in prices, while vowing to keep close tabs on the evolving supply situation.</p><p>Although Brent prices touched the highest level seen since mid-2022, govt officials said there was no immediate plan to increase pump prices of fuel in India. “We are nicely placed vis-a-vis crude. There is unlikely to be a rise in petrol and diesel prices in the foreseeable future, even if prices remain at $110-120 a barrel,” said a senior govt official.</p> <strong>This story continues on page 11 in the newspaper. For your reading convenience we have added it below.</strong><br><br><strong>Govt working to ‘optimise’ gas supply as Gulf war hits LNG flow</strong><br><p>New Delhi: With nearly 40% of India’s LNG flow hit due to the West Asia conflict, govt is working on an “optimisation plan” for industries, including priority segments such as fertiliser. Those familiar with the discussions said the petroleum ministry could work out the arrangement as early as Tuesday, with a reduction in supply to fertiliser sector not ruled out. </p><p>“Fertiliser units will be given enough supply for them to operate at optimum level,” said a person in the know.</p><p>Some of the fertiliser units are said to be advancing their maintenance shutdowns, and the lower gas availability won’t be so much of a concern for now due to the lean season. Besides, with sufficient urea stocks at its disposal, the industry is not overly worried. Fertiliser Association of India (FAI) said that India is entering agricultural lean season and kharif sowing will begin in June. “During this phase, fertiliser consumption typically remains moderate, allowing the industry to replenish inventories and undertake routine maintenance operations at production facilities.”</p><p>Amid concerns over a possibly sharp cut, an industry executive said that fertiliser is a priority for govt and the reduction will not be drastic.</p><p>The non-priority sectors will, however, need to make do with lower supplies and make alternate arrangements to meet their fuel requirements, insiders indicated.</p><p>Company executives said India continues to get 60% of its LNG supply from sources other than West Asia and efforts are underway to tie up more supplies, including from countries such as Australia and Canada. One of the challenges will be arranging for tankers that can ship the gas as well as ensuring that new sources of gas have surplus capacity to liquify the gas before it is loaded onto vessels.</p><p>According to official data, there is sufficient stock of fertiliser, estimated to have increased 36.5% to 17.7 million tonnes as of Friday, compared with nearly 13 MTs a year ago. DAP and NPK inventories are 70-80% higher than last year, FAI said, adding that in case of phosphatic fertilisers India has diversified supplies, which offset the risk from one region.</p><p>“Fertiliser reserves, which are significantly higher than last year, provide a vital operational cushion, ensuring that international logistics bottlenecks do not translate into domestic farm-gate shortages,” the fertilisers department said in a statement on Friday. It added that agencies had imported the soil nutrients in large quantities, which added up to 9.8 MTs till the end of Feb. Import of another 1.7 MTs has been tied up for the next three months. Some of this, however, may face disruption due to the conflict in West Asia.</p><p> Currently, 60% of LNG used in urea manufacturing is imported from Qatar, which has been forced to stop production after a hit on the QatarEnergy facility by Iran.</p>",
         mergedStoryInfo: {
-            wordCount: 341,
-            page: '24',
-            title: 'Peter Mandelson, former UK envoy to US, arrested in probe into Epstein ties',
+            wordCount: 614,
+            damId: '69afa3d228cf7177f901fae2',
+            page: '11',
+            title: "Govt working to ‘optimise’ gas supply as Gulf war hits LNG flow",
         },
         typeLabel: 'Stories',
     },
@@ -97,7 +91,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         title: 'Ranchi-Delhi air ambulance crashes, all 7 on board killed',
         wordCount: 109,
         imageCount: 0,
-        coverage: 'Delhi',
+        agency: 'Delhi',
         label: 'Book1',
         insertDate: '2026-02-25 12:39:09',
         merged: false,
@@ -106,7 +100,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
 ];
 
 export const marketplaceContentCardSampleMissingStories: EpaperMissingStoriesCardData = {
-    coverage: 'Delhi',
+    agency: 'Delhi',
     indesignThumbUrl: [
         'https://images.pexels.com/photos/14576628/pexels-photo-14576628.jpeg',
     ],
