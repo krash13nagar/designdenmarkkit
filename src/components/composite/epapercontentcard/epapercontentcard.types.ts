@@ -57,6 +57,7 @@ export interface EpaperStoryCardData extends EpaperBaseCardData {
     thumbnailUrl?: string;
     datasource?: string;
     typeLabel?: string;
+    page?: string;
 }
 
 export interface EpaperMissingStoriesCardData extends EpaperPdfCardData {

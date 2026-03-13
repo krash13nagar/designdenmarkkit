@@ -106,8 +106,8 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     }, [isStoriesVariant, storyData?.imageCount]);
 
     const cardPage = useMemo(() => {
-        return pdfData?.page || missingStoriesData?.page || '-';
-    }, [pdfData?.page, missingStoriesData?.page]);
+        return pdfData?.page || missingStoriesData?.page || storyData?.page || '-';
+    }, [pdfData?.page, missingStoriesData?.page, storyData?.page]);
 
     const headerTime = useMemo(() => {
         if (isPdfVariant || isMissingStoriesVariant) return `Page ${cardPage}`;
@@ -310,17 +310,9 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
                     <Divider sx={{ height: '14px', margin: '0px 2px' }} orientation="vertical" />
                     <DenBox className={marketplaceCss['card-footer-rhs']}>
-                        <DenCustomTooltip title={`Datasource : ${data?.datasource || '-'}`} arrow {...tooltipstyles}>
-                            <DenTypography className={cssClassName['footerMetaText']}>{data?.datasource || '-'}</DenTypography>
+                        <DenCustomTooltip title={`Page : ${cardPage}`} arrow {...tooltipstyles}>
+                            <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
                         </DenCustomTooltip>
-                        {(isPdfVariant || isMissingStoriesVariant) && (
-                            <>
-                                <Divider sx={{ height: '14px' }} orientation="vertical" />
-                                <DenCustomTooltip title={`Page : ${cardPage}`} arrow {...tooltipstyles}>
-                                    <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
-                                </DenCustomTooltip>
-                            </>
-                        )}
                         <Divider sx={{ height: '14px' }} orientation="vertical" />
                         <DenCustomTooltip title={`Center : ${data.agency || '-'}`} arrow {...tooltipstyles}>
                             <DenTypography className={cssClassName['footerMetaText']}>{data.agency || '-'}</DenTypography>

@@ -85,6 +85,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
             title: "Govt working to ‘optimise’ gas supply as Gulf war hits LNG flow",
         },
         typeLabel: 'Stories',
+        page: '1',
     },
     {
         id: 'story-3',
@@ -96,6 +97,7 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         insertDate: '2026-02-25 12:39:09',
         merged: false,
         typeLabel: 'Stories',
+        page: '2',
     },
 ];
 
