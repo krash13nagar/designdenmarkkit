@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 import { Divider } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
@@ -33,11 +33,6 @@ import {
     EpaperStoryCardData,
 } from './epapercontentcard.types';
 import { parseInsertDate } from '../../../utility/utils';
-
-const DESCRIPTION_MAX_LINES = 4;
-const DESCRIPTION_LINE_HEIGHT = 16;
-
-
 
 const formatInsertTime = (insertDate?: string | number | Date): string => {
     if (insertDate === undefined || insertDate === null || insertDate === '') return '-';
@@ -154,115 +149,6 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         if (!shouldShowContinueOn) return '';
         return ` Continued on P${mergedPage}`;
     }, [shouldShowContinueOn, mergedPage]);
-    const shouldMeasureDescription = shouldShowContinueOn && Boolean(storyDescription);
-
-    const descriptionRef = useRef<HTMLParagraphElement>(null);
-    const descriptionMeasureRef = useRef<HTMLParagraphElement>(null);
-    const descriptionPrefixMeasureRef = useRef<HTMLSpanElement>(null);
-    const descriptionSuffixMeasureRef = useRef<HTMLSpanElement>(null);
-    const descriptionMeasurementKeyRef = useRef('');
-    const [descriptionPrefix, setDescriptionPrefix] = useState(storyDescription);
-
-    const buildDescriptionCandidate = useCallback((value: string, length: number) => {
-        if (length >= value.length) return value;
-
-        const truncatedValue = value.slice(0, length).trimEnd();
-        return truncatedValue ? `${truncatedValue}…` : '';
-    }, []);
-
-    const updateDescriptionPrefix = useCallback((nextValue: string) => {
-        setDescriptionPrefix((currentValue) => (currentValue === nextValue ? currentValue : nextValue));
-    }, []);
-
-    useEffect(() => {
-        if (!shouldMeasureDescription) {
-            descriptionMeasurementKeyRef.current = '';
-            updateDescriptionPrefix(storyDescription);
-            return undefined;
-        }
-
-        const descriptionElement = descriptionRef.current;
-        const measureElement = descriptionMeasureRef.current;
-        const prefixMeasureElement = descriptionPrefixMeasureRef.current;
-        const suffixMeasureElement = descriptionSuffixMeasureRef.current;
-
-        if (!descriptionElement || !measureElement || !prefixMeasureElement) {
-            descriptionMeasurementKeyRef.current = '';
-            updateDescriptionPrefix(storyDescription);
-            return undefined;
-        }
-
-        const measureDescription = () => {
-            const width = Math.floor(descriptionElement.getBoundingClientRect().width);
-            if (!width) {
-                descriptionMeasurementKeyRef.current = '';
-                updateDescriptionPrefix(storyDescription);
-                return;
-            }
-
-            const measurementKey = `${width}-${storyDescription}-${continueText}`;
-            if (descriptionMeasurementKeyRef.current === measurementKey) return;
-
-            measureElement.style.width = `${width}px`;
-            if (suffixMeasureElement) {
-                suffixMeasureElement.textContent = continueText;
-            }
-
-            const maxHeight = DESCRIPTION_MAX_LINES * DESCRIPTION_LINE_HEIGHT;
-            const fits = (candidate: string) => {
-                prefixMeasureElement.textContent = candidate;
-                return measureElement.scrollHeight <= maxHeight;
-            };
-
-            if (fits(storyDescription)) {
-                descriptionMeasurementKeyRef.current = measurementKey;
-                updateDescriptionPrefix(storyDescription);
-                return;
-            }
-
-            let low = 0;
-            let high = storyDescription.length;
-            let bestFit = '';
-
-            while (low <= high) {
-                const mid = Math.floor((low + high) / 2);
-                const candidate = buildDescriptionCandidate(storyDescription, mid);
-
-                if (fits(candidate)) {
-                    bestFit = candidate;
-                    low = mid + 1;
-                } else {
-                    high = mid - 1;
-                }
-            }
-
-            descriptionMeasurementKeyRef.current = measurementKey;
-            updateDescriptionPrefix(bestFit);
-        };
-
-        let frameId = window.requestAnimationFrame(measureDescription);
-
-        if (typeof ResizeObserver === 'undefined') {
-            window.addEventListener('resize', measureDescription);
-
-            return () => {
-                window.cancelAnimationFrame(frameId);
-                window.removeEventListener('resize', measureDescription);
-            };
-        }
-
-        const resizeObserver = new ResizeObserver(() => {
-            window.cancelAnimationFrame(frameId);
-            frameId = window.requestAnimationFrame(measureDescription);
-        });
-
-        resizeObserver.observe(descriptionElement);
-
-        return () => {
-            window.cancelAnimationFrame(frameId);
-            resizeObserver.disconnect();
-        };
-    }, [storyDescription, continueText, shouldMeasureDescription, buildDescriptionCandidate, updateDescriptionPrefix]);
 
     const handleClose = useCallback(
         (
@@ -335,39 +221,26 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         return (
             <div className={clsx(marketplaceCss['card-details-section'], cssClassName['storyBody'])}>
                 <div className={marketplaceCss['card-image-wrapper']}>
-                    <DenBox sx={{ minWidth: 0, flex: 1, position: 'relative' }}>
+                    <DenBox sx={{ minWidth: 0, flex: 1 }}>
                         <DenCustomTooltip arrow title={resolvedTitle} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
                             <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'])} onClick={handleCardTitleClick}>
                                 {resolvedTitle}
                             </DenBox>
                         </DenCustomTooltip>
-                        <p ref={descriptionRef} className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>
-                            <span className={cssClassName['story-description-prefix']}>{descriptionPrefix}</span>
-                            {shouldShowContinueOn && (
-                                <span
-                                    className={cssClassName['inlineContinueLink']}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        onMergedClick?.(String(mergedPage));
-                                    }}
-                                >
-                                    <LinkIcon className={cssClassName['inlineContinueIcon']} />
-                                    <span>{continueText}</span>
-                                </span>
-                            )}
+                        <p className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>
+                            <span className={cssClassName['story-description-prefix']}>{storyDescription}</span>
                         </p>
-                        {shouldMeasureDescription && (
-                            <p
-                                aria-hidden="true"
-                                ref={descriptionMeasureRef}
-                                className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'], cssClassName['story-description-measure'])}
+                        {shouldShowContinueOn && (
+                            <div
+                                className={cssClassName['storyContinueRow']}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onMergedClick?.(String(mergedPage));
+                                }}
                             >
-                                <span ref={descriptionPrefixMeasureRef} className={cssClassName['story-description-prefix']} />
-                                <span className={cssClassName['inlineContinueLink']}>
-                                    <LinkIcon className={cssClassName['inlineContinueIcon']} />
-                                    <span ref={descriptionSuffixMeasureRef} />
-                                </span>
-                            </p>
+                                <LinkIcon className={cssClassName['inlineContinueIcon']} />
+                                <span className={cssClassName['inlineContinueLink']}>{continueText}</span>
+                            </div>
                         )}
                     </DenBox>
                     {shouldShowStoryThumbnail && (
@@ -407,12 +280,9 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         resolvedTitle,
         tooltipstyles,
         handleCardTitleClick,
-        descriptionPrefix,
-        shouldMeasureDescription,
         shouldShowStoryThumbnail,
         storyData?.thumbnailUrl,
         storyData?.title,
-        shouldShowContinueOn,
         mergedPage,
         continueText,
         onMergedClick,
