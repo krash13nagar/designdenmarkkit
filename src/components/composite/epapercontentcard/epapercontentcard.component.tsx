@@ -369,7 +369,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                             <DenTypography className={cssClassName['footerMetaText']}>{`P${cardPage}`}</DenTypography>
                         </DenCustomTooltip>
                         <Divider sx={{ height: '14px' }} orientation="vertical" />
-                        <DenCustomTooltip title={`Center : ${data.agency || '-'}`} arrow {...tooltipstyles}>
+                        <DenCustomTooltip title={`Agency : ${data.agency || '-'}`} arrow {...tooltipstyles}>
                             <DenTypography className={cssClassName['footerMetaText']}>{data.agency || '-'}</DenTypography>
                         </DenCustomTooltip>
                     </DenBox>
