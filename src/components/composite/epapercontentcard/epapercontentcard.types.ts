@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 export interface EpaperCardMenuOptionsConfig {
     label: string;
@@ -38,9 +38,10 @@ export interface EpaperPdfCardData extends EpaperBaseCardData {
 
 export interface MergedStoryInfo {
     wordCount: number;
-    page: string;
+    onChannelHover?: (event: SyntheticEvent<HTMLElement>) => void;
     title: string;
     damId?: string;
+    page: string;
 }
 
 export interface EpaperStoryCardData extends EpaperBaseCardData {
@@ -58,6 +59,12 @@ export interface EpaperStoryCardData extends EpaperBaseCardData {
     datasource?: string;
     typeLabel?: string;
     page?: string;
+    channelAbbreviation?: string;
+    channelTooltipData?: ReactNode;
+    isChannelTooltipLoading?: boolean;
+    showChannelTooltip?: boolean;
+    onChannelHover?: (event: SyntheticEvent<HTMLElement>, story?: EpaperStoryCardData) => void;
+
 }
 
 export interface EpaperMissingStoriesCardData extends EpaperPdfCardData {
@@ -81,6 +88,11 @@ export interface EpaperContentCardCommonProps {
     showCheckbox?: boolean;
     cardMenuOptions?: EpaperCardMenuOptionsConfig[];
     showAllCheckboxes?: boolean;
+    channelAbbreviation?: string;
+    channelTooltipData?: ReactNode;
+    isChannelTooltipLoading?: boolean;
+    showChannelTooltip?: boolean;
+    onChannelHover?: (event: SyntheticEvent<HTMLElement>, story?: EpaperStoryCardData) => void;
 }
 
 export type EpaperContentCardProps = EpaperContentCardCommonProps &

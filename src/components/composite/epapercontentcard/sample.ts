@@ -74,6 +74,8 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         agency: 'Delhi',
         label: 'Book1',
         insertDate: '2026-03-10 10:25:17',
+        channelAbbreviation: 'TOI',
+        channelTooltipData: '<div style="color:red">Hello world</div>',
         merged: true,
         damid: '69afa1c7316fb45a183175f7',
         predictionScore: 0,
@@ -86,6 +88,8 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         },
         typeLabel: 'Stories',
         page: '1',
+        onChannelHover: (e) => console.log('Channel hover'),
+        showChannelTooltip: false
     },
     {
         id: 'story-3',
@@ -95,6 +99,9 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         agency: 'Delhi',
         label: 'Book1',
         insertDate: '2026-02-25 12:39:09',
+        channelAbbreviation: 'MKT',
+        onChannelHover: () => console.log('Channel hover'),
+        isChannelTooltipLoading: true,
         merged: false,
         typeLabel: 'Stories',
         page: '2',

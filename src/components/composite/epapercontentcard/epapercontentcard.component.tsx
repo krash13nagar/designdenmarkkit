@@ -24,6 +24,7 @@ import {
     DenTypography,
     DenSvgIcon,
     ImageWithFallback,
+    DenCircularProgress,
 } from '../../common';
 import {
     EpaperContentCardProps,
@@ -63,6 +64,11 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         checkboxProps,
         showCheckbox = true,
         showAllCheckboxes = false,
+        channelAbbreviation,
+        channelTooltipData,
+        isChannelTooltipLoading,
+        showChannelTooltip,
+        onChannelHover,
         onCardClick = () => { },
         onTitleClick,
         onMergedClick,
@@ -89,6 +95,45 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     const missingStoriesData = isMissingStoriesVariant ? (data as EpaperMissingStoriesCardData) : undefined;
     const storyData = isStoriesVariant ? (data as EpaperStoryCardData) : undefined;
     const mergedStoryInfo = storyData?.mergedStoryInfo;
+
+    const resolvedShowChannelTooltip = useMemo(() => {
+        if (!isStoriesVariant) return false;
+        if (showChannelTooltip !== undefined) return showChannelTooltip;
+        if (storyData?.showChannelTooltip !== undefined) return storyData.showChannelTooltip;
+        return true;
+    }, [isStoriesVariant, showChannelTooltip, storyData?.showChannelTooltip]);
+
+    const resolvedChannelAbbreviation = useMemo(() => {
+        if (!isStoriesVariant) return undefined;
+        return channelAbbreviation ?? storyData?.channelAbbreviation;
+    }, [channelAbbreviation, isStoriesVariant, storyData?.channelAbbreviation]);
+
+    const resolvedChannelTooltipData = useMemo(() => {
+        if (!isStoriesVariant) return undefined;
+        return channelTooltipData ?? storyData?.channelTooltipData;
+    }, [channelTooltipData, isStoriesVariant, storyData?.channelTooltipData]);
+
+    const resolvedChannelTooltipLoading = useMemo(() => {
+        if (!isStoriesVariant) return false;
+        if (isChannelTooltipLoading !== undefined) return isChannelTooltipLoading;
+        if (storyData?.isChannelTooltipLoading !== undefined) return storyData.isChannelTooltipLoading;
+        return !resolvedChannelTooltipData;
+    }, [isStoriesVariant, isChannelTooltipLoading, storyData?.isChannelTooltipLoading, resolvedChannelTooltipData]);
+
+    const channelTooltipContent = useMemo(() => {
+        if (!isStoriesVariant || !resolvedShowChannelTooltip) return '';
+        if (resolvedChannelTooltipLoading) {
+            return (
+                <DenBox className={cssClassName['channel-tooltip-loader']}>
+                    <DenCircularProgress size={22} />
+                </DenBox>
+            );
+        }
+        if (typeof resolvedChannelTooltipData === 'string') {
+            return <span dangerouslySetInnerHTML={{ __html: resolvedChannelTooltipData }} />;
+        }
+        return resolvedChannelTooltipData || '';
+    }, [isStoriesVariant, resolvedShowChannelTooltip, resolvedChannelTooltipLoading, resolvedChannelTooltipData]);
 
     const resolvedTitle = useMemo(() => {
         if (!isStoriesVariant) return '';
@@ -187,6 +232,16 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
     }, [checkboxProps]);
 
     const hasCardMenuOptions = Boolean(cardMenuOptions?.length);
+
+    const handleChannelHover = (event: React.SyntheticEvent<HTMLElement>) => {
+        if (!resolvedShowChannelTooltip) return;
+        event.stopPropagation();
+        if (storyData?.onChannelHover) {
+            storyData.onChannelHover(event);
+            return;
+        }
+        onChannelHover?.(event, storyData);
+    };
 
     const renderBody = useMemo(() => {
         if (isPdfVariant || isMissingStoriesVariant) {
@@ -459,6 +514,46 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                     </div>
 
                     {renderBody}
+                    {isStoriesVariant && view === 'grid' && resolvedChannelAbbreviation && (
+                        <div className={marketplaceCss['tags-channels-section']}>
+                            <DenBox className={marketplaceCss['channels-wrapper']}>
+                                {resolvedShowChannelTooltip ? (
+                                    <DenTooltip
+                                        title={channelTooltipContent}
+                                        arrow
+                                        placement="top"
+                                        PopperProps={{
+                                            sx: {
+                                                '& .cds-MuiTooltip-tooltip': {
+                                                    backgroundColor: 'white',
+                                                    padding: '0',
+                                                    boxShadow: '0px 3px 6px #00000029'
+                                                },
+                                                '& .cds-MuiTooltip-arrow': {
+                                                    color: 'white'
+                                                }
+                                            }
+                                        }}
+                                    >
+                                        <DenBox
+                                            className={marketplaceCss['channel-chip']}
+                                            onMouseEnter={handleChannelHover}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <DenTypography>{resolvedChannelAbbreviation}</DenTypography>
+                                        </DenBox>
+                                    </DenTooltip>
+                                ) : (
+                                    <DenBox
+                                        className={marketplaceCss['channel-chip']}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <DenTypography>{resolvedChannelAbbreviation}</DenTypography>
+                                    </DenBox>
+                                )}
+                            </DenBox>
+                        </div>
+                    )}
                     {renderFooter}
                 </div>
             </DenCard>
