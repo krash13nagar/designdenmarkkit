@@ -554,7 +554,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                             </DenBox>
                         </div>
                     )}
-                    {renderFooter}
+                    {isStoriesVariant && renderFooter}
                 </div>
             </DenCard>
         </div>
