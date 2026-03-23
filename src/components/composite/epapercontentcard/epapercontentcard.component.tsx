@@ -72,6 +72,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         onCardClick = () => { },
         onTitleClick,
         onMergedClick,
+        highlightCard = false,
     } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<EpaperAnchorGeneric>({});
@@ -137,13 +138,13 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
     const resolvedTitle = useMemo(() => {
         if (!isStoriesVariant) return '';
-        return mergedStoryInfo?.title || storyData?.title || '-';
-    }, [isStoriesVariant, mergedStoryInfo?.title, storyData?.title]);
+        return storyData?.title || '-';
+    }, [isStoriesVariant, storyData?.title]);
 
     const resolvedWordCount = useMemo(() => {
         if (!isStoriesVariant) return '-';
-        return String(mergedStoryInfo?.wordCount ?? storyData?.wordCount ?? '-');
-    }, [isStoriesVariant, mergedStoryInfo?.wordCount, storyData?.wordCount]);
+        return String(storyData?.wordCount ?? '-');
+    }, [isStoriesVariant, storyData?.wordCount]);
 
     const resolvedImageCount = useMemo(() => {
         if (!isStoriesVariant) return '-';
@@ -286,16 +287,18 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                             <span className={cssClassName['story-description-prefix']}>{storyDescription}</span>
                         </p>
                         {shouldShowContinueOn && (
-                            <div
-                                className={cssClassName['storyContinueRow']}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onMergedClick?.(String(mergedPage));
-                                }}
-                            >
-                                <LinkIcon className={cssClassName['inlineContinueIcon']} />
-                                <span className={cssClassName['inlineContinueLink']}>{continueText}</span>
-                            </div>
+                            <DenCustomTooltip arrow title={`#P${mergedStoryInfo.page} | ${mergedStoryInfo?.title || ''}`} {...tooltipstyles} placement="bottom-start">
+                                <div
+                                    className={cssClassName['storyContinueRow']}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onMergedClick?.(String(mergedPage));
+                                    }}
+                                >
+                                    <LinkIcon className={cssClassName['inlineContinueIcon']} />
+                                    <span className={cssClassName['inlineContinueLink']}>{continueText}</span>
+                                </div>
+                            </DenCustomTooltip>
                         )}
                     </DenBox>
                     {shouldShowStoryThumbnail && (
@@ -407,7 +410,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                 onClick={onCardClick}
             >
                 <div className={marketplaceCss['image-with-details-wrapper']}>
-                    <div className={clsx(marketplaceCss['card-header'], checkboxProps?.isChecked && marketplaceCss['card-header-with-checkbox'])}>
+                    <div className={clsx(marketplaceCss['card-header'], checkboxProps?.isChecked && marketplaceCss['card-header-with-checkbox'], highlightCard && cssClassName['card-header-highlighted'])}>
                         <div className={marketplaceCss['card-header-lhs']}>
                             {showCheckbox && (
                                 checkboxProps?.tooltipText ? (

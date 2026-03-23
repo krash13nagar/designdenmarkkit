@@ -89,7 +89,8 @@ export const marketplaceContentCardSampleStories: EpaperStoryCardData[] = [
         typeLabel: 'Stories',
         page: '1',
         onChannelHover: (e) => console.log('Channel hover'),
-        showChannelTooltip: false
+        showChannelTooltip: false,
+        highlightCard: true,
     },
     {
         id: 'story-3',

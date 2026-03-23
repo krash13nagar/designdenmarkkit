@@ -64,7 +64,7 @@ export interface EpaperStoryCardData extends EpaperBaseCardData {
     isChannelTooltipLoading?: boolean;
     showChannelTooltip?: boolean;
     onChannelHover?: (event: SyntheticEvent<HTMLElement>, story?: EpaperStoryCardData) => void;
-
+    highlightCard?: boolean;
 }
 
 export interface EpaperMissingStoriesCardData extends EpaperPdfCardData {
@@ -93,6 +93,7 @@ export interface EpaperContentCardCommonProps {
     isChannelTooltipLoading?: boolean;
     showChannelTooltip?: boolean;
     onChannelHover?: (event: SyntheticEvent<HTMLElement>, story?: EpaperStoryCardData) => void;
+    highlightCard?: boolean;
 }
 
 export type EpaperContentCardProps = EpaperContentCardCommonProps &
