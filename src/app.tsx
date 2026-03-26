@@ -5,7 +5,11 @@
 
 import React, { useState } from 'react';
 import DenLink from './components/common/link/link.component';
-import { DenTypography, MarketplaceContentCard, marketplaceContentCardSample } from './components';
+import {
+  DenTypography,
+  MarketplaceContentCard,
+  marketplaceContentCardSample
+} from './components';
 import _ from 'lodash';
 import { config } from './components/complex/keywords/keywords.sample';
 import {

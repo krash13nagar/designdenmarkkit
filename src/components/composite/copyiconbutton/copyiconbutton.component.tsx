@@ -9,7 +9,8 @@ const CopyIconButton = (props: CopyIconButtonProps) => {
   const copyValue = props.copyValue ?? '';
   const [isCopied, setCopied] = useState(false);
 
-  const handleIconClick = (value: string) => {
+  const handleIconClick = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
+    e.stopPropagation();
     if (isCopied) return;
     copyToClipboard(value);
     setCopied(true);
@@ -24,7 +25,7 @@ const CopyIconButton = (props: CopyIconButtonProps) => {
         <DenIconButton
           title={isCopied ? 'Copied' : 'Click to copy'}
           className="cds-copy-icon-button"
-          onClick={() => handleIconClick(copyValue)}
+          onClick={(e) => handleIconClick(e, copyValue)}
           sx={{ p: '4px' }}
         >
           {isCopied ? (
