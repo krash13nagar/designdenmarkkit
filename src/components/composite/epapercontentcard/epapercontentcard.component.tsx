@@ -276,7 +276,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
         return (
             <div className={clsx(marketplaceCss['card-details-section'], cssClassName['storyBody'])}>
-                <div className={marketplaceCss['card-image-wrapper']}>
+                <div className={clsx(marketplaceCss['card-image-wrapper'], cssClassName['epaper-card-image-wrapper'])}>
                     <DenBox sx={{ minWidth: 0, flex: 1 }}>
                         <DenCustomTooltip arrow title={resolvedTitle} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
                             <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'])} onClick={handleCardTitleClick}>
@@ -348,7 +348,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
     const renderFooter = useMemo(() => {
         return (
-            <div className={marketplaceCss['card-footer']}>
+            <div className={clsx(marketplaceCss['card-footer'], cssClassName['epaper-footer'])}>
                 <DenBox className={marketplaceCss['card-footer-lhs']}>
                     <DenCustomTooltip title={`Word Count : ${resolvedWordCount}`} arrow {...tooltipstyles}>
                         <DenBox className={marketplaceCss['wordcount']}>
@@ -518,6 +518,46 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
 
                     {renderBody}
                     {isStoriesVariant && view === 'grid' && resolvedChannelAbbreviation && (
+                        <div className={marketplaceCss['tags-channels-section']}>
+                            <DenBox className={marketplaceCss['channels-wrapper']}>
+                                {resolvedShowChannelTooltip ? (
+                                    <DenTooltip
+                                        title={channelTooltipContent}
+                                        arrow
+                                        placement="top"
+                                        PopperProps={{
+                                            sx: {
+                                                '& .cds-MuiTooltip-tooltip': {
+                                                    backgroundColor: 'white',
+                                                    padding: '0',
+                                                    boxShadow: '0px 3px 6px #00000029'
+                                                },
+                                                '& .cds-MuiTooltip-arrow': {
+                                                    color: 'white'
+                                                }
+                                            }
+                                        }}
+                                    >
+                                        <DenBox
+                                            className={marketplaceCss['channel-chip']}
+                                            onMouseEnter={handleChannelHover}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <DenTypography>{resolvedChannelAbbreviation}</DenTypography>
+                                        </DenBox>
+                                    </DenTooltip>
+                                ) : (
+                                    <DenBox
+                                        className={marketplaceCss['channel-chip']}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <DenTypography>{resolvedChannelAbbreviation}</DenTypography>
+                                    </DenBox>
+                                )}
+                            </DenBox>
+                        </div>
+                    )}
+                    {isStoriesVariant && view === 'single' && resolvedChannelAbbreviation && (
                         <div className={marketplaceCss['tags-channels-section']}>
                             <DenBox className={marketplaceCss['channels-wrapper']}>
                                 {resolvedShowChannelTooltip ? (

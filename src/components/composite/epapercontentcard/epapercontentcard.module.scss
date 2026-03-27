@@ -17,6 +17,25 @@
             font-size: 16px;
         }
     }
+
+    // Grid view: explicit story thumbnail dimensions
+    .storyThumbWrap {
+        height: 38px;
+        width: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        border-radius: 4px;
+    }
+
+    // Grid view: story image wrapper - no gap (stacks naturally)
+    .epaper-card-image-wrapper {
+        gap: 0;
+    }
+
+    // Grid view: footer padding
+    .epaper-footer {
+        padding: 6px;
+    }
 }
 
 .pdfBody {
@@ -187,6 +206,16 @@
             padding: 4px !important;
         }
 
+        // Single view: add gap between text and thumbnail (mirrors marketplaceSingleViewVariant)
+        .epaper-card-image-wrapper {
+            gap: 6px;
+        }
+
+        // Single view: tighter footer padding (mirrors marketplaceSingleViewVariant)
+        .epaper-footer {
+            padding: 4px;
+        }
+
         .story-title {
             display: block;
             white-space: nowrap;
@@ -198,22 +227,25 @@
             color: #2B2B2B;
         }
 
+        // Single view: constrain description to exactly 1 line
         .story-description {
             display: block !important;
-            max-height: 64px !important;
+            max-height: 16px !important;
             overflow: hidden !important;
-            white-space: normal !important;
-            text-overflow: clip !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
             line-height: 16px !important;
-            line-clamp: unset;
+            line-clamp: unset !important;
             -webkit-line-clamp: unset !important;
             -webkit-box-orient: initial !important;
         }
 
-        .story-description-with-continue {
-            .story-description-prefix {
-                padding-right: 122px;
-            }
+        // Make prefix inline so it collapses to 1 line with the parent <p>
+        .story-description-prefix {
+            display: inline !important;
+            white-space: nowrap;
+            -webkit-line-clamp: unset !important;
+            -webkit-box-orient: initial !important;
         }
 
         .storyThumbWrap {
