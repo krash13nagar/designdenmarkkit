@@ -225,7 +225,7 @@ export const marketplaceContentCardSample = {
         </g>
     </svg>,
     typeLabel: 'Global News',
-
+    showTitleCopy: true
 
 }
 

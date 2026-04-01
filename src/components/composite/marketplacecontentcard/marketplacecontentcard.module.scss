@@ -254,6 +254,30 @@
             display: flex;
             justify-content: space-between;
 
+            .card-title-copy-wrapper {
+                display: flex;
+                align-items: flex-end;
+                width: 100%;
+
+                .card-title-copy-icon {
+                    position: relative;
+                    bottom: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.2s ease, visibility 0.2s ease;
+                    flex-shrink: 0;
+                    margin-left: 4px;
+                    margin-top: 1px;
+                }
+
+                &:hover {
+                    .card-title-copy-icon {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+
             .card-title {
                 display: -webkit-box;
                 white-space: normal;

@@ -12,6 +12,7 @@ import ImageIcon from '../../../assets/cdsicons/imageicon';
 import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon';
 import { Chip, Divider } from '@mui/material';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
+import CopyIconButton from '../copyiconbutton/copyiconbutton.component';
 
 export const MarketplaceContentCard = React.forwardRef((props: MarketplaceContentCardConfig, ref: React.MutableRefObject<any>) => {
 
@@ -45,7 +46,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         isCompetitor = true,
         typeIcon,
         typeLabel = '',
-        translateLanguageErrorMsg = ''
+        translateLanguageErrorMsg = '',
+        showTitleCopy = false
 
     } = props;
 
@@ -247,7 +249,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                 <DenTooltip title={typeLabel} PopperProps={{
                                     sx: {
                                         '& .cds-MuiTooltip-tooltip': {
-                                            font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                            font: "normal normal normal 12px/20px 'Source Sans 3' !important",
                                             padding: "1px 4px 1px 4px !important",
                                             backgroundColor: "#4D4D4D !important",
                                         }
@@ -286,7 +288,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             PopperProps={{
                                                 sx: {
                                                     '& .cds-MuiTooltip-tooltip': {
-                                                        font: "normal normal normal 12px/20px 'Source Sans Pro' !important",
+                                                        font: "normal normal normal 12px/20px 'Source Sans 3' !important",
                                                         padding: "1px 4px 1px 4px !important",
                                                         backgroundColor: "#4D4D4D !important",
                                                     }
@@ -316,11 +318,20 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
                             <DenBox sx={{ width: '100%' }}>
-                                {title && <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
-                                    <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
-                                        {<p dangerouslySetInnerHTML={{ __html: title }} />}
-                                    </DenBox>
-                                </DenCustomTooltip>}
+                                {title && (
+                                    <div className={cssClassName['card-title-copy-wrapper']}>
+                                        <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                            <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
+                                                {<p dangerouslySetInnerHTML={{ __html: title }} />}
+                                            </DenBox>
+                                        </DenCustomTooltip>
+                                        {showTitleCopy && (
+                                            <div className={cssClassName['card-title-copy-icon']}>
+                                                <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                                 {slugTitle && <p className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                                 {(subtitle || story) && (
                                     <p className={cssClassName['card-subtitle']} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
