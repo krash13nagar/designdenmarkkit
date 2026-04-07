@@ -317,26 +317,6 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            <DenBox sx={{ width: '100%' }}>
-                                {title && (
-                                    <div className={cssClassName['card-title-copy-wrapper']}>
-                                        <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
-                                            <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
-                                                {<p dangerouslySetInnerHTML={{ __html: title }} />}
-                                            </DenBox>
-                                        </DenCustomTooltip>
-                                        {showTitleCopy && (
-                                            <div className={cssClassName['card-title-copy-icon']}>
-                                                <CopyIconButton copyValue={decodeHtmlEntities(title)} />
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                                {slugTitle && <p className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
-                                {(subtitle || story) && (
-                                    <p className={cssClassName['card-subtitle']} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
-                                )}
-                            </DenBox>
                             {imageUrl && <div className={cssClassName['card-image']}>
                                 <ImageWithFallback
                                     src={imageUrl}
@@ -344,6 +324,24 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     showFallbackBorder={false}
                                 />
                             </div>}
+                            {title && (
+                                <div className={cssClassName['card-title-copy-wrapper']}>
+                                    <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                        <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
+                                            {<p className={cssClassName['card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />}
+                                            {showTitleCopy && (
+                                                <span className={cssClassName['card-title-copy-icon']}>
+                                                    <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                                </span>
+                                            )}
+                                        </DenBox>
+                                    </DenCustomTooltip>
+                                </div>
+                            )}
+                            {slugTitle && <p className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                            {(subtitle || story) && (
+                                <p className={clsx(cssClassName['card-subtitle'], slugTitle ? cssClassName['subtitle-with-slug'] : cssClassName['subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
+                            )}
                         </div>
 
                     </div>
@@ -544,6 +542,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
+                            {(view === 'single' && (isCompetitor || agency)) && <Divider sx={{ height: '14px' }} orientation="vertical" />}
                             {isCompetitor ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();

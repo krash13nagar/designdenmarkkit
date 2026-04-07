@@ -26,6 +26,7 @@ import {
     ImageWithFallback,
     DenCircularProgress,
 } from '../../common';
+import CopyIconButton from '../copyiconbutton/copyiconbutton.component';
 import {
     EpaperContentCardProps,
     EpaperAnchorGeneric,
@@ -63,6 +64,7 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         cardMenuOptions,
         checkboxProps,
         showCheckbox = true,
+        showTitleCopy = false,
         showAllCheckboxes = false,
         channelAbbreviation,
         channelTooltipData,
@@ -82,6 +84,13 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
             font: 'normal normal 400 13px/18px "Source Sans 3"',
             textColor: '#4D4D4D',
         };
+    }, []);
+
+    const decodeHtmlEntities = useCallback((text: string): string => {
+        if (!text) return text;
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = text;
+        return textarea.value;
     }, []);
 
     const variantClassName = useMemo(() => {
@@ -278,9 +287,20 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
             <div className={clsx(marketplaceCss['card-details-section'], cssClassName['storyBody'])}>
                 <div className={clsx(marketplaceCss['card-image-wrapper'], cssClassName['epaper-card-image-wrapper'])}>
                     <DenBox sx={{ minWidth: 0, flex: 1 }}>
-                        <DenCustomTooltip arrow title={resolvedTitle} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
-                            <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'])} onClick={handleCardTitleClick}>
-                                {resolvedTitle}
+                        <DenCustomTooltip arrow title={decodeHtmlEntities(resolvedTitle)} {...tooltipstyles} textColor="#2B2B2B" maxWidth="230px" placement='bottom-start'>
+                            <DenBox
+                                title={resolvedTitle}
+                                className={cssClassName['card-title-copy-wrapper']}
+                                onClick={handleCardTitleClick}
+                            >
+                                <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'], cssClassName['card-title'])}>
+                                    <p className={cssClassName['card-title-text']}>{resolvedTitle}</p>
+                                    {showTitleCopy && (
+                                        <span className={cssClassName['card-title-copy-icon']}>
+                                            <CopyIconButton copyValue={decodeHtmlEntities(resolvedTitle)} />
+                                        </span>
+                                    )}
+                                </DenBox>
                             </DenBox>
                         </DenCustomTooltip>
                         <p className={clsx(marketplaceCss['card-subtitle'], cssClassName['story-description'])}>

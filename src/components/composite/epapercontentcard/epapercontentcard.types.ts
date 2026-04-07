@@ -88,6 +88,7 @@ export interface EpaperContentCardCommonProps {
     showCheckbox?: boolean;
     cardMenuOptions?: EpaperCardMenuOptionsConfig[];
     showAllCheckboxes?: boolean;
+    showTitleCopy?: boolean;
     channelAbbreviation?: string;
     channelTooltipData?: ReactNode;
     isChannelTooltipLoading?: boolean;

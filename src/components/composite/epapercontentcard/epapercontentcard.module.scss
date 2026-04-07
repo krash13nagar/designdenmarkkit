@@ -107,6 +107,57 @@
     cursor: pointer;
 }
 
+.card-title-copy-wrapper {
+    display: block;
+    max-width: 100%;
+
+    .card-title-copy-icon {
+        display: inline-flex;
+        align-self: flex-start;
+        flex-shrink: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    &:hover {
+        .card-title-copy-icon {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    white-space: normal;
+    max-width: 100%;
+    font: normal normal 600 13px/17px "Source Sans 3";
+    line-height: 1.60;
+    letter-spacing: 0px;
+    color: #2B2B2B;
+    opacity: 1;
+    overflow: hidden;
+
+    p {
+        margin: 0;
+    }
+}
+
+.card-title-text {
+    flex: 1;
+    min-width: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 .story-description {
     display: block !important;
     margin: 4px 0 0 !important;
