@@ -104,3 +104,44 @@ export const imageSearchCardSample2 = {
     cardStyle: "minimal" as imageSearchCardConfig['cardStyle']
 }
 
+export const imageSearchCardSampleWithIconButtons = {
+    type: "3-0",
+    name: "Students Demand University Cuts Ties With Arms Firms Over Gaza War",
+    agencyName: "Getty Images",
+    entityType: "IMAGES",
+    imageUrl: "https://qc10denmark.timesinternet.in/apis/image/gettyExternalImage?securitykey=2992654ae785c210778b384d5cb39ef5&id=1990331476",
+    dataSource: "GETTYFEED",
+    fromNow: "10min ago",
+    imageSource: "DAM",
+    classes: { "root": "cardWrapperClass" },
+    resolution: "5369 x 3580",
+    ingestionDate: "6th Feb 2024 03:53 PM",
+    imageCardMenuOptions: IMAGE_CARD_MENU_OPTIONS,
+    onCardClick: () => { console.log("card clicked!") },
+    onCallbackSelectImagefnc: function (e: React.SyntheticEvent<HTMLElement>) { { console.log("selected image card") } },
+    actionButtonsList: [
+        {
+            label: 'Select',
+            variant: 'contained' as ButtonProps['variant'],
+            onClick: () => { console.log("Select clicked!") },
+            toolTip: 'Select Image'
+        },
+        {
+            buttonType: 'iconButton' as const,
+            icon: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z" />
+            </svg>,
+            toolTip: 'Download',
+            onClick: () => { console.log("Download icon clicked!") }
+        },
+        {
+            buttonType: 'iconButton' as const,
+            icon: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+            </svg>,
+            toolTip: 'Preview',
+            onClick: () => { console.log("Preview icon clicked!") }
+        }
+    ]
+}
+
