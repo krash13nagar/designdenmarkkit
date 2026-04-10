@@ -3,7 +3,9 @@ import style from './imagesearchcard.module.scss';
 import { AGENCY_USAGE_QUOTA } from './sample';
 import { imageSearchCardHoverConfig } from './imagesearchcard.types';
 import { ICONS } from './imagesearchcard.constant';
-import { DenButton, DenIconButton, DenTooltip } from '../../common';
+import { DenButton } from '../../common/button/button.component';
+import { DenIconButton } from '../../common/iconbutton/iconbutton.component';
+import { DenTooltip } from '../../common/tooltip/tooltip.component';
 import moment from 'moment';
 import MoreVert from '@mui/icons-material/MoreVert';
 import { DenNestedMenu } from '../nestedmenu/nestedmenu';
@@ -171,8 +173,27 @@ export const ImageSearchCardHoverDetails = (
               actionButtonsList.map((btn, i) => {
 
                 const { sx, ...btnProps } = btn.props || {};
+
+                if (btn.buttonType === 'iconButton') {
+                  return (
+                    <DenTooltip key={i} title={btn?.toolTip || ""} arrow>
+                      <div className={style['card-footer-btn-wrapper-tooltip']}>
+                        <DenIconButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            btn?.onClick?.(e as any);
+                          }}
+                          sx={{ color: '#FFFFFF', padding: '4px', ...(sx || {}) }}
+                        >
+                          {btn.icon}
+                        </DenIconButton>
+                      </div>
+                    </DenTooltip>
+                  );
+                }
+
                 return (
-                  <DenTooltip title={btn?.toolTip || ""} arrow>
+                  <DenTooltip key={i} title={btn?.toolTip || ""} arrow>
                     <div className={style['card-footer-btn-wrapper-tooltip']}>
                       <DenButton
                         onClick={(e) => {
@@ -181,7 +202,6 @@ export const ImageSearchCardHoverDetails = (
                         }}
                         variant={btn.variant || 'contained'}
                         color={btn.color || 'primary'}
-                        key={i}
                         className={style['primaryButton-cds']}
                         sx={{
                           mr: '8px',

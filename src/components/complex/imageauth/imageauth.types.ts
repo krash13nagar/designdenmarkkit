@@ -81,7 +81,9 @@ export interface ImageAuthoringProps
 
 export interface ActionButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  label: string,
+  label?: string,
+  buttonType?: 'button' | 'iconButton',
+  icon?: ReactNode,
   variant?: ButtonProps['variant'],
   color?: ButtonProps['color'],
   props?: ButtonProps,
