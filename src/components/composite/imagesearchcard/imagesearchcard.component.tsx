@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import cssClassName from './imagesearchcard.module.scss';
-import { DenCard, DenCardActions, DenCardMedia } from '../../common';
+import { DenCard } from '../../common/card/card.component';
+import { DenCardActions } from '../../common/cardactions/cardactions.component';
+import { DenCardMedia } from '../../common/cardmedia/cardmedia.component';
 import { calculateFromNow, cleanHTML } from '../../../utility/utils';
 import ImageSearchCardHoverDetails from './imagesearchcardhover.component';
 
@@ -10,7 +12,7 @@ import {
 } from './imagesearchcard.types';
 import DiscardImageCard from './discardimagecard.component';
 import { Checkbox } from '@mui/material';
-import { DenTooltip } from '../../common';
+import { DenTooltip } from '../../common/tooltip/tooltip.component';
 
 export const ImageSearchCard = React.forwardRef((props: imageSearchCardConfig, ref: React.MutableRefObject<any>) => {
   const isShowResolution = true;
