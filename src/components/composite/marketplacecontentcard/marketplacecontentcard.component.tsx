@@ -26,7 +26,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         cardMenuOptions,
         ImageFallback,
         onCardClick = () => { },
-        onTitleClick = () => { },
+        onTitleClick,
         selected,
         publishDateTimestamp,
         classes,
@@ -86,10 +86,13 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         event.stopPropagation();
     };
 
+    const isTitleClickable = !isCompetitor && Boolean(onTitleClick);
+
     const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
-        if (onTitleClick) onTitleClick(event);
+        onTitleClick?.(event);
         event.stopPropagation();
     }
+
 
     const tooltipstyles = useMemo(() => {
         return {
@@ -317,30 +320,38 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            {imageUrl && <div className={cssClassName['card-image']}>
-                                <ImageWithFallback
-                                    src={imageUrl}
-                                    placeholderIcon={ImageFallback}
-                                    showFallbackBorder={false}
-                                />
-                            </div>}
-                            {title && (
-                                <div className={cssClassName['card-title-copy-wrapper']}>
-                                    <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
-                                        <DenBox title={title} className={clsx(cssClassName['card-title'], !isCompetitor && cssClassName['card-title-wire'])} onClick={handleOnTitleClick}>
-                                            {<p className={cssClassName['card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />}
-                                            {showTitleCopy && (
-                                                <span className={cssClassName['card-title-copy-icon']}>
-                                                    <CopyIconButton copyValue={decodeHtmlEntities(title)} />
-                                                </span>
-                                            )}
-                                        </DenBox>
-                                    </DenCustomTooltip>
+                            {(title || imageUrl) && (
+                                <div className={cssClassName['card-title-row']}>
+                                    {title && (
+                                        <div className={cssClassName['card-title-copy-wrapper']}>
+                                            <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                                <DenBox
+                                                    title={title}
+                                                    className={clsx(cssClassName['card-title'], isTitleClickable && cssClassName['card-title-wire'])}
+                                                    onClick={isTitleClickable ? handleOnTitleClick : undefined}
+                                                >
+                                                    <span className={cssClassName['card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
+                                                    {showTitleCopy && (
+                                                        <span className={cssClassName['card-title-copy-icon']}>
+                                                            <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                                        </span>
+                                                    )}
+                                                </DenBox>
+                                            </DenCustomTooltip>
+                                        </div>
+                                    )}
+                                    {imageUrl && <div className={cssClassName['card-image']}>
+                                        <ImageWithFallback
+                                            src={imageUrl}
+                                            placeholderIcon={ImageFallback}
+                                            showFallbackBorder={false}
+                                        />
+                                    </div>}
                                 </div>
                             )}
-                            {slugTitle && <p className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                            {slugTitle && <div className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                             {(subtitle || story) && (
-                                <p className={clsx(cssClassName['card-subtitle'], slugTitle ? cssClassName['subtitle-with-slug'] : cssClassName['subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
+                                <div className={clsx(cssClassName['card-subtitle'], slugTitle ? cssClassName['subtitle-with-slug'] : cssClassName['subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
                             )}
                         </div>
 
