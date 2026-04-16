@@ -327,10 +327,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                                 <DenBox
                                                     title={title}
-                                                    className={clsx(cssClassName['card-title'], isTitleClickable && cssClassName['card-title-wire'])}
+                                                    className={clsx(cssClassName['marketplace-card-title'], isTitleClickable && cssClassName['card-title-wire'])}
                                                     onClick={isTitleClickable ? handleOnTitleClick : undefined}
                                                 >
-                                                    <span className={cssClassName['card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
+                                                    <span className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
                                                     {showTitleCopy && (
                                                         <span className={cssClassName['card-title-copy-icon']}>
                                                             <CopyIconButton copyValue={decodeHtmlEntities(title)} />
@@ -351,7 +351,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             )}
                             {slugTitle && <div className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                             {(subtitle || story) && (
-                                <div className={clsx(cssClassName['card-subtitle'], slugTitle ? cssClassName['subtitle-with-slug'] : cssClassName['subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
+                                <div className={clsx(cssClassName['marketplace-card-subtitle'], slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
                             )}
                         </div>
 

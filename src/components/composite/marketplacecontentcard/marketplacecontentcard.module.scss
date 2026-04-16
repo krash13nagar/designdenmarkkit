@@ -299,7 +299,7 @@
                 }
             }
 
-            .card-title {
+            .marketplace-card-title {
                 display: flex;
                 align-items: flex-start;
                 gap: 4px;
@@ -319,7 +319,7 @@
                 }
             }
 
-            .card-title-text {
+            .marketplace-card-title-text {
                 flex: 1;
                 min-width: 0;
                 display: -webkit-box;
@@ -398,7 +398,7 @@
                 }
             }
 
-            .card-subtitle {
+            .marketplace-card-subtitle {
                 font: normal normal normal 13px/16px "Source Sans 3";
                 letter-spacing: 0.14px;
                 color: #4D4D4D;
@@ -414,6 +414,7 @@
                 line-clamp: 4;
                 overflow-wrap: anywhere;
                 word-break: break-word;
+                max-height: 81px;
 
                 >* {
                     margin: 0;
@@ -431,12 +432,12 @@
             }
 
             // Dynamic subtitle line clamping for grid view
-            .subtitle-with-slug {
+            .marketplace-subtitle-with-slug {
                 -webkit-line-clamp: 3; // grid view with slug present
                 line-clamp: 3;
             }
 
-            .subtitle-without-slug {
+            .marketplace-subtitle-without-slug {
                 -webkit-line-clamp: 4; // grid view without slug
                 line-clamp: 4;
             }
@@ -619,7 +620,7 @@
                 .card-image-wrapper {
 
                     // Task 3: Match grid view title font exactly
-                    .card-title {
+                    .marketplace-card-title {
                         display: flex;
                         align-items: flex-start;
                         gap: 4px;
@@ -637,7 +638,7 @@
                         }
                     }
 
-                    .card-title-text {
+                    .marketplace-card-title-text {
                         -webkit-line-clamp: 2; // 2 lines for single view
                         line-clamp: 2;
                     }
@@ -665,7 +666,7 @@
                 }
 
                 // Task 3: Match grid view description font exactly
-                .card-subtitle {
+                .marketplace-card-subtitle {
                     font: normal normal normal 13px/16px "Source Sans 3";
                     letter-spacing: 0.14px;
                     color: #4D4D4D;
@@ -677,12 +678,12 @@
                 }
 
                 // Task 2: Dynamic subtitle clamping for single view
-                .subtitle-with-slug {
+                .marketplace-subtitle-with-slug {
                     -webkit-line-clamp: 1; // single view with slug
                     line-clamp: 1;
                 }
 
-                .subtitle-without-slug {
+                .marketplace-subtitle-without-slug {
                     -webkit-line-clamp: 2; // single view without slug
                     line-clamp: 2;
                 }
