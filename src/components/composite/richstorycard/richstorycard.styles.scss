@@ -7,12 +7,12 @@
 }
 
 .richstorycard-fallback-wrapper {
-    .fallback-image-wrapper{
+    .den-image-fallback-wrapper{
         background: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        &.show {
+        &.den-image-fallback-visible {
             display:flex !important;
         }
     }

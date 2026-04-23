@@ -33,7 +33,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = (props) => {
 
   return (
     <>
-      <div className="image-with-fallback-wrapper" style={{ width, height }}>
+      <div className="den-image-with-fallback-wrapper" style={{ width, height }}>
         {!loadError && (
           <img
             onLoad={handleSuccess}
@@ -45,10 +45,10 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = (props) => {
           ></img>
         )}
         <span
-          className={`fallback-image-wrapper ${
+          className={`den-image-fallback-wrapper ${
             showFallback || loadError
-              ? `show ${showFallbackBorder ? 'border' : ''}`
-              : 'hide'
+              ? `den-image-fallback-visible ${showFallbackBorder ? 'den-image-fallback-border' : ''}`
+              : 'den-image-fallback-hidden'
           }`}
           style={{
             width,

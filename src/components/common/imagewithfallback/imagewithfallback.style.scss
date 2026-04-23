@@ -1,7 +1,7 @@
-.image-with-fallback-wrapper {
+.den-image-with-fallback-wrapper {
     display: inline-block;
     position: relative;
-    .fallback-image-wrapper {
+    .den-image-fallback-wrapper {
         top: 0;
         left: 0;
         right: 0;
@@ -10,14 +10,14 @@
         display:flex;
         justify-content: center;
         align-items: center;
-        &.show {
+        &.den-image-fallback-visible {
             display:flex;
         }
-        &.hide {
+        &.den-image-fallback-hidden {
             display: none;
         }
 
-        &.border {
+        &.den-image-fallback-border {
             border:1px solid #D2D8DF;
             // border-radius: 4px;
         }
