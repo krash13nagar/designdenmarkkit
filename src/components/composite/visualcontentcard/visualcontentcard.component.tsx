@@ -294,7 +294,7 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
           height={'100%'}
           placeholderIcon={
             <div className={cssClassName['brokenImgClass']}>
-              <BrokenImgIcon />
+              <BrokenImgIcon htmlColor="#BFBFBF" />
               {brokenImgText && (
                 <p className={cssClassName['visualcontentcard-broken-img-text']}>
                   {brokenImgText}

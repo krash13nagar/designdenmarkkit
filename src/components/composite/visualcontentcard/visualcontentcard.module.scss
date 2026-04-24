@@ -147,9 +147,15 @@
 }
 
 .visualcontentcard-broken-img-text {
-  margin-top: 4px;
-  font: normal normal 500 13px/16px "Source Sans 3";
-  color: #2b2b2b;
+  font-family: "Source Sans 3";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 11px;
+  leading-trim: none;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  text-align: center;
+  color: #6B6B6B;
 }
 
 .media-footer {
