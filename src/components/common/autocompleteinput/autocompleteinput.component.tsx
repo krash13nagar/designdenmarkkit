@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import {
+  AutocompleteChangeDetails,
+  AutocompleteChangeReason,
+  AutocompleteInputChangeReason,
+} from '@mui/material/Autocomplete';
 import './autocompleteinput.styles.scss';
 import { DenDefautTextField } from '../defaulttextfield';
 import { AutocompleteInputProps } from './autocompleteinput.types';
@@ -11,6 +16,30 @@ import DenAutocomplete from '../autocomplete/autocomplete.component';
 import clsx from 'clsx';
 import { ErrorIcon, Warning } from '../../../assets';
 import DenBox from '../box/box.component';
+
+type AutocompleteInputRestProps = Omit<
+  AutocompleteInputProps,
+  | 'options'
+  | 'title'
+  | 'limit'
+  | 'disabled'
+  | 'helperText'
+  | 'placeholder'
+  | 'useFor'
+  | 'onChange'
+  | 'renderTags'
+  | 'renderOptions'
+  | 'classes'
+  | 'wrapperClass'
+  | 'isError'
+  | 'errorMessage'
+  | 'childError'
+  | 'nowrap'
+  | 'shrinkLabel'
+  | 'noBorder'
+  | 'inputValueProp'
+  | 'setInputValueProp'
+>;
 
 const AutoCompleteInputBase = (
   props: AutocompleteInputProps,
@@ -37,13 +66,16 @@ const AutoCompleteInputBase = (
     shrinkLabel = false,
     noBorder = false,
     inputValueProp = null,
-    setInputValueProp = null
+    setInputValueProp = null,
+    ...rest
   } = props;
   const [value, setValues] = useState([]);
   const [inputValueState, setInputValueState] = React.useState('');
 
   const inputValue = inputValueProp || inputValueState;
   const setInputValue = setInputValueProp || setInputValueState;
+
+  const restProps: AutocompleteInputRestProps = rest;
 
 
   const [open, setOpen] = React.useState(false);
@@ -61,16 +93,25 @@ const AutoCompleteInputBase = (
     setOpen(false);
   }, [props.options]);
 
-  const handleInputChange = (event: any, value: any) => {
+  const handleInputChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) => {
     if (props.onTextChange) {
       setOpen(true);
-      props.onTextChange(value);
+      props.onTextChange(value, event, reason);
     }
   };
 
-  const handleChange = (event: any, value: any) => {
+  const handleChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: any,
+    reason: AutocompleteChangeReason,
+    details?: AutocompleteChangeDetails<any>
+  ) => {
     if (props.onChange) {
-      props.onChange(event, value);
+      props.onChange(event, value, reason, details);
     }
     setInputValue('');
   };
@@ -192,6 +233,7 @@ const AutoCompleteInputBase = (
               <span className="helper-text">{helperText}</span>
             </>
           )}
+          {...restProps}
         />
       </div>
       {(isError && errorMessage) ? (

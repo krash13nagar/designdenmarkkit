@@ -1,4 +1,10 @@
-import { AutocompleteProps } from '@mui/material/Autocomplete';
+import {
+    AutocompleteChangeDetails,
+    AutocompleteChangeReason,
+    AutocompleteInputChangeReason,
+    AutocompleteProps,
+} from '@mui/material/Autocomplete';
+import { SyntheticEvent } from 'react';
 
 export interface AutocompleteInputProps {
     isReadOnly?: boolean,
@@ -12,13 +18,22 @@ export interface AutocompleteInputProps {
     options?: any[],
     disableUnderline?: boolean,
     value?: any,
-    onTextChange?: Function,
-    onChange?: Function,
+    onTextChange?: (
+        value: string,
+        event?: SyntheticEvent<Element, Event>,
+        reason?: AutocompleteInputChangeReason
+    ) => void,
+    onChange?: (
+        event: SyntheticEvent<Element, Event>,
+        value: any,
+        reason: AutocompleteChangeReason,
+        details?: AutocompleteChangeDetails<any>
+    ) => void,
     hideSearchIcon?: boolean,
     renderTags?: AutocompleteProps<any, any, any, any, any>["renderTags"],
     renderOptions?: AutocompleteProps<any, any, any, any, any>["renderOption"],
     inputValueProp?: string | null,
-    setInputValueProp?: Function | null,
+    setInputValueProp?: ((value: string) => void) | null,
     required?: boolean
     classes?: AutocompleteProps<any, any, any, any, any>["classes"],
     wrapperClass?: string,
