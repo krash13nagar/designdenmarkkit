@@ -21,4 +21,5 @@ export interface EditorTextfieldProps {
   editorOptionsType?: 'title' | 'caption',
   placeholder?: string,
   disabled?: boolean,
+  dir?: 'ltr' | 'rtl',
 }

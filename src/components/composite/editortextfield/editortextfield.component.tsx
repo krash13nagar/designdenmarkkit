@@ -37,6 +37,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
     small = '',
     placeholder = '',
     disabled = false,
+    dir = 'ltr',
   } = props;
   const [focus, setFocus] = React.useState(false);
   const [content, setContent] = React.useState('');
@@ -111,7 +112,7 @@ export const EditorTextField: React.FC<EditorTextfieldProps> = (props) => {
           {title}
         </DenInputLabel>
       )}
-      <div className={clsx('editor-wrapper', error ? 'has-error' : '')}>
+      <div className={clsx('editor-wrapper', error ? 'has-error' : '')} dir={dir}>
         <SunEditor
           getSunEditorInstance={getSunEditorInstance}
           {...(width && { width: width })}
