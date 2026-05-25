@@ -93,6 +93,50 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         event.stopPropagation();
     }
 
+    const updateTitleCopyPosition = useCallback((event: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
+        const titleElement = event.currentTarget;
+        const titleTextElement = titleElement.querySelector('[data-marketplace-title-text="true"]');
+
+        if (!(titleTextElement instanceof HTMLElement)) return;
+
+        const titleRect = titleElement.getBoundingClientRect();
+        const textRect = titleTextElement.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(titleTextElement);
+
+        const visibleRects = Array.from(range.getClientRects()).filter((rect) => {
+            return (
+                rect.width > 0 &&
+                rect.height > 0 &&
+                rect.bottom > textRect.top &&
+                rect.top < textRect.bottom &&
+                rect.right > textRect.left &&
+                rect.left < textRect.right
+            );
+        });
+
+        range.detach();
+
+        if (!visibleRects.length) {
+            titleElement.style.removeProperty('--title-copy-left');
+            return;
+        }
+
+        const lastVisibleRect = visibleRects.reduce((latestRect, rect) => (
+            rect.bottom > latestRect.bottom ? rect : latestRect
+        ));
+        const lastLineRects = visibleRects.filter((rect) => Math.abs(rect.top - lastVisibleRect.top) < 2);
+        const lastLineRight = Math.max(...lastLineRects.map((rect) => Math.min(rect.right, textRect.right)));
+        const iconOffset = 4;
+        const iconWidth = 20;
+        const copyLeft = Math.min(
+            Math.max(lastLineRight - titleRect.left + iconOffset, 0),
+            Math.max(titleRect.width - iconWidth, 0)
+        );
+
+        titleElement.style.setProperty('--title-copy-left', `${copyLeft}px`);
+    }, []);
+
 
     const tooltipstyles = useMemo(() => {
         return {
@@ -327,10 +371,16 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                                 <DenBox
                                                     title={title}
-                                                    className={clsx(cssClassName['marketplace-card-title'], isTitleClickable && cssClassName['card-title-wire'])}
+                                                    className={clsx(
+                                                        cssClassName['marketplace-card-title'],
+                                                        showTitleCopy && cssClassName['marketplace-card-title-with-copy'],
+                                                        isTitleClickable && cssClassName['card-title-wire']
+                                                    )}
                                                     onClick={isTitleClickable ? handleOnTitleClick : undefined}
+                                                    onMouseEnter={showTitleCopy ? updateTitleCopyPosition : undefined}
+                                                    onFocus={showTitleCopy ? updateTitleCopyPosition : undefined}
                                                 >
-                                                    <span className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
+                                                    <span data-marketplace-title-text="true" className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
                                                     {showTitleCopy && (
                                                         <span className={cssClassName['card-title-copy-icon']}>
                                                             <CopyIconButton copyValue={decodeHtmlEntities(title)} />

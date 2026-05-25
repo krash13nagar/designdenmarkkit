@@ -236,6 +236,50 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         event.stopPropagation();
     }, [onTitleClick]);
 
+    const updateTitleCopyPosition = useCallback((event: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
+        const titleElement = event.currentTarget;
+        const titleTextElement = titleElement.querySelector('[data-epaper-title-text="true"]');
+
+        if (!(titleTextElement instanceof HTMLElement)) return;
+
+        const titleRect = titleElement.getBoundingClientRect();
+        const textRect = titleTextElement.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(titleTextElement);
+
+        const visibleRects = Array.from(range.getClientRects()).filter((rect) => {
+            return (
+                rect.width > 0 &&
+                rect.height > 0 &&
+                rect.bottom > textRect.top &&
+                rect.top < textRect.bottom &&
+                rect.right > textRect.left &&
+                rect.left < textRect.right
+            );
+        });
+
+        range.detach();
+
+        if (!visibleRects.length) {
+            titleElement.style.removeProperty('--title-copy-left');
+            return;
+        }
+
+        const lastVisibleRect = visibleRects.reduce((latestRect, rect) => (
+            rect.bottom > latestRect.bottom ? rect : latestRect
+        ));
+        const lastLineRects = visibleRects.filter((rect) => Math.abs(rect.top - lastVisibleRect.top) < 2);
+        const lastLineRight = Math.max(...lastLineRects.map((rect) => Math.min(rect.right, textRect.right)));
+        const iconOffset = 4;
+        const iconWidth = 20;
+        const copyLeft = Math.min(
+            Math.max(lastLineRight - titleRect.left + iconOffset, 0),
+            Math.max(titleRect.width - iconWidth, 0)
+        );
+
+        titleElement.style.setProperty('--title-copy-left', `${copyLeft}px`);
+    }, []);
+
     const handleCheckboxChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         event.stopPropagation();
         checkboxProps?.onCheckboxClick?.(event, checked);
@@ -293,8 +337,18 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
                                 className={cssClassName['card-title-copy-wrapper']}
                                 onClick={handleCardTitleClick}
                             >
-                                <DenBox className={clsx(marketplaceCss['card-title'], marketplaceCss['card-title-wire'], cssClassName['story-title'], cssClassName['card-title'])}>
-                                    <p className={cssClassName['card-title-text']}>{resolvedTitle}</p>
+                                <DenBox
+                                    className={clsx(
+                                        marketplaceCss['card-title'],
+                                        marketplaceCss['card-title-wire'],
+                                        cssClassName['story-title'],
+                                        cssClassName['card-title'],
+                                        showTitleCopy && cssClassName['card-title-with-copy']
+                                    )}
+                                    onMouseEnter={showTitleCopy ? updateTitleCopyPosition : undefined}
+                                    onFocus={showTitleCopy ? updateTitleCopyPosition : undefined}
+                                >
+                                    <p data-epaper-title-text="true" className={cssClassName['card-title-text']}>{resolvedTitle}</p>
                                     {showTitleCopy && (
                                         <span className={cssClassName['card-title-copy-icon']}>
                                             <CopyIconButton copyValue={decodeHtmlEntities(resolvedTitle)} />
@@ -358,6 +412,8 @@ export const EpaperContentCard = React.forwardRef((props: EpaperContentCardProps
         resolvedTitle,
         tooltipstyles,
         handleCardTitleClick,
+        updateTitleCopyPosition,
+        showTitleCopy,
         shouldShowStoryThumbnail,
         storyData?.thumbnailUrl,
         storyData?.title,
