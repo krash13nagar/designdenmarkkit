@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import cssClassName from './visualcontentcard.module.scss';
 import {
+  DenBox,
   DenCard,
+  DenCircularProgress,
   DenIconButton,
   DenMenu,
   DenMenuItem,
@@ -29,7 +31,7 @@ import {
 } from './visualcontentcard.type';
 
 const VARIANT_META: Record<VisualContentCardVariant, VisualContentCardVariantMeta> =
-  {
+{
   slideshow: {
     title: 'Slideshow',
     countLabel: 'Slides',
@@ -106,17 +108,22 @@ const getMenuOptionDisabledMeta = (option: VisualContentCardMenuOption) => {
 
 export const VisualContentCard = (props: VisualContentCardProps) => {
   const {
+    msid,
     slidesCount,
     imagesCount,
     videosCount,
     contentType,
     hostName,
+    showChannelTooltip,
+    channelTooltipData,
+    isChannelTooltipLoading,
     updatedDateTimeEpoch,
     publishDateTimeEpoch,
     imageUrl,
     imgTitle,
     cardMenuOptions = [],
     handleClick,
+    onChannelHover,
     classes = {},
     active,
     brokenImgText = '',
@@ -150,10 +157,45 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     return getChannelBadgeLabel(hostName);
   }, [hostName]);
 
+  const resolvedShowChannelTooltip = useMemo(() => {
+    if (showChannelTooltip !== undefined) return showChannelTooltip;
+    return true;
+  }, [showChannelTooltip]);
+
+  const resolvedChannelTooltipLoading = useMemo(() => {
+    if (!resolvedShowChannelTooltip) return false;
+    if (isChannelTooltipLoading !== undefined) return isChannelTooltipLoading;
+    return !channelTooltipData;
+  }, [resolvedShowChannelTooltip, isChannelTooltipLoading, channelTooltipData]);
+
+  const channelTooltipContent = useMemo(() => {
+    if (!resolvedShowChannelTooltip) return '';
+    if (resolvedChannelTooltipLoading) {
+      return (
+        <DenBox className={cssClassName['channel-tooltip-loader']}>
+          <DenCircularProgress size={22} />
+        </DenBox>
+      );
+    }
+    if (typeof channelTooltipData === 'string') {
+      return <span dangerouslySetInnerHTML={{ __html: channelTooltipData }} />;
+    }
+    return channelTooltipData || hostName || '';
+  }, [resolvedShowChannelTooltip, resolvedChannelTooltipLoading, channelTooltipData, hostName]);
+
   const slidesCountValue =
     typeof slidesCount === 'number' && Number.isFinite(slidesCount)
       ? slidesCount
       : 0;
+  const imagesCountValue =
+    typeof imagesCount === 'number' && Number.isFinite(imagesCount)
+      ? imagesCount
+      : 0;
+  const videosCountValue =
+    typeof videosCount === 'number' && Number.isFinite(videosCount)
+      ? videosCount
+      : 0;
+  const storyId = msid ?? '';
 
   const handleContextClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     setAnchorEl((prev) => ({ ...prev, [index]: event.currentTarget }));
@@ -177,11 +219,18 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     event.stopPropagation();
   };
 
+  const handleChannelHover = (event: React.MouseEvent<HTMLElement>) => {
+    if (!resolvedShowChannelTooltip) return;
+    event.stopPropagation();
+    onChannelHover?.(event);
+  };
+
   return (
     <DenCard
       classes={{ root: clsx(cssClassName['card-root'], classes?.root) }}
       className={clsx(
         cssClassName['visualcontentcard-wrapper'],
+        visualVariant === 'webstory' && cssClassName['visualcontentcard-wrapper-webstory'],
         classes?.root,
         active && cssClassName['active']
       )}
@@ -282,6 +331,19 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
         </div>
       </div>
 
+      <div className={cssClassName['card-content']}>
+        <DenCustomTooltip
+          title={imgTitle || ''}
+          arrow
+          placement="bottom-start"
+          {...tooltipstyles}
+          textColor="#2B2B2B"
+          maxWidth="230px"
+        >
+          <div className={cssClassName['img-title']}>{imgTitle}</div>
+        </DenCustomTooltip>
+      </div>
+
       <div
         className={clsx(
           cssClassName['card-media'],
@@ -294,7 +356,7 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
           height={'100%'}
           placeholderIcon={
             <div className={cssClassName['brokenImgClass']}>
-              <BrokenImgIcon htmlColor="#BFBFBF" />
+              <BrokenImgIcon htmlColor="#4D4D4D" />
               {brokenImgText && (
                 <p className={cssClassName['visualcontentcard-broken-img-text']}>
                   {brokenImgText}
@@ -311,47 +373,60 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
         <div className={cssClassName['media-footer']}>
           <div className={cssClassName['media-footer-left']}>
             {channelBadgeLabel && (
-              <DenTooltip title={hostName || ''} arrow placement="top">
-                <span className={cssClassName['channel-badge']}>{channelBadgeLabel}</span>
-              </DenTooltip>
+              (resolvedShowChannelTooltip ? (
+                <DenTooltip
+                  title={channelTooltipContent}
+                  arrow
+                  placement="top"
+                  PopperProps={{
+                    sx: {
+                      '& .cds-MuiTooltip-tooltip': {
+                        backgroundColor: 'white',
+                        padding: '0',
+                        boxShadow: '0px 3px 6px #00000029',
+                      },
+                      '& .cds-MuiTooltip-arrow': {
+                        color: 'white',
+                      },
+                    },
+                  }}
+                >
+                  <span
+                    className={cssClassName['channel-badge']}
+                    onMouseEnter={handleChannelHover}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {channelBadgeLabel}
+                  </span>
+                </DenTooltip>
+              ) : (
+                <span
+                  className={cssClassName['channel-badge']}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {channelBadgeLabel}
+                </span>
+              ))
             )}
+            <span className={cssClassName['story-id']}>ID : {storyId}</span>
+          </div>
+
+          <span className={cssClassName['slides-count-wrapper']}>
             <span className={cssClassName['slides-count']}>
               {variantMeta.countLabel} : {slidesCountValue}
             </span>
-          </div>
-
-          <div className={cssClassName['media-footer-right']}>
-            {typeof imagesCount === 'number' && imagesCount > 0 && (
-              <div className={cssClassName['media-count']}>
-                <span className={cssClassName['media-count-icon']}>
-                  <VisualFooterImageIcon width={16} height={16} />
-                </span>
-                <span>{imagesCount}</span>
-              </div>
-            )}
-            {typeof videosCount === 'number' && videosCount > 0 && (
-              <div className={cssClassName['media-count']}>
-                <span className={cssClassName['media-count-icon']}>
-                  <VisualFooterVideoIcon width={16} height={16} />
-                </span>
-                <span>{videosCount}</span>
-              </div>
-            )}
-          </div>
+            <span className={cssClassName['slides-hover-stats']}>
+              <span className={cssClassName['hover-stat']}>
+                <VisualFooterImageIcon width={24} height={24} />
+                <span>{imagesCountValue}</span>
+              </span>
+              <span className={cssClassName['hover-stat']}>
+                <VisualFooterVideoIcon width={24} height={24} />
+                <span>{videosCountValue}</span>
+              </span>
+            </span>
+          </span>
         </div>
-      </div>
-
-      <div className={cssClassName['card-content']}>
-        <DenCustomTooltip
-          title={imgTitle || ''}
-          arrow
-          placement="bottom-start"
-          {...tooltipstyles}
-          textColor="#2B2B2B"
-          maxWidth="230px"
-        >
-          <div className={cssClassName['img-title']}>{imgTitle}</div>
-        </DenCustomTooltip>
       </div>
     </DenCard>
   );

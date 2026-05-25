@@ -51,7 +51,7 @@ const baseVisualSample: Omit<VisualContentCardProps, 'contentType'> = {
 
 export const visualContentCardSample: VisualContentCardProps = {
   ...baseVisualSample,
-  contentType: 'slideshow',
+  contentType: 'photofeature',
 };
 
 export const visualContentCardVariantSamples: Record<
