@@ -261,6 +261,7 @@
             width: 100%;
             flex: 1;
             min-height: 0;
+            max-height: 165px;
 
             .card-content-container {
                 display: flex;
@@ -488,6 +489,14 @@
                 table {
                     display: none !important;
                 }
+            }
+
+            .marketplace-card-language-font-boost {
+                font-size: 14px;
+            }
+
+            .card-slug-title.marketplace-card-language-font-boost {
+                font-size: 13px;
             }
 
             // Dynamic subtitle line clamping for grid view

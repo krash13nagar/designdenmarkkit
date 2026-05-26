@@ -46,6 +46,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         isCompetitor = true,
         typeIcon,
         typeLabel = '',
+        languageCode = '',
         translateLanguageErrorMsg = '',
         showTitleCopy = false
 
@@ -87,6 +88,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     };
 
     const isTitleClickable = !isCompetitor && Boolean(onTitleClick);
+    const shouldIncreaseTypographyForLanguage = useMemo(() => {
+        const normalizedLanguageCode = languageCode.trim().toLowerCase();
+        return ['en', 'ml', 'ta'].includes(normalizedLanguageCode);
+    }, [languageCode]);
     const cardContentContainerRef = useRef<HTMLDivElement | null>(null);
     const titleRowRef = useRef<HTMLDivElement | null>(null);
     const slugTitleRef = useRef<HTMLDivElement | null>(null);
@@ -429,6 +434,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                         title={title}
                                                         className={clsx(
                                                             cssClassName['marketplace-card-title'],
+                                                            shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'],
                                                             showTitleCopy && cssClassName['marketplace-card-title-with-copy'],
                                                             isTitleClickable && cssClassName['card-title-wire']
                                                         )}
@@ -455,10 +461,14 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         </div>}
                                     </div>
                                 )}
-                                {slugTitle && <div className={cssClassName['card-slug-title']} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                                {slugTitle && <div className={clsx(cssClassName['card-slug-title'], shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'])} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                                 {(subtitle || story) && (
                                     <div
-                                        className={clsx(cssClassName['marketplace-card-subtitle'], slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'])}
+                                        className={clsx(
+                                            cssClassName['marketplace-card-subtitle'],
+                                            slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'],
+                                            shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost']
+                                        )}
                                         ref={subtitleRef}
                                         dangerouslySetInnerHTML={{ __html: subtitle || story }}
                                     />
