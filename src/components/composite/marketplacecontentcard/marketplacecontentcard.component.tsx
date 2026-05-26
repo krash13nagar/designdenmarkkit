@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import cssClassName from './marketplacecontentcard.module.scss';
 import { DenBox, DenCard, DenCheckbox, DenChip, DenIconButton, DenMenu, DenMenuItem, DenSvgIcon, DenTooltip, DenTypography, ImageWithFallback, StatusDotNew, } from '../../common';
 import { formatDateString, formatDateWithMoment } from '../../../utility/utils';
@@ -87,6 +87,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
     };
 
     const isTitleClickable = !isCompetitor && Boolean(onTitleClick);
+    const cardContentContainerRef = useRef<HTMLDivElement | null>(null);
+    const titleRowRef = useRef<HTMLDivElement | null>(null);
+    const slugTitleRef = useRef<HTMLDivElement | null>(null);
+    const subtitleRef = useRef<HTMLDivElement | null>(null);
 
     const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
         onTitleClick?.(event);
@@ -136,6 +140,57 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
 
         titleElement.style.setProperty('--title-copy-left', `${copyLeft}px`);
     }, []);
+
+    const updateSubtitleClamp = useCallback(() => {
+        const contentContainerElement = cardContentContainerRef.current;
+        const subtitleElement = subtitleRef.current;
+
+        if (!contentContainerElement || !subtitleElement) return;
+
+        const subtitleStyles = window.getComputedStyle(subtitleElement);
+        const lineHeight = Number.parseFloat(subtitleStyles.lineHeight) || 0;
+        const subtitleMarginTop = Number.parseFloat(subtitleStyles.marginTop) || 0;
+
+        if (!lineHeight) return;
+
+        const containerHeight = contentContainerElement.clientHeight;
+        const titleHeight = titleRowRef.current?.offsetHeight || 0;
+        const slugHeight = slugTitleRef.current?.offsetHeight || 0;
+        const availableSubtitleHeight = Math.max(containerHeight - titleHeight - slugHeight - subtitleMarginTop, 0);
+        const clampLines = Math.max(Math.floor(availableSubtitleHeight / lineHeight), 1);
+        const clampValue = String(clampLines);
+
+        if (subtitleElement.style.getPropertyValue('--marketplace-subtitle-line-clamp') !== clampValue) {
+            subtitleElement.style.setProperty('--marketplace-subtitle-line-clamp', clampValue);
+        }
+    }, []);
+
+    useEffect(() => {
+        let resizeObserver: ResizeObserver | undefined;
+        let frameId: number | undefined;
+        const observedElements = [
+            cardContentContainerRef.current,
+            titleRowRef.current,
+            slugTitleRef.current
+        ].filter((element): element is HTMLDivElement => Boolean(element));
+
+        const scheduleClampUpdate = () => {
+            if (frameId) cancelAnimationFrame(frameId);
+            frameId = requestAnimationFrame(() => updateSubtitleClamp());
+        };
+
+        scheduleClampUpdate();
+
+        if (typeof ResizeObserver !== 'undefined') {
+            resizeObserver = new ResizeObserver(scheduleClampUpdate);
+            observedElements.forEach((element) => resizeObserver?.observe(element));
+        }
+
+        return () => {
+            if (frameId) cancelAnimationFrame(frameId);
+            resizeObserver?.disconnect();
+        };
+    }, [updateSubtitleClamp, title, slugTitle, subtitle, story, imageUrl, view]);
 
 
     const tooltipstyles = useMemo(() => {
@@ -364,45 +419,51 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            {(title || imageUrl) && (
-                                <div className={cssClassName['card-title-row']}>
-                                    {title && (
-                                        <div className={cssClassName['card-title-copy-wrapper']}>
-                                            <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
-                                                <DenBox
-                                                    title={title}
-                                                    className={clsx(
-                                                        cssClassName['marketplace-card-title'],
-                                                        showTitleCopy && cssClassName['marketplace-card-title-with-copy'],
-                                                        isTitleClickable && cssClassName['card-title-wire']
-                                                    )}
-                                                    onClick={isTitleClickable ? handleOnTitleClick : undefined}
-                                                    onMouseEnter={showTitleCopy ? updateTitleCopyPosition : undefined}
-                                                    onFocus={showTitleCopy ? updateTitleCopyPosition : undefined}
-                                                >
-                                                    <span data-marketplace-title-text="true" className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
-                                                    {showTitleCopy && (
-                                                        <span className={cssClassName['card-title-copy-icon']}>
-                                                            <CopyIconButton copyValue={decodeHtmlEntities(title)} />
-                                                        </span>
-                                                    )}
-                                                </DenBox>
-                                            </DenCustomTooltip>
-                                        </div>
-                                    )}
-                                    {imageUrl && <div className={cssClassName['card-image']}>
-                                        <ImageWithFallback
-                                            src={imageUrl}
-                                            placeholderIcon={ImageFallback}
-                                            showFallbackBorder={false}
-                                        />
-                                    </div>}
+                            <div className={cssClassName['card-content-container']} ref={cardContentContainerRef}>
+                                {(title || imageUrl) && (
+                                    <div className={cssClassName['card-title-row']} ref={titleRowRef}>
+                                        {title && (
+                                            <div className={cssClassName['card-title-copy-wrapper']}>
+                                                <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                                    <DenBox
+                                                        title={title}
+                                                        className={clsx(
+                                                            cssClassName['marketplace-card-title'],
+                                                            showTitleCopy && cssClassName['marketplace-card-title-with-copy'],
+                                                            isTitleClickable && cssClassName['card-title-wire']
+                                                        )}
+                                                        onClick={isTitleClickable ? handleOnTitleClick : undefined}
+                                                        onMouseEnter={showTitleCopy ? updateTitleCopyPosition : undefined}
+                                                        onFocus={showTitleCopy ? updateTitleCopyPosition : undefined}
+                                                    >
+                                                        <span data-marketplace-title-text="true" className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
+                                                        {showTitleCopy && (
+                                                            <span className={cssClassName['card-title-copy-icon']}>
+                                                                <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                                            </span>
+                                                        )}
+                                                    </DenBox>
+                                                </DenCustomTooltip>
+                                            </div>
+                                        )}
+                                        {imageUrl && <div className={cssClassName['card-image']}>
+                                            <ImageWithFallback
+                                                src={imageUrl}
+                                                placeholderIcon={ImageFallback}
+                                                showFallbackBorder={false}
+                                            />
+                                        </div>}
+                                    </div>
+                                )}
+                                {slugTitle && <div className={cssClassName['card-slug-title']} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                                {(subtitle || story) && (
+                                    <div
+                                        className={clsx(cssClassName['marketplace-card-subtitle'], slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'])}
+                                        ref={subtitleRef}
+                                        dangerouslySetInnerHTML={{ __html: subtitle || story }}
+                                    />
+                                )}
                                 </div>
-                            )}
-                            {slugTitle && <div className={cssClassName['card-slug-title']} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
-                            {(subtitle || story) && (
-                                <div className={clsx(cssClassName['marketplace-card-subtitle'], slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'])} dangerouslySetInnerHTML={{ __html: subtitle || story }} />
-                            )}
                         </div>
 
                     </div>

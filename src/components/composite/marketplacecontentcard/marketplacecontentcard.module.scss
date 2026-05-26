@@ -259,6 +259,17 @@
             flex-direction: column;
             min-width: 0;
             width: 100%;
+            flex: 1;
+            min-height: 0;
+
+            .card-content-container {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                min-height: 0;
+                max-height: 100%;
+                overflow: hidden;
+            }
 
             .card-title-row {
                 display: flex;
@@ -426,20 +437,46 @@
                 color: #4D4D4D;
                 opacity: 1;
                 margin-top: 8px;
+                flex: 1;
+                min-height: 0;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: normal;
                 line-height: 1.55;
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
-                -webkit-line-clamp: 4; // default (grid, no slug)
-                line-clamp: 4;
+                -webkit-line-clamp: var(--marketplace-subtitle-line-clamp, 4);
+                line-clamp: var(--marketplace-subtitle-line-clamp, 4);
+                max-height: calc(var(--marketplace-subtitle-line-clamp, 4) * 1.55em);
                 overflow-wrap: anywhere;
                 word-break: keep-all;
-                max-height: 81px;
 
                 >* {
                     margin: 0;
+                    display: inline;
+                    line-height: inherit;
+                    font: inherit;
+                }
+
+                p,
+                div,
+                section,
+                article,
+                blockquote,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                ul,
+                ol,
+                li {
+                    display: inline;
+                    margin: 0;
+                    padding: 0;
+                    line-height: inherit;
+                    font: inherit;
                 }
 
                 img,
@@ -455,13 +492,11 @@
 
             // Dynamic subtitle line clamping for grid view
             .marketplace-subtitle-with-slug {
-                -webkit-line-clamp: 3; // grid view with slug present
-                line-clamp: 3;
+                --marketplace-subtitle-line-clamp: 3; // grid view with slug present
             }
 
             .marketplace-subtitle-without-slug {
-                -webkit-line-clamp: 4; // grid view without slug
-                line-clamp: 4;
+                --marketplace-subtitle-line-clamp: 4; // grid view without slug
             }
 
         }
@@ -710,13 +745,11 @@
 
                 // Task 2: Dynamic subtitle clamping for single view
                 .marketplace-subtitle-with-slug {
-                    -webkit-line-clamp: 1; // single view with slug
-                    line-clamp: 1;
+                    --marketplace-subtitle-line-clamp: 1; // single view with slug
                 }
 
                 .marketplace-subtitle-without-slug {
-                    -webkit-line-clamp: 2; // single view without slug
-                    line-clamp: 2;
+                    --marketplace-subtitle-line-clamp: 2; // single view without slug
                 }
             }
 
