@@ -21,6 +21,7 @@ type AutocompleteInputRestProps = Omit<
   AutocompleteInputProps,
   | 'options'
   | 'title'
+  | 'labelComponent'
   | 'limit'
   | 'disabled'
   | 'helperText'
@@ -50,6 +51,7 @@ const AutoCompleteInputBase = (
   const {
     options,
     title = '',
+    labelComponent = null,
     limit,
     disabled,
     helperText,
@@ -139,7 +141,7 @@ const AutoCompleteInputBase = (
           wrapperClass
         )}
       >
-        {title && (
+        {(title || labelComponent) && (
           <DenInputLabel
             className={clsx(
               'label-wrapper',
@@ -151,7 +153,10 @@ const AutoCompleteInputBase = (
             htmlFor={_id}
             disabled={disabled}
           >
-            {title}
+            <span className="label-content">
+              {title ? <span>{title}</span> : null}
+              {labelComponent ? <span className="label-component">{labelComponent}</span> : null}
+            </span>
           </DenInputLabel>
         )}
         <DenAutocomplete

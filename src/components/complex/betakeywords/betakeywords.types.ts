@@ -139,4 +139,5 @@ export interface BetaKeywordsAddedChipsProps {
   handlePreviewCallBack?: () => void;
   autoPopulateKeywordsAndMeta?: boolean;
   handleAutoPopulateKeywordsAndMeta?: () => void;
+  labelComponent?: React.ReactNode;
 }

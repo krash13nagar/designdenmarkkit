@@ -33,7 +33,15 @@ export const BetaKeywordsWrapper = (props: BetaKeywordsWrapperProps) => {
       <div className={styles.seoAddedKeywords}>
         <div className={styles.addedKeywordsWrapper}>
           <div className={`${styles['added-keywords']} ${addedKeywordsClassName ? ' ' + addedKeywordsClassName : ''}`}>
-            {`${addedKeywordsConfig.label} (${addedKeywordsConfig.keywords?.length || 0})`}
+            <span className={styles['added-keywords-label']}>
+              <span>{addedKeywordsConfig.label}</span>
+              <span>{`(${addedKeywordsConfig.keywords?.length || 0})`}</span>
+              {addedKeywordsConfig.labelComponent ? (
+                <span className={styles['added-keywords-label-component']}>
+                  {addedKeywordsConfig.labelComponent}
+                </span>
+              ) : null}
+            </span>
             {addedKeywordsConfig.showComplianceIcons && (
               <div className={styles.seo_complianticon}>
                 {addedKeywordsConfig.showNonCompliantIcon ? addedKeywordsConfig.nonCompliantIcon : addedKeywordsConfig.complianceIcon}

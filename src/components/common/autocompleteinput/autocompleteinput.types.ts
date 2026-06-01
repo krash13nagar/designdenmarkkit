@@ -4,11 +4,12 @@ import {
     AutocompleteInputChangeReason,
     AutocompleteProps,
 } from '@mui/material/Autocomplete';
-import { SyntheticEvent } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 export interface AutocompleteInputProps {
     isReadOnly?: boolean,
     title?: string,
+    labelComponent?: ReactNode,
     limit?: number,
     disabled?: boolean,
     helperText?: string,

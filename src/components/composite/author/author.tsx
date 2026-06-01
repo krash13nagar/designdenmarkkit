@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { AutoCompleteInput, DenBox, DenInputLabel, DenMenuItem, DenSelect } from "../../common";
 import { AuthorProps } from "./author.types";
-
+import './author.style.scss';
 export const Author: React.FC<AuthorProps> = ({
     title = '',
+    labelComponent = null,
     showDropdown = false,
     selectedOption = '',
     onDropdownSelect = () => {},
@@ -23,13 +24,16 @@ export const Author: React.FC<AuthorProps> = ({
         }}
         className="article-author-search-wrapper"
       >
-        {title && (
+        {(title || labelComponent) && (
           <DenInputLabel
             id="cds-simple-select-label"
             shrink={false}
             sx={{ mb: '6px !important' }}
           >
-            {title}
+            <span className="label-content">
+              {title ? <span>{title}</span> : null}
+              {labelComponent ? <span className="label-component">{labelComponent}</span> : null}
+            </span>
           </DenInputLabel>
         )}
         <DenBox sx={{ display: 'flex' }}>

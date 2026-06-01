@@ -12,6 +12,7 @@ export interface BylineAutocompleteProps {
 
 export interface AuthorProps {
   title?: string;
+  labelComponent?: ReactNode;
   showDropdown?: boolean;
   selectedOption?: string;
   onDropdownSelect?: (event: SelectChangeEvent<unknown>, child: ReactNode) => void;

@@ -11,6 +11,17 @@
         display: flex;
         align-items: center;
 
+        .added-keywords-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          .added-keywords-label-component {
+            display: inline-flex;
+            align-items: center;
+          }
+        }
+
         .preview_seprator {
           background-color: #D2D8DF;
           width: 1px;

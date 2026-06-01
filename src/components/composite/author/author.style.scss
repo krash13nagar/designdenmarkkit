@@ -1,4 +1,12 @@
 .article-author-search-wrapper {
+    .label-content {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        .label-component{
+            display: flex;
+        }
+    }
 
     .autocomplete-wrapper {
         .cds-MuiInputBase-root {
