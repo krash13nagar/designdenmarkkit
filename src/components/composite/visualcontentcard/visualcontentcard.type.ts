@@ -4,7 +4,7 @@ import type { SVGTypes } from '../../common/svgicon/svgicon.types';
 export type VisualContentCardVariant =
   | 'slideshow'
   | 'webstory'
-  | 'visualrichstory'
+  | 'immersive'
   | 'photofeature';
 
 export type VisualContentCardIconComponent = React.ComponentType<
@@ -37,9 +37,11 @@ export interface VisualContentCardProps {
   id?: string;
   msid?: string | number;
   slidesCount?: number;
+  blocksCountValue?: number;
   imagesCount?: number;
   videosCount?: number;
   hostName?: string;
+  showStats?: boolean;
   showChannelTooltip?: boolean;
   channelTooltipData?: React.ReactNode;
   isChannelTooltipLoading?: boolean;

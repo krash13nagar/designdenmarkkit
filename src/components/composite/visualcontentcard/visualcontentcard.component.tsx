@@ -15,7 +15,7 @@ import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 import clsx from 'clsx';
 import moment from 'moment';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import VisualRichStoryIcon from '../../../assets/cdsicons/visualrichstoryicon';
+import ImmersiveStoryIcon from '../../../assets/cdsicons/immersivestoryicon';
 import PhotoFeatureIcon from '../../../assets/cdsicons/photofeatureicon';
 import VisualFooterImageIcon from '../../../assets/cdsicons/visualfooterimageicon';
 import VisualFooterVideoIcon from '../../../assets/cdsicons/visualfootervideoicon';
@@ -42,10 +42,10 @@ const VARIANT_META: Record<VisualContentCardVariant, VisualContentCardVariantMet
     countLabel: 'Slides',
     Icon: VisualWebStoryIcon,
   },
-  visualrichstory: {
-    title: 'Visual Rich Story',
+  immersive: {
+    title: 'Immersive Story',
     countLabel: 'Blocks',
-    Icon: VisualRichStoryIcon,
+    Icon: ImmersiveStoryIcon,
   },
   photofeature: {
     title: 'Photofeature',
@@ -64,7 +64,7 @@ const getVariantFromContentType = (
   const variantMap: Partial<Record<string, VisualContentCardVariant>> = {
     slideshow: 'slideshow',
     webstory: 'webstory',
-    visualrichstory: 'visualrichstory',
+    immersive: 'immersive',
     photofeature: 'photofeature',
   };
 
@@ -110,10 +110,12 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
   const {
     msid,
     slidesCount,
+    blocksCountValue,
     imagesCount,
     videosCount,
     contentType,
     hostName,
+    showStats = true,
     showChannelTooltip,
     channelTooltipData,
     isChannelTooltipLoading,
@@ -187,6 +189,12 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     typeof slidesCount === 'number' && Number.isFinite(slidesCount)
       ? slidesCount
       : 0;
+  const blocksCount =
+    typeof blocksCountValue === 'number' && Number.isFinite(blocksCountValue)
+      ? blocksCountValue
+      : 0;
+  const countValue =
+    variantMeta.countLabel === 'Blocks' ? blocksCount : slidesCountValue;
   const imagesCountValue =
     typeof imagesCount === 'number' && Number.isFinite(imagesCount)
       ? imagesCount
@@ -411,21 +419,23 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
             <span className={cssClassName['story-id']}>ID : {storyId}</span>
           </div>
 
-          <span className={cssClassName['slides-count-wrapper']}>
-            <span className={cssClassName['slides-count']}>
-              {variantMeta.countLabel} : {slidesCountValue}
-            </span>
-            <span className={cssClassName['slides-hover-stats']}>
-              <span className={cssClassName['hover-stat']}>
-                <VisualFooterImageIcon width={24} height={24} />
-                <span>{imagesCountValue}</span>
+          {showStats && (
+            <span className={cssClassName['slides-count-wrapper']}>
+              <span className={cssClassName['slides-count']}>
+                {variantMeta.countLabel} : {countValue}
               </span>
-              <span className={cssClassName['hover-stat']}>
-                <VisualFooterVideoIcon width={24} height={24} />
-                <span>{videosCountValue}</span>
+              <span className={cssClassName['slides-hover-stats']}>
+                <span className={cssClassName['hover-stat']}>
+                  <VisualFooterImageIcon width={24} height={24} />
+                  <span>{imagesCountValue}</span>
+                </span>
+                <span className={cssClassName['hover-stat']}>
+                  <VisualFooterVideoIcon width={24} height={24} />
+                  <span>{videosCountValue}</span>
+                </span>
               </span>
             </span>
-          </span>
+          )}
         </div>
       </div>
     </DenCard>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { DenSvgIcon, SVGTypes } from '../../components';
 
-export const VisualRichStoryIcon = (props: Partial<SVGTypes>) => (
+export const ImmersiveStoryIcon = (props: Partial<SVGTypes>) => (
   <DenSvgIcon
-    name={props?.name ?? 'visual rich story icon'}
+    name={props?.name ?? 'immersive story icon'}
     htmlColor={props?.htmlColor ?? '#3C3C3C'}
     width={props?.width ?? 24}
     height={props?.height ?? 24}
@@ -24,4 +24,6 @@ export const VisualRichStoryIcon = (props: Partial<SVGTypes>) => (
   </DenSvgIcon>
 );
 
-export default VisualRichStoryIcon;
+export const VisualRichStoryIcon = ImmersiveStoryIcon;
+
+export default ImmersiveStoryIcon;

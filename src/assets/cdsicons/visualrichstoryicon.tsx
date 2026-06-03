@@ -1,4 +1,5 @@
-import VisualRichStoryIcon from './immersivestoryicon';
+import ImmersiveStoryIcon from './immersivestoryicon';
 
-export { VisualRichStoryIcon };
-export default VisualRichStoryIcon;
+export { ImmersiveStoryIcon };
+export { ImmersiveStoryIcon as VisualRichStoryIcon };
+export default ImmersiveStoryIcon;
