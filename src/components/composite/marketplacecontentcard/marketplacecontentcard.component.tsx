@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import cssClassName from './marketplacecontentcard.module.scss';
 import { DenBox, DenCard, DenCheckbox, DenChip, DenIconButton, DenMenu, DenMenuItem, DenSvgIcon, DenTooltip, DenTypography, ImageWithFallback, StatusDotNew, } from '../../common';
 import { formatDateString, formatDateWithMoment } from '../../../utility/utils';
@@ -92,17 +92,12 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         const normalizedLanguageCode = languageCode.trim().toLowerCase();
         return ['en', 'ml', 'ta'].includes(normalizedLanguageCode);
     }, [languageCode]);
-    const cardContentContainerRef = useRef<HTMLDivElement | null>(null);
-    const titleRowRef = useRef<HTMLDivElement | null>(null);
-    const slugTitleRef = useRef<HTMLDivElement | null>(null);
-    const subtitleRef = useRef<HTMLDivElement | null>(null);
-
     const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
         onTitleClick?.(event);
         event.stopPropagation();
     }
 
-    const updateTitleCopyPosition = useCallback((event: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
+    const updateTitleCopyPosition = useCallback((event: React.MouseEvent<HTMLElement>) => {
         const titleElement = event.currentTarget;
         const titleTextElement = titleElement.querySelector('[data-marketplace-title-text="true"]');
 
@@ -146,58 +141,6 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         titleElement.style.setProperty('--title-copy-left', `${copyLeft}px`);
     }, []);
 
-    const updateSubtitleClamp = useCallback(() => {
-        const contentContainerElement = cardContentContainerRef.current;
-        const subtitleElement = subtitleRef.current;
-
-        if (!contentContainerElement || !subtitleElement) return;
-
-        const subtitleStyles = window.getComputedStyle(subtitleElement);
-        const lineHeight = Number.parseFloat(subtitleStyles.lineHeight) || 0;
-        const subtitleMarginTop = Number.parseFloat(subtitleStyles.marginTop) || 0;
-
-        if (!lineHeight) return;
-
-        const containerHeight = contentContainerElement.clientHeight;
-        const titleHeight = titleRowRef.current?.offsetHeight || 0;
-        const slugHeight = slugTitleRef.current?.offsetHeight || 0;
-        const availableSubtitleHeight = Math.max(containerHeight - titleHeight - slugHeight - subtitleMarginTop, 0);
-        const clampLines = Math.max(Math.floor(availableSubtitleHeight / lineHeight), 1);
-        const clampValue = String(clampLines);
-
-        if (subtitleElement.style.getPropertyValue('--marketplace-subtitle-line-clamp') !== clampValue) {
-            subtitleElement.style.setProperty('--marketplace-subtitle-line-clamp', clampValue);
-        }
-    }, []);
-
-    useEffect(() => {
-        let resizeObserver: ResizeObserver | undefined;
-        let frameId: number | undefined;
-        const observedElements = [
-            cardContentContainerRef.current,
-            titleRowRef.current,
-            slugTitleRef.current
-        ].filter((element): element is HTMLDivElement => Boolean(element));
-
-        const scheduleClampUpdate = () => {
-            if (frameId) cancelAnimationFrame(frameId);
-            frameId = requestAnimationFrame(() => updateSubtitleClamp());
-        };
-
-        scheduleClampUpdate();
-
-        if (typeof ResizeObserver !== 'undefined') {
-            resizeObserver = new ResizeObserver(scheduleClampUpdate);
-            observedElements.forEach((element) => resizeObserver?.observe(element));
-        }
-
-        return () => {
-            if (frameId) cancelAnimationFrame(frameId);
-            resizeObserver?.disconnect();
-        };
-    }, [updateSubtitleClamp, title, slugTitle, subtitle, story, imageUrl, view]);
-
-
     const tooltipstyles = useMemo(() => {
         return {
             font: 'normal normal 400 13px/18px "Source Sans 3"',
@@ -211,6 +154,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         textarea.innerHTML = text;
         return textarea.value;
     }, [])
+
+    const decodedTitle = useMemo(() => decodeHtmlEntities(title || ''), [decodeHtmlEntities, title]);
 
     const tagsTooltip = useCallback((tags: any) => {
         return (
@@ -424,12 +369,12 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            <div className={cssClassName['card-content-container']} ref={cardContentContainerRef}>
+                            <div className={cssClassName['card-content-container']}>
                                 {(title || imageUrl) && (
-                                    <div className={cssClassName['card-title-row']} ref={titleRowRef}>
+                                    <div className={cssClassName['card-title-row']}>
                                         {title && (
                                             <div className={cssClassName['card-title-copy-wrapper']}>
-                                                <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                                <DenCustomTooltip arrow title={decodedTitle} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
                                                     <DenBox
                                                         title={title}
                                                         className={clsx(
@@ -440,12 +385,11 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                         )}
                                                         onClick={isTitleClickable ? handleOnTitleClick : undefined}
                                                         onMouseEnter={showTitleCopy ? updateTitleCopyPosition : undefined}
-                                                        onFocus={showTitleCopy ? updateTitleCopyPosition : undefined}
                                                     >
                                                         <span data-marketplace-title-text="true" className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
                                                         {showTitleCopy && (
                                                             <span className={cssClassName['card-title-copy-icon']}>
-                                                                <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                                                <CopyIconButton copyValue={decodedTitle} />
                                                             </span>
                                                         )}
                                                     </DenBox>
@@ -461,7 +405,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         </div>}
                                     </div>
                                 )}
-                                {slugTitle && <div className={clsx(cssClassName['card-slug-title'], shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'])} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                                {slugTitle && <div className={clsx(cssClassName['card-slug-title'], shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'])} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
                                 {(subtitle || story) && (
                                     <div
                                         className={clsx(
@@ -469,7 +413,6 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                             slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'],
                                             shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost']
                                         )}
-                                        ref={subtitleRef}
                                         dangerouslySetInnerHTML={{ __html: subtitle || story }}
                                     />
                                 )}
