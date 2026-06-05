@@ -215,6 +215,20 @@
   flex-shrink: 0;
 }
 
+.channel-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  line-height: 0;
+  flex-shrink: 0;
+
+  :global(svg) {
+    display: block;
+  }
+}
+
 .channel-tooltip-loader {
   display: flex;
   align-items: center;

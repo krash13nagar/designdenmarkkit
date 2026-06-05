@@ -41,10 +41,16 @@ export interface VisualContentCardProps {
   imagesCount?: number;
   videosCount?: number;
   hostName?: string;
+  channelIcon?: React.ReactNode;
   showStats?: boolean;
+  showChannelBadge?: boolean;
+  showChannelIcon?: boolean;
   showChannelTooltip?: boolean;
   channelTooltipData?: React.ReactNode;
   isChannelTooltipLoading?: boolean;
+  showChannelIconTooltip?: boolean;
+  channelIconTooltipData?: React.ReactNode;
+  isChannelIconTooltipLoading?: boolean;
   contentType: VisualContentCardVariant;
   updatedDateTimeEpoch?: number;
   publishDateTimeEpoch?: number;
@@ -54,6 +60,7 @@ export interface VisualContentCardProps {
   handleClick?: React.MouseEventHandler<HTMLDivElement>;
   handleCTA?: React.MouseEventHandler<HTMLElement>;
   onChannelHover?: React.MouseEventHandler<HTMLElement>;
+  onChannelIconHover?: React.MouseEventHandler<HTMLElement>;
   brokenImgText?: string;
   classes?: VisualContentCardClasses;
   active?: boolean;

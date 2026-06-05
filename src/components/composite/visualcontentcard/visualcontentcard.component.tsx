@@ -115,10 +115,16 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     videosCount,
     contentType,
     hostName,
+    channelIcon,
     showStats = true,
+    showChannelBadge = true,
+    showChannelIcon = true,
     showChannelTooltip,
     channelTooltipData,
     isChannelTooltipLoading,
+    showChannelIconTooltip,
+    channelIconTooltipData,
+    isChannelIconTooltipLoading,
     updatedDateTimeEpoch,
     publishDateTimeEpoch,
     imageUrl,
@@ -126,6 +132,7 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     cardMenuOptions = [],
     handleClick,
     onChannelHover,
+    onChannelIconHover,
     classes = {},
     active,
     brokenImgText = '',
@@ -159,16 +166,42 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     return getChannelBadgeLabel(hostName);
   }, [hostName]);
 
+  const resolvedShowChannelBadge = useMemo(() => {
+    return showChannelBadge && Boolean(channelBadgeLabel);
+  }, [showChannelBadge, channelBadgeLabel]);
+
+  const resolvedShowChannelIcon = useMemo(() => {
+    return showChannelIcon && Boolean(channelIcon);
+  }, [showChannelIcon, channelIcon]);
+
   const resolvedShowChannelTooltip = useMemo(() => {
+    if (!resolvedShowChannelBadge) return false;
     if (showChannelTooltip !== undefined) return showChannelTooltip;
     return true;
-  }, [showChannelTooltip]);
+  }, [resolvedShowChannelBadge, showChannelTooltip]);
 
   const resolvedChannelTooltipLoading = useMemo(() => {
     if (!resolvedShowChannelTooltip) return false;
     if (isChannelTooltipLoading !== undefined) return isChannelTooltipLoading;
     return !channelTooltipData;
   }, [resolvedShowChannelTooltip, isChannelTooltipLoading, channelTooltipData]);
+
+  const resolvedShowChannelIconTooltip = useMemo(() => {
+    if (!resolvedShowChannelIcon) return false;
+    if (showChannelIconTooltip !== undefined) return showChannelIconTooltip;
+    return true;
+  }, [resolvedShowChannelIcon, showChannelIconTooltip]);
+
+  const resolvedChannelIconTooltipLoading = useMemo(() => {
+    if (!resolvedShowChannelIconTooltip) return false;
+    if (isChannelIconTooltipLoading !== undefined) return isChannelIconTooltipLoading;
+    return !channelIconTooltipData && !channelTooltipData;
+  }, [
+    resolvedShowChannelIconTooltip,
+    isChannelIconTooltipLoading,
+    channelIconTooltipData,
+    channelTooltipData,
+  ]);
 
   const channelTooltipContent = useMemo(() => {
     if (!resolvedShowChannelTooltip) return '';
@@ -184,6 +217,27 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     }
     return channelTooltipData || hostName || '';
   }, [resolvedShowChannelTooltip, resolvedChannelTooltipLoading, channelTooltipData, hostName]);
+
+  const channelIconTooltipContent = useMemo(() => {
+    if (!resolvedShowChannelIconTooltip) return '';
+    if (resolvedChannelIconTooltipLoading) {
+      return (
+        <DenBox className={cssClassName['channel-tooltip-loader']}>
+          <DenCircularProgress size={22} />
+        </DenBox>
+      );
+    }
+    if (typeof channelIconTooltipData === 'string') {
+      return <span dangerouslySetInnerHTML={{ __html: channelIconTooltipData }} />;
+    }
+    return channelIconTooltipData || channelTooltipData || hostName || '';
+  }, [
+    resolvedShowChannelIconTooltip,
+    resolvedChannelIconTooltipLoading,
+    channelIconTooltipData,
+    channelTooltipData,
+    hostName,
+  ]);
 
   const slidesCountValue =
     typeof slidesCount === 'number' && Number.isFinite(slidesCount)
@@ -231,6 +285,12 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
     if (!resolvedShowChannelTooltip) return;
     event.stopPropagation();
     onChannelHover?.(event);
+  };
+
+  const handleChannelIconHover = (event: React.MouseEvent<HTMLElement>) => {
+    if (!resolvedShowChannelIconTooltip) return;
+    event.stopPropagation();
+    onChannelIconHover?.(event);
   };
 
   return (
@@ -380,7 +440,7 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
 
         <div className={cssClassName['media-footer']}>
           <div className={cssClassName['media-footer-left']}>
-            {channelBadgeLabel && (
+            {resolvedShowChannelBadge && (
               (resolvedShowChannelTooltip ? (
                 <DenTooltip
                   title={channelTooltipContent}
@@ -412,7 +472,43 @@ export const VisualContentCard = (props: VisualContentCardProps) => {
                   className={cssClassName['channel-badge']}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {channelBadgeLabel}
+                    {channelBadgeLabel}
+                </span>
+              ))
+            )}
+            {resolvedShowChannelIcon && (
+              (resolvedShowChannelIconTooltip ? (
+                <DenTooltip
+                  title={channelIconTooltipContent}
+                  arrow
+                  placement="top"
+                  PopperProps={{
+                    sx: {
+                      '& .cds-MuiTooltip-tooltip': {
+                        backgroundColor: 'white',
+                        padding: '0',
+                        boxShadow: '0px 3px 6px #00000029',
+                      },
+                      '& .cds-MuiTooltip-arrow': {
+                        color: 'white',
+                      },
+                    },
+                  }}
+                >
+                  <span
+                    className={cssClassName['channel-icon-wrapper']}
+                    onMouseEnter={handleChannelIconHover}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {channelIcon}
+                  </span>
+                </DenTooltip>
+              ) : (
+                <span
+                  className={cssClassName['channel-icon-wrapper']}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {channelIcon}
                 </span>
               ))
             )}
