@@ -60,10 +60,15 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         );
     }, [publishDateTimestamp]);
 
+    const normalizedView = useMemo(() => view.trim().toLowerCase(), [view]);
+
+    const isSingleView = normalizedView === 'single';
+    const isGridView = normalizedView === 'grid';
+
     const variantClassName = useMemo(() => {
-        if (view === 'single') return 'marketplaceSingleViewVariant';
+        if (isSingleView) return 'marketplaceSingleViewVariant';
         return '';
-    }, [view]);
+    }, [isSingleView]);
 
     const handleClose = (
         event: React.SyntheticEvent<HTMLElement> | undefined,
@@ -484,7 +489,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         </div>
                     )}
                     {/* Tags and Channels Section for Grid View */}
-                    {view !== 'single' && (
+                    {isGridView && (
                         <div className={cssClassName['tags-channels-section']}>
                             {/* Channels */}
                             {channels && channels.length > 0 && (
@@ -591,7 +596,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             </DenCustomTooltip>}
                         </DenBox>
                         <DenBox className={cssClassName['card-footer-rhs']}>
-                            {view === 'single' && channels && channels.length > 0 && (
+                            {isSingleView && channels && channels.length > 0 && (
                                 <DenBox className={cssClassName['channels-wrapper']}>
                                     {visibleChannels.map((channel, index) => (
                                         <DenTooltip
@@ -647,8 +652,8 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     )}
                                 </DenBox>
                             )}
-                            {view === 'single' && channels && channels.length > 0 && <Divider sx={{ height: '14px' }} orientation="vertical" />}
-                            {view === 'single' && tags && tags.length > 0 && (
+                            {isSingleView && channels && channels.length > 0 && <Divider sx={{ height: '14px' }} orientation="vertical" />}
+                            {isSingleView && tags && tags.length > 0 && (
                                 <DenBox className={cssClassName['card-tags-single-view']}>
                                     {
                                         (tags?.length > 0 && <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
@@ -674,7 +679,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     }
                                 </DenBox>
                             )}
-                            {(view === 'single' && (isCompetitor || agency)) && <Divider sx={{ height: '14px' }} orientation="vertical" />}
+                            {(isSingleView && (isCompetitor || agency)) && <Divider sx={{ height: '14px' }} orientation="vertical" />}
                             {isCompetitor ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
                                 <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
                                     e.stopPropagation();

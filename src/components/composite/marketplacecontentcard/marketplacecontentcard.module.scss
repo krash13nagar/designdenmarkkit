@@ -303,7 +303,7 @@
                     opacity: 0;
                     visibility: hidden;
                     transition: opacity 0.2s ease, visibility 0.2s ease;
-                    margin-left: 7px;
+                    margin-left: 4px;
 
                     :global(.cds-copy-icon-button) {
                         height: 20px;
@@ -321,6 +321,7 @@
             }
 
             .marketplace-card-title {
+                --marketplace-card-title-line-height: 20.8px;
                 display: flex;
                 align-items: flex-start;
                 gap: 4px;
@@ -328,7 +329,7 @@
                 max-width: 100%;
                 min-width: 0;
                 font: normal normal 600 13px/17px "Source Sans 3";
-                line-height: 1.60;
+                line-height: var(--marketplace-card-title-line-height);
                 letter-spacing: 0px;
                 color: #2B2B2B;
                 opacity: 1;
@@ -347,8 +348,8 @@
                 overflow: visible;
 
                 .marketplace-card-title-text {
-                    width: calc(100% - 32px);
-                    max-width: calc(100% - 32px);
+                    width: calc(100% - 12px);
+                    max-width: calc(100% - 12px);
                 }
             }
 
@@ -389,9 +390,11 @@
             }
 
             .card-slug-title {
+                --marketplace-card-slug-line-height: 17px;
                 font: italic normal normal 12px/17px 'Source Sans 3';
+                line-height: var(--marketplace-card-slug-line-height);
                 color: #818181;
-                margin-top: 8px;
+                margin-top: 6px;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 line-clamp: 2;
@@ -433,22 +436,23 @@
             }
 
             .marketplace-card-subtitle {
+                --marketplace-card-subtitle-line-height: 20.15px;
                 font: normal normal normal 13px/16px "Source Sans 3";
                 letter-spacing: 0.14px;
                 color: #4D4D4D;
                 opacity: 1;
-                margin-top: 8px;
+                margin-top: 6px;
                 flex: 1;
                 min-height: 0;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: normal;
-                line-height: 1.55;
+                line-height: var(--marketplace-card-subtitle-line-height);
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
                 -webkit-line-clamp: var(--marketplace-subtitle-line-clamp, 4);
                 line-clamp: var(--marketplace-subtitle-line-clamp, 4);
-                max-height: calc(var(--marketplace-subtitle-line-clamp, 4) * 1.55em);
+                max-height: calc(var(--marketplace-subtitle-line-clamp, 4) * var(--marketplace-card-subtitle-line-height));
                 overflow-wrap: anywhere;
                 word-break: keep-all;
 
@@ -692,7 +696,7 @@
                         gap: 4px;
                         white-space: normal;
                         font: normal normal 600 13px/17px "Source Sans 3";
-                        line-height: 1.60;
+                        line-height: var(--marketplace-card-title-line-height);
                         letter-spacing: 0px;
                         color: #2B2B2B;
                         opacity: 1;
@@ -745,7 +749,7 @@
                     font: normal normal normal 13px/16px "Source Sans 3";
                     letter-spacing: 0.14px;
                     color: #4D4D4D;
-                    line-height: 1.55;
+                    line-height: var(--marketplace-card-subtitle-line-height);
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
