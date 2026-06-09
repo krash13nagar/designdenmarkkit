@@ -1,21 +1,85 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import cssClassName from './marketplacecontentcard.module.scss';
-import { DenBox, DenCard, DenCheckbox, DenChip, DenIconButton, DenMenu, DenMenuItem, DenSvgIcon, DenTooltip, DenTypography, ImageWithFallback, StatusDotNew, } from '../../common';
-import { formatDateString, formatDateWithMoment } from '../../../utility/utils';
+import {
+    DenBox,
+    DenCard,
+    DenCheckbox,
+    DenIconButton,
+    DenMenu,
+    DenMenuItem,
+    DenSvgIcon,
+    DenTooltip,
+    DenTypography,
+    ImageWithFallback,
+} from '../../common';
+import { formatDateWithMoment } from '../../../utility/utils';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import clsx from 'clsx';
 import {
     AnchorGeneric,
     MarketplaceContentCardConfig,
 } from './marketplacecontentcard.types';
-import ImageIcon from '../../../assets/cdsicons/imageicon';
 import MarketplaceImageIcon from '../../../assets/cdsicons/marketplaceimageicon';
 import { Chip, Divider } from '@mui/material';
 import DenCustomTooltip from '../../common/tooltip/customtooltip.component';
 import CopyIconButton from '../copyiconbutton/copyiconbutton.component';
 
-export const MarketplaceContentCard = React.forwardRef((props: MarketplaceContentCardConfig, ref: React.MutableRefObject<any>) => {
+const RESIZE_OBSERVER_THROTTLE_MS = 1000;
 
+const TOOLTIP_TEXT_STYLES = {
+    font: 'normal normal 400 13px/18px "Source Sans 3"',
+    textColor: '#4D4D4D',
+};
+
+const CHANNEL_TOOLTIP_POPPER_PROPS = {
+    sx: {
+        '& .cds-MuiTooltip-tooltip': {
+            backgroundColor: 'white',
+            padding: '0',
+            boxShadow: '0px 3px 6px #00000029',
+        },
+    },
+};
+
+const SINGLE_VIEW_CHANNEL_TOOLTIP_POPPER_PROPS = {
+    sx: {
+        '& .cds-MuiTooltip-tooltip': {
+            backgroundColor: 'white',
+            padding: '0',
+            boxShadow: '0px 3px 6px #00000029',
+        },
+        '& .cds-MuiTooltip-arrow': {
+            color: '#fff',
+        },
+    },
+};
+
+const TYPE_TOOLTIP_POPPER_PROPS = {
+    sx: {
+        '& .cds-MuiTooltip-tooltip': {
+            font: "normal normal normal 12px/20px 'Source Sans 3' !important",
+            padding: '1px 4px 1px 4px !important',
+            backgroundColor: '#4D4D4D !important',
+        },
+    },
+};
+
+const CARD_MENU_TOOLTIP_POPPER_PROPS = TYPE_TOOLTIP_POPPER_PROPS;
+
+const TAG_CHIP_SX = {
+    '& .cds-MuiChip-icon': {
+        marginTop: '5px',
+    },
+};
+
+const decodeHtmlEntities = (text: string): string => {
+    if (!text) return text;
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+};
+
+const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContentCardConfig>((props, ref) => {
     const {
         id,
         title,
@@ -48,29 +112,59 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         typeLabel = '',
         languageCode = '',
         translateLanguageErrorMsg = '',
-        showTitleCopy = false
-
+        showTitleCopy = false,
     } = props;
 
-    const [anchorEl, setAnchorEl] = React.useState<AnchorGeneric>({});
+    const [anchorEl, setAnchorEl] = useState<AnchorGeneric>({});
+    const cardContentContainerRef = useRef<HTMLDivElement | null>(null);
+    const titleRowRef = useRef<HTMLDivElement | null>(null);
+    const slugTitleRef = useRef<HTMLDivElement | null>(null);
+    const subtitleRef = useRef<HTMLDivElement | null>(null);
+    const clampFrameRef = useRef<number | undefined>(undefined);
+    const clampTimeoutRef = useRef<number | undefined>(undefined);
+    const lastClampRunAtRef = useRef(0);
 
     const headerDate = useMemo(() => {
-        return (
-            (publishDateTimestamp ? formatDateWithMoment(publishDateTimestamp) : '')
-        );
+        return publishDateTimestamp ? formatDateWithMoment(publishDateTimestamp) : '';
     }, [publishDateTimestamp]);
 
     const normalizedView = useMemo(() => view.trim().toLowerCase(), [view]);
-
     const isSingleView = normalizedView === 'single';
     const isGridView = normalizedView === 'grid';
 
     const variantClassName = useMemo(() => {
-        if (isSingleView) return 'marketplaceSingleViewVariant';
-        return '';
+        return isSingleView ? 'marketplaceSingleViewVariant' : '';
     }, [isSingleView]);
 
-    const handleClose = (
+    const isTitleClickable = !isCompetitor && Boolean(onTitleClick);
+
+    const shouldIncreaseTypographyForLanguage = useMemo(() => {
+        const normalizedLanguageCode = languageCode.trim().toLowerCase();
+        return ['en', 'ml', 'ta'].includes(normalizedLanguageCode);
+    }, [languageCode]);
+
+    const decodedTitle = useMemo(() => {
+        return decodeHtmlEntities(title || '');
+    }, [title]);
+
+    const hasChannels = channels.length > 0;
+    const hasTags = Boolean(tags?.length);
+    const hasTitleRow = Boolean(title || imageUrl);
+    const hasSubtitle = Boolean(subtitle || story);
+
+    const visibleChannels = useMemo(() => {
+        return channels.slice(0, 2);
+    }, [channels]);
+
+    const remainingChannels = useMemo(() => {
+        return channels.slice(2);
+    }, [channels]);
+
+    const hasRemainingChannels = remainingChannels.length > 0;
+
+    const primaryTag = tags?.[0];
+
+    const handleClose = useCallback((
         event: React.SyntheticEvent<HTMLElement> | undefined,
         index: number,
         cb?: Function | undefined
@@ -78,34 +172,25 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         setAnchorEl((prev: any) => ({ ...prev, [index]: null }));
         event?.stopPropagation();
         if (cb) cb(event);
-    };
+    }, []);
 
-    const handleDenMenuOnClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDenMenuOnClose = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         handleClose(undefined, 1);
         e.stopPropagation();
-    };
-    const handleContextClick = (
+    }, [handleClose]);
+
+    const handleContextClick = useCallback((
         event: React.SyntheticEvent<HTMLElement>,
         index: number
     ) => {
         setAnchorEl((prev: any) => ({ ...prev, [index]: event.currentTarget }));
         event.stopPropagation();
-    };
+    }, []);
 
-    const isTitleClickable = !isCompetitor && Boolean(onTitleClick);
-    const shouldIncreaseTypographyForLanguage = useMemo(() => {
-        const normalizedLanguageCode = languageCode.trim().toLowerCase();
-        return ['en', 'ml', 'ta'].includes(normalizedLanguageCode);
-    }, [languageCode]);
-    const cardContentContainerRef = useRef<HTMLDivElement | null>(null);
-    const titleRowRef = useRef<HTMLDivElement | null>(null);
-    const slugTitleRef = useRef<HTMLDivElement | null>(null);
-    const subtitleRef = useRef<HTMLDivElement | null>(null);
-
-    const handleOnTitleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleOnTitleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
         onTitleClick?.(event);
         event.stopPropagation();
-    }
+    }, [onTitleClick]);
 
     const updateTitleCopyPosition = useCallback((event: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
         const titleElement = event.currentTarget;
@@ -158,16 +243,21 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         if (!contentContainerElement || !subtitleElement) return;
 
         const subtitleStyles = window.getComputedStyle(subtitleElement);
+        const slugStyles = slugTitleRef.current ? window.getComputedStyle(slugTitleRef.current) : undefined;
         const lineHeight = Number.parseFloat(subtitleStyles.lineHeight) || 0;
         const subtitleMarginTop = Number.parseFloat(subtitleStyles.marginTop) || 0;
+        const slugMarginTop = Number.parseFloat(slugStyles?.marginTop || '0') || 0;
 
         if (!lineHeight) return;
 
         const containerHeight = contentContainerElement.clientHeight;
-        const titleHeight = titleRowRef.current?.offsetHeight || 0;
-        const slugHeight = slugTitleRef.current?.offsetHeight || 0;
-        const availableSubtitleHeight = Math.max(containerHeight - titleHeight - slugHeight - subtitleMarginTop, 0);
-        const clampLines = Math.max(Math.floor(availableSubtitleHeight / lineHeight), 1);
+        const titleHeight = titleRowRef.current?.getBoundingClientRect().height || 0;
+        const slugHeight = slugTitleRef.current?.getBoundingClientRect().height || 0;
+        const availableSubtitleHeight = Math.max(
+            containerHeight - titleHeight - slugHeight - slugMarginTop - subtitleMarginTop,
+            0
+        );
+        const clampLines = Math.max(Math.floor((availableSubtitleHeight + 0.5) / lineHeight), 1);
         const clampValue = String(clampLines);
 
         if (subtitleElement.style.getPropertyValue('--marketplace-subtitle-line-clamp') !== clampValue) {
@@ -175,49 +265,78 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
         }
     }, []);
 
+    const scheduleSubtitleClampUpdate = useCallback((force = false) => {
+        const clearScheduledClamp = () => {
+            if (clampTimeoutRef.current) {
+                window.clearTimeout(clampTimeoutRef.current);
+                clampTimeoutRef.current = undefined;
+            }
+            if (clampFrameRef.current) {
+                window.cancelAnimationFrame(clampFrameRef.current);
+                clampFrameRef.current = undefined;
+            }
+        };
+
+        const runClampUpdate = () => {
+            lastClampRunAtRef.current = Date.now();
+            clampFrameRef.current = window.requestAnimationFrame(() => {
+                clampFrameRef.current = undefined;
+                updateSubtitleClamp();
+            });
+        };
+
+        const now = Date.now();
+        const elapsed = now - lastClampRunAtRef.current;
+
+        if (force || elapsed >= RESIZE_OBSERVER_THROTTLE_MS) {
+            clearScheduledClamp();
+            runClampUpdate();
+            return;
+        }
+
+        if (clampTimeoutRef.current || clampFrameRef.current) return;
+
+        clampTimeoutRef.current = window.setTimeout(() => {
+            clampTimeoutRef.current = undefined;
+            if (clampFrameRef.current) {
+                window.cancelAnimationFrame(clampFrameRef.current);
+                clampFrameRef.current = undefined;
+            }
+            runClampUpdate();
+        }, RESIZE_OBSERVER_THROTTLE_MS - elapsed);
+    }, [updateSubtitleClamp]);
+
     useEffect(() => {
         let resizeObserver: ResizeObserver | undefined;
-        let frameId: number | undefined;
         const observedElements = [
             cardContentContainerRef.current,
             titleRowRef.current,
-            slugTitleRef.current
+            slugTitleRef.current,
         ].filter((element): element is HTMLDivElement => Boolean(element));
 
-        const scheduleClampUpdate = () => {
-            if (frameId) cancelAnimationFrame(frameId);
-            frameId = requestAnimationFrame(() => updateSubtitleClamp());
-        };
-
-        scheduleClampUpdate();
+        scheduleSubtitleClampUpdate(true);
 
         if (typeof ResizeObserver !== 'undefined') {
-            resizeObserver = new ResizeObserver(scheduleClampUpdate);
+            resizeObserver = new ResizeObserver(() => scheduleSubtitleClampUpdate());
             observedElements.forEach((element) => resizeObserver?.observe(element));
         }
 
         return () => {
-            if (frameId) cancelAnimationFrame(frameId);
+            if (clampTimeoutRef.current) {
+                window.clearTimeout(clampTimeoutRef.current);
+                clampTimeoutRef.current = undefined;
+            }
+            if (clampFrameRef.current) {
+                window.cancelAnimationFrame(clampFrameRef.current);
+                clampFrameRef.current = undefined;
+            }
             resizeObserver?.disconnect();
         };
-    }, [updateSubtitleClamp, title, slugTitle, subtitle, story, imageUrl, view]);
+    }, [scheduleSubtitleClampUpdate, hasTitleRow, slugTitle, hasSubtitle, view]);
 
+    const tagsTooltipContent = useMemo(() => {
+        if (!tags?.length || tags.length <= 1) return '';
 
-    const tooltipstyles = useMemo(() => {
-        return {
-            font: 'normal normal 400 13px/18px "Source Sans 3"',
-            textColor: '#4D4D4D',
-        }
-    }, [])
-
-    const decodeHtmlEntities = useCallback((text: string): string => {
-        if (!text) return text;
-        const textarea = document.createElement('textarea');
-        textarea.innerHTML = text;
-        return textarea.value;
-    }, [])
-
-    const tagsTooltip = useCallback((tags: any) => {
         return (
             <React.Fragment>
                 <DenTypography variant="body2" color="textPrimary">
@@ -225,100 +344,163 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                         Category:
                     </span>{' '}
                     <span style={{ font: 'normal normal 400 13px/18px "Source Sans 3"', color: '#4D4D4D' }}>
-                        {tags?.map((tag: any) => tag.label).join(', ')}
+                        {tags.map((tag: any) => tag.label).join(', ')}
                     </span>
                 </DenTypography>
             </React.Fragment>
-        )
-    }, [])
-
-    // Channel display logic
-    const visibleChannels = useMemo(() => {
-        return channels.slice(0, 2);
-    }, [channels]);
-
-    const remainingChannels = useMemo(() => {
-        return channels.slice(2);
-    }, [channels]);
-
-    const hasRemainingChannels = remainingChannels.length > 0;
-
-    // Channel tooltip content
-    const getChannelTooltipContent = useCallback((channel: any) => {
-        return (
-            <React.Fragment>
-                <DenBox className={cssClassName['channel-tooltip-container']}>
-                    <DenBox className={cssClassName['channel-tooltip-header-row']}>
-                        <StatusDotNew status="ACTIVE" size={6} />
-                        <DenTypography className={cssClassName['channel-tooltip-header-msid']}>
-                            MSID:
-                        </DenTypography>
-                        <DenTypography className={cssClassName['channel-tooltip-header-msid-val']}>
-                            {channel.sectionInfo.msid}
-                        </DenTypography>
-                        <Divider sx={{ height: '16px' }} className='channel-tooltip-header-divider' orientation="vertical" />
-                        <DenTypography className={cssClassName['channel-tooltip-header-timestamp']}>
-                            {channel.sectionInfo.timeStamp}
-                        </DenTypography>
-                    </DenBox>
-                    <DenBox className={cssClassName['channel-tooltip-channel-row']}>
-                        <DenChip
-                            label={
-                                <DenBox sx={{ display: 'flex' }}>
-                                    <DenSvgIcon>{channel.channelIcon}</DenSvgIcon>
-                                    <DenTypography className={cssClassName['channel-tooltip-section-name']}>
-                                        {channel.sectionInfo.sectionName}
-                                    </DenTypography>
-                                </DenBox>
-                            }
-                            size="small"
-                            className={cssClassName['channel-tooltip-section-chip']}
-                        />
-                    </DenBox>
-                    <DenTypography className={cssClassName['channel-tooltip-username']}>
-                        {channel.sectionInfo.userName}
-                    </DenTypography>
-                    <DenBox className={cssClassName['channel-tooltip-actions-row']}>
-                        <DenTypography
-                            className={cssClassName['channel-tooltip-action-link']}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                channel.sectionInfo.onPreviewClick?.(e);
-                            }}
-                        >
-                            Preview
-                        </DenTypography>
-                        {/* <Divider sx={{ height: '14px' }} className='channel-tooltip-header-divider' orientation="vertical" />
-                        <DenTypography
-                            className={cssClassName['channel-tooltip-action-link']}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                channel.sectionInfo.onFullStoryClick?.(e);
-                            }}
-                        >
-                            Full Story
-                        </DenTypography> */}
-                    </DenBox>
-                </DenBox>
-            </React.Fragment>
         );
-    }, []);
+    }, [tags]);
 
-    // Remaining channels tooltip content
-    const getRemainingChannelsTooltipContent = useCallback(() => {
+    const tagChipContent = useMemo(() => {
+        if (!primaryTag) return null;
+
+        const label = tags && tags.length > 1 ? (
+            <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <span className={cssClassName['card-tag-label']}>{primaryTag.label}</span>
+                <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags.length - 1}`}</span>
+            </span>
+        ) : (
+            <span className={cssClassName['card-tag-label']}>{primaryTag.label}</span>
+        );
+
         return (
-            <DenBox className={cssClassName['channel-list-tooltip-container']}>
-                {remainingChannels.map((channel, index) => (
-                    <React.Fragment key={index}>
-                        {getChannelTooltipContent(channel)}
-                        {index < remainingChannels.length - 1 && (
-                            <Divider sx={{ margin: '0px 4px 0px 4px' }} />
-                        )}
-                    </React.Fragment>
+            <DenCustomTooltip title={tagsTooltipContent} arrow {...TOOLTIP_TEXT_STYLES} placement='top'>
+                <Chip
+                    className={cssClassName['card-tag']}
+                    size="small"
+                    icon={<span dangerouslySetInnerHTML={{ __html: primaryTag.icon }} />}
+                    label={label}
+                    variant="outlined"
+                    sx={TAG_CHIP_SX}
+                />
+            </DenCustomTooltip>
+        );
+    }, [primaryTag, tags, tagsTooltipContent]);
+
+    const menuItems = useMemo(() => {
+        return cardMenuOptions?.map((option) => (
+            <DenTooltip
+                key={option?.label}
+                title={option?.disabled ? option?.disabledMsg : ''}
+                disableHoverListener={!option?.disabled}
+                PopperProps={CARD_MENU_TOOLTIP_POPPER_PROPS}
+                arrow
+            >
+                <span>
+                    <DenMenuItem
+                        onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
+                        classes={{
+                            root: classes?.menuOption,
+                        }}
+                        disabled={option?.disabled}
+                    >
+                        <DenTypography variant="inherit">
+                            {option.label}
+                        </DenTypography>
+                    </DenMenuItem>
+                </span>
+            </DenTooltip>
+        ));
+    }, [cardMenuOptions, classes?.menuOption, handleClose]);
+
+    const gridChannelChips = useMemo(() => {
+        if (!hasChannels) return null;
+
+        return (
+            <DenBox className={cssClassName['channels-wrapper']}>
+                {visibleChannels.map((channel, index) => (
+                    <DenTooltip
+                        key={index}
+                        title={''}
+                        arrow
+                        placement="top"
+                        PopperProps={CHANNEL_TOOLTIP_POPPER_PROPS}
+                    >
+                        <DenBox className={cssClassName['channel-chip']}>
+                            <DenTypography className={cssClassName['channel-name']}>
+                                {channel.channelName}
+                            </DenTypography>
+                        </DenBox>
+                    </DenTooltip>
                 ))}
+                {hasRemainingChannels && (
+                    <DenTooltip
+                        title={''}
+                        arrow
+                        placement="top"
+                        PopperProps={CHANNEL_TOOLTIP_POPPER_PROPS}
+                    >
+                        <DenBox className={cssClassName['channel-chip']}>
+                            <DenTypography className={cssClassName['channel-plus']}>
+                                +{remainingChannels.length}
+                            </DenTypography>
+                        </DenBox>
+                    </DenTooltip>
+                )}
             </DenBox>
         );
-    }, [remainingChannels, getChannelTooltipContent]);
+    }, [hasChannels, visibleChannels, hasRemainingChannels, remainingChannels.length]);
+
+    const singleViewChannelChips = useMemo(() => {
+        if (!isSingleView || !hasChannels) return null;
+
+        return (
+            <DenBox className={cssClassName['channels-wrapper']}>
+                {visibleChannels.map((channel, index) => (
+                    <DenTooltip
+                        key={index}
+                        title={''}
+                        arrow
+                        placement="top"
+                        PopperProps={SINGLE_VIEW_CHANNEL_TOOLTIP_POPPER_PROPS}
+                    >
+                        <DenBox className={cssClassName['channel-chip']}>
+                            <DenTypography className={cssClassName['channel-name']}>
+                                {channel.channelName}
+                            </DenTypography>
+                        </DenBox>
+                    </DenTooltip>
+                ))}
+                {hasRemainingChannels && (
+                    <DenTooltip
+                        title={''}
+                        arrow
+                        placement="top"
+                        PopperProps={SINGLE_VIEW_CHANNEL_TOOLTIP_POPPER_PROPS}
+                    >
+                        <DenBox className={cssClassName['channel-chip']}>
+                            <DenTypography className={cssClassName['channel-plus']}>
+                                +{remainingChannels.length}
+                            </DenTypography>
+                        </DenBox>
+                    </DenTooltip>
+                )}
+            </DenBox>
+        );
+    }, [isSingleView, hasChannels, visibleChannels, hasRemainingChannels, remainingChannels.length]);
+
+    const sourceOrAgencyContent = useMemo(() => {
+        if (!isSingleView) return null;
+
+        if (isCompetitor) {
+            return (
+                <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...TOOLTIP_TEXT_STYLES}>
+                    <DenBox
+                        className={cssClassName['datasoruce']}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            dataSource?.onClick?.(e);
+                        }}
+                    >
+                        <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
+                        <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
+                    </DenBox>
+                </DenCustomTooltip>
+            );
+        }
+
+        return <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>;
+    }, [agency, dataSource, isCompetitor, isSingleView]);
 
     return (
         <div className={cssClassName[variantClassName]}>
@@ -328,13 +510,10 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                 ref={ref}
                 onClick={onCardClick}
             >
-                <div
-                    className={cssClassName['image-with-details-wrapper']}
-                >
+                <div className={cssClassName['image-with-details-wrapper']}>
                     <div className={clsx(cssClassName['card-header'], checkboxProps?.isChecked && cssClassName['card-header-with-checkbox'], isBreakingCard && cssClassName['card-header-breaking'], isUpdatedCard && cssClassName['card-header-updated'])}>
                         <div className={cssClassName['card-header-lhs']}>
-                            {<DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}
-                            >
+                            <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}>
                                 <span>
                                     <DenCheckbox
                                         className={clsx(
@@ -346,7 +525,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                         onChange={checkboxProps?.onCheckboxClick}
                                     />
                                 </span>
-                            </DenTooltip>}
+                            </DenTooltip>
                             {isBreakingCard && <DenTypography className={cssClassName['card-header-breaking-label']}>BREAKING</DenTypography>}
                             {isUpdatedCard && <DenTypography className={cssClassName['card-header-updated-label']}>UPDATED</DenTypography>}
                             {(isBreakingCard || isUpdatedCard) && <Divider sx={{ height: '16px', margin: '0px 2px 0px 2px' }} orientation="vertical" />}
@@ -357,32 +536,21 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             >
                                 <DenBox className={cssClassName['card-header-date']}>{headerDate}</DenBox>
                             </DenCustomTooltip>
-                            {typeIcon &&
-                                <DenTooltip title={typeLabel} PopperProps={{
-                                    sx: {
-                                        '& .cds-MuiTooltip-tooltip': {
-                                            font: "normal normal normal 12px/20px 'Source Sans 3' !important",
-                                            padding: "1px 4px 1px 4px !important",
-                                            backgroundColor: "#4D4D4D !important",
-                                        }
-                                    }
-                                }}>
+                            {typeIcon && (
+                                <DenTooltip title={typeLabel} PopperProps={TYPE_TOOLTIP_POPPER_PROPS}>
                                     <DenSvgIcon sx={{ marginLeft: '6px', marginTop: '4px' }} className='marketplace-card-header-type-icon'>{typeIcon}</DenSvgIcon>
                                 </DenTooltip>
-
-                            }
+                            )}
                         </div>
                         <div className={cssClassName['card-header-rhs']}>
                             <DenBox className={cssClassName['card-header-menu']}>
                                 <DenIconButton
                                     aria-label="more"
-                                    id={''}
+                                    id={id || ''}
                                     aria-haspopup="true"
                                     onClick={(e) => handleContextClick(e, 1)}
                                     className={clsx(cssClassName['more-icon-base'], Boolean(anchorEl?.[1]) && cssClassName['menu-open'])}
                                     disableRipple
-
-                                //disabled={action?.disabled}
                                 >
                                     <MoreVertIcon sx={{ fontSize: '24px', color: 'inherit' }} />
                                 </DenIconButton>
@@ -392,54 +560,29 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     open={Boolean(anchorEl?.[1])}
                                     onClose={handleDenMenuOnClose}
                                 >
-                                    {cardMenuOptions?.map((option) => (
-                                        <DenTooltip
-                                            key={option?.label}
-                                            title={option?.disabled ? option?.disabledMsg : ''}
-                                            disableHoverListener={!option?.disabled}
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        font: "normal normal normal 12px/20px 'Source Sans 3' !important",
-                                                        padding: "1px 4px 1px 4px !important",
-                                                        backgroundColor: "#4D4D4D !important",
-                                                    }
-                                                }
-                                            }}
-                                            arrow
-                                        >
-                                            <span>
-                                                <DenMenuItem
-                                                    onClick={(e) => handleClose(e, 1, option?.onClickFnc)}
-                                                    classes={{
-                                                        root: classes?.menuOption,
-                                                    }}
-                                                    disabled={option?.disabled}
-                                                >
-                                                    <DenTypography variant="inherit">
-                                                        {option.label}
-                                                    </DenTypography>
-                                                </DenMenuItem>
-                                            </span>
-                                        </DenTooltip>
-                                    ))}
+                                    {menuItems}
                                 </DenMenu>
                             </DenBox>
                         </div>
                     </div>
                     <div className={cssClassName['card-details-section']}>
                         <div className={cssClassName['card-image-wrapper']}>
-                            <div className={cssClassName['card-content-container']} ref={cardContentContainerRef}>
-                                {(title || imageUrl) && (
+                            <div
+                                className={clsx(
+                                    cssClassName['card-content-container'],
+                                    shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-rhythm-boost']
+                                )}
+                                ref={cardContentContainerRef}
+                            >
+                                {hasTitleRow && (
                                     <div className={cssClassName['card-title-row']} ref={titleRowRef}>
                                         {title && (
                                             <div className={cssClassName['card-title-copy-wrapper']}>
-                                                <DenCustomTooltip arrow title={decodeHtmlEntities(title)} {...tooltipstyles} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start' >
+                                                <DenCustomTooltip arrow title={decodedTitle} {...TOOLTIP_TEXT_STYLES} textColor='#2B2B2B' maxWidth="230px" placement='bottom-start'>
                                                     <DenBox
                                                         title={title}
                                                         className={clsx(
                                                             cssClassName['marketplace-card-title'],
-                                                            shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'],
                                                             showTitleCopy && cssClassName['marketplace-card-title-with-copy'],
                                                             isTitleClickable && cssClassName['card-title-wire']
                                                         )}
@@ -450,119 +593,49 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                                         <span data-marketplace-title-text="true" className={cssClassName['marketplace-card-title-text']} dangerouslySetInnerHTML={{ __html: title }} />
                                                         {showTitleCopy && (
                                                             <span className={cssClassName['card-title-copy-icon']}>
-                                                                <CopyIconButton copyValue={decodeHtmlEntities(title)} />
+                                                                <CopyIconButton copyValue={decodedTitle} />
                                                             </span>
                                                         )}
                                                     </DenBox>
                                                 </DenCustomTooltip>
                                             </div>
                                         )}
-                                        {imageUrl && <div className={cssClassName['card-image']}>
-                                            <ImageWithFallback
-                                                src={imageUrl}
-                                                placeholderIcon={ImageFallback}
-                                                showFallbackBorder={false}
-                                            />
-                                        </div>}
+                                        {imageUrl && (
+                                            <div className={cssClassName['card-image']}>
+                                                <ImageWithFallback
+                                                    src={imageUrl}
+                                                    placeholderIcon={ImageFallback}
+                                                    showFallbackBorder={false}
+                                                />
+                                            </div>
+                                        )}
                                     </div>
                                 )}
-                                {slugTitle && <div className={clsx(cssClassName['card-slug-title'], shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost'])} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
-                                {(subtitle || story) && (
+                                {slugTitle && <div className={cssClassName['card-slug-title']} ref={slugTitleRef} dangerouslySetInnerHTML={{ __html: slugTitle }} />}
+                                {hasSubtitle && (
                                     <div
                                         className={clsx(
                                             cssClassName['marketplace-card-subtitle'],
-                                            slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug'],
-                                            shouldIncreaseTypographyForLanguage && cssClassName['marketplace-card-language-font-boost']
+                                            slugTitle ? cssClassName['marketplace-subtitle-with-slug'] : cssClassName['marketplace-subtitle-without-slug']
                                         )}
                                         ref={subtitleRef}
                                         dangerouslySetInnerHTML={{ __html: subtitle || story }}
                                     />
                                 )}
-                                </div>
+                            </div>
                         </div>
-
                     </div>
-                    {/* Translate Error Message */}
                     {translateLanguageErrorMsg && (
                         <div className={cssClassName['translate-error-section']}>
                             <p className={cssClassName['card-translate-error']}>{translateLanguageErrorMsg}</p>
                         </div>
                     )}
-                    {/* Tags and Channels Section for Grid View */}
                     {isGridView && (
                         <div className={cssClassName['tags-channels-section']}>
-                            {/* Channels */}
-                            {channels && channels.length > 0 && (
-                                <DenBox className={cssClassName['channels-wrapper']}>
-                                    {visibleChannels.map((channel, index) => (
-                                        <DenTooltip
-                                            key={index}
-                                            title={''}
-                                            arrow
-                                            placement="top"
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        backgroundColor: 'white',
-                                                        padding: '0',
-                                                        boxShadow: '0px 3px 6px #00000029'
-                                                    }
-                                                }
-                                            }}
-                                        >
-                                            <DenBox className={cssClassName['channel-chip']}>
-                                                <DenTypography className={cssClassName['channel-name']}>
-                                                    {channel.channelName}
-                                                </DenTypography>
-                                            </DenBox>
-                                        </DenTooltip>
-                                    ))}
-                                    {hasRemainingChannels && (
-                                        <DenTooltip
-                                            title={''}
-                                            arrow
-                                            placement="top"
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        backgroundColor: 'white',
-                                                        padding: '0',
-                                                        boxShadow: '0px 3px 6px #00000029'
-                                                    }
-                                                }
-                                            }}
-                                        >
-                                            <DenBox className={cssClassName['channel-chip']}>
-                                                <DenTypography className={cssClassName['channel-plus']}>
-                                                    +{remainingChannels.length}
-                                                </DenTypography>
-                                            </DenBox>
-                                        </DenTooltip>
-                                    )}
-                                </DenBox>
-                            )}
-                            {/* Tags */}
-                            {tags?.length > 0 && (
+                            {gridChannelChips}
+                            {hasTags && (
                                 <DenBox className={cssClassName['tags-wrapper']} sx={{ marginLeft: 'auto' }}>
-                                    <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
-                                        <Chip
-                                            className={cssClassName['card-tag']}
-                                            size="small"
-                                            icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
-                                            label={
-                                                tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                    <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
-                                                    <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                                </span> : <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
-                                            }
-                                            variant="outlined"
-                                            sx={{
-                                                '& .cds-MuiChip-icon': {
-                                                    marginTop: '5px'
-                                                }
-                                            }}
-                                        />
-                                    </DenCustomTooltip>
+                                    {tagChipContent}
                                 </DenBox>
                             )}
                         </div>
@@ -570,14 +643,14 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
 
                     <div className={cssClassName['card-footer']}>
                         <DenBox className={cssClassName['card-footer-lhs']}>
-                            {!!wordCount && <DenCustomTooltip title={wordCount ? `Word Count : ${wordCount}` : ''} arrow {...tooltipstyles}>
+                            {!!wordCount && <DenCustomTooltip title={wordCount ? `Word Count : ${wordCount}` : ''} arrow {...TOOLTIP_TEXT_STYLES}>
                                 <DenBox className={cssClassName['wordcount']}>
                                     <DenTypography>
                                         <span className={cssClassName['wordcount-label']}>WC :</span> {wordCount}
                                     </DenTypography>
                                 </DenBox>
                             </DenCustomTooltip>}
-                            {!!imagesCount && <DenCustomTooltip title={imagesCount ? `Images : ${imagesCount}` : ''} arrow {...tooltipstyles}>
+                            {!!imagesCount && <DenCustomTooltip title={imagesCount ? `Images : ${imagesCount}` : ''} arrow {...TOOLTIP_TEXT_STYLES}>
                                 <DenBox className={cssClassName['image']}>
                                     {!!wordCount && <Divider orientation="vertical" sx={{ height: '16px', margin: '0px 2px' }} />}
                                     <MarketplaceImageIcon width="16px" height="16px" />
@@ -586,7 +659,7 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                                     </DenTypography>
                                 </DenBox>
                             </DenCustomTooltip>}
-                            {!!videosCount && <DenCustomTooltip title={videosCount ? `Videos : ${videosCount}` : ''} arrow {...tooltipstyles}>
+                            {!!videosCount && <DenCustomTooltip title={videosCount ? `Videos : ${videosCount}` : ''} arrow {...TOOLTIP_TEXT_STYLES}>
                                 <DenBox className={cssClassName['video']}>
                                     <MarketplaceImageIcon width="14px" height="14px" />
                                     <DenTypography>
@@ -596,104 +669,24 @@ export const MarketplaceContentCard = React.forwardRef((props: MarketplaceConten
                             </DenCustomTooltip>}
                         </DenBox>
                         <DenBox className={cssClassName['card-footer-rhs']}>
-                            {isSingleView && channels && channels.length > 0 && (
-                                <DenBox className={cssClassName['channels-wrapper']}>
-                                    {visibleChannels.map((channel, index) => (
-                                        <DenTooltip
-                                            key={index}
-                                            title={''}
-                                            arrow
-                                            placement="top"
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        backgroundColor: 'white',
-                                                        padding: '0',
-                                                        boxShadow: '0px 3px 6px #00000029',
-                                                    },
-                                                    '& .cds-MuiTooltip-arrow': {
-                                                        color: '#fff'
-                                                    }
-                                                }
-                                            }}
-                                        >
-                                            <DenBox className={cssClassName['channel-chip']}>
-                                                <DenTypography className={cssClassName['channel-name']}>
-                                                    {channel.channelName}
-                                                </DenTypography>
-                                            </DenBox>
-                                        </DenTooltip>
-                                    ))}
-                                    {hasRemainingChannels && (
-                                        <DenTooltip
-                                            title={''}
-                                            arrow
-                                            placement="top"
-                                            PopperProps={{
-                                                sx: {
-                                                    '& .cds-MuiTooltip-tooltip': {
-                                                        backgroundColor: 'white',
-                                                        padding: '0',
-                                                        boxShadow: '0px 3px 6px #00000029',
-                                                    },
-                                                    '& .cds-MuiTooltip-arrow': {
-                                                        color: '#fff'
-                                                    }
-
-                                                }
-                                            }}
-                                        >
-                                            <DenBox className={cssClassName['channel-chip']}>
-                                                <DenTypography className={cssClassName['channel-plus']}>
-                                                    +{remainingChannels.length}
-                                                </DenTypography>
-                                            </DenBox>
-                                        </DenTooltip>
-                                    )}
-                                </DenBox>
-                            )}
-                            {isSingleView && channels && channels.length > 0 && <Divider sx={{ height: '14px' }} orientation="vertical" />}
-                            {isSingleView && tags && tags.length > 0 && (
+                            {singleViewChannelChips}
+                            {(isSingleView && hasChannels) && <Divider sx={{ height: '14px' }} orientation="vertical" />}
+                            {isSingleView && hasTags && (
                                 <DenBox className={cssClassName['card-tags-single-view']}>
-                                    {
-                                        (tags?.length > 0 && <DenCustomTooltip title={tags?.length > 1 ? tagsTooltip(tags) : ''} arrow {...tooltipstyles} placement='top'>
-                                            <Chip
-                                                className={cssClassName['card-tag']}
-                                                size="small"
-                                                icon={<span dangerouslySetInnerHTML={{ __html: tags[0].icon }} />}
-                                                label={
-                                                    tags?.length > 1 ? <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                        <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
-                                                        <span style={{ color: '#0F89FF', fontWeight: 500 }}>{`+${tags?.length - 1}`}</span>
-                                                    </span> : <span className={cssClassName['card-tag-label']}>{tags[0].label}</span>
-                                                }
-                                                variant="outlined"
-                                                sx={{
-                                                    '& .cds-MuiChip-icon': {
-                                                        marginTop: '5px'
-                                                    }
-                                                }}
-                                            />
-                                        </DenCustomTooltip>
-                                        )
-                                    }
+                                    {tagChipContent}
                                 </DenBox>
                             )}
                             {(isSingleView && (isCompetitor || agency)) && <Divider sx={{ height: '14px' }} orientation="vertical" />}
-                            {isCompetitor ? <DenCustomTooltip title={`See on ${dataSource?.name}`} arrow {...tooltipstyles}>
-                                <DenBox className={cssClassName['datasoruce']} onClick={(e) => {
-                                    e.stopPropagation();
-                                    dataSource?.onClick?.(e);
-                                }}>
-                                    <DenSvgIcon>{dataSource?.icon}</DenSvgIcon>
-                                    <DenTypography className={cssClassName['datasource-text']}>{dataSource?.name}</DenTypography>
-                                </DenBox>
-                            </DenCustomTooltip> : <DenTypography className={cssClassName['agency-text']}>{agency}</DenTypography>}
+                            {sourceOrAgencyContent}
                         </DenBox>
                     </div>
                 </div>
-            </DenCard >
-        </div >
+            </DenCard>
+        </div>
     );
-})
-export default MarketplaceContentCard; 
+});
+
+MarketplaceContentCardComponent.displayName = 'MarketplaceContentCard';
+
+export const MarketplaceContentCard = React.memo(MarketplaceContentCardComponent);
+export default MarketplaceContentCard;

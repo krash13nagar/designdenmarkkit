@@ -264,12 +264,27 @@
             max-height: 165px;
 
             .card-content-container {
+                --marketplace-card-title-font-size: 13px;
+                --marketplace-card-title-line-height: 20.8px;
+                --marketplace-card-slug-font-size: 12px;
+                --marketplace-card-slug-line-height: 17px;
+                --marketplace-card-subtitle-font-size: 13px;
+                --marketplace-card-subtitle-line-height: 20.15px;
                 display: flex;
                 flex-direction: column;
                 flex: 1;
                 min-height: 0;
                 max-height: 100%;
                 overflow: hidden;
+            }
+
+            .marketplace-card-language-rhythm-boost {
+                --marketplace-card-title-font-size: 14px;
+                --marketplace-card-title-line-height: 20.8px;
+                --marketplace-card-slug-font-size: 13px;
+                --marketplace-card-slug-line-height: 17px;
+                --marketplace-card-subtitle-font-size: 14px;
+                --marketplace-card-subtitle-line-height: 20.15px;
             }
 
             .card-title-row {
@@ -321,14 +336,16 @@
             }
 
             .marketplace-card-title {
-                --marketplace-card-title-line-height: 20.8px;
                 display: flex;
                 align-items: flex-start;
                 gap: 4px;
                 white-space: normal;
                 max-width: 100%;
                 min-width: 0;
-                font: normal normal 600 13px/17px "Source Sans 3";
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-title-font-size);
+                font-style: normal;
+                font-weight: 600;
                 line-height: var(--marketplace-card-title-line-height);
                 letter-spacing: 0px;
                 color: #2B2B2B;
@@ -390,8 +407,10 @@
             }
 
             .card-slug-title {
-                --marketplace-card-slug-line-height: 17px;
-                font: italic normal normal 12px/17px 'Source Sans 3';
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-slug-font-size);
+                font-style: italic;
+                font-weight: 400;
                 line-height: var(--marketplace-card-slug-line-height);
                 color: #818181;
                 margin-top: 6px;
@@ -436,8 +455,10 @@
             }
 
             .marketplace-card-subtitle {
-                --marketplace-card-subtitle-line-height: 20.15px;
-                font: normal normal normal 13px/16px "Source Sans 3";
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-subtitle-font-size);
+                font-style: normal;
+                font-weight: 400;
                 letter-spacing: 0.14px;
                 color: #4D4D4D;
                 opacity: 1;
@@ -495,14 +516,6 @@
                 }
             }
 
-            .marketplace-card-language-font-boost {
-                font-size: 14px;
-            }
-
-            .card-slug-title.marketplace-card-language-font-boost {
-                font-size: 13px;
-            }
-
             // Dynamic subtitle line clamping for grid view
             .marketplace-subtitle-with-slug {
                 --marketplace-subtitle-line-clamp: 3; // grid view with slug present
@@ -510,6 +523,7 @@
 
             .marketplace-subtitle-without-slug {
                 --marketplace-subtitle-line-clamp: 4; // grid view without slug
+                margin-top: 9px;
             }
 
         }
@@ -695,7 +709,10 @@
                         align-items: flex-start;
                         gap: 4px;
                         white-space: normal;
-                        font: normal normal 600 13px/17px "Source Sans 3";
+                        font-family: "Source Sans 3";
+                        font-size: var(--marketplace-card-title-font-size);
+                        font-style: normal;
+                        font-weight: 600;
                         line-height: var(--marketplace-card-title-line-height);
                         letter-spacing: 0px;
                         color: #2B2B2B;
@@ -724,7 +741,10 @@
 
                     // Task 3: Match grid view slug font exactly
                     .card-slug-title {
-                        font: italic normal normal 12px/17px 'Source Sans 3';
+                        font-family: "Source Sans 3";
+                        font-size: var(--marketplace-card-slug-font-size);
+                        font-style: italic;
+                        font-weight: 400;
                         color: #818181;
                     }
 
@@ -746,7 +766,10 @@
 
                 // Task 3: Match grid view description font exactly
                 .marketplace-card-subtitle {
-                    font: normal normal normal 13px/16px "Source Sans 3";
+                    font-family: "Source Sans 3";
+                    font-size: var(--marketplace-card-subtitle-font-size);
+                    font-style: normal;
+                    font-weight: 400;
                     letter-spacing: 0.14px;
                     color: #4D4D4D;
                     line-height: var(--marketplace-card-subtitle-line-height);
@@ -763,6 +786,7 @@
 
                 .marketplace-subtitle-without-slug {
                     --marketplace-subtitle-line-clamp: 2; // single view without slug
+                    margin-top: 9px;
                 }
             }
 
