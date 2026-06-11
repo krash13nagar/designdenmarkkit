@@ -4,7 +4,7 @@ import type { SVGTypes } from '../../common/svgicon/svgicon.types';
 export type VisualContentCardVariant =
   | 'slideshow'
   | 'webstory'
-  | 'visualrichstory'
+  | 'immersive'
   | 'photofeature';
 
 export type VisualContentCardIconComponent = React.ComponentType<
@@ -34,11 +34,23 @@ export interface VisualContentCardMenuOption {
 }
 
 export interface VisualContentCardProps {
-  id: string;
+  id?: string;
+  msid?: string | number;
   slidesCount?: number;
+  blocksCountValue?: number;
   imagesCount?: number;
   videosCount?: number;
   hostName?: string;
+  channelIcon?: React.ReactNode;
+  showStats?: boolean;
+  showChannelBadge?: boolean;
+  showChannelIcon?: boolean;
+  showChannelTooltip?: boolean;
+  channelTooltipData?: React.ReactNode;
+  isChannelTooltipLoading?: boolean;
+  showChannelIconTooltip?: boolean;
+  channelIconTooltipData?: React.ReactNode;
+  isChannelIconTooltipLoading?: boolean;
   contentType: VisualContentCardVariant;
   updatedDateTimeEpoch?: number;
   publishDateTimeEpoch?: number;
@@ -47,6 +59,8 @@ export interface VisualContentCardProps {
   cardMenuOptions?: VisualContentCardMenuOption[];
   handleClick?: React.MouseEventHandler<HTMLDivElement>;
   handleCTA?: React.MouseEventHandler<HTMLElement>;
+  onChannelHover?: React.MouseEventHandler<HTMLElement>;
+  onChannelIconHover?: React.MouseEventHandler<HTMLElement>;
   brokenImgText?: string;
   classes?: VisualContentCardClasses;
   active?: boolean;

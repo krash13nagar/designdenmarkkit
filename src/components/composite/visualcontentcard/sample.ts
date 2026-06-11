@@ -28,9 +28,11 @@ export const VISUAL_CARD_MENU_OPTIONS: VisualContentCardMenuOption[] = [
 const baseVisualSample: Omit<VisualContentCardProps, 'contentType'> = {
   id: '7650409',
   slidesCount: 10,
+  blocksCountValue: 12,
   imagesCount: 8,
   videosCount: 2,
   hostName: 'The Times of India',
+  showStats: true,
   updatedDateTimeEpoch: 1776756528634,
   publishDateTimeEpoch: 1776756481528,
   imageUrl:
@@ -51,7 +53,7 @@ const baseVisualSample: Omit<VisualContentCardProps, 'contentType'> = {
 
 export const visualContentCardSample: VisualContentCardProps = {
   ...baseVisualSample,
-  contentType: 'slideshow',
+  contentType: 'photofeature',
 };
 
 export const visualContentCardVariantSamples: Record<
@@ -70,11 +72,11 @@ export const visualContentCardVariantSamples: Record<
     slidesCount: 10,
     imgTitle: 'Webstory card sample for VisualContentCard.',
   },
-  visualrichstory: {
+  immersive: {
     ...baseVisualSample,
-    contentType: 'visualrichstory',
-    slidesCount: 10,
-    imgTitle: 'Visual rich story card sample for VisualContentCard.',
+    contentType: 'immersive',
+    blocksCountValue: 12,
+    imgTitle: 'Immersive story card sample for VisualContentCard.',
   },
   photofeature: {
     ...baseVisualSample,

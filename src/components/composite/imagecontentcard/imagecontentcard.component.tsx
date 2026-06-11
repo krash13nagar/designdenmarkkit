@@ -30,6 +30,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
         ingestionDateTimestamp,
         isSelected = false,
         isDisabled = false,
+        isLowResolutionImage = false,
         dimensions = '1600 X 900',
         imageIcon,
         footerRightText,
@@ -215,7 +216,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                                 showFallbackBorder={false}
                             />
                             {/* Overlay Text - Bottom */}
-                            {(overlayText || overlayBottomText) && (
+                            {/* {(overlayText || overlayBottomText) && (
                                 <div className={cssClassName['image-overlay-bottom']}>
                                     <DenTooltip
                                         title={overlayBottomText || overlayText || ''}
@@ -227,7 +228,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                                         </DenTypography>
                                     </DenTooltip>
                                 </div>
-                            )}
+                            )} */}
                             {/* Overlay Text - Top
                             {overlayTopText && (
                                 <div className={cssClassName['image-overlay-top']}>
@@ -252,6 +253,7 @@ export const ImageContentCard = React.forwardRef((props: ImageContentCardConfig,
                 <ImageContentCardFooter
                     dimensions={dimensions}
                     footerRightText={footerRightText}
+                    isLowResolutionImage={isLowResolutionImage}
                     cssClassName={cssClassName}
                 />
             </div>

@@ -13,6 +13,7 @@ export interface ImageContentCardConfig {
     ingestionDateTimestamp?: string | number;
     isSelected?: boolean;
     isDisabled?: boolean;
+    isLowResolutionImage?: boolean;
     dimensions?: string;
     imageIcon?: ReactNode;
     footerRightText?: string;

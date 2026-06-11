@@ -259,6 +259,33 @@
             flex-direction: column;
             min-width: 0;
             width: 100%;
+            flex: 1;
+            min-height: 0;
+            max-height: 165px;
+
+            .card-content-container {
+                --marketplace-card-title-font-size: 13px;
+                --marketplace-card-title-line-height: 20.8px;
+                --marketplace-card-slug-font-size: 12px;
+                --marketplace-card-slug-line-height: 17px;
+                --marketplace-card-subtitle-font-size: 13px;
+                --marketplace-card-subtitle-line-height: 20.15px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                min-height: 0;
+                max-height: 100%;
+                overflow: hidden;
+            }
+
+            .marketplace-card-language-rhythm-boost {
+                --marketplace-card-title-font-size: 14px;
+                --marketplace-card-title-line-height: 20.8px;
+                --marketplace-card-slug-font-size: 13px;
+                --marketplace-card-slug-line-height: 17px;
+                --marketplace-card-subtitle-font-size: 14px;
+                --marketplace-card-subtitle-line-height: 20.15px;
+            }
 
             .card-title-row {
                 display: flex;
@@ -284,11 +311,20 @@
 
                 .card-title-copy-icon {
                     display: inline-flex;
-                    align-self: flex-start;
-                    flex-shrink: 0;
+                    position: absolute;
+                    left: var(--title-copy-left, 0px);
+                    bottom: 0;
+                    line-height: 0;
                     opacity: 0;
                     visibility: hidden;
                     transition: opacity 0.2s ease, visibility 0.2s ease;
+                    margin-left: 4px;
+
+                    :global(.cds-copy-icon-button) {
+                        height: 20px;
+                        width: 20px;
+                        padding: 2px !important;
+                    }
                 }
 
                 &:hover {
@@ -306,8 +342,11 @@
                 white-space: normal;
                 max-width: 100%;
                 min-width: 0;
-                font: normal normal 600 13px/17px "Source Sans 3";
-                line-height: 1.60;
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-title-font-size);
+                font-style: normal;
+                font-weight: 600;
+                line-height: var(--marketplace-card-title-line-height);
                 letter-spacing: 0px;
                 color: #2B2B2B;
                 opacity: 1;
@@ -319,9 +358,22 @@
                 }
             }
 
+            .marketplace-card-title-with-copy {
+                display: block;
+                position: relative;
+                width: 100%;
+                overflow: visible;
+
+                .marketplace-card-title-text {
+                    width: calc(100% - 12px);
+                    max-width: calc(100% - 12px);
+                }
+            }
+
             .marketplace-card-title-text {
                 flex: 1;
                 min-width: 0;
+                max-width: 100%;
                 display: -webkit-box;
                 -webkit-line-clamp: 3; // 3 lines for grid view
                 line-clamp: 3;
@@ -330,7 +382,7 @@
                 text-overflow: ellipsis;
                 white-space: normal;
                 overflow-wrap: anywhere;
-                word-break: break-word;
+                word-break: keep-all;
 
                 >* {
                     margin: 0;
@@ -355,9 +407,13 @@
             }
 
             .card-slug-title {
-                font: italic normal normal 12px/17px 'Source Sans 3';
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-slug-font-size);
+                font-style: italic;
+                font-weight: 400;
+                line-height: var(--marketplace-card-slug-line-height);
                 color: #818181;
-                margin-top: 8px;
+                margin-top: 6px;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 line-clamp: 2;
@@ -366,7 +422,7 @@
                 text-overflow: ellipsis;
                 white-space: normal;
                 overflow-wrap: anywhere;
-                word-break: break-word;
+                word-break: keep-all;
 
                 >* {
                     margin: 0;
@@ -399,25 +455,54 @@
             }
 
             .marketplace-card-subtitle {
-                font: normal normal normal 13px/16px "Source Sans 3";
+                font-family: "Source Sans 3";
+                font-size: var(--marketplace-card-subtitle-font-size);
+                font-style: normal;
+                font-weight: 400;
                 letter-spacing: 0.14px;
                 color: #4D4D4D;
                 opacity: 1;
-                margin-top: 8px;
+                margin-top: 6px;
+                flex: 1;
+                min-height: 0;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: normal;
-                line-height: 1.55;
+                line-height: var(--marketplace-card-subtitle-line-height);
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
-                -webkit-line-clamp: 4; // default (grid, no slug)
-                line-clamp: 4;
+                -webkit-line-clamp: var(--marketplace-subtitle-line-clamp, 4);
+                line-clamp: var(--marketplace-subtitle-line-clamp, 4);
+                max-height: calc(var(--marketplace-subtitle-line-clamp, 4) * var(--marketplace-card-subtitle-line-height));
                 overflow-wrap: anywhere;
-                word-break: break-word;
-                max-height: 81px;
+                word-break: keep-all;
 
                 >* {
                     margin: 0;
+                    display: inline;
+                    line-height: inherit;
+                    font: inherit;
+                }
+
+                p,
+                div,
+                section,
+                article,
+                blockquote,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                ul,
+                ol,
+                li {
+                    display: inline;
+                    margin: 0;
+                    padding: 0;
+                    line-height: inherit;
+                    font: inherit;
                 }
 
                 img,
@@ -433,13 +518,12 @@
 
             // Dynamic subtitle line clamping for grid view
             .marketplace-subtitle-with-slug {
-                -webkit-line-clamp: 3; // grid view with slug present
-                line-clamp: 3;
+                --marketplace-subtitle-line-clamp: 3; // grid view with slug present
             }
 
             .marketplace-subtitle-without-slug {
-                -webkit-line-clamp: 4; // grid view without slug
-                line-clamp: 4;
+                --marketplace-subtitle-line-clamp: 4; // grid view without slug
+                margin-top: 9px;
             }
 
         }
@@ -625,8 +709,11 @@
                         align-items: flex-start;
                         gap: 4px;
                         white-space: normal;
-                        font: normal normal 600 13px/17px "Source Sans 3";
-                        line-height: 1.60;
+                        font-family: "Source Sans 3";
+                        font-size: var(--marketplace-card-title-font-size);
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: var(--marketplace-card-title-line-height);
                         letter-spacing: 0px;
                         color: #2B2B2B;
                         opacity: 1;
@@ -638,6 +725,15 @@
                         }
                     }
 
+                    .marketplace-card-title-with-copy {
+                        display: block;
+                        position: relative;
+                        width: 100%;
+                        max-width: 100%;
+                        min-width: 0;
+                        overflow: visible;
+                    }
+
                     .marketplace-card-title-text {
                         -webkit-line-clamp: 2; // 2 lines for single view
                         line-clamp: 2;
@@ -645,7 +741,10 @@
 
                     // Task 3: Match grid view slug font exactly
                     .card-slug-title {
-                        font: italic normal normal 12px/17px 'Source Sans 3';
+                        font-family: "Source Sans 3";
+                        font-size: var(--marketplace-card-slug-font-size);
+                        font-style: italic;
+                        font-weight: 400;
                         color: #818181;
                     }
 
@@ -667,10 +766,13 @@
 
                 // Task 3: Match grid view description font exactly
                 .marketplace-card-subtitle {
-                    font: normal normal normal 13px/16px "Source Sans 3";
+                    font-family: "Source Sans 3";
+                    font-size: var(--marketplace-card-subtitle-font-size);
+                    font-style: normal;
+                    font-weight: 400;
                     letter-spacing: 0.14px;
                     color: #4D4D4D;
-                    line-height: 1.55;
+                    line-height: var(--marketplace-card-subtitle-line-height);
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
@@ -679,13 +781,12 @@
 
                 // Task 2: Dynamic subtitle clamping for single view
                 .marketplace-subtitle-with-slug {
-                    -webkit-line-clamp: 1; // single view with slug
-                    line-clamp: 1;
+                    --marketplace-subtitle-line-clamp: 1; // single view with slug
                 }
 
                 .marketplace-subtitle-without-slug {
-                    -webkit-line-clamp: 2; // single view without slug
-                    line-clamp: 2;
+                    --marketplace-subtitle-line-clamp: 2; // single view without slug
+                    margin-top: 9px;
                 }
             }
 
