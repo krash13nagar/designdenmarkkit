@@ -87,7 +87,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
         subtitle,
         story,
         imageUrl,
-        cardMenuOptions,
+        cardMenuOptions=[],
         ImageFallback,
         onCardClick = () => { },
         onTitleClick,
@@ -99,7 +99,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
         wordCount,
         dataSource,
         tags,
-        checkboxProps,
+        checkboxProps = {},
         headerTooltipContent,
         view = 'grid',
         showAllCheckboxes = false,
@@ -123,6 +123,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
     const clampFrameRef = useRef<number | undefined>(undefined);
     const clampTimeoutRef = useRef<number | undefined>(undefined);
     const lastClampRunAtRef = useRef(0);
+    const showCheckbox = checkboxProps?.showCheckbox ?? true;
 
     const headerDate = useMemo(() => {
         return publishDateTimestamp ? formatDateWithMoment(publishDateTimestamp) : '';
@@ -515,7 +516,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
                         <div className={cssClassName['card-header-lhs']}>
                             <DenTooltip title={checkboxProps?.tooltipText || ''} arrow PopperProps={checkboxProps?.PopperProps}>
                                 <span>
-                                    <DenCheckbox
+                                    {showCheckbox && <DenCheckbox
                                         className={clsx(
                                             cssClassName['card-header-lhs-checkbox'],
                                             checkboxProps?.isChecked && cssClassName['checkbox-visible'],
@@ -523,7 +524,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
                                         )}
                                         checked={checkboxProps?.isChecked}
                                         onChange={checkboxProps?.onCheckboxClick}
-                                    />
+                                    />}
                                 </span>
                             </DenTooltip>
                             {isBreakingCard && <DenTypography className={cssClassName['card-header-breaking-label']}>BREAKING</DenTypography>}
@@ -543,7 +544,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
                             )}
                         </div>
                         <div className={cssClassName['card-header-rhs']}>
-                            <DenBox className={cssClassName['card-header-menu']}>
+                            {menuItems?.length>0 && <DenBox className={cssClassName['card-header-menu']}>
                                 <DenIconButton
                                     aria-label="more"
                                     id={id || ''}
@@ -562,7 +563,7 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
                                 >
                                     {menuItems}
                                 </DenMenu>
-                            </DenBox>
+                            </DenBox>}
                         </div>
                     </div>
                     <div className={cssClassName['card-details-section']}>
