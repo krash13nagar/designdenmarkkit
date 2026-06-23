@@ -480,7 +480,6 @@ const MarketplaceContentCardComponent = React.forwardRef<any, MarketplaceContent
     }, [isSingleView, hasChannels, visibleChannels, hasRemainingChannels, remainingChannels.length]);
 
     const sourceOrAgencyContent = useMemo(() => {
-        if (!isSingleView) return null;
 
         if (isCompetitor) {
             return (
