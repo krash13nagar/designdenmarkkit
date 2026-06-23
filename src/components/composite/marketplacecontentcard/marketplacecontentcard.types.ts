@@ -74,7 +74,8 @@ export interface MarketPlaceCardCheckboxProps {
     isChecked?: boolean,
     onCheckboxClick?: (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => void,
     tooltipText?: string,
-    PopperProps?: any
+    PopperProps?: any,
+    showCheckbox?:boolean
 }
 
 
